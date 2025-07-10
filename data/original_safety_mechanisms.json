@@ -1,0 +1,1916 @@
+{
+    "OpenAI": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "HPV",
+                "summary": "Multi-stage filtering using Moderation API and safety classifiers to remove CSAM, hateful content, violence, and CBRN materials from training datasets",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "CSAM Detection & Removal": {
+                "rating": "HPC",
+                "summary": "Automated detection and removal of child sexual abuse material using specialized classifiers during pre-training data preparation",
+                "url": "https://openai.com/policies/usage-policies",
+                "lasTupdated": "2024-01-01"
+            },
+            "Copyright Content Filtering": {
+                "rating": "HPV",
+                "summary": "Fingerprinting system to remove opted-out images from training data, building on DALL-E 3 opt-out mechanism",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Bias Detection in Training Data": {
+                "rating": "MBC",
+                "summary": "Advanced data filtering processes to reduce biased content, though specific bias detection methods not fully detailed",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "PII Reduction": {
+                "rating": "HPC",
+                "summary": "Advanced data filtering processes to reduce personal information from training data using automated detection systems",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "HPC",
+                "summary": "Compliance with voluntary White House commitments and usage policy enforcement for regulatory alignment",
+                "url": "https://openai.com/policies/usage-policies",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "HPV",
+                "summary": "Multi-round RLHF with separate safety reward models, aligning model to human preferences through post-training optimization",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Constitutional AI / Self-Critique": {
+                "rating": "MRV",
+                "summary": "Research-stage implementation of self-critique elements integrated into training process, building on constitutional AI principles",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Safety Reward Modeling": {
+                "rating": "HPC",
+                "summary": "Separate safety reward models used in conjunction with RLHF to optimize for safety alongside capability",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Adversarial Training": {
+                "rating": "MBC",
+                "summary": "Red team data integration and adversarial testing during training, though specific methods not detailed",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Red Team Data Integration": {
+                "rating": "HPV",
+                "summary": "100+ external red teamers across 45 languages and 29 countries, data integrated into training process",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "HPC",
+                "summary": "Layered policy engine with system prompt → model → content filter pipeline, including specialized voice classifiers",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Output Content Filtering": {
+                "rating": "HPC",
+                "summary": "Multi-stage content filtering with moderation API applied to both text and audio outputs",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Prompt Injection Protection": {
+                "rating": "MBC",
+                "summary": "System prompt protections and multi-layer filtering, though specific prompt injection defenses not detailed",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "HPC",
+                "summary": "Real-time monitoring and enforcement with product-level mitigations including streaming audio analysis",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Contextual Safety Assessment": {
+                "rating": "MBC",
+                "summary": "Context-aware safety evaluation, particularly for voice interactions, though implementation not detailed",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "HPC",
+                "summary": "Comprehensive safety pipeline spanning pre-training, post-training, product development, and policy enforcement",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "PII Detection & Redaction": {
+                "rating": "MPC",
+                "summary": "PII detection capabilities integrated into content filtering systems for personal information protection",
+                "url": "https://openai.com/policies/usage-policies",
+                "lasTupdated": "2024-01-01"
+            },
+            "Configurable Safety Policies": {
+                "rating": "MPC",
+                "summary": "Usage policies and moderation tools provided to users, with transparency reports and configurable settings",
+                "url": "https://openai.com/policies/usage-policies",
+                "lasTupdated": "2024-01-01"
+            },
+            "Audit Logging": {
+                "rating": "MPC",
+                "summary": "Usage monitoring and incident reporting systems for tracking and analyzing safety incidents",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            }
+        },
+        "Governance & Oversight": {
+            "Capability Threshold Monitoring": {
+                "rating": "HPV",
+                "summary": "Preparedness Framework with pre-defined capability thresholds and deployment decisions based on risk assessments",
+                "url": "https://cdn.openai.com/openai-preparedness-framework-beta.pdf",
+                "lasTupdated": "2023-10-01"
+            },
+            "External Red Team Networks": {
+                "rating": "HPV",
+                "summary": "100+ external red teamers from diverse backgrounds conducting systematic capability discovery and safety testing",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Safety Level Classifications": {
+                "rating": "HPV",
+                "summary": "Preparedness Framework risk classifications with clear thresholds for cybersecurity, CBRN, persuasion, and model autonomy",
+                "url": "https://cdn.openai.com/openai-preparedness-framework-beta.pdf",
+                "lasTupdated": "2023-10-01"
+            },
+            "Independent Safety Advisory": {
+                "rating": "HPC",
+                "summary": "Safety Advisory Group providing independent oversight and recommendations on deployment decisions",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Incident Reporting Systems": {
+                "rating": "HPC",
+                "summary": "Systematic incident reporting and analysis with internal tracking and external disclosure mechanisms",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Usage Monitoring & Analytics": {
+                "rating": "HPC",
+                "summary": "Comprehensive usage monitoring with analytics for detecting patterns of misuse and safety incidents",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Capability Evaluation Protocols": {
+                "rating": "HPV",
+                "summary": "Systematic evaluation protocols for dangerous capabilities including cybersecurity, CBRN, persuasion, and autonomy",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Red Team Exercises": {
+                "rating": "HPV",
+                "summary": "Systematic red team exercises across multiple phases with diverse expert networks and real-world testing scenarios",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "HPC",
+                "summary": "Compliance with voluntary White House commitments and development of internal governance frameworks",
+                "url": "https://openai.com/index/our-approach-to-ai-safety",
+                "lasTupdated": "2024-01-01"
+            },
+            "Academic Partnerships": {
+                "rating": "HPC",
+                "summary": "Collaboration with academic institutions and independent research organizations for safety evaluation",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            }
+        },
+        "Transparency": {
+            "Comprehensive Safety Documentation": {
+                "rating": "HPU",
+                "summary": "Detailed system cards providing comprehensive safety evaluations, methodologies, and results for each model release",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Model Cards & Technical Specs": {
+                "rating": "HPU",
+                "summary": "Technical documentation including model architecture, training methodology, and safety evaluation results",
+                "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+                "lasTupdated": "2024-08-08"
+            },
+            "Safety Research Publications": {
+                "rating": "HPU",
+                "summary": "Regular publication of safety research, evaluation methodologies, and lessons learned from deployment",
+                "url": "https://openai.com/research",
+                "lasTupdated": "2024-01-01"
+            },
+            "Policy & Compliance Documentation": {
+                "rating": "HPU",
+                "summary": "Comprehensive usage policies, terms of service, and compliance documentation publicly available",
+                "url": "https://openai.com/policies",
+                "lasTupdated": "2024-01-01"
+            }
+        }
+    },
+    "Anthropic": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "MPC",
+                "summary": "Constitutional training data with filtered corpora designed to reduce harmful content and improve model alignment",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "CSAM Detection & Removal": {
+                "rating": "MPC",
+                "summary": "Standard CSAM detection and removal processes, though specific methodologies not publicly detailed",
+                "url": "https://www.anthropic.com/claude-3-model-card",
+                "lasTupdated": "2024-03-04"
+            },
+            "Copyright Content Filtering": {
+                "rating": "MPC",
+                "summary": "Copyright filtering mechanisms implemented, though specific approaches not detailed in public documentation",
+                "url": "https://www.anthropic.com/claude-3-model-card",
+                "lasTupdated": "2024-03-04"
+            },
+            "Bias Detection in Training Data": {
+                "rating": "MBC",
+                "summary": "Constitutional AI training designed to reduce bias, with specific focus on helpful, harmless, honest principles",
+                "url": "https://arxiv.org/abs/2212.08073",
+                "lasTupdated": "2022-12-15"
+            },
+            "PII Reduction": {
+                "rating": "MPC",
+                "summary": "Personal information filtering as part of constitutional training data preparation",
+                "url": "https://www.anthropic.com/claude-3-model-card",
+                "lasTupdated": "2024-03-04"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "MPC",
+                "summary": "Compliance with emerging AI regulations and industry standards through responsible scaling policy",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "HPV",
+                "summary": "Constitutional AI approach combining self-critique with RLHF for scalable oversight and preference learning",
+                "url": "https://arxiv.org/abs/2212.08073",
+                "lasTupdated": "2022-12-15"
+            },
+            "Constitutional AI / Self-Critique": {
+                "rating": "HPV",
+                "summary": "Self-critique training using constitutional principles for helpful, harmless, honest behavior with scalable oversight",
+                "url": "https://arxiv.org/abs/2212.08073",
+                "lasTupdated": "2022-12-15"
+            },
+            "Safety Reward Modeling": {
+                "rating": "MPC",
+                "summary": "Safety considerations integrated into reward modeling as part of constitutional AI framework",
+                "url": "https://arxiv.org/abs/2212.08073",
+                "lasTupdated": "2022-12-15"
+            },
+            "Adversarial Training": {
+                "rating": "MBC",
+                "summary": "Adversarial testing integrated into constitutional AI training process for robustness",
+                "url": "https://arxiv.org/abs/2212.08073",
+                "lasTupdated": "2022-12-15"
+            },
+            "Red Team Data Integration": {
+                "rating": "HPV",
+                "summary": "Red team exercises and data integration as part of responsible scaling policy and safety evaluation",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "MPC",
+                "summary": "Content classification systems for input filtering, though specific implementation details not public",
+                "url": "https://www.anthropic.com/claude-3-model-card",
+                "lasTupdated": "2024-03-04"
+            },
+            "Output Content Filtering": {
+                "rating": "MPC",
+                "summary": "Output filtering based on constitutional AI principles and helpful, harmless, honest framework",
+                "url": "https://arxiv.org/abs/2212.08073",
+                "lasTupdated": "2022-12-15"
+            },
+            "Prompt Injection Protection": {
+                "rating": "MBC",
+                "summary": "Constitutional AI training provides some robustness against prompt injection through principle-based responses",
+                "url": "https://arxiv.org/abs/2212.08073",
+                "lasTupdated": "2022-12-15"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "MPC",
+                "summary": "Safety monitoring systems in place, though specific real-time implementation details not disclosed",
+                "url": "https://www.anthropic.com/claude-3-model-card",
+                "lasTupdated": "2024-03-04"
+            },
+            "Contextual Safety Assessment": {
+                "rating": "HPC",
+                "summary": "Constitutional AI enables sophisticated contextual safety assessment through principle-based reasoning",
+                "url": "https://arxiv.org/abs/2212.08073",
+                "lasTupdated": "2022-12-15"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "HPC",
+                "summary": "Comprehensive safety pipeline including constitutional training, RLHF, and responsible scaling evaluation",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "PII Detection & Redaction": {
+                "rating": "MPC",
+                "summary": "PII protection mechanisms integrated into constitutional AI framework",
+                "url": "https://www.anthropic.com/claude-3-model-card",
+                "lasTupdated": "2024-03-04"
+            },
+            "Configurable Safety Policies": {
+                "rating": "MPC",
+                "summary": "Constitutional principles provide framework for configurable safety responses",
+                "url": "https://arxiv.org/abs/2212.08073",
+                "lasTupdated": "2022-12-15"
+            },
+            "Audit Logging": {
+                "rating": "MPC",
+                "summary": "Audit and monitoring capabilities as part of responsible scaling policy framework",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            }
+        },
+        "Novel/Advanced Features": {
+            "Watermarking Technology": {
+                "rating": "MRC",
+                "summary": "Research into watermarking techniques for AI-generated content detection and provenance",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            }
+        },
+        "Governance & Oversight": {
+            "External Red Team Networks": {
+                "rating": "HPV",
+                "summary": "External red team engagement as part of responsible scaling policy and AI Safety Level assessments",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "Safety Level Classifications": {
+                "rating": "HPV",
+                "summary": "AI Safety Level (ASL) framework with clear classifications and deployment thresholds",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "Independent Safety Advisory": {
+                "rating": "HPC",
+                "summary": "Independent safety advisory structure as part of responsible scaling policy governance",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "Incident Reporting Systems": {
+                "rating": "HPC",
+                "summary": "Incident reporting and analysis systems integrated into responsible scaling framework",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "Usage Monitoring & Analytics": {
+                "rating": "MPC",
+                "summary": "Usage monitoring capabilities for safety assessment and responsible scaling decisions",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "Capability Evaluation Protocols": {
+                "rating": "HPV",
+                "summary": "Systematic capability evaluation protocols as part of ASL framework and responsible scaling",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "Red Team Exercises": {
+                "rating": "HPV",
+                "summary": "Comprehensive red team exercises for capability assessment and safety evaluation",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "HPC",
+                "summary": "Proactive regulatory compliance through responsible scaling policy and industry engagement",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "Academic Partnerships": {
+                "rating": "HPC",
+                "summary": "Academic collaborations for safety research and constitutional AI development",
+                "url": "https://www.anthropic.com/research",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Comprehensive Safety Documentation": {
+                "rating": "HPU",
+                "summary": "Responsible scaling policy and constitutional AI research provide comprehensive safety framework documentation",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            },
+            "Model Cards & Technical Specs": {
+                "rating": "MPU",
+                "summary": "Model cards available for Claude models with technical specifications and safety information",
+                "url": "https://www.anthropic.com/claude-3-model-card",
+                "lasTupdated": "2024-03-04"
+            },
+            "Safety Research Publications": {
+                "rating": "HPU",
+                "summary": "Extensive publication of constitutional AI research and safety methodologies",
+                "url": "https://www.anthropic.com/research",
+                "lasTupdated": "2024-01-01"
+            },
+            "Policy & Compliance Documentation": {
+                "rating": "HPU",
+                "summary": "Comprehensive policy documentation including responsible scaling policy and usage guidelines",
+                "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+                "lasTupdated": "2023-09-18"
+            }
+        }
+    },
+    "Google": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "MPC",
+                "summary": "Multi-lingual safety filtering and bias detection in training data preparation for Gemini models",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "CSAM Detection & Removal": {
+                "rating": "MPC",
+                "summary": "CSAM detection and removal systems implemented as part of standard content filtering pipeline",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Copyright Content Filtering": {
+                "rating": "MPC",
+                "summary": "Copyright filtering mechanisms implemented for training data and generated content",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Bias Detection in Training Data": {
+                "rating": "MBC",
+                "summary": "Bias detection in training data with focus on multi-lingual and cultural fairness considerations",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "PII Reduction": {
+                "rating": "MPC",
+                "summary": "Personal information filtering and protection mechanisms integrated into data processing pipeline",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "HPC",
+                "summary": "EU AI Act compliance measures with transparency registers and regulatory reporting mechanisms",
+                "url": "https://blog.google/technology/ai/google-ai-act-preparation/",
+                "lasTupdated": "2024-02-01"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "MPV",
+                "summary": "RLHF with adversarial safety tuning datasets and Sparrow-style critiquing methodology",
+                "url": "https://arxiv.org/abs/2209.14375",
+                "lasTupdated": "2022-09-29"
+            },
+            "Constitutional AI / Self-Critique": {
+                "rating": "MRC",
+                "summary": "Research into constitutional AI principles and self-critique mechanisms for Gemini safety",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Safety Reward Modeling": {
+                "rating": "MPC",
+                "summary": "Safety considerations integrated into reward modeling for Gemini training optimization",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Adversarial Training": {
+                "rating": "MBC",
+                "summary": "Adversarial safety tuning datasets used in RLHF process for robustness improvement",
+                "url": "https://arxiv.org/abs/2209.14375",
+                "lasTupdated": "2022-09-29"
+            },
+            "Red Team Data Integration": {
+                "rating": "MPC",
+                "summary": "Red team exercises and data integration for Gemini safety evaluation and improvement",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "MPC",
+                "summary": "Multi-stage safety layer including toxicity and content classification for input processing",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Output Content Filtering": {
+                "rating": "MPC",
+                "summary": "Output content filtering with toxicity classifiers and safety policy enforcement",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Prompt Injection Protection": {
+                "rating": "MBC",
+                "summary": "Basic prompt injection protection through input filtering and safety classifiers",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "MPC",
+                "summary": "Real-time safety monitoring capabilities integrated into Gemini deployment infrastructure",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Contextual Safety Assessment": {
+                "rating": "MBC",
+                "summary": "Contextual safety assessment capabilities, though specific implementation details not disclosed",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "MPC",
+                "summary": "Multi-stage safety layers including toxicity detection, policy checks, and SynthID watermarking",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "PII Detection & Redaction": {
+                "rating": "MPC",
+                "summary": "PII detection and redaction capabilities integrated into safety pipeline",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Configurable Safety Policies": {
+                "rating": "MPC",
+                "summary": "Configurable safety policies and content filtering options for different deployment contexts",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Audit Logging": {
+                "rating": "MPC",
+                "summary": "Audit logging capabilities for safety incident tracking and regulatory compliance",
+                "url": "https://blog.google/technology/ai/google-ai-act-preparation/",
+                "lasTupdated": "2024-02-01"
+            }
+        },
+        "Novel/Advanced Features": {
+            "Watermarking Technology": {
+                "rating": "HRV",
+                "summary": "SynthID watermarking technology for AI-generated image and audio content identification",
+                "url": "https://deepmind.google/science/synthid/",
+                "lasTupdated": "2023-08-29"
+            },
+            "EU AI Act compliance": {
+                "rating": "MPC",
+                "summary": "Proactive EU AI Act compliance measures including transparency registers and documentation",
+                "url": "https://blog.google/technology/ai/google-ai-act-preparation/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Transparency registers": {
+                "rating": "MPC",
+                "summary": "Transparency registers and documentation for EU AI Act compliance and regulatory reporting",
+                "url": "https://blog.google/technology/ai/google-ai-act-preparation/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Ethics boards": {
+                "rating": "MPC",
+                "summary": "Ethics boards and advisory structures for AI development and deployment oversight",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "SynthID papers": {
+                "rating": "MPU",
+                "summary": "Research publications on SynthID watermarking technology and AI content identification",
+                "url": "https://deepmind.google/science/synthid/",
+                "lasTupdated": "2023-08-29"
+            },
+            "Sparrow research": {
+                "rating": "MPU",
+                "summary": "Sparrow research on helpful, harmless, and honest AI with human feedback optimization",
+                "url": "https://arxiv.org/abs/2209.14375",
+                "lasTupdated": "2022-09-29"
+            }
+        },
+        "Governance & Oversight": {
+            "External Red Team Networks": {
+                "rating": "MPC",
+                "summary": "External red team engagement for Gemini safety evaluation and testing",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Safety Level Classifications": {
+                "rating": "MPC",
+                "summary": "Internal safety classification system for model capabilities and deployment decisions",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Capability Evaluation Protocols": {
+                "rating": "MPC",
+                "summary": "Capability evaluation protocols for dangerous capabilities and safety assessment",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Red Team Exercises": {
+                "rating": "MPC",
+                "summary": "Red team exercises for capability discovery and safety evaluation across multiple domains",
+                "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "HPC",
+                "summary": "Comprehensive regulatory compliance frameworks including EU AI Act preparation and transparency measures",
+                "url": "https://blog.google/technology/ai/google-ai-act-preparation/",
+                "lasTupdated": "2024-02-01"
+            },
+            "Academic Partnerships": {
+                "rating": "HPC",
+                "summary": "Academic partnerships for AI safety research and independent evaluation of safety measures",
+                "url": "https://deepmind.google/research/",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Model Cards & Technical Specs": {
+                "rating": "MPU",
+                "summary": "Model cards and technical documentation for Gemini models with safety information",
+                "url": "https://deepmind.google/gemini/",
+                "lasTupdated": "2024-02-01"
+            }
+        }
+    },
+    "Microsoft": {
+        "Pre-training Safety": {
+            "PII Reduction": {
+                "rating": "LPU",
+                "summary": "Enterprise data governance and PII protection through Azure OpenAI and Microsoft 365 integration",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "LPU",
+                "summary": "Enterprise compliance frameworks and data governance for regulatory requirements",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "LPU",
+                "summary": "Uses OpenAI models with additional tenant-specific fine-tuning and enterprise safety layers",
+                "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/",
+                "lasTupdated": "2024-03-01"
+            },
+            "Fine-tuning for Domain Safety": {
+                "rating": "MPU",
+                "summary": "Tenant-specific fine-tuning for enterprise safety requirements and domain-specific risk mitigation",
+                "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning",
+                "lasTupdated": "2024-03-01"
+            },
+            "Community Feedback Integration": {
+                "rating": "LPU",
+                "summary": "Enterprise customer feedback integration for safety improvements and policy development",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "LPU",
+                "summary": "Prompt injection protection and content classification through Microsoft 365 security stack",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Output Content Filtering": {
+                "rating": "LPU",
+                "summary": "Content filtering integrated into Microsoft 365 applications with enterprise security controls",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Prompt Injection Protection": {
+                "rating": "MPU",
+                "summary": "Secure-by-default firewall for prompt injection protection integrated into enterprise applications",
+                "url": "https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/announcing-managed-security-enhancements-for-microsoft-copilot-studio/",
+                "lasTupdated": "2024-01-15"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "LPU",
+                "summary": "Real-time monitoring capabilities through Microsoft 365 admin dashboards and security controls",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "LPU",
+                "summary": "Multi-stage safety pipeline leveraging OpenAI safety measures plus Microsoft enterprise security",
+                "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/",
+                "lasTupdated": "2024-03-01"
+            },
+            "PII Detection & Redaction": {
+                "rating": "LPU",
+                "summary": "PII detection and chat log masking capabilities integrated into enterprise security framework",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Configurable Safety Policies": {
+                "rating": "MPU",
+                "summary": "Enterprise-configurable safety policies and admin controls for organizational requirements",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Audit Logging": {
+                "rating": "HPU",
+                "summary": "Comprehensive audit logging and compliance tracking through Microsoft 365 enterprise controls",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            }
+        },
+        "Novel/Advanced Features": {
+            "Open Source Safety Tools": {
+                "rating": "LPU",
+                "summary": "Limited open source safety tools, primarily relying on OpenAI and Microsoft proprietary solutions",
+                "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/",
+                "lasTupdated": "2024-03-01"
+            },
+            "Enterprise Security Integration": {
+                "rating": "HPU",
+                "summary": "Deep integration with Microsoft 365 security stack and enterprise identity management",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Sovereignty/On-Premises Options": {
+                "rating": "HPU",
+                "summary": "Customer-managed encryption keys and sovereign cloud options for data residency requirements",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            }
+        },
+        "Governance & Oversight": {
+            "Incident Reporting Systems": {
+                "rating": "MPU",
+                "summary": "Enterprise incident reporting through Microsoft security and compliance frameworks",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Usage Monitoring & Analytics": {
+                "rating": "HPU",
+                "summary": "Comprehensive usage monitoring and analytics through Microsoft 365 admin dashboards",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "HPU",
+                "summary": "Enterprise-grade regulatory compliance frameworks including GDPR, HIPAA, and industry standards",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            }
+        },
+        "Transparency": {
+            "Comprehensive Safety Documentation": {
+                "rating": "MPU",
+                "summary": "Enterprise security and privacy documentation with threat models and compliance guides",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            },
+            "Policy & Compliance Documentation": {
+                "rating": "HPU",
+                "summary": "Comprehensive privacy, security, and compliance documentation for enterprise deployment",
+                "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+                "lasTupdated": "2024-03-01"
+            }
+        }
+    },
+    "Meta": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "HPV",
+                "summary": "Open training with safety benchmarks and Llama Guard integration for content filtering",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "CSAM Detection & Removal": {
+                "rating": "MPC",
+                "summary": "CSAM detection and removal processes integrated into training data preparation",
+                "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+                "lasTupdated": "2023-12-07"
+            },
+            "Copyright Content Filtering": {
+                "rating": "MPC",
+                "summary": "Copyright filtering mechanisms for training data with open source transparency",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Bias Detection in Training Data": {
+                "rating": "MBV",
+                "summary": "Bias detection and mitigation with community-driven evaluation and open source validation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "PII Reduction": {
+                "rating": "MPC",
+                "summary": "Personal information filtering with open source methodology allowing external validation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "LPC",
+                "summary": "Basic regulatory compliance measures with limited international regulatory integration",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "HPV",
+                "summary": "Two-phase RLHF with community-driven safety feedback and open source evaluation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Adversarial Training": {
+                "rating": "MBV",
+                "summary": "Adversarial training integrated into two-phase RLHF with open source validation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Red Team Data Integration": {
+                "rating": "MBV",
+                "summary": "Red team data integration with community-driven safety feedback and open evaluation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Community Feedback Integration": {
+                "rating": "MPV",
+                "summary": "Community-driven safety feedback with open source evaluation harness and academic partnerships",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "MPV",
+                "summary": "Llama Guard as separate safety classifier for input content with open source implementation",
+                "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+                "lasTupdated": "2023-12-07"
+            },
+            "Output Content Filtering": {
+                "rating": "MPV",
+                "summary": "Llama Guard output filtering with contextual moderation and open source validation",
+                "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+                "lasTupdated": "2023-12-07"
+            },
+            "Prompt Injection Protection": {
+                "rating": "MBC",
+                "summary": "Basic prompt injection protection through Llama Guard classification and community testing",
+                "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+                "lasTupdated": "2023-12-07"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "MPC",
+                "summary": "Real-time safety monitoring capabilities through Llama Guard integration",
+                "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+                "lasTupdated": "2023-12-07"
+            },
+            "Contextual Safety Assessment": {
+                "rating": "MBC",
+                "summary": "Contextual moderation capabilities through Llama Guard classification system",
+                "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+                "lasTupdated": "2023-12-07"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "MPC",
+                "summary": "Multi-stage safety pipeline with Llama Guard integration and community validation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "PII Detection & Redaction": {
+                "rating": "MPC",
+                "summary": "PII detection capabilities integrated into Llama Guard classification system",
+                "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+                "lasTupdated": "2023-12-07"
+            },
+            "Configurable Safety Policies": {
+                "rating": "MPC",
+                "summary": "Configurable safety policies through open source Llama Guard implementation",
+                "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+                "lasTupdated": "2023-12-07"
+            },
+            "Audit Logging": {
+                "rating": "MPC",
+                "summary": "Basic audit logging capabilities with open source transparency and community oversight",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Novel/Advanced Features": {
+            "Open Source Safety Tools": {
+                "rating": "HPU",
+                "summary": "Comprehensive open source safety tools including Llama Guard and evaluation frameworks",
+                "url": "https://github.com/meta-llama",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Governance & Oversight": {
+            "External Red Team Networks": {
+                "rating": "MBV",
+                "summary": "Community-driven red team networks with academic partnerships and open evaluation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Responsible release process": {
+                "rating": "HPV",
+                "summary": "Responsible release checklist with community evaluation and academic partnership validation",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            },
+            "Academic partnerships": {
+                "rating": "HPV",
+                "summary": "Extensive academic partnerships for safety evaluation and community-driven research",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            },
+            "Safety benchmarks": {
+                "rating": "HPV",
+                "summary": "Open safety benchmarks and evaluation metrics with community validation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Capability Evaluation Protocols": {
+                "rating": "MBV",
+                "summary": "Community-driven capability evaluation protocols with open source validation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Red Team Exercises": {
+                "rating": "MBV",
+                "summary": "Community-driven red team exercises with academic partnerships and open evaluation",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "MPC",
+                "summary": "Basic regulatory compliance frameworks with open source transparency",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            },
+            "Community Governance": {
+                "rating": "HPV",
+                "summary": "Community governance model with open source development and academic oversight",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Comprehensive Safety Documentation": {
+                "rating": "MPU",
+                "summary": "Open safety documentation with research papers and community evaluation results",
+                "url": "https://arxiv.org/abs/2307.09288",
+                "lasTupdated": "2023-07-18"
+            },
+            "Model Cards & Technical Specs": {
+                "rating": "MPU",
+                "summary": "Open model cards and technical specifications with community validation",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            },
+            "Safety Research Publications": {
+                "rating": "HPU",
+                "summary": "Extensive safety research publications with peer review and community validation",
+                "url": "https://ai.meta.com/research/",
+                "lasTupdated": "2024-01-01"
+            },
+            "Policy & Compliance Documentation": {
+                "rating": "MPU",
+                "summary": "Open policy and compliance documentation with community feedback integration",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            },
+            "Community Evaluation Frameworks": {
+                "rating": "HPU",
+                "summary": "Open community evaluation frameworks with academic partnerships and peer review",
+                "url": "https://ai.meta.com/llama/",
+                "lasTupdated": "2024-01-01"
+            }
+        }
+    },
+    "Amazon": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "LPU",
+                "summary": "Enterprise-focused training data curation with customer data isolation and basic filtering",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "CSAM Detection & Removal": {
+                "rating": "LPU",
+                "summary": "Standard CSAM detection integrated into Bedrock platform with enterprise compliance",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Copyright Content Filtering": {
+                "rating": "LPU",
+                "summary": "Basic copyright filtering with enterprise compliance and customer-configurable policies",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Bias Detection in Training Data": {
+                "rating": "LPU",
+                "summary": "Limited bias detection capabilities with enterprise compliance focus",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "PII Reduction": {
+                "rating": "MPV",
+                "summary": "Advanced PII detection and redaction through Bedrock Guardrails with enterprise-grade protection",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-sensitive-filters.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "MPU",
+                "summary": "Enterprise regulatory compliance frameworks with industry-specific guardrails",
+                "url": "https://aws.amazon.com/compliance/",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "LPU",
+                "summary": "Basic RLHF with customer fine-tuning options and domain-specific safety optimization",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Fine-tuning for Domain Safety": {
+                "rating": "MPU",
+                "summary": "Customer fine-tuning options with domain-specific safety configurations and enterprise controls",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "MPU",
+                "summary": "Bedrock Guardrails input classification with customizable policies and enterprise integration",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Output Content Filtering": {
+                "rating": "MPU",
+                "summary": "Bedrock Guardrails output filtering with hallucination detection and content policy enforcement",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Prompt Injection Protection": {
+                "rating": "MPU",
+                "summary": "Basic prompt injection protection through Bedrock Guardrails input filtering",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "MPU",
+                "summary": "Real-time safety monitoring through AWS infrastructure with enterprise logging and alerting",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "MPU",
+                "summary": "Multi-stage safety pipeline with Bedrock Guardrails and AWS security integration",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "PII Detection & Redaction": {
+                "rating": "HPU",
+                "summary": "Advanced PII detection and redaction with enterprise-grade sensitive information filters",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-sensitive-filters.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Configurable Safety Policies": {
+                "rating": "HPU",
+                "summary": "Highly configurable safety policies through Bedrock Guardrails with customer customization",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Audit Logging": {
+                "rating": "HPU",
+                "summary": "Comprehensive audit logging through AWS CloudTrail with enterprise compliance tracking",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/logging-monitoring.html",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Novel/Advanced Features": {
+            "Enterprise Security Integration": {
+                "rating": "HPU",
+                "summary": "Deep enterprise security integration with AWS IAM, VPC, and compliance frameworks",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/security.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Sovereignty/On-Premises Options": {
+                "rating": "HPU",
+                "summary": "Data sovereignty options with AWS regions and customer-controlled encryption keys",
+                "url": "https://aws.amazon.com/compliance/data-privacy/",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Governance & Oversight": {
+            "Incident Reporting Systems": {
+                "rating": "MPU",
+                "summary": "Enterprise incident reporting through AWS support and compliance frameworks",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/logging-monitoring.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Usage Monitoring & Analytics": {
+                "rating": "HPU",
+                "summary": "Comprehensive usage monitoring through AWS CloudWatch with enterprise analytics",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/logging-monitoring.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "MPU",
+                "summary": "Enterprise regulatory compliance with AWS compliance certifications and industry standards",
+                "url": "https://aws.amazon.com/compliance/",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Comprehensive Safety Documentation": {
+                "rating": "MPU",
+                "summary": "Enterprise-focused safety documentation with AWS service documentation and compliance guides",
+                "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+                "lasTupdated": "2024-01-01"
+            },
+            "Model Cards & Technical Specs": {
+                "rating": "MPU",
+                "summary": "AWS AI Service Cards with model specifications and enterprise integration documentation",
+                "url": "https://aws.amazon.com/machine-learning/ai-service-cards/",
+                "lasTupdated": "2024-01-01"
+            },
+            "Policy & Compliance Documentation": {
+                "rating": "MPU",
+                "summary": "Comprehensive enterprise policy and compliance documentation with AWS security frameworks",
+                "url": "https://aws.amazon.com/compliance/",
+                "lasTupdated": "2024-01-01"
+            }
+        }
+    },
+    "Cohere": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "LPU",
+                "summary": "Enterprise document focus with bias metrics during training for business use cases",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "CSAM Detection & Removal": {
+                "rating": "LPU",
+                "summary": "Basic CSAM detection as part of enterprise content filtering systems",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Copyright Content Filtering": {
+                "ting": "LPU",
+                "summary": "Copyright filtering mechanisms for enterprise compliance and content policies",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Bias Detection in Training Data": {
+                "rating": "LPU",
+                "summary": "Bias metrics published during training with focus on enterprise fairness requirements",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "PII Reduction": {
+                "rating": "LPU",
+                "summary": "Basic PII reduction capabilities for enterprise data protection requirements",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "LPU",
+                "summary": "Enterprise compliance filtering with focus on business regulatory requirements",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "LPU",
+                "summary": "RLHF for business use cases with enterprise-focused training optimization",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Community Feedback Integration": {
+                "rating": "LPU",
+                "summary": "Limited community feedback integration focused on enterprise customer requirements",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Fine-tuning for Domain Safety": {
+                "rating": "MPU",
+                "summary": "Domain-specific fine-tuning for enterprise safety requirements and business use cases",
+                "url": "https://docs.cohere.com/docs/fine-tuning",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "LPU",
+                "summary": "Basic input content classification with dual safety modes (strict/contextual)",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Output Content Filtering": {
+                "rating": "LPU",
+                "summary": "Output filtering through dual safety modes with enterprise logging capabilities",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Prompt Injection Protection": {
+                "rating": "LPU",
+                "summary": "Basic prompt injection protection through safety mode filtering",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "LPU",
+                "summary": "Limited real-time monitoring capabilities through safety mode enforcement",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Contextual Safety Assessment": {
+                "rating": "MPU",
+                "summary": "Contextual safety assessment through CONTEXTUAL safety mode allowing nuanced moderation",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "LPU",
+                "summary": "Basic multi-stage pipeline with dual safety modes and enterprise integration",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Configurable Safety Policies": {
+                "rating": "MPU",
+                "summary": "Configurable safety policies through STRICT and CONTEXTUAL mode selection",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Audit Logging": {
+                "rating": "MPU",
+                "summary": "Enterprise audit logging for disallowed prompts and safety mode enforcement",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Novel/Advanced Features": {
+            "Enterprise Security Integration": {
+                "rating": "MPU",
+                "summary": "Enterprise security integration with on-premises deployment options",
+                "url": "https://cohere.com/enterprise",
+                "lasTupdated": "2024-01-01"
+            },
+            "Sovereignty/On-Premises Options": {
+                "rating": "MPU",
+                "summary": "On-premises deployment options for data sovereignty and enterprise control",
+                "url": "https://cohere.com/enterprise",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Governance & Oversight": {
+            "Incident Reporting Systems": {
+                "rating": "LPU",
+                "summary": "Basic incident reporting through enterprise support channels",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Usage Monitoring & Analytics": {
+                "rating": "MPU",
+                "summary": "Usage monitoring and analytics for enterprise safety and compliance tracking",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "MPU",
+                "summary": "Enterprise regulatory compliance frameworks with industry-specific requirements",
+                "url": "https://cohere.com/enterprise",
+                "lasTupdated": "2024-01-01"
+            },
+            "Academic Partnerships": {
+                "rating": "LPU",
+                "summary": "Limited academic partnerships with focus on enterprise applications",
+                "url": "https://cohere.com/research",
+                "lasTupdated": "2024-01-01"
+            },
+            "Community Governance": {
+                "rating": "MPU",
+                "summary": "Limited community governance with enterprise customer feedback integration",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Comprehensive Safety Documentation": {
+                "rating": "LPU",
+                "summary": "Basic safety documentation focused on safety modes and enterprise implementation",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            },
+            "Model Cards & Technical Specs": {
+                "rating": "LPU",
+                "summary": "Limited model cards and technical specifications with enterprise focus",
+                "url": "https://docs.cohere.com/",
+                "lasTupdated": "2024-01-01"
+            },
+            "Safety Research Publications": {
+                "rating": "LPU",
+                "summary": "Limited safety research publications with focus on enterprise applications",
+                "url": "https://cohere.com/research",
+                "lasTupdated": "2024-01-01"
+            },
+            "Policy & Compliance Documentation": {
+                "rating": "MPU",
+                "summary": "Enterprise policy and compliance documentation with safety mode implementation guides",
+                "url": "https://docs.cohere.com/docs/safety-modes",
+                "lasTupdated": "2024-01-01"
+            }
+        }
+    },
+    "Mistral": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "LPU",
+                "summary": "Lightweight filtering with community-driven approach and European data focus",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "MPU",
+                "summary": "European AI sovereignty focus with EU regulatory compliance measures",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "LPU",
+                "summary": "Minimal RLHF implementation with community feedback integration",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Community Feedback Integration": {
+                "rating": "LPU",
+                "summary": "Community feedback integration for model improvement and safety enhancement",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Fine-tuning for Domain Safety": {
+                "rating": "MPU",
+                "summary": "Domain-specific fine-tuning capabilities with European regulatory focus",
+                "url": "https://docs.mistral.ai/",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "LPU",
+                "summary": "Moderation API for input content classification with lightweight approach",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Output Content Filtering": {
+                "rating": "LPU",
+                "summary": "Content classification and filtering through Moderation API",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Prompt Injection Protection": {
+                "rating": "LPU",
+                "summary": "Basic prompt injection protection through content classification",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "LPU",
+                "summary": "Lightweight safety pipeline with moderation API and content classification",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Configurable Safety Policies": {
+                "rating": "LPU",
+                "summary": "Basic configurable policies through moderation API categories",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            }
+        },
+        "Governance & Oversight": {
+            "Community Governance": {
+                "rating": "LPU",
+                "summary": "Community governance model with European AI sovereignty principles",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "MPU",
+                "summary": "EU-focused regulatory compliance with European AI sovereignty emphasis",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Academic Partnerships": {
+                "rating": "LPU",
+                "summary": "Limited academic partnerships with European research institutions",
+                "url": "https://mistral.ai/research",
+                "lasTupdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Comprehensive Safety Documentation": {
+                "rating": "LPU",
+                "summary": "Basic safety documentation with moderation API specifications",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            },
+            "Model Cards & Technical Specs": {
+                "rating": "LPU",
+                "summary": "Limited model cards and technical documentation",
+                "url": "https://docs.mistral.ai/",
+                "lasTupdated": "2024-01-01"
+            },
+            "Safety Research Publications": {
+                "rating": "LPU",
+                "summary": "Minimal safety research publications with focus on efficiency",
+                "url": "https://mistral.ai/research",
+                "lasTupdated": "2024-01-01"
+            },
+            "Policy & Compliance Documentation": {
+                "rating": "LPU",
+                "summary": "Basic policy documentation with EU regulatory compliance focus",
+                "url": "https://mistral.ai/news/mistral-moderation",
+                "lasTupdated": "2024-11-01"
+            }
+        }
+    },
+    "Stability AI": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "LPU",
+                "summary": "Limited content filtering with community reports and post-hoc safety additions",
+                "url": "https://stability.ai/safety",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Alignment Methods": {
+            "Community Feedback Integration": {
+                "rating": "LPU",
+                "summary": "Community feedback integration for safety improvement and content policy development",
+                "url": "https://stability.ai/safety",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "LPU",
+                "summary": "Basic NSFW filters and community moderation tools for input content",
+                "url": "https://stability.ai/safety",
+                "lastUpdated": "2024-01-01"
+            },
+            "Output Content Filtering": {
+                "rating": "LPU",
+                "summary": "Basic NSFW filters for generated content with community moderation",
+                "url": "https://stability.ai/safety",
+                "lastUpdated": "2024-01-01"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "LPU",
+                "summary": "Basic safety pipeline with NSFW filtering and community moderation",
+                "url": "https://stability.ai/safety",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Governance & Oversight": {
+            "Community Governance": {
+                "rating": "LPU",
+                "summary": "Community governance model with open-source image generation focus",
+                "url": "https://stability.ai/safety",
+                "lastUpdated": "2024-01-01"
+            },
+            "Academic Partnerships": {
+                "rating": "LPU",
+                "summary": "Academic partnerships for image generation research and safety evaluation",
+                "url": "https://stability.ai/research",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Model Cards & Technical Specs": {
+                "rating": "LPU",
+                "summary": "Basic model cards for image generation models with safety considerations",
+                "url": "https://stability.ai/safety",
+                "lastUpdated": "2024-01-01"
+            },
+            "Safety Research Publications": {
+                "rating": "LPU",
+                "summary": "Limited safety research with focus on image generation and community-driven development",
+                "url": "https://stability.ai/research",
+                "lastUpdated": "2024-01-01"
+            }
+        }
+    },
+    "Hugging Face": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "MPU",
+                "summary": "Platform-level content policies with model scanning and community-driven filtering",
+                "url": "https://huggingface.co/docs/hub/security",
+                "lastUpdated": "2024-01-01"
+            },
+            "CSAM Detection & Removal": {
+                "rating": "LPU",
+                "summary": "Basic CSAM detection through platform-level content policies and community reporting",
+                "url": "https://huggingface.co/docs/hub/security",
+                "lastUpdated": "2024-01-01"
+            },
+            "Copyright Content Filtering": {
+                "rating": "LPU",
+                "summary": "Copyright filtering through platform policies and community moderation",
+                "url": "https://huggingface.co/docs/hub/security",
+                "lastUpdated": "2024-01-01"
+            },
+            "PII Reduction": {
+                "rating": "LPU",
+                "summary": "Basic PII protection through platform policies and model scanning",
+                "url": "https://huggingface.co/docs/hub/security",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Alignment Methods": {
+            "Community Feedback Integration": {
+                "rating": "LPU",
+                "summary": "Community feedback integration through platform governance and model reports",
+                "url": "https://huggingface.co/docs/hub/community",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "MPU",
+                "summary": "Safety Checker API for content classification with model card requirements",
+                "url": "https://huggingface.co/docs/diffusers/conceptual/safety_checker",
+                "lastUpdated": "2024-01-01"
+            },
+            "Output Content Filtering": {
+                "rating": "MPU",
+                "summary": "Output filtering through Safety Checker API and content warnings",
+                "url": "https://huggingface.co/docs/diffusers/conceptual/safety_checker",
+                "lastUpdated": "2024-01-01"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "LPU",
+                "summary": "Platform-level monitoring with community reporting and automated scanning",
+                "url": "https://huggingface.co/docs/hub/security",
+                "lastUpdated": "2024-01-01"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "MPU",
+                "summary": "Platform safety pipeline with model scanning, content warnings, and community moderation",
+                "url": "https://huggingface.co/docs/hub/security",
+                "lastUpdated": "2024-01-01"
+            },
+            "PII Detection & Redaction": {
+                "rating": "LPU",
+                "summary": "Basic PII detection through platform policies and model scanning capabilities",
+                "url": "https://huggingface.co/docs/hub/security",
+                "lastUpdated": "2024-01-01"
+            },
+            "Configurable Safety Policies": {
+                "rating": "LPU",
+                "summary": "Platform-level configurable policies with model card requirements and content warnings",
+                "url": "https://huggingface.co/docs/hub/security",
+                "lastUpdated": "2024-01-01"
+            },
+            "Audit Logging": {
+                "rating": "LPU",
+                "summary": "Basic audit logging through platform analytics and community reporting",
+                "url": "https://huggingface.co/docs/hub/security",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Novel/Advanced Features": {
+            "Open Source Safety Tools": {
+                "rating": "HPU",
+                "summary": "Comprehensive open source safety tooling ecosystem with community contributions",
+                "url": "https://huggingface.co/docs/diffusers/conceptual/safety_checker",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Governance & Oversight": {
+            "Community Governance": {
+                "rating": "MPU",
+                "summary": "Community governance with platform governance and collaborative safety development",
+                "url": "https://huggingface.co/docs/hub/community",
+                "lastUpdated": "2024-01-01"
+            },
+            "Academic Partnerships": {
+                "rating": "LPU",
+                "summary": "Academic collaborations for safety research and platform development",
+                "url": "https://huggingface.co/research",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Model Cards & Technical Specs": {
+                "rating": "HPU",
+                "summary": "Extensive model cards and technical specifications with safety information requirements",
+                "url": "https://huggingface.co/docs/hub/model-cards",
+                "lastUpdated": "2024-01-01"
+            },
+            "Safety Research Publications": {
+                "rating": "LPU",
+                "summary": "Limited safety research publications with focus on platform governance",
+                "url": "https://huggingface.co/research",
+                "lastUpdated": "2024-01-01"
+            },
+            "Community Evaluation Frameworks": {
+                "rating": "MPU",
+                "summary": "Community evaluation frameworks with collaborative safety assessment tools",
+                "url": "https://huggingface.co/docs/hub/community",
+                "lastUpdated": "2024-01-01"
+            }
+        }
+    },
+    "Baidu": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "LPU",
+                "summary": "Chinese regulatory compliance with government-approved content filtering",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "CSAM Detection & Removal": {
+                "rating": "LPU",
+                "summary": "CSAM detection in compliance with Chinese internet regulations",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "HPU",
+                "summary": "Comprehensive Chinese regulatory compliance with government oversight integration",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "LPU",
+                "summary": "RLHF with alignment to Chinese values and regulatory requirements",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "LPU",
+                "summary": "Real-time censorship and political content filtering for input classification",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Output Content Filtering": {
+                "rating": "LPU",
+                "summary": "Political content filtering and real-time censorship for output content",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Prompt Injection Protection": {
+                "rating": "LPU",
+                "summary": "Basic prompt injection protection through content filtering and government oversight",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "LPU",
+                "summary": "Real-time monitoring with government oversight and regulatory compliance",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "LPU",
+                "summary": "Multi-stage pipeline with government oversight and political content filtering",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Configurable Safety Policies": {
+                "rating": "LPU",
+                "summary": "Government-configured safety policies with Chinese regulatory compliance",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Audit Logging": {
+                "rating": "LPU",
+                "summary": "Government audit logging and compliance tracking for regulatory oversight",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Novel/Advanced Features": {
+            "Government Oversight": {
+                "rating": "HPU",
+                "summary": "Direct government oversight and regulatory compliance with Chinese authorities",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Governance & Oversight": {
+            "Incident Reporting Systems": {
+                "rating": "LPU",
+                "summary": "Government incident reporting with regulatory compliance tracking",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Usage Monitoring & Analytics": {
+                "rating": "LPU",
+                "summary": "Usage monitoring with government oversight and regulatory compliance",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "HPU",
+                "summary": "Comprehensive Chinese regulatory compliance with government framework integration",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Academic Partnerships": {
+                "rating": "LPU",
+                "summary": "Limited academic partnerships with Chinese research institutions",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Comprehensive Safety Documentation": {
+                "rating": "LPU",
+                "summary": "Limited international transparency with Chinese regulatory documentation",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Model Cards & Technical Specs": {
+                "rating": "LPU",
+                "summary": "Basic model cards with Chinese regulatory compliance information",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            },
+            "Safety Research Publications": {
+                "rating": "LPU",
+                "summary": "Limited international safety research publications with regulatory focus",
+                "url": "https://research.baidu.com/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Policy & Compliance Documentation": {
+                "rating": "LPU",
+                "summary": "Chinese regulatory documentation with limited international transparency",
+                "url": "https://wenxin.baidu.com/wenxin/docs",
+                "lastUpdated": "2024-01-01"
+            }
+        }
+    },
+    "Alibaba": {
+        "Pre-training Safety": {
+            "Training Data Filtering": {
+                "rating": "LPU",
+                "summary": "Commercial focus with regulatory compliance and business-oriented filtering",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "CSAM Detection & Removal": {
+                "rating": "LPU",
+                "summary": "CSAM detection for Chinese regulatory compliance and commercial deployment",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Regulatory Compliance Filtering": {
+                "rating": "MPU",
+                "summary": "Chinese regulatory compliance with commercial focus and efficiency optimization",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Alignment Methods": {
+            "Reinforcement Learning from Human Feedback (RLHF)": {
+                "rating": "LPU",
+                "summary": "Business-oriented RLHF with efficiency focus and commercial optimization",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Fine-tuning for Domain Safety": {
+                "rating": "MPU",
+                "summary": "Domain-specific fine-tuning for business process automation and commercial safety",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Inference Safeguards": {
+            "Input Content Classification": {
+                "rating": "LPU",
+                "summary": "Enterprise content filtering with customer customization for business use cases",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Output Content Filtering": {
+                "rating": "LPU",
+                "summary": "Customer-customizable output filtering for enterprise and commercial applications",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Prompt Injection Protection": {
+                "rating": "LPU",
+                "summary": "Basic prompt injection protection through enterprise content filtering",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Real-time Safety Monitoring": {
+                "rating": "LPU",
+                "summary": "Real-time monitoring for commercial applications with business process integration",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Multi-stage Safety Pipeline": {
+                "rating": "LPU",
+                "summary": "Multi-stage pipeline with cloud integration and business process automation",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "PII Detection & Redaction": {
+                "rating": "LPU",
+                "summary": "Basic PII detection for enterprise data protection and commercial compliance",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Configurable Safety Policies": {
+                "rating": "MPU",
+                "summary": "Customer-configurable safety policies for enterprise deployment and business needs",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Audit Logging": {
+                "rating": "MPU",
+                "summary": "Enterprise audit logging for business compliance and commercial accountability",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Novel/Advanced Features": {
+            "Enterprise Security Integration": {
+                "rating": "MPU",
+                "summary": "Cloud integration with Alibaba Cloud security and business process automation",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Sovereignty/On-Premises Options": {
+                "rating": "HPU",
+                "summary": "Data sovereignty options through Alibaba Cloud with regional deployment flexibility",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Governance & Oversight": {
+            "Incident Reporting Systems": {
+                "rating": "LPU",
+                "summary": "Basic incident reporting through enterprise support and commercial channels",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Usage Monitoring & Analytics": {
+                "rating": "MPU",
+                "summary": "Enterprise usage monitoring with business analytics and commercial optimization",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Regulatory Compliance Frameworks": {
+                "rating": "MPU",
+                "summary": "Chinese regulatory compliance frameworks with commercial focus and enterprise requirements",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            }
+        },
+        "Transparency": {
+            "Comprehensive Safety Documentation": {
+                "rating": "LPU",
+                "summary": "Business documentation with limited research disclosure and commercial focus",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Model Cards & Technical Specs": {
+                "rating": "LPU",
+                "summary": "Basic model cards with commercial specifications and business application focus",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            },
+            "Policy & Compliance Documentation": {
+                "rating": "MPU",
+                "summary": "Business policy documentation with enterprise compliance and commercial requirements",
+                "url": "https://tongyi.aliyun.com/qianwen/",
+                "lastUpdated": "2024-01-01"
+            }
+        }
+    }
+}
