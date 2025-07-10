@@ -92,25 +92,27 @@ jobs:
           const fs = require('fs');
           const summary = fs.readFileSync('verification_summary.txt', 'utf8');
           
+          const issueBody = `## ⚠️ Source Verification Issues
+          
+          The weekly verification detected some failures.
+          
+          ### Summary
+          \`\`\`
+          ${summary}
+          \`\`\`
+          
+          ### Action Required
+          Please review the failed sources and:
+          1. Update URLs if they've moved
+          2. Remove evidence if sources are permanently unavailable
+          3. Find alternative sources if possible
+          
+          [View Full Workflow Run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`;
+          
           await github.rest.issues.create({
             owner: context.repo.owner,
             repo: context.repo.repo,
             title: '[Automated] Source Verification Failures Detected',
-            body: `## ⚠️ Source Verification Issues
-                   The weekly verification detected some failures.
-
-                   ### Summary
-                   \`\`\`
-                   ${summary}
-                   \`\`\`
-
-                   ### Action Required
-                   Please review the failed sources and:
-                   1. Update URLs if they've moved
-                   2. Remove evidence if sources are permanently unavailable
-                   3. Find alternative sources if possible
-
-                   [View Full Workflow Run]
-                   (${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`,
-        labels: ['bug', 'verification', 'help wanted']
+            body: issueBody,
+            labels: ['bug', 'verification', 'help wanted']
           });
