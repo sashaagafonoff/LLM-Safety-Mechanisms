@@ -1,33 +1,20 @@
 # LLM Safety Mechanisms Dataset
 
-A comprehensive, structured dataset tracking safety mechanisms implemented by major LLM providers.
+[![GitHub issues](https://img.shields.io/github/issues/sashaagafonoff/LLM-Safety-Mechanisms)](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Dashboard](https://img.shields.io/badge/dashboard-live-blue)](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/)
 
-## 🎯 Purpose
+**The most comprehensive tracker of safety mechanisms implemented by major LLM providers.**
 
-This dataset provides researchers, policymakers, and practitioners with:
-- Standardized taxonomy of LLM safety techniques
-- Evidence-based tracking of implementation across providers
-- Verifiable sources for all safety claims
-- Machine-readable format for analysis
+🎯 **Why this matters:** As AI systems become more powerful, understanding their safety mechanisms is critical for researchers, policymakers, and practitioners.
 
-## 📊 Dataset Structure
+📊 **[View Interactive Dashboard](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/)**
 
-The dataset uses a normalized structure with six linked entities:
-- **Providers**: LLM companies and organizations
-- **Models**: Specific model versions and their capabilities
-- **Categories**: Safety mechanism categories (e.g., "Pre-training Safety")
-- **Techniques**: Specific safety methods (e.g., "Training Data Filtering")
-- **Evidence**: Provider-specific implementations with sources
-- **Risk Areas**: Standardized risk taxonomy
+## 🚀 Quick Stats
+- 5 major providers tracked
+- 14 safety techniques documented  
+- 25+ evidence records with primary sources
+- Weekly automated verification
 
-## 🚀 Quick Start
-
-```bash
-# Validate the dataset
-python scripts/validate_data.py
-
-# View evidence for a specific provider
-jq '.[] | select(.providerId=="openai")' data/evidence.json
-
-# Generate summary report
-python scripts/generate_report.py
+## 🤝 Help Wanted
+We need evidence for 50+ missing safety implementations. [See open issues →](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues)
