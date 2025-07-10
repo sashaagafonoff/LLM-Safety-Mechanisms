@@ -1,1 +1,86 @@
-[]
+[
+  {
+    "id": "ev-openai-training-filtering-001",
+    "providerId": "openai",
+    "techniqueId": "tech-training-data-filtering",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "Multi-stage filtering using Moderation API and safety classifiers to remove CSAM, hateful content, violence, and CBRN materials from training datasets",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 3: Safety Evaluations"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Specific filtering thresholds not disclosed",
+      "May introduce demographic biases"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "SOC2"
+    ],
+    "notes": "Part of comprehensive pre-training safety pipeline"
+  },
+  {
+    "id": "ev-openai-training-filtering-001",
+    "providerId": "openai",
+    "techniqueId": "tech-training-data-filtering",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "Multi-stage filtering using Moderation API and safety classifiers to remove CSAM, hateful content, violence, and CBRN materials from training datasets",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 3: Safety Evaluations"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Specific filtering thresholds not disclosed",
+      "May introduce demographic biases"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "SOC2"
+    ],
+    "notes": "Part of comprehensive pre-training safety pipeline"
+  }
+]

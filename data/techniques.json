@@ -23,5 +23,103 @@
       2,
       6
     ]
+  },
+  {
+    "id": "tech-csam-detection",
+    "name": "CSAM Detection & Removal",
+    "categoryId": "cat-pre-training-safety",
+    "description": "Automated detection and removal of child sexual abuse material",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "ExternalSafetyService"
+    ],
+    "governingStandards": [
+      "NCMEC"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "False positive rates not disclosed"
+    ],
+    "aliases": [
+      "CSAM Filtering"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1
+    ]
+  },
+  {
+    "id": "tech-rlhf",
+    "name": "Reinforcement Learning from Human Feedback",
+    "categoryId": "cat-alignment",
+    "description": "Training models to align with human preferences through feedback",
+    "implementationMethods": [
+      "HumanModeration",
+      "EmbeddedClassifier"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Subject to annotator biases",
+      "Expensive to scale"
+    ],
+    "aliases": [
+      "RLHF"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      5
+    ]
+  },
+  {
+    "id": "tech-csam-detection",
+    "name": "CSAM Detection & Removal",
+    "categoryId": "cat-pre-training-safety",
+    "description": "Automated detection and removal of child sexual abuse material",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "ExternalSafetyService"
+    ],
+    "governingStandards": [
+      "NCMEC"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "False positive rates not disclosed"
+    ],
+    "aliases": [
+      "CSAM Filtering"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1
+    ]
+  },
+  {
+    "id": "tech-rlhf",
+    "name": "Reinforcement Learning from Human Feedback",
+    "categoryId": "cat-alignment",
+    "description": "Training models to align with human preferences through feedback",
+    "implementationMethods": [
+      "HumanModeration",
+      "EmbeddedClassifier"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Subject to annotator biases",
+      "Expensive to scale"
+    ],
+    "aliases": [
+      "RLHF"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      5
+    ]
   }
 ]
