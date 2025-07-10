@@ -406,5 +406,419 @@
     "riskAreaIds": [
       7
     ]
+  },
+  {
+    "id": "tech-adversarial-training",
+    "name": "Adversarial Training",
+    "categoryId": "cat-alignment",
+    "description": "Training with adversarial examples to improve robustness",
+    "implementationMethods": [
+      "AdversarialRedTeam"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Cannot cover all attack vectors"
+    ],
+    "aliases": [
+      "Adversarial Robustness Training"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      4
+    ]
+  },
+  {
+    "id": "tech-red-team-data",
+    "name": "Red Team Data Integration",
+    "categoryId": "cat-alignment",
+    "description": "Incorporating red team findings into training data",
+    "implementationMethods": [
+      "AdversarialRedTeam",
+      "HumanModeration"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Limited by red team scope"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [
+      "tech-red-teaming"
+    ],
+    "riskAreaIds": [
+      1,
+      2,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "tech-realtime-monitoring",
+    "name": "Real-time Safety Monitoring",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Live monitoring of model outputs for safety violations",
+    "implementationMethods": [
+      "ExternalSafetyService",
+      "EmbeddedClassifier"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Latency impact",
+      "May miss context"
+    ],
+    "aliases": [
+      "Live Safety Monitoring"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "tech-contextual-safety",
+    "name": "Contextual Safety Assessment",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Context-aware safety evaluation considering conversation history",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "RetrievalAugmentation"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Complex contexts challenging"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      5
+    ]
+  },
+  {
+    "id": "tech-multistage-pipeline",
+    "name": "Multi-stage Safety Pipeline",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Multiple layers of safety checks at different stages",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Increased complexity",
+      "Potential for conflicts"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "tech-pii-detection-inference",
+    "name": "PII Detection & Redaction",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Real-time detection and redaction of personal information",
+    "implementationMethods": [
+      "RuleBased",
+      "EmbeddedClassifier"
+    ],
+    "governingStandards": [
+      "GDPR",
+      "CCPA"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "Context-dependent PII hard to catch"
+    ],
+    "aliases": [
+      "PII Redaction"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      3
+    ]
+  },
+  {
+    "id": "tech-configurable-policies",
+    "name": "Configurable Safety Policies",
+    "categoryId": "cat-inference-safeguards",
+    "description": "User or admin configurable safety thresholds and policies",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Requires user expertise"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "tech-audit-logging",
+    "name": "Audit Logging",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Comprehensive logging of safety-relevant events",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [
+      "SOC2",
+      "ISO27001"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "Storage requirements",
+      "Privacy concerns"
+    ],
+    "aliases": [
+      "Safety Audit Trail"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      7
+    ]
+  },
+  {
+    "id": "tech-safety-advisory",
+    "name": "Independent Safety Advisory",
+    "categoryId": "cat-governance",
+    "description": "External advisory board for safety oversight",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Advisory only, not binding"
+    ],
+    "aliases": [
+      "Safety Board"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "id": "tech-incident-reporting",
+    "name": "Incident Reporting Systems",
+    "categoryId": "cat-governance",
+    "description": "Formal systems for reporting and tracking safety incidents",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Depends on reporting culture"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "tech-usage-monitoring",
+    "name": "Usage Monitoring & Analytics",
+    "categoryId": "cat-governance",
+    "description": "Monitoring usage patterns for safety insights",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Privacy considerations"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "tech-regulatory-compliance",
+    "name": "Regulatory Compliance Frameworks",
+    "categoryId": "cat-governance",
+    "description": "Frameworks for compliance with AI regulations",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [
+      "EU AI Act",
+      "NIST AI RMF"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "Varies by jurisdiction"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "id": "tech-academic-partnerships",
+    "name": "Academic Partnerships",
+    "categoryId": "cat-governance",
+    "description": "Collaborations with academic institutions for safety research",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Research timeline constraints"
+    ],
+    "aliases": [
+      "University Collaborations"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "id": "tech-model-cards",
+    "name": "Model Cards & Technical Specs",
+    "categoryId": "cat-transparency",
+    "description": "Standardized documentation of model capabilities and limitations",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [
+      "Model Cards Framework"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "May not cover all aspects"
+    ],
+    "aliases": [
+      "Model Documentation"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      7
+    ]
+  },
+  {
+    "id": "tech-safety-research",
+    "name": "Safety Research Publications",
+    "categoryId": "cat-transparency",
+    "description": "Publishing safety research and methodologies",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "May not include proprietary methods"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      7
+    ]
+  },
+  {
+    "id": "tech-policy-documentation",
+    "name": "Policy & Compliance Documentation",
+    "categoryId": "cat-transparency",
+    "description": "Public documentation of safety policies and compliance measures",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "May be high-level"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      7
+    ]
+  },
+  {
+    "id": "tech-watermarking",
+    "name": "Watermarking Technology",
+    "categoryId": "cat-novel-features",
+    "description": "Embedding detectable patterns in AI-generated content",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Can be removed or spoofed"
+    ],
+    "aliases": [
+      "AI Watermarking",
+      "SynthID"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      5,
+      7
+    ]
   }
 ]

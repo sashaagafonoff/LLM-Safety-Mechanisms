@@ -614,5 +614,1125 @@
     "complianceStandards": [],
     "notes": "Industry-leading transparency",
     "id": "ev-anthropic-0014"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-csam-detection",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Automated detection and removal of child sexual abuse material using specialized classifiers during pre-training data preparation",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://openai.com/policies/usage-policies",
+        "documentType": "policy",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Prohibited Usage"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Detection rates not disclosed"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "NCMEC"
+    ],
+    "notes": "Part of comprehensive content filtering",
+    "id": "ev-openai-0003"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-copyright-filtering",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Fingerprinting system to remove opted-out images from training data, building on DALL-E 3 opt-out mechanism",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 2.1"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Only for opted-out content"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "DMCA"
+    ],
+    "notes": "Extends DALL-E 3 opt-out system",
+    "id": "ev-openai-0004"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-bias-detection-training",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Advanced data filtering processes to reduce biased content, though specific bias detection methods not fully detailed",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Safety Evaluations"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Specific methods not disclosed"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0005"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-pii-reduction",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Advanced data filtering processes to reduce personal information from training data using automated detection systems",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Data Processing"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Cannot catch all PII"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "GDPR",
+      "CCPA"
+    ],
+    "notes": "",
+    "id": "ev-openai-0006"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-adversarial-training",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Red team data integration and adversarial testing during training, though specific methods not detailed",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Red Teaming"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Methods not fully disclosed"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0007"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-red-team-data",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "100+ external red teamers across 45 languages and 29 countries, data integrated into training process",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "External Red Teaming"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Extensive red team network",
+    "id": "ev-openai-0008"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-input-classification",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Layered policy engine with system prompt \u2192 model \u2192 content filter pipeline, including specialized voice classifiers",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Safety Pipeline"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Multi-layer approach",
+    "id": "ev-openai-0009"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-output-filtering",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Multi-stage content filtering with moderation API applied to both text and audio outputs",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Output Moderation"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Includes audio moderation",
+    "id": "ev-openai-0010"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-prompt-injection-protection",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "System prompt protections and multi-layer filtering, though specific prompt injection defenses not detailed",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Safety Mitigations"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Specific defenses not disclosed"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0011"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-realtime-monitoring",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Real-time monitoring and enforcement with product-level mitigations including streaming audio analysis",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Real-time Voice"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Includes voice monitoring",
+    "id": "ev-openai-0012"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-contextual-safety",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Context-aware safety evaluation, particularly for voice interactions, though implementation not detailed",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Voice Safety"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Implementation details limited"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0013"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-multistage-pipeline",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Comprehensive safety pipeline spanning pre-training, post-training, product development, and policy enforcement",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Safety Architecture"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "End-to-end approach",
+    "id": "ev-openai-0014"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-pii-detection-inference",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "PII detection capabilities integrated into content filtering systems for personal information protection",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://openai.com/policies/usage-policies",
+        "documentType": "policy",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Privacy"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Details not specified"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "GDPR",
+      "CCPA"
+    ],
+    "notes": "",
+    "id": "ev-openai-0015"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-configurable-policies",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Usage policies and moderation tools provided to users, with transparency reports and configurable settings",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://openai.com/policies/usage-policies",
+        "documentType": "policy",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Usage Policies"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Limited configurability"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0016"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-audit-logging",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Usage monitoring and incident reporting systems for tracking and analyzing safety incidents",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Monitoring"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "SOC2"
+    ],
+    "notes": "",
+    "id": "ev-openai-0017"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-capability-monitoring",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "Preparedness Framework with pre-defined capability thresholds and deployment decisions based on risk assessments",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/openai-preparedness-framework-beta.pdf",
+        "documentType": "policy",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Full Document"
+      }
+    ],
+    "implementationDate": "2023-10-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Industry-leading framework",
+    "id": "ev-openai-0018"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-safety-advisory",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Safety Advisory Group providing independent oversight and recommendations on deployment decisions",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Governance"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P12M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0019"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-incident-reporting",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": true,
+      "automatedTest": true
+    },
+    "summary": "Systematic incident reporting and analysis with internal tracking and external disclosure mechanisms",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Incident Response"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0020"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-usage-monitoring",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": true,
+      "automatedTest": true
+    },
+    "summary": "Comprehensive usage monitoring with analytics for detecting patterns of misuse and safety incidents",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Usage Analytics"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0021"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-regulatory-compliance",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Compliance with voluntary White House commitments and development of internal governance frameworks",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://openai.com/index/our-approach-to-ai-safety",
+        "documentType": "blog-post",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Commitments"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "White House Commitments"
+    ],
+    "notes": "",
+    "id": "ev-openai-0022"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-academic-partnerships",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Collaboration with academic institutions and independent research organizations for safety evaluation",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "External Collaboration"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P12M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0023"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-model-cards",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "Technical documentation including model architecture, training methodology, and safety evaluation results",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+        "documentType": "system-card",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Full Document"
+      }
+    ],
+    "implementationDate": "2024-08-08",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P12M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Comprehensive system card",
+    "id": "ev-openai-0024"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-safety-research",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Regular publication of safety research, evaluation methodologies, and lessons learned from deployment",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://openai.com/research",
+        "documentType": "research-paper",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Safety Research"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P12M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0025"
+  },
+  {
+    "providerId": "openai",
+    "techniqueId": "tech-policy-documentation",
+    "modelIds": [
+      "model-gpt-4o"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Comprehensive usage policies, terms of service, and compliance documentation publicly available",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://openai.com/policies",
+        "documentType": "policy",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "All Policies"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-openai-0026"
+  },
+  {
+    "providerId": "google",
+    "techniqueId": "tech-watermarking",
+    "modelIds": [
+      "model-gemini-pro"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": true,
+      "automatedTest": true
+    },
+    "summary": "SynthID watermarking technology for AI-generated image and audio content identification",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://deepmind.google/science/synthid/",
+        "documentType": "documentation",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Technology Overview"
+      }
+    ],
+    "implementationDate": "2023-08-29",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Limited to certain content types"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Industry-leading watermarking",
+    "id": "ev-google-0003"
+  },
+  {
+    "providerId": "google",
+    "techniqueId": "tech-regulatory-compliance",
+    "modelIds": [
+      "model-gemini-pro"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "EU AI Act compliance measures with transparency registers and regulatory reporting mechanisms",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://blog.google/technology/ai/google-ai-act-preparation/",
+        "documentType": "blog-post",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Compliance Measures"
+      }
+    ],
+    "implementationDate": "2024-02-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "EU AI Act"
+    ],
+    "notes": "Proactive compliance",
+    "id": "ev-google-0004"
+  },
+  {
+    "providerId": "google",
+    "techniqueId": "tech-multistage-pipeline",
+    "modelIds": [
+      "model-gemini-pro"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Multi-stage safety layers including toxicity detection, policy checks, and SynthID watermarking",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+        "documentType": "blog-post",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Safety Architecture"
+      }
+    ],
+    "implementationDate": "2024-02-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-google-0005"
+  },
+  {
+    "providerId": "google",
+    "techniqueId": "tech-academic-partnerships",
+    "modelIds": [
+      "model-gemini-pro"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Academic partnerships for AI safety research and independent evaluation of safety measures",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://deepmind.google/research/",
+        "documentType": "documentation",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Collaborations"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P12M",
+    "reviewer": "initial-import",
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-google-0006"
+  },
+  {
+    "providerId": "meta",
+    "techniqueId": "tech-output-filtering",
+    "modelIds": [
+      "model-llama-3-70b"
+    ],
+    "rating": "medium",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Llama Guard output filtering with contextual moderation and open source validation",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+        "documentType": "research-paper",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Output Moderation"
+      }
+    ],
+    "implementationDate": "2023-12-07",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Requires separate inference"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Open source implementation",
+    "id": "ev-meta-0004"
+  },
+  {
+    "providerId": "meta",
+    "techniqueId": "tech-bias-detection-training",
+    "modelIds": [
+      "model-llama-3-70b"
+    ],
+    "rating": "medium",
+    "severityBand": "B",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "Bias detection and mitigation with community-driven evaluation and open source validation",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://arxiv.org/abs/2307.09288",
+        "documentType": "research-paper",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 5.2: Bias Evaluation"
+      }
+    ],
+    "implementationDate": "2023-07-18",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "knownLimitations": [
+      "Community-dependent validation"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "",
+    "id": "ev-meta-0005"
   }
 ]
