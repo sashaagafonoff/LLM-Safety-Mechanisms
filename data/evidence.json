@@ -82,5 +82,537 @@
       "SOC2"
     ],
     "notes": "Part of comprehensive pre-training safety pipeline"
+  },
+  {
+    "providerId": "anthropic",
+    "techniqueId": "tech-training-data-filtering",
+    "modelIds": [
+      "model-claude-3-opus",
+      "model-claude-3-sonnet"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Constitutional training data with filtered corpora designed to reduce harmful content and improve model alignment",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+        "documentType": "policy",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Safety and Security Standards"
+      }
+    ],
+    "implementationDate": "2023-09-18",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Specific filtering methods not detailed"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Part of Constitutional AI framework",
+    "id": "ev-anthropic-0002"
+  },
+  {
+    "providerId": "anthropic",
+    "techniqueId": "tech-constitutional-ai",
+    "modelIds": [
+      "model-claude-3-opus",
+      "model-claude-3-sonnet"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "Self-critique training using constitutional principles for helpful, harmless, honest behavior with scalable oversight",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://arxiv.org/abs/2212.08073",
+        "documentType": "research-paper",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 3: Constitutional AI"
+      }
+    ],
+    "implementationDate": "2022-12-15",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [
+      {
+        "metric": "human_preference_rate",
+        "value": 76,
+        "unit": "percent",
+        "benchmarkContext": {
+          "name": "Constitutional AI Eval",
+          "version": "v1",
+          "url": "https://arxiv.org/abs/2212.08073"
+        }
+      }
+    ],
+    "knownLimitations": [
+      "May be overly conservative",
+      "Principles require careful design"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Core safety innovation from Anthropic",
+    "id": "ev-anthropic-0003"
+  },
+  {
+    "providerId": "anthropic",
+    "techniqueId": "tech-rlhf",
+    "modelIds": [
+      "model-claude-3-opus",
+      "model-claude-3-sonnet"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "Constitutional AI approach combining self-critique with RLHF for scalable oversight and preference learning",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://arxiv.org/abs/2212.08073",
+        "documentType": "research-paper",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 4: Training Process"
+      }
+    ],
+    "implementationDate": "2022-12-15",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Subject to annotator biases",
+      "Computationally expensive"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Combined with Constitutional AI for enhanced safety",
+    "id": "ev-anthropic-0004"
+  },
+  {
+    "providerId": "google",
+    "techniqueId": "tech-training-data-filtering",
+    "modelIds": [
+      "model-gemini-pro"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Multi-lingual safety filtering and bias detection in training data preparation for Gemini models",
+    "evidenceLevel": "secondary",
+    "sourceUrls": [
+      {
+        "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+        "documentType": "blog-post",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Training Data Safety"
+      }
+    ],
+    "implementationDate": "2024-02-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Specific methods not detailed"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "EU AI Act"
+    ],
+    "notes": "Focus on multilingual safety",
+    "id": "ev-google-0005"
+  },
+  {
+    "providerId": "google",
+    "techniqueId": "tech-rlhf",
+    "modelIds": [
+      "model-gemini-pro"
+    ],
+    "rating": "medium",
+    "severityBand": "B",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "RLHF with adversarial safety tuning datasets and Sparrow-style critiquing methodology",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://arxiv.org/abs/2209.14375",
+        "documentType": "research-paper",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 3: Training Sparrow"
+      }
+    ],
+    "implementationDate": "2022-09-29",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Limited to English initially"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Based on Sparrow research",
+    "id": "ev-google-0006"
+  },
+  {
+    "providerId": "meta",
+    "techniqueId": "tech-training-data-filtering",
+    "modelIds": [
+      "model-llama-3-70b"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Open training with safety benchmarks and Llama Guard integration for content filtering",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://arxiv.org/abs/2307.09288",
+        "documentType": "research-paper",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 4: Safety"
+      }
+    ],
+    "implementationDate": "2023-07-18",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Community-dependent verification"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Open source approach enables community verification",
+    "id": "ev-meta-0007"
+  },
+  {
+    "providerId": "meta",
+    "techniqueId": "tech-rlhf",
+    "modelIds": [
+      "model-llama-3-70b"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": true,
+      "automatedTest": false
+    },
+    "summary": "Two-phase RLHF with community-driven safety feedback and open source evaluation",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://arxiv.org/abs/2307.09288",
+        "documentType": "research-paper",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 3.3: Fine-tuning"
+      }
+    ],
+    "implementationDate": "2023-07-18",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Resource intensive",
+      "Community feedback quality varies"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Two-phase approach with safety-specific rewards",
+    "id": "ev-meta-0008"
+  },
+  {
+    "providerId": "meta",
+    "techniqueId": "tech-input-classification",
+    "modelIds": [
+      "model-llama-3-70b"
+    ],
+    "rating": "medium",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Llama Guard as separate safety classifier for input content with open source implementation",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+        "documentType": "research-paper",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Section 2: Llama Guard"
+      }
+    ],
+    "implementationDate": "2023-12-07",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Requires separate model inference"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Open source safety classifier",
+    "id": "ev-meta-0009"
+  },
+  {
+    "providerId": "amazon",
+    "techniqueId": "tech-pii-reduction",
+    "modelIds": [
+      "model-titan-text-express"
+    ],
+    "rating": "medium",
+    "severityBand": "B",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Advanced PII detection and redaction through Bedrock Guardrails with enterprise-grade protection",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-sensitive-filters.html",
+        "documentType": "documentation",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Sensitive Information Filters"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Language support varies",
+      "Context-dependent PII challenging"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "HIPAA",
+      "PCI-DSS"
+    ],
+    "notes": "Enterprise-grade PII protection",
+    "id": "ev-amazon-0010"
+  },
+  {
+    "providerId": "amazon",
+    "techniqueId": "tech-input-classification",
+    "modelIds": [
+      "model-titan-text-express"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Bedrock Guardrails input classification with customizable policies and enterprise integration",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+        "documentType": "documentation",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Content Filters"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Requires configuration",
+      "May have false positives"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Highly configurable for enterprise needs",
+    "id": "ev-amazon-0011"
+  },
+  {
+    "providerId": "amazon",
+    "techniqueId": "tech-output-filtering",
+    "modelIds": [
+      "model-titan-text-express"
+    ],
+    "rating": "medium",
+    "severityBand": "C",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": true
+    },
+    "summary": "Bedrock Guardrails output filtering with hallucination detection and content policy enforcement",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+        "documentType": "documentation",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Output Moderation"
+      }
+    ],
+    "implementationDate": "2024-01-01",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P6M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "May alter outputs",
+      "Hallucination detection has limits"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Includes hallucination detection",
+    "id": "ev-amazon-0012"
+  },
+  {
+    "providerId": "anthropic",
+    "techniqueId": "tech-red-teaming",
+    "modelIds": [
+      "model-claude-3-opus",
+      "model-claude-3-sonnet"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "External red team engagement as part of responsible scaling policy and AI Safety Level assessments",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+        "documentType": "policy",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "AI Safety Levels"
+      }
+    ],
+    "implementationDate": "2023-09-18",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P3M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [
+      "Specific findings not always public"
+    ],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Part of ASL framework",
+    "id": "ev-anthropic-0013"
+  },
+  {
+    "providerId": "anthropic",
+    "techniqueId": "tech-safety-documentation",
+    "modelIds": [
+      "model-claude-3-opus",
+      "model-claude-3-sonnet"
+    ],
+    "rating": "high",
+    "severityBand": "P",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": true,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "summary": "Responsible scaling policy and constitutional AI research provide comprehensive safety framework documentation",
+    "evidenceLevel": "primary",
+    "sourceUrls": [
+      {
+        "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+        "documentType": "policy",
+        "lastVerified": "2024-12-19",
+        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "relevantSection": "Full Document"
+      }
+    ],
+    "implementationDate": "2023-09-18",
+    "lastReviewed": "2024-12-19",
+    "reviewFrequency": "P12M",
+    "reviewer": "initial-import",
+    "evaluationMetrics": [],
+    "knownLimitations": [],
+    "deploymentScope": "all-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "notes": "Industry-leading transparency",
+    "id": "ev-anthropic-0014"
   }
 ]

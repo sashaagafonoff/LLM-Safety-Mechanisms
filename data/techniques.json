@@ -121,5 +121,290 @@
       2,
       5
     ]
+  },
+  {
+    "id": "tech-copyright-filtering",
+    "name": "Copyright Content Filtering",
+    "categoryId": "cat-pre-training-safety",
+    "description": "Detection and removal of copyrighted content from training datasets",
+    "implementationMethods": [
+      "RuleBased",
+      "EmbeddedClassifier"
+    ],
+    "governingStandards": [
+      "DMCA"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "Difficult to detect all copyrighted content",
+      "May remove fair use content"
+    ],
+    "aliases": [
+      "Copyright Protection"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      6
+    ]
+  },
+  {
+    "id": "tech-bias-detection-training",
+    "name": "Bias Detection in Training Data",
+    "categoryId": "cat-pre-training-safety",
+    "description": "Detection and mitigation of demographic and cultural biases in training data",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "RuleBased"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Cannot detect all forms of bias",
+      "Definitions of bias vary culturally"
+    ],
+    "aliases": [
+      "Training Data Debiasing"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      2
+    ]
+  },
+  {
+    "id": "tech-pii-reduction",
+    "name": "PII Reduction",
+    "categoryId": "cat-pre-training-safety",
+    "description": "Detection and removal of personal information from training data",
+    "implementationMethods": [
+      "RuleBased",
+      "EmbeddedClassifier"
+    ],
+    "governingStandards": [
+      "GDPR",
+      "CCPA"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "Cannot catch all PII",
+      "Context-dependent PII is challenging"
+    ],
+    "aliases": [
+      "PII Filtering",
+      "Personal Data Removal"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      3
+    ]
+  },
+  {
+    "id": "tech-constitutional-ai",
+    "name": "Constitutional AI / Self-Critique",
+    "categoryId": "cat-alignment",
+    "description": "Training models to critique and revise their own outputs based on constitutional principles",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "RetrievalAugmentation"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Requires careful principle design",
+      "May be overly conservative"
+    ],
+    "aliases": [
+      "CAI",
+      "Constitutional AI"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      5,
+      10
+    ]
+  },
+  {
+    "id": "tech-safety-reward-modeling",
+    "name": "Safety Reward Modeling",
+    "categoryId": "cat-alignment",
+    "description": "Separate reward models specifically optimized for safety outcomes",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "HumanModeration"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "May conflict with capability objectives",
+      "Hard to balance multiple safety goals"
+    ],
+    "aliases": [
+      "Safety RM"
+    ],
+    "requiredTechniqueIds": [
+      "tech-rlhf"
+    ],
+    "riskAreaIds": [
+      1,
+      2,
+      5
+    ]
+  },
+  {
+    "id": "tech-input-classification",
+    "name": "Input Content Classification",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Classification of input prompts for safety risks before processing",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "ExternalSafetyService"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "May block benign content",
+      "Context-dependent risks hard to catch"
+    ],
+    "aliases": [
+      "Input Filtering",
+      "Prompt Classification"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "tech-output-filtering",
+    "name": "Output Content Filtering",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Post-generation filtering of model outputs for safety violations",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "ExternalSafetyService",
+      "RuleBased"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "May alter intended meaning",
+      "Can be overly restrictive"
+    ],
+    "aliases": [
+      "Output Moderation"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      5,
+      6
+    ]
+  },
+  {
+    "id": "tech-prompt-injection-protection",
+    "name": "Prompt Injection Protection",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Detection and prevention of prompt injection attacks",
+    "implementationMethods": [
+      "RuleBased",
+      "EmbeddedClassifier"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Evolving attack vectors",
+      "May restrict legitimate use cases"
+    ],
+    "aliases": [
+      "Injection Defense"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      4
+    ]
+  },
+  {
+    "id": "tech-red-teaming",
+    "name": "Red Team Exercises",
+    "categoryId": "cat-governance",
+    "description": "Systematic adversarial testing by security experts",
+    "implementationMethods": [
+      "HumanModeration",
+      "AdversarialRedTeam"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Limited by red team expertise",
+      "Cannot test all scenarios"
+    ],
+    "aliases": [
+      "Adversarial Testing",
+      "Red Teaming"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10
+    ]
+  },
+  {
+    "id": "tech-capability-monitoring",
+    "name": "Capability Threshold Monitoring",
+    "categoryId": "cat-governance",
+    "description": "Monitoring model capabilities against predefined safety thresholds",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Thresholds may be arbitrary",
+      "Capabilities hard to measure precisely"
+    ],
+    "aliases": [
+      "Capability Evaluation"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      9,
+      10
+    ]
+  },
+  {
+    "id": "tech-safety-documentation",
+    "name": "Comprehensive Safety Documentation",
+    "categoryId": "cat-transparency",
+    "description": "Detailed public documentation of safety measures and evaluations",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [
+      "ISO 26000"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "May not cover proprietary methods",
+      "Can become outdated"
+    ],
+    "aliases": [
+      "Safety Cards",
+      "System Cards"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      7
+    ]
   }
 ]
