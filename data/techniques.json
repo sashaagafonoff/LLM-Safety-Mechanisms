@@ -74,55 +74,6 @@
     ]
   },
   {
-    "id": "tech-csam-detection",
-    "name": "CSAM Detection & Removal",
-    "categoryId": "cat-pre-training-safety",
-    "description": "Automated detection and removal of child sexual abuse material",
-    "implementationMethods": [
-      "EmbeddedClassifier",
-      "ExternalSafetyService"
-    ],
-    "governingStandards": [
-      "NCMEC"
-    ],
-    "licence": null,
-    "knownLimitations": [
-      "False positive rates not disclosed"
-    ],
-    "aliases": [
-      "CSAM Filtering"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1
-    ]
-  },
-  {
-    "id": "tech-rlhf",
-    "name": "Reinforcement Learning from Human Feedback",
-    "categoryId": "cat-alignment",
-    "description": "Training models to align with human preferences through feedback",
-    "implementationMethods": [
-      "HumanModeration",
-      "EmbeddedClassifier"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Subject to annotator biases",
-      "Expensive to scale"
-    ],
-    "aliases": [
-      "RLHF"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      2,
-      5
-    ]
-  },
-  {
     "id": "tech-copyright-filtering",
     "name": "Copyright Content Filtering",
     "categoryId": "cat-pre-training-safety",
@@ -252,6 +203,53 @@
     ]
   },
   {
+    "id": "tech-adversarial-training",
+    "name": "Adversarial Training",
+    "categoryId": "cat-alignment",
+    "description": "Training with adversarial examples to improve robustness",
+    "implementationMethods": [
+      "AdversarialRedTeam"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Cannot cover all attack vectors"
+    ],
+    "aliases": [
+      "Adversarial Robustness Training"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      4
+    ]
+  },
+  {
+    "id": "tech-red-team-data",
+    "name": "Red Team Data Integration",
+    "categoryId": "cat-alignment",
+    "description": "Incorporating red team findings into training data",
+    "implementationMethods": [
+      "AdversarialRedTeam",
+      "HumanModeration"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Limited by red team scope"
+    ],
+    "aliases": [],
+    "requiredTechniqueIds": [
+      "tech-red-teaming"
+    ],
+    "riskAreaIds": [
+      1,
+      2,
+      4,
+      5
+    ]
+  },
+  {
     "id": "tech-input-classification",
     "name": "Input Content Classification",
     "categoryId": "cat-inference-safeguards",
@@ -326,132 +324,6 @@
     "requiredTechniqueIds": [],
     "riskAreaIds": [
       4
-    ]
-  },
-  {
-    "id": "tech-red-teaming",
-    "name": "Red Team Exercises",
-    "categoryId": "cat-governance",
-    "description": "Systematic adversarial testing by security experts",
-    "implementationMethods": [
-      "HumanModeration",
-      "AdversarialRedTeam"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Limited by red team expertise",
-      "Cannot test all scenarios"
-    ],
-    "aliases": [
-      "Adversarial Testing",
-      "Red Teaming"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      9,
-      10
-    ]
-  },
-  {
-    "id": "tech-capability-monitoring",
-    "name": "Capability Threshold Monitoring",
-    "categoryId": "cat-governance",
-    "description": "Monitoring model capabilities against predefined safety thresholds",
-    "implementationMethods": [
-      "Other"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Thresholds may be arbitrary",
-      "Capabilities hard to measure precisely"
-    ],
-    "aliases": [
-      "Capability Evaluation"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      9,
-      10
-    ]
-  },
-  {
-    "id": "tech-safety-documentation",
-    "name": "Comprehensive Safety Documentation",
-    "categoryId": "cat-transparency",
-    "description": "Detailed public documentation of safety measures and evaluations",
-    "implementationMethods": [
-      "Other"
-    ],
-    "governingStandards": [
-      "ISO 26000"
-    ],
-    "licence": null,
-    "knownLimitations": [
-      "May not cover proprietary methods",
-      "Can become outdated"
-    ],
-    "aliases": [
-      "Safety Cards",
-      "System Cards"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      7
-    ]
-  },
-  {
-    "id": "tech-adversarial-training",
-    "name": "Adversarial Training",
-    "categoryId": "cat-alignment",
-    "description": "Training with adversarial examples to improve robustness",
-    "implementationMethods": [
-      "AdversarialRedTeam"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Cannot cover all attack vectors"
-    ],
-    "aliases": [
-      "Adversarial Robustness Training"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      4
-    ]
-  },
-  {
-    "id": "tech-red-team-data",
-    "name": "Red Team Data Integration",
-    "categoryId": "cat-alignment",
-    "description": "Incorporating red team findings into training data",
-    "implementationMethods": [
-      "AdversarialRedTeam",
-      "HumanModeration"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Limited by red team scope"
-    ],
-    "aliases": [],
-    "requiredTechniqueIds": [
-      "tech-red-teaming"
-    ],
-    "riskAreaIds": [
-      1,
-      2,
-      4,
-      5
     ]
   },
   {
@@ -601,6 +473,60 @@
     ]
   },
   {
+    "id": "tech-red-teaming",
+    "name": "Red Team Exercises",
+    "categoryId": "cat-governance",
+    "description": "Systematic adversarial testing by security experts",
+    "implementationMethods": [
+      "HumanModeration",
+      "AdversarialRedTeam"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Limited by red team expertise",
+      "Cannot test all scenarios"
+    ],
+    "aliases": [
+      "Adversarial Testing",
+      "Red Teaming"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10
+    ]
+  },
+  {
+    "id": "tech-capability-monitoring",
+    "name": "Capability Threshold Monitoring",
+    "categoryId": "cat-governance",
+    "description": "Monitoring model capabilities against predefined safety thresholds",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Thresholds may be arbitrary",
+      "Capabilities hard to measure precisely"
+    ],
+    "aliases": [
+      "Capability Evaluation"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      9,
+      10
+    ]
+  },
+  {
     "id": "tech-safety-advisory",
     "name": "Independent Safety Advisory",
     "categoryId": "cat-governance",
@@ -738,6 +664,31 @@
     ]
   },
   {
+    "id": "tech-safety-documentation",
+    "name": "Comprehensive Safety Documentation",
+    "categoryId": "cat-transparency",
+    "description": "Detailed public documentation of safety measures and evaluations",
+    "implementationMethods": [
+      "Other"
+    ],
+    "governingStandards": [
+      "ISO 26000"
+    ],
+    "licence": null,
+    "knownLimitations": [
+      "May not cover proprietary methods",
+      "Can become outdated"
+    ],
+    "aliases": [
+      "Safety Cards",
+      "System Cards"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      7
+    ]
+  },
+  {
     "id": "tech-model-cards",
     "name": "Model Cards & Technical Specs",
     "categoryId": "cat-transparency",
@@ -819,107 +770,6 @@
     "riskAreaIds": [
       5,
       7
-    ]
-  },
-  {
-    "id": "tech-realtime-fact-checking",
-    "name": "Real-time Fact Checking",
-    "categoryId": "cat-inference-safeguards",
-    "description": "Live fact-checking against real-time information sources during inference",
-    "implementationMethods": [
-      "RetrievalAugmentation",
-      "ExternalSafetyService"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Dependent on source reliability",
-      "May introduce latency"
-    ],
-    "aliases": [
-      "Live Fact Verification"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      5
-    ]
-  },
-  {
-    "id": "tech-platform-context-safety",
-    "name": "Platform Context Safety",
-    "categoryId": "cat-inference-safeguards",
-    "description": "Safety measures that consider broader platform context and user interactions",
-    "implementationMethods": [
-      "EmbeddedClassifier",
-      "RetrievalAugmentation"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Privacy considerations with user data",
-      "Complex context interpretation"
-    ],
-    "aliases": [
-      "Social Context Safety"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      2,
-      3,
-      4
-    ]
-  },
-  {
-    "id": "tech-multimodal-safety-alignment",
-    "name": "Multimodal Safety Alignment",
-    "categoryId": "cat-alignment",
-    "description": "Safety alignment techniques specifically for multimodal (text, image, audio) models",
-    "implementationMethods": [
-      "EmbeddedClassifier",
-      "HumanModeration"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Cross-modal safety interactions complex",
-      "Limited multimodal safety datasets"
-    ],
-    "aliases": [
-      "Cross-modal Safety"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      2,
-      5,
-      6
-    ]
-  },
-  {
-    "id": "tech-dynamic-policy-adaptation",
-    "name": "Dynamic Policy Adaptation",
-    "categoryId": "cat-inference-safeguards",
-    "description": "Real-time adaptation of safety policies based on context and emerging threats",
-    "implementationMethods": [
-      "EmbeddedClassifier",
-      "Other"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "May be unpredictable",
-      "Requires constant monitoring"
-    ],
-    "aliases": [
-      "Adaptive Safety Policies"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      4,
-      5,
-      9
     ]
   },
   {
