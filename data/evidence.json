@@ -1,89 +1,5 @@
 [
   {
-    "id": "ev-openai-training-filtering-001",
-    "providerId": "openai",
-    "techniqueId": "tech-training-data-filtering",
-    "modelIds": [
-      "model-gpt-4o"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Multi-stage filtering using Moderation API and safety classifiers to remove CSAM, hateful content, violence, and CBRN materials from training datasets",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
-        "documentType": "system-card",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
-        "relevantSection": "Section 3: Safety Evaluations"
-      }
-    ],
-    "implementationDate": "2024-08-08",
-    "lastReviewed": "2024-12-19",
-    "reviewFrequency": "P3M",
-    "reviewer": "initial-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [
-      "Specific filtering thresholds not disclosed",
-      "May introduce demographic biases"
-    ],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [
-      "SOC2"
-    ],
-    "notes": "Part of comprehensive pre-training safety pipeline"
-  },
-  {
-    "id": "ev-openai-training-filtering-001",
-    "providerId": "openai",
-    "techniqueId": "tech-training-data-filtering",
-    "modelIds": [
-      "model-gpt-4o"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Multi-stage filtering using Moderation API and safety classifiers to remove CSAM, hateful content, violence, and CBRN materials from training datasets",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
-        "documentType": "system-card",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
-        "relevantSection": "Section 3: Safety Evaluations"
-      }
-    ],
-    "implementationDate": "2024-08-08",
-    "lastReviewed": "2024-12-19",
-    "reviewFrequency": "P3M",
-    "reviewer": "initial-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [
-      "Specific filtering thresholds not disclosed",
-      "May introduce demographic biases"
-    ],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [
-      "SOC2"
-    ],
-    "notes": "Part of comprehensive pre-training safety pipeline"
-  },
-  {
     "providerId": "anthropic",
     "techniqueId": "tech-training-data-filtering",
     "modelIds": [
@@ -862,7 +778,7 @@
       "quantitativeMetrics": false,
       "automatedTest": true
     },
-    "summary": "Layered policy engine with system prompt \u2192 model \u2192 content filter pipeline, including specialized voice classifiers",
+    "summary": "Layered policy engine with system prompt → model → content filter pipeline, including specialized voice classifiers",
     "evidenceLevel": "primary",
     "sourceUrls": [
       {
@@ -1736,80 +1652,6 @@
     "id": "ev-meta-0005"
   },
   {
-    "id": "ev-openai-0001",
-    "providerId": "openai",
-    "techniqueId": "tech-training-data-filtering",
-    "modelIds": [
-      "model-gpt-4o"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Multi-stage filtering using Moderation API and safety classifiers to remove CSAM, hateful content, violence, and CBRN materials from training datasets",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
-        "documentType": "system-card",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-08-08",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPV"
-  },
-  {
-    "id": "ev-openai-0002",
-    "providerId": "openai",
-    "techniqueId": "tech-csam-detection",
-    "modelIds": [
-      "model-gpt-4o"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Automated detection and removal of child sexual abuse material using specialized classifiers during pre-training data preparation",
-    "evidenceLevel": "claimed",
-    "sourceUrls": [
-      {
-        "url": "https://openai.com/policies/usage-policies",
-        "documentType": "policy",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-01-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPC"
-  },
-  {
     "id": "ev-openai-0027",
     "providerId": "openai",
     "techniqueId": "tech-capability-monitoring",
@@ -1884,80 +1726,6 @@
     "notes": "Imported from original dataset with rating code: HPV"
   },
   {
-    "id": "ev-openai-0029",
-    "providerId": "openai",
-    "techniqueId": "tech-regulatory-compliance",
-    "modelIds": [
-      "model-gpt-4o"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Compliance with voluntary White House commitments and development of internal governance frameworks",
-    "evidenceLevel": "claimed",
-    "sourceUrls": [
-      {
-        "url": "https://openai.com/index/our-approach-to-ai-safety",
-        "documentType": "documentation",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-01-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPC"
-  },
-  {
-    "id": "ev-openai-0030",
-    "providerId": "openai",
-    "techniqueId": "tech-academic-partnerships",
-    "modelIds": [
-      "model-gpt-4o"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Collaboration with academic institutions and independent research organizations for safety evaluation",
-    "evidenceLevel": "claimed",
-    "sourceUrls": [
-      {
-        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
-        "documentType": "system-card",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-08-08",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPC"
-  },
-  {
     "id": "ev-openai-0031",
     "providerId": "openai",
     "techniqueId": "tech-safety-documentation",
@@ -1993,155 +1761,6 @@
     "geographicRestrictions": [],
     "complianceStandards": [],
     "notes": "Imported from original dataset with rating code: HPU"
-  },
-  {
-    "id": "ev-openai-0032",
-    "providerId": "openai",
-    "techniqueId": "tech-model-cards",
-    "modelIds": [
-      "model-gpt-4o"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Technical documentation including model architecture, training methodology, and safety evaluation results",
-    "evidenceLevel": "secondary",
-    "sourceUrls": [
-      {
-        "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
-        "documentType": "system-card",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-08-08",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPU"
-  },
-  {
-    "id": "ev-openai-0033",
-    "providerId": "openai",
-    "techniqueId": "tech-safety-research",
-    "modelIds": [
-      "model-gpt-4o"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Regular publication of safety research, evaluation methodologies, and lessons learned from deployment",
-    "evidenceLevel": "secondary",
-    "sourceUrls": [
-      {
-        "url": "https://openai.com/research",
-        "documentType": "documentation",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-01-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPU"
-  },
-  {
-    "id": "ev-openai-0034",
-    "providerId": "openai",
-    "techniqueId": "tech-policy-documentation",
-    "modelIds": [
-      "model-gpt-4o"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Comprehensive usage policies, terms of service, and compliance documentation publicly available",
-    "evidenceLevel": "secondary",
-    "sourceUrls": [
-      {
-        "url": "https://openai.com/policies",
-        "documentType": "policy",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "0000000000000000000000000000000000000000000000000000000000000000",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-01-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPU"
-  },
-  {
-    "id": "ev-anthropic-0001",
-    "providerId": "anthropic",
-    "techniqueId": "tech-training-data-filtering",
-    "modelIds": [
-      "model-claude-3-opus",
-      "model-claude-3-sonnet"
-    ],
-    "rating": "medium",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": false,
-      "automatedTest": false
-    },
-    "summary": "Constitutional training data with filtered corpora designed to reduce harmful content and improve model alignment",
-    "evidenceLevel": "claimed",
-    "sourceUrls": [
-      {
-        "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
-        "documentType": "blog-post",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "c80dc973cb8fd080547563a182c731c7ad78b550e5511bb815729d194d2fa669",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2023-09-18",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P12M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: MPC"
   },
   {
     "id": "ev-anthropic-0005",
@@ -2218,82 +1837,6 @@
     "geographicRestrictions": [],
     "complianceStandards": [],
     "notes": "Imported from original dataset with rating code: MPC"
-  },
-  {
-    "id": "ev-anthropic-0007",
-    "providerId": "anthropic",
-    "techniqueId": "tech-rlhf",
-    "modelIds": [
-      "model-claude-3-opus",
-      "model-claude-3-sonnet"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Constitutional AI approach combining self-critique with RLHF for scalable oversight and preference learning",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://arxiv.org/abs/2212.08073",
-        "documentType": "research-paper",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "9a456a07ad346e3372f9867d346f69f5b0f68b4c65f060aca0b8a13fa9d98e83",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2022-12-15",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPV"
-  },
-  {
-    "id": "ev-anthropic-0008",
-    "providerId": "anthropic",
-    "techniqueId": "tech-constitutional-ai",
-    "modelIds": [
-      "model-claude-3-opus",
-      "model-claude-3-sonnet"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Self-critique training using constitutional principles for helpful, harmless, honest behavior with scalable oversight",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://arxiv.org/abs/2212.08073",
-        "documentType": "research-paper",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "9a456a07ad346e3372f9867d346f69f5b0f68b4c65f060aca0b8a13fa9d98e83",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2022-12-15",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPV"
   },
   {
     "id": "ev-anthropic-0009",
@@ -2714,44 +2257,6 @@
     "notes": "Imported from original dataset with rating code: MRC"
   },
   {
-    "id": "ev-anthropic-0022",
-    "providerId": "anthropic",
-    "techniqueId": "tech-red-teaming",
-    "modelIds": [
-      "model-claude-3-opus",
-      "model-claude-3-sonnet"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "External red team engagement as part of responsible scaling policy and AI Safety Level assessments",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
-        "documentType": "blog-post",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "4f484bc60972a43e559e568f69e787c05591a9ebc507edbc2490445ff44383ec",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2023-09-18",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPV"
-  },
-  {
     "id": "ev-anthropic-0023",
     "providerId": "anthropic",
     "techniqueId": "tech-capability-monitoring",
@@ -3056,44 +2561,6 @@
     "notes": "Imported from original dataset with rating code: HPC"
   },
   {
-    "id": "ev-anthropic-0031",
-    "providerId": "anthropic",
-    "techniqueId": "tech-safety-documentation",
-    "modelIds": [
-      "model-claude-3-opus",
-      "model-claude-3-sonnet"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Responsible scaling policy and constitutional AI research provide comprehensive safety framework documentation",
-    "evidenceLevel": "secondary",
-    "sourceUrls": [
-      {
-        "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
-        "documentType": "blog-post",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "13434502986940f247abe2d2b0be3cf48f91297de0541384fc30e4d1209c5309",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2023-09-18",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPU"
-  },
-  {
     "id": "ev-anthropic-0032",
     "providerId": "anthropic",
     "techniqueId": "tech-model-cards",
@@ -3208,43 +2675,6 @@
     "notes": "Imported from original dataset with rating code: HPU"
   },
   {
-    "id": "ev-google-0001",
-    "providerId": "google",
-    "techniqueId": "tech-training-data-filtering",
-    "modelIds": [
-      "model-gemini-pro"
-    ],
-    "rating": "medium",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": false,
-      "automatedTest": false
-    },
-    "summary": "Multi-lingual safety filtering and bias detection in training data preparation for Gemini models",
-    "evidenceLevel": "claimed",
-    "sourceUrls": [
-      {
-        "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
-        "documentType": "blog-post",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-02-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P12M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: MPC"
-  },
-  {
     "id": "ev-google-0002",
     "providerId": "google",
     "techniqueId": "tech-csam-detection",
@@ -3280,43 +2710,6 @@
     "geographicRestrictions": [],
     "complianceStandards": [],
     "notes": "Imported from original dataset with rating code: MPC"
-  },
-  {
-    "id": "ev-google-0007",
-    "providerId": "google",
-    "techniqueId": "tech-rlhf",
-    "modelIds": [
-      "model-gemini-pro"
-    ],
-    "rating": "medium",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": false,
-      "automatedTest": false
-    },
-    "summary": "RLHF with adversarial safety tuning datasets and Sparrow-style critiquing methodology",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://arxiv.org/abs/2209.14375",
-        "documentType": "research-paper",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "e7df8fc1e41dfc3b47a781958fc53e6467f3b0ba3b0c10db5040f7924097709a",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2022-09-29",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P12M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: MPV"
   },
   {
     "id": "ev-google-0008",
@@ -3652,43 +3045,6 @@
     "notes": "Imported from original dataset with rating code: MBC"
   },
   {
-    "id": "ev-google-0017",
-    "providerId": "google",
-    "techniqueId": "tech-multistage-pipeline",
-    "modelIds": [
-      "model-gemini-pro"
-    ],
-    "rating": "medium",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": false,
-      "automatedTest": false
-    },
-    "summary": "Multi-stage safety layers including toxicity detection, policy checks, and SynthID watermarking",
-    "evidenceLevel": "claimed",
-    "sourceUrls": [
-      {
-        "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
-        "documentType": "blog-post",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-02-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P12M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: MPC"
-  },
-  {
     "id": "ev-google-0018",
     "providerId": "google",
     "techniqueId": "tech-pii-detection-inference",
@@ -3798,43 +3154,6 @@
     "geographicRestrictions": [],
     "complianceStandards": [],
     "notes": "Imported from original dataset with rating code: MPC"
-  },
-  {
-    "id": "ev-google-0021",
-    "providerId": "google",
-    "techniqueId": "tech-watermarking",
-    "modelIds": [
-      "model-gemini-pro"
-    ],
-    "rating": "high",
-    "severityBand": "B",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "SynthID watermarking technology for AI-generated image and audio content identification",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://deepmind.google/science/synthid/",
-        "documentType": "documentation",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "4f071251e21f57201c19df37e36ec8aaf8abbba1af74e493d1d9278cf82dcdb3",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2023-08-29",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HRV"
   },
   {
     "id": "ev-google-0022",
@@ -4011,43 +3330,6 @@
       }
     ],
     "implementationDate": "2024-02-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPC"
-  },
-  {
-    "id": "ev-google-0027",
-    "providerId": "google",
-    "techniqueId": "tech-academic-partnerships",
-    "modelIds": [
-      "model-gemini-pro"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Academic partnerships for AI safety research and independent evaluation of safety measures",
-    "evidenceLevel": "claimed",
-    "sourceUrls": [
-      {
-        "url": "https://deepmind.google/research/",
-        "documentType": "documentation",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "a6810900b6799797a809eb3370bdfc90c812985ea1e5efaceedc59e1c931c3ee",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-01-01",
     "lastReviewed": "2025-07-10",
     "reviewFrequency": "P6M",
     "reviewer": "dataset-import",
@@ -4831,43 +4113,6 @@
     "notes": "Imported from original dataset with rating code: HPU"
   },
   {
-    "id": "ev-meta-0001",
-    "providerId": "meta",
-    "techniqueId": "tech-training-data-filtering",
-    "modelIds": [
-      "model-llama-3-70b"
-    ],
-    "rating": "high",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": true,
-      "automatedTest": false
-    },
-    "summary": "Open training with safety benchmarks and Llama Guard integration for content filtering",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://arxiv.org/abs/2307.09288",
-        "documentType": "research-paper",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "1df284ce95f783002074bfe8f21d47c646b396ceb1736ea3ec0ea212fc070d91",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2023-07-18",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P6M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: HPV"
-  },
-  {
     "id": "ev-meta-0002",
     "providerId": "meta",
     "techniqueId": "tech-csam-detection",
@@ -5005,80 +4250,6 @@
       }
     ],
     "implementationDate": "2024-01-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P12M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: MPV"
-  },
-  {
-    "id": "ev-meta-0011",
-    "providerId": "meta",
-    "techniqueId": "tech-input-classification",
-    "modelIds": [
-      "model-llama-3-70b"
-    ],
-    "rating": "medium",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": false,
-      "automatedTest": false
-    },
-    "summary": "Llama Guard as separate safety classifier for input content with open source implementation",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
-        "documentType": "documentation",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "a2d215d7be2e85b992ca98263a2936a98d2dbd2e07cec7da311a8e01e255f51e",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2023-12-07",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P12M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: MPV"
-  },
-  {
-    "id": "ev-meta-0012",
-    "providerId": "meta",
-    "techniqueId": "tech-output-filtering",
-    "modelIds": [
-      "model-llama-3-70b"
-    ],
-    "rating": "medium",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": false,
-      "automatedTest": false
-    },
-    "summary": "Llama Guard output filtering with contextual moderation and open source validation",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
-        "documentType": "documentation",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "29ce02e8ca8c2e90f0a667bec986a953798a41a5700d894839c9e594836c35f0",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2023-12-07",
     "lastReviewed": "2025-07-10",
     "reviewFrequency": "P12M",
     "reviewer": "dataset-import",
@@ -6015,43 +5186,6 @@
     "notes": "Imported from original dataset with rating code: LPU"
   },
   {
-    "id": "ev-amazon-0005",
-    "providerId": "amazon",
-    "techniqueId": "tech-pii-reduction",
-    "modelIds": [
-      "model-titan-text-express"
-    ],
-    "rating": "medium",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": true,
-      "quantitativeMetrics": false,
-      "automatedTest": false
-    },
-    "summary": "Advanced PII detection and redaction through Bedrock Guardrails with enterprise-grade protection",
-    "evidenceLevel": "primary",
-    "sourceUrls": [
-      {
-        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-sensitive-filters.html",
-        "documentType": "documentation",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "78345f7d93b99083e289d59cf56d2c99eddef37d84d5fd7aba8b1337ffa927de",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-01-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P12M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: MPV"
-  },
-  {
     "id": "ev-amazon-0006",
     "providerId": "amazon",
     "techniqueId": "tech-regulatory-compliance",
@@ -6148,43 +5282,6 @@
         "documentType": "documentation",
         "lastVerified": "2025-07-10",
         "sourceHash": "38e2a93cc6d2a5a0c342236ed8afa0c96591e80fbb83740a70f903abadabde28",
-        "relevantSection": ""
-      }
-    ],
-    "implementationDate": "2024-01-01",
-    "lastReviewed": "2025-07-10",
-    "reviewFrequency": "P12M",
-    "reviewer": "dataset-import",
-    "evaluationMetrics": [],
-    "knownLimitations": [],
-    "deploymentScope": "all-users",
-    "geographicRestrictions": [],
-    "complianceStandards": [],
-    "notes": "Imported from original dataset with rating code: MPU"
-  },
-  {
-    "id": "ev-amazon-0009",
-    "providerId": "amazon",
-    "techniqueId": "tech-input-classification",
-    "modelIds": [
-      "model-titan-text-express"
-    ],
-    "rating": "medium",
-    "severityBand": "P",
-    "ratingCriteria": {
-      "publiclyDocumented": true,
-      "independentlyVerified": false,
-      "quantitativeMetrics": false,
-      "automatedTest": false
-    },
-    "summary": "Bedrock Guardrails input classification with customizable policies and enterprise integration",
-    "evidenceLevel": "secondary",
-    "sourceUrls": [
-      {
-        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
-        "documentType": "documentation",
-        "lastVerified": "2025-07-10",
-        "sourceHash": "7f13c29cdbbe4fe0a88694014617bb8fb51201e649092549a46395ec2763bb8a",
         "relevantSection": ""
       }
     ],
