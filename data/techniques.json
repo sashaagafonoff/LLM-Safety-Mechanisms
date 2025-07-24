@@ -820,5 +820,131 @@
       5,
       7
     ]
+  },
+  {
+    "id": "tech-realtime-fact-checking",
+    "name": "Real-time Fact Checking",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Live fact-checking against real-time information sources during inference",
+    "implementationMethods": [
+      "RetrievalAugmentation",
+      "ExternalSafetyService"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Dependent on source reliability",
+      "May introduce latency"
+    ],
+    "aliases": [
+      "Live Fact Verification"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      5
+    ]
+  },
+  {
+    "id": "tech-platform-context-safety",
+    "name": "Platform Context Safety",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Safety measures that consider broader platform context and user interactions",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "RetrievalAugmentation"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Privacy considerations with user data",
+      "Complex context interpretation"
+    ],
+    "aliases": [
+      "Social Context Safety"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "id": "tech-multimodal-safety-alignment",
+    "name": "Multimodal Safety Alignment",
+    "categoryId": "cat-alignment",
+    "description": "Safety alignment techniques specifically for multimodal (text, image, audio) models",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "HumanModeration"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Cross-modal safety interactions complex",
+      "Limited multimodal safety datasets"
+    ],
+    "aliases": [
+      "Cross-modal Safety"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      5,
+      6
+    ]
+  },
+  {
+    "id": "tech-dynamic-policy-adaptation",
+    "name": "Dynamic Policy Adaptation",
+    "categoryId": "cat-inference-safeguards",
+    "description": "Real-time adaptation of safety policies based on context and emerging threats",
+    "implementationMethods": [
+      "EmbeddedClassifier",
+      "Other"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "May be unpredictable",
+      "Requires constant monitoring"
+    ],
+    "aliases": [
+      "Adaptive Safety Policies"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      4,
+      5,
+      9
+    ]
+  },
+  {
+    "id": "tech-fine-tuning-safety",
+    "name": "Fine-tuning Safety Controls",
+    "categoryId": "cat-alignment",
+    "description": "Safety controls and guidelines for model fine-tuning processes",
+    "implementationMethods": [
+      "HumanModeration",
+      "EmbeddedClassifier"
+    ],
+    "governingStandards": [],
+    "licence": null,
+    "knownLimitations": [
+      "Depends on base model safety",
+      "Limited by fine-tuning data quality"
+    ],
+    "aliases": [
+      "Custom Training Safety"
+    ],
+    "requiredTechniqueIds": [],
+    "riskAreaIds": [
+      1,
+      2,
+      5
+    ]
   }
 ]

@@ -10597,5 +10597,410 @@
     "geographicRestrictions": [],
     "complianceStandards": [],
     "notes": "Imported from original dataset with rating code: MPU"
+  },
+  {
+    "id": "ev-x-constitutional-ai-001",
+    "providerId": "x",
+    "techniqueId": "tech-constitutional-ai",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Constitutional AI training methodology implemented in Grok-4 to align model behavior with human values and safety principles",
+    "rating": "medium",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://x.ai/news/grok-4",
+        "documentType": "blog-post",
+        "relevantSection": "Training and Safety",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "c6d3e7bfa462aef2201bdff29ed7472fefb66eed1a8478ae51f05b63a54e3de3"
+      }
+    ],
+    "knownLimitations": [
+      "Limited public details on specific constitutional principles",
+      "No published effectiveness metrics"
+    ],
+    "notes": "Grok-4 implements constitutional AI for value alignment",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "limited-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
+  },
+  {
+    "id": "ev-x-realtime-fact-check-002",
+    "providerId": "x",
+    "techniqueId": "tech-realtime-fact-checking",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Integration with X platform's real-time information feed to fact-check claims and provide current information verification",
+    "rating": "medium-high",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://x.ai/news/grok-4",
+        "documentType": "blog-post",
+        "relevantSection": "Real-time Information Access",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "c6d3e7bfa462aef2201bdff29ed7472fefb66eed1a8478ae51f05b63a54e3de3"
+      }
+    ],
+    "knownLimitations": [
+      "Dependent on X platform data quality",
+      "May amplify trending misinformation"
+    ],
+    "notes": "Unique capability leveraging X's real-time data stream",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "premium-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
+  },
+  {
+    "id": "ev-x-platform-context-003",
+    "providerId": "x",
+    "techniqueId": "tech-platform-context-safety",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Safety measures that consider broader X platform context, user interaction history, and social graph for contextual risk assessment",
+    "rating": "medium",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://x.com/privacy",
+        "documentType": "privacy-policy",
+        "relevantSection": "Data Usage for AI Services",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "513d7ecde9321768275d88c28293cb49b3a69e6921c0015a4ad3d760d9b3c513"
+      }
+    ],
+    "knownLimitations": [
+      "Privacy implications of using social context",
+      "Potential for social bias amplification"
+    ],
+    "notes": "Leverages X platform social context for safety",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "limited-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
+  },
+  {
+    "id": "ev-x-multimodal-safety-004",
+    "providerId": "x",
+    "techniqueId": "tech-multimodal-safety-alignment",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Cross-modal safety alignment for Grok-4's multimodal capabilities, ensuring safety across text, image, and audio interactions",
+    "rating": "medium",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://x.ai/news/grok-4",
+        "documentType": "blog-post",
+        "relevantSection": "Multimodal Capabilities",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "c6d3e7bfa462aef2201bdff29ed7472fefb66eed1a8478ae51f05b63a54e3de3"
+      }
+    ],
+    "knownLimitations": [
+      "Cross-modal safety interactions are complex",
+      "Limited multimodal safety evaluation data"
+    ],
+    "notes": "Addresses safety across multiple modalities in Grok-4",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "limited-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
+  },
+  {
+    "id": "ev-x-input-classification-005",
+    "providerId": "x",
+    "techniqueId": "tech-input-classification",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Pre-processing classification of user inputs to identify potential safety risks before processing by Grok-4",
+    "rating": "medium",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://help.x.com/en/rules-and-policies",
+        "documentType": "policy-documentation",
+        "relevantSection": "Content Moderation",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "b737b99b7dde781f17abe0db3c6129d63edce718f07dad841b9e15ffd47fef2a"
+      }
+    ],
+    "knownLimitations": [
+      "May block benign content",
+      "Context-dependent risks challenging to detect"
+    ],
+    "notes": "Integrated with X platform content moderation",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "limited-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
+  },
+  {
+    "id": "ev-x-output-filtering-006",
+    "providerId": "x",
+    "techniqueId": "tech-output-filtering",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Post-generation filtering of Grok-4 outputs for safety violations before presentation to users",
+    "rating": "medium-high",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://help.x.com/en/rules-and-policies",
+        "documentType": "policy-documentation",
+        "relevantSection": "AI Content Guidelines",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "b737b99b7dde781f17abe0db3c6129d63edce718f07dad841b9e15ffd47fef2a"
+      }
+    ],
+    "knownLimitations": [
+      "May alter intended meaning",
+      "Can be overly restrictive"
+    ],
+    "notes": "Aligned with X platform community guidelines",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "limited-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
+  },
+  {
+    "id": "ev-x-realtime-monitoring-007",
+    "providerId": "x",
+    "techniqueId": "tech-realtime-monitoring",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Continuous monitoring of Grok-4 interactions for safety violations and emerging risk patterns",
+    "rating": "medium",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://x.com/tos",
+        "documentType": "terms-of-service",
+        "relevantSection": "Monitoring and Enforcement",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "609d7b180f98578d6303a8b71961b90a8324ecc31e9d42c10f01b2df8930690c"
+      }
+    ],
+    "knownLimitations": [
+      "Latency impact on user experience",
+      "May miss contextual nuances"
+    ],
+    "notes": "Integrated with X platform monitoring infrastructure",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "limited-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
+  },
+  {
+    "id": "ev-x-pii-detection-008",
+    "providerId": "x",
+    "techniqueId": "tech-pii-detection-inference",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Real-time detection and redaction of personally identifiable information in Grok-4 interactions",
+    "rating": "medium",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://x.com/privacy",
+        "documentType": "privacy-policy",
+        "relevantSection": "Personal Information Protection",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "513d7ecde9321768275d88c28293cb49b3a69e6921c0015a4ad3d760d9b3c513"
+      }
+    ],
+    "knownLimitations": [
+      "Context-dependent PII challenging to detect",
+      "May miss novel PII patterns"
+    ],
+    "notes": "Complies with X platform privacy standards",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "limited-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "GDPR",
+      "CCPA"
+    ],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
+  },
+  {
+    "id": "ev-x-training-filtering-009",
+    "providerId": "x",
+    "techniqueId": "tech-training-data-filtering",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Systematic filtering of training data for Grok-4 to remove harmful, biased, or inappropriate content",
+    "rating": "medium-low",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://x.ai/news/grok-4",
+        "documentType": "blog-post",
+        "relevantSection": "Data and Training",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "c6d3e7bfa462aef2201bdff29ed7472fefb66eed1a8478ae51f05b63a54e3de3"
+      }
+    ],
+    "knownLimitations": [
+      "Limited transparency on filtering criteria",
+      "May introduce demographic biases"
+    ],
+    "notes": "Standard pre-training data curation practices",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "limited-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
+  },
+  {
+    "id": "ev-x-audit-logging-010",
+    "providerId": "x",
+    "techniqueId": "tech-audit-logging",
+    "modelIds": [
+      "model-grok-4"
+    ],
+    "summary": "Comprehensive logging of Grok-4 safety-relevant events and decisions for audit and improvement purposes",
+    "rating": "medium",
+    "implementationDate": "2024-12-12",
+    "lastReviewed": "2025-07-24",
+    "evidenceLevel": "primary",
+    "ratingCriteria": {
+      "publiclyDocumented": true,
+      "independentlyVerified": false,
+      "quantitativeMetrics": false,
+      "automatedTest": false
+    },
+    "sourceUrls": [
+      {
+        "url": "https://x.com/tos",
+        "documentType": "terms-of-service",
+        "relevantSection": "Data Retention and Logging",
+        "lastVerified": "2025-07-24",
+        "sourceHash": "609d7b180f98578d6303a8b71961b90a8324ecc31e9d42c10f01b2df8930690c"
+      }
+    ],
+    "knownLimitations": [
+      "Storage and privacy considerations",
+      "Log completeness not specified"
+    ],
+    "notes": "Supports X platform compliance requirements",
+    "reviewer": "evidence-extractor-script",
+    "deploymentScope": "limited-users",
+    "geographicRestrictions": [],
+    "complianceStandards": [
+      "SOC2"
+    ],
+    "reviewFrequency": "P3M",
+    "severityBand": "P",
+    "evaluationMetrics": []
   }
 ]
