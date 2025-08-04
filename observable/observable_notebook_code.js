@@ -14,6 +14,13 @@ This interactive notebook provides comprehensive analysis of Large Language Mode
   )
 }
 
+function _2(md) {
+  return (
+    md`***
+`
+  )
+}
+
 function _sunburstChart(data, filteredData, d3) {
   const width = 928;
   const radius = width / 2;
@@ -319,6 +326,46 @@ function _sunburstChart(data, filteredData, d3) {
 }
 
 
+function _4(md) {
+  return (
+    md`***`
+  )
+}
+
+function _5(filteredData, filters, data, md) {
+  return (
+    md`## Summary Statistics
+
+**Total Evidence Records:** ${filteredData.length.toLocaleString()} ${filters.categories?.length > 0 || filters.providers?.length > 0 || filters.techniques?.length > 0 || filters.rating > 0 || filters.search ? `(filtered from ${data.evidence.length.toLocaleString()})` : ''}
+
+**Unique Categories:** ${new Set(filteredData.map(d => d.category_id)).size}  
+**Unique Providers:** ${new Set(filteredData.map(d => d.provider_id)).size}  
+**Unique Techniques:** ${new Set(filteredData.map(d => d.technique_id)).size}  
+**Average Effectiveness:** ${(filteredData.reduce((sum, d) => sum + d.effectiveness_score, 0) / filteredData.length || 0).toFixed(2)}
+
+${filteredData.length > 0 ? `
+**Active Categories:** ${[...new Set(filteredData.map(d => d.category_name))].sort().join(', ')}
+
+**Active Providers:** ${[...new Set(filteredData.map(d => d.provider_name))].sort().join(', ')}
+` : '**No data matches current filters**'}
+
+`
+  )
+}
+
+function _6(md) {
+  return (
+    md`***`
+  )
+}
+
+function _7(md) {
+  return (
+    md`## Dataset Filter
+Constrain the collection using the following tools.`
+  )
+}
+
 function _filters(html, data, d3) {
   const form = html`<div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
     <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
@@ -622,24 +669,20 @@ function _filters(html, data, d3) {
 }
 
 
-function _4(filteredData, filters, data, md) {
+function _9(md) {
   return (
-    md`## Summary Statistics
+    md`***`
+  )
+}
 
-**Total Evidence Records:** ${filteredData.length.toLocaleString()} ${filters.categories?.length > 0 || filters.providers?.length > 0 || filters.techniques?.length > 0 || filters.rating > 0 || filters.search ? `(filtered from ${data.evidence.length.toLocaleString()})` : ''}
-
-**Unique Categories:** ${new Set(filteredData.map(d => d.category_id)).size}  
-**Unique Providers:** ${new Set(filteredData.map(d => d.provider_id)).size}  
-**Unique Techniques:** ${new Set(filteredData.map(d => d.technique_id)).size}  
-**Average Effectiveness:** ${(filteredData.reduce((sum, d) => sum + d.effectiveness_score, 0) / filteredData.length || 0).toFixed(2)}
-
-${filteredData.length > 0 ? `
-**Active Categories:** ${[...new Set(filteredData.map(d => d.category_name))].sort().join(', ')}
-
-**Active Providers:** ${[...new Set(filteredData.map(d => d.provider_name))].sort().join(', ')}
-` : '**No data matches current filters**'}
-
-`
+function _10(md) {
+  return (
+    md`## Provider-Technique Relationships
+* Pinch/scroll to zoom.
+* Default state is multi (click and drag to multi-select objects)
+* Click Multi button to switch to drag mode if you want to drag the canvas
+* Legends are draggable so you can place them anywhere you want
+* Legend members are clickable to hide/show in the chart. Simplifies without needing to scroll up to filter`
   )
 }
 
@@ -1866,6 +1909,495 @@ function _unifiedChart(filteredData, d3) {
 }
 
 
+function _12(md) {
+  return (
+    md`***`
+  )
+}
+
+function _13(Plot, filteredData) {
+  return (
+    Plot.plot({
+      title: "Effectiveness Rating Distribution",
+      width: 800,
+      height: 400,
+      x: {
+        label: "Effectiveness Rating",
+        domain: [0, 10]
+      },
+      y: {
+        label: "Count"
+      },
+      marks: [
+        Plot.rectY(
+          filteredData,
+          Plot.binX({ y: "count" }, { x: "effectiveness_score", fill: "steelblue" })
+        ),
+        Plot.ruleY([0])
+      ]
+    })
+  )
+}
+
+function _14(Plot, d3, filteredData) {
+  return (
+    Plot.plot({
+      title: "Safety Mechanisms by Provider",
+      width: 1200,
+      height: 400,
+      x: {
+        label: "Provider"
+      },
+      y: {
+        label: "Number of Mechanisms"
+      },
+      marks: [
+        Plot.barY(
+          d3.rollup(
+            filteredData,
+            (v) => v.length,
+            (d) => d.provider_name
+          ),
+          { x: ([provider]) => provider, y: ([, count]) => count, fill: "orange" }
+        ),
+        Plot.ruleY([0])
+      ]
+    })
+  )
+}
+
+function _15(Plot, d3, filteredData) {
+  return (
+    Plot.plot({
+      title: "Average Effectiveness by Technique",
+      width: 800,
+      height: 500,
+      x: {
+        label: "Average Effectiveness Rating"
+      },
+      y: {
+        label: "Technique"
+      },
+      marks: [
+        Plot.barX(
+          d3.rollup(
+            filteredData,
+            (v) => d3.mean(v, (d) => d.effectiveness_score),
+            (d) => d.technique_name
+          ),
+          {
+            x: ([, avg]) => avg,
+            y: ([technique]) => technique,
+            fill: "green",
+            sort: { y: "x", reverse: true }
+          }
+        ),
+        Plot.ruleX([0])
+      ]
+    })
+  )
+}
+
+function _16(md) {
+  return (
+    md`***
+## Tabulated Dataset (with export tools)`
+  )
+}
+
+function _table(Inputs, filteredData) {
+  return (
+    Inputs.table(
+      filteredData.map((d) => ({
+        Category: d.category_name,
+        Provider: d.provider_name,
+        Technique: d.technique_name,
+        Model: d.model_name,
+        Score: d.effectiveness_score,
+        Description:
+          d.summary?.substring(0, 100) + (d.summary?.length > 100 ? "..." : "") ||
+          d.description?.substring(0, 100) +
+          (d.description?.length > 100 ? "..." : "") ||
+          "No description",
+        "Date Added": d.date_added.toLocaleDateString()
+      })),
+      {
+        columns: [
+          "Category",
+          "Provider",
+          "Technique",
+          "Model",
+          "Score",
+          "Description",
+          "Date Added"
+        ]
+      }
+    )
+  )
+}
+
+function _exportOptions(html, filteredData, filters) {
+  const div = html`<div style="padding: 15px; background: #f0f8ff; border-radius: 8px; margin: 20px 0;">
+    <h3>Export Data</h3>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <button id="export-json" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        📄 Export JSON
+      </button>
+      <button id="export-csv" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        📊 Export CSV
+      </button>
+      <button id="export-config" style="padding: 10px 20px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        ⚙️ Export Config
+      </button>
+    </div>
+  </div>`;
+
+  // Export functions
+  const exportJSON = () => {
+    const dataStr = JSON.stringify(filteredData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `llm-safety-mechanisms-${new Date().toISOString().split("T")[0]
+      }.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const exportCSV = () => {
+    const headers = [
+      "Provider",
+      "Technique",
+      "Model",
+      "Rating",
+      "Description",
+      "Date Added"
+    ];
+    const csvData = [
+      headers.join(","),
+      ...filteredData.map((d) =>
+        [
+          d.provider_name,
+          d.technique_name,
+          d.model_name,
+          d.effectiveness_score,
+          `"${d.description?.replace(/"/g, '""') || ""}"`,
+          d.date_added.toISOString()
+        ].join(",")
+      )
+    ].join("\n");
+
+    const dataBlob = new Blob([csvData], { type: "text/csv" });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `llm-safety-mechanisms-${new Date().toISOString().split("T")[0]
+      }.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const exportConfig = () => {
+    const config = {
+      filters: {
+        provider: filters.provider,
+        technique: filters.technique,
+        rating: filters.rating,
+        search: filters.search
+      },
+      timestamp: new Date().toISOString(),
+      recordCount: filteredData.length
+    };
+
+    const dataStr = JSON.stringify(config, null, 2);
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `llm-safety-config-${new Date().toISOString().split("T")[0]
+      }.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  div.querySelector("#export-json").addEventListener("click", exportJSON);
+  div.querySelector("#export-csv").addEventListener("click", exportCSV);
+  div.querySelector("#export-config").addEventListener("click", exportConfig);
+
+  return div;
+}
+
+
+function _19(md) {
+  return (
+    md`***`
+  )
+}
+
+function _excludedDataSummary(data, html) {
+  const exclusions = data.exclusions;
+
+  return html`<div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 20px; margin: 20px 0;">
+    <h3 style="color: #856404; margin-top: 0;">📊 Data Quality Report</h3>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
+        <div style="font-size: 24px; font-weight: bold; color: #28a745;">${data.evidence.length
+    }</div>
+        <div style="font-size: 14px; color: #666;">Valid Records</div>
+      </div>
+      
+      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
+        <div style="font-size: 24px; font-weight: bold; color: #dc3545;">${exclusions.missingProvider.length
+    }</div>
+        <div style="font-size: 14px; color: #666;">Missing Providers</div>
+      </div>
+      
+      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
+        <div style="font-size: 24px; font-weight: bold; color: #dc3545;">${exclusions.missingTechnique.length
+    }</div>
+        <div style="font-size: 14px; color: #666;">Missing Techniques</div>
+      </div>
+      
+      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
+        <div style="font-size: 24px; font-weight: bold; color: #dc3545;">${exclusions.missingModel.length
+    }</div>
+        <div style="font-size: 14px; color: #666;">Missing Models</div>
+      </div>
+      
+      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
+        <div style="font-size: 24px; font-weight: bold; color: #dc3545;">${exclusions.missingCategory.length
+    }</div>
+        <div style="font-size: 14px; color: #666;">Missing Categories</div>
+      </div>
+    </div>
+    
+    ${exclusions.missingProvider.length > 0
+      ? `
+      <details style="margin-bottom: 15px;">
+        <summary style="cursor: pointer; font-weight: bold; color: #856404;">🏢 Missing Providers (${exclusions.missingProvider.length
+      })</summary>
+        <div style="margin-top: 10px; background: white; padding: 10px; border-radius: 4px;">
+          <strong>Provider IDs to add:</strong><br>
+          ${[
+        ...new Set(
+          exclusions.missingProvider.map((item) => item._providerId)
+        )
+      ]
+        .map(
+          (id) =>
+            `<code style="background: #f8f9fa; padding: 2px 4px; margin: 2px; border-radius: 2px;">${id}</code>`
+        )
+        .join(" ")}
+        </div>
+      </details>
+    `
+      : ""
+    }
+    
+    ${exclusions.missingTechnique.length > 0
+      ? `
+      <details style="margin-bottom: 15px;">
+        <summary style="cursor: pointer; font-weight: bold; color: #856404;">⚙️ Missing Techniques (${exclusions.missingTechnique.length
+      })</summary>
+        <div style="margin-top: 10px; background: white; padding: 10px; border-radius: 4px;">
+          <strong>Technique IDs to add:</strong><br>
+          ${[
+        ...new Set(
+          exclusions.missingTechnique.map((item) => item._techniqueId)
+        )
+      ]
+        .map(
+          (id) =>
+            `<code style="background: #f8f9fa; padding: 2px 4px; margin: 2px; border-radius: 2px;">${id}</code>`
+        )
+        .join(" ")}
+        </div>
+      </details>
+    `
+      : ""
+    }
+    
+    ${exclusions.missingModel.length > 0
+      ? `
+      <details style="margin-bottom: 15px;">
+        <summary style="cursor: pointer; font-weight: bold; color: #856404;">🤖 Missing Models (${exclusions.missingModel.length
+      })</summary>
+        <div style="margin-top: 10px; background: white; padding: 10px; border-radius: 4px;">
+          <strong>Model IDs to add:</strong><br>
+          ${[...new Set(exclusions.missingModel.map((item) => item._modelId))]
+        .map(
+          (id) =>
+            `<code style="background: #f8f9fa; padding: 2px 4px; margin: 2px; border-radius: 2px;">${id}</code>`
+        )
+        .join(" ")}
+        </div>
+      </details>
+    `
+      : ""
+    }
+    
+    ${exclusions.missingCategory.length > 0
+      ? `
+      <details style="margin-bottom: 15px;">
+        <summary style="cursor: pointer; font-weight: bold; color: #856404;">📂 Missing Categories (${exclusions.missingCategory.length
+      })</summary>
+        <div style="margin-top: 10px; background: white; padding: 10px; border-radius: 4px;">
+          <strong>Category IDs to add:</strong><br>
+          ${[
+        ...new Set(
+          exclusions.missingCategory.map((item) => item._categoryId)
+        )
+      ]
+        .map(
+          (id) =>
+            `<code style="background: #f8f9fa; padding: 2px 4px; margin: 2px; border-radius: 2px;">${id}</code>`
+        )
+        .join(" ")}
+        </div>
+      </details>
+    `
+      : ""
+    }
+    
+    <div style="font-size: 14px; color: #856404; font-style: italic;">
+      💡 <strong>Next Steps:</strong> Add the missing IDs to their respective JSON files to include all evidence in the dataset.
+    </div>
+  </div>`;
+}
+
+
+function _21(md) {
+  return (
+    md`***`
+  )
+}
+
+function _22(data, md) {
+  return (
+    md`## Documentation
+
+### Data Sources
+This notebook fetches live data from the following GitHub repository endpoints:
+- **Evidence**: \\\`evidence.json\\\` - Contains safety mechanism implementations and their effectiveness ratings
+- **Techniques**: \\\`techniques.json\\\` - Catalog of safety techniques and methodologies  
+- **Providers**: \\\`providers.json\\\` - LLM provider information and metadata
+- **Models**: \\\`models.json\\\` - Model specifications and capabilities
+
+### Methodology
+- **Effectiveness Ratings**: Numerical scores from 0-10 indicating the effectiveness of safety mechanisms
+- **Data Processing**: Real-time data fetching with automatic enrichment and cross-referencing
+- **Filtering**: Multi-dimensional filtering across providers, techniques, ratings, and free-text search
+
+### Usage Examples
+
+#### Basic Filtering
+1. Select a provider from the dropdown to focus on specific implementations
+2. Choose a technique type to analyze particular safety approaches
+3. Adjust the minimum rating slider to filter by effectiveness threshold
+4. Use the search box for free-text filtering across descriptions
+
+#### Advanced Analytics
+- **Distribution Analysis**: Examine the spread of effectiveness ratings
+- **Provider Comparison**: Compare safety mechanism adoption across providers
+- **Technique Effectiveness**: Identify the most effective safety approaches
+
+#### Data Export
+- **JSON Export**: Full structured data with all fields and metadata
+- **CSV Export**: Tabular format suitable for spreadsheet analysis
+- **Configuration Export**: Save current filter settings for reproducibility
+
+### API Integration
+The notebook exposes an embedding API for integration with other applications:
+
+\\\`\\\`\\\`javascript
+// Get processed chart data
+const chartData = embedAPI.getChartData('distribution');
+
+// Generate shareable URL
+const shareURL = embedAPI.generateShareableURL(filters);
+
+// Get summary statistics
+const stats = embedAPI.getSummaryStats();
+\\\`\\\`\\\`
+
+### Technical Notes
+- Data refreshes automatically on notebook reload
+- All visualizations are responsive and interactive
+- Export functions generate timestamped files
+- Shareable configurations preserve filter states
+
+Last updated: ${data.lastUpdated.toLocaleString()}
+
+---
+
+**Repository**: [LLM Safety Mechanisms](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms)  
+**License**: MIT  
+**Maintainer**: Observable Notebook Community`
+  )
+}
+
+function _23(md) {
+  return (
+    md`***
+## Assorted Supporting Code for Notebook`
+  )
+}
+
+function _embedAPI(filteredData, d3, URLSearchParams) {
+  return {
+    // Get chart data for embedding
+    getChartData: (type, filters = {}) => {
+      let data = filteredData;
+
+      switch (type) {
+        case "distribution":
+          return data.map((d) => ({ x: d.effectiveness_score, y: 1 }));
+        case "provider-comparison":
+          return Array.from(
+            d3.rollup(
+              data,
+              (v) => v.length,
+              (d) => d.provider_name
+            )
+          );
+        case "technique-effectiveness":
+          return Array.from(
+            d3.rollup(
+              data,
+              (v) => d3.mean(v, (d) => d.effectiveness_score),
+              (d) => d.technique_name
+            )
+          );
+        default:
+          return data;
+      }
+    },
+
+    // Generate shareable URLs
+    generateShareableURL: (filters) => {
+      const params = new URLSearchParams();
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) params.append(key, value);
+      });
+      return `${window.location.origin}${window.location.pathname
+        }?${params.toString()}`;
+    },
+
+    // Get summary statistics
+    getSummaryStats: () => ({
+      totalRecords: filteredData.length,
+      uniqueProviders: new Set(filteredData.map((d) => d.provider_id)).size,
+      uniqueTechniques: new Set(filteredData.map((d) => d.technique_id)).size,
+      avgEffectiveness:
+        filteredData.reduce((sum, d) => sum + d.effectiveness_score, 0) /
+        filteredData.length || 0
+    })
+  };
+}
+
+
 async function _data() {
   const baseUrl =
     "https://raw.githubusercontent.com/sashaagafonoff/LLM-Safety-Mechanisms/main/data/";
@@ -2151,482 +2683,50 @@ function _filteredData(data, filters) {
 }
 
 
-function _8(Plot, filteredData) {
+function _27(htl) {
   return (
-    Plot.plot({
-      title: "Effectiveness Rating Distribution",
-      width: 800,
-      height: 400,
-      x: {
-        label: "Effectiveness Rating",
-        domain: [0, 10]
-      },
-      y: {
-        label: "Count"
-      },
-      marks: [
-        Plot.rectY(
-          filteredData,
-          Plot.binX({ y: "count" }, { x: "effectiveness_score", fill: "steelblue" })
-        ),
-        Plot.ruleY([0])
-      ]
-    })
-  )
+    htl.html`<style>
+hr {
+    border: none; /* Remove default border */
+    border-top: 2px dotted orange; /* Set the top border style, width, and color */
+    width: 80%; /* Adjust the width of the line */
+    margin: 20px auto; /* Center the line and add vertical spacing */
 }
-
-function _9(Plot, d3, filteredData) {
-  return (
-    Plot.plot({
-      title: "Safety Mechanisms by Provider",
-      width: 1200,
-      height: 400,
-      x: {
-        label: "Provider"
-      },
-      y: {
-        label: "Number of Mechanisms"
-      },
-      marks: [
-        Plot.barY(
-          d3.rollup(
-            filteredData,
-            (v) => v.length,
-            (d) => d.provider_name
-          ),
-          { x: ([provider]) => provider, y: ([, count]) => count, fill: "orange" }
-        ),
-        Plot.ruleY([0])
-      ]
-    })
-  )
-}
-
-function _10(Plot, d3, filteredData) {
-  return (
-    Plot.plot({
-      title: "Average Effectiveness by Technique",
-      width: 800,
-      height: 500,
-      x: {
-        label: "Average Effectiveness Rating"
-      },
-      y: {
-        label: "Technique"
-      },
-      marks: [
-        Plot.barX(
-          d3.rollup(
-            filteredData,
-            (v) => d3.mean(v, (d) => d.effectiveness_score),
-            (d) => d.technique_name
-          ),
-          {
-            x: ([, avg]) => avg,
-            y: ([technique]) => technique,
-            fill: "green",
-            sort: { y: "x", reverse: true }
-          }
-        ),
-        Plot.ruleX([0])
-      ]
-    })
-  )
-}
-
-function _table(Inputs, filteredData) {
-  return (
-    Inputs.table(
-      filteredData.map((d) => ({
-        Category: d.category_name,
-        Provider: d.provider_name,
-        Technique: d.technique_name,
-        Model: d.model_name,
-        Score: d.effectiveness_score,
-        Description:
-          d.summary?.substring(0, 100) + (d.summary?.length > 100 ? "..." : "") ||
-          d.description?.substring(0, 100) +
-          (d.description?.length > 100 ? "..." : "") ||
-          "No description",
-        "Date Added": d.date_added.toLocaleDateString()
-      })),
-      {
-        columns: [
-          "Category",
-          "Provider",
-          "Technique",
-          "Model",
-          "Score",
-          "Description",
-          "Date Added"
-        ]
-      }
-    )
-  )
-}
-
-function _exportOptions(html, filteredData, filters) {
-  const div = html`<div style="padding: 15px; background: #f0f8ff; border-radius: 8px; margin: 20px 0;">
-    <h3>Export Data</h3>
-    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-      <button id="export-json" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
-        📄 Export JSON
-      </button>
-      <button id="export-csv" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
-        📊 Export CSV
-      </button>
-      <button id="export-config" style="padding: 10px 20px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
-        ⚙️ Export Config
-      </button>
-    </div>
-  </div>`;
-
-  // Export functions
-  const exportJSON = () => {
-    const dataStr = JSON.stringify(filteredData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `llm-safety-mechanisms-${new Date().toISOString().split("T")[0]
-      }.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const exportCSV = () => {
-    const headers = [
-      "Provider",
-      "Technique",
-      "Model",
-      "Rating",
-      "Description",
-      "Date Added"
-    ];
-    const csvData = [
-      headers.join(","),
-      ...filteredData.map((d) =>
-        [
-          d.provider_name,
-          d.technique_name,
-          d.model_name,
-          d.effectiveness_score,
-          `"${d.description?.replace(/"/g, '""') || ""}"`,
-          d.date_added.toISOString()
-        ].join(",")
-      )
-    ].join("\n");
-
-    const dataBlob = new Blob([csvData], { type: "text/csv" });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `llm-safety-mechanisms-${new Date().toISOString().split("T")[0]
-      }.csv`;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const exportConfig = () => {
-    const config = {
-      filters: {
-        provider: filters.provider,
-        technique: filters.technique,
-        rating: filters.rating,
-        search: filters.search
-      },
-      timestamp: new Date().toISOString(),
-      recordCount: filteredData.length
-    };
-
-    const dataStr = JSON.stringify(config, null, 2);
-    const dataBlob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `llm-safety-config-${new Date().toISOString().split("T")[0]
-      }.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-
-  div.querySelector("#export-json").addEventListener("click", exportJSON);
-  div.querySelector("#export-csv").addEventListener("click", exportCSV);
-  div.querySelector("#export-config").addEventListener("click", exportConfig);
-
-  return div;
-}
-
-
-function _excludedDataSummary(data, html) {
-  const exclusions = data.exclusions;
-
-  return html`<div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 20px; margin: 20px 0;">
-    <h3 style="color: #856404; margin-top: 0;">📊 Data Quality Report</h3>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
-      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
-        <div style="font-size: 24px; font-weight: bold; color: #28a745;">${data.evidence.length
-    }</div>
-        <div style="font-size: 14px; color: #666;">Valid Records</div>
-      </div>
-      
-      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
-        <div style="font-size: 24px; font-weight: bold; color: #dc3545;">${exclusions.missingProvider.length
-    }</div>
-        <div style="font-size: 14px; color: #666;">Missing Providers</div>
-      </div>
-      
-      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
-        <div style="font-size: 24px; font-weight: bold; color: #dc3545;">${exclusions.missingTechnique.length
-    }</div>
-        <div style="font-size: 14px; color: #666;">Missing Techniques</div>
-      </div>
-      
-      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
-        <div style="font-size: 24px; font-weight: bold; color: #dc3545;">${exclusions.missingModel.length
-    }</div>
-        <div style="font-size: 14px; color: #666;">Missing Models</div>
-      </div>
-      
-      <div style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
-        <div style="font-size: 24px; font-weight: bold; color: #dc3545;">${exclusions.missingCategory.length
-    }</div>
-        <div style="font-size: 14px; color: #666;">Missing Categories</div>
-      </div>
-    </div>
-    
-    ${exclusions.missingProvider.length > 0
-      ? `
-      <details style="margin-bottom: 15px;">
-        <summary style="cursor: pointer; font-weight: bold; color: #856404;">🏢 Missing Providers (${exclusions.missingProvider.length
-      })</summary>
-        <div style="margin-top: 10px; background: white; padding: 10px; border-radius: 4px;">
-          <strong>Provider IDs to add:</strong><br>
-          ${[
-        ...new Set(
-          exclusions.missingProvider.map((item) => item._providerId)
-        )
-      ]
-        .map(
-          (id) =>
-            `<code style="background: #f8f9fa; padding: 2px 4px; margin: 2px; border-radius: 2px;">${id}</code>`
-        )
-        .join(" ")}
-        </div>
-      </details>
-    `
-      : ""
-    }
-    
-    ${exclusions.missingTechnique.length > 0
-      ? `
-      <details style="margin-bottom: 15px;">
-        <summary style="cursor: pointer; font-weight: bold; color: #856404;">⚙️ Missing Techniques (${exclusions.missingTechnique.length
-      })</summary>
-        <div style="margin-top: 10px; background: white; padding: 10px; border-radius: 4px;">
-          <strong>Technique IDs to add:</strong><br>
-          ${[
-        ...new Set(
-          exclusions.missingTechnique.map((item) => item._techniqueId)
-        )
-      ]
-        .map(
-          (id) =>
-            `<code style="background: #f8f9fa; padding: 2px 4px; margin: 2px; border-radius: 2px;">${id}</code>`
-        )
-        .join(" ")}
-        </div>
-      </details>
-    `
-      : ""
-    }
-    
-    ${exclusions.missingModel.length > 0
-      ? `
-      <details style="margin-bottom: 15px;">
-        <summary style="cursor: pointer; font-weight: bold; color: #856404;">🤖 Missing Models (${exclusions.missingModel.length
-      })</summary>
-        <div style="margin-top: 10px; background: white; padding: 10px; border-radius: 4px;">
-          <strong>Model IDs to add:</strong><br>
-          ${[...new Set(exclusions.missingModel.map((item) => item._modelId))]
-        .map(
-          (id) =>
-            `<code style="background: #f8f9fa; padding: 2px 4px; margin: 2px; border-radius: 2px;">${id}</code>`
-        )
-        .join(" ")}
-        </div>
-      </details>
-    `
-      : ""
-    }
-    
-    ${exclusions.missingCategory.length > 0
-      ? `
-      <details style="margin-bottom: 15px;">
-        <summary style="cursor: pointer; font-weight: bold; color: #856404;">📂 Missing Categories (${exclusions.missingCategory.length
-      })</summary>
-        <div style="margin-top: 10px; background: white; padding: 10px; border-radius: 4px;">
-          <strong>Category IDs to add:</strong><br>
-          ${[
-        ...new Set(
-          exclusions.missingCategory.map((item) => item._categoryId)
-        )
-      ]
-        .map(
-          (id) =>
-            `<code style="background: #f8f9fa; padding: 2px 4px; margin: 2px; border-radius: 2px;">${id}</code>`
-        )
-        .join(" ")}
-        </div>
-      </details>
-    `
-      : ""
-    }
-    
-    <div style="font-size: 14px; color: #856404; font-style: italic;">
-      💡 <strong>Next Steps:</strong> Add the missing IDs to their respective JSON files to include all evidence in the dataset.
-    </div>
-  </div>`;
-}
-
-
-function _embedAPI(filteredData, d3, URLSearchParams) {
-  return {
-    // Get chart data for embedding
-    getChartData: (type, filters = {}) => {
-      let data = filteredData;
-
-      switch (type) {
-        case "distribution":
-          return data.map((d) => ({ x: d.effectiveness_score, y: 1 }));
-        case "provider-comparison":
-          return Array.from(
-            d3.rollup(
-              data,
-              (v) => v.length,
-              (d) => d.provider_name
-            )
-          );
-        case "technique-effectiveness":
-          return Array.from(
-            d3.rollup(
-              data,
-              (v) => d3.mean(v, (d) => d.effectiveness_score),
-              (d) => d.technique_name
-            )
-          );
-        default:
-          return data;
-      }
-    },
-
-    // Generate shareable URLs
-    generateShareableURL: (filters) => {
-      const params = new URLSearchParams();
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value) params.append(key, value);
-      });
-      return `${window.location.origin}${window.location.pathname
-        }?${params.toString()}`;
-    },
-
-    // Get summary statistics
-    getSummaryStats: () => ({
-      totalRecords: filteredData.length,
-      uniqueProviders: new Set(filteredData.map((d) => d.provider_id)).size,
-      uniqueTechniques: new Set(filteredData.map((d) => d.technique_id)).size,
-      avgEffectiveness:
-        filteredData.reduce((sum, d) => sum + d.effectiveness_score, 0) /
-        filteredData.length || 0
-    })
-  };
-}
-
-
-function _15(data, md) {
-  return (
-    md`## Documentation
-
-### Data Sources
-This notebook fetches live data from the following GitHub repository endpoints:
-- **Evidence**: \\\`evidence.json\\\` - Contains safety mechanism implementations and their effectiveness ratings
-- **Techniques**: \\\`techniques.json\\\` - Catalog of safety techniques and methodologies  
-- **Providers**: \\\`providers.json\\\` - LLM provider information and metadata
-- **Models**: \\\`models.json\\\` - Model specifications and capabilities
-
-### Methodology
-- **Effectiveness Ratings**: Numerical scores from 0-10 indicating the effectiveness of safety mechanisms
-- **Data Processing**: Real-time data fetching with automatic enrichment and cross-referencing
-- **Filtering**: Multi-dimensional filtering across providers, techniques, ratings, and free-text search
-
-### Usage Examples
-
-#### Basic Filtering
-1. Select a provider from the dropdown to focus on specific implementations
-2. Choose a technique type to analyze particular safety approaches
-3. Adjust the minimum rating slider to filter by effectiveness threshold
-4. Use the search box for free-text filtering across descriptions
-
-#### Advanced Analytics
-- **Distribution Analysis**: Examine the spread of effectiveness ratings
-- **Provider Comparison**: Compare safety mechanism adoption across providers
-- **Technique Effectiveness**: Identify the most effective safety approaches
-
-#### Data Export
-- **JSON Export**: Full structured data with all fields and metadata
-- **CSV Export**: Tabular format suitable for spreadsheet analysis
-- **Configuration Export**: Save current filter settings for reproducibility
-
-### API Integration
-The notebook exposes an embedding API for integration with other applications:
-
-\\\`\\\`\\\`javascript
-// Get processed chart data
-const chartData = embedAPI.getChartData('distribution');
-
-// Generate shareable URL
-const shareURL = embedAPI.generateShareableURL(filters);
-
-// Get summary statistics
-const stats = embedAPI.getSummaryStats();
-\\\`\\\`\\\`
-
-### Technical Notes
-- Data refreshes automatically on notebook reload
-- All visualizations are responsive and interactive
-- Export functions generate timestamped files
-- Shareable configurations preserve filter states
-
-Last updated: ${data.lastUpdated.toLocaleString()}
-
----
-
-**Repository**: [LLM Safety Mechanisms](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms)  
-**License**: MIT  
-**Maintainer**: Observable Notebook Community`
+  </style>`
   )
 }
 
 export default function define(runtime, observer) {
   const main = runtime.module();
   main.variable(observer()).define(["md"], _1);
+  main.variable(observer()).define(["md"], _2);
   main.variable(observer("sunburstChart")).define("sunburstChart", ["data", "filteredData", "d3"], _sunburstChart);
+  main.variable(observer()).define(["md"], _4);
+  main.variable(observer()).define(["filteredData", "filters", "data", "md"], _5);
+  main.variable(observer()).define(["md"], _6);
+  main.variable(observer()).define(["md"], _7);
   main.variable(observer("viewof filters")).define("viewof filters", ["html", "data", "d3"], _filters);
   main.variable(observer("filters")).define("filters", ["Generators", "viewof filters"], (G, _) => G.input(_));
-  main.variable(observer()).define(["filteredData", "filters", "data", "md"], _4);
+  main.variable(observer()).define(["md"], _9);
+  main.variable(observer()).define(["md"], _10);
   main.variable(observer("unifiedChart")).define("unifiedChart", ["filteredData", "d3"], _unifiedChart);
-  main.variable(observer("data")).define("data", _data);
-  main.variable(observer("filteredData")).define("filteredData", ["data", "filters"], _filteredData);
-  main.variable(observer()).define(["Plot", "filteredData"], _8);
-  main.variable(observer()).define(["Plot", "d3", "filteredData"], _9);
-  main.variable(observer()).define(["Plot", "d3", "filteredData"], _10);
+  main.variable(observer()).define(["md"], _12);
+  main.variable(observer()).define(["Plot", "filteredData"], _13);
+  main.variable(observer()).define(["Plot", "d3", "filteredData"], _14);
+  main.variable(observer()).define(["Plot", "d3", "filteredData"], _15);
+  main.variable(observer()).define(["md"], _16);
   main.variable(observer("viewof table")).define("viewof table", ["Inputs", "filteredData"], _table);
   main.variable(observer("table")).define("table", ["Generators", "viewof table"], (G, _) => G.input(_));
   main.variable(observer("viewof exportOptions")).define("viewof exportOptions", ["html", "filteredData", "filters"], _exportOptions);
   main.variable(observer("exportOptions")).define("exportOptions", ["Generators", "viewof exportOptions"], (G, _) => G.input(_));
+  main.variable(observer()).define(["md"], _19);
   main.variable(observer("excludedDataSummary")).define("excludedDataSummary", ["data", "html"], _excludedDataSummary);
+  main.variable(observer()).define(["md"], _21);
+  main.variable(observer()).define(["data", "md"], _22);
+  main.variable(observer()).define(["md"], _23);
   main.variable(observer("embedAPI")).define("embedAPI", ["filteredData", "d3", "URLSearchParams"], _embedAPI);
-  main.variable(observer()).define(["data", "md"], _15);
+  main.variable(observer("data")).define("data", _data);
+  main.variable(observer("filteredData")).define("filteredData", ["data", "filters"], _filteredData);
+  main.variable(observer()).define(["htl"], _27);
   return main;
 }
