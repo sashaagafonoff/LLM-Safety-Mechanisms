@@ -8,7 +8,7 @@
 
 🎯 **Why this matters:** As AI systems become more powerful, understanding their safety mechanisms is critical for researchers, policymakers, and practitioners.
 
-📊 **[View the Dataset on Observable](https://observablehq.com/d/88c345368b7d0fa1)
+📊 **[View the Dataset on Observable](https://observablehq.com/d/88c345368b7d0fa1)**
 
 📊 **[View Interactive Dashboard](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/)**
 
