@@ -54,7 +54,7 @@
   {
     "id": "tech-audit-logging",
     "name": "Audit Logging",
-    "categoryId": "cat-inference-safeguards",
+    "categoryId": "cat-runtime-safety",
     "description": "Comprehensive logging of safety-relevant events",
     "implementationMethods": [
       "Other"
@@ -218,7 +218,7 @@
   {
     "id": "tech-configurable-policies",
     "name": "Configurable Safety Policies",
-    "categoryId": "cat-inference-safeguards",
+    "categoryId": "cat-runtime-safety",
     "description": "User or admin configurable safety thresholds and policies",
     "implementationMethods": [
       "Other"
@@ -268,7 +268,7 @@
   {
     "id": "tech-contextual-safety",
     "name": "Contextual Safety Assessment",
-    "categoryId": "cat-inference-safeguards",
+    "categoryId": "cat-runtime-safety",
     "description": "Context-aware safety evaluation considering conversation history",
     "implementationMethods": [
       "EmbeddedClassifier",
@@ -329,7 +329,7 @@
   {
     "id": "tech-enterprise-integration",
     "name": "Enterprise Integration Safety",
-    "categoryId": "cat-deployment-safety",
+    "categoryId": "cat-governance",
     "description": "Safety mechanisms and protocols specifically designed for enterprise deployment environments and integration workflows",
     "riskAreaIds": [
       4
@@ -435,7 +435,7 @@
   {
     "id": "tech-input-classification",
     "name": "Input Content Classification",
-    "categoryId": "cat-inference-safeguards",
+    "categoryId": "cat-runtime-safety",
     "description": "Classification of input prompts for safety risks before processing",
     "implementationMethods": [
       "EmbeddedClassifier",
@@ -484,7 +484,7 @@
   {
     "id": "tech-multistage-pipeline",
     "name": "Multi-stage Safety Pipeline",
-    "categoryId": "cat-inference-safeguards",
+    "categoryId": "cat-runtime-safety",
     "description": "Multiple layers of safety checks at different stages",
     "implementationMethods": [
       "Other"
@@ -537,7 +537,7 @@
   {
     "id": "tech-output-filtering",
     "name": "Output Content Filtering",
-    "categoryId": "cat-inference-safeguards",
+    "categoryId": "cat-runtime-safety",
     "description": "Post-generation filtering of model outputs for safety violations",
     "implementationMethods": [
       "EmbeddedClassifier",
@@ -565,7 +565,7 @@
   {
     "id": "tech-pii-detection-inference",
     "name": "PII Detection & Redaction",
-    "categoryId": "cat-inference-safeguards",
+    "categoryId": "cat-privacy-security",
     "description": "Real-time detection and redaction of personal information",
     "implementationMethods": [
       "RuleBased",
@@ -590,7 +590,7 @@
   {
     "id": "tech-pii-reduction",
     "name": "PII Reduction",
-    "categoryId": "cat-pre-training-safety",
+    "categoryId": "cat-privacy-security",
     "description": "Detection and removal of personal information from training data",
     "implementationMethods": [
       "RuleBased",
@@ -651,7 +651,7 @@
   {
     "id": "tech-prompt-injection-protection",
     "name": "Prompt Injection Protection",
-    "categoryId": "cat-inference-safeguards",
+    "categoryId": "cat-runtime-safety",
     "description": "Detection and prevention of prompt injection attacks",
     "implementationMethods": [
       "RuleBased",
@@ -689,7 +689,7 @@
   {
     "id": "tech-realtime-monitoring",
     "name": "Real-time Safety Monitoring",
-    "categoryId": "cat-inference-safeguards",
+    "categoryId": "cat-runtime-safety",
     "description": "Live monitoring of model outputs for safety violations",
     "implementationMethods": [
       "ExternalSafetyService",
@@ -968,6 +968,186 @@
     "riskAreaIds": [
       5,
       7
+    ]
+  },
+  {
+    "id": "tech-training-data-disclosure",
+    "name": "Training Data Source Disclosure",
+    "categoryId": "cat-transparency",
+    "description": "Comprehensive disclosure of training data sources, collection methods, licensing, and composition details",
+    "riskAreaIds": [
+      "risk-transparency",
+      "risk-bias-fairness"
+    ],
+    "aliases": [
+      "Data Source Documentation",
+      "Training Data Transparency",
+      "Dataset Disclosure"
+    ]
+  },
+  {
+    "id": "tech-compute-documentation",
+    "name": "Compute Resource Documentation",
+    "categoryId": "cat-transparency",
+    "description": "Documentation of computational resources used for model training including hardware, energy consumption, and environmental impact",
+    "riskAreaIds": [
+      "risk-transparency"
+    ],
+    "aliases": [
+      "Compute Transparency",
+      "Resource Documentation",
+      "Infrastructure Disclosure"
+    ]
+  },
+  {
+    "id": "tech-performance-disclosure",
+    "name": "Model Performance Disclosure",
+    "categoryId": "cat-transparency",
+    "description": "Public disclosure of model performance metrics, benchmarks results, and capability assessments",
+    "riskAreaIds": [
+      "risk-transparency",
+      "risk-capability-evaluation"
+    ],
+    "aliases": [
+      "Performance Transparency",
+      "Capability Disclosure",
+      "Benchmark Results Publication"
+    ]
+  },
+  {
+    "id": "tech-safety-evaluation-publication",
+    "name": "Safety Evaluation Results Publication",
+    "categoryId": "cat-evaluation",
+    "description": "Publication of comprehensive safety evaluation results, methodologies, and findings",
+    "riskAreaIds": [
+      "risk-harmful-content",
+      "risk-capability-evaluation"
+    ],
+    "aliases": [
+      "Safety Results Disclosure",
+      "Safety Testing Publication",
+      "Safety Assessment Reports"
+    ]
+  },
+  {
+    "id": "tech-access-control-documentation",
+    "name": "Access Control Documentation",
+    "categoryId": "cat-governance",
+    "description": "Documentation of access control policies, authentication methods, and usage restrictions",
+    "riskAreaIds": [
+      "risk-security-misuse",
+      "risk-governance"
+    ],
+    "aliases": [
+      "Access Policy Documentation",
+      "Usage Control Disclosure",
+      "Authentication Documentation"
+    ]
+  },
+  {
+    "id": "tech-data-retention-policies",
+    "name": "Data Retention Policies",
+    "categoryId": "cat-privacy-security",
+    "description": "Policies and procedures for data retention, deletion, and lifecycle management",
+    "riskAreaIds": [
+      "risk-privacy-pii",
+      "risk-governance"
+    ],
+    "aliases": [
+      "Data Lifecycle Management",
+      "Retention Policies",
+      "Data Deletion Procedures"
+    ]
+  },
+  {
+    "id": "tech-model-versioning",
+    "name": "Model Update & Versioning Protocols",
+    "categoryId": "cat-governance",
+    "description": "Systematic protocols for model updates, versioning, and change management",
+    "riskAreaIds": [
+      "risk-governance",
+      "risk-capability-evaluation"
+    ],
+    "aliases": [
+      "Version Control",
+      "Model Update Management",
+      "Change Control Protocols"
+    ]
+  },
+  {
+    "id": "tech-stakeholder-engagement",
+    "name": "Stakeholder Engagement Processes",
+    "categoryId": "cat-governance",
+    "description": "Formal processes for engaging with stakeholders, communities, and affected parties in safety decisions",
+    "riskAreaIds": [
+      "risk-governance",
+      "risk-bias-fairness"
+    ],
+    "aliases": [
+      "Community Engagement",
+      "Stakeholder Consultation",
+      "Public Participation"
+    ]
+  },
+  {
+    "id": "tech-external-audit-coordination",
+    "name": "External Audit Coordination",
+    "categoryId": "cat-governance",
+    "description": "Coordination and facilitation of external audits, assessments, and independent reviews",
+    "riskAreaIds": [
+      "risk-governance",
+      "risk-capability-evaluation"
+    ],
+    "aliases": [
+      "Third-party Audit Management",
+      "Independent Review Coordination",
+      "External Assessment"
+    ]
+  },
+  {
+    "id": "tech-privacy-impact-assessment",
+    "name": "Privacy Impact Assessments",
+    "categoryId": "cat-privacy-security",
+    "description": "Systematic assessment of privacy risks and impacts throughout the model lifecycle",
+    "riskAreaIds": [
+      "risk-privacy-pii",
+      "risk-governance"
+    ],
+    "aliases": [
+      "Privacy Risk Assessment",
+      "PIA",
+      "Privacy Evaluation"
+    ]
+  },
+  {
+    "id": "tech-algorithmic-impact-assessment",
+    "name": "Algorithmic Impact Assessments",
+    "categoryId": "cat-evaluation",
+    "description": "Assessment of broader societal and ethical impacts of algorithmic systems",
+    "riskAreaIds": [
+      "risk-bias-fairness",
+      "risk-governance",
+      "risk-harmful-content"
+    ],
+    "aliases": [
+      "AIA",
+      "Societal Impact Assessment",
+      "Ethical Impact Evaluation"
+    ]
+  },
+  {
+    "id": "tech-dynamic-risk-assessment",
+    "name": "Dynamic Risk Assessment",
+    "categoryId": "cat-runtime-safety",
+    "description": "Real-time risk assessment that adapts to changing contexts and usage patterns",
+    "riskAreaIds": [
+      "risk-harmful-content",
+      "risk-security-misuse"
+    ],
+    "aliases": [
+      "Adaptive Risk Assessment",
+      "Context-Aware Risk Evaluation",
+      "Dynamic Safety Assessment"
     ]
   }
 ]

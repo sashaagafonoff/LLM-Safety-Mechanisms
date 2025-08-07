@@ -1,104 +1,50 @@
 [
   {
-    "id": "cat-alignment",
-    "name": "Alignment Methods",
-    "description": "Techniques for aligning model behavior with human values",
-    "phase": "training",
-    "parentCategoryId": null,
-    "riskAreaIds": [
-      1,
-      2,
-      5,
-      10
-    ]
-  },
-  {
-    "id": "cat-deployment-safety",
-    "name": "Deployment Safety",
-    "description": "Safety mechanisms and controls for model deployment environments, including enterprise integration and production safeguards",
-    "color": "#FF6B35"
-  },
-  {
-    "id": "cat-evaluation",
-    "name": "Evaluation & Testing",
-    "description": "Safety evaluation frameworks, benchmarks, and testing methodologies for assessing model safety and capabilities",
-    "color": "#4ECDC4"
-  },
-  {
-    "id": "cat-governance",
-    "name": "Governance & Oversight",
-    "description": "Organizational and procedural safety measures",
-    "phase": "governance",
-    "parentCategoryId": null,
-    "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ]
-  },
-  {
-    "id": "cat-inference-safeguards",
-    "name": "Inference Safeguards",
-    "description": "Safety measures applied during model inference and generation",
-    "phase": "inference",
-    "parentCategoryId": null,
-    "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5
-    ]
-  },
-  {
-    "id": "cat-novel-features",
-    "name": "Novel/Advanced Features",
-    "description": "Innovative or unique safety features",
-    "phase": "deployment",
-    "parentCategoryId": null,
-    "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7
-    ]
-  },
-  {
     "id": "cat-pre-training-safety",
     "name": "Pre-training Safety",
-    "description": "Safety measures applied during the initial training phase",
-    "phase": "pre-training",
-    "parentCategoryId": null,
-    "riskAreaIds": [
-      1,
-      2,
-      3
-    ]
+    "description": "Safety measures applied during data collection, curation, and model training phases",
+    "color": "#2E7D32"
+  },
+  {
+    "id": "cat-alignment",
+    "name": "Alignment Methods",
+    "description": "Techniques for aligning model behavior with human values and intentions",
+    "color": "#1976D2"
   },
   {
     "id": "cat-runtime-safety",
     "name": "Runtime Safety",
-    "description": "Dynamic safety mechanisms that operate during model inference, including real-time monitoring and contextual safety controls",
-    "color": "#45B7D1"
+    "description": "Safety mechanisms that operate during model inference and execution",
+    "color": "#7B1FA2"
+  },
+  {
+    "id": "cat-evaluation",
+    "name": "Evaluation & Testing",
+    "description": "Methods for evaluating, testing, and benchmarking model safety and performance",
+    "color": "#D32F2F"
   },
   {
     "id": "cat-transparency",
     "name": "Transparency",
-    "description": "Documentation and disclosure practices",
-    "phase": "governance",
-    "parentCategoryId": null,
-    "riskAreaIds": [
-      7
-    ]
+    "description": "Documentation, disclosure, and transparency practices for model development and deployment",
+    "color": "#F57C00"
+  },
+  {
+    "id": "cat-governance",
+    "name": "Governance & Oversight",
+    "description": "Organizational structures, policies, and processes for safety governance and oversight",
+    "color": "#455A64"
+  },
+  {
+    "id": "cat-privacy-security",
+    "name": "Privacy & Security",
+    "description": "Protection of personal information and security measures against malicious use",
+    "color": "#795548"
+  },
+  {
+    "id": "cat-novel-features",
+    "name": "Novel/Advanced Features",
+    "description": "Emerging and advanced safety technologies and methodologies",
+    "color": "#607D8B"
   }
 ]
