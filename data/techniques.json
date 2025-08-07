@@ -1,35 +1,5 @@
 [
   {
-    "id": "tech-academic-partnerships",
-    "name": "Academic Partnerships",
-    "categoryId": "cat-governance",
-    "description": "Collaborations with academic institutions for safety research",
-    "implementationMethods": [
-      "Other"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Research timeline constraints"
-    ],
-    "aliases": [
-      "University Collaborations"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-    ]
-  },
-  {
     "id": "tech-adversarial-training",
     "name": "Adversarial Training",
     "categoryId": "cat-alignment",
@@ -47,8 +17,8 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      4
+      "1",
+      "4"
     ]
   },
   {
@@ -73,7 +43,7 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      7
+      "7"
     ]
   },
   {
@@ -96,7 +66,7 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      2
+      "2"
     ]
   },
   {
@@ -120,7 +90,7 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1
+      "1"
     ]
   },
   {
@@ -142,8 +112,8 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      9,
-      10
+      "10",
+      "9"
     ]
   },
   {
@@ -152,9 +122,9 @@
     "categoryId": "cat-governance",
     "description": "Mechanisms for collecting, analyzing, and incorporating feedback from user communities and stakeholders to improve safety and alignment",
     "riskAreaIds": [
-      1,
-      2,
-      4
+      "1",
+      "2",
+      "4"
     ],
     "aliases": [
       "User Feedback",
@@ -168,7 +138,7 @@
     "categoryId": "cat-governance",
     "description": "Governance structures involving community participation in safety oversight, policy development, and incident response",
     "riskAreaIds": [
-      4
+      "4"
     ],
     "aliases": [
       "Participatory Governance",
@@ -182,7 +152,7 @@
     "categoryId": "cat-evaluation",
     "description": "Evaluation processes that leverage community expertise and distributed testing for comprehensive safety assessment",
     "riskAreaIds": [
-      2
+      "2"
     ],
     "aliases": [
       "Crowdsourced Testing",
@@ -194,7 +164,7 @@
     "id": "tech-safety-documentation",
     "name": "Comprehensive Safety Documentation",
     "categoryId": "cat-transparency",
-    "description": "Detailed public documentation of safety measures and evaluations",
+    "description": "Comprehensive public documentation of safety measures, evaluations, research publications, and safety evaluation results to ensure transparency and knowledge sharing",
     "implementationMethods": [
       "Other"
     ],
@@ -207,19 +177,32 @@
       "Can become outdated"
     ],
     "aliases": [
+      "Safety Assessment Reports",
       "Safety Cards",
+      "Safety Results Disclosure",
+      "Safety Testing Publication",
       "System Cards"
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      7
-    ]
+      "7",
+      "risk-capability-evaluation",
+      "risk-harmful-content"
+    ],
+    "consolidation_metadata": {
+      "consolidation_date": "2025-08-06T22:19:18.671937",
+      "absorbed_techniques": [
+        "tech-safety-research",
+        "tech-safety-evaluation-publication"
+      ],
+      "original_description": "Detailed public documentation of safety measures and evaluations"
+    }
   },
   {
     "id": "tech-configurable-policies",
     "name": "Configurable Safety Policies",
     "categoryId": "cat-runtime-safety",
-    "description": "User or admin configurable safety thresholds and policies",
+    "description": "User or admin configurable safety thresholds, policies, and fine-tuning safety controls that can be adapted to different use cases and requirements",
     "implementationMethods": [
       "Other"
     ],
@@ -228,15 +211,24 @@
     "knownLimitations": [
       "Requires user expertise"
     ],
-    "aliases": [],
+    "aliases": [
+      "Custom Training Safety"
+    ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5
-    ]
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "consolidation_metadata": {
+      "consolidation_date": "2025-08-06T22:19:18.672942",
+      "absorbed_techniques": [
+        "tech-fine-tuning-safety"
+      ],
+      "original_description": "User or admin configurable safety thresholds and policies"
+    }
   },
   {
     "id": "tech-constitutional-ai",
@@ -259,17 +251,17 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      5,
-      10
+      "1",
+      "10",
+      "2",
+      "5"
     ]
   },
   {
     "id": "tech-contextual-safety",
     "name": "Contextual Safety Assessment",
     "categoryId": "cat-runtime-safety",
-    "description": "Context-aware safety evaluation considering conversation history",
+    "description": "Context-aware safety evaluation and platform-specific safety mechanisms that consider conversation history, user demographics, platform context, and usage patterns",
     "implementationMethods": [
       "EmbeddedClassifier",
       "RetrievalAugmentation"
@@ -279,13 +271,24 @@
     "knownLimitations": [
       "Complex contexts challenging"
     ],
-    "aliases": [],
+    "aliases": [
+      "Adaptive Safety Controls",
+      "Contextual Safety",
+      "Platform-Aware Safety"
+    ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      5
-    ]
+      "1",
+      "2",
+      "5"
+    ],
+    "consolidation_metadata": {
+      "consolidation_date": "2025-08-06T22:19:18.674938",
+      "absorbed_techniques": [
+        "tech-platform-context-safety"
+      ],
+      "original_description": "Context-aware safety evaluation considering conversation history"
+    }
   },
   {
     "id": "tech-copyright-filtering",
@@ -309,7 +312,7 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      6
+      "6"
     ]
   },
   {
@@ -318,7 +321,7 @@
     "categoryId": "cat-governance",
     "description": "Technical and policy controls ensuring data processing and model deployment comply with regional sovereignty requirements",
     "riskAreaIds": [
-      3
+      "3"
     ],
     "aliases": [
       "Regional Compliance",
@@ -332,7 +335,7 @@
     "categoryId": "cat-governance",
     "description": "Safety mechanisms and protocols specifically designed for enterprise deployment environments and integration workflows",
     "riskAreaIds": [
-      4
+      "4"
     ],
     "aliases": [
       "Business Integration",
@@ -341,49 +344,40 @@
     ]
   },
   {
-    "id": "tech-fine-tuning-safety",
-    "name": "Fine-tuning Safety Controls",
-    "categoryId": "cat-alignment",
-    "description": "Safety controls and guidelines for model fine-tuning processes",
-    "implementationMethods": [
-      "HumanModeration",
-      "EmbeddedClassifier"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Depends on base model safety",
-      "Limited by fine-tuning data quality"
-    ],
-    "aliases": [
-      "Custom Training Safety"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      2,
-      5
-    ]
-  },
-  {
     "id": "tech-government-oversight",
     "name": "Government Regulatory Compliance",
     "categoryId": "cat-governance",
-    "description": "Compliance mechanisms and reporting structures for meeting government regulatory requirements and oversight",
+    "description": "Comprehensive compliance mechanisms and reporting structures for meeting government regulatory requirements, regulatory frameworks, and official oversight across all applicable jurisdictions",
     "riskAreaIds": [
-      4
+      "1",
+      "10",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
     ],
     "aliases": [
-      "Regulatory Compliance",
       "Government Reporting",
-      "Official Oversight"
-    ]
+      "Official Oversight",
+      "Regulatory Compliance"
+    ],
+    "consolidation_metadata": {
+      "consolidation_date": "2025-08-06T22:19:18.677939",
+      "absorbed_techniques": [
+        "tech-regulatory-compliance"
+      ],
+      "original_description": "Compliance mechanisms and reporting structures for meeting government regulatory requirements and oversight"
+    }
   },
   {
     "id": "tech-incident-reporting",
     "name": "Incident Reporting Systems",
     "categoryId": "cat-governance",
-    "description": "Formal systems for reporting and tracking safety incidents",
+    "description": "Comprehensive systems for reporting, tracking, and coordinating response to safety incidents including external audit coordination and independent oversight",
     "implementationMethods": [
       "Other"
     ],
@@ -392,15 +386,28 @@
     "knownLimitations": [
       "Depends on reporting culture"
     ],
-    "aliases": [],
+    "aliases": [
+      "External Assessment",
+      "Independent Review Coordination",
+      "Third-party Audit Management"
+    ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5
-    ]
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "risk-capability-evaluation",
+      "risk-governance"
+    ],
+    "consolidation_metadata": {
+      "consolidation_date": "2025-08-06T22:19:18.679941",
+      "absorbed_techniques": [
+        "tech-external-audit-coordination"
+      ],
+      "original_description": "Formal systems for reporting and tracking safety incidents"
+    }
   },
   {
     "id": "tech-safety-advisory",
@@ -420,16 +427,16 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
+      "1",
+      "10",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
     ]
   },
   {
@@ -453,16 +460,16 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      4,
-      5
+      "1",
+      "4",
+      "5"
     ]
   },
   {
     "id": "tech-model-cards",
     "name": "Model Cards & Technical Specs",
     "categoryId": "cat-transparency",
-    "description": "Standardized documentation of model capabilities and limitations",
+    "description": "Comprehensive standardized documentation including model capabilities, limitations, technical specifications, training data sources, and performance metrics disclosure",
     "implementationMethods": [
       "Other"
     ],
@@ -474,12 +481,29 @@
       "May not cover all aspects"
     ],
     "aliases": [
-      "Model Documentation"
+      "Benchmark Results Publication",
+      "Capability Disclosure",
+      "Data Source Documentation",
+      "Dataset Disclosure",
+      "Model Documentation",
+      "Performance Transparency",
+      "Training Data Transparency"
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      7
-    ]
+      "7",
+      "risk-bias-fairness",
+      "risk-capability-evaluation",
+      "risk-transparency"
+    ],
+    "consolidation_metadata": {
+      "consolidation_date": "2025-08-06T22:19:18.680940",
+      "absorbed_techniques": [
+        "tech-training-data-disclosure",
+        "tech-performance-disclosure"
+      ],
+      "original_description": "Standardized documentation of model capabilities and limitations"
+    }
   },
   {
     "id": "tech-multistage-pipeline",
@@ -498,11 +522,11 @@
     "aliases": [],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
     ]
   },
   {
@@ -511,8 +535,8 @@
     "categoryId": "cat-alignment",
     "description": "Safety alignment techniques specifically designed for multimodal models handling text, images, audio, and video content",
     "riskAreaIds": [
-      1,
-      2
+      "1",
+      "2"
     ],
     "aliases": [
       "Cross-Modal Safety",
@@ -526,7 +550,7 @@
     "categoryId": "cat-transparency",
     "description": "Development and provision of open-source tools, libraries, and frameworks for safety evaluation and implementation",
     "riskAreaIds": [
-      7
+      "7"
     ],
     "aliases": [
       "Open Source Libraries",
@@ -555,18 +579,18 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      3,
-      5,
-      6
+      "1",
+      "2",
+      "3",
+      "5",
+      "6"
     ]
   },
   {
     "id": "tech-pii-detection-inference",
     "name": "PII Detection & Redaction",
     "categoryId": "cat-privacy-security",
-    "description": "Real-time detection and redaction of personal information",
+    "description": "Comprehensive detection, redaction, and reduction of personal information both during training data preparation and real-time inference",
     "implementationMethods": [
       "RuleBased",
       "EmbeddedClassifier"
@@ -580,54 +604,21 @@
       "Context-dependent PII hard to catch"
     ],
     "aliases": [
-      "PII Redaction"
-    ],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      3
-    ]
-  },
-  {
-    "id": "tech-pii-reduction",
-    "name": "PII Reduction",
-    "categoryId": "cat-privacy-security",
-    "description": "Detection and removal of personal information from training data",
-    "implementationMethods": [
-      "RuleBased",
-      "EmbeddedClassifier"
-    ],
-    "governingStandards": [
-      "GDPR",
-      "CCPA"
-    ],
-    "licence": null,
-    "knownLimitations": [
-      "Cannot catch all PII",
-      "Context-dependent PII is challenging"
-    ],
-    "aliases": [
       "PII Filtering",
+      "PII Redaction",
       "Personal Data Removal"
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      3
-    ]
-  },
-  {
-    "id": "tech-platform-context-safety",
-    "name": "Platform Context Safety",
-    "categoryId": "cat-runtime-safety",
-    "description": "Safety mechanisms that adapt behavior based on platform-specific context, user demographics, and usage patterns",
-    "riskAreaIds": [
-      1,
-      2
+      "3"
     ],
-    "aliases": [
-      "Contextual Safety",
-      "Platform-Aware Safety",
-      "Adaptive Safety Controls"
-    ]
+    "consolidation_metadata": {
+      "consolidation_date": "2025-08-06T22:19:18.682940",
+      "absorbed_techniques": [
+        "tech-pii-reduction"
+      ],
+      "original_description": "Real-time detection and redaction of personal information"
+    }
   },
   {
     "id": "tech-policy-documentation",
@@ -645,7 +636,7 @@
     "aliases": [],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      7
+      "7"
     ]
   },
   {
@@ -668,7 +659,7 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      4
+      "4"
     ]
   },
   {
@@ -677,8 +668,8 @@
     "categoryId": "cat-runtime-safety",
     "description": "Dynamic fact-checking systems that verify information accuracy in real-time during model inference",
     "riskAreaIds": [
-      5,
-      1
+      "1",
+      "5"
     ],
     "aliases": [
       "Live Fact Verification",
@@ -690,7 +681,7 @@
     "id": "tech-realtime-monitoring",
     "name": "Real-time Safety Monitoring",
     "categoryId": "cat-runtime-safety",
-    "description": "Live monitoring of model outputs for safety violations",
+    "description": "Real-time monitoring and analytics of model outputs, usage patterns, and safety violations with comprehensive usage monitoring and analytics",
     "implementationMethods": [
       "ExternalSafetyService",
       "EmbeddedClassifier"
@@ -706,12 +697,19 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5
-    ]
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "consolidation_metadata": {
+      "consolidation_date": "2025-08-06T22:19:18.686939",
+      "absorbed_techniques": [
+        "tech-usage-monitoring"
+      ],
+      "original_description": "Live monitoring of model outputs for safety violations"
+    }
   },
   {
     "id": "tech-red-team-data",
@@ -732,10 +730,10 @@
       "tech-red-teaming"
     ],
     "riskAreaIds": [
-      1,
-      2,
-      4,
-      5
+      "1",
+      "2",
+      "4",
+      "5"
     ]
   },
   {
@@ -759,45 +757,14 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      9,
-      10
-    ]
-  },
-  {
-    "id": "tech-regulatory-compliance",
-    "name": "Regulatory Compliance Frameworks",
-    "categoryId": "cat-governance",
-    "description": "Frameworks for compliance with AI regulations",
-    "implementationMethods": [
-      "Other"
-    ],
-    "governingStandards": [
-      "EU AI Act",
-      "NIST AI RMF"
-    ],
-    "licence": null,
-    "knownLimitations": [
-      "Varies by jurisdiction"
-    ],
-    "aliases": [],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
+      "1",
+      "10",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "9"
     ]
   },
   {
@@ -820,9 +787,9 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      5
+      "1",
+      "2",
+      "5"
     ]
   },
   {
@@ -831,7 +798,7 @@
     "categoryId": "cat-governance",
     "description": "Structured processes for staged, monitored release of AI systems with safety checkpoints and rollback capabilities",
     "riskAreaIds": [
-      4
+      "4"
     ],
     "aliases": [
       "Staged Release",
@@ -845,31 +812,12 @@
     "categoryId": "cat-evaluation",
     "description": "Standardized benchmarks and evaluation suites for measuring and comparing safety performance across models",
     "riskAreaIds": [
-      1
+      "1"
     ],
     "aliases": [
       "Safety Evaluation",
       "Security Benchmarks",
       "Safety Testing Suites"
-    ]
-  },
-  {
-    "id": "tech-safety-research",
-    "name": "Safety Research Publications",
-    "categoryId": "cat-transparency",
-    "description": "Publishing safety research and methodologies",
-    "implementationMethods": [
-      "Other"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "May not include proprietary methods"
-    ],
-    "aliases": [],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      7
     ]
   },
   {
@@ -894,9 +842,9 @@
       "tech-rlhf"
     ],
     "riskAreaIds": [
-      1,
-      2,
-      5
+      "1",
+      "2",
+      "5"
     ]
   },
   {
@@ -919,32 +867,9 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      1,
-      2,
-      6
-    ]
-  },
-  {
-    "id": "tech-usage-monitoring",
-    "name": "Usage Monitoring & Analytics",
-    "categoryId": "cat-governance",
-    "description": "Monitoring usage patterns for safety insights",
-    "implementationMethods": [
-      "Other"
-    ],
-    "governingStandards": [],
-    "licence": null,
-    "knownLimitations": [
-      "Privacy considerations"
-    ],
-    "aliases": [],
-    "requiredTechniqueIds": [],
-    "riskAreaIds": [
-      1,
-      2,
-      3,
-      4,
-      5
+      "1",
+      "2",
+      "6"
     ]
   },
   {
@@ -966,23 +891,8 @@
     ],
     "requiredTechniqueIds": [],
     "riskAreaIds": [
-      5,
-      7
-    ]
-  },
-  {
-    "id": "tech-training-data-disclosure",
-    "name": "Training Data Source Disclosure",
-    "categoryId": "cat-transparency",
-    "description": "Comprehensive disclosure of training data sources, collection methods, licensing, and composition details",
-    "riskAreaIds": [
-      "risk-transparency",
-      "risk-bias-fairness"
-    ],
-    "aliases": [
-      "Data Source Documentation",
-      "Training Data Transparency",
-      "Dataset Disclosure"
+      "5",
+      "7"
     ]
   },
   {
@@ -1000,43 +910,13 @@
     ]
   },
   {
-    "id": "tech-performance-disclosure",
-    "name": "Model Performance Disclosure",
-    "categoryId": "cat-transparency",
-    "description": "Public disclosure of model performance metrics, benchmarks results, and capability assessments",
-    "riskAreaIds": [
-      "risk-transparency",
-      "risk-capability-evaluation"
-    ],
-    "aliases": [
-      "Performance Transparency",
-      "Capability Disclosure",
-      "Benchmark Results Publication"
-    ]
-  },
-  {
-    "id": "tech-safety-evaluation-publication",
-    "name": "Safety Evaluation Results Publication",
-    "categoryId": "cat-evaluation",
-    "description": "Publication of comprehensive safety evaluation results, methodologies, and findings",
-    "riskAreaIds": [
-      "risk-harmful-content",
-      "risk-capability-evaluation"
-    ],
-    "aliases": [
-      "Safety Results Disclosure",
-      "Safety Testing Publication",
-      "Safety Assessment Reports"
-    ]
-  },
-  {
     "id": "tech-access-control-documentation",
     "name": "Access Control Documentation",
     "categoryId": "cat-governance",
     "description": "Documentation of access control policies, authentication methods, and usage restrictions",
     "riskAreaIds": [
-      "risk-security-misuse",
-      "risk-governance"
+      "risk-governance",
+      "risk-security-misuse"
     ],
     "aliases": [
       "Access Policy Documentation",
@@ -1050,8 +930,8 @@
     "categoryId": "cat-privacy-security",
     "description": "Policies and procedures for data retention, deletion, and lifecycle management",
     "riskAreaIds": [
-      "risk-privacy-pii",
-      "risk-governance"
+      "risk-governance",
+      "risk-privacy-pii"
     ],
     "aliases": [
       "Data Lifecycle Management",
@@ -1065,8 +945,8 @@
     "categoryId": "cat-governance",
     "description": "Systematic protocols for model updates, versioning, and change management",
     "riskAreaIds": [
-      "risk-governance",
-      "risk-capability-evaluation"
+      "risk-capability-evaluation",
+      "risk-governance"
     ],
     "aliases": [
       "Version Control",
@@ -1078,31 +958,34 @@
     "id": "tech-stakeholder-engagement",
     "name": "Stakeholder Engagement Processes",
     "categoryId": "cat-governance",
-    "description": "Formal processes for engaging with stakeholders, communities, and affected parties in safety decisions",
+    "description": "Formal processes for engaging with stakeholders, communities, academic institutions, and affected parties in safety decisions and research collaborations",
     "riskAreaIds": [
-      "risk-governance",
-      "risk-bias-fairness"
+      "1",
+      "10",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "risk-bias-fairness",
+      "risk-governance"
     ],
     "aliases": [
       "Community Engagement",
+      "Public Participation",
       "Stakeholder Consultation",
-      "Public Participation"
-    ]
-  },
-  {
-    "id": "tech-external-audit-coordination",
-    "name": "External Audit Coordination",
-    "categoryId": "cat-governance",
-    "description": "Coordination and facilitation of external audits, assessments, and independent reviews",
-    "riskAreaIds": [
-      "risk-governance",
-      "risk-capability-evaluation"
+      "University Collaborations"
     ],
-    "aliases": [
-      "Third-party Audit Management",
-      "Independent Review Coordination",
-      "External Assessment"
-    ]
+    "consolidation_metadata": {
+      "consolidation_date": "2025-08-06T22:19:18.694939",
+      "absorbed_techniques": [
+        "tech-academic-partnerships"
+      ],
+      "original_description": "Formal processes for engaging with stakeholders, communities, and affected parties in safety decisions"
+    }
   },
   {
     "id": "tech-privacy-impact-assessment",
@@ -1110,8 +993,8 @@
     "categoryId": "cat-privacy-security",
     "description": "Systematic assessment of privacy risks and impacts throughout the model lifecycle",
     "riskAreaIds": [
-      "risk-privacy-pii",
-      "risk-governance"
+      "risk-governance",
+      "risk-privacy-pii"
     ],
     "aliases": [
       "Privacy Risk Assessment",

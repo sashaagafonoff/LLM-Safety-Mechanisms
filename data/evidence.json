@@ -332,7 +332,7 @@
   },
   {
     "providerId": "amazon",
-    "techniqueId": "tech-pii-reduction",
+    "techniqueId": "tech-pii-detection-inference",
     "modelIds": [
       "model-titan-text-express"
     ],
@@ -651,7 +651,7 @@
   },
   {
     "providerId": "openai",
-    "techniqueId": "tech-pii-reduction",
+    "techniqueId": "tech-pii-detection-inference",
     "modelIds": [
       "model-gpt-4o"
     ],
@@ -778,7 +778,7 @@
       "quantitativeMetrics": false,
       "automatedTest": true
     },
-    "summary": "Layered policy engine with system prompt → model → content filter pipeline, including specialized voice classifiers",
+    "summary": "Layered policy engine with system prompt \u2192 model \u2192 content filter pipeline, including specialized voice classifiers",
     "evidenceLevel": "primary",
     "sourceUrls": [
       {
@@ -1211,7 +1211,7 @@
   },
   {
     "providerId": "openai",
-    "techniqueId": "tech-usage-monitoring",
+    "techniqueId": "tech-realtime-monitoring",
     "modelIds": [
       "model-gpt-4o"
     ],
@@ -1247,7 +1247,7 @@
   },
   {
     "providerId": "openai",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [
       "model-gpt-4o"
     ],
@@ -1285,7 +1285,7 @@
   },
   {
     "providerId": "openai",
-    "techniqueId": "tech-academic-partnerships",
+    "techniqueId": "tech-stakeholder-engagement",
     "modelIds": [
       "model-gpt-4o"
     ],
@@ -1357,7 +1357,7 @@
   },
   {
     "providerId": "openai",
-    "techniqueId": "tech-safety-research",
+    "techniqueId": "tech-safety-documentation",
     "modelIds": [
       "model-gpt-4o"
     ],
@@ -1467,7 +1467,7 @@
   },
   {
     "providerId": "google",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [
       "model-gemini-pro"
     ],
@@ -1541,7 +1541,7 @@
   },
   {
     "providerId": "google",
-    "techniqueId": "tech-academic-partnerships",
+    "techniqueId": "tech-stakeholder-engagement",
     "modelIds": [
       "model-gemini-pro"
     ],
@@ -1765,7 +1765,7 @@
   {
     "id": "ev-anthropic-0005",
     "providerId": "anthropic",
-    "techniqueId": "tech-pii-reduction",
+    "techniqueId": "tech-pii-detection-inference",
     "modelIds": [
       "model-claude-3-opus",
       "model-claude-3-sonnet"
@@ -1803,7 +1803,7 @@
   {
     "id": "ev-anthropic-0006",
     "providerId": "anthropic",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [
       "model-claude-3-opus",
       "model-claude-3-sonnet"
@@ -2373,7 +2373,7 @@
   {
     "id": "ev-anthropic-0026",
     "providerId": "anthropic",
-    "techniqueId": "tech-usage-monitoring",
+    "techniqueId": "tech-realtime-monitoring",
     "modelIds": [
       "model-claude-3-opus",
       "model-claude-3-sonnet"
@@ -2487,7 +2487,7 @@
   {
     "id": "ev-anthropic-0029",
     "providerId": "anthropic",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [
       "model-claude-3-opus",
       "model-claude-3-sonnet"
@@ -2525,7 +2525,7 @@
   {
     "id": "ev-anthropic-0030",
     "providerId": "anthropic",
-    "techniqueId": "tech-academic-partnerships",
+    "techniqueId": "tech-stakeholder-engagement",
     "modelIds": [
       "model-claude-3-opus",
       "model-claude-3-sonnet"
@@ -2601,7 +2601,7 @@
   {
     "id": "ev-anthropic-0033",
     "providerId": "anthropic",
-    "techniqueId": "tech-safety-research",
+    "techniqueId": "tech-safety-documentation",
     "modelIds": [
       "model-claude-3-opus",
       "model-claude-3-sonnet"
@@ -3306,7 +3306,7 @@
   {
     "id": "ev-google-0026",
     "providerId": "google",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [
       "model-gemini-pro"
     ],
@@ -3380,7 +3380,7 @@
   {
     "id": "ev-microsoft-0001",
     "providerId": "microsoft",
-    "techniqueId": "tech-pii-reduction",
+    "techniqueId": "tech-pii-detection-inference",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -3415,7 +3415,7 @@
   {
     "id": "ev-microsoft-0002",
     "providerId": "microsoft",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -3485,7 +3485,7 @@
   {
     "id": "ev-microsoft-0004",
     "providerId": "microsoft",
-    "techniqueId": "tech-fine-tuning-safety",
+    "techniqueId": "tech-configurable-policies",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -3975,7 +3975,7 @@
   {
     "id": "ev-microsoft-0018",
     "providerId": "microsoft",
-    "techniqueId": "tech-usage-monitoring",
+    "techniqueId": "tech-realtime-monitoring",
     "modelIds": [],
     "rating": "high",
     "severityBand": "P",
@@ -4010,7 +4010,7 @@
   {
     "id": "ev-microsoft-0019",
     "providerId": "microsoft",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "high",
     "severityBand": "P",
@@ -4189,7 +4189,7 @@
   {
     "id": "ev-meta-0006",
     "providerId": "meta",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [
       "model-llama-3-70b"
     ],
@@ -4633,7 +4633,7 @@
   {
     "id": "ev-meta-0023",
     "providerId": "meta",
-    "techniqueId": "tech-academic-partnerships",
+    "techniqueId": "tech-stakeholder-engagement",
     "modelIds": [
       "model-llama-3-70b"
     ],
@@ -4781,7 +4781,7 @@
   {
     "id": "ev-meta-0027",
     "providerId": "meta",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [
       "model-llama-3-70b"
     ],
@@ -4929,7 +4929,7 @@
   {
     "id": "ev-meta-0031",
     "providerId": "meta",
-    "techniqueId": "tech-safety-research",
+    "techniqueId": "tech-safety-documentation",
     "modelIds": [
       "model-llama-3-70b"
     ],
@@ -5188,7 +5188,7 @@
   {
     "id": "ev-amazon-0006",
     "providerId": "amazon",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [
       "model-titan-text-express"
     ],
@@ -5262,7 +5262,7 @@
   {
     "id": "ev-amazon-0008",
     "providerId": "amazon",
-    "techniqueId": "tech-fine-tuning-safety",
+    "techniqueId": "tech-configurable-policies",
     "modelIds": [
       "model-titan-text-express"
     ],
@@ -5558,7 +5558,7 @@
   {
     "id": "ev-amazon-0020",
     "providerId": "amazon",
-    "techniqueId": "tech-usage-monitoring",
+    "techniqueId": "tech-realtime-monitoring",
     "modelIds": [
       "model-titan-text-express"
     ],
@@ -5595,7 +5595,7 @@
   {
     "id": "ev-amazon-0021",
     "providerId": "amazon",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [
       "model-titan-text-express"
     ],
@@ -5883,7 +5883,7 @@
   {
     "id": "ev-cohere-0005",
     "providerId": "cohere",
-    "techniqueId": "tech-pii-reduction",
+    "techniqueId": "tech-pii-detection-inference",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -5918,7 +5918,7 @@
   {
     "id": "ev-cohere-0006",
     "providerId": "cohere",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -6023,7 +6023,7 @@
   {
     "id": "ev-cohere-0009",
     "providerId": "cohere",
-    "techniqueId": "tech-fine-tuning-safety",
+    "techniqueId": "tech-configurable-policies",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -6443,7 +6443,7 @@
   {
     "id": "ev-cohere-0021",
     "providerId": "cohere",
-    "techniqueId": "tech-usage-monitoring",
+    "techniqueId": "tech-realtime-monitoring",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -6478,7 +6478,7 @@
   {
     "id": "ev-cohere-0022",
     "providerId": "cohere",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -6513,7 +6513,7 @@
   {
     "id": "ev-cohere-0023",
     "providerId": "cohere",
-    "techniqueId": "tech-academic-partnerships",
+    "techniqueId": "tech-stakeholder-engagement",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -6653,7 +6653,7 @@
   {
     "id": "ev-cohere-0027",
     "providerId": "cohere",
-    "techniqueId": "tech-safety-research",
+    "techniqueId": "tech-safety-documentation",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -6758,7 +6758,7 @@
   {
     "id": "ev-mistral-0002",
     "providerId": "mistral",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -6863,7 +6863,7 @@
   {
     "id": "ev-mistral-0005",
     "providerId": "mistral",
-    "techniqueId": "tech-fine-tuning-safety",
+    "techniqueId": "tech-configurable-policies",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -7108,7 +7108,7 @@
   {
     "id": "ev-mistral-0012",
     "providerId": "mistral",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -7143,7 +7143,7 @@
   {
     "id": "ev-mistral-0013",
     "providerId": "mistral",
-    "techniqueId": "tech-academic-partnerships",
+    "techniqueId": "tech-stakeholder-engagement",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -7248,7 +7248,7 @@
   {
     "id": "ev-mistral-0016",
     "providerId": "mistral",
-    "techniqueId": "tech-safety-research",
+    "techniqueId": "tech-safety-documentation",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -7528,7 +7528,7 @@
   {
     "id": "ev-stability-ai-0007",
     "providerId": "stability-ai",
-    "techniqueId": "tech-academic-partnerships",
+    "techniqueId": "tech-stakeholder-engagement",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -7598,7 +7598,7 @@
   {
     "id": "ev-stability-ai-0009",
     "providerId": "stability-ai",
-    "techniqueId": "tech-safety-research",
+    "techniqueId": "tech-safety-documentation",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -7738,7 +7738,7 @@
   {
     "id": "ev-hugging-face-0004",
     "providerId": "hugging-face",
-    "techniqueId": "tech-pii-reduction",
+    "techniqueId": "tech-pii-detection-inference",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -8123,7 +8123,7 @@
   {
     "id": "ev-hugging-face-0015",
     "providerId": "hugging-face",
-    "techniqueId": "tech-academic-partnerships",
+    "techniqueId": "tech-stakeholder-engagement",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -8193,7 +8193,7 @@
   {
     "id": "ev-hugging-face-0017",
     "providerId": "hugging-face",
-    "techniqueId": "tech-safety-research",
+    "techniqueId": "tech-safety-documentation",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -8333,7 +8333,7 @@
   {
     "id": "ev-baidu-0003",
     "providerId": "baidu",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "high",
     "severityBand": "P",
@@ -8718,7 +8718,7 @@
   {
     "id": "ev-baidu-0014",
     "providerId": "baidu",
-    "techniqueId": "tech-usage-monitoring",
+    "techniqueId": "tech-realtime-monitoring",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -8753,7 +8753,7 @@
   {
     "id": "ev-baidu-0015",
     "providerId": "baidu",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "high",
     "severityBand": "P",
@@ -8788,7 +8788,7 @@
   {
     "id": "ev-baidu-0016",
     "providerId": "baidu",
-    "techniqueId": "tech-academic-partnerships",
+    "techniqueId": "tech-stakeholder-engagement",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -8893,7 +8893,7 @@
   {
     "id": "ev-baidu-0019",
     "providerId": "baidu",
-    "techniqueId": "tech-safety-research",
+    "techniqueId": "tech-safety-documentation",
     "modelIds": [],
     "rating": "low",
     "severityBand": "P",
@@ -9033,7 +9033,7 @@
   {
     "id": "ev-alibaba-0003",
     "providerId": "alibaba",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -9103,7 +9103,7 @@
   {
     "id": "ev-alibaba-0005",
     "providerId": "alibaba",
-    "techniqueId": "tech-fine-tuning-safety",
+    "techniqueId": "tech-configurable-policies",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -9523,7 +9523,7 @@
   {
     "id": "ev-alibaba-0017",
     "providerId": "alibaba",
-    "techniqueId": "tech-usage-monitoring",
+    "techniqueId": "tech-realtime-monitoring",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -9558,7 +9558,7 @@
   {
     "id": "ev-alibaba-0018",
     "providerId": "alibaba",
-    "techniqueId": "tech-regulatory-compliance",
+    "techniqueId": "tech-government-oversight",
     "modelIds": [],
     "rating": "medium",
     "severityBand": "P",
@@ -9778,7 +9778,7 @@
   {
     "id": "ev-x-platform-context-003",
     "providerId": "x",
-    "techniqueId": "tech-platform-context-safety",
+    "techniqueId": "tech-contextual-safety",
     "modelIds": [
       "model-grok-4"
     ],
