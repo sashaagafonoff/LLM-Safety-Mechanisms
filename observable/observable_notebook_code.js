@@ -682,7 +682,8 @@ function _10(md) {
 * Default state is multi (click and drag to multi-select objects)
 * Click Multi button to switch to drag mode if you want to drag the canvas
 * Legends are draggable so you can place them anywhere you want
-* Legend members are clickable to hide/show in the chart. Simplifies without needing to scroll up to filter`
+* Legend members are clickable to hide/show in the chart. Simplifies without needing to scroll up to filter
+* Click Force button to let the Providers naturally place in the chart based on implementation of measures. This is useful for identifying either that a Provider has limited implementation of a specific category, or that there may be missing data with respect to those categories`
   )
 }
 
@@ -1224,7 +1225,7 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
   // Controls
   const controls = svg.append("g").attr("transform", `translate(20, 20)`);
 
-  // Mode toggle button
+  // Mode toggle button (MULTI/DRAG)
   const modeButton = controls.append("g").style("cursor", "pointer");
 
   modeButton
@@ -1251,10 +1252,144 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
     }
   });
 
+  // FORCE button
+  let forceSimulation = null;
+  let forceActive = false;
+
+  const forceButton = controls
+    .append("g")
+    .attr("transform", "translate(90, 0)") // Position 90px to the right
+    .style("cursor", "pointer");
+
+  forceButton
+    .append("rect")
+    .attr("class", "control-button")
+    .attr("width", 80)
+    .attr("height", 30)
+    .attr("rx", 5);
+
+  const forceButtonText = forceButton
+    .append("text")
+    .attr("class", "control-text")
+    .attr("x", 40)
+    .attr("y", 20)
+    .text("FORCE");
+
+  forceButton.on("click", () => {
+    forceActive = !forceActive;
+
+    // Visual feedback - change button color
+    forceButton
+      .select("rect")
+      .style("fill", forceActive ? "#d0d0d0" : "#f0f0f0");
+
+    if (forceActive) {
+      // Release only provider nodes - unfix their positions
+      nodes.forEach((node) => {
+        if (node.type === "provider") {
+          node.fx = null;
+          node.fy = null;
+        }
+      });
+
+      // Create force simulation focused on provider positioning
+      forceSimulation = d3
+        .forceSimulation(nodes)
+        .force(
+          "link",
+          d3
+            .forceLink(links)
+            .id((d) => d.id)
+            .distance((d) => {
+              // Shorter distance for provider-technique links to pull providers toward their techniques
+              return d.type === "provider-technique" ? 100 : 50;
+            })
+            .strength((d) => {
+              // Strong pull only for provider-technique links
+              return d.type === "provider-technique" ? 0.5 : 0.1;
+            })
+        )
+        .force(
+          "charge",
+          d3.forceManyBody().strength((d) => {
+            // Providers repel each other, other nodes stay neutral
+            if (d.type === "provider") return -200;
+            return 0;
+          })
+        )
+        .force(
+          "collide",
+          d3.forceCollide().radius((d) => {
+            return d.type === "provider" ? 20 : 10;
+          })
+        )
+        .alphaDecay(0.02)
+        .velocityDecay(0.4)
+        .on("tick", () => {
+          // Only update provider positions
+          if (window.currentProviderNodes) {
+            window.currentProviderNodes
+              .filter((d) => d.type === "provider")
+              .attr("transform", (d) => `translate(${d.x},${d.y})`);
+          }
+
+          // Update all links since provider positions are changing
+          if (window.currentLink) {
+            window.currentLink
+              .attr("x1", (d) => {
+                const source =
+                  typeof d.source === "object"
+                    ? d.source
+                    : nodeById.get(d.source);
+                return source ? source.x : 0;
+              })
+              .attr("y1", (d) => {
+                const source =
+                  typeof d.source === "object"
+                    ? d.source
+                    : nodeById.get(d.source);
+                return source ? source.y : 0;
+              })
+              .attr("x2", (d) => {
+                const target =
+                  typeof d.target === "object"
+                    ? d.target
+                    : nodeById.get(d.target);
+                return target ? target.x : 0;
+              })
+              .attr("y2", (d) => {
+                const target =
+                  typeof d.target === "object"
+                    ? d.target
+                    : nodeById.get(d.target);
+                return target ? target.y : 0;
+              });
+          }
+        });
+
+      // Start simulation
+      forceSimulation.alpha(1).restart();
+    } else {
+      // Stop simulation and fix provider positions where they are
+      if (forceSimulation) {
+        forceSimulation.stop();
+        forceSimulation = null;
+
+        // Fix providers at their current positions
+        nodes.forEach((node) => {
+          if (node.type === "provider") {
+            node.fx = node.x;
+            node.fy = node.y;
+          }
+        });
+      }
+    }
+  });
+
   // Reset button
   const resetButton = controls
     .append("g")
-    .attr("transform", "translate(90, 0)")
+    .attr("transform", "translate(180, 0)") // Position 180px to the right (after FORCE)
     .style("cursor", "pointer");
 
   resetButton
@@ -1272,6 +1407,14 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
     .text("RESET");
 
   resetButton.on("click", () => {
+    // Stop force if active
+    if (forceSimulation) {
+      forceSimulation.stop();
+      forceSimulation = null;
+      forceActive = false;
+      forceButton.select("rect").style("fill", "#f0f0f0");
+    }
+
     svg.call(
       zoom.transform,
       d3.zoomIdentity.scale(0.8).translate(width * 0.5, height * 0.5)
@@ -1569,39 +1712,61 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
               !disabledCategories.has(d.name) &&
               !disabledCategories.has(d.category)
             ) {
-              if (selectedNodes.has(d.id)) {
-                nodes.forEach((node) => {
-                  if (selectedNodes.has(node.id)) {
-                    node.x = event.x - node.dragStartX;
-                    node.y = event.y - node.dragStartY;
-                    node.fx = node.x;
-                    node.fy = node.y;
-                  }
-                });
-
-                [
-                  window.currentTechniqueNodes,
-                  window.currentCategoryNodes,
-                  window.currentProviderNodes
-                ].forEach((nodeGroup) => {
-                  if (nodeGroup) {
-                    nodeGroup
-                      .filter((n) => selectedNodes.has(n.id))
-                      .attr("transform", (n) => `translate(${n.x},${n.y})`);
-                  }
-                });
-              } else {
+              // If force is active and this is a provider, temporarily fix it during drag
+              if (forceActive && forceSimulation && d.type === "provider") {
                 d.x = event.x;
                 d.y = event.y;
-                d.fx = d.x;
-                d.fy = d.y;
-                d3.select(this).attr("transform", `translate(${d.x},${d.y})`);
-              }
+                d.fx = event.x; // Temporarily fix position
+                d.fy = event.y;
 
-              updateLinks();
+                // Update position immediately
+                d3.select(this).attr("transform", `translate(${d.x},${d.y})`);
+                updateLinks();
+
+                // Keep simulation running
+                forceSimulation.alpha(0.1).restart();
+              } else {
+                // Normal drag behavior for non-providers or when force is off
+                if (selectedNodes.has(d.id)) {
+                  nodes.forEach((node) => {
+                    if (selectedNodes.has(node.id)) {
+                      node.x = event.x - node.dragStartX;
+                      node.y = event.y - node.dragStartY;
+                      node.fx = node.x;
+                      node.fy = node.y;
+                    }
+                  });
+
+                  [
+                    window.currentTechniqueNodes,
+                    window.currentCategoryNodes,
+                    window.currentProviderNodes
+                  ].forEach((nodeGroup) => {
+                    if (nodeGroup) {
+                      nodeGroup
+                        .filter((n) => selectedNodes.has(n.id))
+                        .attr("transform", (n) => `translate(${n.x},${n.y})`);
+                    }
+                  });
+                } else {
+                  d.x = event.x;
+                  d.y = event.y;
+                  d.fx = d.x;
+                  d.fy = d.y;
+                  d3.select(this).attr("transform", `translate(${d.x},${d.y})`);
+                }
+
+                updateLinks();
+              }
             }
           })
-          .on("end", function () {
+          .on("end", function (event, d) {
+            if (forceActive && forceSimulation && d.type === "provider") {
+              // Release the provider to continue force simulation
+              d.fx = null;
+              d.fy = null;
+              forceSimulation.alpha(0.3).restart();
+            }
             setTimeout(() => {
               preventClear = false;
             }, 100);
