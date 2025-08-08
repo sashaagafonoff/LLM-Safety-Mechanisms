@@ -21,7 +21,7 @@ function _2(md) {
   )
 }
 
-function _sunburstChart(data, filteredData, d3) {
+function _sunburstChart(data, filteredData, d3, categoryColors) {
   const width = 928;
   const radius = width / 2;
 
@@ -130,8 +130,8 @@ function _sunburstChart(data, filteredData, d3) {
   const categoryNames = Array.from(techniquesByCategory.keys()).sort();
   const color = d3
     .scaleOrdinal()
-    .domain(categoryNames)
-    .range(d3.schemeTableau10);
+    .domain(Object.keys(categoryColors))
+    .range(Object.values(categoryColors));
 
   const svg = d3
     .create("svg")
@@ -686,7 +686,7 @@ function _10(md) {
   )
 }
 
-function _unifiedChart(filteredData, d3) {
+function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
   const width = 800;
   const height = 900;
 
@@ -703,32 +703,6 @@ function _unifiedChart(filteredData, d3) {
       top: 80,
       bottom: 120
     }
-  };
-
-  // Provider color scheme
-  const providerColors = {
-    OpenAI: "#AB68FF",
-    Anthropic: "#6C5BB9",
-    Google: "#EA4335",
-    Microsoft: "#F35325",
-    Meta: "#0064E0",
-    Amazon: "#131A22",
-    Cohere: "#F4CE0E",
-    Mistral: "#9AB8D4",
-    "Stability AI": "#FC8C84",
-    "Hugging Face": "#FF9D00",
-    Baidu: "#2529D8",
-    Alibaba: "#FF6A00"
-  };
-
-  // Category colors - matching sunburst chart
-  const categoryColors = {
-    "Pre-training Safety": "#2E7D32",
-    "Alignment Methods": "#1565C0",
-    "Inference Safeguards": "#D32F2F",
-    "Novel/Advanced Features": "#F57C00",
-    Transparency: "#BE55B1",
-    "Governance & Oversight": "#6A1B9A"
   };
 
   // State management
@@ -937,7 +911,10 @@ function _unifiedChart(filteredData, d3) {
               source: `provider-${provider}`,
               target: techId,
               type: "provider-technique",
-              color: darkenColor(providerColors[provider] || "#999", 40),
+              color: d3
+                .color(providerColors[provider] || "#999")
+                .darker(0.4)
+                .toString(),
               data: data[provider][category][technique.name]
             });
           }
@@ -1158,7 +1135,7 @@ function _unifiedChart(filteredData, d3) {
     techniqueNodes
       .append("path")
       .attr("d", d3.symbol().type(d3.symbolTriangle).size(150))
-      .attr("fill", (d) => d.color)
+      .attr("fill", (d) => categoryColors[d.category] || "#666")
       .attr("stroke", "#fff")
       .attr("stroke-width", 2);
 
@@ -2683,7 +2660,48 @@ function _filteredData(data, filters) {
 }
 
 
-function _27(htl) {
+async function _colorSchemes(d3) {
+  const baseUrl =
+    "https://raw.githubusercontent.com/sashaagafonoff/LLM-Safety-Mechanisms/main/data/";
+
+  const [categories, providers] = await Promise.all([
+    fetch(`${baseUrl}categories.json`).then((d) => d.json()),
+    fetch(`${baseUrl}providers.json`).then((d) => d.json())
+  ]);
+
+  const categoryNames = categories.map((c) => c.name).sort();
+  const providerNames = providers.map((p) => p.name).sort();
+
+  // Use consistent color generation for both
+  const generateColors = (items, saturation = 0.7, lightness = 0.5) => {
+    const colorMap = {};
+    const hueStep = 360 / items.length;
+    items.forEach((item, i) => {
+      colorMap[item] = d3.hsl(i * hueStep, saturation, lightness).toString();
+    });
+    return colorMap;
+  };
+
+  return {
+    categories: generateColors(categoryNames, 0.6, 0.55),
+    providers: generateColors(providerNames, 0.5, 0.6)
+  };
+}
+
+
+function _categoryColors(colorSchemes) {
+  return (
+    colorSchemes.categories
+  )
+}
+
+function _providerColors(colorSchemes) {
+  return (
+    colorSchemes.providers
+  )
+}
+
+function _30(htl) {
   return (
     htl.html`<style>
 hr {
@@ -2700,7 +2718,7 @@ export default function define(runtime, observer) {
   const main = runtime.module();
   main.variable(observer()).define(["md"], _1);
   main.variable(observer()).define(["md"], _2);
-  main.variable(observer("sunburstChart")).define("sunburstChart", ["data", "filteredData", "d3"], _sunburstChart);
+  main.variable(observer("sunburstChart")).define("sunburstChart", ["data", "filteredData", "d3", "categoryColors"], _sunburstChart);
   main.variable(observer()).define(["md"], _4);
   main.variable(observer()).define(["filteredData", "filters", "data", "md"], _5);
   main.variable(observer()).define(["md"], _6);
@@ -2709,7 +2727,7 @@ export default function define(runtime, observer) {
   main.variable(observer("filters")).define("filters", ["Generators", "viewof filters"], (G, _) => G.input(_));
   main.variable(observer()).define(["md"], _9);
   main.variable(observer()).define(["md"], _10);
-  main.variable(observer("unifiedChart")).define("unifiedChart", ["filteredData", "d3"], _unifiedChart);
+  main.variable(observer("unifiedChart")).define("unifiedChart", ["filteredData", "providerColors", "categoryColors", "d3"], _unifiedChart);
   main.variable(observer()).define(["md"], _12);
   main.variable(observer()).define(["Plot", "filteredData"], _13);
   main.variable(observer()).define(["Plot", "d3", "filteredData"], _14);
@@ -2727,6 +2745,9 @@ export default function define(runtime, observer) {
   main.variable(observer("embedAPI")).define("embedAPI", ["filteredData", "d3", "URLSearchParams"], _embedAPI);
   main.variable(observer("data")).define("data", _data);
   main.variable(observer("filteredData")).define("filteredData", ["data", "filters"], _filteredData);
-  main.variable(observer()).define(["htl"], _27);
+  main.variable(observer("colorSchemes")).define("colorSchemes", ["d3"], _colorSchemes);
+  main.variable(observer("categoryColors")).define("categoryColors", ["colorSchemes"], _categoryColors);
+  main.variable(observer("providerColors")).define("providerColors", ["colorSchemes"], _providerColors);
+  main.variable(observer()).define(["htl"], _30);
   return main;
 }
