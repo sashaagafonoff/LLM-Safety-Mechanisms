@@ -687,8 +687,8 @@ function _10(md) {
 }
 
 function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
-  const width = 800;
-  const height = 900;
+  const width = 900;
+  const height = 800;
 
   // Layout configuration - transparent values for easy adjustment
   const layout = {
@@ -697,6 +697,7 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
     categoryPadding: 15, // Padding inside category boxes
     categoryRadius: 8, // Border radius for category boxes
     categoryMinWidth: 120, // Minimum width for category boxes
+    providerSpacing: 30, // Vertical spacing between providers
     nodeMargins: {
       left: 80, // Increased to keep categories fully inside
       right: 80,
@@ -770,23 +771,50 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
     return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")}`;
   }
 
-  // Layout positions for categories (TL, TR, MR, BR, BL, ML)
   function getCategoryPosition(index, total) {
-    const leftX = layout.nodeMargins.left;
-    const rightX = width - layout.nodeMargins.right;
-    const topY = layout.nodeMargins.top;
-    const bottomY = height - layout.nodeMargins.bottom;
-    const middleY = height / 2;
+    const leftCategories = 4;
+    const isLeft = index < leftCategories;
 
-    const positions = [
-      { x: leftX, y: topY }, // TL - top-left
-      { x: rightX, y: topY }, // TR - top-right
-      { x: rightX, y: middleY }, // MR - middle-right
-      { x: rightX, y: bottomY }, // BR - bottom-right
-      { x: leftX, y: bottomY }, // BL - bottom-left
-      { x: leftX, y: middleY } // ML - middle-left
-    ];
-    return positions[index % positions.length];
+    // Calculate actual heights for each category
+    const categoryData = selectedCategories.map((cat) => {
+      const techniques = [];
+      selectedProviders.forEach((provider) => {
+        if (data[provider]?.[cat]) {
+          Object.keys(data[provider][cat]).forEach((technique) => {
+            if (!techniques.find((t) => t.name === technique)) {
+              techniques.push({ name: technique });
+            }
+          });
+        }
+      });
+      return {
+        name: cat,
+        techniqueCount: techniques.length,
+        height: 35 + 20 + techniques.length * layout.techniqueSpacingY + 40
+      };
+    });
+
+    if (isLeft) {
+      // Left side positioning
+      let yPos = -height / 2 + layout.nodeMargins.top + 20;
+      for (let i = 0; i < index; i++) {
+        yPos += categoryData[i].height;
+      }
+      return {
+        x: -width / 2 + layout.nodeMargins.left + layout.categoryMinWidth / 2,
+        y: yPos
+      };
+    } else {
+      // Right side positioning
+      let yPos = -height / 2 + layout.nodeMargins.top + 20;
+      for (let i = 4; i < index; i++) {
+        yPos += categoryData[i].height;
+      }
+      return {
+        x: width / 2 - layout.nodeMargins.right - layout.categoryMinWidth / 2,
+        y: yPos
+      };
+    }
   }
 
   // Measure text width properly
@@ -805,24 +833,25 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
 
     // Add provider nodes - vertical line in center, 75% of height
     const providerX = width / 2;
-    const providerStartY = height * 0.125;
+    // const providerStartY = height * 0.125;
     const providerEndY = height * 0.875;
-    const providerSpacing =
-      (providerEndY - providerStartY) / (selectedProviders.length - 1 || 1);
+    // const providerSpacing = (providerEndY - providerStartY) / (selectedProviders.length - 1 || 1);
 
+    const providerStartY =
+      -(selectedProviders.length * layout.providerSpacing) / 2;
     selectedProviders.forEach((provider, i) => {
-      const node = {
+      const providerNode = {
         id: `provider-${provider}`,
         name: provider,
         type: "provider",
         color: providerColors[provider] || "#999",
-        x: providerX,
-        y: providerStartY + i * providerSpacing,
-        fx: providerX,
-        fy: providerStartY + i * providerSpacing
+        x: 0,
+        y: providerStartY + i * layout.providerSpacing,
+        fx: 0,
+        fy: providerStartY + i * layout.providerSpacing
       };
-      nodes.push(node);
-      nodeById.set(node.id, node);
+      nodes.push(providerNode);
+      nodeById.set(providerNode.id, providerNode);
     });
 
     // Add category nodes and techniques
@@ -1243,7 +1272,10 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
     .text("RESET");
 
   resetButton.on("click", () => {
-    g.attr("transform", d3.zoomIdentity);
+    svg.call(
+      zoom.transform,
+      d3.zoomIdentity.scale(0.8).translate(width * 0.5, height * 0.5)
+    );
     disabledProviders.clear();
     disabledCategories.clear();
     selectedNodes.clear();
@@ -1254,24 +1286,24 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
   const providerLegend = g
     .append("g")
     .attr("class", "provider-legend")
-    .attr("transform", `translate(${width / 2 - 80}, 15)`);
+    .attr("transform", "translate(0, 350)"); // Centered X, bottom of chart
 
   const categoryLegend = g
     .append("g")
     .attr("class", "category-legend")
-    .attr(
-      "transform",
-      `translate(${width / 2 - 80}, ${height - selectedCategories.length * 20 - 45
-      })`
-    );
+    .attr("transform", "translate(250, 270)"); // Move down 20px from 250
 
   function buildLegends() {
+    // Clear any existing transforms first
+    providerLegend.attr("transform", "translate(0, 200)");
+    categoryLegend.attr("transform", "translate(180, 320)");
+
     // Provider legend
     const providerLegendBg = providerLegend
       .append("rect")
       .attr("class", "legend-container")
       .attr("width", 160)
-      .attr("height", 35 + selectedProviders.length * 20)
+      .attr("height", 35 + Math.min(selectedProviders.length) * 20) // Limit height
       .attr("x", -10)
       .attr("y", -10);
 
@@ -1284,7 +1316,7 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
 
     const providerItems = providerLegend
       .selectAll(".provider-legend-item")
-      .data(selectedProviders)
+      .data(selectedProviders) // Show all providers
       .join("g")
       .attr("class", "legend-item provider-legend-item")
       .attr("transform", (d, i) => `translate(0, ${30 + i * 20})`);
@@ -1311,12 +1343,6 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
     });
 
     // Category legend
-    categoryLegend.attr(
-      "transform",
-      `translate(${width / 2 - 80}, ${height - selectedCategories.length * 20 - 45
-      })`
-    );
-
     const categoryLegendBg = categoryLegend
       .append("rect")
       .attr("class", "legend-container")
@@ -1837,6 +1863,13 @@ function _unifiedChart(filteredData, providerColors, categoryColors, d3) {
 
   // Initial setup
   svg.call(zoom);
+  // Better initial zoom and centering
+  svg.call(
+    zoom.transform,
+    d3.zoomIdentity
+      .scale(0.8) // Zoom out more
+      .translate(width * 0.5, height * 0.5) // Center better
+  );
   svg.style("cursor", "crosshair");
   buildVisualization();
 
