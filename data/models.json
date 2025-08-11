@@ -1,79 +1,313 @@
-[
-  {
-    "id": "model-gpt-4o",
-    "providerId": "openai",
-    "name": "GPT-4",
-    "version": "gpt-4o-2024-08-06",
-    "releaseDate": "2024-08-06",
-    "modalityType": "multimodal",
-    "parameterCount": null,
-    "deploymentStatus": "general-availability",
-    "accessType": "api"
-  },
-  {
-    "id": "model-claude-3-opus",
-    "providerId": "anthropic",
-    "name": "Claude 3",
-    "version": "claude-3-opus-20240229",
-    "releaseDate": "2024-03-04",
-    "modalityType": "text",
-    "parameterCount": null,
-    "deploymentStatus": "general-availability",
-    "accessType": "api"
-  },
-  {
-    "id": "model-claude-3-sonnet",
-    "providerId": "anthropic",
-    "name": "Claude 3",
-    "version": "claude-3-sonnet-20240229",
-    "releaseDate": "2024-03-04",
-    "modalityType": "text",
-    "parameterCount": null,
-    "deploymentStatus": "general-availability",
-    "accessType": "api"
-  },
-  {
-    "id": "model-gemini-pro",
-    "providerId": "google",
-    "name": "Gemini",
-    "version": "gemini-pro-1.0",
-    "releaseDate": "2023-12-06",
-    "modalityType": "multimodal",
-    "parameterCount": null,
-    "deploymentStatus": "general-availability",
-    "accessType": "api"
-  },
-  {
-    "id": "model-llama-3-70b",
-    "providerId": "meta",
-    "name": "Llama 3",
-    "version": "llama-3-70b",
-    "releaseDate": "2024-04-18",
-    "modalityType": "text",
-    "parameterCount": 70000000000,
-    "deploymentStatus": "general-availability",
-    "accessType": "download"
-  },
-  {
-    "id": "model-titan-text-express",
-    "providerId": "amazon",
-    "name": "Titan Text",
-    "version": "titan-text-express-v1",
-    "releaseDate": "2023-09-28",
-    "modalityType": "text",
-    "parameterCount": null,
-    "deploymentStatus": "general-availability",
-    "accessType": "api"
-  },
-  {
-    "id": "model-grok-4",
-    "providerId": "x",
-    "name": "Grok",
-    "version": "grok-4",
-    "releaseDate": "2024-12-12",
-    "modalityType": "multimodal",
-    "parameterCount": null,
-    "deploymentStatus": "limited-availability",
-    "accessType": "api"
-  }
-]
+{
+  "models": [
+    {
+      "name": "claude-opus-4-1-20250805",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-10T23:29:01.195819",
+      "context_window": 200000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "complex-reasoning",
+        "creative-writing",
+        "code-generation"
+      ],
+      "description": "Most capable Claude model for complex tasks",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "claude-opus-4-20250514",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-10T23:29:01.195819",
+      "context_window": 200000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "complex-reasoning",
+        "creative-writing",
+        "code-generation"
+      ],
+      "description": "Most capable Claude model for complex tasks",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "claude-sonnet-4-20250514",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-10T23:29:01.195819",
+      "context_window": 200000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "balanced-performance",
+        "code-generation"
+      ],
+      "description": "Balanced Claude model for most use cases",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "claude-3-7-sonnet-20250219",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-10T23:29:01.195819",
+      "context_window": 200000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "balanced-performance",
+        "code-generation"
+      ],
+      "description": "Balanced Claude model for most use cases",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "claude-3-5-haiku-20241022",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-10T23:29:01.195819",
+      "context_window": 200000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "fast-response",
+        "simple-tasks"
+      ],
+      "description": "Fast and efficient Claude model",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "claude-sonnet-3.5-v2",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-10T23:32:47.860354",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "balanced-performance",
+        "code-generation"
+      ],
+      "description": "Balanced Claude model for most use cases",
+      "safety_mechanisms": [],
+      "context_window": 200000
+    },
+    {
+      "name": "claude-3-5-sonnet-20241022",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-10T23:29:01.196705",
+      "context_window": 200000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "balanced-performance",
+        "code-generation"
+      ],
+      "description": "Balanced Claude model for most use cases",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "claude-haiku-3",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-10T23:21:21.550224",
+      "context_window": 200000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "fast-response",
+        "simple-tasks"
+      ],
+      "description": "Fast and efficient Claude model",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "gpt-4o",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "context_window": 128000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "complex-reasoning",
+        "code-generation",
+        "multimodal"
+      ],
+      "description": "Most advanced GPT-4 model, optimized for chat and complex tasks",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "gpt-4o-mini",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "context_window": 128000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "fast-response"
+      ],
+      "description": "Smaller, faster version of GPT-4o",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "gpt-4-turbo",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "context_window": 128000,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "complex-reasoning",
+        "code-generation",
+        "multimodal"
+      ],
+      "description": "Latest GPT-4 Turbo model with improved performance",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "gpt-4",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "context_window": 8192,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "complex-reasoning",
+        "code-generation"
+      ],
+      "description": "Most capable GPT-4 model for complex, multi-step tasks",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "gpt-3.5-turbo",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "context_window": 16385,
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "fast-response",
+        "cost-effective"
+      ],
+      "description": "Most capable GPT-3.5 model and optimized for chat",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "dall-e-3",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "capabilities": [
+        "image-generation",
+        "creative-ai"
+      ],
+      "description": "Most advanced image generation model",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "dall-e-2",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "capabilities": [
+        "image-generation",
+        "creative-ai"
+      ],
+      "description": "Image generation model",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "whisper-1",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "capabilities": [
+        "speech-to-text",
+        "transcription",
+        "audio-processing"
+      ],
+      "description": "Speech recognition model",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "tts-1",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "capabilities": [
+        "text-to-speech",
+        "voice-synthesis"
+      ],
+      "description": "Text-to-speech model",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "tts-1-hd",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "capabilities": [
+        "text-to-speech",
+        "voice-synthesis",
+        "high-quality"
+      ],
+      "description": "Higher quality text-to-speech model",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "text-embedding-3-large",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "context_window": 8191,
+      "capabilities": [
+        "text-embeddings",
+        "semantic-search",
+        "similarity"
+      ],
+      "description": "Most capable embedding model",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "text-embedding-3-small",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "context_window": 8191,
+      "capabilities": [
+        "text-embeddings",
+        "semantic-search",
+        "cost-effective"
+      ],
+      "description": "Smaller, more efficient embedding model",
+      "safety_mechanisms": []
+    },
+    {
+      "name": "text-embedding-ada-002",
+      "provider": "openai",
+      "status": "active",
+      "last_updated": "2025-08-10T23:45:11.296557",
+      "context_window": 8191,
+      "capabilities": [
+        "text-embeddings",
+        "semantic-search"
+      ],
+      "description": "Previous generation embedding model",
+      "safety_mechanisms": []
+    }
+  ],
+  "last_updated": "2025-08-10T23:45:11.297557",
+  "total_models": 21,
+  "providers": [
+    "anthropic",
+    "openai"
+  ]
+}
