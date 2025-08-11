@@ -1,0 +1,832 @@
+{
+  "alibaba": {
+    "documentation_urls": [
+      "https://github.com/QwenLM/Qwen"
+    ],
+    "known_models": {
+      "qwen-7b": {
+        "api_name": "qwen-7b",
+        "status": "active",
+        "alternative_names": [
+          "Qwen 7B"
+        ]
+      },
+      "qwen-14b": {
+        "api_name": "qwen-14b",
+        "status": "active",
+        "alternative_names": [
+          "Qwen 14B"
+        ]
+      },
+      "qwen-72b": {
+        "api_name": "qwen-72b",
+        "status": "active",
+        "alternative_names": [
+          "Qwen 72B"
+        ]
+      }
+    },
+    "model_patterns": [
+      "qwen\\d+\\.\\d+-\\d+[a-z]",
+      "qwen\\d+-[a-z]+-\\d+[a-z]"
+    ]
+  },
+  "amazon": {
+    "documentation_urls": [
+      "https://www.amazon.science/publications/the-amazon-nova-family-of-models-technical-report-and-model-card"
+    ],
+    "known_models": {
+      "amazon-nova-micro": {
+        "api_name": "amazon-nova-micro",
+        "status": "active",
+        "alternative_names": [
+          "Amazon Nova Micro",
+          "Nova Micro"
+        ]
+      },
+      "amazon-nova-lite": {
+        "api_name": "amazon-nova-lite",
+        "status": "active",
+        "alternative_names": [
+          "Amazon Nova Lite",
+          "Nova Lite"
+        ]
+      },
+      "amazon-nova-pro": {
+        "api_name": "amazon-nova-pro",
+        "status": "active",
+        "alternative_names": [
+          "Amazon Nova Pro",
+          "Nova Pro"
+        ]
+      },
+      "amazon-nova-premier": {
+        "api_name": "amazon-nova-premier",
+        "status": "active",
+        "alternative_names": [
+          "Amazon Nova Premier",
+          "Nova Premier"
+        ]
+      }
+    },
+    "model_patterns": [
+      "amazon-nova-(?:micro|lite|pro|premier)",
+      "nova-(?:micro|lite|pro|premier)"
+    ]
+  },
+  "anthropic": {
+    "documentation_urls": [
+      "https://docs.anthropic.com/claude/docs/models-overview"
+    ],
+    "known_models": {
+      "claude-opus-4.1": {
+        "api_name": "claude-opus-4-1-20250805",
+        "status": "active",
+        "alternative_names": [
+          "claude-opus-4-1-20250805",
+          "Claude Opus 4.1"
+        ]
+      },
+      "claude-3-5-sonnet": {
+        "api_name": "claude-3-5-sonnet",
+        "status": "active",
+        "alternative_names": []
+      },
+      "claude-3.5-sonnet": {
+        "api_name": "claude-3-5-sonnet-20241022",
+        "status": "active",
+        "alternative_names": [
+          "claude-3-5-sonnet-20241022",
+          "Claude 3.5 sonnet"
+        ]
+      },
+      "claude-3.5-haiku": {
+        "api_name": "claude-3-5-haiku-20241022",
+        "status": "active",
+        "alternative_names": [
+          "Claude 3.5 haiku",
+          "claude-3-5-haiku-20241022"
+        ]
+      },
+      "claude-sonnet-4.0": {
+        "api_name": "claude-sonnet-4-20250514",
+        "status": "active",
+        "alternative_names": [
+          "claude-sonnet-4-20250514",
+          "Claude Sonnet 4.0"
+        ]
+      },
+      "claude-opus-4.0": {
+        "api_name": "claude-opus-4-20250514",
+        "status": "active",
+        "alternative_names": [
+          "claude-opus-4-20250514",
+          "Claude Opus 4.0"
+        ]
+      },
+      "claude-3-5-haiku": {
+        "api_name": "claude-3-5-haiku",
+        "status": "active",
+        "alternative_names": []
+      },
+      "claude-3.7-sonnet": {
+        "api_name": "claude-3-7-sonnet-20250219",
+        "status": "active",
+        "alternative_names": [
+          "Claude 3.7 sonnet",
+          "claude-3-7-sonnet-20250219"
+        ]
+      },
+      "claude-3-7-sonnet": {
+        "api_name": "claude-3-7-sonnet",
+        "status": "active",
+        "alternative_names": []
+      }
+    },
+    "model_patterns": [
+      "claude-(?:opus|sonnet|haiku)-\\d+(?:\\.\\d+)?(?:-\\d{8})?",
+      "claude-\\d+(?:\\.\\d+)?-(?:opus|sonnet|haiku)(?:-\\d{8})?"
+    ]
+  },
+  "baidu": {
+    "documentation_urls": [
+      "https://huggingface.co/baidu"
+    ],
+    "known_models": {
+      "ERNIE-4.5-VL-424B-A47B-PT": {
+        "api_name": "ERNIE-4.5-VL-424B-A47B-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 Vl 424B A47B Pt"
+        ]
+      },
+      "ERNIE-4.5-VL-28B-A3B-Base-PT": {
+        "api_name": "ERNIE-4.5-VL-28B-A3B-Base-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 Vl 28B A3B Base Pt"
+        ]
+      },
+      "ERNIE-4.5-VL-424B-A47B-Base-PT": {
+        "api_name": "ERNIE-4.5-VL-424B-A47B-Base-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 Vl 424B A47B Base Pt"
+        ]
+      },
+      "ernie-45-6861cd4c9be84540645f35c9": {
+        "api_name": "ernie-45-6861cd4c9be84540645f35c9",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 45 6861Cd4C9Be84540645F35C9"
+        ]
+      },
+      "ERNIE-4.5-VL-424B-A47B-Base-Paddle": {
+        "api_name": "ERNIE-4.5-VL-424B-A47B-Base-Paddle",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 Vl 424B A47B Base Paddle"
+        ]
+      },
+      "ERNIE-4.5-300B-A47B-Base-Paddle": {
+        "api_name": "ERNIE-4.5-300B-A47B-Base-Paddle",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 300B A47B Base Paddle"
+        ]
+      },
+      "ERNIE-4.5-300B-A47B-Base-PT": {
+        "api_name": "ERNIE-4.5-300B-A47B-Base-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 300B A47B Base Pt"
+        ]
+      },
+      "simple_ernie_bot_demo": {
+        "api_name": "simple_ernie_bot_demo",
+        "status": "active",
+        "alternative_names": [
+          "Simple_Ernie_Bot_Demo"
+        ]
+      },
+      "ernie_4.5_turbo_demo": {
+        "api_name": "ernie_4.5_turbo_demo",
+        "status": "active",
+        "alternative_names": [
+          "Ernie_4.5_Turbo_Demo"
+        ]
+      },
+      "ERNIE-4.5-VL-28B-A3B-PT": {
+        "api_name": "ERNIE-4.5-VL-28B-A3B-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 Vl 28B A3B Pt"
+        ]
+      },
+      "ERNIE-4.5-0.3B-Base-PT": {
+        "api_name": "ERNIE-4.5-0.3B-Base-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 0.3B Base Pt"
+        ]
+      },
+      "ERNIE-4.5-0.3B-PT": {
+        "api_name": "ERNIE-4.5-0.3B-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 0.3B Pt"
+        ]
+      },
+      "ERNIE-4.5-300B-A47B-PT": {
+        "api_name": "ERNIE-4.5-300B-A47B-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 300B A47B Pt"
+        ]
+      },
+      "ERNIE-4.5-21B-A3B-PT": {
+        "api_name": "ERNIE-4.5-21B-A3B-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 21B A3B Pt"
+        ]
+      },
+      "ERNIE-4.5-21B-A3B-Base-PT": {
+        "api_name": "ERNIE-4.5-21B-A3B-Base-PT",
+        "status": "active",
+        "alternative_names": [
+          "Ernie 4.5 21B A3B Base Pt"
+        ]
+      }
+    },
+    "model_patterns": [
+      "ernie-\\d+\\.\\d+-\\d+[a-z]",
+      "ernie-[a-z]+-\\d+[a-z]"
+    ]
+  },
+  "cohere": {
+    "documentation_urls": [
+      "https://docs.cohere.com/docs/models"
+    ],
+    "known_models": {
+      "command-r-plus": {
+        "api_name": "command-r-plus",
+        "status": "active",
+        "alternative_names": [
+          "Command R Plus"
+        ]
+      },
+      "command-r": {
+        "api_name": "command-r",
+        "status": "active",
+        "alternative_names": [
+          "Command R"
+        ]
+      },
+      "command-light": {
+        "api_name": "command-light",
+        "status": "active",
+        "alternative_names": [
+          "Command Light"
+        ]
+      },
+      "command": {
+        "api_name": "command",
+        "status": "active",
+        "alternative_names": [
+          "Command"
+        ]
+      }
+    },
+    "model_patterns": [
+      "command(?:-[a-z]+)?(?:-plus)?"
+    ]
+  },
+  "google": {
+    "documentation_urls": [
+      "https://ai.google.dev/gemini-api/docs/models"
+    ],
+    "known_models": {
+      "gemini-2.0-flash-preview-image-generation": {
+        "api_name": "gemini-2.0-flash-preview-image-generation",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash Preview Image Generation"
+        ]
+      },
+      "gemini-2.0-flash-exp-image-generation": {
+        "api_name": "gemini-2.0-flash-exp-image-generation",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash Exp Image Generation"
+        ]
+      },
+      "gemini-2.5-pro-preview-03-25": {
+        "api_name": "gemini-2.5-pro-preview-03-25",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Pro Preview 03 25"
+        ]
+      },
+      "gemini-2.5-pro-preview-06-05": {
+        "api_name": "gemini-2.5-pro-preview-06-05",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Pro Preview 06 05"
+        ]
+      },
+      "gemini-2.5-flash": {
+        "api_name": "gemini-2.5-flash",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Flash"
+        ]
+      },
+      "gemini-1.5-pro-exp-0801": {
+        "api_name": "gemini-1.5-pro-exp-0801",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Pro Exp 0801"
+        ]
+      },
+      "gemini-2.0-flash-live-001": {
+        "api_name": "gemini-2.0-flash-live-001",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash Live 001"
+        ]
+      },
+      "gemini-1.5-flash-8b-latest": {
+        "api_name": "gemini-1.5-flash-8b-latest",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Flash 8B Latest"
+        ]
+      },
+      "gemini-2.5-flash-exp-native-audio-thinking-dialog": {
+        "api_name": "gemini-2.5-flash-exp-native-audio-thinking-dialog",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Flash Exp Native Audio Thinking Dialog"
+        ]
+      },
+      "gemini-2.0-flash": {
+        "api_name": "gemini-2.0-flash",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash"
+        ]
+      },
+      "gemini-1.5-flash-001": {
+        "api_name": "gemini-1.5-flash-001",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Flash 001"
+        ]
+      },
+      "gemini-2.0-flash-exp": {
+        "api_name": "gemini-2.0-flash-exp",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash Exp"
+        ]
+      },
+      "gemini-2.5-flash-preview-tts": {
+        "api_name": "gemini-2.5-flash-preview-tts",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Flash Preview Tts"
+        ]
+      },
+      "gemini-2.5-pro-preview-tts": {
+        "api_name": "gemini-2.5-pro-preview-tts",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Pro Preview Tts"
+        ]
+      },
+      "gemini-1.5-flash-002": {
+        "api_name": "gemini-1.5-flash-002",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Flash 002"
+        ]
+      },
+      "gemini-2.5-pro": {
+        "api_name": "gemini-2.5-pro",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Pro"
+        ]
+      },
+      "gemini-2.0-flash-lite": {
+        "api_name": "gemini-2.0-flash-lite",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash Lite"
+        ]
+      },
+      "gemini-2.0-flash-thinking-exp-1219": {
+        "api_name": "gemini-2.0-flash-thinking-exp-1219",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash Thinking Exp 1219"
+        ]
+      },
+      "gemini-1.5-pro-latest": {
+        "api_name": "gemini-1.5-pro-latest",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Pro Latest"
+        ]
+      },
+      "gemini-2.5-flash-lite": {
+        "api_name": "gemini-2.5-flash-lite",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Flash Lite"
+        ]
+      },
+      "gemini-2.5-flash-preview-native-audio-dialog": {
+        "api_name": "gemini-2.5-flash-preview-native-audio-dialog",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Flash Preview Native Audio Dialog"
+        ]
+      },
+      "gemini-1.5-flash-8b-exp-0924": {
+        "api_name": "gemini-1.5-flash-8b-exp-0924",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Flash 8B Exp 0924"
+        ]
+      },
+      "gemini-1.5-flash-8b-001": {
+        "api_name": "gemini-1.5-flash-8b-001",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Flash 8B 001"
+        ]
+      },
+      "gemini-2.0-pro-exp-02-05": {
+        "api_name": "gemini-2.0-pro-exp-02-05",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Pro Exp 02 05"
+        ]
+      },
+      "gemini-1.5-flash": {
+        "api_name": "gemini-1.5-flash",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Flash"
+        ]
+      },
+      "gemini-2.0-flash-lite-001": {
+        "api_name": "gemini-2.0-flash-lite-001",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash Lite 001"
+        ]
+      },
+      "gemini-2.0-flash-001": {
+        "api_name": "gemini-2.0-flash-001",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash 001"
+        ]
+      },
+      "gemini-1.5-flash-latest": {
+        "api_name": "gemini-1.5-flash-latest",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Flash Latest"
+        ]
+      },
+      "gemini-2.5-flash-preview-04-17": {
+        "api_name": "gemini-2.5-flash-preview-04-17",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Flash Preview 04 17"
+        ]
+      },
+      "gemini-2.5-flash-lite-06-17": {
+        "api_name": "gemini-2.5-flash-lite-06-17",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Flash Lite 06 17"
+        ]
+      },
+      "gemini-1.5-pro": {
+        "api_name": "gemini-1.5-pro",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Pro"
+        ]
+      },
+      "gemini-1.5-pro-001": {
+        "api_name": "gemini-1.5-pro-001",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Pro 001"
+        ]
+      },
+      "gemini-1.5-pro-exp-0827": {
+        "api_name": "gemini-1.5-pro-exp-0827",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Pro Exp 0827"
+        ]
+      },
+      "gemini-1.5-pro-002": {
+        "api_name": "gemini-1.5-pro-002",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Pro 002"
+        ]
+      },
+      "gemini-2.5-pro-preview-05-06": {
+        "api_name": "gemini-2.5-pro-preview-05-06",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Pro Preview 05 06"
+        ]
+      },
+      "gemini-2.5-flash-preview-05-20": {
+        "api_name": "gemini-2.5-flash-preview-05-20",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.5 Flash Preview 05 20"
+        ]
+      },
+      "gemini-2.0-flash-thinking-exp-01-21": {
+        "api_name": "gemini-2.0-flash-thinking-exp-01-21",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 2.0 Flash Thinking Exp 01 21"
+        ]
+      },
+      "gemini-1.5-flash-8b-exp-0827": {
+        "api_name": "gemini-1.5-flash-8b-exp-0827",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Flash 8B Exp 0827"
+        ]
+      },
+      "gemini-1.5-flash-8b": {
+        "api_name": "gemini-1.5-flash-8b",
+        "status": "active",
+        "alternative_names": [
+          "Gemini 1.5 Flash 8B"
+        ]
+      }
+    },
+    "model_patterns": [
+      "gemini-\\d+\\.\\d+-(?:pro|flash)(?:-\\d+[a-z])?(?:-exp)?"
+    ]
+  },
+  "meta": {
+    "documentation_urls": [
+      "https://huggingface.co/meta-llama"
+    ],
+    "known_models": {
+      "Meta-Llama-3-8B-Instruct": {
+        "api_name": "Meta-Llama-3-8B-Instruct",
+        "status": "active",
+        "alternative_names": [
+          "Meta Llama 3 8B Instruct"
+        ]
+      },
+      "Meta-Llama-3-70B-Instruct": {
+        "api_name": "Meta-Llama-3-70B-Instruct",
+        "status": "active",
+        "alternative_names": [
+          "Meta Llama 3 70B Instruct"
+        ]
+      },
+      "llama-4-67f0c30d9fe03840bc9d0164": {
+        "api_name": "llama-4-67f0c30d9fe03840bc9d0164",
+        "status": "active",
+        "alternative_names": [
+          "Llama 4 67F0C30D9Fe03840Bc9D0164"
+        ]
+      },
+      "Llama-4-Scout-17B-16E-Instruct": {
+        "api_name": "Llama-4-Scout-17B-16E-Instruct",
+        "status": "active",
+        "alternative_names": [
+          "Llama 4 Scout 17B 16E Instruct"
+        ]
+      },
+      "Llama-4-Scout-17B-16E": {
+        "api_name": "Llama-4-Scout-17B-16E",
+        "status": "active",
+        "alternative_names": [
+          "Llama 4 Scout 17B 16E"
+        ]
+      },
+      "Llama-4-Maverick-17B-128E-Instruct": {
+        "api_name": "Llama-4-Maverick-17B-128E-Instruct",
+        "status": "active",
+        "alternative_names": [
+          "Llama 4 Maverick 17B 128E Instruct"
+        ]
+      },
+      "Llama-4-Maverick-17B-128E-Instruct-FP8": {
+        "api_name": "Llama-4-Maverick-17B-128E-Instruct-FP8",
+        "status": "active",
+        "alternative_names": [
+          "Llama 4 Maverick 17B 128E Instruct Fp8"
+        ]
+      },
+      "llama-33-67531d5c405ec5d08a852000": {
+        "api_name": "llama-33-67531d5c405ec5d08a852000",
+        "status": "active",
+        "alternative_names": [
+          "Llama 33 67531D5C405Ec5D08A852000"
+        ]
+      },
+      "Llama-3.3-70B-Instruct": {
+        "api_name": "Llama-3.3-70B-Instruct",
+        "status": "active",
+        "alternative_names": [
+          "Llama 3.3 70B Instruct"
+        ]
+      },
+      "Llama-4-Maverick-17B-128E-Instruct-Original": {
+        "api_name": "Llama-4-Maverick-17B-128E-Instruct-Original",
+        "status": "active",
+        "alternative_names": [
+          "Llama 4 Maverick 17B 128E Instruct Original"
+        ]
+      },
+      "Llama-4-Maverick-17B-128E": {
+        "api_name": "Llama-4-Maverick-17B-128E",
+        "status": "active",
+        "alternative_names": [
+          "Llama 4 Maverick 17B 128E"
+        ]
+      }
+    },
+    "model_patterns": [
+      "llama-\\d+\\.\\d+-\\d+[a-z]"
+    ]
+  },
+  "mistral": {
+    "documentation_urls": [
+      "https://huggingface.co/mistralai/models"
+    ],
+    "known_models": {
+      "mistral-small": {
+        "api_name": "Mistral-Small-Instruct-2409",
+        "status": "active",
+        "alternative_names": [
+          "Mistral Small Instruct 2409"
+        ]
+      },
+      "mistral-large": {
+        "api_name": "Mistral-Large-Instruct-2407",
+        "status": "active",
+        "alternative_names": [
+          "Mistral Large Instruct 2407"
+        ]
+      },
+      "mistral-7b-instruct": {
+        "api_name": "Mistral-7B-Instruct-v0.3",
+        "status": "active",
+        "alternative_names": [
+          "Mistral 7B Instruct v0.3"
+        ]
+      },
+      "codestral": {
+        "api_name": "Codestral-22B-v0.1",
+        "status": "active",
+        "alternative_names": [
+          "Codestral 22B v0.1"
+        ]
+      },
+      "Mistral-7B-v0.1": {
+        "api_name": "Mistral-7B-v0.1",
+        "status": "active",
+        "alternative_names": [
+          "Mistral 7B v0.1"
+        ]
+      }
+    },
+    "model_patterns": [
+      "mistral-(?:large|medium|small|tiny)",
+      "mixtral-\\d+x\\d+[a-z]"
+    ]
+  },
+  "openai": {
+    "documentation_urls": [
+      "https://platform.openai.com/docs/models"
+    ],
+    "known_models": {
+      "gpt-4o": {
+        "api_name": "gpt-4o",
+        "status": "active",
+        "alternative_names": [
+          "GPT-4o",
+          "GPT 4o"
+        ]
+      },
+      "gpt-4o-mini": {
+        "api_name": "gpt-4o-mini",
+        "status": "active",
+        "alternative_names": [
+          "GPT-4o Mini",
+          "GPT 4o Mini"
+        ]
+      },
+      "gpt-4-turbo": {
+        "api_name": "gpt-4-turbo",
+        "status": "active",
+        "alternative_names": [
+          "GPT-4 Turbo",
+          "GPT 4 Turbo"
+        ]
+      },
+      "gpt-4": {
+        "api_name": "gpt-4",
+        "status": "active",
+        "alternative_names": [
+          "GPT-4",
+          "GPT 4"
+        ]
+      },
+      "gpt-3.5-turbo": {
+        "api_name": "gpt-3.5-turbo",
+        "status": "active",
+        "alternative_names": [
+          "GPT-3.5 Turbo",
+          "GPT 3.5 Turbo"
+        ]
+      }
+    },
+    "model_patterns": [
+      "gpt-4o(?:-mini)?(?:-\\d{4}-\\d{2}-\\d{2})?",
+      "gpt-4(?:-turbo)?(?:-\\d{4}-\\d{2}-\\d{2})?",
+      "gpt-3\\.5-turbo(?:-\\d{4}-\\d{2}-\\d{2})?"
+    ]
+  },
+  "x": {
+    "documentation_urls": [
+      "https://docs.x.ai/docs/models"
+    ],
+    "known_models": {
+      "grok-3131": {
+        "api_name": "grok-3131",
+        "status": "active",
+        "alternative_names": [
+          "Grok 3131"
+        ]
+      },
+      "grok-2-image": {
+        "api_name": "grok-2-image",
+        "status": "active",
+        "alternative_names": [
+          "Grok 2 Image"
+        ]
+      },
+      "grok-3-mini": {
+        "api_name": "grok-3-mini",
+        "status": "active",
+        "alternative_names": [
+          "Grok 3 Mini"
+        ]
+      },
+      "grok-3-mini131": {
+        "api_name": "grok-3-mini131",
+        "status": "active",
+        "alternative_names": [
+          "Grok 3 Mini131"
+        ]
+      },
+      "grok-4": {
+        "api_name": "grok-4",
+        "status": "active",
+        "alternative_names": [
+          "Grok 4"
+        ]
+      },
+      "grok-3": {
+        "api_name": "grok-3",
+        "status": "active",
+        "alternative_names": [
+          "Grok 3"
+        ]
+      },
+      "grok-4-0709256": {
+        "api_name": "grok-4-0709256",
+        "status": "active",
+        "alternative_names": [
+          "Grok 4 0709256"
+        ]
+      }
+    },
+    "model_patterns": [
+      "grok-\\d+(?:\\.\\d+)?(?:-\\w+)?"
+    ]
+  }
+}
