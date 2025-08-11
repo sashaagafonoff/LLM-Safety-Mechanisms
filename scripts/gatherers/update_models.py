@@ -1,11 +1,21 @@
-# scripts/gatherers/update_models.py (updated for multiple providers)
+# scripts/gatherers/update_models.py (updated for all providers)
 import json
 import os
 import shutil
 from datetime import datetime
 from typing import Dict, List, Any
+
+# Import all gatherers
 from anthropic_gatherer import AnthropicGatherer
 from openai_gatherer import OpenAIGatherer
+from google_gatherer import GoogleGatherer
+from meta_gatherer import MetaGatherer
+from amazon_gatherer import AmazonGatherer
+from xai_gatherer import XaiGatherer
+from alibaba_gatherer import AlibabaGatherer
+from baidu_gatherer import BaiduGatherer
+from cohere_gatherer import CohereGatherer
+from mistral_gatherer import MistralGatherer 
 
 class ModelUpdater:
     def __init__(self, models_json_path: str = None):
@@ -16,6 +26,20 @@ class ModelUpdater:
             self.models_json_path = models_json_path
             
         print(f"📄 Models file: {self.models_json_path}")
+        
+        # All available gatherers
+        self.gatherers = {
+            'anthropic': AnthropicGatherer,
+            'openai': OpenAIGatherer,
+            'google': GoogleGatherer,
+            'meta': MetaGatherer,
+            'amazon': AmazonGatherer,
+            'xai': XaiGatherer,
+            'alibaba': AlibabaGatherer,
+            'baidu': BaiduGatherer, 
+            'cohere': CohereGatherer,
+            'mistral': MistralGatherer 
+        }
     
     def update_all_models(self):
         """Update models.json with latest models from all providers"""
@@ -28,23 +52,30 @@ class ModelUpdater:
         
         # Step 3: Gather models from all providers
         print("\n" + "="*60)
+        print("🚀 GATHERING MODELS FROM ALL PROVIDERS")
+        print("="*60)
+        
         all_new_models = []
+        provider_counts = {}
         
-        # Gather Anthropic models
-        print("🔍 Gathering Anthropic models...")
-        anthropic_gatherer = AnthropicGatherer()
-        anthropic_models = anthropic_gatherer.gather_models()
-        all_new_models.extend(anthropic_models)
+        for provider_name, gatherer_class in self.gatherers.items():
+            try:
+                print(f"\n🔍 Gathering {provider_name.upper()} models...")
+                gatherer = gatherer_class()
+                models = gatherer.gather_models()
+                all_new_models.extend(models)
+                provider_counts[provider_name] = len(models)
+                print(f"✅ {provider_name.upper()}: {len(models)} models")
+                
+            except Exception as e:
+                print(f"❌ {provider_name.upper()} failed: {e}")
+                provider_counts[provider_name] = 0
         
-        # Gather OpenAI models
-        print("\n🔍 Gathering OpenAI models...")
-        openai_gatherer = OpenAIGatherer()
-        openai_models = openai_gatherer.gather_models()
-        all_new_models.extend(openai_models)
-        
-        print(f"\n📊 TOTAL GATHERED: {len(all_new_models)} models")
-        print(f"   - Anthropic: {len(anthropic_models)}")
-        print(f"   - OpenAI: {len(openai_models)}")
+        print(f"\n📊 GATHERING SUMMARY:")
+        total_gathered = sum(provider_counts.values())
+        print(f"   Total models gathered: {total_gathered}")
+        for provider, count in provider_counts.items():
+            print(f"   - {provider.capitalize()}: {count}")
         
         # Step 4: Update the models data
         updated_models = self._merge_models(existing_models, all_new_models)
@@ -55,31 +86,47 @@ class ModelUpdater:
         # Step 6: Report changes
         self._report_changes(existing_models, updated_models, backup_path)
     
-    def update_anthropic_models(self):
-        """Update models.json with latest Anthropic models only"""
+    def update_specific_providers(self, provider_names: List[str]):
+        """Update models.json with specific providers only"""
+        
+        # Validate provider names
+        invalid_providers = [p for p in provider_names if p not in self.gatherers]
+        if invalid_providers:
+            print(f"❌ Invalid providers: {invalid_providers}")
+            print(f"   Available: {list(self.gatherers.keys())}")
+            return
+        
         backup_path = self._create_backup()
         existing_models = self._load_existing_models()
         
         print("\n" + "="*60)
-        gatherer = AnthropicGatherer()
-        new_anthropic_models = gatherer.gather_models()
+        print(f"🚀 GATHERING MODELS FROM: {', '.join(provider_names).upper()}")
+        print("="*60)
         
-        updated_models = self._merge_models(existing_models, new_anthropic_models)
+        all_new_models = []
+        provider_counts = {}
+        
+        for provider_name in provider_names:
+            gatherer_class = self.gatherers[provider_name]
+            try:
+                print(f"\n🔍 Gathering {provider_name.upper()} models...")
+                gatherer = gatherer_class()
+                models = gatherer.gather_models()
+                all_new_models.extend(models)
+                provider_counts[provider_name] = len(models)
+                print(f"✅ {provider_name.upper()}: {len(models)} models")
+                
+            except Exception as e:
+                print(f"❌ {provider_name.upper()} failed: {e}")
+                provider_counts[provider_name] = 0
+        
+        updated_models = self._merge_models(existing_models, all_new_models)
         self._save_models(updated_models)
         self._report_changes(existing_models, updated_models, backup_path)
     
-    def update_openai_models(self):
-        """Update models.json with latest OpenAI models only"""
-        backup_path = self._create_backup()
-        existing_models = self._load_existing_models()
-        
-        print("\n" + "="*60)
-        gatherer = OpenAIGatherer()
-        new_openai_models = gatherer.gather_models()
-        
-        updated_models = self._merge_models(existing_models, new_openai_models)
-        self._save_models(updated_models)
-        self._report_changes(existing_models, updated_models, backup_path)
+    def update_single_provider(self, provider_name: str):
+        """Update models.json with single provider"""
+        self.update_specific_providers([provider_name])
     
     def _create_backup(self) -> str:
         """Create backup of existing models.json"""
@@ -157,7 +204,7 @@ class ModelUpdater:
         for provider, stats in changes.items():
             print(f"   {provider.upper()}:")
             print(f"     ➕ Added: {stats['added']} models")
-            print(f"     🔄 Updated: {stats['updated']} models")
+            print(f"     🔄 Updated: {stats['updated']} models") 
             print(f"     🚫 Retired: {stats['retired']} models")
         
         # Update metadata
@@ -232,13 +279,21 @@ class ModelUpdater:
         print(f"\n📋 CHANGE REPORT")
         print("="*50)
         
-        # New models
+        # New models by provider
         new_names = set(new_models.keys()) - set(old_models.keys())
         if new_names:
+            by_provider = {}
+            for name in new_names:
+                provider = new_models[name].get('provider', 'unknown')
+                if provider not in by_provider:
+                    by_provider[provider] = []
+                by_provider[provider].append(name)
+            
             print(f"\n➕ NEW MODELS ({len(new_names)}):")
-            for name in sorted(new_names):
-                model = new_models[name]
-                print(f"   • {name} ({model.get('provider', 'unknown')})")
+            for provider, models in sorted(by_provider.items()):
+                print(f"   {provider.upper()} ({len(models)}):")
+                for model in sorted(models):
+                    print(f"     • {model}")
         
         # Updated models
         updated_names = []
@@ -249,7 +304,8 @@ class ModelUpdater:
         if updated_names:
             print(f"\n🔄 UPDATED MODELS ({len(updated_names)}):")
             for name in sorted(updated_names):
-                print(f"   • {name}")
+                provider = new_models[name].get('provider', 'unknown')
+                print(f"   • {name} ({provider})")
         
         # Retired models
         retired_names = []
@@ -262,20 +318,21 @@ class ModelUpdater:
         if retired_names:
             print(f"\n🚫 RETIRED MODELS ({len(retired_names)}):")
             for name in sorted(retired_names):
-                print(f"   • {name}")
+                provider = new_models[name].get('provider', 'unknown')
+                print(f"   • {name} ({provider})")
         
         print(f"\n✅ Update completed successfully!")
         if backup_path:
             print(f"   Backup available at: {backup_path}")
         print(f"   Total models: {len(new_models)}")
         
-        # Provider summary
+        # Final provider summary
         providers = {}
         for model in new_models.values():
             provider = model.get("provider", "unknown")
             providers[provider] = providers.get(provider, 0) + 1
         
-        print(f"   Providers: {dict(providers)}")
+        print(f"   Provider distribution: {dict(sorted(providers.items()))}")
 
 
 if __name__ == "__main__":
@@ -284,16 +341,12 @@ if __name__ == "__main__":
     updater = ModelUpdater()
     
     if len(sys.argv) > 1:
-        provider = sys.argv[1].lower()
-        if provider == "anthropic":
-            updater.update_anthropic_models()
-        elif provider == "openai":
-            updater.update_openai_models()
-        elif provider == "all":
+        if sys.argv[1].lower() == "all":
             updater.update_all_models()
         else:
-            print(f"Unknown provider: {provider}")
-            print("Usage: python update_models.py [anthropic|openai|all]")
+            # Support multiple providers: python update_models.py google meta xai
+            providers = [p.lower() for p in sys.argv[1:]]
+            updater.update_specific_providers(providers)
     else:
         # Default to all providers
         updater.update_all_models()
