@@ -7,15 +7,12 @@
     "implementationMethods": [
       "AdversarialRedTeam"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Cannot cover all attack vectors"
     ],
     "aliases": [
       "Adversarial Robustness Training"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "4"
@@ -29,11 +26,6 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [
-      "SOC2",
-      "ISO27001"
-    ],
-    "licence": null,
     "knownLimitations": [
       "Storage requirements",
       "Privacy concerns"
@@ -41,7 +33,6 @@
     "aliases": [
       "Safety Audit Trail"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "7"
     ]
@@ -55,8 +46,6 @@
       "EmbeddedClassifier",
       "RuleBased"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Cannot detect all forms of bias",
       "Definitions of bias vary culturally"
@@ -64,7 +53,6 @@
     "aliases": [
       "Training Data Debiasing"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "2"
     ]
@@ -78,17 +66,12 @@
       "EmbeddedClassifier",
       "ExternalSafetyService"
     ],
-    "governingStandards": [
-      "NCMEC"
-    ],
-    "licence": null,
     "knownLimitations": [
       "False positive rates not disclosed"
     ],
     "aliases": [
       "CSAM Filtering"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1"
     ]
@@ -101,8 +84,6 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Thresholds may be arbitrary",
       "Capabilities hard to measure precisely"
@@ -110,7 +91,6 @@
     "aliases": [
       "Capability Evaluation"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "10",
       "9"
@@ -168,10 +148,6 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [
-      "ISO 26000"
-    ],
-    "licence": null,
     "knownLimitations": [
       "May not cover proprietary methods",
       "Can become outdated"
@@ -183,20 +159,11 @@
       "Safety Testing Publication",
       "System Cards"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "7",
       "risk-capability-evaluation",
       "risk-harmful-content"
-    ],
-    "consolidation_metadata": {
-      "consolidation_date": "2025-08-06T22:19:18.671937",
-      "absorbed_techniques": [
-        "tech-safety-research",
-        "tech-safety-evaluation-publication"
-      ],
-      "original_description": "Detailed public documentation of safety measures and evaluations"
-    }
+    ]
   },
   {
     "id": "tech-configurable-policies",
@@ -206,29 +173,19 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Requires user expertise"
     ],
     "aliases": [
       "Custom Training Safety"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "2",
       "3",
       "4",
       "5"
-    ],
-    "consolidation_metadata": {
-      "consolidation_date": "2025-08-06T22:19:18.672942",
-      "absorbed_techniques": [
-        "tech-fine-tuning-safety"
-      ],
-      "original_description": "User or admin configurable safety thresholds and policies"
-    }
+    ]
   },
   {
     "id": "tech-constitutional-ai",
@@ -239,8 +196,6 @@
       "EmbeddedClassifier",
       "RetrievalAugmentation"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Requires careful principle design",
       "May be overly conservative"
@@ -249,7 +204,6 @@
       "CAI",
       "Constitutional AI"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "10",
@@ -266,8 +220,6 @@
       "EmbeddedClassifier",
       "RetrievalAugmentation"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Complex contexts challenging"
     ],
@@ -276,19 +228,11 @@
       "Contextual Safety",
       "Platform-Aware Safety"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "2",
       "5"
-    ],
-    "consolidation_metadata": {
-      "consolidation_date": "2025-08-06T22:19:18.674938",
-      "absorbed_techniques": [
-        "tech-platform-context-safety"
-      ],
-      "original_description": "Context-aware safety evaluation considering conversation history"
-    }
+    ]
   },
   {
     "id": "tech-copyright-filtering",
@@ -299,10 +243,6 @@
       "RuleBased",
       "EmbeddedClassifier"
     ],
-    "governingStandards": [
-      "DMCA"
-    ],
-    "licence": null,
     "knownLimitations": [
       "Difficult to detect all copyrighted content",
       "May remove fair use content"
@@ -310,7 +250,6 @@
     "aliases": [
       "Copyright Protection"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "6"
     ]
@@ -364,14 +303,7 @@
       "Government Reporting",
       "Official Oversight",
       "Regulatory Compliance"
-    ],
-    "consolidation_metadata": {
-      "consolidation_date": "2025-08-06T22:19:18.677939",
-      "absorbed_techniques": [
-        "tech-regulatory-compliance"
-      ],
-      "original_description": "Compliance mechanisms and reporting structures for meeting government regulatory requirements and oversight"
-    }
+    ]
   },
   {
     "id": "tech-incident-reporting",
@@ -381,8 +313,6 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Depends on reporting culture"
     ],
@@ -391,7 +321,6 @@
       "Independent Review Coordination",
       "Third-party Audit Management"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "2",
@@ -400,14 +329,7 @@
       "5",
       "risk-capability-evaluation",
       "risk-governance"
-    ],
-    "consolidation_metadata": {
-      "consolidation_date": "2025-08-06T22:19:18.679941",
-      "absorbed_techniques": [
-        "tech-external-audit-coordination"
-      ],
-      "original_description": "Formal systems for reporting and tracking safety incidents"
-    }
+    ]
   },
   {
     "id": "tech-safety-advisory",
@@ -417,15 +339,12 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Advisory only, not binding"
     ],
     "aliases": [
       "Safety Board"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "10",
@@ -448,8 +367,6 @@
       "EmbeddedClassifier",
       "ExternalSafetyService"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "May block benign content",
       "Context-dependent risks hard to catch"
@@ -458,7 +375,6 @@
       "Input Filtering",
       "Prompt Classification"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "4",
@@ -473,10 +389,6 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [
-      "Model Cards Framework"
-    ],
-    "licence": null,
     "knownLimitations": [
       "May not cover all aspects"
     ],
@@ -489,21 +401,12 @@
       "Performance Transparency",
       "Training Data Transparency"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "7",
       "risk-bias-fairness",
       "risk-capability-evaluation",
       "risk-transparency"
-    ],
-    "consolidation_metadata": {
-      "consolidation_date": "2025-08-06T22:19:18.680940",
-      "absorbed_techniques": [
-        "tech-training-data-disclosure",
-        "tech-performance-disclosure"
-      ],
-      "original_description": "Standardized documentation of model capabilities and limitations"
-    }
+    ]
   },
   {
     "id": "tech-multistage-pipeline",
@@ -513,14 +416,11 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Increased complexity",
       "Potential for conflicts"
     ],
     "aliases": [],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "2",
@@ -568,8 +468,6 @@
       "ExternalSafetyService",
       "RuleBased"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "May alter intended meaning",
       "Can be overly restrictive"
@@ -577,7 +475,6 @@
     "aliases": [
       "Output Moderation"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "2",
@@ -595,11 +492,6 @@
       "RuleBased",
       "EmbeddedClassifier"
     ],
-    "governingStandards": [
-      "GDPR",
-      "CCPA"
-    ],
-    "licence": null,
     "knownLimitations": [
       "Context-dependent PII hard to catch"
     ],
@@ -608,17 +500,9 @@
       "PII Redaction",
       "Personal Data Removal"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "3"
-    ],
-    "consolidation_metadata": {
-      "consolidation_date": "2025-08-06T22:19:18.682940",
-      "absorbed_techniques": [
-        "tech-pii-reduction"
-      ],
-      "original_description": "Real-time detection and redaction of personal information"
-    }
+    ]
   },
   {
     "id": "tech-policy-documentation",
@@ -628,13 +512,10 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "May be high-level"
     ],
     "aliases": [],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "7"
     ]
@@ -648,8 +529,6 @@
       "RuleBased",
       "EmbeddedClassifier"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Evolving attack vectors",
       "May restrict legitimate use cases"
@@ -657,7 +536,6 @@
     "aliases": [
       "Injection Defense"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "4"
     ]
@@ -686,8 +564,6 @@
       "ExternalSafetyService",
       "EmbeddedClassifier"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Latency impact",
       "May miss context"
@@ -695,21 +571,13 @@
     "aliases": [
       "Live Safety Monitoring"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "2",
       "3",
       "4",
       "5"
-    ],
-    "consolidation_metadata": {
-      "consolidation_date": "2025-08-06T22:19:18.686939",
-      "absorbed_techniques": [
-        "tech-usage-monitoring"
-      ],
-      "original_description": "Live monitoring of model outputs for safety violations"
-    }
+    ]
   },
   {
     "id": "tech-red-team-data",
@@ -720,15 +588,10 @@
       "AdversarialRedTeam",
       "HumanModeration"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Limited by red team scope"
     ],
     "aliases": [],
-    "requiredTechniqueIds": [
-      "tech-red-teaming"
-    ],
     "riskAreaIds": [
       "1",
       "2",
@@ -745,8 +608,6 @@
       "HumanModeration",
       "AdversarialRedTeam"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Limited by red team expertise",
       "Cannot test all scenarios"
@@ -755,7 +616,6 @@
       "Adversarial Testing",
       "Red Teaming"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "10",
@@ -776,8 +636,6 @@
       "HumanModeration",
       "EmbeddedClassifier"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Subject to annotator biases",
       "Expensive to scale"
@@ -785,7 +643,6 @@
     "aliases": [
       "RLHF"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "2",
@@ -829,17 +686,12 @@
       "EmbeddedClassifier",
       "HumanModeration"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "May conflict with capability objectives",
       "Hard to balance multiple safety goals"
     ],
     "aliases": [
       "Safety RM"
-    ],
-    "requiredTechniqueIds": [
-      "tech-rlhf"
     ],
     "riskAreaIds": [
       "1",
@@ -856,8 +708,6 @@
       "RuleBased",
       "EmbeddedClassifier"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "May introduce demographic biases"
     ],
@@ -865,7 +715,6 @@
       "Data Curation",
       "Dataset Cleaning"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "1",
       "2",
@@ -880,8 +729,6 @@
     "implementationMethods": [
       "Other"
     ],
-    "governingStandards": [],
-    "licence": null,
     "knownLimitations": [
       "Can be removed or spoofed"
     ],
@@ -889,7 +736,6 @@
       "AI Watermarking",
       "SynthID"
     ],
-    "requiredTechniqueIds": [],
     "riskAreaIds": [
       "5",
       "7"
@@ -978,14 +824,7 @@
       "Public Participation",
       "Stakeholder Consultation",
       "University Collaborations"
-    ],
-    "consolidation_metadata": {
-      "consolidation_date": "2025-08-06T22:19:18.694939",
-      "absorbed_techniques": [
-        "tech-academic-partnerships"
-      ],
-      "original_description": "Formal processes for engaging with stakeholders, communities, and affected parties in safety decisions"
-    }
+    ]
   },
   {
     "id": "tech-privacy-impact-assessment",
