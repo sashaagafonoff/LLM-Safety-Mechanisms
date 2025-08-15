@@ -14,8 +14,8 @@
       "Adversarial Robustness Training"
     ],
     "riskAreaIds": [
-      "1",
-      "4"
+      "harmful_content",
+      "security_and_misuse"
     ]
   },
   {
@@ -34,7 +34,7 @@
       "Safety Audit Trail"
     ],
     "riskAreaIds": [
-      "7"
+      "transparency"
     ]
   },
   {
@@ -54,7 +54,7 @@
       "Training Data Debiasing"
     ],
     "riskAreaIds": [
-      "2"
+      "bias_and_fairness"
     ]
   },
   {
@@ -73,7 +73,7 @@
       "CSAM Filtering"
     ],
     "riskAreaIds": [
-      "1"
+      "harmful_content"
     ]
   },
   {
@@ -92,8 +92,8 @@
       "Capability Evaluation"
     ],
     "riskAreaIds": [
-      "10",
-      "9"
+      "autonomy_and_control",
+      "dual_use"
     ]
   },
   {
@@ -102,9 +102,9 @@
     "categoryId": "cat-governance",
     "description": "Mechanisms for collecting, analyzing, and incorporating feedback from user communities and stakeholders to improve safety and alignment",
     "riskAreaIds": [
-      "1",
-      "2",
-      "4"
+      "harmful_content",
+      "bias_and_fairness",
+      "security_and_misuse"
     ],
     "aliases": [
       "User Feedback",
@@ -118,7 +118,7 @@
     "categoryId": "cat-governance",
     "description": "Governance structures involving community participation in safety oversight, policy development, and incident response",
     "riskAreaIds": [
-      "4"
+      "security_and_misuse"
     ],
     "aliases": [
       "Participatory Governance",
@@ -132,7 +132,7 @@
     "categoryId": "cat-evaluation",
     "description": "Evaluation processes that leverage community expertise and distributed testing for comprehensive safety assessment",
     "riskAreaIds": [
-      "2"
+      "bias_and_fairness"
     ],
     "aliases": [
       "Crowdsourced Testing",
@@ -160,9 +160,9 @@
       "System Cards"
     ],
     "riskAreaIds": [
-      "7",
-      "risk-capability-evaluation",
-      "risk-harmful-content"
+      "transparency",
+      "security_and_misuse",
+      "harmful_content"
     ]
   },
   {
@@ -180,11 +180,11 @@
       "Custom Training Safety"
     ],
     "riskAreaIds": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
+      "harmful_content",
+      "bias_and_fairness",
+      "privacy_and_pii",
+      "security_and_misuse",
+      "misinformation"
     ]
   },
   {
@@ -205,10 +205,10 @@
       "Constitutional AI"
     ],
     "riskAreaIds": [
-      "1",
-      "10",
-      "2",
-      "5"
+      "harmful_content",
+      "autonomy_and_control",
+      "bias_and_fairness",
+      "misinformation"
     ]
   },
   {
@@ -229,9 +229,9 @@
       "Platform-Aware Safety"
     ],
     "riskAreaIds": [
-      "1",
-      "2",
-      "5"
+      "harmful_content",
+      "bias_and_fairness",
+      "misinformation"
     ]
   },
   {
@@ -251,7 +251,7 @@
       "Copyright Protection"
     ],
     "riskAreaIds": [
-      "6"
+      "copyright_and_ip"
     ]
   },
   {
@@ -260,7 +260,7 @@
     "categoryId": "cat-governance",
     "description": "Technical and policy controls ensuring data processing and model deployment comply with regional sovereignty requirements",
     "riskAreaIds": [
-      "3"
+      "privacy_and_pii"
     ],
     "aliases": [
       "Regional Compliance",
@@ -274,7 +274,7 @@
     "categoryId": "cat-governance",
     "description": "Safety mechanisms and protocols specifically designed for enterprise deployment environments and integration workflows",
     "riskAreaIds": [
-      "4"
+      "security_and_misuse"
     ],
     "aliases": [
       "Business Integration",
@@ -288,16 +288,16 @@
     "categoryId": "cat-governance",
     "description": "Comprehensive compliance mechanisms and reporting structures for meeting government regulatory requirements, regulatory frameworks, and official oversight across all applicable jurisdictions",
     "riskAreaIds": [
-      "1",
-      "10",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9"
+      "harmful_content",
+      "autonomy_and_control",
+      "bias_and_fairness",
+      "privacy_and_pii",
+      "security_and_misuse",
+      "misinformation",
+      "copyright_and_ip",
+      "transparency",
+      "environmental",
+      "dual_use"
     ],
     "aliases": [
       "Government Reporting",
@@ -322,13 +322,12 @@
       "Third-party Audit Management"
     ],
     "riskAreaIds": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "risk-capability-evaluation",
-      "risk-governance"
+      "harmful_content",
+      "bias_and_fairness",
+      "privacy_and_pii",
+      "security_and_misuse",
+      "misinformation",
+      "transparency"
     ]
   },
   {
@@ -346,16 +345,16 @@
       "Safety Board"
     ],
     "riskAreaIds": [
-      "1",
-      "10",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9"
+      "harmful_content",
+      "autonomy_and_control",
+      "bias_and_fairness",
+      "privacy_and_pii",
+      "security_and_misuse",
+      "misinformation",
+      "copyright_and_ip",
+      "transparency",
+      "environmental",
+      "dual_use"
     ]
   },
   {
@@ -376,9 +375,9 @@
       "Prompt Classification"
     ],
     "riskAreaIds": [
-      "1",
-      "4",
-      "5"
+      "harmful_content",
+      "security_and_misuse",
+      "misinformation"
     ]
   },
   {
@@ -402,10 +401,9 @@
       "Training Data Transparency"
     ],
     "riskAreaIds": [
-      "7",
-      "risk-bias-fairness",
-      "risk-capability-evaluation",
-      "risk-transparency"
+      "transparency",
+      "bias_and_fairness",
+      "security_and_misuse"
     ]
   },
   {
@@ -422,11 +420,11 @@
     ],
     "aliases": [],
     "riskAreaIds": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
+      "harmful_content",
+      "bias_and_fairness",
+      "privacy_and_pii",
+      "security_and_misuse",
+      "misinformation"
     ]
   },
   {
@@ -435,8 +433,8 @@
     "categoryId": "cat-alignment",
     "description": "Safety alignment techniques specifically designed for multimodal models handling text, images, audio, and video content",
     "riskAreaIds": [
-      "1",
-      "2"
+      "harmful_content",
+      "bias_and_fairness"
     ],
     "aliases": [
       "Cross-Modal Safety",
@@ -450,7 +448,7 @@
     "categoryId": "cat-transparency",
     "description": "Development and provision of open-source tools, libraries, and frameworks for safety evaluation and implementation",
     "riskAreaIds": [
-      "7"
+      "transparency"
     ],
     "aliases": [
       "Open Source Libraries",
@@ -476,11 +474,11 @@
       "Output Moderation"
     ],
     "riskAreaIds": [
-      "1",
-      "2",
-      "3",
-      "5",
-      "6"
+      "harmful_content",
+      "bias_and_fairness",
+      "privacy_and_pii",
+      "misinformation",
+      "copyright_and_ip"
     ]
   },
   {
@@ -501,7 +499,7 @@
       "Personal Data Removal"
     ],
     "riskAreaIds": [
-      "3"
+      "privacy_and_pii"
     ]
   },
   {
@@ -517,7 +515,7 @@
     ],
     "aliases": [],
     "riskAreaIds": [
-      "7"
+      "transparency"
     ]
   },
   {
@@ -537,7 +535,7 @@
       "Injection Defense"
     ],
     "riskAreaIds": [
-      "4"
+      "security_and_misuse"
     ]
   },
   {
@@ -546,8 +544,8 @@
     "categoryId": "cat-runtime-safety",
     "description": "Dynamic fact-checking systems that verify information accuracy in real-time during model inference",
     "riskAreaIds": [
-      "1",
-      "5"
+      "harmful_content",
+      "misinformation"
     ],
     "aliases": [
       "Live Fact Verification",
@@ -572,11 +570,11 @@
       "Live Safety Monitoring"
     ],
     "riskAreaIds": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
+      "harmful_content",
+      "bias_and_fairness",
+      "privacy_and_pii",
+      "security_and_misuse",
+      "misinformation"
     ]
   },
   {
@@ -593,10 +591,10 @@
     ],
     "aliases": [],
     "riskAreaIds": [
-      "1",
-      "2",
-      "4",
-      "5"
+      "harmful_content",
+      "bias_and_fairness",
+      "security_and_misuse",
+      "misinformation"
     ]
   },
   {
@@ -617,14 +615,14 @@
       "Red Teaming"
     ],
     "riskAreaIds": [
-      "1",
-      "10",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "9"
+      "harmful_content",
+      "autonomy_and_control",
+      "bias_and_fairness",
+      "privacy_and_pii",
+      "security_and_misuse",
+      "misinformation",
+      "copyright_and_ip",
+      "dual_use"
     ]
   },
   {
@@ -644,9 +642,9 @@
       "RLHF"
     ],
     "riskAreaIds": [
-      "1",
-      "2",
-      "5"
+      "harmful_content",
+      "bias_and_fairness",
+      "misinformation"
     ]
   },
   {
@@ -655,7 +653,7 @@
     "categoryId": "cat-governance",
     "description": "Structured processes for staged, monitored release of AI systems with safety checkpoints and rollback capabilities",
     "riskAreaIds": [
-      "4"
+      "security_and_misuse"
     ],
     "aliases": [
       "Staged Release",
@@ -669,7 +667,7 @@
     "categoryId": "cat-evaluation",
     "description": "Standardized benchmarks and evaluation suites for measuring and comparing safety performance across models",
     "riskAreaIds": [
-      "1"
+      "harmful_content"
     ],
     "aliases": [
       "Safety Evaluation",
@@ -694,9 +692,9 @@
       "Safety RM"
     ],
     "riskAreaIds": [
-      "1",
-      "2",
-      "5"
+      "harmful_content",
+      "bias_and_fairness",
+      "misinformation"
     ]
   },
   {
@@ -716,9 +714,9 @@
       "Dataset Cleaning"
     ],
     "riskAreaIds": [
-      "1",
-      "2",
-      "6"
+      "harmful_content",
+      "bias_and_fairness",
+      "copyright_and_ip"
     ]
   },
   {
@@ -737,8 +735,8 @@
       "SynthID"
     ],
     "riskAreaIds": [
-      "5",
-      "7"
+      "misinformation",
+      "transparency"
     ]
   },
   {
@@ -747,7 +745,7 @@
     "categoryId": "cat-transparency",
     "description": "Documentation of computational resources used for model training including hardware, energy consumption, and environmental impact",
     "riskAreaIds": [
-      "risk-transparency"
+      "transparency"
     ],
     "aliases": [
       "Compute Transparency",
@@ -761,8 +759,8 @@
     "categoryId": "cat-governance",
     "description": "Documentation of access control policies, authentication methods, and usage restrictions",
     "riskAreaIds": [
-      "risk-governance",
-      "risk-security-misuse"
+      "transparency",
+      "security_and_misuse"
     ],
     "aliases": [
       "Access Policy Documentation",
@@ -776,8 +774,8 @@
     "categoryId": "cat-privacy-security",
     "description": "Policies and procedures for data retention, deletion, and lifecycle management",
     "riskAreaIds": [
-      "risk-governance",
-      "risk-privacy-pii"
+      "transparency",
+      "privacy_and_pii"
     ],
     "aliases": [
       "Data Lifecycle Management",
@@ -791,8 +789,8 @@
     "categoryId": "cat-governance",
     "description": "Systematic protocols for model updates, versioning, and change management",
     "riskAreaIds": [
-      "risk-capability-evaluation",
-      "risk-governance"
+      "security_and_misuse",
+      "transparency"
     ],
     "aliases": [
       "Version Control",
@@ -806,18 +804,16 @@
     "categoryId": "cat-governance",
     "description": "Formal processes for engaging with stakeholders, communities, academic institutions, and affected parties in safety decisions and research collaborations",
     "riskAreaIds": [
-      "1",
-      "10",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "risk-bias-fairness",
-      "risk-governance"
+      "harmful_content",
+      "autonomy_and_control",
+      "bias_and_fairness",
+      "privacy_and_pii",
+      "security_and_misuse",
+      "misinformation",
+      "copyright_and_ip",
+      "transparency",
+      "environmental",
+      "dual_use"
     ],
     "aliases": [
       "Community Engagement",
@@ -832,8 +828,8 @@
     "categoryId": "cat-privacy-security",
     "description": "Systematic assessment of privacy risks and impacts throughout the model lifecycle",
     "riskAreaIds": [
-      "risk-governance",
-      "risk-privacy-pii"
+      "transparency",
+      "privacy_and_pii"
     ],
     "aliases": [
       "Privacy Risk Assessment",
@@ -847,9 +843,9 @@
     "categoryId": "cat-evaluation",
     "description": "Assessment of broader societal and ethical impacts of algorithmic systems",
     "riskAreaIds": [
-      "risk-bias-fairness",
-      "risk-governance",
-      "risk-harmful-content"
+      "bias_and_fairness",
+      "transparency",
+      "harmful_content"
     ],
     "aliases": [
       "AIA",
@@ -863,8 +859,8 @@
     "categoryId": "cat-runtime-safety",
     "description": "Real-time risk assessment that adapts to changing contexts and usage patterns",
     "riskAreaIds": [
-      "risk-harmful-content",
-      "risk-security-misuse"
+      "harmful_content",
+      "security_and_misuse"
     ],
     "aliases": [
       "Adaptive Risk Assessment",
