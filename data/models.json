@@ -9,7 +9,8 @@
         "text-generation",
         "conversation",
         "code-generation"
-      ]
+      ],
+      "version": ""
     },
     {
       "name": "qwen-14b",
@@ -20,7 +21,8 @@
         "text-generation",
         "conversation",
         "code-generation"
-      ]
+      ],
+      "version": ""
     },
     {
       "name": "qwen-72b",
@@ -31,1172 +33,571 @@
         "text-generation",
         "conversation",
         "code-generation"
-      ]
+      ],
+      "version": ""
     },
     {
-      "name": "amazon-nova-micro",
+      "name": "titan",
       "provider": "amazon",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:30.337794",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "conversation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation"
+      ],
+      "version": ""
     },
     {
-      "name": "amazon-nova-lite",
+      "name": "titan-express",
       "provider": "amazon",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:30.337794",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "conversation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation"
+      ],
+      "version": ""
     },
     {
-      "name": "amazon-nova-pro",
+      "name": "titan-lite",
       "provider": "amazon",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:30.337794",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "conversation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation"
+      ],
+      "version": ""
     },
     {
-      "name": "amazon-nova-premier",
-      "provider": "amazon",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:30.337794",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "multimodal"
-      ]
-    },
-    {
-      "name": "claude-opus-4.1",
+      "name": "claude-2",
       "provider": "anthropic",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:31.136990",
-      "context_window": 200000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation",
-        "complex-reasoning",
-        "creative-writing",
         "code-generation",
-        "multimodal"
+        "analysis"
       ],
-      "description": "Claude Opus 4.1Our most powerful and capable model  200k context window Superior reasoning capabilities."
+      "version": ""
+    },
+    {
+      "name": "claude-2.1",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "analysis"
+      ],
+      "version": ""
+    },
+    {
+      "name": "claude-3-haiku",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "analysis"
+      ],
+      "version": "claude-3-haiku-20240307"
+    },
+    {
+      "name": "claude-3-sonnet",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "analysis"
+      ],
+      "version": "claude-3-sonnet-20240229"
+    },
+    {
+      "name": "claude-3-opus",
+      "provider": "anthropic",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "analysis"
+      ],
+      "version": "claude-3-opus-20240229"
     },
     {
       "name": "claude-3-5-sonnet",
       "provider": "anthropic",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:31.136990",
-      "context_window": 200000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation",
-        "balanced-performance",
         "code-generation",
-        "multimodal"
-      ]
-    },
-    {
-      "name": "claude-3.5-sonnet",
-      "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.136990",
-      "context_window": 200000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "balanced-performance",
-        "code-generation",
-        "multimodal"
-      ]
-    },
-    {
-      "name": "claude-3.5-haiku",
-      "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.136990",
-      "context_window": 200000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "fast-response",
-        "simple-tasks",
-        "multimodal"
-      ]
-    },
-    {
-      "name": "claude-sonnet-4.0",
-      "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.136990",
-      "context_window": 200000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "balanced-performance",
-        "code-generation",
-        "multimodal"
+        "analysis"
       ],
-      "description": "While aliases are useful for experimentation, we recommend using specific model versions (e."
-    },
-    {
-      "name": "claude-opus-4.0",
-      "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.136990",
-      "context_window": 200000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "complex-reasoning",
-        "creative-writing",
-        "code-generation",
-        "multimodal"
-      ]
+      "version": "claude-3-5-sonnet-20241022"
     },
     {
       "name": "claude-3-5-haiku",
       "provider": "anthropic",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:31.136990",
-      "context_window": 200000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation",
-        "fast-response",
-        "simple-tasks",
-        "multimodal"
-      ]
-    },
-    {
-      "name": "claude-3.7-sonnet",
-      "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.136990",
-      "context_window": 200000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "balanced-performance",
         "code-generation",
-        "multimodal"
-      ]
+        "analysis"
+      ],
+      "version": "claude-3-5-haiku-20241022"
     },
     {
-      "name": "claude-3-7-sonnet",
+      "name": "claude-instant",
       "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.136990",
-      "context_window": 200000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "balanced-performance",
-        "code-generation",
-        "multimodal"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-VL-424B-A47B-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
+      "status": "deprecated",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-VL-28B-A3B-Base-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-VL-424B-A47B-Base-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "ernie-45-6861cd4c9be84540645f35c9",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352"
-    },
-    {
-      "name": "ERNIE-4.5-VL-424B-A47B-Base-Paddle",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-300B-A47B-Base-Paddle",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-300B-A47B-Base-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "simple_ernie_bot_demo",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352"
-    },
-    {
-      "name": "ernie_4.5_turbo_demo",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352"
-    },
-    {
-      "name": "ERNIE-4.5-VL-28B-A3B-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-0.3B-Base-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-0.3B-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-300B-A47B-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-21B-A3B-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "ERNIE-4.5-21B-A3B-Base-PT",
-      "provider": "baidu",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:31.670352",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ]
-    },
-    {
-      "name": "command-r-plus",
-      "provider": "cohere",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:32.298535",
-      "context_window": 256000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "complex-reasoning",
-        "rag-optimized",
-        "tool-use"
       ],
-      "description": "command-r-plus is an alias for command-r-plus-04-2024, so if you use command-r-plus in the API, that’s the model you’re pointing to."
-    },
-    {
-      "name": "command-r",
-      "provider": "cohere",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:32.298535",
-      "context_window": 256000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "rag-optimized",
-        "tool-use"
-      ],
-      "description": "command-r7b-12-2024 is a small, fast update delivered in December 2024."
-    },
-    {
-      "name": "command-light",
-      "provider": "cohere",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:32.298535",
-      "context_window": 256000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "fast-response",
-        "cost-effective"
-      ],
-      "description": "To reduce the time between major releases, we put out nightly versions of command models."
+      "version": ""
     },
     {
       "name": "command",
       "provider": "cohere",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:32.298535",
-      "context_window": 256000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation"
       ],
-      "description": "An Overview of Cohere's Models | Cohere."
+      "version": ""
     },
     {
-      "name": "gemini-2.0-flash-preview-image-generation",
-      "provider": "google",
+      "name": "command-light",
+      "provider": "cohere",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
+        "conversation"
       ],
-      "description": "Gemini 2.0 Flash Preview Image Generation gemini-2.0-flash-preview-image-generation."
+      "version": ""
     },
     {
-      "name": "gemini-2.0-flash-exp-image-generation",
-      "provider": "google",
+      "name": "command-r",
+      "provider": "cohere",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-2.5-pro-preview-03-25",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ]
-    },
-    {
-      "name": "gemini-2.5-pro-preview-06-05",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
+        "retrieval"
       ],
-      "description": "To specify a preview version, use the following pattern: <model>-<generation>-<variation>-<version>."
+      "version": ""
     },
     {
-      "name": "gemini-2.5-flash",
-      "provider": "google",
+      "name": "command-r-plus",
+      "provider": "cohere",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
+        "retrieval"
       ],
-      "description": "models/gemini-2.5-flash."
+      "version": ""
     },
     {
-      "name": "gemini-1.5-pro-exp-0801",
+      "name": "gemini-1.0-pro",
       "provider": "google",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 2000000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ]
-    },
-    {
-      "name": "gemini-2.0-flash-live-001",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
+        "code-generation"
       ],
-      "description": "models/gemini-2.0-flash-live-001."
-    },
-    {
-      "name": "gemini-1.5-flash-8b-latest",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "Latest: gemini-1.5-flash-8b-latest."
-    },
-    {
-      "name": "gemini-2.5-flash-exp-native-audio-thinking-dialog",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "models/gemini-2.5-flash-exp-native-audio-thinking-dialog."
-    },
-    {
-      "name": "gemini-2.0-flash",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "gemini-2.0-flash-preview-image-generation."
-    },
-    {
-      "name": "gemini-1.5-flash-001",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-2.0-flash-exp",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "gemini-2.0-flash-exp-image-generation."
-    },
-    {
-      "name": "gemini-2.5-flash-preview-tts",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "models/gemini-2.5-flash-preview-tts."
-    },
-    {
-      "name": "gemini-2.5-pro-preview-tts",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ],
-      "description": "models/gemini-2.5-pro-preview-tts."
-    },
-    {
-      "name": "gemini-1.5-flash-002",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-2.5-pro",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ],
-      "description": "models/gemini-2.5-pro-preview-tts."
-    },
-    {
-      "name": "gemini-2.0-flash-lite",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "models/gemini-2.0-flash-lite."
-    },
-    {
-      "name": "gemini-2.0-flash-thinking-exp-1219",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-1.5-pro-latest",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 2000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ],
-      "description": "Latest: gemini-1.5-pro-latest."
-    },
-    {
-      "name": "gemini-2.5-flash-lite",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "models/gemini-2.5-flash-lite."
-    },
-    {
-      "name": "gemini-2.5-flash-preview-native-audio-dialog",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "models/gemini-2.5-flash-preview-native-audio-dialog."
-    },
-    {
-      "name": "gemini-1.5-flash-8b-exp-0924",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-1.5-flash-8b-001",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-2.0-pro-exp-02-05",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ],
-      "description": "To specify an experimental version, use the following pattern: <model>-<generation>-<variation>-<version>."
+      "version": "gemini-1.0-pro-002"
     },
     {
       "name": "gemini-1.5-flash",
       "provider": "google",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
+        "code-generation",
+        "multimodal"
       ],
-      "description": "models/gemini-1.5-flash."
-    },
-    {
-      "name": "gemini-2.0-flash-lite-001",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-2.0-flash-001",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "To specify a stable version, use the following pattern: <model>-<generation>-<variation>-<version>."
-    },
-    {
-      "name": "gemini-1.5-flash-latest",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ],
-      "description": "Latest: gemini-1.5-flash-latest."
-    },
-    {
-      "name": "gemini-2.5-flash-preview-04-17",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-2.5-flash-lite-06-17",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
+      "version": "gemini-1.5-flash-8b-exp-0924"
     },
     {
       "name": "gemini-1.5-pro",
       "provider": "google",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 2000000,
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
         "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
+        "code-generation",
+        "multimodal"
       ],
-      "description": "models/gemini-1.5-pro."
+      "version": "gemini-1.5-pro-exp-0827"
     },
     {
-      "name": "gemini-1.5-pro-001",
+      "name": "palm-2",
       "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 2000000,
+      "status": "deprecated",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ]
-    },
-    {
-      "name": "gemini-1.5-pro-exp-0827",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 2000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ]
-    },
-    {
-      "name": "gemini-1.5-pro-002",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 2000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ]
-    },
-    {
-      "name": "gemini-2.5-pro-preview-05-06",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "complex-reasoning",
-        "long-context"
-      ]
-    },
-    {
-      "name": "gemini-2.5-flash-preview-05-20",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-2.0-flash-thinking-exp-01-21",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-1.5-flash-8b-exp-0827",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
-      ]
-    },
-    {
-      "name": "gemini-1.5-flash-8b",
-      "provider": "google",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:33.158884",
-      "context_window": 1000000,
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal",
-        "fast-response",
-        "efficient"
+        "conversation"
       ],
-      "description": "models/gemini-1.5-flash-8b."
+      "version": ""
     },
     {
-      "name": "Meta-Llama-3-8B-Instruct",
-      "provider": "meta",
+      "name": "inflection-2.5",
+      "provider": "inflection",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation"
+      ],
+      "version": ""
     },
     {
-      "name": "Meta-Llama-3-70B-Instruct",
+      "name": "llama-2-7b",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation"
+      ],
+      "version": "llama-2-7b-chat"
     },
     {
-      "name": "llama-4-67f0c30d9fe03840bc9d0164",
+      "name": "llama-2-13b",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831"
-    },
-    {
-      "name": "Llama-4-Scout-17B-16E-Instruct",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation"
+      ],
+      "version": "llama-2-13b-chat"
     },
     {
-      "name": "Llama-4-Scout-17B-16E",
+      "name": "llama-2-70b",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation"
+      ],
+      "version": "llama-2-70b-chat"
     },
     {
-      "name": "Llama-4-Maverick-17B-128E-Instruct",
+      "name": "llama-3-8b",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation",
+        "code-generation"
+      ],
+      "version": "llama-3-8b-instruct"
     },
     {
-      "name": "Llama-4-Maverick-17B-128E-Instruct-FP8",
+      "name": "llama-3-70b",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation",
+        "code-generation"
+      ],
+      "version": "llama-3-70b-instruct"
     },
     {
-      "name": "llama-33-67531d5c405ec5d08a852000",
+      "name": "llama-3.1-8b",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831"
-    },
-    {
-      "name": "Llama-3.3-70B-Instruct",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation",
+        "code-generation"
+      ],
+      "version": "llama-3.1-8b-instruct"
     },
     {
-      "name": "Llama-4-Maverick-17B-128E-Instruct-Original",
+      "name": "llama-3.1-70b",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "code-generation",
-        "multimodal"
-      ]
+        "conversation",
+        "code-generation"
+      ],
+      "version": "llama-3.1-70b-instruct"
     },
     {
-      "name": "Llama-4-Maverick-17B-128E",
+      "name": "llama-3.1-405b",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:35.824831",
+      "last_updated": "2025-08-11T20:28:29.134966",
       "capabilities": [
         "text-generation",
-        "code-generation",
+        "conversation",
+        "code-generation"
+      ],
+      "version": "llama-3.1-405b-instruct"
+    },
+    {
+      "name": "llama-3.2-1b",
+      "provider": "meta",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation"
+      ],
+      "version": "llama-3.2-1b-instruct"
+    },
+    {
+      "name": "llama-3.2-3b",
+      "provider": "meta",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation"
+      ],
+      "version": "llama-3.2-3b-instruct"
+    },
+    {
+      "name": "llama-3.2-11b-vision",
+      "provider": "meta",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
         "multimodal"
-      ]
+      ],
+      "version": "llama-3.2-11b-vision-instruct"
+    },
+    {
+      "name": "llama-3.2-90b-vision",
+      "provider": "meta",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "multimodal"
+      ],
+      "version": "llama-3.2-90b-vision-instruct"
+    },
+    {
+      "name": "mistral-7b",
+      "provider": "mistral",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation"
+      ],
+      "version": ""
+    },
+    {
+      "name": "mixtral-8x7b",
+      "provider": "mistral",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation"
+      ],
+      "version": "mixtral-8x7b-instruct"
+    },
+    {
+      "name": "mixtral-8x22b",
+      "provider": "mistral",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation"
+      ],
+      "version": "mixtral-8x22b-instruct"
     },
     {
       "name": "mistral-small",
       "provider": "mistral",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:36.600439"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation"
+      ],
+      "version": "mistral-small-2409"
+    },
+    {
+      "name": "mistral-medium",
+      "provider": "mistral",
+      "status": "deprecated",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation"
+      ],
+      "version": ""
     },
     {
       "name": "mistral-large",
       "provider": "mistral",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:36.600439"
-    },
-    {
-      "name": "mistral-7b-instruct",
-      "provider": "mistral",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:36.600439"
-    },
-    {
-      "name": "codestral",
-      "provider": "mistral",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:36.600439"
-    },
-    {
-      "name": "Mistral-7B-v0.1",
-      "provider": "mistral",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:36.600439"
-    },
-    {
-      "name": "gpt-4o",
-      "provider": "openai",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:36.954564"
-    },
-    {
-      "name": "gpt-4o-mini",
-      "provider": "openai",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:36.954564"
-    },
-    {
-      "name": "gpt-4-turbo",
-      "provider": "openai",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:36.954564"
-    },
-    {
-      "name": "gpt-4",
-      "provider": "openai",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:36.954564"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation"
+      ],
+      "version": "mistral-large-2411"
     },
     {
       "name": "gpt-3.5-turbo",
       "provider": "openai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:36.954564"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation"
+      ],
+      "version": "gpt-3.5-turbo-0125"
     },
     {
-      "name": "grok-3131",
-      "provider": "x",
+      "name": "gpt-4",
+      "provider": "openai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:37.308087"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "analysis"
+      ],
+      "version": "gpt-4-0613"
     },
     {
-      "name": "grok-2-image",
-      "provider": "x",
+      "name": "gpt-4-32k",
+      "provider": "openai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:37.308087"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "analysis"
+      ],
+      "version": "gpt-4-32k-0613"
     },
     {
-      "name": "grok-3-mini",
-      "provider": "x",
+      "name": "gpt-4-turbo",
+      "provider": "openai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:37.308087"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "analysis",
+        "multimodal"
+      ],
+      "version": "gpt-4-turbo-2024-04-09"
     },
     {
-      "name": "grok-3-mini131",
-      "provider": "x",
+      "name": "gpt-4o",
+      "provider": "openai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:37.308087"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation",
+        "analysis",
+        "multimodal"
+      ],
+      "version": ""
     },
     {
-      "name": "grok-4",
-      "provider": "x",
+      "name": "gpt-4o-mini",
+      "provider": "openai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:37.308087"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation",
+        "code-generation"
+      ],
+      "version": ""
     },
     {
-      "name": "grok-3",
-      "provider": "x",
+      "name": "o1-preview",
+      "provider": "openai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:37.308087"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "reasoning",
+        "code-generation",
+        "analysis"
+      ],
+      "version": "o1-preview-2024-09-12"
     },
     {
-      "name": "grok-4-0709256",
-      "provider": "x",
+      "name": "o1-mini",
+      "provider": "openai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:37.308087"
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "reasoning",
+        "code-generation"
+      ],
+      "version": "o1-mini-2024-09-12"
+    },
+    {
+      "name": "ai21-jurassic-2",
+      "provider": "ai21",
+      "status": "active",
+      "last_updated": "2025-08-11T20:28:29.134966",
+      "capabilities": [
+        "text-generation",
+        "conversation"
+      ],
+      "version": ""
     }
-  ],
-  "last_updated": "2025-08-11T20:28:38.533558",
-  "total_models": 102,
-  "providers": [
-    "alibaba",
-    "amazon",
-    "anthropic",
-    "baidu",
-    "cohere",
-    "google",
-    "meta",
-    "mistral",
-    "openai",
-    "x"
   ]
 }
