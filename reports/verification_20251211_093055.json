@@ -1,0 +1,1192 @@
+{
+  "timestamp": "2025-12-11T09:30:55.519275",
+  "summary": {
+    "total_sources": 229,
+    "verified": 229,
+    "updated": 179,
+    "failed": 21
+  },
+  "failed_sources": [
+    {
+      "evidence_id": "ev-openai-0003",
+      "url": "https://openai.com/policies/usage-policies",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-openai-0015",
+      "url": "https://openai.com/policies/usage-policies",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-openai-0016",
+      "url": "https://openai.com/policies/usage-policies",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-openai-0022",
+      "url": "https://openai.com/index/our-approach-to-ai-safety",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-openai-0025",
+      "url": "https://openai.com/research",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-openai-0026",
+      "url": "https://openai.com/policies",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-google-0004",
+      "url": "https://blog.google/technology/ai/google-ai-act-preparation/",
+      "error": "HTTP 404"
+    },
+    {
+      "evidence_id": "ev-google-0020",
+      "url": "https://blog.google/technology/ai/google-ai-act-preparation/",
+      "error": "HTTP 404"
+    },
+    {
+      "evidence_id": "ev-google-0026",
+      "url": "https://blog.google/technology/ai/google-ai-act-preparation/",
+      "error": "HTTP 404"
+    },
+    {
+      "evidence_id": "ev-amazon-0023",
+      "url": "https://aws.amazon.com/machine-learning/ai-service-cards/",
+      "error": "HTTP 404"
+    },
+    {
+      "evidence_id": "ev-cohere-0018",
+      "url": "https://cohere.com/enterprise",
+      "error": "HTTP 404"
+    },
+    {
+      "evidence_id": "ev-cohere-0019",
+      "url": "https://cohere.com/enterprise",
+      "error": "HTTP 404"
+    },
+    {
+      "evidence_id": "ev-cohere-0022",
+      "url": "https://cohere.com/enterprise",
+      "error": "HTTP 404"
+    },
+    {
+      "evidence_id": "ev-mistral-0013",
+      "url": "https://mistral.ai/research",
+      "error": "HTTP 404"
+    },
+    {
+      "evidence_id": "ev-mistral-0016",
+      "url": "https://mistral.ai/research",
+      "error": "HTTP 404"
+    },
+    {
+      "evidence_id": "ev-x-constitutional-ai-001",
+      "url": "https://x.ai/news/grok-4",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-x-realtime-fact-check-002",
+      "url": "https://x.ai/news/grok-4",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-x-multimodal-safety-004",
+      "url": "https://x.ai/news/grok-4",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-x-input-classification-005",
+      "url": "https://help.x.com/en/rules-and-policies",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-x-output-filtering-006",
+      "url": "https://help.x.com/en/rules-and-policies",
+      "error": "HTTP 403"
+    },
+    {
+      "evidence_id": "ev-x-training-filtering-009",
+      "url": "https://x.ai/news/grok-4",
+      "error": "HTTP 403"
+    }
+  ],
+  "updated_sources": [
+    {
+      "evidence_id": "ev-anthropic-0002",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "828ab119ebb84441747e58f064065331f74d51361307d967b007911d6e0e82ef",
+      "new_hash": "e8613be09f6504430f6ab136244821856bcc85fa64d1366e918730a18bdc9a7a"
+    },
+    {
+      "evidence_id": "ev-google-0005",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-meta-0009",
+      "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+      "old_hash": "eb8c90feb97a4a0065972dfba8ca59964a016d5ee69d088728b086c808c7b98e",
+      "new_hash": "bab6877ae50430e4da48d96bdc1b94699a9bff1f7016312243497c4faece3f18"
+    },
+    {
+      "evidence_id": "ev-amazon-0010",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-sensitive-filters.html",
+      "old_hash": "78345f7d93b99083e289d59cf56d2c99eddef37d84d5fd7aba8b1337ffa927de",
+      "new_hash": "73a67b936595f89eca621dfdd178f11f337d94a349c40155341374cfc416a01b"
+    },
+    {
+      "evidence_id": "ev-amazon-0011",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "old_hash": "7f13c29cdbbe4fe0a88694014617bb8fb51201e649092549a46395ec2763bb8a",
+      "new_hash": "cc418dd6d7011d59336aa2fbf8c84a4fb3c069ea89b9bd41e19c6f075cd5956b"
+    },
+    {
+      "evidence_id": "ev-amazon-0012",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "old_hash": "7f13c29cdbbe4fe0a88694014617bb8fb51201e649092549a46395ec2763bb8a",
+      "new_hash": "cc418dd6d7011d59336aa2fbf8c84a4fb3c069ea89b9bd41e19c6f075cd5956b"
+    },
+    {
+      "evidence_id": "ev-anthropic-0013",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "3404f6aa5bd1a98d847e9c7e9ad6b59bb0818aca577a4fa7fba3624410fa4b58",
+      "new_hash": "cf726d4f2ee0deadac58805309f9600f35d4d02848f8c7403e4905ddb24ee400"
+    },
+    {
+      "evidence_id": "ev-anthropic-0014",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "a2de3cf968bd72fb1f045ee4e23c72de4582bc2f9d76b97b100ddd0637f8e774",
+      "new_hash": "d1aded54c758d4a55cca01e7fc1ae155b753477d4c4ea74d317567ecdabc1916"
+    },
+    {
+      "evidence_id": "ev-openai-0004",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0005",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0006",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0007",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0008",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0009",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0010",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0011",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0012",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0013",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0014",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0017",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0019",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0020",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0021",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0023",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0024",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-google-0003",
+      "url": "https://deepmind.google/science/synthid/",
+      "old_hash": "4f071251e21f57201c19df37e36ec8aaf8abbba1af74e493d1d9278cf82dcdb3",
+      "new_hash": "a1f0b871fa9773331353ce355f5321f999292fab9f840785262c656f83119936"
+    },
+    {
+      "evidence_id": "ev-google-0005",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0006",
+      "url": "https://deepmind.google/research/",
+      "old_hash": "a6810900b6799797a809eb3370bdfc90c812985ea1e5efaceedc59e1c931c3ee",
+      "new_hash": "0c6ea290eb11b4822a57b70d1600ce0d495ca227ef5f19004845c00512a95840"
+    },
+    {
+      "evidence_id": "ev-meta-0004",
+      "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+      "old_hash": "6850c2547c233d23b2c39dea073c272721d80e60fec490b22fe837dd8946d331",
+      "new_hash": "7998d01861830a4d3527914e2399bc61630e7fe0387c1d15affbe539a89acbaf"
+    },
+    {
+      "evidence_id": "ev-openai-0027",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0028",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-openai-0031",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "old_hash": "a45484c549cae62741fbe31572831152f20489bded5e3e9a273201e67ae1175e",
+      "new_hash": "e2579ecb185cbc13bac39f9dbf25e1917f78e1ea5a3a5023165c6614fb5db724"
+    },
+    {
+      "evidence_id": "ev-anthropic-0006",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "cf7e4cae3e245c60517c1ebc4aa0b0e71a370fd6414a7d9aecca9a115f144b7f",
+      "new_hash": "cff1266afe4ec1d34a1a46b3abbe8564d715f532117e2d145cc7f1c3cdc52dc0"
+    },
+    {
+      "evidence_id": "ev-anthropic-0011",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "aadb57175df25b1f8abf39a95682d1aa8b407d526bcf75eed064e793fc0d3e3a",
+      "new_hash": "2fae7810b0f889adba6b67b06698f3a69e1f816ab5480d0cc6807ed7f833680f"
+    },
+    {
+      "evidence_id": "ev-anthropic-0017",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "079635b1ddacdbeadfa48b4506621c68ca2585acf6e45b856e0ee12fbc844d24",
+      "new_hash": "9b54a017637976fb8e0703ae2bb9a6ba47a68ddf29ba6ca44e2b50ab0b9940b5"
+    },
+    {
+      "evidence_id": "ev-anthropic-0020",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "99e3e9d019534ddc7cd09c2c275fc1e346bd690fb76812bfdcf8c760d17a9ac5",
+      "new_hash": "763188cb73906d111859e035249f5931964043dc471d7c57073ab78ec52a942c"
+    },
+    {
+      "evidence_id": "ev-anthropic-0021",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "a211231a6ad65944a8e1da03af1d243aaa763f694d60d0814a28dc6b4da5b33c",
+      "new_hash": "d8d7f01dda86b91a0e914913b8db7b9021acc0e8204b8327ee0aabfcd8ba8de3"
+    },
+    {
+      "evidence_id": "ev-anthropic-0023",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "bb8b506a71da3f294fae28d0d069a4ea4d3df2fab05952a465ae077dfe7eaa17",
+      "new_hash": "9fb9e520876cdbcd606a35ddabda1e8763dff89e314eb60e934e83a703ba912e"
+    },
+    {
+      "evidence_id": "ev-anthropic-0024",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "00e09395ed56dbcbd76af9daf44fdbd936d00342e6b94a4f326e2dc9484854c1",
+      "new_hash": "32c3c5c3ebb0bfe224d2dae3d6cfc2c2de91d2c61666a28efc8fcd05d624639e"
+    },
+    {
+      "evidence_id": "ev-anthropic-0025",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "c025aca43e1da49fe330752ec6fca0f8048a87c0c013c694732ee25539d48031",
+      "new_hash": "b07467296919f37d66ad24bf678a5e382ab10a0cfc4b6f8937ad00732fdbb118"
+    },
+    {
+      "evidence_id": "ev-anthropic-0026",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "e2e72913ac3656665bd2d2366084d09d3c93a320ac71ca699ae1a8483b0faa2b",
+      "new_hash": "df1efe05e13d78a0b0302e88fc22ae014484911ad798c186d6be7cdff60378bb"
+    },
+    {
+      "evidence_id": "ev-anthropic-0027",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "dda75141f2b0104bba6b8242206319fc961ee98be43f0d6b183050f57a6ad27d",
+      "new_hash": "f4c1d7110c3425f2e5ab40190ac0310bb0f59b87c139d126f7e02ad441e2450c"
+    },
+    {
+      "evidence_id": "ev-anthropic-0028",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "f3552f4b8b3aee51ed312a3442736bcd68c191af738fc94cd5452641c3a6f387",
+      "new_hash": "d66ee334e534f33bab3cd57cf7b846ea3ff6e3dbe6288453cc5de116fb9dca75"
+    },
+    {
+      "evidence_id": "ev-anthropic-0029",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "d41b19bd805e8fd19cf40d3281ab98455c8ba86d202e3ce04bb3d70f658a96eb",
+      "new_hash": "0286718a07a7ba5bd84021f889130c61eb90cb693303fe3a9a563e90cafa6ad7"
+    },
+    {
+      "evidence_id": "ev-anthropic-0030",
+      "url": "https://www.anthropic.com/research",
+      "old_hash": "2e5ca6c366086d6b1ae96e10cb7731cd7744c96368bac08fe5182336aebdb578",
+      "new_hash": "dd230a0fa0b481c94dfd0c90787e2d28f7b79e07635755e39680773e25d61eff"
+    },
+    {
+      "evidence_id": "ev-anthropic-0033",
+      "url": "https://www.anthropic.com/research",
+      "old_hash": "ea19b55b7cd52811a9a318e0c046d0ea32abc00be141fa6c5dec2e010e3b0117",
+      "new_hash": "f4ff5e702fa3404d021610d0401f6dbe094b188b6dea84867dc604bde873f7ed"
+    },
+    {
+      "evidence_id": "ev-anthropic-0034",
+      "url": "https://www.anthropic.com/news/anthropics-responsible-scaling-policy",
+      "old_hash": "067a8cf2d8500fce7bfc5a598fa29e0f0c7589c6e8d5b1bf5c1bab121b5b13c0",
+      "new_hash": "8fc1849f24768cab828329d6d6a0f01fa1d64bcf64c65546e47de4885ff8bdd7"
+    },
+    {
+      "evidence_id": "ev-google-0002",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0008",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0009",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0011",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0012",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0013",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0014",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0015",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0016",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0018",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0019",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0022",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0023",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0024",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0025",
+      "url": "https://deepmind.google/discover/blog/advancing-geminis-security-safeguards/",
+      "old_hash": "d8c81b41d5c036bb3d90c206bddf3be84565583da93751b97f4c97c71ff24a9d",
+      "new_hash": "4f3249030db3de98be9b7be62c74fec52e246b37c1d2fbf3d329c00f98fc8700"
+    },
+    {
+      "evidence_id": "ev-google-0028",
+      "url": "https://deepmind.google/gemini/",
+      "old_hash": "92b6792423f2f3855282980fe501528d766707a406dd86acbe372b0c96222bca",
+      "new_hash": "0d1a274ecc64b56c7eaa318e2870b176490201cde5a3b23b5e5983802d73f587"
+    },
+    {
+      "evidence_id": "ev-meta-0002",
+      "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+      "old_hash": "2c8a37adc46986f4d6696029e69cf581a9e12580de602e39e67ef39b2e39b636",
+      "new_hash": "fd2f2308a30ee34510b3901f843b0885bb7615870e0166b44e79373661cfde62"
+    },
+    {
+      "evidence_id": "ev-meta-0006",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "fd9da5a9d27360ac2cb6a0fab2fd2349e0c6d7d8ce7323a2d1790a8335af657c",
+      "new_hash": "5037792ac1877ba7f6794292cb56907d536509b5f11943cecc6eeb34623c3e7a"
+    },
+    {
+      "evidence_id": "ev-meta-0010",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "5f4635803154a1ef7add7724deb5cbf0f7b5e5b33cb3002e2fbe92ee3ead9f2d",
+      "new_hash": "ef6fb3d05b9f12592cd8bd697c164ac0ba9d5fd3e012bbc0dfb7ad223b30058a"
+    },
+    {
+      "evidence_id": "ev-meta-0013",
+      "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+      "old_hash": "475347e1a26654c2c113ad6e308c23d95b07cd6b68fee31f2b75f6709526daeb",
+      "new_hash": "b234da744ff77a027fb110f24ccde562676192b5946960a431d936aa7c31e459"
+    },
+    {
+      "evidence_id": "ev-meta-0014",
+      "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+      "old_hash": "d9bb188e47adea55e3f2c880b9c870d98e6916c4d635dd619d89b18900b61707",
+      "new_hash": "395a2336c5d3080036166ae30ff905baf02c18dd3fa5e3534b1ef0977b9906ac"
+    },
+    {
+      "evidence_id": "ev-meta-0015",
+      "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+      "old_hash": "0002a83287bfed1a06ed9cb92cc35e882b885103803bbe1f376ee73c8a8af4be",
+      "new_hash": "389997863988a49615666653a57b9efb987c6ff09a6e637b16ba21b8e53d33c6"
+    },
+    {
+      "evidence_id": "ev-meta-0017",
+      "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+      "old_hash": "af4c985fa18038e42b02b754ba70e0d18fe6e32a185f07aa81dfca5b480f1f33",
+      "new_hash": "152c50755e0412c510675ce188a4fa17c82e22dafde78ad622f8070eadeb7806"
+    },
+    {
+      "evidence_id": "ev-meta-0018",
+      "url": "https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/",
+      "old_hash": "400854f02824fc602d68c2af055dbb2ed96ed49643a753c6e2e037e5d4d709f1",
+      "new_hash": "de9b9c00403533ebca73ab2a7d31e1061b9b942e7de83696a50061b80ba1ed39"
+    },
+    {
+      "evidence_id": "ev-meta-0019",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "8992414dd1075f1cd28ecc72a8cf257bd95f30e92b67364c2ddb31e12fb41f3e",
+      "new_hash": "20cffa81e7ec784f4fb052a0eaee1e27d4eed5106aad6b38584f25e623487450"
+    },
+    {
+      "evidence_id": "ev-meta-0020",
+      "url": "https://github.com/meta-llama",
+      "old_hash": "96c58c5632435d4144db3e88c3d46aa7286296f42b5c2de8f33862eba8567420",
+      "new_hash": "d423eb8582be2a3aeff32a822239f089a7416223227f9e6588b8dc26c82bc8df"
+    },
+    {
+      "evidence_id": "ev-meta-0022",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "52189a1c29ec21005579e3e4d14ba9697f68a8a6be7e5d4ab7540290cb99d1fd",
+      "new_hash": "72e5f6850ff12705c4b4d4ebb797be270dbd3a21cadfe01c5242571688202f66"
+    },
+    {
+      "evidence_id": "ev-meta-0023",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "73e68f13678539026a59acefebf7fbecf87f4d2cacf6c94e75292b97c67be1e3",
+      "new_hash": "7f55d18c1c87092e3b5f83ae9c0bbfa305c3f995b05b56ecd07e835f0f8dc0bd"
+    },
+    {
+      "evidence_id": "ev-meta-0027",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "e9f8d170e93479bef9d83df24ac854b6bba2cd7102fae16ec79bd39c6ec25182",
+      "new_hash": "5d22693b8543a4bf447424495efc013a8ef9268a0b44ed877f113696229dc6d5"
+    },
+    {
+      "evidence_id": "ev-meta-0028",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "d7d0beeb79c5d7965c4959fda1cf4867ed2bf27766e249453bde54262284c63a",
+      "new_hash": "4f07479864738e459b5432ff49666d7a7e655f49a999da6a38a85ccf761f22d1"
+    },
+    {
+      "evidence_id": "ev-meta-0030",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "a16cd9ff7e3afc7baf57db0612ecd898a7498daf216d5c632d3d9193366601a5",
+      "new_hash": "129de4fcc8461b850a1dbe51b2393e13960c70d46f5c3b17d76d7e25a7976a9f"
+    },
+    {
+      "evidence_id": "ev-meta-0031",
+      "url": "https://ai.meta.com/research/",
+      "old_hash": "b00cec482773fd17d6672114c8284151eeec99bc31be17da27e5258749c62d5e",
+      "new_hash": "f9718016cf36ef8b900ba45d1f3e01fbf4d055ad6a3446eb06f0a01b1b6a343a"
+    },
+    {
+      "evidence_id": "ev-meta-0032",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "ae92c48005db3a69ddb34325709ccecf64313e7e49e23dd9824fa5d1137e57e5",
+      "new_hash": "dd5e2a01ba83dd16443b50980adfaa0172afc759c9784bbdb74a41340d2fbded"
+    },
+    {
+      "evidence_id": "ev-meta-0033",
+      "url": "https://ai.meta.com/llama/",
+      "old_hash": "a67eac29fc255e1c2148707ed8157b3f528491d267996ec95da40d36a66a0506",
+      "new_hash": "3873beb71858e15b7f19ee61040bb52634676af657bdf4d4cab8c201b965c405"
+    },
+    {
+      "evidence_id": "ev-amazon-0001",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
+      "old_hash": "674a1b5e13e37d8fedfedecf001a4d91f05b28cd6281f7aa359517952e354256",
+      "new_hash": "9efac3b7025e270277bf5a83d228de2c4326c5ee8216f5180b5c243d3582a659"
+    },
+    {
+      "evidence_id": "ev-amazon-0002",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "old_hash": "7f13c29cdbbe4fe0a88694014617bb8fb51201e649092549a46395ec2763bb8a",
+      "new_hash": "cc418dd6d7011d59336aa2fbf8c84a4fb3c069ea89b9bd41e19c6f075cd5956b"
+    },
+    {
+      "evidence_id": "ev-amazon-0003",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "old_hash": "7f13c29cdbbe4fe0a88694014617bb8fb51201e649092549a46395ec2763bb8a",
+      "new_hash": "cc418dd6d7011d59336aa2fbf8c84a4fb3c069ea89b9bd41e19c6f075cd5956b"
+    },
+    {
+      "evidence_id": "ev-amazon-0004",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "old_hash": "7f13c29cdbbe4fe0a88694014617bb8fb51201e649092549a46395ec2763bb8a",
+      "new_hash": "cc418dd6d7011d59336aa2fbf8c84a4fb3c069ea89b9bd41e19c6f075cd5956b"
+    },
+    {
+      "evidence_id": "ev-amazon-0006",
+      "url": "https://aws.amazon.com/compliance/",
+      "old_hash": "ade6486183d8bc8461579083a54e51eccd00689d3a94dca228c125724b1d2834",
+      "new_hash": "47457240ffb2d85ca241fc3bfaf693741c00be54ac39f791920934c1bc1c9065"
+    },
+    {
+      "evidence_id": "ev-amazon-0007",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
+      "old_hash": "674a1b5e13e37d8fedfedecf001a4d91f05b28cd6281f7aa359517952e354256",
+      "new_hash": "9efac3b7025e270277bf5a83d228de2c4326c5ee8216f5180b5c243d3582a659"
+    },
+    {
+      "evidence_id": "ev-amazon-0008",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+      "old_hash": "38e2a93cc6d2a5a0c342236ed8afa0c96591e80fbb83740a70f903abadabde28",
+      "new_hash": "557e239a99abc5cd5fdf1195fe5d7a0567596267313f10c33fcdad4f75850f1b"
+    },
+    {
+      "evidence_id": "ev-amazon-0013",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "old_hash": "7f13c29cdbbe4fe0a88694014617bb8fb51201e649092549a46395ec2763bb8a",
+      "new_hash": "cc418dd6d7011d59336aa2fbf8c84a4fb3c069ea89b9bd41e19c6f075cd5956b"
+    },
+    {
+      "evidence_id": "ev-amazon-0014",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-sensitive-filters.html",
+      "old_hash": "78345f7d93b99083e289d59cf56d2c99eddef37d84d5fd7aba8b1337ffa927de",
+      "new_hash": "73a67b936595f89eca621dfdd178f11f337d94a349c40155341374cfc416a01b"
+    },
+    {
+      "evidence_id": "ev-amazon-0015",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "old_hash": "7f13c29cdbbe4fe0a88694014617bb8fb51201e649092549a46395ec2763bb8a",
+      "new_hash": "cc418dd6d7011d59336aa2fbf8c84a4fb3c069ea89b9bd41e19c6f075cd5956b"
+    },
+    {
+      "evidence_id": "ev-amazon-0018",
+      "url": "https://aws.amazon.com/compliance/data-privacy/",
+      "old_hash": "bdc3ba1a2ae52668004d7861754a3cd2e72ce08c9b25d7ca2eb998bafa69d230",
+      "new_hash": "7987137740765b6c820ba4262973c9f006bc5e7bc32947d5efdb6864f1fa75ff"
+    },
+    {
+      "evidence_id": "ev-amazon-0021",
+      "url": "https://aws.amazon.com/compliance/",
+      "old_hash": "6d06702b178024ebf462ddb2934115720a6946cf49276e55e85a58f0a573ef59",
+      "new_hash": "7db10754ff6c990d287d6b6d2d82c1db452a336089f972c5c7ea9e4731fefe5f"
+    },
+    {
+      "evidence_id": "ev-amazon-0022",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "old_hash": "7f13c29cdbbe4fe0a88694014617bb8fb51201e649092549a46395ec2763bb8a",
+      "new_hash": "cc418dd6d7011d59336aa2fbf8c84a4fb3c069ea89b9bd41e19c6f075cd5956b"
+    },
+    {
+      "evidence_id": "ev-amazon-0024",
+      "url": "https://aws.amazon.com/compliance/",
+      "old_hash": "ad7ffcc47d65ee7c5ed29af4c06886beedac970270d1bf97b7581b24b1d72f2b",
+      "new_hash": "23f7ccec446ad7ef9b2eef447983cc15c2fa263885f808f70669a80457924afe"
+    },
+    {
+      "evidence_id": "ev-cohere-0001",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0002",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0003",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0004",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0005",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0006",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0007",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0008",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0009",
+      "url": "https://docs.cohere.com/docs/fine-tuning",
+      "old_hash": "1e3339e103612d613371df8a2f9e45d9d5a97d2ea07179103f0a809265ae90bb",
+      "new_hash": "67572db07810f99ea4872fbb10a6104b51707a0490d9eb332304385fc73cb7f4"
+    },
+    {
+      "evidence_id": "ev-cohere-0010",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0011",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0012",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0013",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0014",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0015",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0016",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0017",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0020",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0021",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0023",
+      "url": "https://cohere.com/research",
+      "old_hash": "fe01c483bb6290abae52cf5267e011d0d23cc311b545b70325722abe0c28a348",
+      "new_hash": "1286ceb0130cc56058118e5ad68faaf1f96660db2cd8156e80ba34e25b4481c4"
+    },
+    {
+      "evidence_id": "ev-cohere-0024",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0025",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-cohere-0026",
+      "url": "https://docs.cohere.com/",
+      "old_hash": "8d47e6182a26160cc3cc20b77acb27a597db44a04a2fec1fbe15924342c6bf7d",
+      "new_hash": "f277938267caa93766d7f234eb2a32b90632524d85ef63b52fc2b19327c1854e"
+    },
+    {
+      "evidence_id": "ev-cohere-0027",
+      "url": "https://cohere.com/research",
+      "old_hash": "fe01c483bb6290abae52cf5267e011d0d23cc311b545b70325722abe0c28a348",
+      "new_hash": "1286ceb0130cc56058118e5ad68faaf1f96660db2cd8156e80ba34e25b4481c4"
+    },
+    {
+      "evidence_id": "ev-cohere-0028",
+      "url": "https://docs.cohere.com/docs/safety-modes",
+      "old_hash": "3afcafd8def1ad0ce0bf983a23420960605aeea6f100372ebe8a1a267b3de123",
+      "new_hash": "5acabaeb52f3a7cbebea4b6937e92abaa4d9d2f4a9337ca2c0190ea2ad36b017"
+    },
+    {
+      "evidence_id": "ev-mistral-0001",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0002",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0003",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0004",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0005",
+      "url": "https://docs.mistral.ai/",
+      "old_hash": "ad7583ca2eb5b9617f12f9ae9246128a5488fef2e5181126347bbfa273489c69",
+      "new_hash": "89ed43ac1f394f4bb7c325f922563193f838d97cdff07532fd5f320d089ac9c6"
+    },
+    {
+      "evidence_id": "ev-mistral-0006",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0007",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0008",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0009",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0010",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0011",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0012",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0014",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-mistral-0015",
+      "url": "https://docs.mistral.ai/",
+      "old_hash": "ad7583ca2eb5b9617f12f9ae9246128a5488fef2e5181126347bbfa273489c69",
+      "new_hash": "89ed43ac1f394f4bb7c325f922563193f838d97cdff07532fd5f320d089ac9c6"
+    },
+    {
+      "evidence_id": "ev-mistral-0017",
+      "url": "https://mistral.ai/news/mistral-moderation",
+      "old_hash": "42e42303d707a87b264548da624f5c818f9a4422dfcb1e549d49f423518b79b5",
+      "new_hash": "13401babb3093e283578b6f2577bb8be6ed3e2708c6e3c88c7de366d7026f8fa"
+    },
+    {
+      "evidence_id": "ev-baidu-0001",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0002",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0003",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0004",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0005",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0006",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0007",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0008",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0009",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0010",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0011",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0012",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0013",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0014",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0015",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0016",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0017",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0018",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-baidu-0020",
+      "url": "https://wenxin.baidu.com/wenxin/docs",
+      "old_hash": "7918a2c220206c72635563f8d7033ee68bf7f298d5773977a9d52c8069ad6ffb",
+      "new_hash": "c73269fa9a549834272833504132d65f2b09bdbdf56ac4c5cb5ab500bdcfb200"
+    },
+    {
+      "evidence_id": "ev-alibaba-0001",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "854665679f57dbb57361179cf88ab5483eb6b3ba86a78cb28799fa3591650682",
+      "new_hash": "78adb0629f4161c3963eda4fa5001b8f6fa9a34cbdf33263fe9780a0924b733a"
+    },
+    {
+      "evidence_id": "ev-alibaba-0002",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "16edbf5f23f6c7a2275be9c690adc3416d7326b28a034e0fe64cb309fee16bd7",
+      "new_hash": "89e254b5ee3e7f2426d2d8c6408a0d20a41e9fc481f51d26cf22745c506b877d"
+    },
+    {
+      "evidence_id": "ev-alibaba-0003",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "331ba2cd11c07e1bc626e9e15bcbac40264e9cd966534b93edfb5eda2019e65a",
+      "new_hash": "d82bd3c4ee538fadf268805fe0410129787547589a1b3bf3bf987e9ee5a72c71"
+    },
+    {
+      "evidence_id": "ev-alibaba-0004",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "22afc15d9fafb8a668c3e0673568d405f7a32593789492fa243da7955de47495",
+      "new_hash": "34ebfeb6015bca1b8b1db4a7ff346a633defa76eadd98ad6b1660ff01113f7bd"
+    },
+    {
+      "evidence_id": "ev-alibaba-0005",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "d478ecd3a090e8f44e3d018caf1ff04b79bf02f3e0824c3b0c6b5ff9b0e8af61",
+      "new_hash": "76de69a2ebb469520443eb7f7d7324dee268907ae819dce85d3f6e432cdd93d0"
+    },
+    {
+      "evidence_id": "ev-alibaba-0006",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "1265ac8cbedbbc56fee64e7618deae893574d144d263cf964884a09d14e3e8ea",
+      "new_hash": "0fe16f78d37117bb1ef4688c55b78dc82e4a8e8683a2c35e2fd09fbd50d6f7b5"
+    },
+    {
+      "evidence_id": "ev-alibaba-0007",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "ff7fe1c16dbf30c35f63fcb4381090b2e9fe687c788cc234be31262b7aaad4e4",
+      "new_hash": "f44a4a1a18f57775de3b8b74fcf10d7f9ead35af237c38639be4c1f4119e4655"
+    },
+    {
+      "evidence_id": "ev-alibaba-0008",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "a32a328fcb499443713d694111bda315eacc22d8c61ec720423a453089d6c415",
+      "new_hash": "6769b9bf1a6d1e7bada7dd24369934d9e35fbdad0e03d131989c625bba8a5b58"
+    },
+    {
+      "evidence_id": "ev-alibaba-0009",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "711b60a31bf665f6d5acf0dd23f6388523840a2c30f2c1d6a54a2d294ce17684",
+      "new_hash": "634b98577c470a265c8c8362e0f518762453fe024a618260e3b110d3f79039fb"
+    },
+    {
+      "evidence_id": "ev-alibaba-0010",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "37606db17dc2f14b03dc5eb2a77529e373c22fd89cec66faa6bc1ab3a1ce8f32",
+      "new_hash": "ae7e8b4a15947c646f4a499f970e8ddfb835fe4b2b18bc41fafb20d7e0ebeccb"
+    },
+    {
+      "evidence_id": "ev-alibaba-0011",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "c3e1b400fa558ef3c3d27e479bd6b583c623ab96b73af468e7be38bf5ff1cdfc",
+      "new_hash": "2b87d1c30583baee90863607c4d9db00bc0b96997ee64d51a6aab3a709cfe13f"
+    },
+    {
+      "evidence_id": "ev-alibaba-0012",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "79633a56a36b1362cfd811f3994b4485c54aea6eee855e474defaae50e1669ae",
+      "new_hash": "08c2badf8a6a392054fc334c02adb122aa1a591e7ed083a3dc5b6578f4a676eb"
+    },
+    {
+      "evidence_id": "ev-alibaba-0013",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "5644c1c434f176f7f2a2f7a36f55b5097e354cd9b5afb150be55e00cabe66075",
+      "new_hash": "d7141c07929f84b5ab3ad206c94bd559f92a70eaa2f5354559c53736966edd95"
+    },
+    {
+      "evidence_id": "ev-alibaba-0014",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "92226400959d0ef437b78e7d60de58e9d4b4d6c9d20e6f0dacd0cc7e5d4f3565",
+      "new_hash": "01be1d44cfe5377a00db62d87455dc33bed9114603da6cf71ff65d58f676e1a1"
+    },
+    {
+      "evidence_id": "ev-alibaba-0015",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "bdd79b4bb74440697b28d2da1d5d6a4b2511bad1263b2a4019b32b1d6f93c8b8",
+      "new_hash": "62ff68664fb4fad6d45485de6a1b46656ac80ec176b9c66f166c1380467bb491"
+    },
+    {
+      "evidence_id": "ev-alibaba-0016",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "9058d2718604bf728e00ccf222a3e36483dfaec7127fc025ed4e2d9c54d0677e",
+      "new_hash": "f510570dbbce9c2a7abbaf9892837f94614974837f4379a5656b505d19f3948d"
+    },
+    {
+      "evidence_id": "ev-alibaba-0017",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "fae6b0410d53a09105bcb6208bcdfc6c893ef846b0104fc7ef6388aa18936c6a",
+      "new_hash": "301a98447948b3bd20ff75f365d0b46d2aae21c21b193e64405e1695a9db0cde"
+    },
+    {
+      "evidence_id": "ev-alibaba-0018",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "c0afd0b591a66c6df9bddbc3c5f72c9ad76abbf3b01e528dedd018bb9a95b52a",
+      "new_hash": "57fdf2a3c01951aec03736fd5d589df847e24c0471ebce6d336e836dc967f203"
+    },
+    {
+      "evidence_id": "ev-alibaba-0019",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "bf9ef2e93dcc9773f64e329cd8f9603718e17a67c4eea9afd906f2ee8e22adab",
+      "new_hash": "992a174d6aa73182c349690d8f10d26db528105f07e35423d08b2ad343568548"
+    },
+    {
+      "evidence_id": "ev-alibaba-0020",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "112dc132169dce8df524e03884f7cd25d1cad5e758c77795136789b13d77e197",
+      "new_hash": "807f2ffd9359a10a15e6cc2cc54e721da889539c221154eaf65d8d525adb1f85"
+    },
+    {
+      "evidence_id": "ev-alibaba-0021",
+      "url": "https://tongyi.aliyun.com/qianwen/",
+      "old_hash": "400036d35fac0016d9f602bb27990e653581c6af216f95ef08552c08ca05718d",
+      "new_hash": "1a7fe58e08e6ef309d62ff7329d18e0ec93331e5d8932b822ce10b9f38ff8bfa"
+    },
+    {
+      "evidence_id": "ev-x-platform-context-003",
+      "url": "https://x.com/privacy",
+      "old_hash": "513d7ecde9321768275d88c28293cb49b3a69e6921c0015a4ad3d760d9b3c513",
+      "new_hash": "6c673ee21fe832fb634e3deb6399b95b53d1c0dab4665629ec47ce757c7784a8"
+    },
+    {
+      "evidence_id": "ev-x-realtime-monitoring-007",
+      "url": "https://x.com/tos",
+      "old_hash": "609d7b180f98578d6303a8b71961b90a8324ecc31e9d42c10f01b2df8930690c",
+      "new_hash": "3396e9b3d8c7d318c66c59c3270a5fca8d733af6a0f09361eb0a7f50a33794a6"
+    },
+    {
+      "evidence_id": "ev-x-pii-detection-008",
+      "url": "https://x.com/privacy",
+      "old_hash": "513d7ecde9321768275d88c28293cb49b3a69e6921c0015a4ad3d760d9b3c513",
+      "new_hash": "b6dfe73c6ce691bd8d026bddbbe174575af3f6ede46cc025fbeefd05458dec1c"
+    },
+    {
+      "evidence_id": "ev-x-audit-logging-010",
+      "url": "https://x.com/tos",
+      "old_hash": "609d7b180f98578d6303a8b71961b90a8324ecc31e9d42c10f01b2df8930690c",
+      "new_hash": "e3462ce1c3d2feae660e60498c47771172bdb2487039427a4bb8297a1dff8dc6"
+    }
+  ]
+}
