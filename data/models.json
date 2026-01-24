@@ -1,603 +1,364 @@
 {
   "models": [
     {
-      "name": "qwen-7b",
-      "provider": "alibaba",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": ""
-    },
-    {
-      "name": "qwen-14b",
-      "provider": "alibaba",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": ""
-    },
-    {
-      "name": "qwen-72b",
-      "provider": "alibaba",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": ""
-    },
-    {
-      "name": "titan",
+      "id": "nova-pro",
+      "name": "Nova",
       "provider": "amazon",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
+      "version": "Nova Pro",
+      "notes": "Highly-capable multimodal model with the best combination of accuracy, speed, and cost for a wide range of tasks"
     },
     {
-      "name": "titan-express",
+      "id": "nova-lite",
+      "name": "Nova",
       "provider": "amazon",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
+      "version": "Nova Lite",
+      "notes": "Low-cost multimodal model that is lightning fast for processing images, video, documents, and text"
     },
     {
-      "name": "titan-lite",
+      "id": "nova-micro",
+      "name": "Nova",
       "provider": "amazon",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
+      "version": "Nova Micro",
+      "notes": "Text-only model that delivers the lowest-latency responses at very low cost"
     },
     {
-      "name": "claude-2",
+      "id": "gpt-5.2",
+      "name": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5.2",
+      "notes": "<n/a>"
+    },
+    {
+      "id": "o3-pro",
+      "name": "o",
+      "provider": "openai",
+      "status": "active",
+      "version": "o3-pro",
+      "notes": "<n/a>"
+    },
+    {
+      "id": "o3",
+      "name": "o",
+      "provider": "openai",
+      "status": "active",
+      "version": "o3",
+      "notes": "Reasoning model that excels at solving complex math, coding, and scientific challenges"
+    },
+    {
+      "id": "gpt-5-mini",
+      "name": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5 mini",
+      "notes": "<n/a>"
+    },
+    {
+      "id": "o4-mini",
+      "name": "o",
+      "provider": "openai",
+      "status": "active",
+      "version": "o4-mini",
+      "notes": "Combines state-of-the-art reasoning with full tool capabilities, including web browsing and python analysis"
+    },
+    {
+      "id": "gpt-oss-120b",
+      "name": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-oss-120b",
+      "notes": "<n/a>"
+    },
+    {
+      "id": "claude-opus-4.5",
+      "name": "Claude",
       "provider": "anthropic",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis"
-      ],
-      "version": ""
+      "version": "Claude Opus 4.5",
+      "notes": "Flagship, high-logic model built for enterprise research, advanced coding, agent chains, and massive context workloads"
     },
     {
-      "name": "claude-2.1",
+      "id": "claude-sonnet-4.5",
+      "name": "Claude",
       "provider": "anthropic",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis"
-      ],
-      "version": ""
+      "version": "Claude Sonnet 4.5",
+      "notes": "Balances reasoning depth and cost, excelling at structured analysis, coding, and extended chat"
     },
     {
-      "name": "claude-3-haiku",
+      "id": "claude-haiku-4.5",
+      "name": "Claude",
       "provider": "anthropic",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis"
-      ],
-      "version": "claude-3-haiku-20240307"
+      "version": "Claude Haiku 4.5",
+      "notes": "Delivers near-frontier results at minimal latency and low price for everyday chat and document tasks"
     },
     {
-      "name": "claude-3-sonnet",
-      "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis"
-      ],
-      "version": "claude-3-sonnet-20240229"
-    },
-    {
-      "name": "claude-3-opus",
-      "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis"
-      ],
-      "version": "claude-3-opus-20240229"
-    },
-    {
-      "name": "claude-3-5-sonnet",
-      "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis"
-      ],
-      "version": "claude-3-5-sonnet-20241022"
-    },
-    {
-      "name": "claude-3-5-haiku",
-      "provider": "anthropic",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis"
-      ],
-      "version": "claude-3-5-haiku-20241022"
-    },
-    {
-      "name": "claude-instant",
-      "provider": "anthropic",
-      "status": "deprecated",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
-    },
-    {
-      "name": "command",
-      "provider": "cohere",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
-    },
-    {
-      "name": "command-light",
-      "provider": "cohere",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
-    },
-    {
-      "name": "command-r",
-      "provider": "cohere",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "retrieval"
-      ],
-      "version": ""
-    },
-    {
-      "name": "command-r-plus",
-      "provider": "cohere",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "retrieval"
-      ],
-      "version": ""
-    },
-    {
-      "name": "gemini-1.0-pro",
+      "id": "gemini-3-pro",
+      "name": "Gemini",
       "provider": "google",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "gemini-1.0-pro-002"
+      "version": "Gemini 3 Pro",
+      "notes": "Intelligent model with state-of-the-art reasoning, advanced multimodal understanding, and exceptional coding capabilities"
     },
     {
-      "name": "gemini-1.5-flash",
+      "id": "gemini-3-deep-think",
+      "name": "Gemini",
       "provider": "google",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "multimodal"
-      ],
-      "version": "gemini-1.5-flash-8b-exp-0924"
+      "version": "Gemini 3 Deep Think",
+      "notes": "Uses an internal thinking process to significantly improve reasoning and multi-step planning abilities"
     },
     {
-      "name": "gemini-1.5-pro",
+      "id": "gemini-3-flash",
+      "name": "Gemini",
       "provider": "google",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "multimodal"
-      ],
-      "version": "gemini-1.5-pro-exp-0827"
+      "version": "Gemini 3 Flash",
+      "notes": "Minimizes latency for chat or high throughput applications while maintaining strong reasoning capabilities"
     },
     {
-      "name": "palm-2",
+      "id": "gemini-2.5-flash-lite",
+      "name": "Gemini",
       "provider": "google",
-      "status": "deprecated",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
-    },
-    {
-      "name": "inflection-2.5",
-      "provider": "inflection",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
+      "version": "Gemini 2.5 Flash-Lite",
+      "notes": "Cost-effective model optimized for speed and efficiency, suitable for high-volume tasks"
     },
     {
-      "name": "llama-2-7b",
+      "id": "llama-4-maverick",
+      "name": "Llama",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": "llama-2-7b-chat"
+      "version": "Llama 4 Maverick",
+      "notes": "Natively multimodal model featuring 128 experts, excelling in versatile assistant and chat applications"
     },
     {
-      "name": "llama-2-13b",
+      "id": "llama-4-scout",
+      "name": "Llama",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": "llama-2-13b-chat"
+      "version": "Llama 4 Scout",
+      "notes": "General-purpose multimodal model with 16 experts, delivering superior performance for its size"
     },
     {
-      "name": "llama-2-70b",
+      "id": "llama-4-8b",
+      "name": "Llama",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": "llama-2-70b-chat"
+      "version": "Llama 4 8B",
+      "notes": "<n/a>"
     },
     {
-      "name": "llama-3-8b",
+      "id": "llama-4-17b",
+      "name": "Llama",
       "provider": "meta",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "llama-3-8b-instruct"
+      "version": "Llama 4 17B",
+      "notes": "<n/a>"
     },
     {
-      "name": "llama-3-70b",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "llama-3-70b-instruct"
-    },
-    {
-      "name": "llama-3.1-8b",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "llama-3.1-8b-instruct"
-    },
-    {
-      "name": "llama-3.1-70b",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "llama-3.1-70b-instruct"
-    },
-    {
-      "name": "llama-3.1-405b",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "llama-3.1-405b-instruct"
-    },
-    {
-      "name": "llama-3.2-1b",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": "llama-3.2-1b-instruct"
-    },
-    {
-      "name": "llama-3.2-3b",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": "llama-3.2-3b-instruct"
-    },
-    {
-      "name": "llama-3.2-11b-vision",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal"
-      ],
-      "version": "llama-3.2-11b-vision-instruct"
-    },
-    {
-      "name": "llama-3.2-90b-vision",
-      "provider": "meta",
-      "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "multimodal"
-      ],
-      "version": "llama-3.2-90b-vision-instruct"
-    },
-    {
-      "name": "mistral-7b",
+      "id": "mistral-large-3",
+      "name": "Mistral",
       "provider": "mistral",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
+      "version": "Mistral Large 3",
+      "notes": "Flagship multimodal and multilingual model with 41B active parameters and agentic capabilities"
     },
     {
-      "name": "mixtral-8x7b",
+      "id": "magistral-medium-1.2",
+      "name": "Magistral",
       "provider": "mistral",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "mixtral-8x7b-instruct"
+      "version": "Magistral Medium 1.2",
+      "notes": "Specialized in transparent and multilingual reasoning with complex thinking capabilities"
     },
     {
-      "name": "mixtral-8x22b",
+      "id": "ministral-3",
+      "name": "Ministral",
       "provider": "mistral",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "mixtral-8x22b-instruct"
+      "version": "Ministral 3",
+      "notes": "Combines compact efficiency with multimodal and multilingual capability for edge and self-hosted systems"
     },
     {
-      "name": "mistral-small",
+      "id": "pixtral",
+      "name": "Pixtral",
       "provider": "mistral",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": "mistral-small-2409"
+      "version": "Pixtral",
+      "notes": "Vision pioneer that combines text, image, and structured data understanding in a single model"
     },
     {
-      "name": "mistral-medium",
-      "provider": "mistral",
-      "status": "deprecated",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
-    },
-    {
-      "name": "mistral-large",
-      "provider": "mistral",
+      "id": "deepseek-v3.2",
+      "name": "DeepSeek",
+      "provider": "deepseek",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "mistral-large-2411"
+      "version": "DeepSeek-V3.2",
+      "notes": "Mixture-of-Experts model using sparse attention to improve long-context efficiency"
     },
     {
-      "name": "gpt-3.5-turbo",
-      "provider": "openai",
+      "id": "deepseek-r1",
+      "name": "DeepSeek",
+      "provider": "deepseek",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": "gpt-3.5-turbo-0125"
+      "version": "DeepSeek-R1",
+      "notes": "Reasoning model that generates a step-by-step chain of thought for complex problem-solving"
     },
     {
-      "name": "gpt-4",
-      "provider": "openai",
+      "id": "deepseek-r1-distill",
+      "name": "DeepSeek",
+      "provider": "deepseek",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis"
-      ],
-      "version": "gpt-4-0613"
+      "version": "DeepSeek-R1-Distill",
+      "notes": "<n/a>"
     },
     {
-      "name": "gpt-4-32k",
-      "provider": "openai",
+      "id": "deepseek-v3-lite",
+      "name": "DeepSeek",
+      "provider": "deepseek",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis"
-      ],
-      "version": "gpt-4-32k-0613"
+      "version": "DeepSeek-V3-Lite",
+      "notes": "<n/a>"
     },
     {
-      "name": "gpt-4-turbo",
-      "provider": "openai",
+      "id": "qwen3-max",
+      "name": "Qwen",
+      "provider": "alibaba",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis",
-        "multimodal"
-      ],
-      "version": "gpt-4-turbo-2024-04-09"
+      "version": "Qwen3-Max",
+      "notes": "Delivers major improvements in reasoning, instruction following, and multilingual support across 100+ languages"
     },
     {
-      "name": "gpt-4o",
-      "provider": "openai",
+      "id": "qwen3-thinking",
+      "name": "Qwen",
+      "provider": "alibaba",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation",
-        "analysis",
-        "multimodal"
-      ],
-      "version": ""
+      "version": "Qwen3-Thinking",
+      "notes": "<n/a>"
     },
     {
-      "name": "gpt-4o-mini",
-      "provider": "openai",
+      "id": "qwen3-turbo",
+      "name": "Qwen",
+      "provider": "alibaba",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation",
-        "code-generation"
-      ],
-      "version": ""
+      "version": "Qwen3-Turbo",
+      "notes": "<n/a>"
     },
     {
-      "name": "o1-preview",
-      "provider": "openai",
+      "id": "grok-4",
+      "name": "Grok",
+      "provider": "xai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "reasoning",
-        "code-generation",
-        "analysis"
-      ],
-      "version": "o1-preview-2024-09-12"
+      "version": "Grok 4",
+      "notes": "Intelligent model featuring native tool use, real-time search integration, and refined reasoning"
     },
     {
-      "name": "o1-mini",
-      "provider": "openai",
+      "id": "grok-4-thinking",
+      "name": "Grok",
+      "provider": "xai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "reasoning",
-        "code-generation"
-      ],
-      "version": "o1-mini-2024-09-12"
+      "version": "Grok 4 Thinking",
+      "notes": "<n/a>"
     },
     {
-      "name": "ai21-jurassic-2",
-      "provider": "ai21",
+      "id": "grok-4-fast",
+      "name": "Grok",
+      "provider": "xai",
       "status": "active",
-      "last_updated": "2025-08-11T20:28:29.134966",
-      "capabilities": [
-        "text-generation",
-        "conversation"
-      ],
-      "version": ""
+      "version": "Grok 4 Fast",
+      "notes": "<n/a>"
+    },
+    {
+      "id": "phi-5",
+      "name": "Phi",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "Phi-5",
+      "notes": "<n/a>"
+    },
+    {
+      "id": "phi-4",
+      "name": "Phi",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "Phi-4",
+      "notes": "Powerful open model leveraging language, vision, and speech research for broad commercial and research use"
+    },
+    {
+      "id": "phi-4-multimodal",
+      "name": "Phi",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "Phi-4-multimodal",
+      "notes": "Lightweight foundation model processing text, image, and audio inputs with strong instruction adherence"
+    },
+    {
+      "id": "command-a",
+      "name": "Command",
+      "provider": "cohere",
+      "status": "active",
+      "version": "Command A",
+      "notes": "<n/a>"
+    },
+    {
+      "id": "command-r-plus",
+      "name": "Command",
+      "provider": "cohere",
+      "status": "active",
+      "version": "Command R+",
+      "notes": "Optimized for long-context tasks, RAG, and tool use to automate sophisticated enterprise workflows"
+    },
+    {
+      "id": "nemotron-4",
+      "name": "Nemotron",
+      "provider": "nvidia",
+      "status": "active",
+      "version": "Nemotron-4",
+      "notes": "<n/a>"
+    },
+    {
+      "id": "llama-3.1-nemotron",
+      "name": "Nemotron",
+      "provider": "nvidia",
+      "status": "active",
+      "version": "Llama-3.1-Nemotron",
+      "notes": "Derivative reasoning model post-trained for math, code, and tool calling capabilities"
+    },
+    {
+      "id": "falcon-3",
+      "name": "Falcon",
+      "provider": "tii",
+      "status": "active",
+      "version": "Falcon 3",
+      "notes": "<n/a>"
+    },
+    {
+      "id": "falcon-180b",
+      "name": "Falcon",
+      "provider": "tii",
+      "status": "active",
+      "version": "Falcon 180B",
+      "notes": "Large-scale open model with 180 billion parameters, optimized for reasoning and knowledge tasks"
+    },
+    {
+      "id": "hunyuan-large",
+      "name": "Hunyuan",
+      "provider": "tencent",
+      "status": "active",
+      "version": "Hunyuan-Large (MoE 389B)",
+      "notes": "Flagship MoE model, competes with Llama 3.1 405B"
+    },
+    {
+      "id": "hunyuan-7b-instruct",
+      "name": "Hunyuan",
+      "provider": "tencent",
+      "status": "active",
+      "version": "Hunyuan-7B-Instruct",
+      "notes": "Standard dense model for efficient local deployment"
     }
   ]
 }
