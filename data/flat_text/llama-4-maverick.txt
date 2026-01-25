@@ -1,0 +1,153 @@
+SOURCE_ID: llama-4-maverick
+SOURCE_TITLE: Llama 3 & 4 Safety Protections
+SOURCE_URI: https://www.llama.com/llama-protections/
+--------------------
+Llama Protections - Llama
+Llama Protections
+Making protection tools accessible to everyone
+Enabling developers, advancing protections, and building an open ecosystem.
+Learn more
+Our approach
+System safeguards
+Evaluations
+Ecosystem
+Developer use guide
+Our approach
+An open approach to protections in the era of generative AI
+At Meta, we’re pioneering an open source approach to generative AI development enabling everyone to benefit from our models and their powerful capabilities, while making it as easy as possible to build and innovate with trust by design. Our comprehensive system-level protections framework proactively identifies and mitigates potential risks, empowering developers to more easily deploy generative AI responsibly.
+System level safeguards
+Llama Guard
+Our Llama Guard models offer unparalleled safety content moderation performance and flexibility, and we now offer a collection of specialized models tailored to specific development needs.
+Llama Guard 4
+Llama Guard 4 is an 12B-parameter high-performance multimodal input and output moderation model designed to support developers to detect various common types of violating content.
+It was built by pruning pre-trained Llama 4 Scout and finetuned and optimized to support the detection of the MLCommons standard taxonomy of hazards, catering to a range of developer use cases.
+It supports 12 languages and works across modalities to detect and filter policy-violating inputs and outputs across text and images.
+Llama Guard is designed to be usable across Llama model sizes, including Llama 4 Scout and Llama 4 Maverick.
+For the first time, Llama Guard 4 is
+now available
+through the /moderations endpoint in Llama API.
+Model card
+These solutions are integrated into our reference implementations and applications and are now available for the open source community to use.
+Resources to get started with Llama Guard, such as how to fine-tune it for your own use case, are available in our Llama-recipe github repository.
+Download the model
+Get started
+Prompt Guard 2
+Prompt Guard is a powerful tool for protecting LLM powered applications from malicious prompts to ensure their security and integrity.
+Categories of prompt attacks include
+prompt injection
+and
+jailbreaking:
+Prompt Injections
+are inputs that exploit the inclusion of untrusted data from third parties into the context window of a model to get it to execute unintended instructions.
+Jailbreaks
+are malicious instructions designed to override the safety and security features built into a model.
+Prompt Guard is designed to perform strongly and generalize well to new settings and distributions of adversarial attacks. We use a multilingual base model that significantly enhances the model's ability to recognize prompt attacks in non-English languages, providing comprehensive protection for your application.
+We’re releasing two versions of Prompt Guard 2 as open source so you can fine tune them to your specific application and use cases:
+Prompt Guard 2 86M is an even more effective and robust classifier for detecting malicious prompts with reduced instances of false positives.
+Prompt Guard 2 22M is a smaller, faster tool with substantially lower latency with minimal performance trade-offs outside of multilingual tasks.
+Download the model
+Read the model card
+Llama Firewall
+LlamaFirewall is a security guardrail tool designed to enable building of secure AI systems. LlamaFirewall can orchestrate across guard models and work with our suite of protection tools to detect and prevent risks such as prompt injection, insecure code and risky tool interactions.
+It’s designed to be agnostic to the agentic framework.
+A reference guide for Llama Firewall usage is
+now available
+with Llama for ease of implementation.
+LlamaFirewall includes integrations to the suite of Llama Protections like Llama Guard, Prompt Guard, and CodeShield.
+Read the paper
+Code Shield
+Code Shield provides support for inference-time filtering of insecure code produced by LLMs. This offers mitigation of insecure code suggestions risk and secure command execution for 7 programming languages with an average latency of 200ms.
+Sample workflow
+In line with the principles outlined in our Developer Use Guide: AI Protections, we recommend thorough checking and filtering of all inputs to and outputs from LLMs based on your unique content guidelines for your intended use case and audience.
+There is no one-size-fits-all guardrail detection to prevent all risks. This is why we encourage users to combine all our system level safety tools with other guardrails for your use cases.
+Please go to the
+Llama Github
+for an example implementation of these guardrails.
+Evaluations
+Cybersec Eval
+We are sharing new updates to the industry’s first and most comprehensive set of open source cybersecurity safety evaluations for large language models (LLMs).
+Cybersec Eval 4 expands on its predecessor by augmenting the suite of benchmarks to measure not only the risks, but also the defensive cybersecurity capabilities of AI systems. These new tests include a benchmark (AutoPatchBench) to evaluate an AI system’s capability to automatically patch security vulnerabilities in native code as well as a set of benchmarks (CyberSOCEval) that evaluate its ability to help run a security operations center (SOC) by accurately reasoning about security incidents, recognizing complex malicious activity in system logs, and reasoning about information extracted from threat intelligence reports.
+AutoPatchBench: Read the technical blog post
+Get CyberSecEval
+Our evaluation suite measures LLMs’ propensity to generate insecure code, comply with requests to aid cyber attackers, offensive cybersecurity capabilities, defensive cyber security capabilities, and susceptibility to code interpreter abuse and prompt injection attacks.
+Testing for insecure coding practice generation
+Insecure coding practice tests measure how often an LLM suggests risky security weaknesses in both autocomplete and instruction context and as defined in the
+Common Weakness Enumeration industry-standard insecure coding practice taxonomy
+.
+Testing for susceptibility to prompt injection
+Prompt injection attacks of LLM-based applications are attempts to cause the LLM to behave in undesirable ways. The Prompt Injection tests evaluate the ability to recognize which part of an input is untrusted and the level of resilience against common text and image based prompt injection techniques.
+Testing for compliance with requests to help with cyber attacks
+In Cybersec Eval 1 we introduced tests to measure an LLM's propensity to help carry out cyberattacks as defined in the industry standard MITRE Enterprise ATT&CK ontology of cyberattack methods. Cybersec Eval 2 added tests to measure the false rejection rate of confusingly benign prompts. These prompts are similar to the cyber attack compliance tests in that they cover a wide variety of topics including cyberdefense, but they are explicitly benign, even if they may appear malicious.
+Testing automated offensive cybersecurity capabilities
+This suite consists of capture-the-flag style security test cases that simulate program exploitation. We then use an LLM as the security tool to determine whether it can reach a specific point in the program where a security issue has been intentionally inserted. In some of these tests we explicitly check if the tool can execute basic exploits such as SQL injections and buffer overflows.
+Cybersec Eval 3 adds evaluations for LLM ability to conduct (1) multi-turn spear phishing campaigns and (2) autonomous offensive cyber operations.
+Testing propensity to abuse a code interpreter
+Code interpreters allow LLMs to run code in a sandboxed environment. This set of prompts try to manipulate an LLM into executing malicious code to either gain access to the system that runs the LLM, gather helpful information about the system, craft and execute social engineering attacks, or gather information about the external infrastructure of the host environment.
+Partnerships
+Ecosystem
+In fostering a collaborative approach, we have partnered with ML Commons, the newly formed AI alliance, and a number of leading AI companies.
+We’ve also engaged with our partners at
+Papers With Code
+and
+HELM
+to incorporate these evaluations into their benchmarks, reinforcing our commitment through active participation within the ML Commons AI Safety Working Group.
+New open source benchmarks to evaluate the efficacy of AI systems to automate and scale security operation center (SOC) operations were developed in collaboration and partnership with CrowdStrike.
+As part of our
+Llama Defenders
+Program, we’re also partnering with AT&T, Bell Canada, and ZenDesk to enable select organizations to better defend their organizations’ systems, services, and infrastructure with new state of the art tools.
+Partners include:
+AI Alliance
+AMD
+Anyscale
+AWS
+Bain
+Cloudflare
+Databricks
+Dell Technologies
+Dropbox
+Google Cloud
+Hugging Face
+IBM
+Intel
+Microsoft
+MLCommons
+Nvidia
+Oracle
+Orange
+Scale AI
+Snowflake
+Together.AI
+and many more to come
+Partners include:
+AI Alliance
+AMD
+Anyscale
+AWS
+Bain
+Cloudflare
+Databricks
+Dell Technologies
+Dropbox
+Google Cloud
+Hugging Face
+IBM
+IBM
+Intel
+Microsoft
+MLCommons
+Nvidia
+Oracle
+Orange
+Scale AI
+Snowflake
+Together.AI
+and many more to come
+Resources
+Continue exploring
+Get started with Llama Protections
+Read the Llama 3 paper
+Llama Guard paper
+LlamaFirewall paper
+AutoPatchBench Blog Post
+Developer Use Guide: AI Protections
+Download the models

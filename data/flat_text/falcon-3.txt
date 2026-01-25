@@ -1,0 +1,123 @@
+SOURCE_ID: falcon-3
+SOURCE_TITLE: Falcon 3 7B Instruct Model Card
+SOURCE_URI: https://build.nvidia.com/tiiuae/falcon3-7b-instruct/modelcard
+--------------------
+falcon3-7b-instruct Model by Tiiuae | NVIDIA NIM
+⌘K
+Ctrl+K
+tiiuae
+falcon3-7b-instruct
+Instruction tuned LLM achieving SoTA performance on reasoning, math and general knowledge capabilities
+Coding
+Improved reasoning
+Language Generation
+Math
+Scientific knowledge
+Code Generation
+Model Overview
+Description:
+The
+Falcon3-7B-Instruct
+is an open foundation model designed for state-of-the-art performance in reasoning, language understanding, instruction following, code generation, and mathematics. It supports long-context tasks with a token limit of up to
+32K
+and multilingual capabilities in
+English, French, Spanish, and Portuguese
+.
+This model is for
+research and development purposes only
+.
+Third-Party Community Consideration
+This model is not owned or developed by NVIDIA. This model has been developed and built to a third-party’s requirements for this application and use case; see link to Non-NVIDIA
+TII Model Card
+.
+License/Terms of Use
+GOVERNING TERMS: This trial service is governed by the
+NVIDIA API Trial Terms of Service
+. Use of this model is governed by the
+NVIDIA Community Model License
+. Additional Information:
+Falcon 3 TII Falcon License
+. The NVIDIA-optimized Falcon3-7B-Instruct is built using artificial intelligence technology from the Technology Innovation Institute.
+References:
+Falcon3-7B-Instruct Model Card
+TII Website
+Falcon 3 Family Release Blog
+Model Architecture:
+Architecture Type:
+Transformer
+Network Architecture:
+Transformer Decoder Only Architecture
+Model Details:
+Transformer-based causal decoder-only design.
+Composed of 28 decoder blocks, leveraging Grouped Query Attention (GQA) for faster inference with 12 query heads and 4 key-value heads.
+Wider head dimension of 256 for enhanced performance.
+High RoPE (Rotary Positional Embedding) value of 1000042, enabling extended context understanding up to 32,000 tokens.
+Incorporates SwiGLU activation and RMSNorm for improved training stability and efficiency.
+Input:
+Input Type(s):
+Text
+Input Format(s):
+String
+Input Parameters:
+(1D)
+Other Properties Related to Input:
+Supports multilingual input (EN, FR, ES, PT) and Context length up to 32,000 tokens.
+Output:
+Output Type(s):
+Text
+Output Format:
+String
+Output Parameters:
+(1D)
+Other Properties Related to Output:
+Generates outputs in supported languages with capabilities across reasoning, code, and instructional tasks.
+Software Integration:
+Runtime Engine(s):
+Not specified; supports standard machine learning pipelines such as PyTorch and Hugging Face
+Supported Hardware Microarchitecture Compatibility:
+NVIDIA Ampere
+NVIDIA Hopper
+[Preferred/Supported] Operating System(s):
+Linux
+Model Version(s):
+Falcon3-7B-Instruct v1.0
+Initial version released in December 2024
+Training, Testing, and Evaluation Datasets:
+Training Dataset:
+Link:
+Not publicly available
+Data Collection Method by dataset:
+Hybrid (Automated, Human)
+Labeling Method by dataset:
+Hybrid (Automated, Human)
+Properties:
+Pretrained on 14 teratokens of web, code, STEM, multilingual, and high-quality datasets
+Post-trained on 1.2 million samples of STEM, conversations, code, safety, and function call data
+Testing Dataset:
+Link:
+Not publicly available
+Data Collection Method by dataset:
+Hybrid (Automated, Human)
+Labeling Method by dataset:
+Hybrid (Automated, Human)
+Properties:
+NA
+Evaluation Dataset:
+Link:
+Not publicly available
+Data Collection Method by dataset:
+Hybrid (Automated, Human)
+Labeling Method by dataset:
+Unknown
+Properties:
+Benchmark scores for various models, including Falcon3-7B-Instruct, Qwen2.5-7B-Instruct, and Llama-3.1-8B-Instruct
+Inference:
+Engine:
+TensorRT-LLM
+Test Hardware:
+NVIDIA Ampere
+Ethical Considerations:
+NVIDIA believes Trustworthy AI is a shared responsibility and we have established policies and practices to enable development for a wide array of AI applications.
+When downloaded or used in accordance with our terms of service, developers should work with their internal model team to ensure this model meets requirements for the relevant industry and use case and addresses unforeseen product misuse. Please report security vulnerabilities or NVIDIA AI Concerns
+here
+.

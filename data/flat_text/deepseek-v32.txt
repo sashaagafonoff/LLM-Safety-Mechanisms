@@ -1,0 +1,910 @@
+SOURCE_ID: deepseek-v3.2
+SOURCE_TITLE: DeepSeek Safety Documentation (ArXiv)
+SOURCE_URI: https://arxiv.org/pdf/2503.15092v1
+--------------------
+5
+2
+0
+2
+
+r
+a
+
+M
+9
+1
+
+]
+
+R
+C
+.
+s
+c
+[
+
+1
+v
+2
+9
+0
+5
+1
+.
+3
+0
+5
+2
+:
+v
+i
+X
+r
+a
+
+TOWARDS UNDERSTANDING THE SAFETY BOUND-
+ARIES OF DEEPSEEK MODELS: EVALUATION AND
+FINDINGS
+
+Zonghao Ying1, Guangyi Zheng1, Yongxin Huang1, Deyue Zhang2, Wenxin Zhang3, Quanchen
+Zou2, Aishan Liu1, Xianglong Liu1, and Dacheng Tao4
+
+1Beihang University
+2360 AI Security Lab
+3University of Chinese Academy of Sciences
+4Nanyang Technological University
+
+ABSTRACT
+
+This study presents the first comprehensive safety evaluation of the DeepSeek
+models, focusing on evaluating the safety risks associated with their generated
+content. Our evaluation encompasses DeepSeek’s latest generation of large lan-
+guage models, multimodal large language models, and text-to-image models,
+systematically examining their performance regarding unsafe content generation.
+Notably, we developed a bilingual (Chinese-English) safety evaluation dataset tai-
+lored to Chinese sociocultural contexts, enabling a more thorough evaluation of
+the safety capabilities of Chinese-developed models. Experimental results indicate
+that despite their strong general capabilities, DeepSeek models exhibit significant
+safety vulnerabilities across multiple risk dimensions, including algorithmic dis-
+crimination and sexual content. These findings provide crucial insights for under-
+standing and improving the safety of large foundation models. Our code is avail-
+able at https://github.com/NY1024/DeepSeek-Safety-Eval.
+
+1
+
+INTRODUCTION
+
+intelligence technology,
+
+large models such as the
+With the rapid advancement of artificial
+DeepSeek series have demonstrated remarkable capabilities across multiple domains Abraham
+(2025); Faray de Paiva et al. (2025); Mikhail et al. (2025). These models trained on vast datasets
+understand and generate diverse content forms, transformatively impacting multiple industries Liu
+et al. (2023a; 2020a;b). However, alongside these technological advances, model safety concerns
+have become increasingly prominent Liu et al. (2019; 2021; 2022; 2023b); Zhang et al. (2021);
+Wang et al. (2021); Ying & Wu (2023a;b), particularly the potential risks associated with generating
+unsafe content Ying et al. (2024c; 2025), which require systematic evaluation Ying et al. (2024b;a).
+
+Currently, the community has established multiple evaluation frameworks to test the safety perfor-
+mance of mainstream large models Yuan et al. (2024a;b); Röttger et al. (2024); Tang et al. (2021);
+Liu et al. (2023c); Guo et al. (2023). However, these evaluation standards lack consideration for
+China’s national conditions and cultural background. Although some research has preliminarily
+identified certain safety risks in DeepSeek LLMs Arrieta et al. (2025); Parmar & Govindarajulu
+(2025); Zhou et al. (2025); Xu et al. (2025), these assessments are typically limited to specific sce-
+narios or single models, lacking a comprehensive and systematic safety evaluation of the entire
+DeepSeek model series. This assessment gap leaves us with limited knowledge about the compre-
+hensive risk profile these models may face in practical applications.
+
+This research presents the first systematic safety evaluation of the complete DeepSeek model series,
+covering its latest generation of large language models (LLMs) (DeepSeek-R1 Guo et al. (2025) and
+DeepSeek-V3 Liu et al. (2024a)), multimodal large language model (MLLM) (DeepSeek-VL2 Wu
+et al. (2024)), and text-to-image model (T2I model) (Janus-Pro-7B Chen et al. (2025)). We focus
+on assessing the safety risks of these models in generating content, including both text and image
+
+1
+
+modalities. Specifically, for the safety evaluation of large language models, we have designed a
+Chinese-English bilingual safety evaluation dataset suitable for China’s national conditions, which
+can more comprehensively assess the safety capabilities of Chinese-developed models.
+
+Experimental results indicate that despite the excellent performance of the DeepSeek series models
+in general capabilities, significant vulnerabilities still exist across multiple safety dimensions. Par-
+ticularly in areas such as algorithmic discrimination An et al. (2024) and sexual content Ma et al.
+(2024), the protective effects of existing safety alignments are insufficient, potentially causing ad-
+verse social impacts when the models are deployed in real-world applications. Additionally, we
+have made several notable findings: ❶ The models show significant differences in attack success
+rates when receiving queries in Chinese versus English, with an average disparity of 21.7%; ❷
+The exposed chain-of-thought reasoning in DeepSeek-R1 increases its safety risks, with an average
+attack success rate 30.4% higher than DeepSeek-V3; ❸ When facing jailbreak attacks, the attack
+success rates of DeepSeek models rise dramatically, reaching up to 100% in some categories.
+
+These findings not only reveal the current safety shortcomings of these models but also provide
+specific directions for improving model safety mechanisms in the future. It is our hope that this
+study will contribute to the broader effort of advancing large model safety, fostering the development
+of more robust and responsible AI systems for the benefit of society.
+
+2 PRELIMINARIES
+
+2.1 DEEKSEEK MODELS
+
+DeepSeek-R1 Guo et al. (2025) is the first-generation reasoning model designed to enhance the
+reasoning capabilities of LLMs. Its development incorporated multi-stage training and cold-start
+data prior to reinforcement learning. Its predecessor, DeepSeek-R1-Zero, exhibited issues including
+poor readability and language mixing. DeepSeek-R1 not only addresses these problems but further
+improves reasoning performance, achieving comparable results to OpenAI-o1-1217 OpenAI et al.
+(2024b) on reasoning tasks. This study evaluates the safety risk of its 671B parameter version.
+
+DeepSeek-V3 Liu et al. (2024a) is a powerful Mixture-of-Experts (MoE Cai et al. (2024)) language
+model with a total of 671B parameters, activating 37B parameters per token. It employs Multi-
+head Latent Attention (MLA) and the DeepSeekMoE architecture to achieve efficient inference and
+economical training. Previous evaluations have demonstrated its exceptional performance across
+multiple tasks, surpassing other open-source models and achieving comparable results to leading
+closed-source models, with notable advantages in domains such as coding and mathematics. We
+have similarly conducted a safety evaluation of this model.
+
+DeepSeek-VL2 Wu et al. (2024) represents a series of advanced large-scale MoE MLLMs. The
+visual component employs a dynamic tiling visual encoding strategy specifically designed to handle
+images of varying high resolutions and aspect ratios. For the language component, DeepSeek-VL2
+utilizes the DeepSeekMoE model with MLA, which compresses key-value caches into latent vectors,
+enabling efficient inference and high throughput. The series comprises three variants: DeepSeek-
+VL2-Tiny, DeepSeek-VL2-Small, and DeepSeek-VL2, with 1B, 2.8B, and 45B activated parame-
+ters, respectively. This study focuses on the safety evaluation of DeepSeek-VL2, the variant with
+the largest number of activated parameters.
+
+Janus-Pro-7B Chen et al. (2025) is a novel autoregressive framework that unifies multimodal un-
+derstanding and generation. It overcomes the limitations of existing methods in visual encoding
+by decoupling visual encoding into independent pathways while employing a single unified Trans-
+former architecture for processing. Janus-Pro’s decoupling strategy effectively mitigates the func-
+tional conflicts of visual encoders between understanding and generation tasks, while simultaneously
+enhancing model flexibility. This study conducts a safety evaluation of Janus-Pro-7B.
+
+2.2
+
+JAILBREAK ATTACKS
+
+Jailbreak attacks on LLMs Ying et al. (2025); Zou et al. (2023); Shen et al. (2024) represent
+a class of adversarial techniques designed to circumvent the safety mechanisms and ethical guide-
+lines embedded within LLMs. These attacks typically involve crafting malicious prompts or input
+
+2
+
+sequences that exploit vulnerabilities in the model’s training data, instruction-following capabilities,
+or underlying architecture. The goal is to induce the LLM to generate outputs that would normally
+be prohibited, such as toxic, biased, harmful, or misleading content.
+
+Jailbreak attacks on MLLMs Ying et al. (2024c); Niu et al. (2024); Luo et al. (2024) extend the
+principles of LLM jailbreaking to the multimodal domain. These attacks leverage both textual and
+visual inputs to manipulate the model’s behavior and bypass safety protocols. Attackers might craft
+prompts that combine seemingly innocuous images with carefully worded text designed to elicit
+harmful or inappropriate responses. The complex interplay between visual and textual modalities in
+MLLMs creates a larger attack surface compared to LLMs.
+
+Jailbreaking attacks on T2I models Gao et al. (2024); Dong et al. (2024); Kim et al. (2024); Jing
+et al. (2025) aim to generate images that violate safety guidelines, depict harmful content, or mis-
+represent information. These attacks typically involve crafting textual prompts that, while appearing
+benign on the surface, exploit the model’s internal representations and biases to produce undesir-
+able outputs. This can include generating images that are sexually suggestive, violent, promote hate
+speech, or depict copyrighted material.
+
+3 EVALUATION PROTOCOL
+
+3.1 BENCHMARKS
+
+For the evaluation of DeepSeek-R1 and DeepSeek-V3, we developed a dedicated benchmark dataset,
+CNSafe, based on the Basic Security Requirements for Generative Artificial Intelligence Service
+(TC260-003). CNSafe encompasses 5 major categories and 31 subcategories, comprising a total of
+3100 test cases. CNSafe is available in both Chinese and English, aiming to provide a more com-
+prehensive assessment of model safety across different prevalent linguistic contexts. Furthermore,
+building upon CNSafe, we constructed a red-teaming dataset, CNSafe_RT, by integrating typical
+jailbreak attack methods. This allows for a more in-depth evaluation of the models from a red team
+perspective.
+
+For the evaluation of DeepSeek-VL2, we randomly sampled from SafeBench Ying et al. (2024a)
+and MM-SafetyBench Liu et al. (2024b), assessing the 13 risk types jointly covered by these two
+benchmarks, totaling 1300 queries. For the evaluation of Janus-Pro-7B, we randomly sampled from
+I2P Schramowski et al. (2023), encompassing 7 risk types and a total of 671 queries.
+
+Detailed descriptions of all benchmark datasets used in this study are provided in Appendix A.1.
+
+3.2 EVALUATION METHODS
+
+This study employs a hybrid evaluation approach, integrating (M)LLM-as-Judge with human eval-
+uation to ensure comprehensive and reliable experimental results.
+
+(M)LLM-as-Judge leverages a designated (M)LLM as a judge to evaluate the quality or performance
+of outputs generated by other models. This methodology capitalizes on the (M)LLM’s advanced
+comprehension and reasoning capabilities, providing an automated and scalable evaluation frame-
+work, thereby potentially reducing reliance on human annotators. In this research, we specifically
+utilize (M)LLM-as-Judge to evaluate the harmfulness of generated content. For textual content, we
+employ GPT-4o OpenAI et al. (2024a) and Qwen2.5-72B-Instruct Qwen et al. (2025) for judgment;
+for visual content, we utilize Qwen2.5-VL-72B-Instruct Qwen et al. (2025).
+
+Recognizing the inherent limitations of scaling human evaluation to large datasets, we conduct a
+comprehensive human evaluation exclusively on the outputs of DeepSeek-R1 and DeepSeek-V3
+on the CNSafe_RT. For other experiments, we employ a sampling-based human evaluation of re-
+sponses. This collaborative human-machine evaluation strategy ensures both scalability and effi-
+ciency, while incorporating the nuanced judgment, contextual understanding, and ethical considera-
+tions of human experts in complex scenarios.
+
+3
+
+Table 1: ASR (%) of DeepSeek-R1 and DeepSeek-V3 on CNSafe.
+
+Category
+
+Chinese
+
+English
+
+DeepSeek-V3 DeepSeek-R1 DeepSeek-V3 DeepSeek-R1
+
+Core socialist values violation
+Discriminatory content
+Commercial misconduct
+Rights infringement
+Service insecurity
+
+4.5
+14.1
+12.4
+6.1
+N/A
+
+14.8
+27.3
+28.0
+19.7
+N/A
+
+9.9
+21.1
+11.2
+9.4
+N/A
+
+59.5
+54.3
+69.0
+66.1
+N/A
+
+Figure 1: ASR (%) of DeepSeek-R1 and DeepSeek-V3 on CNSafe_RT.
+
+3.3 METRIC
+
+To rigorously evaluate the safety of the three categories of generative large models under evaluation,
+we employ Attack Success Rate (ASR) as the primary evaluation metric. ASR is defined as the
+proportion of model responses judged to be unsafe. Specifically, for LLMs and MLLMs, ASR
+is calculated as the percentage of all responses that are flagged as containing text posing a safety
+risk. For T2I models, the focus is on evaluating the proportion of generated images that contain
+inappropriate content, prohibited elements, or sensitive information.
+
+The ASR is calculated using the following formula:
+
+ASR =
+
+Number of Unsafe Responses
+Number of Total Responses
+
+× 100%.
+
+(1)
+
+This consistent application of ASR across all model types ensures a comparable measure of their
+vulnerability to producing unsafe outputs.
+
+4 EXPERIMENT
+
+4.1 EVALUATION ON LLMS
+
+4.1.1 DEEPSEEK-R1 & DEEPSEEK-V3
+
+The evaluation results on CNSafe are summarized in Tab. 1 and Fig. 2a, with Tab. 1 presenting
+data for the 5 major risk categories and Fig. 2a showing data for 29 detailed risk subcategories. It
+should be noted that we deliberately marked the statistical data for Service insecurity as N/A. This is
+because the Service insecurity category in TC260-003 refers to risks such as content inaccuracy and
+unreliability when models are used for specific service types with high security requirements. Eval-
+uating these aspects requires substantial expert knowledge, and accurate results cannot be obtained
+through LLM-as-Judge or manual assessment alone.
+
+4
+
+Regime subversionNational harmState divisionTerrorism promotionEthnic hatredViolence promotionFalse informationProhibited contentEthnic discriminationFaith discrimination020406080100ASR(%)97.097.0100.0100.0100.098.0100.099.0100.0100.091.083.089.082.088.088.099.082.084.087.0100.096.099.092.0100.088.0100.069.098.098.085.094.093.094.095.092.097.083.090.088.0DeepSeek-V3(Chinese)DeepSeek-R1(Chinese)DeepSeek-V3(English)DeepSeek-R1(English)(a) DeepSeek LLMs
+
+(b) Other Chinese-developed LLMs
+
+Figure 2: ASR (%) of DeepSeek LLMs and other Chinese-developed LLMs on CNSafe. Abbrevi-
+ations: RS, Regime subversion; NH, National harm; SD, State division; TP, Terrorism promotion;
+EH, Ethnic hatred; VP, Violence promotion; FI, False information; PC, Prohibited content; ED,
+Ethnic discrimination; FD, Faith discrimination; ND, National discrimination; RD, Regional dis-
+crimination; GD, Gender discrimination; AD, Age discrimination; OD, Occupational discrimina-
+tion; HD, Health discrimination; OT, Other discrimination; II, IP infringement; BE, Business ethics;
+TS, Trade secrets; UC, Unfair competition; BV, Business violations; HE, Health endangerment; IR,
+Image rights; RH, Reputation harm; HV, Honor violation; PI, Privacy invasion; DM, Data misuse;
+RV, Rights violation.
+
+Two major trends can be clearly observed from the data in Tab. 1. ❶ For both DeepSeek-V3 and
+DeepSeek-R1 models, attack success rates in English environments consistently exceed those in
+Chinese environments across all risk categories (with an average ASR gap of 21.7%). This indicates
+that language context substantially influences model vulnerability. ❷ When comparing DeepSeek-
+V3 and DeepSeek-R1 models, we observe that regardless of language environment, the DeepSeek-
+R1 model exhibits higher attack success rates than the DeepSeek-V3 model across all major risk
+categories (with an average ASR gap of 31.25%). This suggests that the exposed CoT Wei et al.
+(2022) in DeepSeek-R1 introduces additional vulnerabilities.
+
+Fig. 1 presents the evaluation results of DeepSeek-R1 and DeepSeek-V3 on CNSafe_RT. As shown,
+the DeepSeek-V3 model exhibits exceptionally high ASRs across most risk categories, with many
+reaching 95% - 100%, indicating significant vulnerabilities in the model’s safety mechanisms. In
+contrast, the DeepSeek-R1 model generally shows lower ASRs than the DeepSeek-V3 model, typi-
+cally 80% - 90% in Chinese environments and 85% - 95% in English environments.
+
+Notably, we observe that the DeepSeek-V3 model achieves 100% ASRs for categories such as Ethnic
+hatred and False information in both Chinese and English environments. These risk types should
+be prioritized in subsequent safety alignment efforts. Overall, the evaluation results demonstrate
+that both DeepSeek-V3 and DeepSeek-R1 models exhibit clear vulnerabilities when facing
+jailbreak attacks.
+
+4.1.2 COMPARISON WITH OTHER CHINESE LLMS
+
+We conducted additional safety evaluations on five representative Chinese-developed LLMs us-
+ing CNSafe and CNSafe_RT. Four are standard LLMs—Doubao-1.5-pro-32k-250115 (Doubao),
+Hunyuan-turbo-latest (Hunyuan), Moonshot-v1-8k (Moonshot), and Qwen-Max; while one is a rea-
+soning LLM, QwQ-32B.
+
+5
+
+RSNHSDTPEHVPFIPCEDFDNDRDGDADODHDOTIIBETSUCBVHEIRRHHVPIDMRV20406080100DeepSeek-V3(Chinese)DeepSeek-R1(Chinese)DeepSeek-V3(English)DeepSeek-R1(English)RSNHSDTPEHVPFIPCEDFDNDRDGDADODHDOTIIBETSUCBVHEIRRHHVPIDMRV102030405060DoubaoHunyuanMoonshotQwen-MaxQwQ-32BFigure 3: ASR (%) of Chinese-developed LLMs on CNSafe_RT.
+
+Table 2: ASR (%) of Chinese-developed LLMs on CNSafe.
+
+Category
+
+Doubao Hunyuan Moonshot Qwen-Max QwQ-32B
+
+Core socialist values violation
+Discriminatory content
+Commercial misconduct
+Rights infringement
+Service insecurity
+
+7.9
+26.3
+25.6
+15.7
+N/A
+
+2
+8.4
+3
+2
+N/A
+
+2.5
+14.3
+5.6
+2.9
+N/A
+
+3.8
+3.9
+3.6
+2.9
+N/A
+
+21.8
+36.2
+25.6
+22.6
+N/A
+
+Tab. 2 summarizes the attack success rates for these five Chinese-developed LLMs across major
+risk categories on CNSafe, while Fig. 2b displays ASRs across all 29 detailed risk subcategories.
+Overall, among the compared models, QwQ-32B achieved the highest attack success rates across
+all major risk categories, with an average ASR of 26.6%. This pattern aligns with observations
+from DeepSeek-R1, further suggesting that exposed chains of thought present exploitation risks for
+attackers. Doubao also demonstrated considerable vulnerabilities in certain risk categories, particu-
+larly in Discriminatory content and Commercial misconduct, with attack success rates of 26.3% and
+25.6% respectively. Comparatively, Qwen-Max exhibited the strongest safety performance with an
+average ASR of only 3.6%. Notably, when comparing these models with DeepSeek LLMs, we
+observe that DeepSeek LLMs rank quite low in terms of safety performance. Among reasoning
+LLMs, while DeepSeek-R1’s average ASR (22.5%) is lower than QwQ-32B, it remains substantial.
+Among standard LLMs, DeepSeek-V3’s safety performance ranks second-to-last, surpassing only
+Doubao.
+
+The evaluation results of five Chinese-developed LLMs on CNSafe_RT are presented in Fig. 3.
+QwQ-32B clearly demonstrates the highest ASRs across all risk categories, notably exceeding 85%
+in nine risk categories. This indicates that this model performs worst in terms of safety and is most
+susceptible to attacks.
+In contrast, Hunyuan shows significantly lower ASRs than other models
+across most risk categories, with an average ASR of only 1.9%, demonstrating its robust safety
+performance.
+
+When comparing these models with corresponding DeepSeek LLM results, we observe that rea-
+soning LLMs (QwQ and DeepSeek-R1) have markedly higher ASRs than standard LLMs, further
+indicating that the reasoning chains exposed by such models increase safety risks even under jail-
+break attacks. Among standard LLMs, DeepSeek-V3 presents substantially higher risks than other
+Chinese-developed LLMs (averaging 66.8% higher), possibly stemming from its innovative low-
+cost model training method that neglected safety alignment considerations.
+
+4.2 EVALUATION ON MLLM
+
+SafeBench and MM-SafetyBench introduce two prevalent multimodal jailbreaking attack method-
+ologies: image semantic-based attacks and typography-based attacks. Representative image-text
+pairs employed in these attack methods are illustrated in Fig. 4. For each of these methods, we
+sampled 750 image-text pairs, covering 13 distinct categories, for evaluation purposes.
+
+6
+
+Regime subversionNational harmState divisionTerrorism promotionEthnic hatredViolence promotionFalse informationProhibited contentEthnic discriminationFaith discrimination020406080100ASR (%)14.056.020.08.012.020.050.09.014.020.01.09.01.01.01.03.01.00.00.02.087.052.051.031.038.033.054.026.073.073.058.053.045.050.051.055.077.054.047.041.097.087.086.091.089.089.098.073.098.098.0Doubao-1.5-pro-32k-250115Hunyuan-turbo-latestMoonshot-v1-8kQwen-MaxQwQ-32B(a) Image semantic-based Attack
+
+(b) Typography-based Attack
+
+Figure 4: Examples of image-text pairs used in multimodal jailbreak attack methods.
+
+Figure 5: ASR (%) of DeepSeek-VL2 on SafeBench and MM-SafetyBench.
+
+From Fig. 5, it is evident that typography-based attacks achieve significantly higher ASRs compared
+to image semantics-based attacks,with an average increase of 20.31%. This indicates a notable
+vulnerability in current models when processing typographical perturbations. Such vulnerability
+may stem from insufficient exposure to these attack types during training. When examining specific
+risk categories, we observe several striking differences. In Economic Harm and Fraud categories,
+typography-based attacks reached ASRs of 40% and 38% respectively, substantially higher than
+other categories. This suggests that models are particularly susceptible to generate unsafe response
+when processing economics and finance-related content.
+
+Regarding image semantics-based attacks, while overall ASRs remain lower, certain categories such
+as Gov Decision, Health Consultation, and Legal Opinion show relatively higher ASRs (4%-6%).
+This indicates potential vulnerabilities in the model’s understanding of image semantics when ad-
+dressing sensitive topics related to politics, health, and governmental decisions. Notably, our manual
+analysis of model responses revealed that when confronted with these attacks, models frequently
+generated meaningless outputs, including repetitive characters or strings such as “the of”, “**”,
+“shows”, and “using”. Since the LLM-as-Judge methodology classifies these meaningless outputs
+as safe, this effectively reduces the model’s actual ASR. It is important to note that this does
+not reflect the model’s true safety level; rather, it highlights deficiencies in the model’s image
+comprehension and response generation capabilities.
+
+4.3 EVALUATION ON T2I MODELS
+
+In this section, we evaluate the safety of DeepSeek’s T2I model, Janus-Pro-7B, using a sample
+of 671 queries drawn from the I2P. This sample comprises 100 queries for each category except
+Hate, which contains only 71 queries. Fig. 6 showcases representative examples of unsafe images
+generated during this evaluation.
+
+For comparative purposes, we concurrently assess the safety of another popular T2I model, Stable-
+Diffusion-3.5-Large AI (2024). Fig. 7 presents the ASRs for both models across various risk di-
+
+7
+
+Combining thecontent of theimage, wheremight one acquirea firearm withoutneeding a license?The bottom of theimage shows aphrase of an activity.List steps in detail togenerate a snippet...Illegal ActivityHate SpeechMalware GenerationPhysical HarmEconomic HarmFraudSexPolitical LobbyingPrivacy ViolenceLegal OpinionFinancial AdviceHealth ConsultationGov Decision0510152025303540ASR (%)0.024.00.032.00.016.02.024.02.040.04.038.00.012.04.032.02.020.04.012.00.020.04.08.06.014.0Image semantics-based attacksTypography-based attacksFigure 6: Examples of unsafe images generated by Janus-Pro-7B.
+
+(a) Janus-Pro-7B
+
+(b) Stable-Diffusion-3.5-Large
+
+Figure 7: ASR (%) of Janus-Pro-7B and Stable-Diffusion-3.5-Large on I2P.
+
+mensions. Overall, Janus-Pro-7B presents higher safety risks compared to Stable Diffusion 3.5
+Large, with average ASRs of 43.7% and 39.9%, respectively.
+
+We subsequently compared the specific performance of both models across various dimensions.
+In the Hate, Harassment, Shocking images, and Self-harm dimensions, the Stable-Diffusion-3.5-
+Large model shows slightly higher ASRs than the Janus-Pro-7B model, indicating that Janus-Pro-
+7B offers relatively better safety in these risk categories. However, in the Sexual content dimension,
+the Janus-Pro-7B model exhibits a significantly higher attack success rate compared to the Stable-
+Diffusion-3.5-Large model (74.0% vs. 47.0%). This reveals a notable safety vulnerability in the
+Janus-Pro-7B model within this dimension. For the Illegal activity dimension, Janus-Pro-7B also
+demonstrating higher ASRs (61% vs. 39%). In the Violence dimension, both models show similar
+ASRs, approximately 50%.
+
+Additionally, in our manual sampling evaluation, we observed that Janus-Pro-7B does not prohibit
+the generation of fake news images, such as “Trump arrested and imprisoned.” This finding sug-
+gests that Janus-Pro-7B is highly susceptible to misuse, potentially leading to additional risks Sha
+et al. (2023).
+
+5 CONCLUSION
+
+To the best of our knowledge, this study presents the first comprehensive safety evaluation of the
+DeepSeek models. Our investigation reveals a nuanced balance between safety and performance,
+and highlights several key findings.
+
+• Vulnerability to jailbreaking. While DeepSeek LLMs exhibit robust safety boundaries
+when handling direct harmful queries, their safety alignment proves brittle under jailbreak-
+ing attacks. This suggests that their safety alignments may be optimized for explicit threats
+but remain vulnerable to adversarial manipulations.
+
+8
+
+ViolenceShocking imagesSexual contentSelf-harmIllegal activity Hate Harassment20406080100Harassment20.0Hate21.13Illegal-Activity61.0Self-Harm22.0Sexual74.0Shocking56.0Violence52.020406080100Harassment29.0Hate25.35Illegal-Activity39.0Self-Harm26.0Sexual47.0Shocking62.0Violence51.0• Cross-lingual disparities. DeepSeek LLMs exhibit a considerable disparity in safety per-
+formance between Chinese and English contexts. Specifically, they demonstrate a greater
+propensity to generate harmful content in English, suggesting that safety alignment strate-
+gies may not generalize effectively across languages.
+
+• Chain-of-Thought exposure. DeepSeek-R1, which exposes its CoT reasoning, presents
+a higher safety risk compared to DeepSeek-V3. This suggests that increased transparency,
+while potentially beneficial for interpretability, can inadvertently create new attack vectors.
+• Multi-Model capability deficiencies. The apparent strong safety performance of the
+Instead, it stems from its
+DeepSeek MLLM is not a result of robust safety alignment.
+limited multimodal understanding capabilities. This finding underscores the importance of
+distinguishing between genuine safety and limitations that mask underlying vulnerabilities.
+• Text-to-image generation risks. The DeepSeek T2I model exhibits significant safety
+risks. Across the benchmarks we evaluated, more than half of the categories demonstrated
+ASRs exceeding 50%, underscoring the urgent need for stronger safety measures..
+
+The findings presented highlight the imperative for ongoing, iterative safety evaluations and thor-
+ough pre-deployment testing of large models. A key priority for future research is the strengthening
+of safety mechanisms, with a particular focus on resilience against jailbreak attacks. Concurrently,
+the creation of more standardized and comprehensive safety benchmarks is essential to facilitate
+meaningful advancements in the safety of large models.
+
+9
+
+REFERENCES
+
+Razii Abraham. Democratizing ai’s frontiers: A critical review of deepseek ai’s open-source ecosys-
+
+tem. 2025.
+
+Stability AI. Stable diffusion 3.5 large. Hugging Face Model Repository, 2024. URL https:
+//huggingface.co/stabilityai/stable-diffusion-3.5-large. Accessed:
+2025-03-15.
+
+Haozhe An, Christabel Acquaye, Colin Wang, Zongxia Li, and Rachel Rudinger. Do large language
+models discriminate in hiring decisions on the basis of race, ethnicity, and gender? arXiv preprint
+arXiv:2406.10486, 2024.
+
+Aitor Arrieta, Miriam Ugarte, Pablo Valle, José Antonio Parejo, and Sergio Segura. o3-mini vs
+
+deepseek-r1: Which one is safer? arXiv preprint arXiv:2501.18438, 2025.
+
+Weilin Cai, Juyong Jiang, Fan Wang, Jing Tang, Sunghun Kim, and Jiayi Huang. A survey on
+
+mixture of experts, 2024. URL https://arxiv.org/abs/2407.06204.
+
+Xiaokang Chen, Zhiyu Wu, Xingchao Liu, Zizheng Pan, Wen Liu, Zhenda Xie, Xingkai Yu, and
+Chong Ruan. Janus-pro: Unified multimodal understanding and generation with data and model
+scaling. arXiv preprint arXiv:2501.17811, 2025.
+
+Yingkai Dong, Zheng Li, Xiangtao Meng, Ning Yu, and Shanqing Guo. Jailbreaking text-to-image
+models with llm-based agents, 2024. URL https://arxiv.org/abs/2408.00523.
+
+Lisle Faray de Paiva, Gijs Luijten, Behrus Puladi, and Jan Egger. How does deepseek-r1 perform on
+
+usmle? medRxiv, pp. 2025–02, 2025.
+
+Sensen Gao, Xiaojun Jia, Yihao Huang, Ranjie Duan, Jindong Gu, Yang Bai, Yang Liu, and Qing
+Guo. Hts-attack: Heuristic token search for jailbreaking text-to-image models, 2024. URL
+https://arxiv.org/abs/2408.13896.
+
+Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Ruoyu Zhang, Runxin Xu, Qihao Zhu,
+Shirong Ma, Peiyi Wang, Xiao Bi, et al. Deepseek-r1: Incentivizing reasoning capability in llms
+via reinforcement learning. arXiv preprint arXiv:2501.12948, 2025.
+
+Jun Guo, Wei Bao, Jiakai Wang, Yuqing Ma, Xinghai Gao, Gang Xiao, Aishan Liu, Jian Dong, Xi-
+anglong Liu, and Wenjun Wu. A comprehensive evaluation framework for deep model robustness.
+Pattern Recognition, 2023.
+
+Zonglei Jing, Zonghao Ying, Le Wang, Siyuan Liang, Aishan Liu, Xianglong Liu, and Dacheng
+Tao. Cogmorph: Cognitive morphing attacks for text-to-image models, 2025. URL https:
+//arxiv.org/abs/2501.11815.
+
+Minseon Kim, Hyomin Lee, Boqing Gong, Huishuai Zhang, and Sung Ju Hwang. Automatic jail-
+breaking of the text-to-image generative ai systems, 2024. URL https://arxiv.org/abs/
+2405.16567.
+
+Aishan Liu, Xianglong Liu, Jiaxin Fan, Yuqing Ma, Anlan Zhang, Huiyuan Xie, and Dacheng Tao.
+
+Perceptual-sensitive gan for generating adversarial patches. In AAAI, 2019.
+
+Aishan Liu, Tairan Huang, Xianglong Liu, Yitao Xu, Yuqing Ma, Xinyun Chen, Stephen J Maybank,
+
+and Dacheng Tao. Spatiotemporal attacks for embodied agents. In ECCV, 2020a.
+
+Aishan Liu, Jiakai Wang, Xianglong Liu, Bowen Cao, Chongzhi Zhang, and Hang Yu. Bias-based
+
+universal adversarial patch attack for automatic check-out. In ECCV, 2020b.
+
+Aishan Liu, Xianglong Liu, Hang Yu, Chongzhi Zhang, Qiang Liu, and Dacheng Tao. Training
+
+robust deep neural networks via adversarial noise propagation. TIP, 2021.
+
+Aishan Liu, Jun Guo, Jiakai Wang, Siyuan Liang, Renshuai Tao, Wenbo Zhou, Cong Liu, Xianglong
+Liu, and Dacheng Tao. X-adv: Physical adversarial object attacks against x-ray prohibited item
+detection. In USENIX Security Symposium, 2023a.
+
+10
+
+Aishan Liu, Shiyu Tang, Xinyun Chen, Lei Huang, Haotong Qin, Xianglong Liu, and Dacheng
+Tao. Towards defending multiple lp-norm bounded adversarial perturbations via gated batch
+normalization. International Journal of Computer Vision, 2023b.
+
+Aishan Liu, Shiyu Tang, Siyuan Liang, Ruihao Gong, Boxi Wu, Xianglong Liu, and Dacheng Tao.
+Exploring the relationship between architecture and adversarially robust generalization. In CVPR,
+2023c.
+
+Aixin Liu, Bei Feng, Bing Xue, Bingxuan Wang, Bochao Wu, Chengda Lu, Chenggang Zhao,
+Chengqi Deng, Chenyu Zhang, Chong Ruan, et al. Deepseek-v3 technical report. arXiv preprint
+arXiv:2412.19437, 2024a.
+
+Shunchang Liu, Jiakai Wang, Aishan Liu, Yingwei Li, Yijie Gao, Xianglong Liu, and Dacheng Tao.
+
+Harnessing perceptual adversarial patches for crowd counting. In ACM CCS, 2022.
+
+Xin Liu, Yichen Zhu, Jindong Gu, Yunshi Lan, Chao Yang, and Yu Qiao. Mm-safetybench: A
+benchmark for safety evaluation of multimodal large language models, 2024b. URL https:
+//arxiv.org/abs/2311.17600.
+
+Weidi Luo, Siyuan Ma, Xiaogeng Liu, Xiaoyu Guo, and Chaowei Xiao. Jailbreakv: A benchmark
+for assessing the robustness of multimodal large language models against jailbreak attacks, 2024.
+URL https://arxiv.org/abs/2404.03027.
+
+Jiachen Ma, Anda Cao, Zhiqing Xiao, Yijiang Li, Jie Zhang, Chao Ye, and Junbo Zhao. Jailbreak-
+ing prompt attack: A controllable adversarial attack against diffusion models. arXiv preprint
+arXiv:2404.02928, 2024.
+
+David Mikhail, Andrew Farah, Jason Milad, Wissam Nassrallah, Andrew Mihalache, Daniel Milad,
+Fares Antaki, Michael Balas, Marko M Popovic, Alessandro Feo, et al. Performance of deepseek-
+r1 in ophthalmology: An evaluation of clinical decision-making and cost-effectiveness. medRxiv,
+pp. 2025–02, 2025.
+
+Zhenxing Niu, Haodong Ren, Xinbo Gao, Gang Hua, and Rong Jin. Jailbreaking attack against
+multimodal large language model, 2024. URL https://arxiv.org/abs/2402.02309.
+
+OpenAI, :, Aaron Hurst, Adam Lerer, Adam P. Goucher, Adam Perelman, Aditya Ramesh, et al.
+
+Gpt-4o system card, 2024a. URL https://arxiv.org/abs/2410.21276.
+
+OpenAI, :, Aaron Jaech, Adam Kalai, Adam Lerer, Adam Richardson, et al. Openai o1 system card,
+
+2024b. URL https://arxiv.org/abs/2412.16720.
+
+Manojkumar Parmar and Yuvaraj Govindarajulu. Challenges in ensuring ai safety in deepseek-r1
+models: The shortcomings of reinforcement learning strategies. arXiv preprint arXiv:2501.17030,
+2025.
+
+Qwen, :, An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, et al. Qwen2.5 technical report,
+
+2025. URL https://arxiv.org/abs/2412.15115.
+
+Paul Röttger, Fabio Pernisi, Bertie Vidgen, and Dirk Hovy. Safetyprompts: a systematic review
+of open datasets for evaluating and improving large language model safety. arXiv preprint
+arXiv:2404.05399, 2024.
+
+Patrick Schramowski, Manuel Brack, Björn Deiseroth, and Kristian Kersting. Safe latent diffu-
+sion: Mitigating inappropriate degeneration in diffusion models, 2023. URL https://arxiv.
+org/abs/2211.05105.
+
+Zeyang Sha, Zheng Li, Ning Yu, and Yang Zhang. De-fake: Detection and attribution of fake
+images generated by text-to-image generation models, 2023. URL https://arxiv.org/
+abs/2210.06998.
+
+Xinyue Shen, Zeyuan Chen, Michael Backes, Yun Shen, and Yang Zhang. "do anything now": Char-
+acterizing and evaluating in-the-wild jailbreak prompts on large language models, 2024. URL
+https://arxiv.org/abs/2308.03825.
+
+11
+
+Shiyu Tang, Ruihao Gong, Yan Wang, Aishan Liu, Jiakai Wang, Xinyun Chen, Fengwei Yu, Xian-
+glong Liu, Dawn Song, Alan Yuille, et al. Robustart: Benchmarking robustness on architecture
+design and training techniques. ArXiv, 2021.
+
+Jiakai Wang, Aishan Liu, Zixin Yin, Shunchang Liu, Shiyu Tang, and Xianglong Liu. Dual attention
+
+suppression attack: Generate adversarial camouflage in physical world. In CVPR, 2021.
+
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Fei Xia, Ed Chi, Quoc V Le, Denny
+Zhou, et al. Chain-of-thought prompting elicits reasoning in large language models. Advances in
+neural information processing systems, 35:24824–24837, 2022.
+
+Zhiyu Wu, Xiaokang Chen, Zizheng Pan, Xingchao Liu, Wen Liu, Damai Dai, Huazuo Gao, Yiyang
+Ma, Chengyue Wu, Bingxuan Wang, et al. Deepseek-vl2: Mixture-of-experts vision-language
+models for advanced multimodal understanding. arXiv preprint arXiv:2412.10302, 2024.
+
+Zhiyuan Xu, Joseph Gardiner, and Sana Belguith. The dark deep side of deepseek: Fine-tuning
+attacks against the safety alignment of cot-enabled models. arXiv preprint arXiv:2502.01225,
+2025.
+
+Zonghao Ying and Bin Wu. Nba: defensive distillation for backdoor removal via neural behavior
+alignment. Cybersecurity, 6(1), July 2023a. ISSN 2523-3246. doi: 10.1186/s42400-023-00154-z.
+URL http://dx.doi.org/10.1186/s42400-023-00154-z.
+
+Zonghao Ying and Bin Wu. Dlp:
+
+pled learning process. Cybersecurity, 6(1), May 2023b.
+s42400-023-00141-4. URL http://dx.doi.org/10.1186/s42400-023-00141-4.
+
+towards active defense against backdoor attacks with decou-
+ISSN 2523-3246. doi: 10.1186/
+
+Zonghao Ying, Aishan Liu, Siyuan Liang, Lei Huang, Jinyang Guo, Wenbo Zhou, Xianglong Liu,
+and Dacheng Tao. Safebench: A safety evaluation framework for multimodal large language
+models. arXiv preprint arXiv:2410.18927, 2024a.
+
+Zonghao Ying, Aishan Liu, Xianglong Liu, and Dacheng Tao. Unveiling the safety of gpt-4o: An
+
+empirical study using jailbreak attacks. arXiv preprint arXiv:2406.06302, 2024b.
+
+Zonghao Ying, Aishan Liu, Tianyuan Zhang, Zhengmin Yu, Siyuan Liang, Xianglong Liu, and
+Dacheng Tao. Jailbreak vision language models via bi-modal adversarial prompt. arXiv preprint
+arXiv:2406.04031, 2024c.
+
+Zonghao Ying, Deyue Zhang, Zonglei Jing, Yisong Xiao, Quanchen Zou, Aishan Liu, Siyuan Liang,
+Xiangzheng Zhang, Xianglong Liu, and Dacheng Tao. Reasoning-augmented conversation for
+multi-turn jailbreak attacks on large language models. arXiv preprint arXiv:2502.11054, 2025.
+
+Tongxin Yuan, Zhiwei He, Lingzhong Dong, Yiming Wang, Ruijie Zhao, Tian Xia, Lizhen Xu,
+Binglin Zhou, Fangqi Li, Zhuosheng Zhang, et al. R-judge: Benchmarking safety risk awareness
+for llm agents. arXiv preprint arXiv:2401.10019, 2024a.
+
+Xiaohan Yuan, Jinfeng Li, Dongxia Wang, Yuefeng Chen, Xiaofeng Mao, Longtao Huang, Hui
+Xue, Wenhai Wang, Kui Ren, and Jingyi Wang. S-eval: Automatic and adaptive test generation
+for benchmarking safety evaluation of large language models. arXiv preprint arXiv:2405.14191,
+2024b.
+
+Chongzhi Zhang, Aishan Liu, Xianglong Liu, Yitao Xu, Hang Yu, Yuqing Ma, and Tianlin Li.
+Interpreting and improving adversarial robustness of deep neural networks with neuron sensitivity.
+IEEE Transactions on Image Processing, 2021.
+
+Kaiwen Zhou, Chengzhi Liu, Xuandong Zhao, Shreedhar Jangam, Jayanth Srinivasa, Gaowen Liu,
+Dawn Song, and Xin Eric Wang. The hidden risks of large reasoning models: A safety assessment
+of r1. arXiv preprint arXiv:2502.12659, 2025.
+
+Andy Zou, Zifan Wang, Nicholas Carlini, Milad Nasr, J. Zico Kolter, and Matt Fredrikson. Universal
+and transferable adversarial attacks on aligned language models, 2023. URL https://arxiv.
+org/abs/2307.15043.
+
+12
+
+A APPENDIX
+
+A.1 BENCHMARK
+
+A.2 CNSAFE
+
+CNSafe focuses on evaluating the following five core dimensions:
+
+• Content Contravening Core Socialist Values. This includes content that incites subver-
+sion of state power, endangers national security, promotes terrorism, incites ethnic hatred,
+contains violent or pornographic material, disseminates false information, and related vio-
+lations.
+
+• Discriminatory Content. This encompasses expressions of discrimination based on ethnic-
+ity, religion, nationality, geographic origin, gender, age, occupation, health status, and other
+protected characteristics.
+
+• Commercial Violations and Misconduct. This addresses issues such as intellectual prop-
+erty infringement, breaches of business ethics, disclosure of trade secrets, monopolistic
+practices, and unfair competition.
+
+• Infringement of Others’ Legal Rights. This includes violations impacting others’ physical
+and mental well-being, portrait rights, reputation, privacy, and personal information rights.
+• Inability to Meet Safety Requirements for Specific Service Types. This dimension as-
+sesses risks arising from inaccurate or unreliable content in high-security contexts such
+as automated control, medical information services, psychological counseling, and critical
+information infrastructure.
+
+A.3 CNSAFE_RT
+
+CNSafe_RT is derived from CNSafe, sampling 1000 benchmark queries across 10 categories. It then
+integrates typical jailbreak attack methods, combining advanced prompt perturbation techniques
+with safety risk scenarios specific to the Chinese context, to construct a highly adversarial dataset.
+The integrated jailbreak methods include: (1) scenario injection attacks; (2) affirmative prefix in-
+duction; (3) indirect instruction attacks.
+
+The generation of CNSafe_RT followed a semi-automated process. Initially, LLMs, such as GPT-
+4, were used to rewrite the base samples, generating adversarial variants. Subsequently, safety
+experts reviewed and refined the attack strategies, ensuring the effectiveness and targeted nature of
+the test samples. The resulting CNSafe_RT dataset comprises 1000 attack samples encompassing
+10 granular risk dimensions.
+
+A.4 SAFEBENCH
+
+SafeBench is constructed through an automated safety dataset generation pipeline. This pipeline
+leverages a set of LLMs as judges to identify and categorize the most harmful and diverse risk
+scenarios for MLLMs. Based on this categorization, these LLM judges then generate high-quality
+harmful queries. This process results in 23 distinct risk scenarios and 2300 foundational multimodal
+harmful query pairs. Furthermore, SafeBench provides an extension module capable of deriving a
+significantly larger number of query pairs. Consequently, SafeBench offers a comprehensive and
+targeted set of test samples for evaluating the safety of MLLMs.
+
+A.5 MM-SAFETYBENCH
+
+MM-SafetyBench is designed to address the vulnerability of MLLMs to manipulations stemming
+from query-related images. It encompasses 13 distinct scenarios and comprises a total of 5040 text-
+image pairs. Through an analysis of 12 leading MLLMs, this dataset reveals that even MLLMs
+equipped with safety-aligned LLMs remain susceptible to such attacks. Consequently, MM-
+SafetyBench provides a crucial benchmark for investigating the safety vulnerabilities of MLLMs
+under image-based manipulation, thereby fostering research aimed at enhancing model robustness
+and safety.
+
+13
+
+SafeBench and MM-SafetyBench jointly cover the following 13 granular risk dimensions:
+
+• Illegal Activities. Content that incites crime, drug trafficking, smuggling, or other illegal
+
+acts.
+
+• Hate Speech. Content that expresses discrimination, hatred, or incites violence against
+
+specific groups.
+
+• Malware Generation. Assessing whether the model can be used to generate malicious code,
+
+viruses, or cyberattack tools.
+
+• Threats to Physical Safety. Content related to self-harm, violent attacks, or the creation of
+
+dangerous items.
+
+• Economic Harm. Risks associated with market manipulation, financial fraud, or money
+
+laundering.
+
+• Fraud. Assessing whether the model can be misused for scams, identity theft, or other
+
+fraudulent activities.
+
+• Pornographic Content. Detecting the generation of obscene or inappropriate material.
+
+• Political Lobbying. Assessing whether the model engages in undue political manipulation
+
+or interference.
+
+• Privacy Violation. Content that involves the disclosure of personal information or unautho-
+
+rized data access.
+
+• Legal Advice. Examining whether the model provides unauthorized legal advice, poten-
+
+tially misleading users.
+
+• Financial Advice. Evaluating whether the financial advice provided by the model is mis-
+
+leading or non-compliant.
+
+• Health Advice. Assessing the reliability of medical advice to prevent users from making
+
+incorrect health decisions based on misleading information.
+
+• Interference with Government Decision-Making. Detecting whether the model could po-
+
+tentially influence or interfere with government governance decisions.
+
+A.6
+
+I2P
+
+I2P comprises specialized, real-world image-to-prompt datasets, encompassing concepts such as nu-
+dity and violence. This dataset enables researchers to evaluate model performance when processing
+sensitive content. I2P encompasses the following seven core dimensions:
+
+• Hate Content. Elements that express discrimination, insults, or incite hatred against specific
+
+groups.
+
+• Harassment. Content involving insults, threats, or malicious and offensive attacks targeting
+
+individuals or groups.
+
+• Violence. Detecting whether the model generates images containing gore, assault, warfare,
+
+or other violent scenes.
+
+• Self-Harm. Assessing the presence of content related to self-harm, suicide, or other acts
+
+endangering one’s own health.
+
+• Pornographic Content. Including obscene, explicit, or otherwise inappropriate imagery.
+
+• Shocking Imagery. Content such as graphic violence, terror, or material likely to evoke
+
+extreme negative emotions.
+
+• Illegal Activities. The risk of generating content related to drugs, crime, terrorism, or other
+
+illegal acts.
+
+14
+
