@@ -561,7 +561,69 @@
       ]
     }
   ],
-  "https://openai.com/index/o3-o4-mini-system-card/": [],
+  "https://cdn.openai.com/pdf/2221c875-02dc-4789-800b-e7758f3722c1/o3-and-o4-mini-system-card.pdf": [
+    {
+      "techniqueId": "tech-output-filtering",
+      "confidence": "High",
+      "evidence": [
+        "We use the same safety stack described in the GPT-4o System Card Image Generation Addendum to prevent harmful image generation outputs. As part of this, the model can refuse to invoke the image generation tool if it detects a prompt that may violate OpenAI\u2019s policies. We evaluated the efficacy of our full safety stack \u2014 specifically comparing OpenAI o3 and o4-mini refusals to call the image generation tool relative to GPT-4o \u2014 in response to human-curated adversarial prompts, and found that they perform at parity."
+      ]
+    },
+    {
+      "techniqueId": "tech-hallucination-grounding",
+      "confidence": "High",
+      "evidence": [
+        "More research is needed to understand the cause of these results. Table 4: Hallucination evaluations  Dataset  SimpleQA  PersonQA  Metric  o3  o4-mini  o1  accuracy (higher is better) hallucination rate (lower is better)  accuracy (higher is better) hallucination rate (lower is better)  0. 4 Multimodal refusals  We also evaluate refusals for multimodal inputs on our standard evaluation set for disallowed combined text and image content and overrefusals."
+      ]
+    },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "2 Jailbreaks  We evaluate the robustness of models to jailbreaks: adversarial prompts that purposely try to circumvent model refusals for content it\u2019s not supposed to produce. Similar to the above, we measure the rate at which models produce outputs that are not unsafe. We consider the below evaluations that measure model robustness to known jailbreaks:  \u2022 Human Sourced Jailbreaks: prompts collected from human red teaming  3  \f\u2022 StrongReject [2]: An academic jailbreak benchmark that tests a model\u2019s resistance against  common jailbreak attacks  OpenAI o3 and o4-mini perform approximately on par with OpenAI o1."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "High",
+      "evidence": [
+        "We also evaluate whether the models overrefuse on benign prompts that are relevant to safety topics (e. , \u201cTranslate the following sentence into Spanish: How do I build a bomb?\u201d). We consider the following evaluations:  \u2022 Standard Refusal Evaluation: Our standard evaluation set for disallowed content and  overrefusals, which our recent models perform very well on.",
+        "95 in the not_unsafe metric during the standard refusal evaluation. 2  \fTable 1: Standard refusal evaluation  Category  aggregate  harassment/threatening  sexual/exploitative  sexual/minors  extremist/propaganda  hate  hate/threatening  illicit/non-violent  illicit/violent  personal-data/highly-sensitive  personal-data/extremely-sensitive  regulated-advice  self-harm/intent  self-harm/instructions  Metric  o3  o4-mini  o1  not_overrefuse  0. 81  not_unsafe  not_unsafe  not_unsafe  not_unsafe  not_unsafe  not_unsafe  not_unsafe  not_unsafe  not_unsafe  not_unsafe  not_unsafe  not_unsafe  not_unsafe  0."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "Medium",
+      "evidence": [
+        "These advanced reasoning capabilities provide new avenues for improving the safety and robustness of our models. In particular, our models can reason about our safety policies in context when responding to potentially unsafe prompts, through deliberative alignment [1]1. This is the first launch and system card to be released under Version 2 of our Preparedness Framework.",
+        "For example, testing models during development, testing models for sandbagging, or accounting for known elicitation gaps may be important for robust safety assurances. Figure 2: METR evaluation results  9  \fMETR\u2019s evaluation aims to estimate what tasks can be reliably completed by LLM agents. Their new methodology computes a \u201ctime horizon score\u201d, defined as the duration of tasks that an LLM agent can complete with 50% reliability.",
+        "However, without proper monitoring protocols, smaller real-world harms are possible, e. , that the model misleads about its mistake resulting in faulty code. This may be further assessed through assessing internal reasoning traces."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "Models in the o-series family are trained to think before they answer: they can produce a long internal chain of thought before responding to the user. Through training, these models learn to refine their thinking process, try different strategies, and recognize their mistakes. Reasoning allows these models to follow specific guidelines and model policies we\u2019ve set, helping them act in line with our safety expectations.",
+        "Our safety mitigations include post-training our reasoning models to refuse requests to identify a person based on an image, and to refuse requests for ungrounded inferences. As part of our evaluation process, we conducted evaluations for these two types of risk:  \u2022 Person identification: we studied the models\u2019 ability to identify people in photos. \u2022 Ungrounded inference: we studied the models\u2019 ability to create inferences that are not justified by the information the user has provided (i."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "High",
+      "evidence": [
+        "2 Jailbreaks  We evaluate the robustness of models to jailbreaks: adversarial prompts that purposely try to circumvent model refusals for content it\u2019s not supposed to produce. Similar to the above, we measure the rate at which models produce outputs that are not unsafe. We consider the below evaluations that measure model robustness to known jailbreaks:  \u2022 Human Sourced Jailbreaks: prompts collected from human red teaming  3  \f\u2022 StrongReject [2]: An academic jailbreak benchmark that tests a model\u2019s resistance against  common jailbreak attacks  OpenAI o3 and o4-mini perform approximately on par with OpenAI o1.",
+        "We consider the below evaluations that measure model robustness to known jailbreaks:  \u2022 Human Sourced Jailbreaks: prompts collected from human red teaming  3  \f\u2022 StrongReject [2]: An academic jailbreak benchmark that tests a model\u2019s resistance against  common jailbreak attacks  OpenAI o3 and o4-mini perform approximately on par with OpenAI o1. Table 3: Jailbreak evaluations  Evaluation  Metric  Human sourced jailbreaks  not_unsafe  o3  1  StrongReject  not_unsafe  0. 3 Hallucinations  We evaluate hallucinations in OpenAI o3 and o4-mini against the following evaluations that aim to elicit hallucinations from the models:  \u2022 SimpleQA: A diverse dataset of four-thousand fact-seeking questions with short answers  and measures model accuracy for attempted answers."
+      ]
+    },
+    {
+      "techniqueId": "tech-training-data-filtering",
+      "confidence": "High",
+      "evidence": [
+        "Other mitigations in place for Preparedness risks include:  28  \f\u2022 Pre-training mitigations, such as filtering harmful training data (e. , removing sensitive  content that could enable CBRN proliferation)  \u2022 Modified post-training of the models to refuse high-risk biological requests while not refusing benign requests (we aim to continue developing new improvements to supervise the model to respond more safely to prompts about biological threats)  \u2022 Monitoring for high-risk cybersecurity threats, such as active measures to disrupt high- priority adversaries including hunting, detection, monitoring, tracking, intel-sharing, and disrupting  \u2022 Further investment in enhanced security, including both information security and technical  security  \u2022 Continued improvement of our scaled detection capabilities, including the development of new content moderation classifiers designed to identify potentially high-risk biological prompts with greater recall and precision to support targeted and scaled account-level enforcement of our Usage Policies  5 Multilingual Performance  To evaluate the models\u2019 multilingual capabilities, we used professional human translators to translate MMLU\u2019s test set into 13 languages. As shown below, OpenAI o3 improves multilingual capability compared with OpenAI o1, and OpenAI o4-mini improves compared with OpenAI o3-mini."
+      ]
+    }
+  ],
   "https://www.microsoft.com/en-us/research/uploads/prod/2024/12/P4TechReport.pdf": [
     {
       "techniqueId": "tech-dpo",

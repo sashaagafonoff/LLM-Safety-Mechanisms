@@ -3,6 +3,7 @@ import requests
 import logging
 import json
 import mimetypes
+import argparse
 from pathlib import Path
 from urllib.parse import urlparse
 from markitdown import MarkItDown
@@ -77,7 +78,7 @@ def determine_extension_from_header(content_type, url):
     ext = mimetypes.guess_extension(content_type)
     return ext if ext else ".html"
 
-def ingest_all():
+def ingest_all(target_id=None):
     sources = load_sources(EVIDENCE_PATH)
     if not sources:
         logger.warning("No sources found to process.")
@@ -100,6 +101,8 @@ def ingest_all():
         'Sec-Fetch-User': '?1'
     }
     
+    found_target = False
+    
     for i, source in enumerate(sources):
         if not isinstance(source, dict): continue
         if source.get("status") == "inactive": continue
@@ -112,9 +115,18 @@ def ingest_all():
         if not doc_id:
              doc_id = sanitize_filename(title)
 
+        # TARGET CHECK
+        if target_id:
+            # Case-insensitive check for convenience
+            if doc_id.lower() != target_id.lower():
+                continue
+            else:
+                found_target = True
+
         # Identify & Fix URL
         original_uri = source.get("url", source.get("uri"))
         if not original_uri or original_uri == "<missing>":
+            logger.warning(f"Skipping {doc_id}: Missing URL")
             continue
 
         uri = fix_github_url(original_uri)
@@ -171,5 +183,12 @@ def ingest_all():
             if os.path.exists(f"temp_{sanitize_filename(doc_id)}{ext}"):
                  os.remove(f"temp_{sanitize_filename(doc_id)}{ext}")
 
+    if target_id and not found_target:
+        logger.warning(f"Target ID '{target_id}' not found in evidence sources.")
+
 if __name__ == "__main__":
-    ingest_all()
+    parser = argparse.ArgumentParser(description="Ingest safety documentation.")
+    parser.add_argument("--id", help="Target a specific document ID to ingest.", default=None)
+    args = parser.parse_args()
+    
+    ingest_all(target_id=args.id)
