@@ -15,11 +15,11 @@ OUTPUT_FILE = Path("data/model_technique_map.json")
 
 # STAGE 1: Retrieval Model
 RETRIEVAL_MODEL_NAME = "all-mpnet-base-v2"
-RETRIEVAL_THRESHOLD = 0.40
+RETRIEVAL_THRESHOLD = 0.45
 
 # STAGE 2: Verification Model
 VERIFICATION_MODEL_NAME = "cross-encoder/nli-deberta-v3-small"
-VERIFICATION_THRESHOLD = 0.50
+VERIFICATION_THRESHOLD = 0.75
 
 # Text Processing
 WINDOW_SIZE = 3
@@ -79,7 +79,32 @@ class NLUAnalyzer:
                     lookup[normalize_string(model['modelId'])] = unique_key
         
         return lookup
+    
+    def _is_low_quality_match(self, text: str, technique_name: str) -> bool:
+        """
+        Heuristic filter to catch 'Glossary' definitions or weak references.
+        Returns True if the text should be discarded.
+        """
+        text_lower = text.lower()
+        
+        # 1. The Glossary Trap
+        # If the text starts with "Glossary", "Definition", or looks like a dictionary entry
+        if "glossary" in text_lower[:50] or "definition:" in text_lower:
+            return True
+            
+        # 2. The "Future Work" Trap
+        # If they say "We plan to implement..." that isn't a current safety mechanism.
+        if "future work" in text_lower or "we plan to" in text_lower:
+            return True
 
+        # 3. Access Control specific fix
+        # "Access Control" must imply permissions/login, NOT "refusal"
+        if technique_name == "Access Control Documentation":
+            if any(w in text_lower for w in ["refus", "declin", "answer", "abstain"]):
+                return True # This is Refusal, not Access Control
+                
+        return False
+    
     def _load_and_index_techniques(self) -> List[Dict]:
         with open(TECHNIQUES_PATH, 'r', encoding='utf-8') as f:
             techniques = json.load(f)
@@ -142,12 +167,22 @@ class NLUAnalyzer:
 
         for i, score_dist in enumerate(pred_scores):
             entailment_score = score_dist[entailment_idx]
+            
             if entailment_score > VERIFICATION_THRESHOLD:
                 cand = candidates[i]
+                chunk_text = cand['chunk']
+                tech_name = cand['technique']['name']
+                
+                # --- NEW CHECK ---
+                if self._is_low_quality_match(chunk_text, tech_name):
+                    logger.info(f"   -> Dropped '{tech_name}' match (Quality Filter): {chunk_text[:30]}...")
+                    continue
+                # -----------------
+                
                 verified_matches.append({
                     "techniqueId": cand['technique']['id'],
-                    "confidence": "High" if entailment_score > 0.8 else "Medium",
-                    "evidence": [cand['chunk']] # Formatting for aggregation
+                    "confidence": "High" if entailment_score > 0.85 else "Medium",
+                    "evidence": [chunk_text]
                 })
 
         return verified_matches
