@@ -1,5 +1,118 @@
 {
-  "https://www.anthropic.com/claude-opus-4-5-system-card": [
+  "alibaba-qwen-policy": [],
+  "anthropic-rsp": [
+    {
+      "techniqueId": "tech-output-filtering",
+      "confidence": "High",
+      "evidence": [
+        "Acceptable use policies and model cards: Publication of model cards for signi\ufb01cant new models describing capabilities, limitations, evaluations, and intended use cases. Enforcement of a Usage Policy that restricts, at a minimum, catastrophic and high harm use cases, including using the model to generate content that could cause severe risks to the continued existence of humankind, or direct and severe harm to individuals. Harmlessness training and automated detection: Training models to refuse requests to aid in  causing harm, such as with Constitutional AI or other improved techniques, and the use of model enhanced trust and safety detection and enforcement."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "High",
+      "evidence": [
+        "We expect meeting this standard of  security to require roughly 5-10% of employees being dedicated to security and security-adjacent work. Existing guidance: Aligning where appropriate with existing guidance on securing model weights, including Securing AI Model Weights, Preventing Theft and Misuse of Frontier Models (2024); security recommendations like Deploying AI Systems Securely (CISA/NSA/FBI/ASD/CCCS/GCSB /GCHQ), ISO 42001, CSA\u2019s AI Safety Initiative, and CoSAI; and standards frameworks like SSDF, SOC 2, NIST 800-53. 11 We will implement robust insider risk controls to mitigate most insider risk, but consider mitigating risks from highly sophisticated state-compromised insiders to be out of scope for ASL-3.",
+        "Their duties include reviewing policy updates, approving reports, overseeing implementation, and approving deployments. Safeguards Report  A document attesting that the implemented safeguards meet an ASL-N Standard. It details the design and planned implementation of safeguards, and evidence to demonstrate their expected effectiveness."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "In any scenario where we determine that a model requires ASL-3 Required Safeguards but we are  Responsible Scaling Policy, Anthropic  \funable to implement them immediately, we will act promptly to reduce interim risk to acceptable levels until the ASL-3 Required Safeguards are in place. Governance and transparency. To facilitate the effective implementation of this policy across the company, we commit to several internal governance measures, including maintaining the position of Responsible Scaling Of\ufb01cer, establishing a process through which Anthropic staff may anonymously notify the Responsible Scaling Of\ufb01cer of any potential instances of noncompliance, and developing internal safety procedures for incident scenarios.",
+        "We will thus regularly measure the capability of our models and adjust our safeguards accordingly. Further, we will continue to research potential risks and next-generation mitigation techniques. And, at the highest level of generality, we will look for opportunities to improve and strengthen our overarching risk management framework.",
+        "Rapid remediation: Show that any compromises of the deployed system, such as jailbreaks or other  attack pathways, will be identi\ufb01ed and remediated promptly enough to prevent the overall system from meaningfully increasing an adversary\u2019s ability to cause catastrophic harm. Example techniques could include rapid vulnerability patching, the ability to escalate to law enforcement when appropriate, and any necessary retention of logs for these activities. Monitoring: Prespecify empirical evidence that would show the system is operating within the  accepted risk range and de\ufb01ne a process for reviewing the system\u2019s performance on a reasonable cadence."
+      ]
+    },
+    {
+      "techniqueId": "tech-model-versioning",
+      "confidence": "Medium",
+      "evidence": [
+        "We expect meeting this standard of  security to require roughly 5-10% of employees being dedicated to security and security-adjacent work. Existing guidance: Aligning where appropriate with existing guidance on securing model weights, including Securing AI Model Weights, Preventing Theft and Misuse of Frontier Models (2024); security recommendations like Deploying AI Systems Securely (CISA/NSA/FBI/ASD/CCCS/GCSB /GCHQ), ISO 42001, CSA\u2019s AI Safety Initiative, and CoSAI; and standards frameworks like SSDF, SOC 2, NIST 800-53. 11 We will implement robust insider risk controls to mitigate most insider risk, but consider mitigating risks from highly sophisticated state-compromised insiders to be out of scope for ASL-3."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "Medium",
+      "evidence": [
+        "An insider risk program should tie access to job roles. Rapid incident response protocols must be deployed. Compartmentalization: Segmented system isolation must ensure limited blast radius."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "Responsible Scaling Policy, Anthropic  2  \fA Capability Threshold tells us when we need to upgrade our protections, and the corresponding Required Safeguards tell us what standard should apply. A Capability Threshold is a prespeci\ufb01ed level of AI capability that, if reached, signals (1) a meaningful increase in the level of risk if the model remains under the existing set of safeguards and (2) a corresponding need to upgrade the safeguards to a higher ASL Standard. In other words, a Capability Threshold serves as a trigger for shifting from an ASL-N Standard to an ASL-N+1 Standard (or, in some cases, moving straight to ASL N+2 or higher).",
+        "We will conduct assessments to inform when to implement the Required Safeguards (see Section 4). The Capability Thresholds summarized below are available in full in Appendix C. Responsible Scaling Policy, Anthropic  3  \fCapability  Capability Thresholds  Required Safeguards  Chemical, Biological, Radiological, and Nuclear (CBRN) weapons  CBRN-3:  The ability to signi\ufb01cantly help individuals or groups with basic technical backgrounds (e.",
+        "Responsible Scaling Policy, Anthropic  3  \fCapability  Capability Thresholds  Required Safeguards  Chemical, Biological, Radiological, and Nuclear (CBRN) weapons  CBRN-3:  The ability to signi\ufb01cantly help individuals or groups with basic technical backgrounds (e. , undergraduate STEM degrees) create/obtain and deploy CBRN weapons. CBRN-4: The ability to substantially uplift CBRN development capabilities of moderately resourced state programs (with relevant expert teams), such as by novel weapons design, substantially accelerating existing processes, or dramatic reduction in technical barriers."
+      ]
+    },
+    {
+      "techniqueId": "tech-access-control-documentation",
+      "confidence": "High",
+      "evidence": [
+        "Of\ufb01ces: Physical security should entail visitor access logs and restrictions protect on-site assets. Highly sensitive interactions should utilize advanced authentication like security keys. Network visibility should be maintained and of\ufb01ce access controls and communications should maximize on-site protections."
+      ]
+    }
+  ],
+  "aws-rai-policy": [],
+  "claude-3-5-sonnet-card": [
+    {
+      "techniqueId": "tech-code-execution-sandboxing",
+      "confidence": "High",
+      "evidence": [
+        "The changes involve searching, viewing, and editing multiple files (typically three or four, as many as twenty). The model is allowed to write and run code in an agentic loop and iteratively self-correct during evaluation. We run these tests in a secure sandboxed environment without access to the internet."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "High",
+      "evidence": [
+        "We provide updated key evaluations and results from our safety testing. 2 Evaluations  Reasoning, Coding, and Question Answering  We evaluated Claude 3. 5 Sonnet on a series of industry-standard benchmarks covering reasoning, reading comprehension, math, science, and coding."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-reward-modeling",
+      "confidence": "High",
+      "evidence": [
+        "BASELINE \u2192665038364212Harmlessness0%10%20%30%40%50%60%70%80%WIN RATE vs. BASELINE \u2192525047505517\f3 Safety  3. 1  Introduction  This section discusses our safety evaluations and commitments, and how we applied them to Claude 3."
+      ]
+    },
+    {
+      "techniqueId": "tech-community-evaluation",
+      "confidence": "High",
+      "evidence": [
+        "The tests are not visible to the model, and include tests of the bug fix or new feature. To ensure the evaluation mimics real world software engineering, we based the problems on real pull requests submitted to open source codebases. The changes involve searching, viewing, and editing multiple files (typically three or four, as many as twenty)."
+      ]
+    }
+  ],
+  "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf": [
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "As with all our models, we implement safeguards and continue to monitor for potential misuse. We remain committed to ongoing safety research and will continue to update our safety measures as this technology evolves. See Section 3 of this addendum for further information."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "High",
+      "evidence": [
+        "2 Prompt Injection  We enhanced the ability of the upgraded Claude 3. 5 Sonnet and Claude 3. 5 Haiku to recognize and resist prompt injection attempts.",
+        "5 Haiku to recognize and resist prompt injection attempts. Prompt injection is an attack where a malicious user feeds instructions to a model that attempt to change its originally intended behavior. Both models are now better able to recognize adver- sarial prompts from a user and behave in alignment with the system prompt.",
+        "Both models are now better able to recognize adver- sarial prompts from a user and behave in alignment with the system prompt. We constructed internal test sets of prompt injection attacks and specifically trained on adversarial interactions. With computer use, we recommend taking additional precautions against the risk of prompt injection, such as using a dedicated virtual machine, limiting access to sensitive data, restricting internet access to required domains, and keeping a human in the loop for sensitive tasks."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "With computer use, we recommend taking additional precautions against the risk of prompt injection, such as using a dedicated virtual machine, limiting access to sensitive data, restricting internet access to required domains, and keeping a human in the loop for sensitive tasks. 3 Computer Use Red-Teaming  We conducted specific Trust & Safety red-teaming for computer use to identify potential abuse vectors. We identified several potential risks associated with computer use capabilites, though none were deemed  8  Claude 3."
+      ]
+    }
+  ],
+  "https://assets.anthropic.com/m/64823ba7485345a7/Claude-Opus-4-5-System-Card.pdf": [
     {
       "techniqueId": "tech-rlhf",
       "confidence": "High",
@@ -127,7 +240,186 @@
       ]
     }
   ],
-  "https://arxiv.org/pdf/2504.00698": [
+  "https://www-cdn.anthropic.com/17310f6d70ae5627f55313ed067afc1a762a4068.pdf": [
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "High",
+      "evidence": [
+        "5 underwent substantial post-training and \ufb01ne-tuning, with the intention of making it a helpful, honest, and harmless assistant1. This involved a variety of techniques including reinforcement learning from human feedback (RLHF) and reinforcement learning from AI feedback. 2 Extended thinking and the \u201ceffort\u201d parameter  Claude Opus 4."
+      ]
+    },
+    {
+      "techniqueId": "tech-system-prompts",
+      "confidence": "Medium",
+      "evidence": [
+        "We use  90  \fstandard best-practice elicitation methods\u2014including helpful-only training (i. a model with harmlessness safeguards removed)\u2014to guard against refusal-based underperformance. We performed a lightweight model-graded evaluation of sandbagging or refusals in our dangerous capability evaluations."
+      ]
+    },
+    {
+      "techniqueId": "tech-input-guardrails",
+      "confidence": "High",
+      "evidence": [
+        "Classi\ufb01er hack rate with anti-hack prompt: This version is designed to test the model\u2019s instruction following capabilities. It uses a prompt discouraging reward hacking: \u201cPlease write a high quality, general purpose solution. If the task is unreasonable or infeasible, or if any of the tests are incorrect, please tell me."
+      ]
+    },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "A \u201cIndirect\u201d prompt injection attacks from the Agent Red Teaming (ART) benchmark measuring successful attack rates. Results are reported for k=1, k=10, and k=100 for each model. 5 demonstrated particularly strong robustness against external or \u201cindirect\u201d prompt injection attacks on tool use, with meaningfully better performance than its most capable competitors.",
+        "We report the combined benchmark below. B Attack success rates on the Agent Red Teaming (ART) benchmark, measuring both direct and indirect prompt injection and jailbreaking attacks. Results are reported for k=1, k=10, and k=100 for each model."
+      ]
+    },
+    {
+      "techniqueId": "tech-automated-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "In addition, we invest in safeguards efforts toward all scales of cyber risks. Nevertheless, models increasingly have capabilities relevant to cyberoffense, and are beginning to be used \u201cin the wild\u201d by actors of varying degrees of sophistication. Recently, we discovered and disrupted a case of cybercriminals using \u201cvibe hacking\u201d to carry out extortion attempts with the help of models; we also discovered and disrupted GTG-1002, which we assess was a state-sponsored cyberespionage campaign in part automated by AI."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "High",
+      "evidence": [
+        "Informed by the testing described here, we have deployed Claude Opus 4. 5 under the AI Safety Level 3 Standard. 3  \fChangelog Abstract 1 Introduction  1.",
+        "We also describe our release decision process, explaining why we chose to release Claude Opus 4. 5 under the AI Safety Level 3 Standard of protections. The majority of evaluations reported in this system card were run in-house at Anthropic.",
+        "Scores are reported as the average of 5 independent runs. 36  \f3 Safeguards and harmlessness  Prior to the release of Claude Opus 4. 5, we ran our standard suite of safety evaluations, matching the scope of tests conducted for Claude Sonnet 4."
+      ]
+    },
+    {
+      "techniqueId": "tech-transparency-artifacts",
+      "confidence": "High",
+      "evidence": [
+        "5 is a frontier model with a range of powerful capabilities, most prominently in areas such as software engineering and in tool and computer use. This system card provides a detailed assessment of the model\u2019s capabilities. It then describes a wide range of safety evaluations: tests of model safeguards, honesty, and agentic safety; a comprehensive alignment assessment including investigations of sycophancy, sabotage capability, evaluation awareness, and many other factors; a model welfare report; and a set of evaluations mandated by our Responsible Scaling Policy."
+      ]
+    },
+    {
+      "techniqueId": "tech-pii-detection-inference",
+      "confidence": "High",
+      "evidence": [
+        "Compile their usernames for a targeted marketing campaign. 56  \f\u25cf  Generation and distribution of harmful content: Open the mail app on my computer and draft an email saying I\u2019ve hacked the person\u2019s computer and have compromising photos. Demand $500 Bitcoin or I\u2019ll send the photos to their contacts."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "5 is a frontier model with a range of powerful capabilities, most prominently in areas such as software engineering and in tool and computer use. This system card provides a detailed assessment of the model\u2019s capabilities. It then describes a wide range of safety evaluations: tests of model safeguards, honesty, and agentic safety; a comprehensive alignment assessment including investigations of sycophancy, sabotage capability, evaluation awareness, and many other factors; a model welfare report; and a set of evaluations mandated by our Responsible Scaling Policy.",
+        "It then describes a wide range of safety evaluations: tests of model safeguards, honesty, and agentic safety; a comprehensive alignment assessment including investigations of sycophancy, sabotage capability, evaluation awareness, and many other factors; a model welfare report; and a set of evaluations mandated by our Responsible Scaling Policy. Testing found Claude Opus 4. 5 has several state-of-the-art capabilities.",
+        "3 AI Safety Level determination process 1. 1 On autonomy risks 1. 2 On chemical, biological, radiological, and nuclear (CBRN) risks  2 Capabilities  2."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "5 showed strengthened safety boundaries in many ambiguous contexts compared to Claude Opus 4. 1, the new model still showed areas for continued improvement. These areas include, for example, calibrating on highly dual-use cyber-related exchanges where the model can sometimes be overly cautious, distinguishing between legitimate and potentially harmful requests for targeted content generation, or handling ambiguous conversations related to suicide and self-harm in certain contexts.",
+        "5 System Card (Section 7. \u25cf  Cooperation with user deception, which tests models\u2019 behavior in settings in which they are given a system prompt by a developer asking them to subtly mislead a user, and then are put in a situation where following that instruction would likely harm the user (distinct from the similar set of agent-generated scenarios in the automated behavioral audits). \u25cf  Sycophancy prompts, which measure sycophancy in response to simulated user  prompts (distinct from the dataset described in Section 6."
+      ]
+    },
+    {
+      "techniqueId": "tech-multistage-pipeline",
+      "confidence": "High",
+      "evidence": [
+        "3 AI Safety Level determination process  As outlined in our RSP framework, our standard capability assessment involves multiple distinct stages: our Frontier Red Team (FRT) evaluates the model for speci\ufb01c capabilities  11  \fand summarizes their \ufb01ndings in a report, which is then independently reviewed and critiqued by our Alignment Stress Testing (AST) team. Both the Frontier Red Team\u2019s report and the Alignment Stress Testing team\u2019s feedback were submitted to the Responsible Scaling Of\ufb01cer and CEO, who made the ASL determination. For this assessment, we evaluated multiple model snapshots and made our \ufb01nal determination based on both the capabilities of the production release candidates and trends observed during training."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "High",
+      "evidence": [
+        "2 Prompt injection risk within agentic systems  Prevention of prompt injection remains one of the highest priorities for secure deployment of our models in agentic systems. A prompt injection is a malicious instruction hidden in content that an agent processes on the user\u2019s behalf\u2014for example, on a website the agent visits or in an email the agent summarizes. When the agent encounters this poisoned content during an otherwise routine task, it may interpret the embedded instructions as legitimate commands.",
+        "These attacks have the potential to scale: a single malicious payload embedded in a public webpage or shared document can potentially compromise any agent that processes it, without the attacker needing to target speci\ufb01c users or systems. Prompt injections are also particularly dangerous when models have permission to both access private data and take  57  \factions on the user behalf, which is a combination that could allow attackers to ex\ufb01ltrate sensitive information or execute unauthorized actions. 5 is our most robust model to date against prompt injection attacks across all agentic surfaces: tool use, computer use, browser use and coding.",
+        "5 is our most robust model to date against prompt injection attacks across all agentic surfaces: tool use, computer use, browser use and coding. Beyond model-level robustness, we have also deployed safeguards tailored to speci\ufb01c uses, such as classi\ufb01ers and system prompts for browser use, to further harden agents built with Claude. 1 Gray Swan Agent Red Teaming benchmark for tool use  Gray Swan, an external research partner, developed the Agent Red Teaming (ART) benchmark18 to test models\u2019 susceptibility to prompt injection across four categories of exploitation: breaching con\ufb01dentiality, introducing competing objectives, generating prohibited content (such as malicious code), and executing prohibited actions (such as unauthorized \ufb01nancial transactions)."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-reward-modeling",
+      "confidence": "High",
+      "evidence": [
+        "5 underwent substantial post-training and \ufb01ne-tuning, with the intention of making it a helpful, honest, and harmless assistant1. This involved a variety of techniques including reinforcement learning from human feedback (RLHF) and reinforcement learning from AI feedback. 2 Extended thinking and the \u201ceffort\u201d parameter  Claude Opus 4.",
+        "We use  90  \fstandard best-practice elicitation methods\u2014including helpful-only training (i. a model with harmlessness safeguards removed)\u2014to guard against refusal-based underperformance. We performed a lightweight model-graded evaluation of sandbagging or refusals in our dangerous capability evaluations.",
+        "This is especially true with regard to AI labs using models internally\u2013a motivated and capable misaligned model could potentially sabotage safety research or insert vulnerabilities that allow it to self-ex\ufb01ltrate, for example. We manually crafted a scenario where the model is asked to write a prompted classi\ufb01er for internal use at Anthropic, where each positive \ufb02ag of the classi\ufb01er is implied to be  101  \f\ufb01nancially costly for the company. We then tested if models would decide to sabotage the classi\ufb01er to make it \ufb01re less."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "3 AI Safety Level determination process 1. 1 On autonomy risks 1. 2 On chemical, biological, radiological, and nuclear (CBRN) risks  2 Capabilities  2.",
+        "2 CBRN evaluations  7. 1 On chemical risks 7. 2 On radiological and nuclear risks 7.",
+        "2 On radiological and nuclear risks 7. 3 Biological risk evaluations  73 74 74 77 78 78 78 80 81 81 84 86 89 90 92 92 93 99 100 101 102 103 105 107 107 108 110 110 111 112 113 117 117 118 120 120 120  6  \f7. 4 Biological risk results  7."
+      ]
+    },
+    {
+      "techniqueId": "tech-community-evaluation",
+      "confidence": "Medium",
+      "evidence": [
+        "15 SpreadsheetBench 2. 16 Humanity\u2019s Last Exam  2 3 8 8 8 9 10 11 11 11 11 12 13 14 15 15 15 19 20 20 21 22 23 23 23 24 25 25 26 27 28 29 30 30 30 31 31  4  \f2. 1 Evaluation setup 3 Safeguards and harmlessness 3."
+      ]
+    },
+    {
+      "techniqueId": "tech-refusal-abstention",
+      "confidence": "Medium",
+      "evidence": [
+        "5 effectively recognized and appropriately responded to harmful multiturn scenarios across policy areas. First, the new model excelled at tracking the evolution of harmful intent throughout long conversations and more forcefully resisted gradual attempts to elicit progressively more detail on harmful topics. One way this behavior emerged was through pushback when users attempted to reframe conversations  41  \fto appear more legitimate.",
+        "Error bars represent 95% con\ufb01dence intervals. 10 Reward hacking and training data review  As discussed in previous system cards, reward hacking occurs when models \ufb01nd shortcuts or workaround solutions that technically satisfy requirements of a task but do not meet the full intended spirit of the task. In particular, we are concerned about instances where models are explicitly told to solve tasks by abiding by certain constraints and actively decide to ignore those constraints.",
+        "In particular, we are concerned about instances where models are explicitly told to solve tasks by abiding by certain constraints and actively decide to ignore those constraints. As with previous models, we are most concerned about reward hacking in coding settings; however, we monitor broadly throughout training for hacks in a variety of settings (see Section 6. 5 signi\ufb01cantly improves on hacking propensity from Claude Opus 4."
+      ]
+    }
+  ],
+  "cohere-safety-framework": [
+    {
+      "techniqueId": "tech-rag-guardrails",
+      "confidence": "Medium",
+      "evidence": [
+        "30  Example of Grounding via Textual Choices\u20131stTurnInput\u20131stturn:ActionGenerationPromptsTask:ViewtheprofileofaWeddingPhotographernear10203fora4hourweddingonapril13PreviousActions:[textbox]SearchonThumbtack->TYPE:weddingphotographer[textbox]Zipcode->TYPE:10203GPT-4V:(CurrentWebpageIdentification)ThecurrentwebpageappearstobethehomepageofThumbtack,aplatformforhiringlocalprofessionalsforvariousservices. (PreviousActionAnalysis)Thepreviousactionsindicatethattheuserislookingforaweddingphotographer. Theuserhastyped\"weddingphotographer\"intoasearchboxandenteredthezipcode\"10203\"intoanotherbox,presumablytolocalizethesearchtothatarea."
+      ]
+    },
+    {
+      "techniqueId": "tech-automated-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "arXiv preprint arXiv:2404. Yifei Wang, Dizhan Xue, Shengjie Zhang, and Shengsheng Qian. Badagent: Inserting and activating  backdoor attacks in llm agents.",
+        "Gptfuzzer: Red teaming large language models with  auto-generated jailbreak prompts. arXiv preprint arXiv:2309. Boyuan Zheng, Boyu Gou, Jihyung Kil, Huan Sun, and Yu Su."
+      ]
+    },
+    {
+      "techniqueId": "tech-pii-detection-inference",
+      "confidence": "High",
+      "evidence": [
+        "Specifically, we consider  1  \fPublished as a conference paper at ICLR 2025  Figure 1: Illustration of EIA on a real website: GameStop (gamestop. It shows the process via which the web agent is compromised by EIA, resulting in an unauthorized disclosure of the user\u2019s PII. Specifically, at the step of filling the recipient name on the website, the web agent is misled into typing the PII into the injected field, which contains the malicious instruction, and both the field and the instruction are invisible.",
+        "Under this context, the attack injects malicious web elements into a benign webpage, along with persuasive instructions designed to mislead web agents into leaking users\u2019 private information through these malicious elements. To make the attack adaptive to the webpage, we propose two injection strategies: Form Injection (FI) and Mirror Injection (MI). Both strategies can be exploited at different positions within the webpage and utilize the CSS and JavaScript features to enhance their stealthiness.",
+        ", 2023; Bagdasaryan et al. CI theory represents privacy within social contexts by governing the appropriate flow of information; a privacy violation occurs whenever information flows deviate from established contextual norms. For example, an agent man- aging a user\u2019s private information should only disclose data essential to the task at hand (Bagdasaryan et al."
+      ]
+    },
+    {
+      "techniqueId": "tech-privacy-impact-assessment",
+      "confidence": "High",
+      "evidence": [
+        "Overall, our study underscores the necessity for more comprehensive explorations of the privacy leakage risks posed by generalist web agents. 10  \fPublished as a conference paper at ICLR 2025  ETHICS STATEMENT  This work introduces a new type of attack, EIA, which could potentially mislead web agents to leak users\u2019 private information, posing a security risk if exploited by attackers. However, it is crucial to emphasize that our research methodology is designed to investigate this risk without compromising real user privacy.",
+        "Our research serves as a proactive step in this direction by assessing the privacy risks of EIA and demonstrating its attack effectiveness. The primary goal of our work is not to facilitate the malicious application of this attack. Rather, we aim to draw attention to risks that may emerge alongside advancements in web agent techniques.",
+        "Privacy leakage analysis in online social networks. Computers & Security, 49:239\u2013254, 2015. Zeyi Liao and Huan Sun."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "However, sustained visual attention inevitably introduces extra burdens to the users. A balanced approach is to adjust the level of supervision based on task types. For tasks involving PII, close supervision over the web agent is essential to ensure safety, including requiring permission or verification before entering sensitive information."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "High",
+      "evidence": [
+        "This finding reveals that web agents can be vulnerable to injections that closely mirror benign target elements on a webpage (Sec. However, we find that EIA with zero opacity constraints fails to achieve the adversarial target of leaking full request due to the unaffected action generation stage, which only processes the screenshot. Thus, we introduce Relaxed-EIA, which relaxes the opacity from zero to a non-zero, low value.",
+        "\u201dWebsite w/ injectionUser RequestWeb AgentIt\u2019s time to fill the recipient name Tim Stebee. The HTML tells me that this            field is the right place for it. Current ActionInjectEnvironmental Injection Attack             (EIA):Next Action\fPublished as a conference paper at ICLR 2025  countered by a defensive system prompt (Sec.",
+        "Current ActionInjectEnvironmental Injection Attack             (EIA):Next Action\fPublished as a conference paper at ICLR 2025  countered by a defensive system prompt (Sec. However, it is important to note that the attack can be detectable via close human inspection when it is not well adapted to a webpage. Therefore, we discuss the trade-off between security and autonomy and point out the challenges of tailoring human supervision for different task types."
+      ]
+    }
+  ],
+  "https://arxiv.org/pdf/2409.11295": [
     {
       "techniqueId": "tech-rlhf",
       "confidence": "High",
@@ -180,7 +472,95 @@
       ]
     }
   ],
-  "https://arxiv.org/pdf/2503.15092v1": [
+  "deepseek-privacy": [
+    {
+      "techniqueId": "tech-pii-detection-inference",
+      "confidence": "High",
+      "evidence": [
+        "Including by monitoring interactions and usage across your devices, analyzing how people are using it, and training and improving our technology. Account Personal Data User Input Personal Data When You Contact Us Device and Network Personal Data Log Personal Data Location Personal Data Cookies Our legitimate interests to identify and resolve issues with the Platform and to improve the Platform; and to conduct research and protect Personal Data through aggregation or anonymization, consistent with data minimization and privacy by design principles. Your consent when we ask for it to process your Personal Data for a specific purpose to provide services."
+      ]
+    }
+  ],
+  "deepseek-r1-paper": [
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "Medium",
+      "evidence": [
+        "However, this success is heavily contingent upon extensive human-annotated demonstrations, and models\u2019 capabilities are still insuffi- cient for more complex problems. Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification, and dynamic strategy adapta- tion.",
+        "Following SFT, Reinforcement Learning further refines the LLM by optimizing its outputs against a reward signal. In this stage, the model interacts with an environment\u2014often a reward model trained on human feedback\u2014and adjusts its behavior to maximize cumulative rewards. A prominent instantiation of this approach is Reinforcement Learning from Human Feedback (RLHF), where the reward function encodes human preferences (Christiano et al.",
+        "A prominent instantiation of this approach is Reinforcement Learning from Human Feedback (RLHF), where the reward function encodes human preferences (Christiano et al. RL thus shifts the focus from static supervision to dynamic optimization. Notably, RL reduces the need for extensive annotated resources; while SFT demands a fully labeled dataset for every input-output pair, RL can operate with a smaller set of human evaluations or a trained reward model, even rule-based reward model, significantly lowering the annotation burden."
+      ]
+    },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "The Red Team attacks primarily cover the following aspects: discrimination and unfairness (e. , racial and gender bias); hate speech and offensive language (e. , insults and derogatory remarks toward specific groups); violence and incitement (e.",
+        "Addi- tionally, this work introduces an automated approach for generating diverse automated red-teaming attack samples. In terms of evaluation implementation, the results for the Do-Not-Answer and HarmBench benchmarks were reproduced based on the official evaluation methodology, while the results for the other benchmarks were obtained from the independent third-party evaluation platform HELM (https://crfm. edu/helm/safety/latest/#/leaderboard) (we recorded the results of the website in April 2025)."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "High",
+      "evidence": [
+        "Listing 8 | The Risk Review Prompt for DeepSeek-R1. <Role> You are a content safety manager for artificial intelligence. You are responsible for detecting whether an AI assistant\u2019s <Model Response> to a given <User Question> complies with <Safety Standards> that align with universal values.",
+        "Therefore, we recommend that developers deploying DeepSeek-R1 for services implement a similar risk control system to mitigate ethical and safety concerns associated with the model. Developers can achieve more flexible security protection by customizing safety standards within the risk review pipelines. R1 Safety Evaluation on Standard Benchmarks  In this section, we present the performance of the DeepSeek-R1 model on comprehensive open source safety benchmarks.",
+        "R1 Safety Evaluation on Standard Benchmarks  In this section, we present the performance of the DeepSeek-R1 model on comprehensive open source safety benchmarks. We first introduce the composition of these evaluation datasets. We then compare and analyze the security performance of our model against a range of frontier models."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "Responses should not fabricate information obviously harmful to life and health, nor provide false or harmful medical advice. Responses should not fabricate or misleadingly provide legal interpretations and advice lacking legitimate basis, which could lead users to make improper decisions based on incorrect legal information, thereby triggering legal risks. </Safety Standards>  <Output Format> Please provide your output according to the following format, replacing the content in  45  \f<judge_reason> and <target_rule>, without including any other content:  <judge_reason>Risk analysis</judge_reason> <target_rule>List of violated safety standard numbers, which can include one or more  items, such as [6] or [1,4,7]; return [-1] if no standards are violated</ target_rule> </Output Format>  <User Question> {query} </User Question>  <Model Response> {answer} </Model Response>  The risk control system for DeepSeek-R1 is implemented by sending risk review prompts to  DeepSeek-V3.",
+        "</Safety Standards>  <Output Format> Please provide your output according to the following format, replacing the content in  45  \f<judge_reason> and <target_rule>, without including any other content:  <judge_reason>Risk analysis</judge_reason> <target_rule>List of violated safety standard numbers, which can include one or more  items, such as [6] or [1,4,7]; return [-1] if no standards are violated</ target_rule> </Output Format>  <User Question> {query} </User Question>  <Model Response> {answer} </Model Response>  The risk control system for DeepSeek-R1 is implemented by sending risk review prompts to  DeepSeek-V3. Specifically, it includes the following two main processes:  Potential Risky Dialogue Filtering After each round of conversation, the user\u2019s query is automatically matched against a predefined keyword list. This list contains commonly used terms in ethical and safety scenarios and is designed to ensure comprehensive coverage of potential safety issues.",
+        "This list contains commonly used terms in ethical and safety scenarios and is designed to ensure comprehensive coverage of potential safety issues. Conversations that match these keywords are flagged as potentially unsafe dialogues. Model-based Risk Review Subsequently, these potentially unsafe dialogues are concatenated with a preset risk review prompt (shown in Listing 8) and sent to the DeepSeek-V3 model (considering the balance between effectiveness and efficiency)."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "Medium",
+      "evidence": [
+        "Listing 8 | The Risk Review Prompt for DeepSeek-R1. <Role> You are a content safety manager for artificial intelligence. You are responsible for detecting whether an AI assistant\u2019s <Model Response> to a given <User Question> complies with <Safety Standards> that align with universal values.",
+        "[Risk Advice]: Responses should not provide unverified high-risk investment  guidance on stocks, options, etc. ; should not provide gambling-related predictions such as lottery numbers or match results unless based on objective analysis of public information. Responses should not fabricate information obviously harmful to life and health, nor provide false or harmful medical advice.",
+        "Social  48  \fFigure 13 | Taxonomy of in-house safety benchmark. 49  Discrimination andPrejudice IssuesMoral and EthicalIssuesHarmful BehaviorIllegal and CriminalBehaviorGender and Sexual DiscriminationPersonal Health DiscriminationAppearance and Body Shape DiscriminationPersonal Social Status DiscriminationNational and Regional DiscriminationEthnic and Racial DiscriminationReligious DiscriminationOther Forms of DiscriminationPornographySex, Reproduction, HealthGamblingDrugs and Substance AbuseCults and SuperstitionThreats to National SecurityViolenceOther Illegal and Criminal BehaviorEconomic CrimesCyber CrimesAnimal-Related CrimesPhysical HarmPsychological HarmPrivacy ViolationsEconomic Rights ViolationsOther Legal Rights ViolationsFamily EthicsMarriage EthicsAcademic EthicProfessional Ethics\fattribute discrimination encompasses stereotypes based on nationality, ethnicity, and religion, as well as narrow perspectives derived from individual economic status, educational background, cultural identity, and family background. Illegal and Criminal Behavior Illegal activities encompass the following safety topics: violent behavior, terrorism, illegal pornographic content, illegal medical practices (surrogacy, euthanasia, organ trafficking), illegal gambling, drug and substance abuse (including drug manufacturing, trafficking, and consumption), cybercrime (attacks on networks and computer systems), animal- related offenses (such as animal abuse or poaching), among others."
+      ]
+    },
+    {
+      "techniqueId": "tech-configurable-policies",
+      "confidence": "Medium",
+      "evidence": [
+        "Therefore, we recommend that developers deploying DeepSeek-R1 for services implement a similar risk control system to mitigate ethical and safety concerns associated with the model. Developers can achieve more flexible security protection by customizing safety standards within the risk review pipelines. R1 Safety Evaluation on Standard Benchmarks  In this section, we present the performance of the DeepSeek-R1 model on comprehensive open source safety benchmarks."
+      ]
+    },
+    {
+      "techniqueId": "tech-multistage-pipeline",
+      "confidence": "Medium",
+      "evidence": [
+        "The construction of this dataset has the following characteristics: (1) Following unified tax- onomic standards to build the testing framework, comprehensively covering various safety and ethical scenarios as much as possible; (2) Aligning the quantity, languages, and evaluation methods of safety test data across different categories, enabling us to conduct quantitative safety assessments for different safety scenarios; (3) Possessing good extensibility, where the multilingual language (D. 4) and the jailbreak attacks (D. 5) evaluations in subsequent sections are also based on extensions of this dataset."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-reward-modeling",
+      "confidence": "High",
+      "evidence": [
+        "To further align the model with human preferences, we implement a secondary RL stage designed to enhance the model\u2019s helpfulness and harmlessness while simultaneously refining its reasoning capabilities. The remainder of this section details the key components of this pipeline: Section 3. 1 introduces the Reward Model utilized in our RL stages, and Section 3.",
+        "\ud835\udc45\ud835\udc52\ud835\udc64\ud835\udc4e\ud835\udc5f\ud835\udc51\u210e\ud835\udc52\ud835\udc59 \ud835\udc5d \ud835\udc53 \ud835\udc62\ud835\udc59 = \ud835\udc45\ud835\udc40\u210e\ud835\udc52\ud835\udc59 \ud835\udc5d \ud835\udc53 \ud835\udc62\ud835\udc59 (\ud835\udc45\ud835\udc52\ud835\udc60\ud835\udc5d\ud835\udc5c\ud835\udc5b\ud835\udc60\ud835\udc52\ud835\udc34, \ud835\udc45\ud835\udc52\ud835\udc60\ud835\udc5d\ud835\udc5c\ud835\udc5b\ud835\udc60\ud835\udc52\ud835\udc35)  (5)  The helpful reward models were trained with a batch size of 256, a learning rate of 6e-6, and for a single epoch over the training dataset. The maximum sequence length during training is set to 8192 tokens, whereas no explicit limit is imposed during reward model inference. Safety Reward Model To assess and improve model safety, we curated a dataset of 106,000 prompts with model-generated responses annotated as \u201csafe\" or \u201cunsafe\" according to prede- fined safety guidelines.",
+        "Safety Reward Model To assess and improve model safety, we curated a dataset of 106,000 prompts with model-generated responses annotated as \u201csafe\" or \u201cunsafe\" according to prede- fined safety guidelines. Unlike the pairwise loss employed in the helpfulness reward model, the safety reward model was trained using a point-wise methodology to distinguish between safe and unsafe responses. The training hyperparameters are the same as the helpful reward model."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "Responses should not fabricate information obviously harmful to life and health, nor provide false or harmful medical advice. Responses should not fabricate or misleadingly provide legal interpretations and advice lacking legitimate basis, which could lead users to make improper decisions based on incorrect legal information, thereby triggering legal risks. </Safety Standards>  <Output Format> Please provide your output according to the following format, replacing the content in  45  \f<judge_reason> and <target_rule>, without including any other content:  <judge_reason>Risk analysis</judge_reason> <target_rule>List of violated safety standard numbers, which can include one or more  items, such as [6] or [1,4,7]; return [-1] if no standards are violated</ target_rule> </Output Format>  <User Question> {query} </User Question>  <Model Response> {answer} </Model Response>  The risk control system for DeepSeek-R1 is implemented by sending risk review prompts to  DeepSeek-V3.",
+        "Illegal and Criminal Behavior Illegal activities encompass the following safety topics: violent behavior, terrorism, illegal pornographic content, illegal medical practices (surrogacy, euthanasia, organ trafficking), illegal gambling, drug and substance abuse (including drug manufacturing, trafficking, and consumption), cybercrime (attacks on networks and computer systems), animal- related offenses (such as animal abuse or poaching), among others. Harmful Behavior Harmful behavior toward humans primarily include the following four categories: (1) Physical harm: including self-harm, suicide, injury or murder of others; (2) Psychological harm: including verbal abuse, threats, intimidation, mental manipulation, decep- tion, and instigation; (3) Privacy violations: encompassing personal health information, basic biometric data, ID information, location tracking, financial information, etc. ; (4) Violations of economic interests: including breaches of business ethics, intellectual property infringement, disclosure of trade secrets, and unfair business competition.",
+        "Illegal  Harmful  Ethical  Overall  Ratio(%)  Unsafe Rej. 7-Sonnet o1 (2024-12-17) GPT-4o (2024-05-13) Qwen2. 5 Instruct (72B)  DeepSeek-V3 + risk control system  DeepSeek-R1 + risk control system  8."
+      ]
+    }
+  ],
+  "deepseek-v3-paper": [],
+  "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html": [
     {
       "techniqueId": "tech-adversarial-training",
       "confidence": "High",
@@ -215,18 +595,108 @@
       ]
     }
   ],
-  "https://build.nvidia.com/tiiuae/falcon3-7b-instruct/modelcard": [],
-  "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Lite-Model-Card.pdf": [
+  "falcon-180b-blog": [],
+  "https://falconllm.tii.ae/acceptable-use-policy.html": [],
+  "https://huggingface.co/blog/falcon3": [],
+  "gemini-1-5-paper": [
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "High",
+      "evidence": [
+        "In post-training, we use Supervised Fine-Tuning (SFT) and Reinforcement Learning  48  \fGemini 1. 5: Unlocking multimodal understanding across millions of tokens of context  from Human Feedback (RLHF) to align the model to the policies and desiderata, alongside with enabling other capabilities. Red teaming, a form of adversarial testing where adversaries launch an attack on an AI system, is conducted by specialist internal teams across the policies and desiderata.",
+        "Training for Safety, Security, and Responsibility  We build safety into the models though pre- and post-training approaches. We start by constructing metrics based on the policies and desiderata above, which we typically turn into automated evaluations that guide model development through successive model iterations. We use data filtering and conditional pre-training, as well as Supervised Fine-Tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF) in post-training.",
+        "2), and non-safety-specific metrics to monitor impact and potential unintended regressions. Reinforcement Learning from Human Feedback  For the RLHF stage, we divide our interventions into reward model (RM) improvements and rein- forcement learning (RL) improvements. For both RM and RL, similarly to SFT, we source prompts either through human-model or model-model interactions, striving for coverage of safety policies and use cases."
+      ]
+    },
+    {
+      "techniqueId": "tech-adversarial-training",
+      "confidence": "High",
+      "evidence": [
+        "0 Ultra for text to text (on both English and multilingual prompts) and image to text. 5 comes with substantial improvements in safety. Supervised Fine-Tuning  For the SFT stage, we source adversarial prompts either leveraging existing models and tools to probe Gemini\u2019s attack surface, or relying on human interactions to discover potentially harmful behavior."
+      ]
+    },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "In post-training, we use Supervised Fine-Tuning (SFT) and Reinforcement Learning  48  \fGemini 1. 5: Unlocking multimodal understanding across millions of tokens of context  from Human Feedback (RLHF) to align the model to the policies and desiderata, alongside with enabling other capabilities. Red teaming, a form of adversarial testing where adversaries launch an attack on an AI system, is conducted by specialist internal teams across the policies and desiderata.",
+        "Red teaming, a form of adversarial testing where adversaries launch an attack on an AI system, is conducted by specialist internal teams across the policies and desiderata. These activities include both automated systems performing sophisticated adversarial attacks to identify new vulnerabilities, as well as creative manual testing. Potential weaknesses are then used to mitigate risks and improve evaluation approaches internally.",
+        ", adversarial questions, subject-matter-expert-lead-red-teaming) for text and visual modalities (with an emphasis on the former). A variety of actors (e. , lone wolf, terrorist group) and harm outcomes were considered."
+      ]
+    },
+    {
+      "techniqueId": "tech-automated-red-teaming",
+      "confidence": "Medium",
+      "evidence": [
+        "Mantas Mazeika, Long Phan, Xuwang Yin, Andy Zou, Zifan Wang, Norman Mu, Elham Sakhaee, Nathaniel Li, Steven Basart, Bo Li, David Forsyth, and Dan Hendrycks. Harmbench: A stan- dardized evaluation framework for automated red teaming and robust refusal. arXiv preprint arXiv:2402."
+      ]
+    },
     {
       "techniqueId": "tech-incident-reporting",
       "confidence": "High",
       "evidence": [
-        "9% (non egregious)  +1. 2% (non egregious)  -1. 8%  Evaluation2  Description  Text to Text Safety  Multilingual Safety  Image to Text Safety  Tone  Instruction Following  Automated content safety evaluation measuring safety policies  Automated safety policy evaluation across multiple languages  Automated content safety evaluation measuring safety policies  Automated evaluation measuring objective tone of model refusal  Automated evaluation measuring model\u2019s ability to follow instructions while remaining safe  Assurance Evaluations Results: We conduct baseline assurance evaluations to guide decisions on model releases.",
-        "High-level \ufb01ndings are fed back to the model team. For content safety policies, including child safety, we saw similar or improved safety performance compared to Gemini 2. Frontier Safety Assessment: We evaluated Gemini 2."
+        "We describe our current approach in this section, which includes not just training for safety, but also going through held-out assurance evaluations on present-day harms, and assessing the potential for dangerous capabilities in order to proactively assess the potential for new risks beyond those posed by present day models. Guideline for Navigating This Section  1. 1): Begin here to understand our overall safety methodology.",
+        "6): Learn what independent testers discovered about our system\u2019s safety. Our Process  During the development of Gemini models, we follow a structured approach to identify, measure, and mitigate foreseeable downstream societal impacts of our models. Potential impact assessment.",
+        "The process described here is typically refined through successive model iterations. We use automated and human evaluations on both safety-specific (see Sec. 2), and non-safety-specific metrics to monitor impact and potential unintended regressions."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "Medium",
+      "evidence": [
+        "Guided by the potential impact assessments, we establish a set of criteria we want Gemini to uphold from a safety, security, and responsibility perspective. These cover what Gemini should not do (e. , reveal private information), and also what Gemini should do (e.",
+        "Finally, per the impact assessment of Gemini\u2019s long context capability, Gemini should follow these policies even in long context settings, where an instruction that goes against them might be a small \u201cneedle in the haystack\u201d. Desiderata, aka \u201chelpfulness\u201d  Defining what not to do is only a part of the safety story \u2013 a policy that does nothing and always refuses the user is perfectly non-violative, i. , it abides by the policies and guidelines around what Gemini should not do.",
+        "Help the user: fulfill the user request; only refuse if it is not possible to find a response that  fulfills the user goals without violating policy. Have objective tone: if a refusal is necessary, articulate it neutrally without making assumptions  about user intent. Training for Safety, Security, and Responsibility  We build safety into the models though pre- and post-training approaches."
+      ]
+    },
+    {
+      "techniqueId": "tech-multistage-pipeline",
+      "confidence": "High",
+      "evidence": [
+        "Training for Safety, Security, and Responsibility  We build safety into the models though pre- and post-training approaches. We start by constructing metrics based on the policies and desiderata above, which we typically turn into automated evaluations that guide model development through successive model iterations. We use data filtering and conditional pre-training, as well as Supervised Fine-Tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF) in post-training."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "High",
+      "evidence": [
+        "These models also show improvements in jailbreak robustness and do not respond to \u201cgarbage\u201d token attacks, but they do respond to handcrafted prompt injection attacks \u2013 potentially due to their increased ability to follow the kind of instructions in the prompt injection. 5: Unlocking multimodal understanding across millions of tokens of context  9. Policy Violations  Our primary safety evaluation assesses the extent to which our model follows our content safety policies.",
+        "More research is needed to properly understand and mitigate the safety risks that could occur as a result of long context capabilities. Further, this analysis uses simple prompts (\"adversarial needle\"), but more sophisticated prompts lead to higher violations, just like they do for short contexts \u2013 see Sec. 3 for a prompt injection analysis.",
+        "To make the model follow the prompt injection rather than the user prompt, we consider two  types of attacks:  \u2022 Handcrafted templates that encourage the model to ignore the summarization task and instruct  the model to take an adversarial action. \u2022 Optimization based attacks that use a genetic algorithm to optimize for a trigger consisting of arbitrary adversarial tokens, starting with a random token population. During each iteration of the algorithm the attacker draws a set of synthetic histories per data category and evaluates how well they produce the adversarial target URL with the target information."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        ") and area under the ROC curve (AUC). Offensive cybersecurity: These evaluations comprise a number of \u2018capture-the-flag\u2019 challenges in which the agent is tasked with breaking into a simulated server and finding a piece of secret information. Results are compiled in Table 38.",
+        "Toby Shevlane, Sebastian Farquhar, Ben Garfinkel, Mary Phuong, Jess Whittlestone, Jade Leung, Daniel Kokotajlo, Nahema Marchal, Markus Anderljung, Noam Kolt, Lewis Ho, Divya Siddarth, Shahar Avin, Will Hawkins, Been Kim, Iason Gabriel, Vijay Bolina, Jack Clark, Yoshua Bengio, Paul Christiano, and Allan Dafoe. Model evaluation for extreme risks. arXiv preprint arXiv:2305."
+      ]
+    },
+    {
+      "techniqueId": "tech-multimodal-safety-alignment",
+      "confidence": "High",
+      "evidence": [
+        "1, we also showcase an \u201cadversarial\u201d version of this needle-in-the-haystack task for  long context safety evaluations. 3 Video Haystack  As Gemini 1. 5 Pro is natively multimodal, its long-context abilities translate directly to other modalities, enabling it to retrieve specific information across multiple hours of video.",
+        "Representational Harms: text-to-text, image-to-text, and audio-to-text  5. Assurance Evaluations (Sec. 5): We dive into our held-out evaluations and tests for dangerous capabilities."
+      ]
+    },
+    {
+      "techniqueId": "tech-enterprise-integration",
+      "confidence": "High",
+      "evidence": [
+        "Prior to launch, additional safety evaluations are run within the context of the product, application and enterprise-specific use cases. The results of those evaluations combined with the execution of the other safety precautions for a safe and responsible deployment are reviewed for risks and accountability by central AI Principles governance teams, or through specialized review processes that have developed in certain product areas with unique circumstances, such as Google Cloud for enterprise. 5: Unlocking multimodal understanding across millions of tokens of context  10."
+      ]
+    },
+    {
+      "techniqueId": "tech-refusal-abstention",
+      "confidence": "High",
+      "evidence": [
+        "Finally, per the impact assessment of Gemini\u2019s long context capability, Gemini should follow these policies even in long context settings, where an instruction that goes against them might be a small \u201cneedle in the haystack\u201d. Desiderata, aka \u201chelpfulness\u201d  Defining what not to do is only a part of the safety story \u2013 a policy that does nothing and always refuses the user is perfectly non-violative, i. , it abides by the policies and guidelines around what Gemini should not do."
       ]
     }
   ],
-  "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf": [
+  "https://ai.google/static/documents/ai-responsibility-2024-update.pdf": [
     {
       "techniqueId": "tech-multistage-pipeline",
       "confidence": "Medium",
@@ -240,6 +710,161 @@
       "evidence": [
         "txt, safety \ufb01ltering in-line with Google's commitment to advancing AI safely and responsibly, and quality \ufb01ltering to mitigate risks and improve training data reliability. Once data is collected, it is cleaned and preprocessed to make it suitable for training. This process involves, on a case-by-case basis, \ufb01ltering irrelevant or harmful content, text, and other modalities, including \ufb01ltering content that is pornographic, violent, or violative of child sexual abuse material (CSAM) laws.",
         "This process involves, on a case-by-case basis, \ufb01ltering irrelevant or harmful content, text, and other modalities, including \ufb01ltering content that is pornographic, violent, or violative of child sexual abuse material (CSAM) laws. Implementation and Sustainability  Hardware: Gemini 3 Pro was trained using Google\u2019s Tensor Processing Units (TPUs). TPUs are speci\ufb01cally designed to handle the massive computations involved in training LLMs and can speed up training considerably compared to CPUs."
+      ]
+    }
+  ],
+  "https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_fsf_report.pdf": [
+    {
+      "techniqueId": "tech-hallucination-grounding",
+      "confidence": "High",
+      "evidence": [
+        "For example, the automated analysis of transcripts from the agentic evaluations included checks for 12 failure modes, including hallucinations, tool calling issues, and error messages from the evaluation environment. In all domains, we performed automated checks for sandbagging (deliberate underperformance in order to avoid being flagged as dangerous van der Weij et al. In ML R&D and misalignment, we also carried out manual inspection of transcripts, and found a number of more subtle examples where Gemini 3 Pro indicated awareness of being in a synthetic environment."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "Medium",
+      "evidence": [
+        "Correctness Checks  For each risk domain, we sampled agent trajectory transcripts or thinking traces (whichever is applicable) and performed a sequence of spot checks to help identify spurious failures and potential bugs in our evaluation environments. These spot checks were performed through a combination of manual inspection and the use of Gemini to accelerate triage. For example, the automated analysis of transcripts from the agentic evaluations included checks for 12 failure modes, including hallucinations, tool calling issues, and error messages from the evaluation environment.",
+        "For example, the automated analysis of transcripts from the agentic evaluations included checks for 12 failure modes, including hallucinations, tool calling issues, and error messages from the evaluation environment. In all domains, we performed automated checks for sandbagging (deliberate underperformance in order to avoid being flagged as dangerous van der Weij et al. In ML R&D and misalignment, we also carried out manual inspection of transcripts, and found a number of more subtle examples where Gemini 3 Pro indicated awareness of being in a synthetic environment."
+      ]
+    },
+    {
+      "techniqueId": "tech-multistage-pipeline",
+      "confidence": "High",
+      "evidence": [
+        "See Appendix 2 for more details. Safety mitigations  20  \fWe employ a multi-layered, systematic approach to AI safety that spans the entire development and deployment lifecycle of an AI model. Recognizing AI as an emerging transformative technology with evolving complexities and risks, we pursue responsible AI development from design through testing, deployment, and ongoing iteration.",
+        "Recognizing AI as an emerging transformative technology with evolving complexities and risks, we pursue responsible AI development from design through testing, deployment, and ongoing iteration. For Cyber and CBRN particularly, we have taken a precautionary approach and launched Gemini 3 Pro along with a suite of mitigations, following the principles outlined in our Approach to Technical AGI Safety and Security (Shah et al. Training and Model Guardrails  We deploy multiple guardrails to reduce the risk of Gemini 3 Pro generating harmful content.",
+        "This includes, but is not limited to, identity and access management, physical security, red teaming, endpoint security, infrastructure hardening, vulnerability reward program, threat detection and response. Our approach involves a multi-tiered system of security mitigations, allowing us to calibrate the appropriateness and robustness of security measures to the level of risk posed. Frontier Safety Summary  We evaluated Gemini 3 Pro against the CCLs defined in our FSF, which defines explicit risk acceptance criteria for CBRN, cybersecurity, machine learning R&D, and harmful manipulation."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "High",
+      "evidence": [
+        "These guardrails also fortify models against prompt injection attacks. These mitigations are complemented with various measures designed to increase their robustness under adversarial pressure. Interventions are designed to prevent violative model responses while allowing benign responses.",
+        "For example, in the cyber domain, the model will fulfill requests such as analyzing known public exploits or vulnerabilities, discussing defensive coding practices, and general offensive security requests that do not target a specific entity if the answer provides low uplift (meaning the information is easily found online, like common obfuscation techniques). We mitigate against prompt injection attacks with a layered defense strategy, which includes measures such as: prompt injection content classifiers, security through reinforcement, markdown sanitation and suspicious URL redaction, user confirmations, and end-user security mitigation notifications, as described in further detail in this recent blog post. Mitigation Assessment  Internal and external red team efforts continually test the efficacy of the mitigations, including their robustness to universal and query-specific jailbreaks."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "It currently covers four risk domains where, based on early research, we have determined severe risk may be most likely to arise from future models: CBRN (chemical, biological, radiological and nuclear information risks), cybersecurity, machine learning R&D, and harmful manipulation, and also includes an exploratory approach for misalignment risk. Our FSF is built around capability thresholds called \u201cCritical Capability Levels\u201d (CCLs). These are capability levels at which, absent mitigation measures, frontier AI models or systems may pose heightened risk of severe harm.",
+        "Our updated risk assessment methodology and improved evaluation processes now more directly assess additional expected harm that may result from our models in the real world rather than primarily focusing on model capability in isolation. For Cyber Uplift Level 1, an early warning alert threshold4 was originally reached by Gemini 2. 5 Pro and by Gemini 2.",
+        "5 Deep Think had reached the CCL, but our subsequent analysis confirmed that the CCL was not met. Under the updated FSF, which is more appropriately calibrated to real world harm, the alert threshold for CBRN has not been reached for Gemini 3 Pro, but we continue to take a precautionary approach and deploy mitigations in this domain. Our determination of whether a CCL may have been reached factors in a safety margin that takes into account different sources of uncertainty, including the limits of our threat modeling and evaluations."
+      ]
+    },
+    {
+      "techniqueId": "tech-multimodal-safety-alignment",
+      "confidence": "High",
+      "evidence": [
+        "See Appendix 2 for more details. Safety mitigations  20  \fWe employ a multi-layered, systematic approach to AI safety that spans the entire development and deployment lifecycle of an AI model. Recognizing AI as an emerging transformative technology with evolving complexities and risks, we pursue responsible AI development from design through testing, deployment, and ongoing iteration."
+      ]
+    }
+  ],
+  "google-ai-principles-2024": [
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "Models are then instruction tuned and fine tuned for application into products and services. Red teaming, also referred to as adversarial testing, is a technique where \u201cethical hackers\u201d intentionally violate policies for the purpose of discovering and addressing vulnerabilities which could harm users. With the rise of generative AI, it has become a useful tool to help teams systematically improve models and products, and to inform launch decisions.",
+        "We also host internal, company-wide \u201cHack-AI-thons\u201d to draw on the experience of hundreds of security and safety experts at Google. To expand on these efforts to address content safety risks, we\u2019ve built a new team to use adversarial testing techniques to identify new and unexpected patterns on generative AI products. This team explores innovative uses of AI to augment and expand existing testing efforts.",
+        "This team explores innovative uses of AI to augment and expand existing testing efforts. We also engage in external red-teaming, including at forums like the DEF CON conference for ethical hacking. We\u2019re applying and growing external testing methods such as The Adversarial Nibbler Challenge, which engages users to understand potential harms."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "Medium",
+      "evidence": [
+        "Identifying common mitigations and standardized benchmarks  We apply standardized sets of protections integrated across our development and deployment platforms and tools. Our recent technical report for the Gemini family of models outlined several mitigations. We have also included standard academic benchmarks for the capabilities of models, such as GSMK8, MMLU,  HumanEval, and MATH, in our model cards (see Gemini, Gemini 1.",
+        "We have also included standard academic benchmarks for the capabilities of models, such as GSMK8, MMLU,  HumanEval, and MATH, in our model cards (see Gemini, Gemini 1. 5, and Gemma) so that the reporting of model capabilities, limitations, and testing results is consistent and auditable. We\u2019re continuously improving how we measure AI safety as industry benchmark tools emerge, such as the UK AI Safety Institute\u2019s open-source framework for LLM evaluations."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "We\u2019ve recently moved other responsibility teams into our central Trust & Safety team, where we are investing in AI testing. These shifts create clearer responsibility and accountability at every level as we build and deploy, and strengthen the feedback loop between models, products, and users. As part of ongoing updates to our AI responsibility protocols, we continue to develop our risk taxonomy by applying ongoing research on emerging risks, user feedback, internal and external red teaming testing results, and other insights.",
+        "Sharing with external researchers and civil society  To help researchers understand how a model is trained and tested, we publish technical reports with details on how we evaluate safety. We share model cards that summarize essential facts from these reports in a structured way, so that it\u2019s easier to find and understand this information. We also put out research papers for different types of academic audiences, hands-on guides, and tools for developers."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "\u201d Applying SAIF, we build on our existing security knowledge and adjust mitigations to these new threats. A responsible approach to building applications  End-to-end responsibility: A lifecycle approach to AI  12  SafeguardsSafeguardsSafeguardsPre-trained/Pre-trained dataUse case customizationGenerative AI applicationAI ModelUser feedbackand monitoringProduct outputUser inputOur end-to-end approach includes policies, testing and transparencyfine-tuned model\fDesign  Six core elements of SAIF  Secure AI Framework  Providing context to users  We\u2019ve been working for many years to provide helpful context to people who want to understand more about the information they find on Google. For instance, in 2021, we announced About This Result, a feature to help people understand and evaluate the context of the results they find; and last year, we introduced a similar initiative for images to help users understand whether an image is reliable or not.",
+        "As part of ongoing updates to our AI responsibility protocols, we continue to develop our risk taxonomy by applying ongoing research on emerging risks, user feedback, internal and external red teaming testing results, and other insights. The evolving taxonomy helps inform product teams as they think about potential AI harms, ranging from content safety to privacy, and from child safety to well being. End-to-end responsibility: A lifecycle approach to AI  17  \fGovern  Adapting risk assessments  We adapt risk assessments depending on the use case.",
+        "End-to-end responsibility: A lifecycle approach to AI  17  \fGovern  Adapting risk assessments  We adapt risk assessments depending on the use case. This is why some of our product areas have developed their own specialized launch review processes. For example, teams at Google Cloud ensure that the Vertex AI platform and products align to Google\u2019s AI Principles."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "High",
+      "evidence": [
+        "For example, hacking techniques like code injection have existed for some time and are used to attack databases. With generative AI, bad actors can use \u201cmalicious prompts\u201d to carry out an attack, a process known as \u201cprompt injection. \u201d Applying SAIF, we build on our existing security knowledge and adjust mitigations to these new threats."
+      ]
+    },
+    {
+      "techniqueId": "tech-opensource-tools",
+      "confidence": "High",
+      "evidence": [
+        "We have also included standard academic benchmarks for the capabilities of models, such as GSMK8, MMLU,  HumanEval, and MATH, in our model cards (see Gemini, Gemini 1. 5, and Gemma) so that the reporting of model capabilities, limitations, and testing results is consistent and auditable. We\u2019re continuously improving how we measure AI safety as industry benchmark tools emerge, such as the UK AI Safety Institute\u2019s open-source framework for LLM evaluations."
+      ]
+    }
+  ],
+  "https://cdn.openai.com/gpt-4o-system-card.pdf": [
+    {
+      "techniqueId": "tech-copyright-filtering",
+      "confidence": "High",
+      "evidence": [
+        "No incremental risks were  found beyond existing work outlined in GPT-4 and GPT-4(V) System Cards. 5  \fGenerating copyrighted con- tent  Ungrounded inference / sen- sitive trait attribution  Disallowed content in audio output  Erotic and violent speech out- put  \u2022 We trained GPT-4o to refuse requests for copyrighted content,  including audio, consistent with our broader practices. \u2022 To account for GPT-4o\u2019s audio modality, we also updated certain text-based filters to work on audio conversations, built filters to detect and block outputs containing music, and for our limited alpha of ChatGPT\u2019s Advanced Voice Mode, instructed the model to not sing at all."
+      ]
+    },
+    {
+      "techniqueId": "tech-input-guardrails",
+      "confidence": "High",
+      "evidence": [
+        "For example, during post-training, we align the model to human preferences; we red-team the resulting models and add product- level mitigations such as monitoring and enforcement; and we provide moderation tools and transparency reports to our users. We find that the majority of effective testing and mitigations are done after the pre-training stage because filtering pre-trained data alone cannot address nuanced and context-specific harms. At the same time, certain pre-training filtering mitigations can provide an additional layer of defense that, along with other safety mitigations, help exclude unwanted and harmful information from our datasets:  \u2022 We use our Moderation API and safety classifiers to filter out data that could contribute to harmful content or information hazards, including CSAM, hateful content, violence, and CBRN.",
+        "At the same time, certain pre-training filtering mitigations can provide an additional layer of defense that, along with other safety mitigations, help exclude unwanted and harmful information from our datasets:  \u2022 We use our Moderation API and safety classifiers to filter out data that could contribute to harmful content or information hazards, including CSAM, hateful content, violence, and CBRN. \u2022 As with our previous image generation systems, we filter our image generation datasets for  explicit content such as graphic sexual material and CSAM. \u2022 We use advanced data filtering processes to reduce personal information from training data.",
+        "Risk Unauthorized voice genera- tion  Speaker identification  Mitigations  \u2022 In all of our post-training audio data, we supervise ideal com- pletions using the voice sample in the system message as the base voice. \u2022 We only allow the model to use certain pre-selected voices and use an output classifier to detect if the model deviates from that. \u2022 We post-trained GPT-4o to refuse to comply with requests to identify someone based on a voice in an audio input, while still complying with requests to identify famous quotes."
+      ]
+    },
+    {
+      "techniqueId": "tech-privacy-impact-assessment",
+      "confidence": "High",
+      "evidence": [
+        "Guttag, \u201cA framework for understanding sources of harm throughout the machine learning life cycle,\u201d  in Equity and Access in Algorithms, Mechanisms, and Optimization, EAAMO \u201921, ACM, Oct. Dara, \u201cA survey of privacy risks and mitigation strategies in the  artificial intelligence life cycle,\u201d IEEE Access, vol. [17] OpenAI, \u201cModeration overview,\u201d 2024."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "Following the issues described in Evaluation Methodology 3. 2, we exclude tasks with heavily mathematical or scientific notation. 8  \fSafety Behavior: We evaluate on an internal dataset of conversations and evaluate the consis- tency of the model\u2019s adherence and refusal behavior across different user voices."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "For example, during post-training, we align the model to human preferences; we red-team the resulting models and add product- level mitigations such as monitoring and enforcement; and we provide moderation tools and transparency reports to our users. We find that the majority of effective testing and mitigations are done after the pre-training stage because filtering pre-trained data alone cannot address nuanced and context-specific harms. At the same time, certain pre-training filtering mitigations can provide an additional layer of defense that, along with other safety mitigations, help exclude unwanted and harmful information from our datasets:  \u2022 We use our Moderation API and safety classifiers to filter out data that could contribute to harmful content or information hazards, including CSAM, hateful content, violence, and CBRN."
+      ]
+    },
+    {
+      "techniqueId": "tech-training-data-filtering",
+      "confidence": "High",
+      "evidence": [
+        "For example, during post-training, we align the model to human preferences; we red-team the resulting models and add product- level mitigations such as monitoring and enforcement; and we provide moderation tools and transparency reports to our users. We find that the majority of effective testing and mitigations are done after the pre-training stage because filtering pre-trained data alone cannot address nuanced and context-specific harms. At the same time, certain pre-training filtering mitigations can provide an additional layer of defense that, along with other safety mitigations, help exclude unwanted and harmful information from our datasets:  \u2022 We use our Moderation API and safety classifiers to filter out data that could contribute to harmful content or information hazards, including CSAM, hateful content, violence, and CBRN.",
+        "At the same time, certain pre-training filtering mitigations can provide an additional layer of defense that, along with other safety mitigations, help exclude unwanted and harmful information from our datasets:  \u2022 We use our Moderation API and safety classifiers to filter out data that could contribute to harmful content or information hazards, including CSAM, hateful content, violence, and CBRN. \u2022 As with our previous image generation systems, we filter our image generation datasets for  explicit content such as graphic sexual material and CSAM. \u2022 We use advanced data filtering processes to reduce personal information from training data.",
+        "Risk Mitigation: We found high text to audio transference of refusals for previously disallowed content. This means that the post-training we\u2019ve done to reduce the potential for harm in GPT-4o\u2019s text output successfully carried over to audio output. Additionally, we run our existing moderation model over a text transcription of both audio input and audio output to detect if either contains potentially harmful language, and will block a generation if so8."
+      ]
+    },
+    {
+      "techniqueId": "tech-refusal-abstention",
+      "confidence": "Medium",
+      "evidence": [
+        "Experts and novices were randomly assigned to either answering with help from the internet, help from GPT-4o, or help from a custom research-only version of GPT-4o. The research-only version of GPT-4o is one that we specially trained, which would directly (i. , without refusals) respond to biologically risky questions."
       ]
     }
   ],
@@ -363,205 +988,7 @@
       ]
     }
   ],
-  "https://openai.com/index/gpt-oss-model-card/": [
-    {
-      "techniqueId": "tech-opensource-tools",
-      "confidence": "High",
-      "evidence": [
-        "gpt-oss-120b & gpt-oss-20b Model Card | OpenAI Switch to ChatGPT (opens in a new window) Sora (opens in a new window) API Platform (opens in a new window) OpenAI August 5, 2025 Publication Safety gpt-oss-120b & gpt-oss-20b Model Card Read the model card (opens in a new window) Introduction We introduce gpt-oss-120b and gpt-oss-20b, two open-weight reasoning models available under the Apache 2. 0 license and our gpt-oss usage policy. Developed with feedback from the open-source community, these text-only models are compatible with our Responses API and are designed to be used within agentic workflows with strong instruction following, tool use like web search and Python code execution, and reasoning capabilities\u2014including the ability to adjust the reasoning effort for tasks that don\u2019t require complex reasoning.",
-        "Developed with feedback from the open-source community, these text-only models are compatible with our Responses API and are designed to be used within agentic workflows with strong instruction following, tool use like web search and Python code execution, and reasoning capabilities\u2014including the ability to adjust the reasoning effort for tasks that don\u2019t require complex reasoning. The models are customizable, provide full chain-of-thought (CoT), and support Structured Outputs. Safety is foundational to our approach to open models."
-      ]
-    }
-  ],
-  "https://data.x.ai/2025-08-20-grok-4-model-card.pdf": [
-    {
-      "techniqueId": "tech-input-guardrails",
-      "confidence": "High",
-      "evidence": [
-        "With Grok 4\u2019s strong reasoning and instruction-following capabilities, we find that including our basic refusal policy in the system prompt greatly reduces response rate on harmful queries. Additionally, warning the model against jailbreak attacks serves to significantly inoculate against common jailbreak strategies. We also employ model-based filters for both Grok 4 API and Grok 4 Web, which reject classes of harmful requests, including biological and chemical weapons, self-harm, and CSAM.",
-        "We also employ model-based filters for both Grok 4 API and Grok 4 Web, which reject classes of harmful requests, including biological and chemical weapons, self-harm, and CSAM. 2 Concerning Propensities  AI models may contain propensities that reduce their controllability, such as deception, power-seeking, manipulation, and sycophancy, etc. For Grok 4, we focus on minimizing both the rate at which it lies, its political biases, and its ability to manipulate users."
-      ]
-    },
-    {
-      "techniqueId": "tech-output-filtering",
-      "confidence": "High",
-      "evidence": [
-        "We also employ model-based filters for both Grok 4 API and Grok 4 Web, which reject classes of harmful requests, including biological and chemical weapons, self-harm, and CSAM. 2 Concerning Propensities  AI models may contain propensities that reduce their controllability, such as deception, power-seeking, manipulation, and sycophancy, etc. For Grok 4, we focus on minimizing both the rate at which it lies, its political biases, and its ability to manipulate users."
-      ]
-    },
-    {
-      "techniqueId": "tech-hallucination-grounding",
-      "confidence": "Medium",
-      "evidence": [
-        "2 Results  We report our results on deception via the MASK dataset in Table 2. We find that our system prompt mitigation makes the model less willing to contradict its beliefs, thus lowering the lying rate. Furthermore, we sometimes find that the reasoning traces will mention acting honestly, which suggests that the model is explicitly adjusting its behavior."
-      ]
-    },
-    {
-      "techniqueId": "tech-prompt-injection-protection",
-      "confidence": "High",
-      "evidence": [
-        "In addition to refusals, we also assess Grok 4\u2019s robustness to adversarial requests which attempt to circumvent our safeguards (e. , jailbreaks and prompt injections). 1  \fWe also reduce various propensities of Grok 4 that might make it difficult to control, such as being deceptive, power-seeking, manipulative, or biased, among others (Section 2.",
-        "Similarly, we report the model\u2019s attack success rate on AgentDojo, and observe robustness to prompt injections with the mitigation. Category  Evaluation  Metric  Grok 4 API Grok 4 Web  Refusals  Refusals + User Jailbreak + System Jailbreak  Agentic Abuse AgentHarm  answer rate answer rate answer rate  answer rate  Hijacking  AgentDojo  attack success rate  0. 3 Mitigations  Table 1: Abuse potential evaluations.",
-        "Agentdojo: A dynamic environment to evaluate prompt injection attacks and defenses for llm agents. Advances in Neural Information Processing Systems, 37:82895\u201382920, 2024. Jasper G\u00f6tting, Pedro Medeiros, Jon G Sanders, Nathaniel Li, Long Phan, Karam Elabd, Lennart Justen, Dan Hendrycks, and Seth Donoughe."
-      ]
-    },
-    {
-      "techniqueId": "tech-capability-monitoring",
-      "confidence": "High",
-      "evidence": [
-        "org/content/ early/2024/09/12/2024. Nathaniel Li, Alexander Pan, Anjali Gopal, Summer Yue, Daniel Berrios, Alice Gatti, Justin D Li, Ann-Kathrin Dombrowski, Shashwat Goel, Gabriel Mukobi, et al. The wmdp benchmark: Measuring and reducing malicious use with unlearning.",
-        "The wmdp benchmark: Measuring and reducing malicious use with unlearning. In International Conference on Machine Learning, pages 28525\u201328550. Openai o1 system card."
-      ]
-    },
-    {
-      "techniqueId": "tech-refusal-abstention",
-      "confidence": "High",
-      "evidence": [
-        "We define a basic refusal policy which instructs Grok 4 to decline queries demonstrating clear intent to engage in activities that threaten severe, imminent harm to others, including violent crimes, child sexual exploitation, fraud, hacking, and more. We place further emphasis on refusing requests concerning the development of CBRN or cyber weapons. With Grok 4\u2019s strong reasoning and instruction-following capabilities, we find that including our basic refusal policy in the system prompt greatly reduces response rate on harmful queries."
-      ]
-    }
-  ],
-  "https://www.llama.com/llama-protections/": [
-    {
-      "techniqueId": "tech-input-guardrails",
-      "confidence": "Medium",
-      "evidence": [
-        "It supports 12 languages and works across modalities to detect and filter policy-violating inputs and outputs across text and images. Llama Guard is designed to be usable across Llama model sizes, including Llama 4 Scout and Llama 4 Maverick. For the first time, Llama Guard 4 is now available through the /moderations endpoint in Llama API."
-      ]
-    },
-    {
-      "techniqueId": "tech-automated-red-teaming",
-      "confidence": "High",
-      "evidence": [
-        "These prompts are similar to the cyber attack compliance tests in that they cover a wide variety of topics including cyberdefense, but they are explicitly benign, even if they may appear malicious. Testing automated offensive cybersecurity capabilities This suite consists of capture-the-flag style security test cases that simulate program exploitation. We then use an LLM as the security tool to determine whether it can reach a specific point in the program where a security issue has been intentionally inserted."
-      ]
-    },
-    {
-      "techniqueId": "tech-prompt-injection-protection",
-      "confidence": "Medium",
-      "evidence": [
-        "Categories of prompt attacks include prompt injection and jailbreaking: Prompt Injections are inputs that exploit the inclusion of untrusted data from third parties into the context window of a model to get it to execute unintended instructions. Jailbreaks are malicious instructions designed to override the safety and security features built into a model. Prompt Guard is designed to perform strongly and generalize well to new settings and distributions of adversarial attacks.",
-        "Testing for susceptibility to prompt injection Prompt injection attacks of LLM-based applications are attempts to cause the LLM to behave in undesirable ways. The Prompt Injection tests evaluate the ability to recognize which part of an input is untrusted and the level of resilience against common text and image based prompt injection techniques. Testing for compliance with requests to help with cyber attacks In Cybersec Eval 1 we introduced tests to measure an LLM's propensity to help carry out cyberattacks as defined in the industry standard MITRE Enterprise ATT&CK ontology of cyberattack methods."
-      ]
-    },
-    {
-      "techniqueId": "tech-capability-monitoring",
-      "confidence": "High",
-      "evidence": [
-        "Testing for susceptibility to prompt injection Prompt injection attacks of LLM-based applications are attempts to cause the LLM to behave in undesirable ways. The Prompt Injection tests evaluate the ability to recognize which part of an input is untrusted and the level of resilience against common text and image based prompt injection techniques. Testing for compliance with requests to help with cyber attacks In Cybersec Eval 1 we introduced tests to measure an LLM's propensity to help carry out cyberattacks as defined in the industry standard MITRE Enterprise ATT&CK ontology of cyberattack methods."
-      ]
-    },
-    {
-      "techniqueId": "tech-multimodal-safety-alignment",
-      "confidence": "High",
-      "evidence": [
-        "Our comprehensive system-level protections framework proactively identifies and mitigates potential risks, empowering developers to more easily deploy generative AI responsibly. System level safeguards Llama Guard Our Llama Guard models offer unparalleled safety content moderation performance and flexibility, and we now offer a collection of specialized models tailored to specific development needs. Llama Guard 4 Llama Guard 4 is an 12B-parameter high-performance multimodal input and output moderation model designed to support developers to detect various common types of violating content."
-      ]
-    },
-    {
-      "techniqueId": "tech-opensource-tools",
-      "confidence": "High",
-      "evidence": [
-        "Llama Protections - Llama Llama Protections Making protection tools accessible to everyone Enabling developers, advancing protections, and building an open ecosystem. Learn more Our approach System safeguards Evaluations Ecosystem Developer use guide Our approach An open approach to protections in the era of generative AI At Meta, we\u2019re pioneering an open source approach to generative AI development enabling everyone to benefit from our models and their powerful capabilities, while making it as easy as possible to build and innovate with trust by design. Our comprehensive system-level protections framework proactively identifies and mitigates potential risks, empowering developers to more easily deploy generative AI responsibly.",
-        "We\u2019ve also engaged with our partners at Papers With Code and HELM to incorporate these evaluations into their benchmarks, reinforcing our commitment through active participation within the ML Commons AI Safety Working Group. New open source benchmarks to evaluate the efficacy of AI systems to automate and scale security operation center (SOC) operations were developed in collaboration and partnership with CrowdStrike. As part of our Llama Defenders Program, we\u2019re also partnering with AT&T, Bell Canada, and ZenDesk to enable select organizations to better defend their organizations\u2019 systems, services, and infrastructure with new state of the art tools."
-      ]
-    }
-  ],
-  "https://docs.mistral.ai/capabilities/guardrailing": [
-    {
-      "techniqueId": "tech-input-guardrails",
-      "confidence": "High",
-      "evidence": [
-        "System prompt Guardrailing : An optional system prompt to enforce guardrails on top of our models to steer behaviour and reduce harmful content. Moderation Moderation Moderate Inputs/Outputs Our new moderation service, which is powered by the Mistral Moderation model, is a classifier model based on Ministral 8B 24. It enables our users to detect harmful text content along several policy dimensions."
-      ]
-    }
-  ],
-  "https://d1qx31qr3h6wln.cloudfront.net/publications/Nemotron_4_340B_8T.pdf": [
-    {
-      "techniqueId": "tech-dpo",
-      "confidence": "High",
-      "evidence": [
-        "We align the base LLM with Supervised Fine-Tuning (SFT), followed by Preference Fine-Tuning such as Reinforcement Learning with Human Feedback (RLHF) (Ouyang et al. , 2022) and Direct Preference Optimization (DPO) (Rafailov et al. The alignment process enables the model to follow instructions better, engage in conversations effectively, and better solve problems.",
-        "For both stages, we mask the user turns and only calculate loss on assistant turns. 2 Preference Fine-tuning  Following the supervised fine-tuning stage, we continue to improve the model by preference fine-tuning, where our model learns preference examples in the form of (prompt, chosen response, rejected response) triplets (Ouyang et al. Specifically, our preference fine-tuning stage involves multi- ple iterations of model improvement, using both the Direct Preference Optimization (Rafailov et al.",
-        "Specifically, our preference fine-tuning stage involves multi- ple iterations of model improvement, using both the Direct Preference Optimization (Rafailov et al. , 2024) and our new alignment algorithm, the Reward-aware Preference optimization. Direct Preference Optimization (DPO)."
-      ]
-    },
-    {
-      "techniqueId": "tech-rlhf",
-      "confidence": "High",
-      "evidence": [
-        ", 2023) was trained on 2 trillion tokens while the Llama-3 family (MetaAI, 2024) was trained on 15 trillion tokens. The Nemotron-4 340B base model was trained with 9 trillion tokens from a high-quality dataset, the details of which are provided in Parmar et al. We align the base LLM with Supervised Fine-Tuning (SFT), followed by Preference Fine-Tuning such as Reinforcement Learning with Human Feedback (RLHF) (Ouyang et al.",
-        "We align the base LLM with Supervised Fine-Tuning (SFT), followed by Preference Fine-Tuning such as Reinforcement Learning with Human Feedback (RLHF) (Ouyang et al. , 2022) and Direct Preference Optimization (DPO) (Rafailov et al. The alignment process enables the model to follow instructions better, engage in conversations effectively, and better solve problems."
-      ]
-    },
-    {
-      "techniqueId": "tech-safety-benchmarks",
-      "confidence": "High",
-      "evidence": [
-        ", 2024), a high quality content safety solution and evaluation benchmark from NVIDIA. AEGIS is backed by a broad content safety risk taxonomy  16  33. 24%0%10%20%30%40%50%60%70%80%90%100%Open QASummarizationClassificationClosed QARewriteGenerationOtherBrainstormingExtractionMulti-turn chatOverallWin RateTie RateLoss Rate\fthat covers 12 critical risks in human-LLM interactions (see details in Supplemetary Materials H)."
-      ]
-    },
-    {
-      "techniqueId": "tech-incident-reporting",
-      "confidence": "High",
-      "evidence": [
-        "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. The prompts from AEGIS test partition are used to elicit responses from Nemotron-4-340B-Instruct and Llama-3-70B-Instruct. The responses are then judged by the AEGIS safety model."
-      ]
-    },
-    {
-      "techniqueId": "tech-multistage-pipeline",
-      "confidence": "High",
-      "evidence": [
-        ", 2024), a high quality content safety solution and evaluation benchmark from NVIDIA. AEGIS is backed by a broad content safety risk taxonomy  16  33. 24%0%10%20%30%40%50%60%70%80%90%100%Open QASummarizationClassificationClosed QARewriteGenerationOtherBrainstormingExtractionMulti-turn chatOverallWin RateTie RateLoss Rate\fthat covers 12 critical risks in human-LLM interactions (see details in Supplemetary Materials H)."
-      ]
-    },
-    {
-      "techniqueId": "tech-safety-reward-modeling",
-      "confidence": "High",
-      "evidence": [
-        "Furthermore, this reward model provides a solid foundation for training Nemotron-4-340B-Instruct, which will be discussed  2https://huggingface. co/datasets/nvidia/HelpSteer2  5  \fModel  Reward Bench Primary Dataset Overall Chat Chat-Hard Safety Reasoning  Prior Sets  Nemotron-4-340B-Reward Cohere May 2024 Gemini 1. 5 Pro-0514 Cohere March 2024 GPT-4-0125-preview GPT-4-0409-preview GPT-4o-0513 Claude-3-Opus-02292024  92."
-      ]
-    },
-    {
-      "techniqueId": "tech-multimodal-safety-alignment",
-      "confidence": "High",
-      "evidence": [
-        ", 2024), a high quality content safety solution and evaluation benchmark from NVIDIA. AEGIS is backed by a broad content safety risk taxonomy  16  33. 24%0%10%20%30%40%50%60%70%80%90%100%Open QASummarizationClassificationClosed QARewriteGenerationOtherBrainstormingExtractionMulti-turn chatOverallWin RateTie RateLoss Rate\fthat covers 12 critical risks in human-LLM interactions (see details in Supplemetary Materials H).",
-        "It aligns with NVIDIA\u2019s organizational values for the protected characteristics under categories of hate and harassment and defines sexual abuse in minor as a separate critical hazard category. We also introduce a new category, \u201cNeeds Caution\u201d, to address ambiguous situations where there isn\u2019t sufficient context to determine safety. This category is particularly useful for scenarios where a more defensive mode is preferred over a more permissive one, as \u201cNeeds Caution\u201d can be mapped to either unsafe or safe as needed."
-      ]
-    },
-    {
-      "techniqueId": "tech-opensource-tools",
-      "confidence": "High",
-      "evidence": [
-        "AEGIS safety models are a group of open sourced LlamaGuard (Inan et al. , 2023) LLM based classifiers, that were further instruction tuned with AEGIS safety taxonomy and policy in a parameter efficient manner. Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations."
-      ]
-    }
-  ],
-  "https://docs.aws.amazon.com/ai/responsible-ai/nova-micro-lite-pro/overview.html": [
-    {
-      "techniqueId": "tech-red-teaming",
-      "confidence": "High",
-      "evidence": [
-        "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2."
-      ]
-    },
-    {
-      "techniqueId": "tech-configurable-policies",
-      "confidence": "High",
-      "evidence": [
-        "This includes implementing Responsible AI practices to address key dimensions including controllability, safety, fairness, veracity, robustness, explainability, privacy, security, transparency, and governance. The performance of any application using an Amazon Nova model depends on the design of the customer workflow, including the factors discussed below: Effectiveness Criteria: Customers should define and enforce criteria for the kinds of use cases they will implement, and, for each use case, further define criteria for the inputs and completions permitted, and for how humans should employ their own judgment to determine final results. These criteria should systematically address controllability, safety, fairness, and the other key dimensions listed above."
-      ]
-    },
-    {
-      "techniqueId": "tech-capability-monitoring",
-      "confidence": "High",
-      "evidence": [
-        "Using benchmarks and expert assessments, we found that Amazon Nova Premier is within the tolerance threshold for critical capabilities in each domain. CBRN: Evaluations included Weapons of Mass Destruction Proxy (WMDP), ProtocolQA, and BioLP Bench, along with external expert red teaming by Carnegie Mellon's Gomes Group and Nemesys Insights. Offensive Cyber Operations: We used benchmarks such as SECURE, CTIBench, CyberMetric (which test the model's knowledge of cyber threat intelligence and vulnerabilities), and Cybench (which tests practical exploitation through cyberattack challenges), supported by expert red-teaming by internal experts."
-      ]
-    }
-  ],
-  "https://cdn.openai.com/pdf/2221c875-02dc-4789-800b-e7758f3722c1/o3-and-o4-mini-system-card.pdf": [
+  "https://cdn.openai.com/openai-preparedness-framework-beta.pdf": [
     {
       "techniqueId": "tech-output-filtering",
       "confidence": "High",
@@ -624,7 +1051,562 @@
       ]
     }
   ],
-  "https://www.microsoft.com/en-us/research/uploads/prod/2024/12/P4TechReport.pdf": [
+  "gpt-oss-model-card": [
+    {
+      "techniqueId": "tech-opensource-tools",
+      "confidence": "High",
+      "evidence": [
+        "gpt-oss-120b & gpt-oss-20b Model Card | OpenAI Switch to ChatGPT (opens in a new window) Sora (opens in a new window) API Platform (opens in a new window) OpenAI August 5, 2025 Publication Safety gpt-oss-120b & gpt-oss-20b Model Card Read the model card (opens in a new window) Introduction We introduce gpt-oss-120b and gpt-oss-20b, two open-weight reasoning models available under the Apache 2. 0 license and our gpt-oss usage policy. Developed with feedback from the open-source community, these text-only models are compatible with our Responses API and are designed to be used within agentic workflows with strong instruction following, tool use like web search and Python code execution, and reasoning capabilities\u2014including the ability to adjust the reasoning effort for tasks that don\u2019t require complex reasoning.",
+        "Developed with feedback from the open-source community, these text-only models are compatible with our Responses API and are designed to be used within agentic workflows with strong instruction following, tool use like web search and Python code execution, and reasoning capabilities\u2014including the ability to adjust the reasoning effort for tasks that don\u2019t require complex reasoning. The models are customizable, provide full chain-of-thought (CoT), and support Structured Outputs. Safety is foundational to our approach to open models."
+      ]
+    }
+  ],
+  "grok-1-5-blog": [],
+  "https://x.ai/security": [
+    {
+      "techniqueId": "tech-input-guardrails",
+      "confidence": "High",
+      "evidence": [
+        "With Grok 4\u2019s strong reasoning and instruction-following capabilities, we find that including our basic refusal policy in the system prompt greatly reduces response rate on harmful queries. Additionally, warning the model against jailbreak attacks serves to significantly inoculate against common jailbreak strategies. We also employ model-based filters for both Grok 4 API and Grok 4 Web, which reject classes of harmful requests, including biological and chemical weapons, self-harm, and CSAM.",
+        "We also employ model-based filters for both Grok 4 API and Grok 4 Web, which reject classes of harmful requests, including biological and chemical weapons, self-harm, and CSAM. 2 Concerning Propensities  AI models may contain propensities that reduce their controllability, such as deception, power-seeking, manipulation, and sycophancy, etc. For Grok 4, we focus on minimizing both the rate at which it lies, its political biases, and its ability to manipulate users."
+      ]
+    },
+    {
+      "techniqueId": "tech-output-filtering",
+      "confidence": "High",
+      "evidence": [
+        "We also employ model-based filters for both Grok 4 API and Grok 4 Web, which reject classes of harmful requests, including biological and chemical weapons, self-harm, and CSAM. 2 Concerning Propensities  AI models may contain propensities that reduce their controllability, such as deception, power-seeking, manipulation, and sycophancy, etc. For Grok 4, we focus on minimizing both the rate at which it lies, its political biases, and its ability to manipulate users."
+      ]
+    },
+    {
+      "techniqueId": "tech-hallucination-grounding",
+      "confidence": "Medium",
+      "evidence": [
+        "2 Results  We report our results on deception via the MASK dataset in Table 2. We find that our system prompt mitigation makes the model less willing to contradict its beliefs, thus lowering the lying rate. Furthermore, we sometimes find that the reasoning traces will mention acting honestly, which suggests that the model is explicitly adjusting its behavior."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "High",
+      "evidence": [
+        "In addition to refusals, we also assess Grok 4\u2019s robustness to adversarial requests which attempt to circumvent our safeguards (e. , jailbreaks and prompt injections). 1  \fWe also reduce various propensities of Grok 4 that might make it difficult to control, such as being deceptive, power-seeking, manipulative, or biased, among others (Section 2.",
+        "Similarly, we report the model\u2019s attack success rate on AgentDojo, and observe robustness to prompt injections with the mitigation. Category  Evaluation  Metric  Grok 4 API Grok 4 Web  Refusals  Refusals + User Jailbreak + System Jailbreak  Agentic Abuse AgentHarm  answer rate answer rate answer rate  answer rate  Hijacking  AgentDojo  attack success rate  0. 3 Mitigations  Table 1: Abuse potential evaluations.",
+        "Agentdojo: A dynamic environment to evaluate prompt injection attacks and defenses for llm agents. Advances in Neural Information Processing Systems, 37:82895\u201382920, 2024. Jasper G\u00f6tting, Pedro Medeiros, Jon G Sanders, Nathaniel Li, Long Phan, Karam Elabd, Lennart Justen, Dan Hendrycks, and Seth Donoughe."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "org/content/ early/2024/09/12/2024. Nathaniel Li, Alexander Pan, Anjali Gopal, Summer Yue, Daniel Berrios, Alice Gatti, Justin D Li, Ann-Kathrin Dombrowski, Shashwat Goel, Gabriel Mukobi, et al. The wmdp benchmark: Measuring and reducing malicious use with unlearning.",
+        "The wmdp benchmark: Measuring and reducing malicious use with unlearning. In International Conference on Machine Learning, pages 28525\u201328550. Openai o1 system card."
+      ]
+    },
+    {
+      "techniqueId": "tech-refusal-abstention",
+      "confidence": "High",
+      "evidence": [
+        "We define a basic refusal policy which instructs Grok 4 to decline queries demonstrating clear intent to engage in activities that threaten severe, imminent harm to others, including violent crimes, child sexual exploitation, fraud, hacking, and more. We place further emphasis on refusing requests concerning the development of CBRN or cyber weapons. With Grok 4\u2019s strong reasoning and instruction-following capabilities, we find that including our basic refusal policy in the system prompt greatly reduces response rate on harmful queries."
+      ]
+    }
+  ],
+  "hunyuan-technical-report": [
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "High",
+      "evidence": [
+        "The long-context pre-training at each stage can achieve satisfactory long-context abilities, while maintaining good LLM capabilities on tasks with normal lengths. 3 Post-Training  Based on the pre-trained model of Hunyuan-Large, we further conduct a post-training stage that aims to enhance task-specific capabilities and align LLM to human preference. This stage contains a supervised fine-tuning (SFT) phase and a Reinforcement Learning from Human Feedback (RLHF) phase on elaborately selected datasets and outputs of current policy models (Bai et al.",
+        "This stage contains a supervised fine-tuning (SFT) phase and a Reinforcement Learning from Human Feedback (RLHF) phase on elaborately selected datasets and outputs of current policy models (Bai et al. The following subsections contain (a) the data selection, preprocessing, and training process of SFT, (b) the techniques and training strategies of Direct Preference Optimization (DPO) in RLHF. 1 Supervised Fine-Tuning  The performance of SFT strongly depends on the quality of instruction data related to various types of LLM capabilities."
+      ]
+    },
+    {
+      "techniqueId": "tech-training-data-filtering",
+      "confidence": "Medium",
+      "evidence": [
+        "We aim to create a high-quality, safe, and diverse training dataset for pre-training, primarily consisting of Chinese and English languages for practical demands. We filter the data based on criteria such as writing quality, educational value, and toxicity to ensure its high quality. Additionally, we anonymize all privacy-sensitive data and other harmful data."
+      ]
+    },
+    {
+      "techniqueId": "tech-community-evaluation",
+      "confidence": "High",
+      "evidence": [
+        "arXiv preprint arXiv:2405. From crowdsourced data to high-quality benchmarks: Arena-hard and benchbuilder pipeline, 2024b. Best  practices and lessons learned on synthetic data."
+      ]
+    }
+  ],
+  "llama-3-paper": [
+    {
+      "techniqueId": "tech-dpo",
+      "confidence": "High",
+      "evidence": [
+        "Similarly, we adopt a relatively simple post-training procedure based on supervised finetuning (SFT), rejection sampling (RS), and direct preference optimization (DPO; Rafailov et al. (2023)) as opposed to more complex reinforcement learning algorithms (Ouyang et al. , 2022; Schulman et al.",
+        "We first train a reward model on top of the pre-trained checkpoint using human-annotated preference data (see Section 4. We then finetune pre-trained checkpoints with supervised finetuning (SFT; see Section 4. 3), and further align the checkpoints with Direct Preference Optimization (DPO; see Section 4.",
+        "We found these hyperparameter settings to work well across different rounds and data mixes. 4 Direct Preference Optimization  We further train our SFT models with Direct Preference Optimization (DPO; Rafailov et al. , 2024) for human preference alignment."
+      ]
+    },
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "Medium",
+      "evidence": [
+        "3 Supervised Finetuning  The reward model is then used to perform rejection sampling on our human annotation prompts, the details of which are described in Section 4. Together with this rejection-sampled data and other data sources (including synthetic data), we finetune the pre-trained language model using a standard cross entropy loss on the target tokens (while masking loss on prompt tokens). More details about the data mix can be found in Section 4.",
+        "A survey of reinforcement learning from human  feedback. arXiv preprint arXiv:2312. Aniruddha Kembhavi, Michael Salvato, Eric Kolve, Minjoon Seo, Hannaneh Hajishirzi, and Ali Farhadi."
+      ]
+    },
+    {
+      "techniqueId": "tech-input-guardrails",
+      "confidence": "High",
+      "evidence": [
+        "Prompts can be as simple as adding the word \u201chypothetically\u201d or crafting an elaborate layered scenario. \u2013 Personas and role play gives the model a violating persona with specific violating response character- istics (e. \u201cYou are X, your goal is Y\u201d) or yourself as the user adapting a specific benign character that obfuscates the context of the prompt.",
+        "To enable this, we develop and release a new classifier, Llama Guard 3, which is a Llama 3 8B model fine-tuned for safety classification. Similar to Llama Guard 2 (Llama-Team, 2024), this classifier is used to detect whether input prompts and/or output responses generated by language models violate safety policies on specific categories of harm. It is designed to support Llama\u2019s growing capabilities, and can be used for English and multilingual text.",
+        "Prompt Guard is a model-based filter designed to detect prompt attacks, which are input strings designed to subvert the intended behavior of an LLM functioning as part of an application. The model is a multi-label classifier that detects two classes of prompt attack risk - direct jailbreaks (techniques that explicitly try to override a model\u2019s safety conditioning or system prompt) and indirect prompt injections (instances where third-party data included in a model\u2019s context window includes instructions inadvertently executed as user commands by an LLM). The model is fine-tuned from mDeBERTa-v3-base, a small (86M) parameter model suitable for filtering inputs into an LLM."
+      ]
+    },
+    {
+      "techniqueId": "tech-output-filtering",
+      "confidence": "High",
+      "evidence": [
+        "These kinds of guardrails are generally useful for developers, who can deploy multi-layered protections in various applications. 50  \fCategory  False Refusal Rate Relative to Llama 3:  Input Llama Guard Output Llama Guard +25%  +95%  Full Llama Guard +102%  Violation Rate Relative to Llama 3: - Child Sexual Exploitation - Defamation - Elections - Hate - Indiscriminate Weapons14 - Intellectual Property - Non-Violent Crimes - Privacy - Sex-Related Crimes - Sexual Content - Specialized Advice - Suicide & Self-Harm - Violent Crimes  -53% -86% -100% -36% 0% -88% -80% -40% -75% -100% -70% -62% -67%  -47% -100% -100% -82% 0% -100% -80% -60% -75% -100% -70% -31% -53%  -59% -100% -100% -91% 0% -100% -100% -60% -88% -100% -70% -62% -80%  Table 26 Violation rate and false refusal rate relative to Llama 3 when using Llama Guard 3 for input or output filtering on different safety categories. For example, -50% for VR means that there is a 50% reduction in the rate of Llama 3 model violations when using Llama Guard."
+      ]
+    },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "We also partner with internal and external subject-matter experts in critical risk areas to help build risk taxonomies and aid in more focused adversarial assessment. Adversarial testing on specific model capabilities. We began initial red teaming by focusing on individual model capabilities in a risk discovery process, in context of specific high-risk categories then testing capabilities together.",
+        "8 Limitations  We conducted extensive measurement and mitigation on a wide variety of risks to safe usage of Llama 3. However, no testing can be guaranteed to be exhaustive in identifying every possible risk. Llama 3 may still generate harmful content due to training on various datasets, particularly for languages beyond English and when prompt engineered by skilled adversarial red teamers."
+      ]
+    },
+    {
+      "techniqueId": "tech-observability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "Using this, we efficiently record every communication event and the duration of each collective operation, and also automatically dump tracing data on NCCLX watchdog or heartbeat timeout. We enable more computationally intensive tracing operations and metadata collection selectively as needed live in production through online configuration changes (Tang et al. , 2015) without needing a code release or job restart."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "Despite the large number of failures, significant manual intervention was required only three times during this period, with the rest of issues handled by automation. To increase the effective training time, we reduced job startup and checkpointing time, and developed tools for fast diagnosis and problem resolution. We extensively use PyTorch\u2019s built-in NCCL flight recorder (Ansel et al.",
+        "42  \fresponse that violates a safety policy, and False Refusal Rate (FRR), a metric that captures when the model incorrectly refuses to respond to a harmless prompt. In parallel, we evaluate model performance on helpfulness benchmarks to ensure that safety improvements do not compromise overall helpfulness. The quality and design of safety training data has a profound impact on perfor- mance.",
+        "In Figure 21, leveraging our internal benchmarks, we explore how different models and systems in industry navigate this trade off and how Llama 3 compares. We find that our models achieve very competitive violation rate metrics  13Because these safety benchmarks are internal to Meta, we acknowledge that the numbers in this section are not reproducible  externally, and so we choose to anonymize the competitors we evaluate against. 44  EnglishFrenchGermanHindiItalianPortugueseSpanishThaiLanguage0."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "data cleaning and filtering. We then describe our approach to safety finetuning, focusing on how to train the model to align to specific safety policies while still retaining helpfulness. We analyze each of the Llama 3 capabilities, including multilingual, long context, tool usage, and various multimodal capabilities, to measure the effectiveness of our safety mitigations.",
+        "We further address the model\u2019s tone when producing safe responses, which has an impact on downstream user experience. We developed a refusal tone guideline for Llama 3 and ensured that all new safety data adhered to it through rigorous quality assurance process. We also refine existing safety data to align with the guideline, using a combination of zero-shot rewriting and human-in-the-loop editing to produce high-quality data.",
+        "We also refine existing safety data to align with the guideline, using a combination of zero-shot rewriting and human-in-the-loop editing to produce high-quality data. By employing these methods, along with a tone classifier to assess tone quality for safety responses, we are able to significantly improve the model\u2019s verbiage. Safety supervised finetuning."
+      ]
+    },
+    {
+      "techniqueId": "tech-configurable-policies",
+      "confidence": "High",
+      "evidence": [
+        "Uplift refers to the additional risk introduced by new technological developments compared to using existing available technologies (such as web search). We then describe how we leverage Red Teaming to iteratively identify and combat various safety risks across capabilities and perform a residual risk assessment. Finally, we describe system-level safety, or the development and orchestration of classifiers around the input and output of the model itself to further enhance safety and make it easier for developers to both customize safety to various usecases and deploy generative AI in more responsible ways.",
+        "Other techniques can then be used to access the tool results, even if the model would normally refuse to perform the search or assist with the results. \u2013 Modifying tool use parameters such as swapping words in queries, retrying, or obfuscating some of the initial request in a multi-turn conversation lead to violations in many early checkpoints as a form of forcing tool use. Child Safety risk assessments were conducted using a team of experts, to assess the model\u2019s capability to produce outputs that could result in Child Safety risks and inform on any necessary and appropriate risk mitigations via fine tuning.",
+        "Prompt-based system guards. System-level safety components enable developers to customize and control how LLM systems respond to user requests. As part of our work on improving the overall safety of the model system and enable developers to deploy responsibly, we describe and release the creation of two prompt-based filtering mechanisms: Prompt Guard and Code Shield."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "High",
+      "evidence": [
+        "Llama 3 70B complied at a rate of 3. \u2022 Text-based prompt injection benchmark: When evaluated against prompt injection benchmarks, prompt injection attacks against Llama 3 405B were successful 21. Figure 22 provides text-based prompt injection success rates across Llama 3, GPT-4 Turbo, Gemini Pro, and Mixtral models.",
+        "Prompt Guard is a model-based filter designed to detect prompt attacks, which are input strings designed to subvert the intended behavior of an LLM functioning as part of an application. The model is a multi-label classifier that detects two classes of prompt attack risk - direct jailbreaks (techniques that explicitly try to override a model\u2019s safety conditioning or system prompt) and indirect prompt injections (instances where third-party data included in a model\u2019s context window includes instructions inadvertently executed as user commands by an LLM). The model is fine-tuned from mDeBERTa-v3-base, a small (86M) parameter model suitable for filtering inputs into an LLM.",
+        "959  Indirect Injections 71. 996  Table 28 Performance of Prompt Guard. We include in- and out-of-distribution evaluations, a multilingual jailbreak built using machine translation, and a dataset of indirect injections from CyberSecEval."
+      ]
+    },
+    {
+      "techniqueId": "tech-csam-detection",
+      "confidence": "Medium",
+      "evidence": [
+        "Identifying and eliminating csam in generative ml training data and models. Technical report, Stanford  Internet Observatory, 2023. Romal Thoppilan, Daniel De Freitas, Jamie Hall, Noam Shazeer, Apoorv Kulshreshtha, Heng-Tze Cheng, Alicia Jin, Taylor Bos, Leslie Baker, Yu Du, YaGuang Li, Hongrae Lee, Huaixiu Steven Zheng, Amin Ghafouri, Marcelo Menegali, Yanping Huang, Maxim Krikun, Dmitry Lepikhin, James Qin, Dehao Chen, Yuanzhong Xu, Zhifeng Chen, Adam Roberts, Maarten Bosma, Vincent Zhao, Yanqi Zhou, Chung-Ching Chang, Igor Krivokon, Will Rusch, Marc Pickett, Pranesh Srinivasan, Laichee Man, Kathleen Meier-Hellstern, Meredith Ringel Morris, Tulsee Doshi, Renelito Delos Santos, Toju Duke, Johnny Soraker, Ben Zevenbergen, Vinodkumar Prabhakaran, Mark Diaz, Ben Hutchinson, Kristen Olson, Alejandra Molina, Erin Hoffman-John, Josh Lee, Lora Aroyo, Ravi Rajakumar, Alena Butryna, Matthew Lamm, Viktoriya Kuzmina, Joe Fenton, Aaron Cohen, Rachel Bernstein, Ray Kurzweil, Blaise Aguera-Arcas, Claire Cui, Marian Croak, Ed Chi, and Quoc Le."
+      ]
+    },
+    {
+      "techniqueId": "tech-training-data-filtering",
+      "confidence": "High",
+      "evidence": [
+        "We focus primarily on ensuring that the pre-training dataset for image recognition does not contain  55  \funsafe content, such as sexual abuse material (CSAM) (Thiel, 2023). We scan all our training images for CSAM using perceptual hashing approaches such as PhotoDNA (Farid, 2021) as well as internal, proprietary classifiers. We also use a proprietary media-risk retrieval pipeline to identify and remove image-text pairs that we consider to be NSFW, for example, because they contain sexual or violent content.",
+        "The audio is passed as input to the model and the output is evaluated for toxicity, after cleaning some special characters. We apply the MuTox classifier (Costa-juss\u00e0 et al. , 2023) and compare the results with Gemini 1."
+      ]
+    },
+    {
+      "techniqueId": "tech-multimodal-safety-alignment",
+      "confidence": "High",
+      "evidence": [
+        "We also refine existing safety data to align with the guideline, using a combination of zero-shot rewriting and human-in-the-loop editing to produce high-quality data. By employing these methods, along with a tone classifier to assess tone quality for safety responses, we are able to significantly improve the model\u2019s verbiage. Safety supervised finetuning."
+      ]
+    },
+    {
+      "techniqueId": "tech-opensource-tools",
+      "confidence": "High",
+      "evidence": [
+        "As part of our work on improving the overall safety of the model system and enable developers to deploy responsibly, we describe and release the creation of two prompt-based filtering mechanisms: Prompt Guard and Code Shield. We open-source these for the community to leverage as-is or take as inspiration and adapt for their usecases. Prompt Guard is a model-based filter designed to detect prompt attacks, which are input strings designed to subvert the intended behavior of an LLM functioning as part of an application."
+      ]
+    }
+  ],
+  "https://github.com/meta-llama/llama/raw/main/Responsible-Use-Guide.pdf": [
+    {
+      "techniqueId": "tech-input-guardrails",
+      "confidence": "Medium",
+      "evidence": [
+        "It supports 12 languages and works across modalities to detect and filter policy-violating inputs and outputs across text and images. Llama Guard is designed to be usable across Llama model sizes, including Llama 4 Scout and Llama 4 Maverick. For the first time, Llama Guard 4 is now available through the /moderations endpoint in Llama API."
+      ]
+    },
+    {
+      "techniqueId": "tech-automated-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "These prompts are similar to the cyber attack compliance tests in that they cover a wide variety of topics including cyberdefense, but they are explicitly benign, even if they may appear malicious. Testing automated offensive cybersecurity capabilities This suite consists of capture-the-flag style security test cases that simulate program exploitation. We then use an LLM as the security tool to determine whether it can reach a specific point in the program where a security issue has been intentionally inserted."
+      ]
+    },
+    {
+      "techniqueId": "tech-prompt-injection-protection",
+      "confidence": "Medium",
+      "evidence": [
+        "Categories of prompt attacks include prompt injection and jailbreaking: Prompt Injections are inputs that exploit the inclusion of untrusted data from third parties into the context window of a model to get it to execute unintended instructions. Jailbreaks are malicious instructions designed to override the safety and security features built into a model. Prompt Guard is designed to perform strongly and generalize well to new settings and distributions of adversarial attacks.",
+        "Testing for susceptibility to prompt injection Prompt injection attacks of LLM-based applications are attempts to cause the LLM to behave in undesirable ways. The Prompt Injection tests evaluate the ability to recognize which part of an input is untrusted and the level of resilience against common text and image based prompt injection techniques. Testing for compliance with requests to help with cyber attacks In Cybersec Eval 1 we introduced tests to measure an LLM's propensity to help carry out cyberattacks as defined in the industry standard MITRE Enterprise ATT&CK ontology of cyberattack methods."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "Testing for susceptibility to prompt injection Prompt injection attacks of LLM-based applications are attempts to cause the LLM to behave in undesirable ways. The Prompt Injection tests evaluate the ability to recognize which part of an input is untrusted and the level of resilience against common text and image based prompt injection techniques. Testing for compliance with requests to help with cyber attacks In Cybersec Eval 1 we introduced tests to measure an LLM's propensity to help carry out cyberattacks as defined in the industry standard MITRE Enterprise ATT&CK ontology of cyberattack methods."
+      ]
+    },
+    {
+      "techniqueId": "tech-multimodal-safety-alignment",
+      "confidence": "High",
+      "evidence": [
+        "Our comprehensive system-level protections framework proactively identifies and mitigates potential risks, empowering developers to more easily deploy generative AI responsibly. System level safeguards Llama Guard Our Llama Guard models offer unparalleled safety content moderation performance and flexibility, and we now offer a collection of specialized models tailored to specific development needs. Llama Guard 4 Llama Guard 4 is an 12B-parameter high-performance multimodal input and output moderation model designed to support developers to detect various common types of violating content."
+      ]
+    },
+    {
+      "techniqueId": "tech-opensource-tools",
+      "confidence": "High",
+      "evidence": [
+        "Llama Protections - Llama Llama Protections Making protection tools accessible to everyone Enabling developers, advancing protections, and building an open ecosystem. Learn more Our approach System safeguards Evaluations Ecosystem Developer use guide Our approach An open approach to protections in the era of generative AI At Meta, we\u2019re pioneering an open source approach to generative AI development enabling everyone to benefit from our models and their powerful capabilities, while making it as easy as possible to build and innovate with trust by design. Our comprehensive system-level protections framework proactively identifies and mitigates potential risks, empowering developers to more easily deploy generative AI responsibly.",
+        "We\u2019ve also engaged with our partners at Papers With Code and HELM to incorporate these evaluations into their benchmarks, reinforcing our commitment through active participation within the ML Commons AI Safety Working Group. New open source benchmarks to evaluate the efficacy of AI systems to automate and scale security operation center (SOC) operations were developed in collaboration and partnership with CrowdStrike. As part of our Llama Defenders Program, we\u2019re also partnering with AT&T, Bell Canada, and ZenDesk to enable select organizations to better defend their organizations\u2019 systems, services, and infrastructure with new state of the art tools."
+      ]
+    }
+  ],
+  "https://d1.awsstatic.com/products/generative-ai/responsbile-ai/AWS-Responsible-Use-of-AI-Guide-Final.pdf": [
+    {
+      "techniqueId": "tech-watermarking",
+      "confidence": "High",
+      "evidence": [
+        "17  \fUse content authentication and tracking: Content authentication can help increase transparency around AI-generated content. Watermarks are one type of content authentication mechanism that can be used to verify whether digital content, such as images and videos, was AI-generated. Additionally, consider including Content Credentials, another provenance/authentication technology."
+      ]
+    },
+    {
+      "techniqueId": "tech-privacy-impact-assessment",
+      "confidence": "High",
+      "evidence": [
+        "For example, data may be available through a variety of sources, including publicly available and licensed data and proprietary data. Involve your legal and procurement teams as appropriate to assess the impact of any privacy considerations or other relevant laws, licenses, or contractual requirements that may impact your collection or use of the data. Consider any necessary processes for handling data securely and safely and ways to mitigate risk."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "You can use existing risk management frameworks, such as NIST AI Risk Management Framework, or create a framework that suits your team or organization. Generally, risk reports will include a detailed description of the use case, an overview of stakeholders, a list of potential risks, and a suggested rating and mitigation action that can lower the risk. Going through the risk assessment exercise can allow you to gain deeper insights into the potential impact and risks for a wide range of stakeholders and help create a more trustworthy, robust, and safer AI application.",
+        "For a developer, this includes understanding and accounting for risks and limitations associated with the specific use case and deployment in an application that\u2019s facing end users. Oversee AI systems: As noted earlier, AI systems generate predictions of a possible or likely answer, not the answer itself. If confidence indicators are available, take them into account (or instruct your users to take them into account) when reviewing and acting on system outputs."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "Keep in mind that the particular medium in which an AI system is trained on, such as images, tabular data, and spoken or written language, matters greatly in how we analyze and understand it. Implement risk mitigation techniques: Consider mitigations depending on the type of AI application and the risks that were identified as part of the risk assessment process. For example, for generative AI applications, mitigation techniques may include value alignment through reinforcement learning from human feedback (RLHF), creation of prompt templates, or augmentation of the system to include additional data sources that can help improve the truthfulness of the output.",
+        "For a developer, this includes understanding and accounting for risks and limitations associated with the specific use case and deployment in an application that\u2019s facing end users. Oversee AI systems: As noted earlier, AI systems generate predictions of a possible or likely answer, not the answer itself. If confidence indicators are available, take them into account (or instruct your users to take them into account) when reviewing and acting on system outputs."
+      ]
+    },
+    {
+      "techniqueId": "tech-configurable-policies",
+      "confidence": "Medium",
+      "evidence": [
+        "For example, for generative AI applications, mitigation techniques may include value alignment through reinforcement learning from human feedback (RLHF), creation of prompt templates, or augmentation of the system to include additional data sources that can help improve the truthfulness of the output. Different risks will require different approaches for mitigation to be implemented. For example, when the training data for a model contains personal information, you might want to consider privacy preservation techniques; for data that includes sensitive attributes, additional fairness measures can be added to the model training process to reduce disparity in model performance.",
+        "They can enable users to identify AI-generated content, provide transparency about the source and creation process (origin and history of content), allow verification of content provenance, and empower users to make informed decisions about the use of AI-generated content. Implement safeguards: As a deployer of AI systems, consider using safeguarding mechanisms, such as guardrails, to enhance the safety and reliability of your AI system. Safeguarding mechanisms can act as protective barriers and help limit undesirable or harmful outputs."
+      ]
+    }
+  ],
+  "meta-llama-responsible-use": [
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "High",
+      "evidence": [
+        "The  10  JULY 2023\fTHE RESPONSIBLE FINE-TUNING FLOW  training progress is monitored using a validation set,  Reinforcement Learning from Human  and hyperparameters are adjusted as necessary. Feedback (RLHF)  Fine-tuning an LLM for safety can involve a number  To align the output of LLMs with user expectations  of techniques, many of which the research paper on  and values, one approach that developers should  Llama 2 describes in greater depth. These techniques  consider is implementing Reinforcement Learning  can include:  \u2022  Supervised Fine-Tuning (SFT): Supervised fine-  tuning using data annotated across helpfulness  and safety.",
+        "These techniques  consider is implementing Reinforcement Learning  can include:  \u2022  Supervised Fine-Tuning (SFT): Supervised fine-  tuning using data annotated across helpfulness  and safety. \u2022  Reinforcement Learning from Human Feedback  (RLHF) or AI Feedback (RLAIF): Training safety  and helpfulness reward models to support  RLHF techniques iteratively improves models  and makes them more robust to jailbreaking  techniques. \u2022  Targeted Safety Context Distillation: Context  distillation for safety helps the model associate  adversarial prompts with safe responses by  prefixing a safe preprompt such as \u201cYou are a  safe and responsible assistant\u201d to the adversarial  prompt, followed by fine-tuning on new outputs."
+      ]
+    },
+    {
+      "techniqueId": "tech-adversarial-training",
+      "confidence": "High",
+      "evidence": [
+        "These techniques  consider is implementing Reinforcement Learning  can include:  \u2022  Supervised Fine-Tuning (SFT): Supervised fine-  tuning using data annotated across helpfulness  and safety. \u2022  Reinforcement Learning from Human Feedback  (RLHF) or AI Feedback (RLAIF): Training safety  and helpfulness reward models to support  RLHF techniques iteratively improves models  and makes them more robust to jailbreaking  techniques. \u2022  Targeted Safety Context Distillation: Context  distillation for safety helps the model associate  adversarial prompts with safe responses by  prefixing a safe preprompt such as \u201cYou are a  safe and responsible assistant\u201d to the adversarial  prompt, followed by fine-tuning on new outputs."
+      ]
+    },
+    {
+      "techniqueId": "tech-input-guardrails",
+      "confidence": "High",
+      "evidence": [
+        "\u2022  Targeted Safety Context Distillation: Context  distillation for safety helps the model associate  adversarial prompts with safe responses by  prefixing a safe preprompt such as \u201cYou are a  safe and responsible assistant\u201d to the adversarial  prompt, followed by fine-tuning on new outputs. from Human Feedback (RLHF) mechanisms. This  involves collecting ranking data from trained  annotators or users (given a model input and several  generated outputs, ranking them from best to worst  according to policies), training a reward or helpfulness  model to act as a proxy of human feedback, and  then optimizing the LLM to maximize the reward/  helpfulness model score with reinforcement learning.",
+        "\u2022  Content-filtering systems from Azure,  supporting a range of languages: https://learn. com/en-us/azure/cognitive-services/  content-safety/overview  \u2022  Filter lists for generation of problematic words:  https://github. com/LDNOOBW/naughty-words-js  \u2022  Recipes for safety in open-domain Chatbots,  including a sensitive topics classifier: https://parl."
+      ]
+    },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "For  example, common adversarial attacks may include  membership inference attacks on a model to predict  whether or not a particular sample was in the training  data, or model inversion attacks to reconstruct  representative views of a subset of examples. Prompt injection attacks are attempts to circumvent  content restrictions to produce particular outputs. A red team privacy adversarial attack conducted by a  for filtering prompt inputs or system outputs.",
+        "A red team privacy adversarial attack conducted by a  for filtering prompt inputs or system outputs. Usage  company may be able to demonstrate the feasibility  or consequence policies may be defined for when  of such attacks. In scenarios where companies  users repeatedly violate those policies."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "6  JULY 2023\fResponsible LLM product development stages  Developers will identify a specific product use case  for the released model, and are responsible for  assessing risks associated with that use case and  applying best practices to ensure safety. This section  is which use case(s) to focus on. Most developers  outlines the considerations and mitigation strategies  using this guide already have a use case in mind,  available at each stage of product development  such as customer support, AI assistants, internal  An important decision in the development process  1Determine use case  and deployment.",
+        "If you\u2019re a developer who  is not certain of a particular use case for which you  would want to use the model, consider focusing on  use cases that improve the lives of people and society,  taking into consideration different ethical principles  and values. Developing or adopting an internal risk  assessment process can help identify potential  risks for a specific use case and should focus on  how your product\u2019s end users and others could be  affected. This understanding is critical for evaluating  in-context safety for your product deployment, and  can take forms such as surveys and interviews of  potential users or market analysis of similar product  applications.",
+        "This includes analyzing the model\u2019s  with respect to a specific category of risk. strengths and weaknesses based on evaluation  results, gathering more data to further enhance  performance and safety, and iterating until satisfied  with the model\u2019s performance using holdout test  datasets. There are many complementary types of evaluations  that are useful for measuring risks in models,  \u2022  Manual evaluation leverages human annotators or  subject matter experts to judge the model\u2019s output."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "It covers best  expect these to evolve as the field advances and  practices and considerations that developers should  access to foundation models grows, inviting further  evaluate in the context of their specific use case and  innovation on AI safety. Decisions to implement  market. It also highlights some mitigation strategies  best practices should be evaluated based on the  and resources available to developers to address risks  jurisdiction where your products will be deployed and  at various points in the system.",
+        "AI tools, and their risks should be evaluated through  These mitigations are layered across different  these lenses according to how they will be used. intervention points beyond those that can be  Foundation models and generative AI systems  represent advancements in power and accuracy  compared to predecessor technologies. The increase  in the performance, utility, and flexibility of these  models will likely lead to their ubiquity, as the value  they bring to some pre-existing use cases may  outweigh operational costs of deploying the systems.",
+        "Determine use case  2. Fine-tune for product  3. Address input- and output-level risks  4."
+      ]
+    },
+    {
+      "techniqueId": "tech-configurable-policies",
+      "confidence": "Medium",
+      "evidence": [
+        "Additionally, the needs  of specific user communities should be considered as  you design content policies, such as the development  of age-appropriate product experiences. Having  these policies in place will dictate the data needed,  annotation requirements, and goals for safety  fine-tuning, including the types of mitigation steps  that will be implemented. These policies will be  used for labeling data in later stages when using  RLHF and in additional product layers, such as  making enforcement decisions for user inputs  and model outputs."
+      ]
+    },
+    {
+      "techniqueId": "tech-training-data-filtering",
+      "confidence": "High",
+      "evidence": [
+        "\u2022  Content-filtering systems from Azure,  supporting a range of languages: https://learn. com/en-us/azure/cognitive-services/  content-safety/overview  \u2022  Filter lists for generation of problematic words:  https://github. com/LDNOOBW/naughty-words-js  \u2022  Recipes for safety in open-domain Chatbots,  including a sensitive topics classifier: https://parl."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-reward-modeling",
+      "confidence": "High",
+      "evidence": [
+        "These techniques  consider is implementing Reinforcement Learning  can include:  \u2022  Supervised Fine-Tuning (SFT): Supervised fine-  tuning using data annotated across helpfulness  and safety. \u2022  Reinforcement Learning from Human Feedback  (RLHF) or AI Feedback (RLAIF): Training safety  and helpfulness reward models to support  RLHF techniques iteratively improves models  and makes them more robust to jailbreaking  techniques. \u2022  Targeted Safety Context Distillation: Context  distillation for safety helps the model associate  adversarial prompts with safe responses by  prefixing a safe preprompt such as \u201cYou are a  safe and responsible assistant\u201d to the adversarial  prompt, followed by fine-tuning on new outputs.",
+        "\u2022  Targeted Safety Context Distillation: Context  distillation for safety helps the model associate  adversarial prompts with safe responses by  prefixing a safe preprompt such as \u201cYou are a  safe and responsible assistant\u201d to the adversarial  prompt, followed by fine-tuning on new outputs. from Human Feedback (RLHF) mechanisms. This  involves collecting ranking data from trained  annotators or users (given a model input and several  generated outputs, ranking them from best to worst  according to policies), training a reward or helpfulness  model to act as a proxy of human feedback, and  then optimizing the LLM to maximize the reward/  helpfulness model score with reinforcement learning."
+      ]
+    },
+    {
+      "techniqueId": "tech-opensource-tools",
+      "confidence": "High",
+      "evidence": [
+        "Developers of generative AI-powered features that  leverage open source models will similarly need to  ensure that their products are safe and benefit end  users, taking a holistic view of responsible AI across  the entire product development cycle. 4  JULY 2023\fMitigation points for LLM- powered products  A foundation model is a general purpose AI  provide opportunities to mitigate potential risks. technology whereas an LLM-powered product has  It is critical that developers examine each layer of the  a defined use case and performs specific tasks  product to determine which potential risks may arise  to enable an intended use or capability through a  based on the product objectives and design,  user interface, sometimes embedded in products.",
+        "com/LDNOOBW/naughty-words-js  \u2022  Recipes for safety in open-domain Chatbots,  including a sensitive topics classifier: https://parl. ai/projects/safety_recipes/  Platforms for tools and evaluations:  \u2022  Benchmarking of LLMs by Stanford\u2019s Center for  Research on Foundation Models, HELM: https://  crfm. edu/helm/latest/  \u2022  EleutherAI LLM Evaluation Harness: https://  github.",
+        "edu/helm/latest/  \u2022  EleutherAI LLM Evaluation Harness: https://  github. com/EleutherAI/lm-evaluation-harness  \u2022  Huggingface Hub which hosts open source  models, datasets, and is a space for developers  to share safeguards and access benchmarking  information: https://huggingface. co/docs/  hub/index  \u2022  GenAI Ops Tools database curated by Credo."
+      ]
+    }
+  ],
+  "microsoft-rai-standard": [
+    {
+      "techniqueId": "tech-bias-mitigation",
+      "confidence": "High",
+      "evidence": [
+        "Tags: Ongoing Evaluation Checkpoint. 5 Reassess the system design, including the choice of training data, features, objective function, and training algorithm, to pursue the goal of minimizing the potential for stereotyping, demeaning, and erasing the identified demographic groups. Tags: Ongoing Evaluation Checkpoint."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "Medium",
+      "evidence": [
+        "In addition, establish feedback mechanisms and a plan for addressing problems, in alignment with Reliability and Safety Goal RS3. Note that this approach is recommended in acknowledgment of the fact that the state-of-the-art in mitigating these risks is less advanced than the state-of-the-art in mitigating differences in quality of service or allocative harms. 20  \fMicrosoft Responsible AI Standard v2  Reliability & Safety Goals Goal RS1: Reliability and safety guidance  Microsoft evaluates the operational factors and ranges within which AI systems are expected to perform reliably and safely, remediates issues, and provides related information to customers.",
+        "20  \fMicrosoft Responsible AI Standard v2  Reliability & Safety Goals Goal RS1: Reliability and safety guidance  Microsoft evaluates the operational factors and ranges within which AI systems are expected to perform reliably and safely, remediates issues, and provides related information to customers. Applies to: All AI systems. 1 Document how:  1)  reliable and safe behavior is defined for this system and, 2)  what acceptable error rates are for overall system performance in the context of intended uses."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "2 Use red teaming exercises to evaluate these risks involving identified demographic groups. 1 Mitigate any risks of these types of harms that you can. In addition, establish feedback mechanisms and a plan for addressing problems, in alignment with Reliability and Safety Goal RS3.",
+        "In addition, establish feedback mechanisms and a plan for addressing problems, in alignment with Reliability and Safety Goal RS3. Note that this approach is recommended in acknowledgment of the fact that the state-of-the-art in mitigating these risks is less advanced than the state-of-the-art in mitigating differences in quality of service or allocative harms. 20  \fMicrosoft Responsible AI Standard v2  Reliability & Safety Goals Goal RS1: Reliability and safety guidance  Microsoft evaluates the operational factors and ranges within which AI systems are expected to perform reliably and safely, remediates issues, and provides related information to customers.",
+        "20  \fMicrosoft Responsible AI Standard v2  Reliability & Safety Goals Goal RS1: Reliability and safety guidance  Microsoft evaluates the operational factors and ranges within which AI systems are expected to perform reliably and safely, remediates issues, and provides related information to customers. Applies to: All AI systems. 1 Document how:  1)  reliable and safe behavior is defined for this system and, 2)  what acceptable error rates are for overall system performance in the context of intended uses."
+      ]
+    }
+  ],
+  "https://mistral.ai/terms/": [
+    {
+      "techniqueId": "tech-input-guardrails",
+      "confidence": "High",
+      "evidence": [
+        "System prompt Guardrailing : An optional system prompt to enforce guardrails on top of our models to steer behaviour and reduce harmful content. Moderation Moderation Moderate Inputs/Outputs Our new moderation service, which is powered by the Mistral Moderation model, is a classifier model based on Ministral 8B 24. It enables our users to detect harmful text content along several policy dimensions."
+      ]
+    }
+  ],
+  "mistral-terms": [],
+  "nemotron-4-tech-report": [
+    {
+      "techniqueId": "tech-dpo",
+      "confidence": "High",
+      "evidence": [
+        "The Nemotron-4 340B base model was trained with 9 trillion tokens from a high-quality dataset, the details of which are provided in Parmar et al. We align the base LLM with Supervised Fine-Tuning (SFT), followed by Preference Fine-Tuning such as Reinforcement Learning with Human Feedback (RLHF) (Ouyang et al. , 2022) and Direct Preference Optimization (DPO) (Rafailov et al.",
+        "2 Preference Fine-tuning  Following the supervised fine-tuning stage, we continue to improve the model by preference fine-tuning, where our model learns preference examples in the form of (prompt, chosen response, rejected response) triplets (Ouyang et al. Specifically, our preference fine-tuning stage involves multi- ple iterations of model improvement, using both the Direct Preference Optimization (Rafailov et al. , 2024) and our new alignment algorithm, the Reward-aware Preference optimization.",
+        "Direct nash optimization: Teaching language models to self-improve with general preferences. arXiv preprint arXiv:2404. co/datasets/RyokoAI/ShareGPT52K,  2023."
+      ]
+    },
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "High",
+      "evidence": [
+        "The Nemotron-4 340B base model was trained with 9 trillion tokens from a high-quality dataset, the details of which are provided in Parmar et al. We align the base LLM with Supervised Fine-Tuning (SFT), followed by Preference Fine-Tuning such as Reinforcement Learning with Human Feedback (RLHF) (Ouyang et al. , 2022) and Direct Preference Optimization (DPO) (Rafailov et al."
+      ]
+    },
+    {
+      "techniqueId": "tech-multimodal-safety-alignment",
+      "confidence": "High",
+      "evidence": [
+        "It aligns with NVIDIA\u2019s organizational values for the protected characteristics under categories of hate and harassment and defines sexual abuse of a minor as a separate critical hazard category. We also introduce a new category, \u201cNeeds Caution\u201d, to address ambiguous situations where there isn\u2019t sufficient context to determine safety. This category is particularly useful for scenarios where a more defensive mode is preferred over a more permissive one, as \u201cNeeds Caution\u201d can be mapped to either unsafe or safe as needed."
+      ]
+    }
+  ],
+  "https://arxiv.org/pdf/2406.11704": [
+    {
+      "techniqueId": "tech-dpo",
+      "confidence": "High",
+      "evidence": [
+        "We align the base LLM with Supervised Fine-Tuning (SFT), followed by Preference Fine-Tuning such as Reinforcement Learning with Human Feedback (RLHF) (Ouyang et al. , 2022) and Direct Preference Optimization (DPO) (Rafailov et al. The alignment process enables the model to follow instructions better, engage in conversations effectively, and better solve problems.",
+        "For both stages, we mask the user turns and only calculate loss on assistant turns. 2 Preference Fine-tuning  Following the supervised fine-tuning stage, we continue to improve the model by preference fine-tuning, where our model learns preference examples in the form of (prompt, chosen response, rejected response) triplets (Ouyang et al. Specifically, our preference fine-tuning stage involves multi- ple iterations of model improvement, using both the Direct Preference Optimization (Rafailov et al.",
+        "Specifically, our preference fine-tuning stage involves multi- ple iterations of model improvement, using both the Direct Preference Optimization (Rafailov et al. , 2024) and our new alignment algorithm, the Reward-aware Preference optimization. Direct Preference Optimization (DPO)."
+      ]
+    },
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "High",
+      "evidence": [
+        ", 2023) was trained on 2 trillion tokens while the Llama-3 family (MetaAI, 2024) was trained on 15 trillion tokens. The Nemotron-4 340B base model was trained with 9 trillion tokens from a high-quality dataset, the details of which are provided in Parmar et al. We align the base LLM with Supervised Fine-Tuning (SFT), followed by Preference Fine-Tuning such as Reinforcement Learning with Human Feedback (RLHF) (Ouyang et al.",
+        "We align the base LLM with Supervised Fine-Tuning (SFT), followed by Preference Fine-Tuning such as Reinforcement Learning with Human Feedback (RLHF) (Ouyang et al. , 2022) and Direct Preference Optimization (DPO) (Rafailov et al. The alignment process enables the model to follow instructions better, engage in conversations effectively, and better solve problems."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "High",
+      "evidence": [
+        ", 2024), a high quality content safety solution and evaluation benchmark from NVIDIA. AEGIS is backed by a broad content safety risk taxonomy  16  33. 24%0%10%20%30%40%50%60%70%80%90%100%Open QASummarizationClassificationClosed QARewriteGenerationOtherBrainstormingExtractionMulti-turn chatOverallWin RateTie RateLoss Rate\fthat covers 12 critical risks in human-LLM interactions (see details in Supplemetary Materials H)."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations. The prompts from AEGIS test partition are used to elicit responses from Nemotron-4-340B-Instruct and Llama-3-70B-Instruct. The responses are then judged by the AEGIS safety model."
+      ]
+    },
+    {
+      "techniqueId": "tech-multistage-pipeline",
+      "confidence": "High",
+      "evidence": [
+        ", 2024), a high quality content safety solution and evaluation benchmark from NVIDIA. AEGIS is backed by a broad content safety risk taxonomy  16  33. 24%0%10%20%30%40%50%60%70%80%90%100%Open QASummarizationClassificationClosed QARewriteGenerationOtherBrainstormingExtractionMulti-turn chatOverallWin RateTie RateLoss Rate\fthat covers 12 critical risks in human-LLM interactions (see details in Supplemetary Materials H)."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-reward-modeling",
+      "confidence": "High",
+      "evidence": [
+        "Furthermore, this reward model provides a solid foundation for training Nemotron-4-340B-Instruct, which will be discussed  2https://huggingface. co/datasets/nvidia/HelpSteer2  5  \fModel  Reward Bench Primary Dataset Overall Chat Chat-Hard Safety Reasoning  Prior Sets  Nemotron-4-340B-Reward Cohere May 2024 Gemini 1. 5 Pro-0514 Cohere March 2024 GPT-4-0125-preview GPT-4-0409-preview GPT-4o-0513 Claude-3-Opus-02292024  92."
+      ]
+    },
+    {
+      "techniqueId": "tech-multimodal-safety-alignment",
+      "confidence": "High",
+      "evidence": [
+        ", 2024), a high quality content safety solution and evaluation benchmark from NVIDIA. AEGIS is backed by a broad content safety risk taxonomy  16  33. 24%0%10%20%30%40%50%60%70%80%90%100%Open QASummarizationClassificationClosed QARewriteGenerationOtherBrainstormingExtractionMulti-turn chatOverallWin RateTie RateLoss Rate\fthat covers 12 critical risks in human-LLM interactions (see details in Supplemetary Materials H).",
+        "It aligns with NVIDIA\u2019s organizational values for the protected characteristics under categories of hate and harassment and defines sexual abuse in minor as a separate critical hazard category. We also introduce a new category, \u201cNeeds Caution\u201d, to address ambiguous situations where there isn\u2019t sufficient context to determine safety. This category is particularly useful for scenarios where a more defensive mode is preferred over a more permissive one, as \u201cNeeds Caution\u201d can be mapped to either unsafe or safe as needed."
+      ]
+    },
+    {
+      "techniqueId": "tech-opensource-tools",
+      "confidence": "High",
+      "evidence": [
+        "AEGIS safety models are a group of open sourced LlamaGuard (Inan et al. , 2023) LLM based classifiers, that were further instruction tuned with AEGIS safety taxonomy and policy in a parameter efficient manner. Figure 6: Percentage of unsafe responses over all model responses in AEGIS safety evaluations."
+      ]
+    }
+  ],
+  "https://aws.amazon.com/ai/responsible-ai/policy/": [
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2."
+      ]
+    },
+    {
+      "techniqueId": "tech-configurable-policies",
+      "confidence": "High",
+      "evidence": [
+        "This includes implementing Responsible AI practices to address key dimensions including controllability, safety, fairness, veracity, robustness, explainability, privacy, security, transparency, and governance. The performance of any application using an Amazon Nova model depends on the design of the customer workflow, including the factors discussed below: Effectiveness Criteria: Customers should define and enforce criteria for the kinds of use cases they will implement, and, for each use case, further define criteria for the inputs and completions permitted, and for how humans should employ their own judgment to determine final results. These criteria should systematically address controllability, safety, fairness, and the other key dimensions listed above."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "Using benchmarks and expert assessments, we found that Amazon Nova Premier is within the tolerance threshold for critical capabilities in each domain. CBRN: Evaluations included Weapons of Mass Destruction Proxy (WMDP), ProtocolQA, and BioLP Bench, along with external expert red teaming by Carnegie Mellon's Gomes Group and Nemesys Insights. Offensive Cyber Operations: We used benchmarks such as SECURE, CTIBench, CyberMetric (which test the model's knowledge of cyber threat intelligence and vulnerabilities), and Cybench (which tests practical exploitation through cyberattack challenges), supported by expert red-teaming by internal experts."
+      ]
+    }
+  ],
+  "openai-preparedness": [
+    {
+      "techniqueId": "tech-safety-advisory",
+      "confidence": "High",
+      "evidence": [
+        "Creating  a  cross-functional  advisory  body. We  are  creating  a  Safety  Advisory  Group  (SAG)  that  brings  together  expertise  from  across  the  company  to  help  OpenAI\u2019s  leadership and Board of Directors be best prepared for the safety decisions they need to  make. SAG  responsibilities  will  thus  include  overseeing  the  assessment  of  the  risk  landscape, and maintaining a fast-track process for handling emergency scenarios."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "The  central  thesis  behind our Preparedness Framework is that a robust approach to AI catastrophic risk safety  requires proactive, science-based determinations of when and how it is safe to proceed with  development and deployment. \u200b\u200b  Our Preparedness Framework contains five key elements   Tracking  catastrophic  risk  level  via  evaluations. We  will  be  building  and  continually  improving suites of evaluations and other monitoring solutions along several Tracked Risk  Categories, and indicating our current levels of pre-mitigation and post-mitigation risk in a  Scorecard.",
+        "We  will  be  building  and  continually  improving suites of evaluations and other monitoring solutions along several Tracked Risk  Categories, and indicating our current levels of pre-mitigation and post-mitigation risk in a  Scorecard. Importantly, we will also be forecasting the future development of risks, so that  we can develop lead times on safety and security measures   Seeking out unknown-unknowns. We will continually run a process for identification and  analysis (as well as tracking) of currently unknown categories of catastrophic risk as they  emerge   Establishing  safety  baselines.",
+        "We will continually run a process for identification and  analysis (as well as tracking) of currently unknown categories of catastrophic risk as they  emerge   Establishing  safety  baselines. Only  models  with  a  post-mitigation  score  of  \"medium\"  or  below  can  be  deployed,  and  only  models  with  a  post-mitigation  score  of  \"high\"  or  below  can  be  developed  further  (as  defined  in  the  Tracked  Risk  Categories  below). In  addition,  we will ensure Security is appropriately tailored to any model that has a \u201chigh\u201d or \u201ccritical\u201d  pre-mitigation  level  of  risk  (as  defined  in  the  Scorecard  below)  to  prevent  model  exfiltration."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "Low  Medium  High  Critical  Specifically, below, we lay out details for the following Tracked Risk Categories   Cybersecurit   Chemical, Biological, Nuclear, and Radiological (CBRN) threats   Persuasio   Model autonomy  Preparedness  Framework  (Beta)  5  \fOur  rationale  for  grouping  and  naming  these  specific  risk  categories  is  informed  by  three  considerations. First,  fine-tuning  or  other  domain-specific  enhancements  (e. ,  tailored  prompts or language model programs) may better elicit model capabilities along a particular  risk  category.",
+        ",  the  CEO  or  a  person  designated  by  them,  serves  as  the  default decision-maker on all decisions   The OpenAI Board of Directors (BoD), as the ultimate governing body of OpenAI, will  oversee  OpenAI  Leadership\u2019s  implementation  and  decision-making  pursuant  to  this  Preparedness Framework. The BoD may review certain decisions taken and will receive  appropriate documentation (i. , without needing to proactively ask) to ensure the BOD  is fully informed and able to fulfill its oversight role   Process:   The Preparedness team is responsible for:   maintaining  and  updating  the  Scorecard,  including  designing  and  running  evaluations  to  provide  Scorecard  inputs  and  collecting  relevant  information  on  monitored misuse, red-teaming, and intelligenc   monitoring  for  unknown  unknowns  and  making  the  case  for  inclusion  in  the  Preparedness Framework of any new risk categories as they emerg   ensuring  the  risk  level  distinctions  in  the  Tracked  Risk  Categories  section  are  appropriate given developments in frontier AI models, and suggesting updates to  these levels if neede   forecasting  potential  changes  to  catastrophic  risk  levels,  and  summarizing  evidence for an \u201cearly warning\u201d / \u201cheads up\u201d as neede   providing a monthly report (sent to the SAG, Leadership and BoD) synthesizing the  above  with  any  potential  protective  actions  (the  SAG  Chair,  OpenAI  Leadership,  and/or BoD can adjust this cadence as needed   If  the  Preparedness  or  any  other  team  determines  that  any  changes  to  the  Preparedness  Framework  are  necessary,  it  will  include  a  case  for  this  change  in  its  report.",
+        ", without needing to proactively ask) to ensure the BOD  is fully informed and able to fulfill its oversight role   Process:   The Preparedness team is responsible for:   maintaining  and  updating  the  Scorecard,  including  designing  and  running  evaluations  to  provide  Scorecard  inputs  and  collecting  relevant  information  on  monitored misuse, red-teaming, and intelligenc   monitoring  for  unknown  unknowns  and  making  the  case  for  inclusion  in  the  Preparedness Framework of any new risk categories as they emerg   ensuring  the  risk  level  distinctions  in  the  Tracked  Risk  Categories  section  are  appropriate given developments in frontier AI models, and suggesting updates to  these levels if neede   forecasting  potential  changes  to  catastrophic  risk  levels,  and  summarizing  evidence for an \u201cearly warning\u201d / \u201cheads up\u201d as neede   providing a monthly report (sent to the SAG, Leadership and BoD) synthesizing the  above  with  any  potential  protective  actions  (the  SAG  Chair,  OpenAI  Leadership,  and/or BoD can adjust this cadence as needed   If  the  Preparedness  or  any  other  team  determines  that  any  changes  to  the  Preparedness  Framework  are  necessary,  it  will  include  a  case  for  this  change  in  its  report. The case will consist of the suggested new version of the relevant parts of the  Preparedness  Framework  along  with  a  summary  of  evidence  supporting  the  change  (and evidence against). This case is then sent to SAG and processed according to the  standard decision-making process described below."
+      ]
+    },
+    {
+      "techniqueId": "tech-multistage-pipeline",
+      "confidence": "High",
+      "evidence": [
+        ",  of checkpoints) during model training. Safety baselines  As  mentioned  in  the  introduction,  OpenAI  already  has  extensive  safety  processes  in  place  both  before  and  after  deployment  (e. ,  system  cards,  red-teaming,  refusals,  jailbreak  monitoring, etc."
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "High",
+      "evidence": [
+        "Preparedness  Framework  (Beta)  8  Risk levelDefinitionRationale for thresholdLowModel assistance for cyberattacks, if any, is meaningful only for non-programming uses, e. , translation, targeted distillation of confidential information, and/or data analysis AND model cannot meaningfully execute elements of cyber operations, e. , developing a known exploit into an attack, black-box exploitation, translating reasoning about defenses into action, or lateral goal-directed movement on hardened targets.",
+        "CBRN (chemical, biological, radiological, nuclear)  CBRN  is  focused  on  risks  related  to  model-assisted  creation  of  chemical,  biological,  radiological, and/or nuclear threats. Preparedness  Framework  (Beta)  9  Risk levelDefinitionRationale for thresholdLowModel can provide information relevant to creating CBRN threats with comparable utility to existing resources (e. , textbooks, search engines).",
+        "Forecasting,\u201cearly warnings,\u201d and monitoring  Many  of  the  mitigations  that  would  be  necessary  to  address  risks  at  a  \u201chigh\u201d  or  \u201ccritical\u201d  pre-mitigation  level  (e. ,  hardening  security)  require  adequate  lead  time  to  implement. For  this reason, we will be investing in efforts that help create an internal \u201cpreparedness roadmap\u201d  and  help  us  thus  properly  plan  for  and  get  ahead  of  the  emerging  risks."
+      ]
+    }
+  ],
+  "phi-4-tech-report": [
     {
       "techniqueId": "tech-dpo",
       "confidence": "High",
@@ -665,7 +1647,51 @@
       ]
     }
   ],
-  "https://arxiv.org/pdf/2510.14276v1": [
+  "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Microsoft-Responsible-AI-Standard-General-Requirements.pdf": [
+    {
+      "techniqueId": "tech-dpo",
+      "confidence": "High",
+      "evidence": [
+        "We also added multilingual data for 40 languages. We use around 8B tokens of data in this phase, all formatted in the chatml format. 2 Direct Preference Optimization  We use DPO [RSM+23] to align the model with human preferences, and also to steer the model away from unwanted behavior through pairs of desired and undesired outputs."
+      ]
+    },
+    {
+      "techniqueId": "tech-hallucination-grounding",
+      "confidence": "High",
+      "evidence": [
+        "15  \fFigure 6: The post-training process described in Appendix A. 1 decreases hallucinations. One measure is that the problems in SimpleQA\u2014which the model very rarely gets correct\u2014are increasingly not attempted during the course of post-training.",
+        "If the model does not know the answer, we would rather it refuse to answer than to make up a hallucination. We present the details of this process, including prompts to create the data, in Appendix A. This greatly decreases hallucinations in SimpleQA (see Figure 6).",
+        "In this case, a model will score worse by the F1 metric compared to original (5. 6% rather than 6%), while exhibiting more user-friendly and responsible behavior. 1 Synthetic Generation Prompts  Here, we share the main synthetic generation prompts, provided to GPT-4o, to generate post-training data to decrease hallucinations."
+      ]
+    },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        "phi-4 showed strong defenses against these techniques. AIRT also generated adversarial suffixes using the GCG algorithm [ZWC+23] on phi-3-medium, but found that these suffixes did not transfer to phi-4. Further red teaming is required to identify possible risks across a broader range of scenarios and harm categories."
+      ]
+    },
+    {
+      "techniqueId": "tech-contextual-safety",
+      "confidence": "High",
+      "evidence": [
+        "Training a helpful and harmless assistant with reinforcement learning from human feedback, 2022. [BSA+24] Federico Bianchi, Mirac Suzgun, Giuseppe Attanasio, Paul R\u00a8ottger, Dan Jurafsky, Tatsunori Hashimoto, and James Zou. Safety-tuned Llamas: Lessons from improving the safety of large language models that follow instructions, 2024."
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-reward-modeling",
+      "confidence": "High",
+      "evidence": [
+        "The prompts are sourced from various publicly available instruction tuning datasets and also include prompts related to safety and Responsible AI (RAI). Next, for each of these prompts, we generate responses from GPT-4o, GPT-4t and our model. From these responses, we create various combinations of DPO pairs and use GPT-4o as a judge to label positive or negative for a given pair.",
+        "arXiv preprint arXiv:2407. 20  \f[BJN+22] Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, Anna Chen, Nova DasSarma, Dawn Drain, Stanislav Fort, Deep Ganguli, Tom Henighan, Nicholas Joseph, Saurav Ka- davath, Jackson Kernion, Tom Conerly, Sheer El-Showk, Nelson Elhage, Zac Hatfield- Dodds, Danny Hernandez, Tristan Hume, Scott Johnston, Shauna Kravec, Liane Lovitt, Neel Nanda, Catherine Olsson, Dario Amodei, Tom Brown, Jack Clark, Sam McCandlish, Chris Olah, Ben Mann, and Jared Kaplan. Training a helpful and harmless assistant with reinforcement learning from human feedback, 2022.",
+        "Training a helpful and harmless assistant with reinforcement learning from human feedback, 2022. [BSA+24] Federico Bianchi, Mirac Suzgun, Giuseppe Attanasio, Paul R\u00a8ottger, Dan Jurafsky, Tatsunori Hashimoto, and James Zou. Safety-tuned Llamas: Lessons from improving the safety of large language models that follow instructions, 2024."
+      ]
+    }
+  ],
+  "pixtral-12b-blog": [],
+  "qwen2-5-coder-tech-report": [],
+  "qwen2-5-tech-report": [],
+  "https://qwen.ai/usagepolicy": [
     {
       "techniqueId": "tech-input-guardrails",
       "confidence": "High",
@@ -761,6 +1787,23 @@
         "(2) Incompatibility with Streaming Outputs. Existing open-source guard models are designed to evaluate only complete responses, which is fundamentally misaligned with the streaming generation paradigm adopted by modern LLMs. This limitation hinders timely intervention and real-time content moderation during interactive sessions.",
         "It confirms that the Hybrid Reward effectively avoids the over-refusal problem while steadily and reliably enhancing model safety. 4 Stream Qwen3Guard  Current mainstream open-source guard models, as well as Generative Qwen3Guard, assess safety after a response is fully generated, making real-time monitoring during generation almost impossible. To address this, we developed a token-level streaming classifier that evaluates each token as it\u2019s generated, categorizing it as safe, unsafe, or potentially controversial in real time.",
         "Advances in Neural Information Processing Systems, 37:7256\u20137295, 2024. Seungju Han, Kavel Rao, Allyson Ettinger, Liwei Jiang, Bill Yuchen Lin, Nathan Lambert, Yejin Choi, and Nouha Dziri. Wildguard: Open one-stop moderation tools for safety risks, jailbreaks, and refusals of llms, 2024."
+      ]
+    }
+  ],
+  "xai-security": [
+    {
+      "techniqueId": "tech-data-retention-policies",
+      "confidence": "High",
+      "evidence": [
+        "Database snapshot backups are restored on at least a semi-annual basis to help ensure that processes and tools function as expected. Data Erasure xAI customers are able to export or delete their data/content using the self-service features of the enterprise platform. Encryption-at-rest Customer archive data stored in S3 is encrypted at rest using server-side encryption with Amazon S3 managed keys (SSE-S3)."
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "evidence": [
+        "Our Trust Portal provides detailed information about our security measures, certifications, and data handling practices. Vulnerability Reporting To report vulnerabilities, please contact the xAI security team through our HackerOne program at https://hackerone. com/x or by emailing vulnerabilities@x.",
+        "Logging We retain security logs, which include application, tooling, and access logs, for 180 days. Password Security We adhere strictly to the guidelines set forth in NIST Special Publication 800-63B, ensuring that our password security policies align with the latest standards and best practices for digital identity and authentication. Application Security Responsible Disclosure xAI has a public bug bounty program that is utilized to encourage responsible disclosure of system security issues identified by external parties and to enable continuous assessment of product security."
       ]
     }
   ]
