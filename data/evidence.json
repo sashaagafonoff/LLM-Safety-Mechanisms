@@ -1,10 +1,586 @@
 {
   "sources": [
     {
-      "title": "Amazon Nova Micro, Lite, Pro, and Premier - AWS AI Service Cards",
-      "url": "https://docs.aws.amazon.com/ai/responsible-ai/nova-micro-lite-pro/overview.html",
+      "id": "gpt-5-system-card",
+      "title": "GPT-5 System Card",
+      "provider": "openai",
+      "url": "https://cdn.openai.com/gpt-5-system-card.pdf",
       "type": "System Card",
+      "date_added": "2026-01-15",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "gpt-5-thinking",
+          "name": "GPT-5"
+        },
+        {
+          "modelId": "gpt-5.2",
+          "name": "GPT-5.2"
+        },
+        {
+          "modelId": "gpt-5-mini",
+          "name": "GPT-5 Mini"
+        }
+      ]
+    },
+    {
+      "id": "claude-opus-4-5-system-card",
+      "title": "Claude Opus 4.5 System Card",
+      "provider": "anthropic",
+      "url": "https://www-cdn.anthropic.com/claude-opus-4.5-system-card.pdf",
+      "type": "System Card",
+      "date_added": "2026-01-20",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "claude-opus-4.5",
+          "name": "Claude 3.5 Opus"
+        }
+      ]
+    },
+    {
+      "id": "gemini-3-technical-report",
+      "title": "Gemini 3 Technical Report",
+      "provider": "google",
+      "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_3_report.pdf",
+      "type": "Technical Report",
+      "date_added": "2026-01-22",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "gemini-3-pro",
+          "name": "Gemini 3 Pro"
+        },
+        {
+          "modelId": "gemini-3-flash",
+          "name": "Gemini 3 Flash"
+        },
+        {
+          "modelId": "gemini-3-deep-think",
+          "name": "Gemini 3 Deep Think"
+        }
+      ]
+    },
+    {
+      "id": "llama-4-responsible-use-guide",
+      "title": "Llama 4 Responsible Use Guide",
+      "provider": "meta",
+      "url": "https://ai.meta.com/research/publications/llama-4-responsible-use-guide.pdf",
+      "type": "Guide",
+      "date_added": "2026-01-25",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "llama-4-8b",
+          "name": "Llama 4 8B"
+        },
+        {
+          "modelId": "llama-4-17b",
+          "name": "Llama 4 17B"
+        },
+        {
+          "modelId": "llama-4-scout",
+          "name": "Llama 4 Scout"
+        },
+        {
+          "modelId": "llama-4-maverick",
+          "name": "Llama 4 Maverick"
+        }
+      ]
+    },
+    {
+      "id": "aws-nova-service-card",
+      "title": "Amazon Nova Micro, Lite, Pro, and Premier - AWS AI Service Cards",
       "provider": "amazon",
+      "url": "https://d1.awsstatic.com/responsible-ai/Amazon%20Nova%20Micro%20Lite%20Pro%20and%20Premier%20AWS%20AI%20Service%20Cards.pdf",
+      "type": "System Card",
+      "date_added": "2026-01-26",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "nova-pro",
+          "name": "Amazon Nova Pro"
+        },
+        {
+          "modelId": "nova-lite",
+          "name": "Amazon Nova Lite"
+        },
+        {
+          "modelId": "nova-micro",
+          "name": "Amazon Nova Micro"
+        }
+      ]
+    },
+    {
+      "id": "mistral-large-2411-card",
+      "title": "Mistral Large 2411 System Card",
+      "provider": "mistral",
+      "url": "https://mistral.ai/news/mistral-large-2411-system-card.pdf",
+      "type": "System Card",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "mistral-large-3",
+          "name": "Mistral Large 3"
+        },
+        {
+          "modelId": "ministral-3",
+          "name": "Ministral 3"
+        }
+      ]
+    },
+    {
+      "id": "o3-pro",
+      "title": "OpenAI o3 and o4-mini System Card",
+      "provider": "openai",
+      "url": "https://cdn.openai.com/o3-system-card.pdf",
+      "type": "System Card",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "o3-pro",
+          "name": "o3"
+        },
+        {
+          "modelId": "o4-mini",
+          "name": "o4-mini"
+        },
+        {
+          "modelId": "o3",
+          "name": "o3"
+        }
+      ]
+    },
+    {
+      "id": "deepseek-r1-paper",
+      "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+      "provider": "deepseek",
+      "url": "https://arxiv.org/pdf/2501.12948",
+      "type": "Paper",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "deepseek-r1",
+          "name": "DeepSeek-R1"
+        },
+        {
+          "modelId": "deepseek-r1-distill",
+          "name": "DeepSeek-R1-Distill"
+        }
+      ]
+    },
+    {
+      "id": "grok-1-5-blog",
+      "title": "Announcing Grok-1.5",
+      "provider": "xai",
+      "url": "https://x.ai/blog/grok-1.5",
+      "type": "Blog Post",
+      "date_added": "2026-01-27",
+      "status": "inactive",
+      "models": [
+        {
+          "modelId": "grok-1-5",
+          "name": "Grok-1.5"
+        }
+      ]
+    },
+    {
+      "id": "cohere-safety-framework",
+      "title": "Cohere Safety Framework (ArXiv)",
+      "provider": "cohere",
+      "url": "https://arxiv.org/pdf/2409.11295",
+      "type": "Paper",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "command-r-plus",
+          "name": "Command R+"
+        },
+        {
+          "modelId": "command-a",
+          "name": "Command A"
+        }
+      ]
+    },
+    {
+      "id": "claude-3-5-sonnet-card",
+      "title": "Claude 3.5 Sonnet System Card",
+      "provider": "anthropic",
+      "url": "https://www-cdn.anthropic.com/claude-3-5-sonnet-system-card.pdf",
+      "type": "System Card",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "claude-sonnet-4.5",
+          "name": "Claude 3.5 Sonnet"
+        }
+      ]
+    },
+    {
+      "id": "qwen2-5-tech-report",
+      "title": "Qwen2.5 Technical Report",
+      "provider": "alibaba",
+      "url": "https://arxiv.org/pdf/2409.12191",
+      "type": "Technical Report",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "qwen-2-5-72b",
+          "name": "Qwen2.5-72B"
+        }
+      ]
+    },
+    {
+      "id": "phi-4-tech-report",
+      "title": "Phi-4 Technical Report",
+      "provider": "microsoft",
+      "url": "https://www.microsoft.com/en-us/research/uploads/prod/2024/12/P4TechReport.pdf",
+      "type": "Technical Report",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "phi-4",
+          "name": "Phi-4"
+        },
+        {
+          "modelId": "phi-4-multimodal",
+          "name": "Phi-4 Multimodal"
+        }
+      ]
+    },
+    {
+      "id": "nemotron-4-tech-report",
+      "title": "Nemotron-4 340B Technical Report",
+      "provider": "nvidia",
+      "url": "https://arxiv.org/pdf/2406.11704",
+      "type": "Technical Report",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "nemotron-4",
+          "name": "Nemotron-4 340B"
+        },
+        {
+          "modelId": "llama-3.1-nemotron",
+          "name": "Llama-3.1-Nemotron"
+        }
+      ]
+    },
+    {
+      "id": "falcon-180b-blog",
+      "title": "Falcon 180B Blog Post",
+      "provider": "tii",
+      "url": "https://huggingface.co/blog/falcon-180b",
+      "type": "Blog Post",
+      "date_added": "2026-01-27",
+      "status": "inactive",
+      "models": [
+        {
+          "modelId": "falcon-180b",
+          "name": "Falcon 180B"
+        }
+      ]
+    },
+    {
+      "id": "llama-3-paper",
+      "title": "The Llama 3 Herd of Models",
+      "provider": "meta",
+      "url": "https://arxiv.org/pdf/2407.21783",
+      "type": "Paper",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "llama-3-1-405b",
+          "name": "Llama 3.1 405B"
+        }
+      ]
+    },
+    {
+      "id": "grok-1-blog",
+      "title": "Announcing Grok-1",
+      "provider": "xai",
+      "url": "https://x.ai/blog/grok-1",
+      "type": "Blog Post",
+      "date_added": "2026-01-27",
+      "status": "inactive",
+      "models": []
+    },
+    {
+      "id": "gemini-1-5-paper",
+      "title": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context",
+      "provider": "google",
+      "url": "https://arxiv.org/pdf/2403.05530",
+      "type": "Paper",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "gemini-1-5-pro",
+          "name": "Gemini 1.5 Pro"
+        }
+      ]
+    },
+    {
+      "id": "gpt-4o-system-card",
+      "title": "GPT-4o System Card",
+      "provider": "openai",
+      "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
+      "type": "System Card",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": []
+    },
+    {
+      "id": "gpt-oss-model-card",
+      "title": "gpt-oss-120b & gpt-oss-20b Model Card",
+      "provider": "openai",
+      "url": "https://openai.com/index/gpt-oss-model-card/",
+      "type": "Model Card",
+      "date_added": "2026-01-30",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "gpt-oss-120b",
+          "name": "gpt-oss-120b"
+        }
+      ]
+    },
+    {
+      "id": "claude-3-haiku-model-card",
+      "title": "Claude 3 Haiku Model Card",
+      "provider": "anthropic",
+      "url": "https://www-cdn.anthropic.com/claude-3-haiku-model-card.pdf",
+      "type": "Model Card",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "claude-haiku-4.5",
+          "name": "Claude 3 Haiku"
+        }
+      ]
+    },
+    {
+      "id": "pixtral-12b-blog",
+      "title": "Pixtral 12B Blog Post",
+      "provider": "mistral",
+      "url": "https://mistral.ai/news/pixtral-12b/",
+      "type": "Blog Post",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "pixtral",
+          "name": "Pixtral 12B"
+        }
+      ]
+    },
+    {
+      "id": "falcon-mamba-blog",
+      "title": "Falcon Mamba 7B Blog Post",
+      "provider": "tii",
+      "url": "https://huggingface.co/blog/falcon-mamba-7b",
+      "type": "Blog Post",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "falcon-3",
+          "name": "Falcon 3"
+        }
+      ]
+    },
+    {
+      "id": "hunyuan-technical-report",
+      "title": "Hunyuan-Large: An Open-Source MoE Model",
+      "provider": "tencent",
+      "url": "https://arxiv.org/pdf/2411.02265",
+      "type": "Technical Report",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "hunyuan-2.0",
+          "name": "Hunyuan 2.0"
+        }
+      ]
+    },
+    {
+      "id": "qwen2-5-coder-tech-report",
+      "title": "Qwen2.5-Coder Technical Report",
+      "provider": "alibaba",
+      "url": "https://arxiv.org/pdf/2409.12186",
+      "type": "Technical Report",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": []
+    },
+    {
+      "id": "deepseek-v3-paper",
+      "title": "DeepSeek-V3 Technical Report",
+      "provider": "deepseek",
+      "url": "https://arxiv.org/pdf/2412.19437",
+      "type": "Technical Report",
+      "date_added": "2026-01-27",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "deepseek-v3",
+          "name": "DeepSeek-V3"
+        },
+        {
+          "modelId": "deepseek-v3-lite",
+          "name": "DeepSeek-V3-Lite"
+        },
+        {
+          "modelId": "deepseek-v3.2",
+          "name": "DeepSeek-V3.2"
+        }
+      ]
+    },
+    {
+      "id": "microsoft-rai-standard",
+      "title": "Microsoft Responsible AI Standard v2",
+      "provider": "microsoft",
+      "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/Microsoft-Responsible-AI-Standard-General-Requirements.pdf",
+      "type": "Policy",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "phi-3-mini"
+        },
+        {
+          "modelId": "phi-4"
+        },
+        {
+          "modelId": "phi-4-multimodal"
+        }
+      ]
+    },
+    {
+      "id": "google-ai-principles-2024",
+      "title": "Google AI Principles Progress Update 2024",
+      "provider": "google",
+      "url": "https://ai.google/static/documents/ai-responsibility-2024-update.pdf",
+      "type": "Policy",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "gemini-1-5-pro"
+        },
+        {
+          "modelId": "gemini-3-pro"
+        },
+        {
+          "modelId": "gemini-3-flash"
+        },
+        {
+          "modelId": "gemini-3-deep-think"
+        },
+        {
+          "modelId": "gemini-2.5-flash-lite"
+        }
+      ]
+    },
+    {
+      "id": "anthropic-rsp",
+      "title": "Anthropic Responsible Scaling Policy",
+      "provider": "anthropic",
+      "url": "https://www-cdn.anthropic.com/17310f6d70ae5627f55313ed067afc1a762a4068.pdf",
+      "type": "Policy",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "claude-3-opus"
+        },
+        {
+          "modelId": "claude-3-5-sonnet"
+        },
+        {
+          "modelId": "claude-opus-4.5"
+        },
+        {
+          "modelId": "claude-sonnet-4.5"
+        },
+        {
+          "modelId": "claude-haiku-4.5"
+        }
+      ]
+    },
+    {
+      "id": "openai-preparedness",
+      "title": "OpenAI Preparedness Framework",
+      "provider": "openai",
+      "url": "https://cdn.openai.com/openai-preparedness-framework-beta.pdf",
+      "type": "Framework",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "o3-pro"
+        },
+        {
+          "modelId": "o3"
+        },
+        {
+          "modelId": "o4-mini"
+        },
+        {
+          "modelId": "gpt-5-thinking"
+        },
+        {
+          "modelId": "gpt-5.2"
+        },
+        {
+          "modelId": "gpt-5-mini"
+        },
+        {
+          "modelId": "gpt-oss-120b"
+        }
+      ]
+    },
+    {
+      "id": "meta-llama-responsible-use",
+      "title": "Meta Llama 3 Responsible Use Guide",
+      "provider": "meta",
+      "url": "https://github.com/meta-llama/llama/raw/main/Responsible-Use-Guide.pdf",
+      "type": "Guide",
+      "status": "active",
+      "models": [
+        {
+          "modelId": "llama-3-1-405b"
+        },
+        {
+          "modelId": "llama-3-70b"
+        },
+        {
+          "modelId": "llama-4-8b"
+        },
+        {
+          "modelId": "llama-4-17b"
+        },
+        {
+          "modelId": "llama-4-scout"
+        },
+        {
+          "modelId": "llama-4-maverick"
+        }
+      ]
+    },
+    {
+      "id": "aws-rai-policy",
+      "title": "AWS Responsible AI Policy",
+      "provider": "amazon",
+      "url": "https://aws.amazon.com/ai/responsible-ai/policy/",
+      "type": "Policy",
+      "status": "active",
       "models": [
         {
           "modelId": "nova-pro"
@@ -18,72 +594,81 @@
       ]
     },
     {
-      "title": "GPT-5 System Card",
-      "url": "https://cdn.openai.com/gpt-5-system-card.pdf",
-      "type": "System Card",
-      "provider": "openai",
+      "id": "xai-security",
+      "title": "xAI Trust & Security",
+      "provider": "xai",
+      "url": "https://x.ai/security",
+      "type": "Policy",
+      "status": "active",
       "models": [
         {
-          "modelId": "gpt-5.2"
+          "modelId": "grok-1-5"
         },
         {
-          "modelId": "gpt-5-mini"
+          "modelId": "grok-4"
+        },
+        {
+          "modelId": "grok-4-fast"
+        },
+        {
+          "modelId": "grok-4-thinking"
         }
       ]
     },
     {
-      "title": "OpenAI o3 and o4-mini System Card",
-      "url": "https://cdn.openai.com/pdf/2221c875-02dc-4789-800b-e7758f3722c1/o3-and-o4-mini-system-card.pdf",
-      "type": "System Card",
-      "provider": "openai",
+      "id": "alibaba-qwen-policy",
+      "title": "Alibaba Qwen Usage Policy",
+      "provider": "alibaba",
+      "url": "https://qwen.ai/usagepolicy",
+      "type": "Policy",
+      "status": "active",
       "models": [
         {
-          "modelId": "o3-pro"
+          "modelId": "qwen-2-5-72b"
         },
         {
-          "modelId": "o3"
+          "modelId": "qwen3-max"
         },
         {
-          "modelId": "o4-mini"
+          "modelId": "qwen3-turbo"
+        },
+        {
+          "modelId": "qwen3-thinking"
         }
       ]
     },
     {
-      "title": "gpt-oss-120b & gpt-oss-20b Model Card",
-      "url": "https://openai.com/index/gpt-oss-model-card/",
-      "type": "Model Documentation",
-      "provider": "openai",
+      "id": "deepseek-privacy",
+      "title": "DeepSeek Privacy Policy",
+      "provider": "deepseek",
+      "url": "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html",
+      "type": "Policy",
+      "status": "active",
       "models": [
         {
-          "modelId": "gpt-oss-120b"
+          "modelId": "deepseek-v3"
+        },
+        {
+          "modelId": "deepseek-r1"
+        },
+        {
+          "modelId": "deepseek-v3.2"
+        },
+        {
+          "modelId": "deepseek-v3-lite"
+        },
+        {
+          "modelId": "deepseek-r1-distill"
         }
       ]
     },
     {
-      "title": "Llama 3 & 4 Safety Protections",
-      "url": "https://www.llama.com/llama-protections/",
-      "type": "Model Documentation",
-      "provider": "meta",
-      "models": [
-        {
-          "modelId": "llama-4-maverick"
-        },
-        {
-          "modelId": "llama-4-scout"
-        },
-        {
-          "modelId": "llama-4-8b"
-        },
-        {
-          "modelId": "llama-4-17b"
-        }
-      ]
-    },
-    {
-      "title": "Mistral Guardrailing Capabilities",
-      "url": "https://docs.mistral.ai/capabilities/guardrailing",
-      "type": "Model Documentation",
+      "id": "mistral-terms",
+      "title": "Mistral AI Terms of Use & Safety Policy",
       "provider": "mistral",
+      "url": "https://mistral.ai/terms/",
+      "type": "Policy",
+      "status": "active",
       "models": [
         {
           "modelId": "mistral-large-3"
@@ -92,184 +677,26 @@
           "modelId": "ministral-3"
         },
         {
-          "modelId": "magistral-medium-1.2"
-        },
-        {
           "modelId": "pixtral"
+        },
+        {
+          "modelId": "magistral-medium-1.2"
         }
       ]
     },
     {
-      "title": "DeepSeek Safety Documentation (ArXiv)",
-      "url": "https://arxiv.org/pdf/2503.15092v1",
-      "type": "Model Documentation",
-      "provider": "deepseek",
-      "models": [
-        {
-          "modelId": "deepseek-v3.2"
-        },
-        {
-          "modelId": "deepseek-r1"
-        },
-        {
-          "modelId": "deepseek-r1-distill"
-        },
-        {
-          "modelId": "deepseek-v3-lite"
-        }
-      ]
-    },
-    {
-      "title": "Qwen3 Technical Report (ArXiv)",
-      "url": "https://arxiv.org/pdf/2510.14276v1",
-      "type": "Model Documentation",
-      "provider": "alibaba",
-      "models": [
-        {
-          "modelId": "qwen3-max"
-        },
-        {
-          "modelId": "qwen3-thinking"
-        },
-        {
-          "modelId": "qwen3-turbo"
-        }
-      ]
-    },
-    {
-      "title": "Grok 4 Model Card",
-      "url": "https://data.x.ai/2025-08-20-grok-4-model-card.pdf",
-      "type": "Model Documentation",
-      "provider": "xai",
-      "models": [
-        {
-          "modelId": "grok-4"
-        },
-        {
-          "modelId": "grok-4-thinking"
-        },
-        {
-          "modelId": "grok-4-fast"
-        }
-      ]
-    },
-    {
-      "title": "Cohere Safety Framework (ArXiv)",
-      "url": "https://arxiv.org/pdf/2504.00698",
-      "type": "Model Documentation",
-      "provider": "cohere",
-      "models": [
-        {
-          "modelId": "command-a"
-        },
-        {
-          "modelId": "command-r-plus"
-        }
-      ]
-    },
-    {
-      "title": "Claude Opus 4.5 System Card",
-      "url": "https://www.anthropic.com/claude-opus-4-5-system-card",
-      "type": "System Card",
-      "provider": "anthropic",
-      "models": [
-        {
-          "modelId": "claude-opus-4.5"
-        },
-        {
-          "modelId": "claude-sonnet-4.5"
-        },
-        {
-          "modelId": "claude-haiku-4.5"
-        }
-      ]
-    },
-    {
-      "title": "Gemini 3 Pro - Model Card",
-      "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf",
-      "type": "Model Documentation",
-      "provider": "google",
-      "models": [
-        {
-          "modelId": "gemini-3-pro"
-        },
-        {
-          "modelId": "gemini-3-deep-think"
-        },
-        {
-          "modelId": "gemini-3-flash"
-        }
-      ]
-    },
-    {
-      "title": "Gemini 2.5 Flash-Lite - Model Card",
-      "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Lite-Model-Card.pdf",
-      "type": "Model Documentation",
-      "provider": "google",
-      "models": [
-        {
-          "modelId": "gemini-2.5-flash-lite"
-        }
-      ]
-    },
-    {
-      "title": "Phi-4 Technical Report",
-      "url": "https://www.microsoft.com/en-us/research/uploads/prod/2024/12/P4TechReport.pdf",
-      "type": "Model Documentation",
-      "provider": "microsoft",
-      "models": [
-        {
-          "modelId": "phi-4"
-        },
-        {
-          "modelId": "phi-4-multimodal"
-        }
-      ]
-    },
-    {
-      "title": "Nemotron-4 340B Technical Report",
-      "url": "https://d1qx31qr3h6wln.cloudfront.net/publications/Nemotron_4_340B_8T.pdf",
-      "type": "Model Documentation",
-      "provider": "nvidia",
-      "models": [
-        {
-          "modelId": "nemotron-4"
-        },
-        {
-          "modelId": "llama-3.1-nemotron"
-        }
-      ]
-    },
-    {
-      "title": "Falcon 3 7B Instruct Model Card",
-      "url": "https://build.nvidia.com/tiiuae/falcon3-7b-instruct/modelcard",
-      "type": "Model Documentation",
+      "id": "falcon-license",
+      "title": "Falcon LLM Acceptable Use Policy",
       "provider": "tii",
-      "models": [
-        {
-          "modelId": "falcon-3"
-        }
-      ]
-    },
-    {
-      "title": "<missing>",
-      "url": "<missing>",
-      "type": "Other",
-      "provider": "tii",
+      "url": "https://huggingface.co/tiiuae/falcon-180B/raw/main/LICENSE.txt",
+      "type": "Policy",
+      "status": "active",
       "models": [
         {
           "modelId": "falcon-180b"
-        }
-      ]
-    },
-    {
-      "title": "<missing>",
-      "url": "<missing>",
-      "type": "Other",
-      "provider": "tencent",
-      "models": [
+        },
         {
-          "modelId": "hunyuan-2.0"
+          "modelId": "falcon-3"
         }
       ]
     }
