@@ -384,21 +384,6 @@
       ]
     },
     {
-      "id": "falcon-mamba-blog",
-      "title": "Falcon Mamba 7B Blog Post",
-      "provider": "tii",
-      "url": "https://huggingface.co/blog/falcon-mamba-7b",
-      "type": "Blog Post",
-      "date_added": "2026-01-27",
-      "status": "active",
-      "models": [
-        {
-          "modelId": "falcon-3",
-          "name": "Falcon 3"
-        }
-      ]
-    },
-    {
       "id": "hunyuan-technical-report",
       "title": "Hunyuan-Large: An Open-Source MoE Model",
       "provider": "tencent",
@@ -685,16 +670,25 @@
       ]
     },
     {
-      "id": "falcon-license",
-      "title": "Falcon LLM Acceptable Use Policy",
-      "provider": "tii",
-      "url": "https://huggingface.co/tiiuae/falcon-180B/raw/main/LICENSE.txt",
+      "title": "TII Falcon Acceptable Use Policy",
+      "url": "https://falconllm.tii.ae/acceptable-use-policy.html",
       "type": "Policy",
-      "status": "active",
+      "provider": "tii",
       "models": [
         {
           "modelId": "falcon-180b"
         },
+        {
+          "modelId": "falcon-3"
+        }
+      ]
+    },
+    {
+      "title": "Welcome to the Falcon 3 Family (Technical Blog)",
+      "url": "https://huggingface.co/blog/falcon3",
+      "type": "Blog Post",
+      "provider": "tii",
+      "models": [
         {
           "modelId": "falcon-3"
         }
