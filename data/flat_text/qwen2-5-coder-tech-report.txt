@@ -1,0 +1,4723 @@
+SOURCE_ID: qwen2-5-coder-tech-report
+SOURCE_TITLE: Qwen2.5-Coder Technical Report
+SOURCE_URI: https://arxiv.org/pdf/2409.12186
+--------------------
+Technical Report
+
+Qwen2.5-Coder Technical Report
+
+Jian Yang* Zeyu Cui*
+
+Binyuan Hui*
+Dayiheng Liu Lei Zhang Tianyu Liu Jiajun Zhang Bowen Yu Keming Lu
+Kai Dang Yang Fan Yichang Zhang An Yang Rui Men Fei Huang
+Bo Zheng Yibo Miao
+Xingzhang Ren Xuancheng Ren Jingren Zhou Junyang Lin†
+Qwen Team Alibaba Group
+
+Shanghaoran Quan Yunlong Feng
+
+Jiaxi Yang*
+
+https://hf.co/Qwen/Qwen2.5-Coder-32B-Instruct
+https://github.com/QwenLM/Qwen2.5-Coder
+
+Abstract
+
+In this report, we introduce the Qwen2.5-Coder series, a significant up-
+grade from its predecessor, CodeQwen1.5. This series includes six models:
+Qwen2.5-Coder-(0.5B/1.5B/3B/7B/14B/32B). As a code-specific model,
+Qwen2.5-Coder is built upon the Qwen2.5 architecture and continues pre-
+trained on a vast corpus of over 5.5 trillion tokens. Through meticulous
+data cleaning, scalable synthetic data generation, and balanced data mix-
+ing, Qwen2.5-Coder demonstrates impressive code generation capabilities
+while retaining general and math skills. These models have been evaluated
+on a wide range of code-related tasks, achieving state-of-the-art (SOTA)
+performance across more than 10 benchmarks, including code generation,
+completion, reasoning, and repair, consistently outperforming larger mod-
+els of the same model size. We believe that the release of the Qwen2.5-Coder
+series will advance research in code intelligence and, with its permissive
+licensing, support wider adoption by developers in real-world applications.
+
+4
+2
+0
+2
+
+v
+o
+N
+2
+1
+
+]
+L
+C
+.
+s
+c
+[
+
+3
+v
+6
+8
+1
+2
+1
+.
+9
+0
+4
+2
+:
+v
+i
+X
+r
+a
+
+∗Equal core contribution, †Corresponding author
+
+1
+
+92.788.479.378.190.289.281.273.331.427.922.621.365.962.954.350.538.336.329.829.473.772.959.451.183.475.163.550.658.451.946.245.686.383.874.973.568.957.421.716.892.186.834.665.837.671.489.254.284.469.1..lavEnamuH.....PPBMLiveCodeBench.......McEvalBigCodeBench......AiderCRUXEval-O...BIRD-SQL....sulPlavE..anerAedoCQwen2.5-Coder-32B-InstructDeepSeek-Coder-V2-InstructDeepSeek-Coder-33B-InstructCodeStral-22BGPT-4o-202408061Qwen2.5-Coder-32B
+
+Technical Report
+
+Contents
+
+1 Introduction
+
+2 Model Architecture
+
+3 Pre-training
+
+3.1 Pretraining Data .
+
+.
+
+.
+
+.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3.1.1 Data Composition .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3.1.2 Data Mixture .
+.
+
+3.2 Training Policy .
+
+.
+
+.
+
+.
+
+. . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3.2.1
+
+File-Level Pretraining . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3.2.2 Repo-Level Pretraining . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4 Post-training
+
+4.1 A Recipe for Instruction Data . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4.2 Training Policy .
+
+.
+
+.
+
+.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+5 Decontamination
+
+6 Evaluation on Base Models
+.
+6.1 Code Generation .
+.
+6.2 Code Completion .
+
+.
+.
+
+6.3 Code Reasoning .
+
+6.4 Math Reasoning .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6.5 General Natural Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6.6 Long-Context Evaluation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+7 Evaluation on Instruct Models
+
+7.1 Code Generation .
+.
+7.2 Code Reasoning .
+
+7.3 Code Editing .
+
+7.4 Text-to-SQL .
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+.
+
+.
+
+.
+
+.
+.
+
+.
+
+.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+7.5 Math Reasoning and General Natural Language . . . . . . . . . . . . . . . .
+
+7.6 Table Understanding .
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+8 Discussion: Scaling is All You Need
+
+9 Conclusion
+
+2
+
+3
+
+3
+
+4
+
+4
+
+5
+
+6
+6
+
+6
+
+7
+
+7
+
+7
+
+9
+
+9
+
+10
+10
+11
+
+14
+
+15
+
+15
+
+16
+
+16
+18
+22
+
+23
+
+25
+
+27
+
+27
+
+28
+
+28
+
+Technical Report
+
+Introduction
+
+1
+With the rapid development of large language models (LLMs) (Brown, 2020; Achiam et al.,
+2023; Touvron et al., 2023; Dubey et al., 2024; Jiang et al., 2023; Bai et al., 2023; Yang et al., 2024;
+Anthropic, 2024; OpenAI, 2024), code-specific language models have garnered significant
+attention in the community. Built upon pre-trained LLMs, code LLMs such as the StarCoder
+series (Li et al., 2023; Lozhkov et al., 2024), CodeLlama series (Roziere et al., 2023), DeepSeek-
+Coder series (Guo et al., 2024a), CodeQwen1.5 (Qwen, 2024), and CodeStral (MistralAI,
+2024), have demonstrated superior performance in coding evaluations (Chen et al., 2021;
+Austin et al., 2021; Cassano et al., 2022; Jain et al., 2024; Liu et al., 2024a; Li et al., 2024b; Guo
+et al., 2024b; Wu et al., 2024b). However, in comparison with the recently state-of-the-art
+proprietary LLMs, Claude-3.5-Sonnet (Anthropic, 2024) and GPT-4o (OpenAI, 2024), the
+code LLMs are still falling behind, either open-source or proprietary models.
+
+Building upon our previous work, CodeQwen1.5, we are excited to introduce Qwen2.5-
+Coder, a new series of language models designed to achieve top-tier performance in coding
+tasks at various model sizes. Qwen2.5-Coder models are derived from the Qwen2.5 LLMs,
+inheriting their advanced architecture and tokenizer. These models are trained on exten-
+sive datasets and further fine-tuned on carefully curated instruction datasets specifically
+designed for coding tasks. We are committed to fostering research and innovation in the
+field of code LLMs, coding agents, and coding assistant applications. Therefore, we release
+the Powerful, Diverse, and Practical Qwen2.5-Coder series, dedicated to continuously pro-
+moting the development of Open CodeLLMs. (1) Powerful: Qwen2.5-Coder-32B-Instruct
+has become the current SOTA open-source code model, matching the coding capabilities of
+GPT-4o. While demonstrating strong and comprehensive coding abilities, it also possesses
+good general and mathematical skills. (2) Diverse: Qwen2.5-Coder series brings six model
+sizes, including 0.5B/1.5B/3B/7B/14B/32B. Qwen2.5-Coder has covered six mainstream
+model sizes to meet the needs of different developers. (3) Practical: We explore the practical-
+ity of Qwen2.5-Coder in two scenarios, including code assistants and Artifacts, with some
+examples showcasing the potential applications of Qwen2.5-Coder in real-world scenarios
+
+Significant efforts have been dedicated to constructing a large-scale, coding-specific pretrain-
+ing dataset comprising over 5.5 trillion tokens. This dataset is sourced from a broad range of
+public code repositories, such as those on GitHub, as well as large-scale web-crawled data
+containing code-related texts. We have implemented sophisticated procedures to recall and
+clean potential code data and filter out low-quality content using weak model based classi-
+fiers and scorers. Our approach encompasses both file-level and repository-level pretraining
+to ensure comprehensive coverage. To optimize performance and balance coding expertise
+with general language understanding, we have carefully curated a data mixture that in-
+cludes code, mathematics, and general texts. To transform models into coding assistants for
+downstream applications, we have developed a well-designed instruction-tuning dataset.
+This dataset includes a wide range of coding-related problems and solutions, sourced from
+real-world applications and synthetic data generated by code-focused LLMs, covering a
+broad spectrum of coding tasks.
+
+To evaluate the effectiveness of Qwen2.5-Coder, we conducted an extensive evaluation
+on a suite of popular benchmarks. The results highlight Qwen2.5-Coder’s superior code
+generation capabilities, achieving state-of-the-art performance across more than ten code-
+focused benchmarks while maintaining robust general and mathematical reasoning abilities.
+This model outperforms larger code models on a variety of tasks. The release of these
+models aims to advance code intelligence research and promote widespread adoption in
+real-world applications, facilitated by permissive licensing.
+
+2 Model Architecture
+
+Architecture The architecture of Qwen2.5-Coder is derived directly from Qwen2.5. Table 1
+outlines the architecture of Qwen2.5-Coder across six different model sizes: 0.5B, 1.5B, 3B,
+7B, 14B, and 32B parameters. While all sizes share the same architecture in terms of head
+size, they differ in several other key aspects. With exceptions like the 1.5B model having a
+larger intermediate size and the 3B model having more layers, most parameters generally
+
+3
+
+Technical Report
+
+increase as the model size scales up. Comparing the 7B and 32B models for instance: the 7B
+model features a hidden size of 3,584, whereas the 32B model has a hidden size of 5,120. The
+7B model uses 28 query heads and 4 key-value heads, while the 32B model uses 40 query
+heads and 8 key-value heads, reflecting its enhanced capacity. Similarly, the intermediate
+size scales with model size, being 18,944 for the 7B model and 27,648 for the 32B model.
+Additionally, smaller models use embedding tying, while larger models do not. Both models
+have a vocabulary size of 151,646 tokens and are trained on 5.5 trillion tokens.
+
+Tokenization Qwen2.5-Coder inherits the vocabulary from Qwen2.5 but introduces
+several special tokens to help the model better understand code. Table 2 presents an
+overview of the special tokens added during training to better capture different forms
+of code data. These tokens serve specific purposes in the code-processing pipeline. For
+instance, <|endoftext|> marks the end of a text or sequence, while the <|fim_prefix|>,
+<|fim_middle|>, and <|fim_suffix|> tokens are used to implement the Fill-in-the-Middle
+(FIM) (Bavarian et al., 2022) technique, where a model predicts the missing parts of a code
+block. Additionally, <|fim_pad|> is used for padding during FIM operations. Other tokens
+include <|repo_name|>, which identifies repository names, and <|file_sep|>, used as a
+file separator to better manage repository-level information. These tokens are essential in
+helping the model learn from diverse code structures and enable it to handle longer and
+more complex contexts during both file-level and repo-level pretraining.
+
+Configuration
+
+0.5B
+
+1.5B
+
+3B
+
+7B
+
+14B
+
+32B
+
+Hidden Size
+# Layers
+# Query Heads
+# KV Heads
+Head Size
+Intermediate Size
+Embedding Tying
+Vocabulary Size
+# Trained Tokens
+
+896
+24
+14
+2
+128
+4,864
+(cid:33)
+151,646
+5.5T
+
+1,536
+28
+12
+2
+128
+8,960
+(cid:33)
+151,646
+5.5T
+
+2048
+36
+16
+2
+128
+4,864
+(cid:33)
+151,646
+5.5T
+
+3,584
+28
+28
+4
+128
+18,944
+(cid:37)
+151,646
+5.5T
+
+5120
+48
+40
+8
+128
+13824
+(cid:37)
+151,646
+5.5T
+
+5120
+64
+40
+8
+128
+27648
+(cid:37)
+151,646
+5.5T
+
+Table 1: Architecture of Qwen2.5-Coder.
+
+Token
+
+Token ID Description
+
+<|endoftext|>
+<|fim_prefix|>
+<|fim_middle|>
+<|fim_suffix|>
+<|fim_pad|>
+<|repo_name|>
+<|file_sep|>
+
+151643
+151659
+151660
+151661
+151662
+151663
+151664
+
+end of text/sequence
+FIM prefix
+FIM middle
+FIM suffix
+FIM pad
+repository name
+file separator
+
+Table 2: Overview of the special tokens.
+
+3 Pre-training
+
+3.1 Pretraining Data
+
+Large-scale, high-quality, and diverse data forms the foundation of pre-trained models. To
+this end, we constructed a dataset named Qwen2.5-Coder-Data. This dataset comprises
+five key data types: Source Code Data, Text-Code Grounding Data, Synthetic Data, Math
+Data and Text Data. In this section, we provide a brief overview of the sources and cleaning
+methods applied to these datasets.
+
+4
+
+Technical Report
+
+3.1.1 Data Composition
+
+Source Code We collected public repositories from GitHub created before February 2024,
+spanning 92 programming languages. Similar to StarCoder2 (Lozhkov et al., 2024) and
+DS-Coder (Guo et al., 2024a), we applied a series of rule-based filtering methods. In addition
+to raw code, we also collected data from Pull Requests, Commits, Jupyter Notebooks, and
+Kaggle datasets, all of which were subjected to similar rule-based cleaning techniques.
+
+Figure 1: Number of data tokens across different cc-stages, and the validation effectiveness
+of training Qwen2.5-Coder using corresponding data.
+
+Text-Code Grounding Data We curated a large-scale and high-quality text-code mixed
+dataset from Common Crawl, which includes code-related documentation, tutorials, blogs,
+and more. Instead of the conventional URL-based multi-stage recall method, we developed
+a coarse-to-fine hierarchical filtering approach for raw data. This method offers two key
+advantages:
+
+1. It enables precise control over each filter’s responsibility, ensuring comprehensive
+
+handling of each dimension.
+
+2. It naturally assigns quality scores to the dataset, with data retained in the final stage
+being of higher quality, providing valuable insights for quality-driven data mixing.
+
+We designed a cleaning pipeline for the Text-Code Grounding Data, where each filter level is
+built using smaller models, such as fastText. Although we experimented with larger models,
+they did not yield significant benefits. A likely explanation is that smaller models focus
+more on surface-level features, avoiding unnecessary semantic complexity.
+
+In Qwen2.5-Coder, we applied this process iteratively. As shown in Figure 1, each iteration
+resulted in improvement for Qwen2.5-Coder-1.5B. Through 4-stage filtering, the average
+scores on HumanEval and MBPP increased from 41.6% to 46.8% compared to the baseline,
+demonstrating the value of high-quality Text-Code Grounding Data for code generation.
+
+Synthetic Data Synthetic data offers a promising way to address the anticipated scarcity
+of training data. We used CodeQwen1.5, the predecessor of Qwen2.5-Coder, to generate
+large-scale synthetic datasets. To mitigate the risk of hallucinations during this process, we
+introduced an executor for validation, ensuring that only executable code was retained.
+
+Math Data To enhance the mathematical capabilities of Qwen2.5-Coder, we integrated
+the pre-training corpus from Qwen2.5-Math into the Qwen2.5-Coder dataset. Importantly,
+the inclusion of mathematical data did not negatively impact the model’s performance on
+code tasks. For further details on the collection and cleaning process, please refer to the
+Qwen2.5-Math technical report.
+
+5
+
+Stage1Stage2Stage3Stage40100200300400500600Tokens(B)58237014711835384042454850PerformanceTokens(B)AveragePerformance1Technical Report
+
+Text Data Similar to the Math Data, we included high-quality general natural language
+data from the pre-training corpus of the Qwen2.5 model to preserve Qwen2.5-Coder’s
+general capabilities. This data had already passed stringent quality checks during the
+cleaning phase of Qwen2.5’s dataset, so no further processing was applied. However, all
+code segments were removed from the general Text data to avoid overlap with our code
+data, ensuring the independence of different data sources.
+
+3.1.2 Data Mixture
+
+Balancing Code, Math, and Text data is crucial for building a foundational model. Although
+the research community has explored this balance before, there is limited evidence regarding
+its scalability to large datasets. To address this, we conducted empirical experiments with
+different ratios of Code, Math, and Text data, designing multiple experiments to identify an
+optimal combination rapidly. Specifically, as shown in Table 3, we compared three different
+Code for Qwen2.5-Coder-7B: Text ratios — 100:0:0, 85:10:5, and 70:20:10.
+
+Interestingly, we found that the 7:2:1 ratio outperformed the others, even surpassing the
+performance of groups with a higher proportion of code. A possible explanation is that
+Math and Text data may positively contribute to code performance, but only when their
+concentration reaches a specific threshold. In future work, we plan to explore more efficient
+ratio mechanisms and investigate the underlying causes of this phenomenon. Ultimately,
+we selected a final mixture of 70% Code, 20% Text, and 10% Math. The final training dataset
+comprises 5.2 trillion tokens.
+
+Token Ratio
+
+Coding
+
+Math
+
+General
+
+Code Text Math Common BCB MATH GSM8K MMLU CEval HellaSwag
+
+100
+85
+70
+
+0
+15
+20
+
+0
+5
+10
+
+49.8
+43.3
+48.3
+
+40.3
+36.2
+38.3
+
+10.3
+26.1
+33.2
+
+23.8
+52.5
+64.5
+
+42.8
+56.8
+62.9
+
+35.9
+57.1
+64.0
+
+58.3
+70.0
+73.5
+
+Average
+
+31.3
+48.9
+55.0
+
+Table 3: The performance of Qwen2.5-Coder training on different data mixture policy.
+
+3.2 Training Policy
+
+Figure 2: The three-stage training pipeline for Qwen2.5-Coder.
+
+As shown in 2, we employed a three-stage training approach to train Qwen2.5-Coder,
+including file-level pretraining, repo-level pretraining, and instruction tuning.
+
+3.2.1 File-Level Pretraining
+
+File-level pretraining focuses on learning from individual code files. In this stage, the
+maximum training sequence length is set to 8,192 tokens, covering 5.2T of high-quality data.
+The training objectives include next token prediction and fill-in-the-middle (FIM) (Bavarian
+et al., 2022). The specific FIM format is shown in Figure 3.
+
+File-Level FIM format.
+
+<|fim_prefix|>{code_pre}<|fim_suffix|>{code_suf}<|fim_middle|>{code_mid}<|endoftext|>
+
+Figure 3: File-Level FIM format.
+
+6
+
+Qwen2.5Qwen2.5-CoderFile-Level Pretrain 5.2T TokensRepo-Level Pretrain 300B TokensAlignment Qwen2.5-Code-Instruct①②③SFT & DPOTechnical Report
+
+3.2.2 Repo-Level Pretraining
+
+After file-level pretraining, we turn to repo-level pretraining, aimed at enhancing the model’s
+long-context capabilities. In this stage, the context length is extended from 8,192 tokens to
+32,768 tokens, and RoPE’s base frequency is adjusted from 10,000 to 1,000,000. To further
+leverage the model’s extrapolation potential, we applied the YARN mechanism (Peng et al.,
+2023), enabling the model to handle sequences up to 131,072 (128K) tokens.
+
+In this stage, we used a large amount of high-quality, long-context code data (≈ 300B) and
+extended file-level FIM to the repo-level FIM followed by methods described in Lozhkov
+et al. (2024), with the specific format shown in Figure 4.
+
+Repo-Level FIM format.
+
+<|repo_name|>{repo_name}
+
+<|file_sep|>{file_path1}
+
+{file_content1}
+
+<|file_sep|>{file_path2}
+
+{file_content2}
+
+<|file_sep|>{file_path3}
+
+<|fim_prefix|>{code_pre}<|fim_suffix|>{code_suf}<|fim_middle|>{code_fim}<|endoftext|>
+
+Figure 4: Repo-Level FIM format.
+
+4 Post-training
+
+4.1 A Recipe for Instruction Data
+
+Multilingual Programming Code Identification We fine-tune a CodeBERT (Feng et al.,
+2020) to perform the language identification model to categorize documents into nearly 100
+programming languages. We keep the instruction data of the mainstream programming
+languages and randomly discard a portion of the instruction data of the long-tail languages.
+If a given sample contains very little code data or even no code snippets, the sample will
+possibly be classified into “No Programming Language” tag. Since too many instruction
+samples without code snippets hurt the model performance on code generation tasks (e.g.
+MultiPL-E, McEval, and MdEval), we remove most of the samples without code snippets to
+keep the code generation capability of our instruction model.
+
+Instruction Synthesis from GitHub For the unsupervised data (code snippets) massively
+existing in many websites (e.g. GitHub), we try to construct the supervised instruction
+dataset using LLM. Specifically, we use the LLM to generate the instruction from the code
+snippets within 1024 tokens and then we use the code LLM to generate the response (Wei
+et al., 2024; Sun et al., 2024; Yu et al., 2024). Finally, we use the LLM scorer to filter the
+low-quality ones to obtain the final pair. Given the code snippets of different programming
+languages, we construct an instruction dataset from the code snippets. To fully unleash the
+potential of our proposed method, we also include the open-source instruction dataset (e.g.
+McEval-Instruct for massively multilingual code generation and debugging1) in the seed
+instruction dataset. Finally, we combine the instruction data from the GitHub code snippet
+and open-source instructions for supervised fine-tuning.
+
+Multilingual Code Instruction Data To bridge the gap among different programming
+languages, we propose a multilingual multi-agent collaborative framework to synthesize
+the multilingual instruction corpora. We introduce language-specific agents, where a set of
+
+1https://huggingface.co/datasets/Multilingual-Multimodal-NLP/McEval-Instruct
+
+7
+
+Technical Report
+
+specialized agents are created and each dedicated to a particular programming language.
+These agents are initialized with language-specific instruction data derived from the limited
+existing multilingual instruction corpora. The multilingual data generation process can be
+split into: (1) Language-Specific Intelligent Agents: We create a set of specialized agents,
+each dedicated to a particular programming language. These agents are initialized with
+language-specific instruction data derived from curated code snippets. (2) Collaborative
+Discussion Protocol: Multiple language-specific agents engage in a structured dialogue
+to formulate new instructions and solutions. This process can result in either enhancing
+existing language capabilities or generating instructions for a novel programming language.
+(3) Adaptive Memory System: Each agent maintains a dynamic memory bank that stores its
+generation history to avoid generating the similar samples. (4) Cross-Lingual Discussion:
+We implement a novel knowledge distillation technique that allows agents to share insights
+and patterns across language boundaries, fostering a more comprehensive understanding
+of programming concepts. (5) Synergy Evaluation Metric: We develop a new metric to
+quantify the degree of knowledge sharing and synergy between different programming
+languages within the model. (6) Adaptive Instruction Generation: The framework includes
+a mechanism to dynamically generate new instructions based on identified knowledge gaps
+across languages.
+
+Checklist-based Scoring for Instruction Data To completely evaluate the quality of the
+created instruction pair, we introduce several scoring points for each sample: (1) Ques-
+tion&Answer Consistency: Whether Q&A are consistent and correct for fine-tuning. (2)
+Question&Answer Relevance: Whether Q&A are related to the computer field. (3) Ques-
+tion&Answer Difficulty: Whether Q&A are sufficiently challenging. (4) Code Exist: Whether
+the code is provided in question or answer. (5) Code Correctness: Evaluate whether the
+provided code is free from syntax errors and logical flaws. (6) Consider factors like proper
+variable naming, code indentation, and adherence to best practices. (7) Code Clarity: Assess
+how clear and understandable the code is. Evaluate if it uses meaningful variable names,
+proper comments, and follows a consistent coding style. (8) Code Comments: Evaluate
+the presence of comments and their usefulness in explaining the code’s functionality. (9)
+Easy to Learn: determine its educational value for a student whose goal is to learn ba-
+sic coding concepts. After gaining all scores (s1, . . . , sn), we can get the final score with
+s = w1s1 + · · · + wnsn, where (w1, . . . , wn) are a series of pre-defined weights.
+
+A multilingual sandbox for code verification To further verify the correctness of the code
+syntax, we use the code static checking for all extracted code snippets of programming
+languages (e.g. Python, Java, and C++). We parse the code snippet into the abstract syntax
+tree and filter out the code snippet, where the parsed nodes in code snippet have parsing
+errors. We create a multilingual sandbox to support the code static checking for the main
+programming language. Further, the multilingual sandbox is a comprehensive platform
+designed to validate code snippets across multiple programming languages. It automates the
+process of generating relevant unit tests based on language-specific samples and evaluates
+whether the provided code snippets can successfully pass these tests. Especially, only the
+self-contained (e.g. algorithm problems) code snippet will be fed into the multilingual
+sandbox. The multilingual verification sandbox is mainly comprised of five parts:
+
+1. Language Support Module:
+
+• Implements support for multiple languages (e.g., Python, Java, C++, JavaScript)
+• Maintains language-specific parsing and execution environments
+• Handles syntax and semantic analysis for each supported language
+
+2. Sample Code Repository:
+
+• Stores a diverse collection of code samples for each supported language
+• Organizes samples by language, difficulty level, and programming concepts
+• Regularly updated and curated by language experts
+
+3. Unit Test Generator:
+
+• Analyzes sample code to identify key functionalities and edge cases
+
+8
+
+Technical Report
+
+• Automatically generates unit tests based on the expected behavior
+• Produces test cases covering various input scenarios and expected outputs
+
+4. Code Execution Engine:
+
+• Provides isolated environments for executing code snippets securely
+• Supports parallel execution of multiple test cases
+• Handles resource allocation and timeout mechanisms
+
+5. Result Analyzer:
+
+• Compares the output of code snippets against expected results from unit tests
+• Generates detailed reports on test case successes and failures
+• Provides suggestions for improvements based on failed test cases
+
+4.2 Training Policy
+
+Coarse-to-fine Fine-tuning We first synthesized tens of millions of low-quality but diverse
+instruction samples to fine-tune the base model. In the second stage, we adopt millions
+of high-quality instruction samples to improve the performance of the instruction model
+with rejection sampling and supervised fine-tuning. For the same query, we use the LLM
+to generate multiple candidates and then use the LLM to score the best one for supervised
+fine-tuning.
+
+Mixed Tuning Since most instruction data have a short length, we construct the instruction
+pair with the FIM format to keep the long context capability of the base model. Inspired by
+programming language syntax rules and user habits in practical scenarios, we leverage the
+tree-sitter-languages2 to parse the code snippets and extract the basic logic blocks as the
+middle code to infill. For example, the abstract syntax tree (AST) represents the structure of
+Python code in a tree format, where each node in the tree represents a construct occurring
+in the source code. The tree’s hierarchical nature reflects the syntactic nesting of constructs
+in the code and includes various elements such as expressions, statements, and functions.
+By traversing and manipulating the AST, we can randomly extract the nodes of multiple
+levels and use the code context of the same file to uncover the masked node. Finally, we
+optimize the instruction model with a majority of standard SFT data and a small part of
+FIM instruction samples.
+
+Direct Preference Optimization for Code After obtaining the SFT model, we further align
+the Qwen2.5-Coder with the help of offline direct preference optimization (DPO) (Rafailov
+et al., 2023). Given that human feedback is highly labor-intensive, we use a multilingual
+code sandbox to provide code execution feedback, while an LLM is utilized for human
+judgment feedback. For the algorithm-like and self-contained code snippets, we generate
+the test cases to check the correctness of the code as the code execution feedback, including
+Python, Java, and other languages. For other complex code snippets, we use LLM-as-a-
+judge (Zheng et al., 2023) to decide which code snippet is better. Further, we combine the
+code DPO data and common data for offline DPO training.
+
+5 Decontamination
+
+To ensure that Qwen2.5-Coder does not produce inflated results due to test set leakage,
+we performed decontamination on all data, including both pre-training and post-training
+datasets. We removed key datasets such as HumanEval, MBPP, GSM8K, and MATH. The
+filtering was done using a 10-gram overlap method, where any training data with a 10-gram
+word-level overlap with the test data was removed.
+
+2https://pypi.org/project/tree-sitter-languages/
+
+9
+
+Technical Report
+
+6 Evaluation on Base Models
+
+For the base model, we conducted a comprehensive and fair evaluation in six key aspects, in-
+cluding code generation, code completion, code reasoning, mathematical reasoning, general
+natural language understanding and long-context modeling. To ensure the reproducibility
+of all results, we made all evaluation codes publicly available3. For comparing models,
+we chose the most popular and powerful open source language models, including the
+StarCoder2 and DeepSeek-Coder series. Below is the list of artifacts used in the evaluation
+for this section.
+
+Artifact
+
+Public link
+
+Qwen2.5-Coder-0.5B
+Qwen2.5-Coder-1.5B
+Qwen2.5-Coder-3B
+Qwen2.5-Coder-7B
+Qwen2.5-Coder-14B
+Qwen2.5-Coder-32B
+
+CodeQwen1.5-7B
+StarCoder2-3B
+StarCoder2-7B
+StarCoder2-15B
+DS-Coder-1.3B-Base
+DS-Coder-6.7B-Base
+DS-Coder-33B-Base
+DS-Coder-V2-Lite-Base
+DS-Coder-V2-Base
+
+https://hf.co/Qwen/Qwen2.5-Coder-0.5B
+https://hf.co/Qwen/Qwen2.5-Coder-1.5B
+https://hf.co/Qwen/Qwen2.5-Coder-3B
+https://hf.co/Qwen/Qwen2.5-Coder-7B
+https://hf.co/Qwen/Qwen2.5-Coder-14B
+https://hf.co/Qwen/Qwen2.5-Coder-32B
+
+https://hf.co/Qwen/CodeQwen1.5-7B
+https://hf.co/bigcode/starcoder2-3b
+https://hf.co/bigcode/starcoder2-7b
+https://hf.co/bigcode/starcoder2-15b
+https://hf.co/deepseek-ai/deepseek-coder-1.3b-base
+https://hf.co/deepseek-ai/deepseek-coder-6.7b-base
+https://hf.co/deepseek-ai/deepseek-coder-33b-base
+https://hf.co/deepseek-ai/DeepSeek-Coder-V2-Lite-Base
+https://hf.co/deepseek-ai/DeepSeek-Coder-V2-Base
+
+Table 4: All artifacts released and used in this section.
+
+6.1 Code Generation
+
+HumanEval and MBPP Code generation serves as a fundamental capability for code
+models to handle more complex tasks. We selected two popular code generation benchmarks
+to evaluate Qwen2.5-Coder, namely HumanEval (Chen et al., 2021) and MBPP (Austin et al.,
+2021). HumanEval consists of 164 manually written programming tasks, each providing a
+Python function signature and a docstring as input to the model. MBPP, on the other hand,
+comprises 974 programming problems created by crowdsource contributors. Each problem
+includes a problem statement (i.e., a docstring), a function signature, and three test cases.
+
+To further ensure accurate evaluation, EvalPlus (Liu et al., 2023) extends HumanEval into
+HumanEval+ by adding 80 times more unique test cases and correcting inaccurate ground-
+truth solutions in HumanEval. Similarly, MBPP+ offers 35 times more test cases than the
+original MBPP.
+
+Additionally, we should notice that MBPP 3-shot is particularly suitable for monitoring
+model convergence during training. Early in the convergence process, the model tends to be
+unstable, causing significant fluctuation in metrics, and simple 3-shot examples effectively
+mitigate it. Therefore, we also report the results of MBPP 3-shot performance.
+
+As shown in Table 5, Qwen2.5-Coder have shown impressive performance in basic code
+generation, achieving state-of-the-art results among open-source models of the same size
+and surpassing even larger models. In particular, Qwen2.5-Coder-7B outperforms the
+previous best dense model, DS-Coder-33B, across all five metrics.
+
+BigCodeBench-Complete BigCodeBench (Zhuo et al., 2024) is a recent and more challeng-
+ing benchmark for code generation, primarily aimed at evaluating the ability of tool-use
+and complex instruction following. The base model generates the expected code through a
+
+3https://github.com/QwenLM/Qwen2.5-Coder
+
+10
+
+Technical Report
+
+Model
+
+Size
+
+HumanEval
+HE
+
+HE+ MBPP MBPP+ 3-shot
+
+MBPP
+
+BigCodeBench
+Full
+
+Hard
+
+Qwen2.5-Coder-0.5B
+
+0.5B
+
+28.0
+
+23.8
+
+52.9
+
+47.1
+
+40.4
+
+16.1
+
+4.7
+
+0.5B+ Models
+
+1B+ Models
+
+DS-Coder-1.3B
+Qwen2.5-Coder-1.5B
+
+1.3B
+1.5B
+
+34.8
+43.9
+
+26.8
+36.6
+
+55.6
+69.2
+
+3B+ Models
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+3B
+3B
+
+31.7
+52.4
+
+27.4
+42.7
+
+60.2
+72.2
+
+6B+ Models
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+7B
+6.7B
+2.4/16B
+7B
+7B
+
+35.4
+47.6
+40.9
+51.8
+61.6
+
+29.9
+39.6
+34.1
+45.7
+53.0
+
+54.4
+70.2
+71.9
+72.2
+76.9
+
+14B+ Models
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+15B
+14B
+
+46.3
+64.0
+
+37.8
+57.9
+
+66.2
+81.0
+
+20B+ Models
+
+DS-Coder-33B-Base
+DS-Coder-V2-Base
+Qwen2.5-Coder-32B
+
+33B
+21/236B
+32B
+
+54.9
+50.0
+65.9
+
+47.6
+43.3
+60.4
+
+74.2
+82.5
+83.0
+
+46.9
+58.6
+
+49.1
+61.4
+
+45.6
+56.6
+59.4
+60.2
+62.9
+
+53.1
+66.7
+
+60.7
+65.7
+68.2
+
+46.2
+59.2
+
+26.1
+34.6
+
+47.4
+65.2
+
+21.4
+41.1
+
+51.8
+60.6
+62.6
+61.8
+68.8
+
+27.7
+41.1
+30.6
+45.6
+45.8
+
+57.0
+71.4
+
+38.4
+51.8
+
+66.0
+71.2
+76.4
+
+49.1
+48.7
+53.6
+
+3.4
+9.5
+
+4.7
+11.5
+
+8.8
+11.5
+8.1
+15.5
+16.2
+
+12.2
+22.3
+
+20.3
+21.6
+26.4
+
+Table 5: Performance of various models on HumanEval, MBPP and the “complete” task of
+BigCodeBench.
+
+completion mode, given a function signature and documentation, which is referred to as
+BigCodeBench-Complete. It consists of two subsets: the full set and the hard set. Compared
+to HumanEval and MBPP, BigCodeBench is suited for out-of-distribution (OOD) evaluation.
+
+Table 5 illustrates that Qwen2.5-Coder continues to show strong performance on
+BigCodeBench-Complete, underscoring the model’s generalization potential.
+
+Multi-Programming Language The evaluations mentioned above focus on the Python
+language. However, we expect a strong code model to be not only proficient in Python but
+also versatile across multiple programming languages to meet the complex and evolving
+demands of software development. To more comprehensively evaluate Qwen2.5-Coder’s
+proficiency in handling multiple programming languages, we selected the MultiPL-E (Cas-
+sano et al., 2022) and chose to evaluate eight mainstream languages from this benchmark,
+including Python, C++, Java, PHP, TypeScript, C#, Bash and JavaScript.
+
+As shown in the table 6, Qwen2.5-Coder also achieved state-of-the-art results in the multi-
+programming language evaluation, with its capabilities well-balanced across various lan-
+guages. It scored over 60% in five out of the eight languages.
+
+6.2 Code Completion
+
+Many developer aid tools rely on the capability to autocomplete code based on preced-
+ing and succeeding code snippets. Qwen2.5-Coder utilizes the Fill-In-the-Middle (FIM)
+training strategy, as introduced in Bavarian et al. (2022), enabling the model to generate
+code that is contextually coherent. To assess its code completion proficiency, we utilize the
+HumanEval-FIM benchmark (Allal et al., 2023), CrossCodeEval (Ding et al., 2024), Cross-
+CodeLongEval (Wu et al., 2024a), RepoEval (Zhang et al., 2023) and SAFIM (Gong et al.,
+
+11
+
+Technical Report
+
+Model
+
+Size
+
+Python C++ Java PHP
+
+TS
+
+C#
+
+Bash
+
+JS
+
+Average
+
+0.5B+ Models
+
+Qwen2.5-Coder-0.5B
+
+0.5B
+
+28.0
+
+25.5
+
+22.8
+
+23.6
+
+30.8
+
+31.0
+
+7.0
+
+29.2
+
+24.7
+
+DS-Coder-1.3B-Base
+Qwen2.5-Coder-1.5B
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+1.3B
+1.5B
+
+3B
+3B
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+7B
+6.7B
+2.4/16B
+7B
+7B
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+15B
+14B
+
+DS-Coder-33B-Base
+DS-Coder-V2-Base
+Qwen2.5-Coder-32B
+
+33B
+21/236B
+32B
+
+34.8
+42.1
+
+31.7
+52.4
+
+35.4
+49.4
+40.9
+51.8
+61.6
+
+46.3
+64.0
+
+56.1
+50.0
+65.9
+
+1B+ Models
+
+31.1
+42.9
+
+32.3
+38.6
+
+24.2
+41.0
+
+28.9
+49.1
+
+36.7
+46.2
+
+10.1
+20.3
+
+28.6
+49.1
+
+3B+ Models
+
+30.4
+52.8
+
+29.8
+44.9
+
+32.9
+49.1
+
+39.6
+55.4
+
+34.8
+51.3
+
+13.9
+24.7
+
+35.4
+53.4
+
+6B+ Models
+
+40.4
+50.3
+45.9
+52.2
+62.1
+
+38.0
+43.0
+34.8
+42.4
+53.2
+
+14B+ Models
+
+30.4
+38.5
+47.2
+46.6
+59.0
+
+34.0
+49.7
+48.4
+52.2
+64.2
+
+46.2
+50.0
+41.7
+55.7
+60.8
+
+13.9
+28.5
+19.6
+36.7
+38.6
+
+36.0
+48.4
+44.7
+49.7
+60.3
+
+47.2
+69.6
+
+46.2
+46.8
+
+39.1
+64.6
+
+42.1
+69.2
+
+53.2
+63.3
+
+15.8
+39.9
+
+43.5
+61.5
+
+20B+ Models
+
+58.4
+59.6
+68.3
+
+51.9
+50.0
+70.9
+
+44.1
+55.3
+64.6
+
+52.8
+58.5
+66.0
+
+51.3
+45.6
+68.4
+
+32.3
+36.1
+39.9
+
+55.3
+59.6
+67.1
+
+28.3
+41.1
+
+31.1
+48.0
+
+34.3
+44.7
+40.4
+48.4
+57.5
+
+41.7
+59.9
+
+50.3
+51.8
+63.9
+
+Table 6: Performance of different models on MultiPL-E.
+
+2024). Figure 5 shows the overall evaluation results of Qwen2.5-Coder-32B on different code
+completion benchmarks.
+
+Figure 5: The code completion performance of competitive models on five benchmarks,
+Humaneval-FIM, SAFIM, CrossCodeEval, RepoEval, CrossCodeLongEval.
+
+Humaneval-FIM benchmark challenges the model to accurately predict missing sections
+of code within tasks derived from Humaneval. We use the single-line infilling settings
+across Python, Java, and JavaScript, focusing on predicting a single line of code within
+given contexts. Performance was measured using the Exact Match metric, which determines
+the proportion of the first generated code line that precisely match the ground truth. The
+table 7 illustrates that Qwen2.5-Coder surpasses alternative models concerning model
+size. Specifically, Qwen2.5-Coder-1.5B achieves an average performance improvement of
+3.7%, rivaling the majority of models exceeding 6 billion parameters. Moreover, Qwen2.5-
+Coder-7B stands as the leading model among those over 6 billion parameters, matching the
+performance of the formidable 33 billion parameter model, DS-Coder-33B-Base. Notably,
+we excluded DS-Coder-v2-236B from comparison due to its design focus not being on code
+completion tasks.
+
+12
+
+Humaneval-FIMSAFIMCrossCodeEvalRepoEvalCrossCodeLongEval88.371.257.151.636.986.167.748.843.731.985.067.247.843.430.4Qwen2.5-Coder-32B-BaseDS-Coder-33B-BaseDS-Coder-V2-Lite-Base1Technical Report
+
+Model
+
+Size
+
+Python
+
+0.5B+ Models
+
+Humaneval-FIM
+Java
+
+JavaScript Average∗
+
+Qwen2.5-Coder-0.5B
+
+0.5B
+
+70.3
+
+78.1
+
+81.2
+
+77.7
+
+DS-Coder-1.3B-Base
+Qwen2.5-Coder-1.5B
+
+1.3B
+1.5B
+
+72.8
+77.0
+
+84.3
+85.6
+
+1B+ Models
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+3B+ Models
+
+3B
+3B
+
+70.9
+78.7
+
+84.4
+88.0
+
+6B+ Models
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+7B
+6.7B
+2.4/16B
+7B
+7B
+
+70.8
+78.1
+78.7
+75.8
+79.7
+
+86.0
+87.4
+87.8
+85.7
+88.5
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+CodeStral-22B
+DS-Coder-33B-Base
+Qwen2.5-Coder-32B
+
+14B+ Models
+
+15B
+14B
+
+74.2
+80.5
+
+85.2
+91.0
+
+20B+ Models
+
+22B
+33B
+32B
+
+76.7
+80.1
+81.5
+
+82.5
+89.0
+91.0
+
+81.7
+85.0
+
+81.8
+87.4
+
+84.4
+84.1
+85.9
+85.0
+87.6
+
+84.6
+88.5
+
+86.0
+86.8
+89.4
+
+80.7
+83.5
+
+80.4
+85.7
+
+82.0
+84.0
+85.0
+83.3
+86.2
+
+82.6
+87.7
+
+82.7
+86.2
+88.3
+
+Table 7: Performance of different approaches on the Humaneval-FIM Tasks. ∗Average refers
+to a weighted mean calculated based on the number of samples for each language.
+
+In real-world scenarios, code completion often depends on accessing cross-file context and
+dependencies. CrossCodeEval is a benchmark that requires a deep understanding of this
+cross-file context to accurately complete the code. In our evaluation, we set a maximum
+sequence length of 8192 tokens, designate a maximum output length of 50 tokens, and
+impose a limit of 2048 tokens for the cross-file context. For the cross-file context, we use
+the official BM25 search results provided by Ding et al. (2024). We evaluate performance
+using Exact Match (EM) and Edit Similarity (ES) metrics. Table 8 shows that the Qwen2.5-
+Coder-32B achieves state-of-the-art performance with a 3.7% improvement. Qwen2.5-Coder
+outperforms all the models with a comparable model size. Meanwhile, Qwen2.5-Coder-7B
+has a comparable performance with other models exceeding 20 billion parameters.
+
+CrossCodeLongEval is a long context benchmark on cross file code completion tasks. In
+our evaluation, we set a maximum sequence length of 8192 tokens and set the maximum
+output as 256 tokens for function completion and 50 tokens for other tasks. The cross-file
+context is truncated to 2048 tokens. For the cross-file context, we use the official BM25 search
+results provided by Wu et al. (2024a). We evaluate performance using Exact Match (EM)
+and Edit Similarity (ES) metrics. Qwen2.5-Coder-32B achieves state-of-the-art performance,
+as detailed in Table 9. The Qwen2.5-Coder series surpasses all other models of a similar size.
+All models demonstrate low Exact Match (EM) results on function completion tasks, likely
+due to the complexity of generating multi-line code snippets that are challenging to match
+precisely.
+
+RepoEval is a benchmark designed to evaluate repository-level code completion capabilities
+across three granularities: line, API invocation, and function body completion. In our
+evaluation, we set a maximum sequence length of 8192 tokens, set the maximum output as
+256 tokens for function completion and 50 tokens for other tasks, and impose a limit of 2048
+
+13
+
+Technical Report
+
+Model
+
+Python
+
+Java
+
+TypeScript
+
+C#
+
+Average
+
+EM ES
+
+EM ES
+
+EM ES
+
+EM ES
+
+EM ES
+
+0.5B+ Models
+
+Qwen2.5-Coder-0.5B
+
+22.7
+
+66.2
+
+21.7
+
+66.8
+
+21.9
+
+67.2
+
+32.1
+
+75.4
+
+24.6
+
+68.9
+
+1B+ Models
+
+DS-Coder-1.3B-Base
+Qwen2.5-Coder-1.5B
+
+33.4
+35.5
+
+72.6
+74.3
+
+34.9
+37.9
+
+74.5
+76.5
+
+36.7
+37.6
+
+76.4
+77.4
+
+46.6
+49.8
+
+83.5
+84.5
+
+37.9
+40.2
+
+76.8
+78.2
+
+3B+ Models
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+11.0
+38.4
+
+62.7
+76.1
+
+11.6
+42.8
+
+69.7
+79.8
+
+8.8
+41.6
+
+75.8
+80.5
+
+8.2
+56.7
+
+71.2
+87.1
+
+9.9
+44.9
+
+69.8
+80.9
+
+6B+ Models
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+10.9
+41.1
+41.8
+40.7
+42.4
+
+63.1
+79.2
+78.3
+77.8
+78.6
+
+8.3
+39.9
+46.1
+47.0
+48.1
+
+71.0
+80.1
+81.2
+81.6
+82.6
+
+6.7
+46.3
+44.6
+45.8
+46.8
+
+76.8
+82.4
+81.4
+82.2
+83.4
+
+7.3
+55.0
+58.7
+59.7
+59.7
+
+72.1
+86.9
+87.9
+87.6
+87.9
+
+8.3
+45.6
+47.8
+48.3
+49.3
+
+70.8
+82.1
+82.2
+82.3
+83.1
+
+14B+ Models
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+28.2
+47.7
+
+70.5
+81.7
+
+26.7
+54.7
+
+71.0
+85.7
+
+24.7
+52.9
+
+76.3
+86.0
+
+25.2
+66.4
+
+74.2
+91.1
+
+26.2
+55.4
+
+73.0
+86.1
+
+CodeStral-22B
+DS-Coder-33B-Base
+Qwen2.5-Coder-32B
+
+49.3
+44.2
+49.2
+
+82.7
+80.4
+82.1
+
+44.1
+46.5
+56.4
+
+71.1
+82.7
+86.6
+
+51.0
+49.2
+54.9
+
+85.0
+84.0
+87.0
+
+53.7
+55.2
+68.0
+
+83.6
+87.8
+91.6
+
+49.5
+48.8
+57.1
+
+80.6
+83.7
+86.8
+
+20B+ Models
+
+Table 8: Performance of different approaches on the CrossCodeEval Tasks.
+
+tokens for the cross-file context. Besides, we utilize the official sparse retriever (Lu et al.,
+2022) to extract the cross-file context. We evaluate performance using Exact Match (EM)
+and Edit Similarity (ES) metrics. As shown in Table 10, Qwen2.5-Coder-32B achieves state-
+of-the-art performance with an average improvement of 7.9% EM and 4.2% ES compared
+to DS-Coder-33B-Base. Furthermore, Qwen2.5-Coder-14B and Qwen2.5-Coder-7B achieve
+comparable performance to models with more than 20B parameters, while maintaining
+state-of-the-art results among models of similar size.
+
+SAFIM is a syntax-aware fill-in-the-middle benchmark that emphasizes AST-based code
+completion, specifically targeting algorithmic blocks, control-flow expressions, and API
+function calls. The benchmark consists of 17,720 examples from 8,590 code files created
+after April 2022, deliberately avoiding overlap with mainstream pretraining corpora. For
+evaluation, we use pass@1 rate as the metric for algorithmic and control-flow tasks, and
+Exact Match (EM) for API completion tasks.
+
+6.3 Code Reasoning
+
+Code is a highly abstract form of logical language, and reasoning based on code helps
+us determine whether a model truly understands the reasoning flow behind the code.
+We selected CRUXEval (Gu et al., 2024) as the benchmark, which includes 800 Python
+functions along with corresponding input-output examples. It consists of two distinct
+tasks: CRUXEval-I, where the large language model (LLM) must predict the output based
+on a given input; and CRUXEval-O, where the model must predict the input based on a
+known output. For both CRUXEval-I and CRUXEval-O, we used a chain-of-thought (CoT)
+approach, requiring the LLM to output steps sequentially during simulated execution.
+
+14
+
+Technical Report
+
+Model
+
+Chunk Completion
+
+Function completion
+
+Average
+
+EM
+
+ES
+
+EM
+
+ES
+
+EM ES
+
+0.5B+ Models
+
+Qwen2.5-Coder-0.5B
+
+29.8
+
+64.2
+
+9.5
+
+38.0
+
+19.7
+
+51.1
+
+DS-Coder-1.3B-Base
+Qwen2.5-Coder-1.5B
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+CodeStral-22B
+DS-Coder-33B-Base
+Qwen2.5-Coder-32B
+
+40.6
+44.2
+
+18.5
+46.6
+
+19.4
+48.4
+49.5
+48.2
+52.4
+
+21.3
+56.9
+
+56.7
+52.0
+57.3
+
+1B+ Models
+
+71.9
+73.9
+
+3B+ Models
+
+62.0
+76.1
+
+6B+ Models
+
+63.6
+78.2
+77.1
+77.5
+79.3
+
+14B+ Models
+
+53.7
+81.8
+
+20B+ Models
+
+81.8
+79.9
+82.1
+
+9.6
+12.4
+
+10.2
+13.5
+
+10.2
+10.7
+11.4
+6.4
+14.4
+
+7.8
+15.4
+
+10.5
+11.9
+16.4
+
+39.4
+44.4
+
+39.2
+46.4
+
+40.0
+42.4
+43.1
+30.6
+48.4
+
+30.5
+49.8
+
+37.8
+44.3
+50.8
+
+25.1
+28.3
+
+55.7
+59.2
+
+14.3
+30.0
+
+50.6
+61.3
+
+14.8
+29.6
+30.4
+27.3
+33.4
+
+51.8
+60.3
+60.1
+54.1
+63.8
+
+14.6
+36.1
+
+42.1
+65.8
+
+33.6
+32.0
+36.9
+
+59.8
+62.1
+66.4
+
+Table 9: Performance of different approaches on the CrossCodeLongEval Tasks.
+
+As shown in Table 11, Qwen2.5-Coder delivered highly promising results, achieving a score
+of 56.5 on CRUXEval-I and 56.0 on CRUXEval-O, thanks to our focus on executable quality
+during the code cleaning process.
+
+6.4 Math Reasoning
+
+Mathematics and coding have always been closely intertwined. Mathematics forms the
+foundational discipline for coding, while coding serves as a vital tool in mathematical
+fields. As such, we expect an open and powerful code model to exhibit strong mathematical
+capabilities as well. To assess Qwen2.5-Coder’s mathematical performance, we selected
+five popular benchmarks, including MATH (Hendrycks et al., 2021), GSM8K (Cobbe et al.,
+2021), MMLU-STEM (Hendrycks et al., 2020) and TheoremQA (Chen et al., 2023). Table 12
+highlights Qwen2.5-Coder’s strengths in mathematics, which likely stem from two key
+factors: first, the model’s strong foundation built on Qwen2.5, and second, the careful
+mixing of code and mathematical data during training, which has ensured a well-balanced
+performance across these domains.
+
+6.5 General Natural Language
+
+In addition to mathematical ability, we aim to retain as much of the base model’s general-
+purpose capabilities as possible, such as general knowledge. To evaluate general natural
+language understanding, we selected MMLU (Hendrycks et al., 2021) and its variant MMLU-
+Redux (Gema et al., 2024), along with four other benchmarks: ARC-Challenge (Clark et al.,
+2018), TruthfulQA (Lin et al., 2021), WinoGrande (Sakaguchi et al., 2019), and HellaSwag
+(Zellers et al., 2019). Similar to the results in mathematics, Table 14 highlights Qwen2.5-
+
+15
+
+Technical Report
+
+Model
+
+Line
+
+Function
+
+API
+
+Average
+
+EM ES
+
+EM ES
+
+EM ES
+
+EM ES
+
+0.5B+ Models
+
+Qwen2.5-Coder-0.5B
+
+44.2
+
+72.6
+
+4.6
+
+48.0
+
+35.6
+
+68.5
+
+28.1
+
+63.0
+
+1B+ Models
+
+DS-Coder-1.3B-Base
+Qwen2.5-Coder-1.5B
+
+58.7
+59.8
+
+80.4
+82.6
+
+6.2
+10.6
+
+48.8
+52.4
+
+45.8
+51.0
+
+75.0
+80.1
+
+36.9
+40.5
+
+68.1
+71.7
+
+3B+ Models
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+22.3
+64.9
+
+67.4
+85.0
+
+3.1
+12.3
+
+51.6
+55.8
+
+20.6
+54.7
+
+70.1
+81.3
+
+15.3
+44.0
+
+63.0
+74.0
+
+6B+ Models
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+19.5
+63.1
+66.5
+59.7
+67.3
+
+67.6
+85.5
+85.4
+81.5
+86.1
+
+4.0
+9.9
+10.8
+4.8
+13.2
+
+53.5
+53.3
+53.9
+44.3
+55.2
+
+19.1
+52.3
+53.1
+46.1
+58.4
+
+72.8
+81.7
+81.3
+77.5
+83.9
+
+14.2
+41.7
+43.4
+36.9
+46.3
+
+64.7
+73.5
+73.5
+67.8
+75.1
+
+14B+ Models
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+30.9
+74.3
+
+62.5
+90.1
+
+5.5
+14.1
+
+43.7
+59.5
+
+21.7
+63.4
+
+60.3
+87.3
+
+19.4
+50.6
+
+55.5
+79.0
+
+20B+ Models
+
+Codestral-22B-v0.1
+DS-Coder-33B-Base
+Qwen2.5-Coder-32B
+
+40.9
+66.5
+76.1
+
+51.7
+86.6
+90.5
+
+9.9
+10.3
+13.6
+
+49.2
+52.9
+57.5
+
+24.8
+54.2
+65.1
+
+40.8
+83.5
+87.6
+
+30.0
+43.7
+51.6
+
+46.6
+74.3
+78.5
+
+Table 10: Performance of different approaches on the RepoEval Tasks.
+
+Coder’s advantage in general natural language capabilities compared to other coders, further
+validating the effectiveness of Qwen2.5-Coder data mixing strategy.
+
+6.6 Long-Context Evaluation
+
+Long context capability is crucial for code LLMs, serving as the core skill for understanding
+repository-level code and becoming a code agent. However, most of the current code
+models still have very limited support for length, which hinders their potential for practical
+application. Qwen2.5-Coder aims to further advance the progress of open-source code
+models in long context modeling. To achieve this, we have collected and constructed
+long sequence code data at the repository level for pre-training. Through careful data
+proportioning and organization, we have enabled it to support input lengths of up to 128K
+tokens.
+
+Needle in the Code We created a simple but basic synthetic task called Needle in the Code,
+inspired by popular long-context evaluations in the text domain. In this task, we inserted a
+very simple custom function at various positions within a code repo (we chose Megatron 4 to
+honor its contributions to open-source LLMs!) and tested whether the model could replicate
+this function at the end of the codebase. The figure below shows that Qwen2.5-Coder is
+capable of successfully completing this task within a 128k length range.
+
+7 Evaluation on Instruct Models
+
+For the evaluation of the instruct models, we rigorously assessed six core areas: code genera-
+tion, code reasoning, code editing, text-to-sql, mathematical reasoning and general natural language
+
+4https://github.com/NVIDIA/Megatron-LM
+
+16
+
+Technical Report
+
+Model
+
+Size
+
+CRUXEval
+Input-CoT Output-CoT
+
+Qwen2.5-Coder-0.5B
+
+0.5B
+
+35.2
+
+0.5B+ Models
+
+1B+ Models
+
+DS-Coder-1.3B-Base
+Qwen2.5-Coder-1.5B
+
+1.3B
+1.5B
+
+3B+ Models
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+3B
+3B
+
+6B+ Models
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+7B
+6.7B
+2.4/16B
+7B
+7B
+
+14B+ Models
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+15B
+14B
+
+20B+ Models
+
+DS-Coder-33B-Base
+DS-Coder-V2-Base
+Qwen2.5-Coder-32B
+
+33B
+21/236B
+32B
+
+32.1
+43.8
+
+42.1
+46.5
+
+39.5
+39.0
+53.4
+44.8
+56.5
+
+46.1
+60.6
+
+50.6
+62.7
+62.5
+
+23.0
+
+28.2
+34.6
+
+29.2
+43.8
+
+35.1
+41.0
+46.1
+40.1
+56.0
+
+47.6
+66.4
+
+48.8
+67.4
+69.4
+
+Table 11: Performance of different models on CRUXEval with Input-CoT and Output-CoT
+settings.
+
+Figure 6: The long context ability of Qwen2.5-Coder, evaluated by Needle in the Code.
+
+understanding. The evaluation was structured to ensure a fair and thorough comparison
+across models. All evaluation code is publicly accessible for reproducibility5. To ensure a
+broad comparison, we included some of the most popular and widely-used open-source
+instruction-tuned models, notably versions from the DeepSeek-Coder series and Codestral
+models. Below is a list of all artifacts referenced in this section.
+
+5https://github.com/QwenLM/Qwen2.5-Coder
+
+17
+
+10k23k35k48k61k74k86k99k112k128kContextLength0%11%22%33%44%56%67%78%89%100%Qwen2.5-CoderCorrectIncorrect1Technical Report
+
+Model
+
+Size
+
+MATH GSM8K MMLU STEM TheoremQA
+4-shot
+
+5-shot
+
+5-shot
+
+4-shot
+
+Qwen2.5-Coder-0.5B
+
+0.5B
+
+15.4
+
+34.5
+
+0.5B+ Models
+
+1B+ Models
+
+DS-Coder-1.3B-Base
+Qwen2.5-Coder-1.5B
+
+1.3B
+1.5B
+
+4.6
+30.9
+
+4.4
+65.8
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+3B+ Models
+
+3B
+3B
+
+10.8
+40.0
+
+21.6
+75.7
+
+6B+ Models
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+7B
+6.7B
+2.4/16B
+7B
+7B
+
+14.6
+10.3
+39.0
+10.6
+46.6
+
+32.7
+21.3
+67.1
+37.7
+83.9
+
+14B+ Models
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+15B
+14B
+
+23.7
+52.8
+
+57.7
+88.7
+
+20B+ Models
+
+DS-Coder-33B-Base
+DS-Coder-V2-Base
+Qwen2.5-Coder-32B
+
+33B
+21/236B
+32B
+
+14.4
+50.6
+57.2
+
+35.4
+85.8
+91.1
+
+34.4
+
+24.5
+49.0
+
+34.9
+56.0
+
+39.8
+34.2
+58.5
+39.6
+67.6
+
+49.2
+73.9
+
+39.5
+76.0
+75.1
+
+14.3
+
+8.9
+21.4
+
+12.1
+29.5
+
+16.0
+13.6
+29.3
+15.8
+34.0
+
+20.5
+39.6
+
+17.5
+39.4
+43.1
+
+Table 12: Performance of various models on four math benchmarks, named MATH, GSM8K,
+MMLU STEM and TheoremQA respectively.
+
+7.1 Code Generation
+
+Building on the performance improvements of the Qwen2.5-Coder series base models, our
+Qwen2.5-Coder series instruct models similarly demonstrated outstanding performance in
+code generation tasks.
+
+HumanEval and MBPP We also assessed the code generation capabilities of the Qwen2.5-
+Coder series instruction models using the EvalPlus (Liu et al., 2023) dataset. As shown by
+the results in Table 16, our Qwen2.5-Coder-7B-Instruct model demonstrated exceptional
+accuracy, significantly outperforming other models with a comparable parameter count.
+Remarkably, it even surpassed larger models with over 20 billion parameters, such as
+CodeStral-22B and DS-Coder-33B-Instruct. Furthermore, our Qwen2.5-Coder-32B-Instruct
+model achieved the highest performance on EvalPlus, even outperforming DS-Coder-V2-
+Instruct, making it the most powerful open-source code model to date.
+
+BigCodeBench-Instruct The instruct split provided by BigCodeBench (Zhuo et al., 2024)
+is designed to evaluate the code generation capabilities of instruction-based models. We
+evaluated the Qwen2.5-Coder series instruct models on the BigCodeBench-Instruct dataset.
+As indicated in Table 16, the Qwen2.5-Coder-7B-Instruct model outperformed other instruct
+models with comparable parameter sizes, achieving notably high accuracy scores on both the
+full and hard subsets, reaching 41.0% on the full subset and 18.2% on the hard subset. This
+highlights the robust code generation capabilities of the Qwen2.5-Coder instruct models.
+Furthermore, the Qwen2.5-Coder-32B-Instruct achieved accuracy rates of 49.6% on the
+complete split and 27.0% on the hard split, establishing it as the best-performing open-
+source code generation model and surpassing several closed-source APIs.
+
+18
+
+Technical Report
+
+Model
+
+Size
+
+MMLU
+
+Base
+
+Pro Redux
+
+0.5B+ Models
+
+Qwen2.5-Coder-0.5B
+
+0.5B
+
+42.0
+
+13.3
+
+40.6
+
+1B+ Models
+
+DS-Coder-1.3B-Base
+Qwen2.5-Coder-1.5B
+
+1.3B
+1.5B
+
+25.8
+53.6
+
+11.4
+23.1
+
+24.5
+50.9
+
+3B+ Models
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+3B
+3B
+
+36.6
+61.2
+
+15.5
+32.0
+
+37.0
+59.5
+
+6B+ Models
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+7B
+6.7B
+2.4/16B
+7B
+7B
+
+38.8
+36.4
+60.5
+40.5
+68.0
+
+17.2
+16.7
+33.4
+17.2
+40.1
+
+38.6
+36.5
+58.3
+41.2
+66.6
+
+14B+ Models
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+15B
+14B
+
+64.1
+75.2
+
+24.3
+49.3
+
+48.8
+72.4
+
+20B+ Models
+
+DS-Coder-33B-Base
+Qwen2.5-Coder-32B
+
+33B
+32B
+
+39.4
+79.1
+
+18.4
+50.4
+
+38.7
+77.5
+
+Table 13: MMLU results of different models, a general benchmark for common knowledge.
+
+LiveCodeBench LiveCodeBench (Jain et al., 2024) is a comprehensive and contamination-
+free benchmark designed to evaluate the coding capabilities of LLMs. It continuously
+gathers new problems from leading competitive programming platforms like LeetCode6,
+AtCoder7, and CodeForces8, ensuring an up-to-date and diverse set of challenges. Currently,
+it hosts over 600 high-quality coding problems published between May 2023 and September
+2024.
+
+To further demonstrate our model’s effectiveness on real-world competitive programming
+tasks, we evaluated the Qwen-2.5-Coder series instruct models on the LiveCodeBench (2407-
+2409) dataset. As shown in Table 16, the Qwen-2.5-Coder-7B-Instruct model achieved an
+impressive Pass@1 accuracy of 37.6%, significantly outperforming other models with similar
+parameter counts. Notably, it also outperformed larger models, such as CodeStral-22B-v0.1
+and DS-Coder-33B-Instruct. Additionally, our Qwen-2.5-Coder-32B-Instruct model achieved
+an accuracy of 31.4%, surpassing all open-source code generation models and reaching a
+level comparable to many closed-source APIs.
+
+Multi-Programming Language The Qwen2.5-Coder series instruct models have inherited
+the high performance of the base model on the Multi-Programming Language. To further
+evaluate their capabilities, we tested the instruct models on two specific benchmarks:
+MultiPL-E (Cassano et al., 2022) and McEval (Chai et al., 2024).
+
+MultiPL-E As shown by the evaluation results in Table 17, Qwen2.5-Coder-7B-Instruct
+consistently outperforms other models with similar parameter counts, such as DS-Coder-
+
+6https://leetcode.com
+7https://atcoder.jp
+8https://codeforces.com
+
+19
+
+Technical Report
+
+Model
+
+Size ARC-Challenge TruthfulQA WinoGrande HellaSwag
+
+Qwen2.5-Coder-0.5B
+
+0.5B
+
+34.4
+
+0.5B+ Models
+
+DS-Coder-1.3B-Base
+Qwen2.5-Coder-1.5B
+
+StarCoder2-3B
+Qwen2.5-Coder-3B
+
+1.3B
+1.5B
+
+3B
+3B
+
+1B+ Models
+
+25.4
+45.2
+
+3B+ Models
+
+34.2
+52.9
+
+6B+ Models
+
+StarCoder2-7B
+DS-Coder-6.7B-Base
+DS-Coder-V2-Lite-Base
+CodeQwen1.5-7B
+Qwen2.5-Coder-7B
+
+7B
+6.7B
+2.4/16B
+7B
+7B
+
+38.7
+36.4
+57.3
+35.7
+60.9
+
+14B+ Models
+
+StarCoder2-15B
+Qwen2.5-Coder-14B
+
+15B
+14B
+
+47.2
+66.0
+
+20B+ Models
+
+DS-Coder-33B-Base
+DS-Coder-V2-Base
+Qwen2.5-Coder-32B
+
+33B
+21/236B
+32B
+
+42.2
+64.3
+70.5
+
+42.7
+
+42.7
+44.0
+
+40.5
+49.2
+
+42.0
+40.2
+38.8
+42.2
+50.6
+
+37.9
+55.2
+
+40.0
+41.4
+54.2
+
+54.8
+
+53.3
+60.7
+
+57.1
+67.4
+
+57.1
+57.6
+72.9
+59.8
+72.9
+
+64.3
+76.8
+
+62.0
+83.7
+80.8
+
+48.4
+
+39.5
+61.8
+
+48.1
+70.9
+
+52.4
+53.8
+76.1
+56.0
+76.8
+
+64.1
+80.2
+
+60.2
+86.0
+83.0
+
+Table 14: General performance of different models on four popular general benchmarks,
+ARC-Challenge, TruthfulQA, WinoGrande and HellaSwag.
+
+Artifact
+
+Public link
+
+Qwen2.5-Coder-0.5B-Instruct
+Qwen2.5-Coder-1.5B-Instruct
+Qwen2.5-Coder-3B-Instruct
+Qwen2.5-Coder-7B-Instruct
+Qwen2.5-Coder-14B-Instruct
+Qwen2.5-Coder-32B-Instruct
+
+https://hf.co/Qwen/Qwen2.5-Coder-0.5B-Instruct
+https://hf.co/Qwen/Qwen2.5-Coder-1.5B-Instruct
+https://hf.co/Qwen/Qwen2.5-Coder-3B-Instruct
+https://hf.co/Qwen/Qwen2.5-Coder-7B-Instruct
+https://hf.co/Qwen/Qwen2.5-Coder-14B-Instruct
+https://hf.co/Qwen/Qwen2.5-Coder-32B-Instruct
+
+CodeQwen1.5-7B-Chat
+CodeLlama-7B-Instruct
+CodeLlama-13B-Instruct
+CodeLlama-34B-Instruct
+CodeLlama-70B-Instruct
+DS-Coder-1.3B-instruct
+DS-Coder-6.7B-instruct
+DS-Coder-33B-instruct
+DS-Coder-V2-Lite-Instruct
+DS-Coder-V2-Instruct
+Starcoder2-15B-Instruct-v0.1
+CodeStral-22B-v0.1
+Yi-Coder-1.5B-Chat
+Yi-Coder-9B-Chat
+
+https://hf.co/Qwen/CodeQwen1.5-7B-Chat
+https://hf.co/meta-llama/CodeLlama-7b-Instruct-hf
+https://hf.co/meta-llama/CodeLlama-13b-Instruct-hf
+https://hf.co/meta-llama/CodeLlama-34b-Instruct-hf
+https://hf.co/meta-llama/CodeLlama-70b-Instruct-hf
+https://hf.co/deepseek-ai/deepseek-coder-1.3b-instruct
+https://hf.co/deepseek-ai/deepseek-coder-6.7b-instruct
+https://hf.co/deepseek-ai/deepseek-coder-33b-instruct
+https://hf.co/deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct
+https://hf.co/deepseek-ai/DeepSeek-Coder-V2-Instruct
+https://hf.co/bigcode/starcoder2-15b-instruct-v0.1
+https://hf.co/mistralai/Codestral-22B-v0.1
+https://hf.co/01-ai/Yi-Coder-1.5B-Chat
+https://hf.co/01-ai/Yi-Coder-9B-Chat
+
+Table 15: All artifacts released and used in this section.
+
+V2-Lite-Instruct, in code generation tasks across eight programming languages. Both
+Qwen2.5-Coder-7B-Instruct and Qwen2.5-Coder-14B-Instruct even surpass larger models,
+like CodeStral-22B and DS-Coder-33B-Instruct (which have over 20 billion parameters),
+underscoring their strong code generation capabilities across multiple languages. Our
+Qwen2.5-Coder-32B-Instruct model achieves comparable performance to the DS-Coder-V2-
+
+20
+
+Technical Report
+
+Model
+
+Size
+
+HumanEval
+HE
+
+HE+ MBPP MBPP+
+
+MBPP
+
+BigCodeBench
+Full
+
+Hard
+
+LiveCodeBench
+Pass@1
+
+Qwen2.5-Coder-0.5B-Instruct
+
+0.5B
+
+61.6
+
+57.3
+
+52.4
+
+43.7
+
+11.1
+
+1.4
+
+0.5B+ Models
+
+1B+ Models
+
+DS-Coder-1.3B-Instruct
+Yi-Coder-1.5B-Chat
+Qwen2.5-Coder-1.5B-Instruct
+
+1.3B
+1.5B
+1.5B
+
+65.9
+69.5
+70.7
+
+60.4
+64.0
+66.5
+
+65.3
+65.9
+69.2
+
+54.8
+57.7
+59.4
+
+22.8
+23.8
+32.5
+
+3.4
+11.5
+6.8
+
+3B+ Models
+
+Qwen2.5-Coder-3B-Instruct
+
+3B
+
+84.1
+
+80.5
+
+73.6
+
+62.4
+
+35.8
+
+14.2
+
+CodeLlama-7B-Instruct
+DS-Coder-6.7B-Instruct
+CodeQwen1.5-7B-Chat
+Yi-Coder-9B-Chat
+DS-Coder-V2-Lite-Instruct
+Qwen2.5-Coder-7B-Instruct
+
+7B
+6.7B
+7B
+9B
+2.4/16B
+7B
+
+CodeLlama-13B-Instruct
+Starcoder2-15B-Instruct-v0.1
+Qwen2.5-Coder-14B-Instruct
+
+13B
+15B
+14B
+
+CodeLlama-34B-Instruct
+CodeStral-22B-v0.1
+DS-Coder-33B-Instruct
+CodeLlama-70B-Instruct
+DS-Coder-V2-Instruct
+Qwen2.5-Coder-32B-Instruct
+
+34B
+22B
+33B
+70B
+21/236B
+32B
+
+Claude-3.5-Sonnet-20240620
+Claude-3.5-Sonnet-20241022
+GPT-4o-mini-2024-07-18
+GPT-4o-2024-08-06
+o1-mini
+o1-preview
+
+-
+-
+-
+-
+-
+-
+
+6B+ Models
+
+33.5
+71.3
+78.7
+74.4
+75.6
+84.1
+
+54.0
+74.9
+77.7
+82.0
+82.8
+83.5
+
+13B+ Models
+
+32.3
+60.4
+87.2
+
+60.3
+78.0
+86.2
+
+20B+ Models
+
+40.2
+73.2
+75.0
+65.9
+82.3
+87.2
+
+61.1
+78.2
+80.4
+77.8
+89.4
+90.2
+
+Closed-APIs
+
+81.1
+86.0
+84.8
+86.0
+90.2
+88.4
+
+87.6
+91.0
+86.0
+86.8
+93.9
+93.4
+
+40.9
+74.4
+83.5
+82.3
+81.1
+88.4
+
+40.2
+67.7
+89.6
+
+48.2
+81.1
+81.1
+72.0
+85.4
+92.7
+
+89.0
+92.1
+87.8
+92.1
+97.6
+95.1
+
+44.4
+65.6
+67.2
+69.0
+70.4
+71.7
+
+51.1
+65.1
+72.8
+
+50.5
+62.2
+70.1
+64.6
+75.1
+75.1
+
+72.0
+74.6
+72.2
+72.5
+78.3
+77.8
+
+21.9
+35.5
+39.6
+38.1
+36.8
+41.0
+
+28.5
+37.2
+48.4
+
+29.0
+41.8
+42.0
+40.7
+48.2
+49.6
+
+45.3
+45.3
+46.9
+50.1
+46.3
+49.3
+
+3.4
+10.1
+18.9
+11.5
+16.2
+18.2
+
+9.5
+11.5
+22.2
+
+8.8
+16.9
+17.6
+11.5
+24.3
+27.0
+
+25.7
+23.6
+23.6
+25.0
+23.0
+27.7
+
+2.0
+
+5.1
+4.8
+6.1
+
+10.8
+
+7.1
+15.5
+7.9
+17.2
+16.3
+18.2
+
+6.1
+12.1
+23.4
+
+8.4
+22.6
+21.3
+3.3
+27.9
+31.4
+
+32.1
+31.6
+28.3
+34.6
+60.0
+43.1
+
+Table 16: The performance of different instruct models on code generation by HumanEval,
+MBPP, bigcodebench and livecodebench. For bigcodebench here, we report “instruct” tasks
+score.
+
+Instruct model with only 32 billion parameters, bringing it very close to the performance of
+several closed-source APIs.
+
+McEval To comprehensively assess the code generation capabilities of the Qwen2.5-Coder
+series models across a broader range of programming languages, we evaluated them on
+the McEval benchmark (Chai et al., 2024), which spans 40 programming languages and
+includes 16,000 test cases. As shown in Figure 7, the Qwen2.5-Coder-32B-Instruct model
+excels when compared to other open-source models on the McEval benchmark, particularly
+across a wide range of programming languages.
+
+MdEval Qwen2.5-Coder is further evaluated on the comprehensive multilingual code
+debugging benchmark MdEval (Liu et al., 2024b) across 18 languages. Compared to the
+multilingual code generation benchmark McEval (Chai et al., 2024), MdEval provides the
+buggy code with example test cases (1.2K samples) to LLM for generating the correct code.
+Figure 8 demonstrates that the Qwen2.5-Coder-32B-Instruct achieves a comparable or better
+performance even compared to LLMs with larger model sizes.
+
+Human Preference Alignment To evaluate the alignment performance of Qwen2.5-Coder-
+32B-Instruct with the human preferences, we adopted an internal annotated evaluation
+benchmark called CodeArena, including nearly 400 human-curated samples. Similar to
+
+21
+
+Technical Report
+
+Model
+
+Size
+
+Python
+
+Java C++
+
+C#
+
+TS
+
+JS
+
+PHP Bash Average
+
+0.5B+ Models
+
+Qwen2.5-Coder-0.5B-Instruct
+
+0.5B
+
+62.8
+
+46.2
+
+43.5
+
+62.7
+
+50.3
+
+50.3
+
+52.8
+
+27.8
+
+49.6
+
+1B+ Models
+
+DS-Coder-1.3B-Instruct
+Yi-Coder-1.5B-Chat
+Qwen2.5-Coder-1.5B-Instruct
+
+1.3B
+1.5B
+1.5B
+
+65.2
+67.7
+71.2
+
+51.9
+51.9
+55.7
+
+45.3
+49.1
+50.9
+
+55.1
+57.6
+64.6
+
+59.7
+57.9
+61.0
+
+52.2
+59.6
+62.1
+
+45.3
+52.2
+59.0
+
+12.7
+19.0
+29.1
+
+48.4
+51.9
+56.7
+
+3B+ Models
+
+Qwen2.5-Coder-3B-Instruct
+
+3B
+
+83.5
+
+74.7
+
+68.3
+
+78.5
+
+79.9
+
+75.2
+
+73.3
+
+43.0
+
+72.1
+
+6B+ Models
+
+CodeLlama-7B-Instruct
+DS-Coder-6.7B-Instruct
+CodeQwen1.5-7B-Chat
+Yi-Coder-9B-Chat
+DS-Coder-V2-Lite-Instruct
+Qwen2.5-Coder-7B-Instruct
+
+7B
+6.7B
+7B
+9B
+2.4/16B
+7B
+
+34.8
+78.6
+84.1
+85.4
+81.1
+87.8
+
+30.4
+68.4
+73.4
+76.0
+76.6
+76.5
+
+31.1
+63.4
+74.5
+67.7
+75.8
+75.6
+
+21.6
+72.8
+77.8
+76.6
+76.6
+80.3
+
+32.7
+67.2
+71.7
+72.3
+80.5
+81.8
+
+-
+72.7
+75.2
+78.9
+77.6
+83.2
+
+13B+ Models
+
+CodeLlama-13B-Instruct
+Starcoder2-15B-Instruct-v0.1
+Qwen2.5-Coder-14B-Instruct
+
+13B
+15B
+14B
+
+42.7
+68.9
+89.0
+
+40.5
+53.8
+79.7
+
+42.2
+50.9
+85.1
+
+24.0
+62.7
+84.2
+
+39.0
+57.9
+86.8
+
+-
+59.6
+84.5
+
+20B+ Models
+
+CodeLlama-34B-Instruct
+CodeStral-22B-v0.1
+DS-Coder-33B-Instruct
+CodeLlama-70B-Instruct
+DS-Coder-V2-Instruct
+Qwen2.5-Coder-32B-Instruct
+
+34B
+22B
+33B
+70B
+21/236B
+32B
+
+41.5
+81.1
+79.3
+67.8
+90.2
+92.7
+
+43.7
+63.3
+73.4
+58.2
+82.3
+80.4
+
+45.3
+65.2
+68.9
+53.4
+84.8
+79.5
+
+Claude-3.5-Sonnet-20240620
+Claude-3.5-Sonnet-20241022
+GPT-4o-mini-2024-07-18
+GPT-4o-2024-08-06
+o1-mini
+o1-preview
+
+Closed-APIs
+
+-
+-
+-
+-
+-
+-
+
+89.6
+93.9
+87.2
+90.9
+95.7
+96.3
+
+86.1
+86.7
+75.9
+83.5
+90.5
+88.0
+
+82.6
+88.2
+77.6
+76.4
+93.8
+91.9
+
+31.0
+43.7
+74.1
+36.7
+82.3
+82.9
+
+85.4
+87.3
+79.7
+81.0
+77.2
+84.2
+
+40.3
+68.6
+67.9
+39.0
+83.0
+86.8
+
+84.3
+88.1
+79.2
+83.6
+91.2
+90.6
+
+-
+-
+73.9
+-
+84.5
+85.7
+
+84.5
+91.3
+81.4
+90.1
+92.5
+93.8
+
+28.6
+68.9
+70.8
+72.1
+74.5
+78.3
+
+32.3
+53.4
+80.1
+
+36.6
+68.9
+72.7
+58.4
+79.5
+78.9
+
+80.7
+82.6
+75.2
+78.9
+84.5
+90.1
+
+10.1
+36.7
+39.2
+45.6
+43.0
+48.7
+
+13.9
+24.7
+47.5
+
+19.6
+42.4
+43.0
+29.7
+52.5
+48.1
+
+48.1
+52.5
+43.7
+48.1
+55.1
+47.5
+
+-
+66.1
+70.8
+71.8
+73.2
+76.5
+
+-
+54.0
+79.6
+
+-
+-
+69.2
+-
+79.9
+79.4
+
+80.2
+83.8
+75.0
+79.1
+85.1
+85.3
+
+Table 17: The performance of different models on instruct format MultiPL-E.
+
+Chatbot Arena (Chiang et al., 2024), we use CodeArena to emulate user code-related prompts
+in realistic environments. We use GPT-4o as the evaluation model for preference alignment,
+employing an “A vs. B win” evaluation method, which measures the percentage of instances
+in the test set where the score of A exceeds the score of B. The results in Figure 9 demonstrate
+the advantage of Qwen2.5-Coder-32B-Instruct in preference alignment.
+
+7.2 Code Reasoning
+
+To evaluate the code reasoning capabilities of the Qwen2.5-Coder series instruct mod-
+els, we conducted an assessment on the CRUXEval (Gu et al., 2024) dataset. As shown
+in Table 18, the Qwen2.5-Coder-7B-Instruct model achieved Input-CoT and Output-CoT
+accuracies of 65.8% and 65.9%, respectively—demonstrating a substantial improvement
+over the DS-Coder-V2-Lite-Instruct model, with gains of 12.8% in Input-CoT accuracy
+and 13.0% in Output-CoT accuracy. Additionally, the Qwen2.5-Coder-7B-Instruct model
+outperformed larger models, including CodeStral-22B and DS-Coder-33B-Instruct, high-
+lighting its advanced code reasoning capabilities despite its smaller size. Notably, our
+Qwen2.5-Coder-32B-Instruct model achieved accuracies of 75.2% and 83.4% on Input-CoT
+and Output-CoT, respectively, significantly outperforming other open-source code mod-
+els (including DS-Coder-V2-Instruct) and underscoring its robust performance in code
+reasoning.
+
+Figure 10 illustrates the relationship between model sizes and code reasoning capabilities.
+The Qwen2.5-Coder instruct models stand out for delivering superior code reasoning
+
+22
+
+Technical Report
+
+Figure 7: The McEval Performance of Qwen2.5-Coder-32B-Instruct compared with popular
+open-source large code models with similar size.
+
+performance with the fewest parameters, surpassing the results of other open-source large
+language models by a significant margin.
+
+7.3 Code Editing
+
+Aider Aider9 has created a code editing benchmark designed to quantitatively measure
+its collaboration with large language models (LLMs). Drawing from a set of 133 Python
+exercises sourced from Exercism10, the benchmark tests the ability of Aider and LLMs to
+interpret natural language programming requests and translate them into executable code
+that successfully passes unit tests. This assessment goes beyond evaluating raw coding
+proficiency; it also examines how effectively LLMs can edit existing code and format those
+modifications for seamless integration with Aider’s system, ensuring that local source
+files can be updated without issues. The comprehensive nature of this benchmark reflects
+both the technical aptitude of the LLMs and their consistency in task completion. Table 19
+highlights the performance of several language models in the Code Editing task. Among
+these models, Qwen2.5-Coder-7B-Instruct exhibits exceptional code repair capabilities.
+Despite its relatively modest scale of 7 billion parameters, it achieves an impressive PASS@1
+accuracy of 51.9%, significantly outperforming comparable models. Remarkably, it also
+surpasses larger models such as CodeStral-22B and DS-Coder-33B-Instruct , highlighting
+
+9https://github.com/paul-gauthier/aider
+10https://github.com/exercism/python
+
+23
+
+AverageCoffeeGroovySwiftJsonC#KotlinPower050RustJavaVBHaskellRShellJuliaPHP050SchemeF#PythonJSRubyScalaAWKC02550C++GoLuaRacketTSClispElixirFortran02550PerlElispPascalTclVimLErlangDartHtml02550Qwen2.5-Coder-7B-ChatDS-Coder-V2-Lite-InstructCodeStral-20BDS-Coder-V1-33B-InstructDS-Coder-V1-6.7B-InstructCodeQwen1.5-7B-ChatMcEvalPerformance1Technical Report
+
+Figure 8: The MdEval Performance of Qwen2.5-Coder-32B-Instruct compared with popular
+open-source large code models with similar size.
+
+Figure 9: The CodeArena Performance of Qwen2.5-Coder-32B-Instruct compared with
+popular open-source large code models with similar size.
+
+its remarkable efficiency and effectiveness in code editing tasks. Our Qwen2.5-Coder-32B-
+Instruct model achieves even higher accuracy, with Pass@1 and Pass@2 rates reaching 60.9%
+and 73.7%, respectively.
+
+CodeEditorBench An effective code assistant must excel in generating code based on
+given specifications, as well as in modifying or debugging existing code to meet evolving
+requirements or resolve issues. In evaluating Qwen2.5-Coders proficiency in code modifi-
+cation tasks, we focused on the CodeEditorBench (Guo et al., 2024b) suite, which assesses
+performance across four key dimensions: Debugging, Translation, Switching, and Polishing.
+We employed the same evaluation approach used in the original paper, relying on win
+rate as the metric for overall performance across diverse problem types. The win rate was
+computed for each problem category and then averaged across all categories to obtain the
+overall score. The results in Figure 11 show that Qwen2.5-Coder-32B-Instruct achieves a win
+rate comparable to DS-Coder-V2-Instruct (86.2% win rate), which features a significantly
+larger 236 billion parameter scale.
+
+24
+
+AverageCClispC++GoJavaJavaScriptJuliaPascal050100PHPPythonRRubyRustScalaSwiftC#F#050100Qwen2.5-Coder-32B-InstructDS-Coder-33B-InstructGPT-4o-2024-08-06Codestral-22BDS-Coder-V2-InstructMdEvalPerformance1PercentageClaude-3.5-Sonnet-20241022GPT-4o-20240806Qwen2.5-Coder-32B-InstructDS-Coder-V2-InstructCodestral-22BDS-Coder-33B-Instruct78.1%13.5%8.4%69.1%18.1%12.8%68.9%15.6%15.5%57.4%17.6%25.0%21.7%15.1%63.2%16.8%11.9%71.3%WinTieLose1Technical Report
+
+Model
+
+Size
+
+CRUXEval
+Input-CoT Output-CoT
+
+Qwen2.5-Coder-0.5B-Instruct
+
+0.5B
+
+33.9
+
+0.5B+ Models
+
+1B+ Models
+
+DS-Coder-1.3B-Instruct
+Yi-Coder-1.5B-Chat
+Qwen2.5-Coder-1.5B-Instruct
+
+1.3B
+1.5B
+1.5B
+
+12.9
+19.9
+45.4
+
+3B+ Models
+
+Qwen2.5-Coder-3B-Instruct
+
+3B
+
+53.2
+
+6B+ Models
+
+CodeLlama-7B-Instruct
+DS-Coder-6.7B-Instruct
+CodeQwen1.5-7B-Chat
+Yi-Coder-9B-Chat
+DS-Coder-V2-Lite-Instruct
+Qwen2.5-Coder-7B-Instruct
+
+7B
+6.7B
+7B
+9B
+2.4/16B
+7B
+
+13B+ Models
+
+CodeLlama-13B-Instruct
+Starcoder2-15B-Instruct-v0.1
+Qwen2.5-Coder-14B-Instruct
+
+13B
+15B
+14B
+
+20B+ Models
+
+CodeLlama-34B-Instruct
+CodeStral-22B-v0.1
+DS-Coder-33B-Instruct
+CodeLlama-70B-Instruct
+DS-Coder-V2-Instruct
+Qwen2.5-Coder-32B-Instruct
+
+34B
+22B
+33B
+70B
+21/236B
+32B
+
+Closed-APIs
+
+Claude-3.5-Sonnet-20240620
+Claude-3.5-Sonnet-20241022
+GPT-4o-mini-2024-07-18
+GPT-4o-2024-08-06
+o1-mini
+o1-preview
+
+-
+-
+-
+-
+-
+-
+
+36.1
+42.6
+44.0
+47.5
+53.0
+65.8
+
+47.5
+45.5
+69.5
+
+48.5
+61.3
+47.3
+56.5
+70.0
+75.2
+
+75.5
+84.4
+67.5
+78.6
+91.6
+86.5
+
+27.8
+
+28.1
+24.9
+37.5
+
+56.0
+
+36.2
+45.1
+38.8
+55.6
+52.9
+65.9
+
+41.1
+50.9
+79.5
+
+47.1
+63.5
+50.6
+57.8
+75.1
+83.4
+
+81.8
+87.2
+78.4
+89.2
+96.2
+81.4
+
+Table 18: The CRUXEval performance of different instruct models, with Input-CoT and
+Output-CoT settings.
+7.4 Text-to-SQL
+
+SQL is one of the essential tools in daily software development and production, but its
+steep learning curve often hinders free interaction between non-programming experts and
+databases. To address this issue, the Text-to-SQL task was introduced, aiming for models
+to automatically map natural language questions to structured SQL queries. Previous
+improvements in Text-to-SQL focused primarily on structure-aware learning, domain-
+specific pre-training, and sophisticated prompt designs.
+
+Thanks to the use of finely crafted synthetic data during both pre-training and fine-tuning,
+we significantly enhanced Qwen2.5-Coder’s capability in Text-to-SQL tasks. We selected
+two well-known benchmarks, Spider (Yu et al., 2018) and BIRD (Li et al., 2024a), for com-
+prehensive evaluation. To ensure a fair comparison between Qwen2.5-Coder and other
+open-source language models on this task, we used a unified prompt template as input,
+following the work of Chang & Fosler-Lussier (2023). The evaluation prompt consists of
+table representations aligned with database instructions, examples of table content, op-
+tional additional knowledge, and natural language questions. This standardized prompt
+template minimizes biases that may arise from prompt variations. As shown in Figure 12,
+Qwen2.5-Coder outperforms other code models of the same size on the Text-to-SQL task.
+
+25
+
+Technical Report
+
+Figure 10: The relationship between model sizes and code reasoning capabilities. The x-axis
+represents the parameter sizes of different models, and the y-axis indicates the CRUXEval-O
+(CoT) scores respectively.
+
+Figure 11: The evaluation results on CodeEditBench.
+
+Figure 12: The text-to-SQL evaluation on various instruct code models.
+
+Figure 13: The table understanding evaluation on TableBench.
+
+26
+
+CRUXEval-O (CoT)0???# of Parameters (B)3B7B30BQwen2.5-Coder-1.5B-InstructGPT-4o-0513Qwen2.5-Coder-7B-InstructClaude-3-OpusBest performance/size ratio90%45%0%CodestralDS-Coder-33B-InstructLlama3-InstructDS-Coder-V2-Lite-InstructDS-Coder-V2-InstructDS-Coder-1.3B-InstructDS-Coder-6.7B-InstructCodeQwen1.5-7B-ChatQwen2.5-Coder-32B-InstructOverallWinRateCodeDebugCodeTranslationCodeRequirementSwitchCodePolishmentPresent020406080Qwen2.5-Coder-32B-InstructDS-Coder-V2-InstructCodestral-22B-v0.1DS-Coder-V1-33B-Instruct1706050403020DS-Coder-6.7B-InstructDS-Coder-V2-Lite-InstructDS-Coder-33B-InstructCodeStral-22BQwen2.5-Coder-7B-InstructQwen2.5-Coder-14B-InstructQwen2.5-Coder-32B-Instruct39.841.645.646.251.156.958.4Bird40506070809010070.074.673.876.682.084.885.1SpiderBirdSpider1OverallFactCheckingNum-ReasoningDataAnalysisVisualization010203040506070Qwen2.5-Coder-32B-InstructDS-Coder-V2-InstructCodestral-22B-v0.1DS-Coder-V1-33B-Instruct1Technical Report
+
+Model
+
+Size
+
+Aider
+Pass@1 Pass@2
+
+Qwen2.5-Coder-0.5B-Instruct
+
+0.5B
+
+14.3
+
+14.3
+
+0.5B+ Models
+
+1B+ Models
+
+DS-Coder-1.3B-Instruct
+Yi-Coder-1.5B-Chat
+Qwen2.5-Coder-1.5B-Instruct
+
+1.3B
+1.5B
+1.5B
+
+18.0
+17.3
+28.6
+
+18.8
+17.3
+31.6
+
+3B+ Models
+
+Qwen2.5-Coder-3B-Instruct
+
+3B
+
+33.8
+
+39.1
+
+6B+ Models
+
+CodeLlama-7B-Instruct
+DS-Coder-6.7B-Instruct
+CodeQwen1.5-7B-Chat
+Yi-Coder-9B-Chat
+DS-Coder-V2-Lite-Instruct
+Qwen2.5-Coder-7B-Instruct
+
+7B
+6.7B
+7B
+9B
+2.4/16B
+7B
+
+13B+ Models
+
+CodeLlama-13B-Instruct
+Qwen2.5-Coder-14B-Instruct
+
+13B
+14B
+
+20B+ Models
+
+CodeLlama-34B-Instruct
+CodeStral-22B-v0.1
+DS-Coder-33B-Instruct
+CodeLlama-70B-Instruct
+DS-Coder-V2-Instruct
+Qwen2.5-Coder-32B-Instruct
+
+34B
+22B
+33B
+70B
+21/236B
+32B
+
+Closed-APIs
+
+Claude-3.5-Sonnet-20240620
+Claude-3.5-Sonnet-20241022
+GPT-4o-mini-2024-07-18
+GPT-4o-2024-08-06
+o1-mini
+o1-preview
+
+-
+-
+-
+-
+-
+-
+
+1.5
+37.6
+24.8
+45.9
+44.4
+55.6
+
+1.5
+58.6
+
+1.5
+36.8
+50.4
+12.8
+51.9
+60.9
+
+59.4
+71.4
+43.6
+56.8
+49.6
+69.9
+
+1.5
+44.4
+38.3
+54.1
+52.6
+68.4
+
+1.5
+69.2
+
+1.5
+51.1
+54.5
+15.0
+73.7
+73.7
+
+66.2
+86.5
+55.6
+74.4
+70.7
+88.0
+
+Table 19: The code editing ability of different instruct models evaluated by Aider benchmark.
+The whole edit-format was consistently applied across all our experiments.
+
+7.5 Math Reasoning and General Natural Language
+
+In this section, we provide a comparative analysis of the performance between our Qwen2.5-
+Coder series models and the DS-Coder-V2 series models, with a focus on both mathematical
+computation and general natural language processing tasks. The results in Table 20 highlight
+the versatility of the Qwen2.5-Coder series, which excels not only in complex coding tasks
+but also in advanced general-purpose tasks, setting it apart from its competitors.
+
+7.6 Table Understanding
+
+To evaluate the understanding capabilities of structured data, we further evaluate the
+Qwen2.5-Coder on a comprehensive and complex benchmark TableBench (Wu et al., 2024b),
+which includes 18 fields within four major categories of table question answering (TableQA)
+capabilities. We compare Qwen2.5-Coder with other LLMs under the textual chain-of-
+
+27
+
+Technical Report
+
+Model
+
+Size MATH GSM8K GaoKao2023en OlympiadBench CollegeMath AIME24
+
+DS-Coder-V2-Lite-Instruct
+DS-Coder-V2-Instruct
+
+2.4/16B
+21/236B
+
+Qwen2.5-Coder-3B-Instruct
+Qwen2.5-Coder-7B-Instruct
+Qwen2.5-Coder-14B-Instruct
+Qwen2.5-Coder-32B-Instruct
+
+3B
+7B
+14B
+32B
+
+61.0
+74.2
+
+58.1
+66.8
+66.8
+76.4
+
+87.6
+94.5
+
+80.7
+86.7
+94.2
+93.0
+
+56.1
+65.7
+
+48.8
+60.5
+66.0
+68.3
+
+26.4
+37.8
+
+23.6
+29.8
+40.1
+42.5
+
+39.8
+45.9
+
+39.7
+43.5
+47.3
+47.7
+
+6.7
+6.7
+
+6.7
+10.0
+10.0
+20.0
+
+Model
+
+Size AMC23 MMLU
+
+MMLU-Pro
+
+IFEval
+
+CEval
+
+GPQA
+
+DS-Coder-V2-Lite-Instruct
+DS-Coder-V2-Instruct
+
+2.4/16B
+21/236B
+
+Qwen2.5-Coder-3B-Instruct
+Qwen2.5-Coder-7B-Instruct
+Qwen2.5-Coder-14B-Instruct
+Qwen2.5-Coder-32B-Instruct
+
+3B
+7B
+14B
+32B
+
+40.4
+52.5
+
+25.0
+42.5
+50.0
+55.0
+
+42.5
+76.7
+
+56.5
+68.7
+71.7
+77.6
+
+60.6
+65.6
+
+35.2
+45.6
+55.6
+62.3
+
+38.6
+40.9
+
+44.2
+58.6
+66.5
+79.9
+
+60.1
+73.4
+
+53.9
+61.4
+66.2
+68.9
+
+27.6
+44.3
+
+28.3
+35.6
+36.8
+41.8
+
+Table 20: The performance of math and general.
+
+thought (TCoT) setting. Figure 13 demonstrates that Qwen2.5-Coder-32B-Instruct gets the
+best performance 45.1 on TableBench.
+
+8 Discussion: Scaling is All You Need
+
+In Figure 14, We present a comparison of different sizes of Qwen2.5-Coder with other
+open-source LLMs on MBPP-3shot and LiveCodeBench. For the base LLM, we choose
+MBPP-3shot as the evaluation metric. Our extensive experiments show that MBPP-3shot is
+more suitable for evaluating base models and correlates well with the actual performance
+of the models. For the instruction model, we select the latest 4 months of LiveCodeBench
+(2024.07∼2024.11) questions as the evaluation to strictly avoid test data contamination, truly
+reflecting the OOD capabilities of the LLM. There is a positive correlation between model
+size and model performance, and Qwen2.5-Coder has achieved state-of-the-art performance
+across all sizes, encouraging us to continue exploring larger sizes of code LLM.
+
+Figure 14: The evaluation results of Qwen2.5-Coder models with different sizes on MBPP-
+3shot and LiveCodeBench.
+
+9 Conclusion
+
+This work introduces Qwen2.5-Coder, the latest addition to the Qwen series. Built upon
+Qwen2.5, a top-tier open-source LLM, Qwen2.5-Coder has been developed through exten-
+sive pre-training and post-training of Qwen2.5-0.5B/1.5B/3B/7B/14B/32B on large-scale
+datasets. To ensure the quality of the pre-training data, we have curated a dataset by collect-
+ing public code data and extracting high-quality code-related content from web texts, while
+filtering out low-quality data using advanced classifiers. Additionally, we have constructed
+a meticulously designed instruction-tuning dataset to transform the base code LLM into a
+strong coding assistant.
+
+Looking ahead, our research will focus on exploring the impact of scaling up code LLMs
+in terms of both data size and model size. We will also continue to enhance the reasoning
+capabilities of these models, aiming to push the boundaries of what code LLMs can achieve.
+
+28
+
+ModelSize4050607080DS-Coder-1.3B-BaseDS-Coder-6.7B-BaseDS-Coder-33B-BaseDS-Coder-V2Lite-BaseDS-Coder-V2-BaseStarcoder2-3B-BaseStarcoder2-7B-BaseStarcoder2-15B-BaseMBPP-3shotQwen2.5-Coder-BaseModelSize010203040DS-Coder-1.3B-InstructDS-Coder-6.7B-InstructDS-Coder-33B-InstructDS-Coder-V2Lite-InstructDS-Coder-V2-InstructStarcoder2-15B-InstructCodestral-22BLiveCodeBench(2024.07-2024.11)Qwen2.5-Coder-Instruct10.5B1.5B3B7B14B32B0.5B1.5B3B7B14B32BTechnical Report
+
+References
+
+Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Florencia Leoni
+Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat, et al.
+Gpt-4 technical report. arXiv preprint arXiv:2303.08774, 2023.
+
+Loubna Ben Allal, Raymond Li, Denis Kocetkov, Chenghao Mou, Christopher Akiki, Car-
+los Munoz Ferrandis, Niklas Muennighoff, Mayank Mishra, Alex Gu, Manan Dey, et al.
+Santacoder: don’t reach for the stars! arXiv preprint arXiv:2301.03988, 2023.
+
+Anthropic. Claude 3.5 sonnet. https://www.anthropic.com/news/claude-3-5-sonnet, 2024.
+
+2024.06.21.
+
+Jacob Austin, Augustus Odena, Maxwell Nye, Maarten Bosma, Henryk Michalewski, David
+Dohan, Ellen Jiang, Carrie Cai, Michael Terry, Quoc Le, et al. Program synthesis with
+large language models. arXiv preprint arXiv:2108.07732, 2021.
+
+Jinze Bai, Shuai Bai, Yunfei Chu, Zeyu Cui, Kai Dang, Xiaodong Deng, Yang Fan, Wenbin
+Ge, Yu Han, Fei Huang, et al. Qwen technical report. arXiv preprint arXiv:2309.16609,
+2023.
+
+Mohammad Bavarian, Heewoo Jun, Nikolas Tezak, John Schulman, Christine McLeavey,
+Jerry Tworek, and Mark Chen. Efficient training of language models to fill in the middle.
+arXiv preprint arXiv:2207.14255, 2022.
+
+Tom B Brown. Language models are few-shot learners. arXiv preprint arXiv:2005.14165, 2020.
+
+Federico Cassano, John Gouwar, Daniel Nguyen, Sydney Nguyen, Luna Phipps-Costin,
+Donald Pinckney, Ming-Ho Yee, Yangtian Zi, Carolyn Jane Anderson, Molly Q Feld-
+man, et al. Multipl-e: A scalable and extensible approach to benchmarking neural code
+generation. arXiv preprint arXiv:2208.08227, 2022.
+
+Linzheng Chai, Shukai Liu, Jian Yang, Yuwei Yin, Ke Jin, Jiaheng Liu, Tao Sun, Ge Zhang,
+Changyu Ren, Hongcheng Guo, et al. Mceval: Massively multilingual code evaluation.
+arXiv preprint arXiv:2406.07436, 2024.
+
+Shuaichen Chang and Eric Fosler-Lussier. How to prompt llms for text-to-sql: A study
+in zero-shot, single-domain, and cross-domain settings. arXiv preprint arXiv:2305.11853,
+2023.
+
+Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde De Oliveira Pinto,
+Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, et al. Evalu-
+ating large language models trained on code. arXiv preprint arXiv:2107.03374, 2021.
+
+Wenhu Chen, Ming Yin, Max Ku, Pan Lu, Yixin Wan, Xueguang Ma, Jianyu Xu, Xinyi Wang,
+and Tony Xia. Theoremqa: A theorem-driven question answering dataset. In Proceedings
+of the 2023 Conference on Empirical Methods in Natural Language Processing, pp. 7889–7901,
+2023.
+
+Wei-Lin Chiang, Lianmin Zheng, Ying Sheng, Anastasios Nikolas Angelopoulos, Tianle
+Li, Dacheng Li, Hao Zhang, Banghua Zhu, Michael Jordan, Joseph E Gonzalez, et al.
+Chatbot arena: An open platform for evaluating llms by human preference. arXiv preprint
+arXiv:2403.04132, 2024.
+
+Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick,
+and Oyvind Tafjord. Think you have solved question answering? try arc, the ai2 reasoning
+challenge. arXiv preprint arXiv:1803.05457, 2018.
+
+Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz Kaiser,
+Matthias Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano, et al. Training verifiers
+to solve math word problems. arXiv preprint arXiv:2110.14168, 2021.
+
+29
+
+Technical Report
+
+Yangruibo Ding, Zijian Wang, Wasi Ahmad, Hantian Ding, Ming Tan, Nihal Jain, Murali Kr-
+ishna Ramanathan, Ramesh Nallapati, Parminder Bhatia, Dan Roth, et al. Crosscodeeval:
+A diverse and multilingual benchmark for cross-file code completion. Advances in Neural
+Information Processing Systems, 36, 2024.
+
+Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle,
+Aiesha Letman, Akhil Mathur, Alan Schelten, Amy Yang, Angela Fan, et al. The llama 3
+herd of models. arXiv preprint arXiv:2407.21783, 2024.
+
+Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun
+Shou, Bing Qin, Ting Liu, Daxin Jiang, and Ming Zhou. Codebert: A pre-trained model
+for programming and natural languages. In Trevor Cohn, Yulan He, and Yang Liu (eds.),
+Findings of the Association for Computational Linguistics: EMNLP 2020, Online Event, 16-20
+November 2020, volume EMNLP 2020 of Findings of ACL, pp. 1536–1547. Association for
+Computational Linguistics, 2020. doi: 10.18653/V1/2020.FINDINGS-EMNLP.139. URL
+https://doi.org/10.18653/v1/2020.findings-emnlp.139.
+
+Aryo Pradipta Gema, Joshua Ong Jun Leang, Giwon Hong, Alessio Devoto, Alberto
+Carlo Maria Mancino, Rohit Saxena, Xuanli He, Yu Zhao, Xiaotang Du, Mohammad
+Reza Ghasemi Madani, et al. Are we done with mmlu? arXiv preprint arXiv:2406.04127,
+2024.
+
+Linyuan Gong, Sida Wang, Mostafa Elhoushi, and Alvin Cheung. Evaluation of llms on
+
+syntax-aware code fill-in-the-middle tasks. arXiv preprint arXiv:2403.04814, 2024.
+
+Alex Gu, Baptiste Rozi`ere, Hugh Leather, Armando Solar-Lezama, Gabriel Synnaeve, and
+Sida I Wang. Cruxeval: A benchmark for code reasoning, understanding and execution.
+arXiv preprint arXiv:2401.03065, 2024.
+
+Daya Guo, Qihao Zhu, Dejian Yang, Zhenda Xie, Kai Dong, Wentao Zhang, Guanting Chen,
+Xiao Bi, Yu Wu, YK Li, et al. Deepseek-coder: When the large language model meets
+programming–the rise of code intelligence. arXiv preprint arXiv:2401.14196, 2024a.
+
+Jiawei Guo, Ziming Li, Xueling Liu, Kaijing Ma, Tianyu Zheng, Zhouliang Yu, Ding Pan,
+Yizhi Li, Ruibo Liu, Yue Wang, et al. Codeeditorbench: Evaluating code editing capability
+of large language models. arXiv preprint arXiv:2404.03543, 2024b.
+
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, and
+Jacob Steinhardt. Measuring massive multitask language understanding. arXiv preprint
+arXiv:2009.03300, 2020.
+
+Dan Hendrycks, Collin Burns, Saurav Kadavath, Akul Arora, Steven Basart, Eric Tang,
+Dawn Song, and Jacob Steinhardt. Measuring mathematical problem solving with the
+math dataset. arXiv preprint arXiv:2103.03874, 2021.
+
+Naman Jain, King Han, Alex Gu, Wen-Ding Li, Fanjia Yan, Tianjun Zhang, Sida Wang, Ar-
+mando Solar-Lezama, Koushik Sen, and Ion Stoica. Livecodebench: Holistic and contami-
+nation free evaluation of large language models for code. arXiv preprint arXiv:2403.07974,
+2024.
+
+AQ Jiang, A Sablayrolles, A Mensch, C Bamford, DS Chaplot, D de las Casas, F Bressand,
+G Lengyel, G Lample, L Saulnier, et al. Mistral 7b (2023). arXiv preprint arXiv:2310.06825,
+2023.
+
+Jinyang Li, Binyuan Hui, Ge Qu, Jiaxi Yang, Binhua Li, Bowen Li, Bailin Wang, Bowen Qin,
+Ruiying Geng, Nan Huo, et al. Can llm already serve as a database interface? a big bench
+for large-scale database grounded text-to-sqls. Advances in Neural Information Processing
+Systems, 36, 2024a.
+
+Raymond Li, Loubna Ben Allal, Yangtian Zi, Niklas Muennighoff, Denis Kocetkov, Cheng-
+hao Mou, Marc Marone, Christopher Akiki, Jia Li, Jenny Chim, et al. Starcoder: may the
+source be with you! arXiv preprint arXiv:2305.06161, 2023.
+
+30
+
+Technical Report
+
+Ziming Li, Qianbo Zang, David Ma, Jiawei Guo, Tianyu Zheng, Xinyao Niu, Xiang Yue,
+Yue Wang, Jian Yang, Jiaheng Liu, et al. Autokaggle: A multi-agent framework for
+autonomous data science competitions. arXiv preprint arXiv:2410.20424, 2024b.
+
+Stephanie Lin, Jacob Hilton, and Owain Evans. Truthfulqa: Measuring how models mimic
+
+human falsehoods. arXiv preprint arXiv:2109.07958, 2021.
+
+J Liu, CS Xia, Y Wang, and L Zhang. Is your code generated by chatgpt really correct?
+rigorous evaluation of large language models for code generation. arxiv preprint arxiv:
+230501210. 2023, 2023.
+
+Jiaheng Liu, Ken Deng, Congnan Liu, Jian Yang, Shukai Liu, He Zhu, Peng Zhao, Linzheng
+Chai, Yanan Wu, Ke Jin, et al. M2rc-eval: Massively multilingual repository-level code
+completion evaluation. arXiv preprint arXiv:2410.21157, 2024a.
+
+Shukai Liu, Linzheng Chai, Jian Yang, Jiajun Shi, He Zhu, Liran Wang, Ke Jin, Wei Zhang,
+Hualei Zhu, Shuyue Guo, et al. Mdeval: Massively multilingual code debugging. arXiv
+preprint arXiv:2411.02310, 2024b.
+
+Anton Lozhkov, Raymond Li, Loubna Ben Allal, Federico Cassano, Joel Lamy-Poirier,
+Nouamane Tazi, Ao Tang, Dmytro Pykhtar, Jiawei Liu, Yuxiang Wei, et al. Starcoder 2
+and the stack v2: The next generation. arXiv preprint arXiv:2402.19173, 2024.
+
+Shuai Lu, Nan Duan, Hojae Han, Daya Guo, Seung-won Hwang, and Alexey Svy-
+atkovskiy. Reacc: A retrieval-augmented code completion framework. arXiv preprint
+arXiv:2203.07722, 2022.
+
+MistralAI. Codestral. https://mistral.ai/news/codestral, 2024. 2024.05.29.
+
+OpenAI. Gpt-4o. https://openai.com/index/hello-gpt-4o, 2024. 2024.05.13.
+
+Bowen Peng, Jeffrey Quesnelle, Honglu Fan, and Enrico Shippole. Yarn: Efficient context
+
+window extension of large language models. arXiv preprint arXiv:2309.00071, 2023.
+
+Qwen. Code with codeqwen1.5, April 2024. URL https://qwenlm.github.io/blog/
+
+codeqwen1.5/.
+
+Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D Manning, and
+Chelsea Finn. Direct preference optimization: Your language model is secretly a reward
+model. arXiv preprint arXiv:2305.18290, 2023.
+
+Baptiste Roziere, Jonas Gehring, Fabian Gloeckle, Sten Sootla, Itai Gat, Xiaoqing Ellen Tan,
+Yossi Adi, Jingyu Liu, Romain Sauvestre, Tal Remez, et al. Code llama: Open foundation
+models for code. arXiv preprint arXiv:2308.12950, 2023.
+
+Keisuke Sakaguchi, Ronan Le Bras, Chandra Bhagavatula, and Yejin Choi. An adversarial
+
+winograd schema challenge at scale. arXiv preprint arXiv:1907.10641, 2019.
+
+Tao Sun, Linzheng Chai, Jian Yang, Yuwei Yin, Hongcheng Guo, Jiaheng Liu, Bing Wang,
+Liqun Yang, and Zhoujun Li. Unicoder: Scaling code large language model via universal
+code. In Lun-Wei Ku, Andre Martins, and Vivek Srikumar (eds.), Proceedings of the 62nd
+Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), ACL
+2024, Bangkok, Thailand, August 11-16, 2024, pp. 1812–1824. Association for Computational
+Linguistics, 2024. URL https://aclanthology.org/2024.acl-long.100.
+
+Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine Babaei,
+Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhosale, et al. Llama 2:
+Open foundation and fine-tuned chat models. arXiv preprint arXiv:2307.09288, 2023.
+
+Yuxiang Wei, Zhe Wang, Jiawei Liu, Yifeng Ding, and Lingming Zhang. Magicoder: Em-
+In Forty-first International Conference on
+powering code generation with oss-instruct.
+Machine Learning, ICML 2024, Vienna, Austria, July 21-27, 2024. OpenReview.net, 2024.
+URL https://openreview.net/forum?id=XUeoOBid3x.
+
+31
+
+Technical Report
+
+Di Wu, Wasi Uddin Ahmad, Dejiao Zhang, Murali Krishna Ramanathan, and Xiaofei Ma.
+Repoformer: Selective retrieval for repository-level code completion. arXiv preprint
+arXiv:2403.10059, 2024a.
+
+Xianjie Wu, Jian Yang, Linzheng Chai, Ge Zhang, Jiaheng Liu, Xinrun Du, Di Liang, Daixin
+Shu, Xianfu Cheng, Tianzhen Sun, et al. Tablebench: A comprehensive and complex
+benchmark for table question answering. arXiv preprint arXiv:2408.09174, 2024b.
+
+An Yang, Baosong Yang, Binyuan Hui, Bo Zheng, Bowen Yu, Chang Zhou, Chengpeng Li,
+Chengyuan Li, Dayiheng Liu, Fei Huang, et al. Qwen2 technical report. arXiv preprint
+arXiv:2407.10671, 2024.
+
+Tao Yu, Rui Zhang, Kai Yang, Michihiro Yasunaga, Dongxu Wang, Zifan Li, James Ma,
+Irene Li, Qingning Yao, Shanelle Roman, et al. Spider: A large-scale human-labeled
+dataset for complex and cross-domain semantic parsing and text-to-sql task. arXiv preprint
+arXiv:1809.08887, 2018.
+
+Zhaojian Yu, Xin Zhang, Ning Shang, Yangyu Huang, Can Xu, Yishujie Zhao, Wenxiang
+Hu, and Qiufeng Yin. Wavecoder: Widespread and versatile enhancement for code
+large language models by instruction tuning. In Lun-Wei Ku, Andre Martins, and Vivek
+Srikumar (eds.), Proceedings of the 62nd Annual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers), ACL 2024, Bangkok, Thailand, August 11-16, 2024, pp.
+5140–5153. Association for Computational Linguistics, 2024. doi: 10.18653/V1/2024.
+ACL-LONG.280. URL https://doi.org/10.18653/v1/2024.acl-long.280.
+
+Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, and Yejin Choi. Hellaswag: Can a
+
+machine really finish your sentence? arXiv preprint arXiv:1905.07830, 2019.
+
+Fengji Zhang, Bei Chen, Yue Zhang, Jacky Keung, Jin Liu, Daoguang Zan, Yi Mao, Jian-
+Guang Lou, and Weizhu Chen. Repocoder: Repository-level code completion through
+iterative retrieval and generation. arXiv preprint arXiv:2303.12570, 2023.
+
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao
+Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric Xing, et al. Judging llm-as-a-judge with
+mt-bench and chatbot arena. Advances in Neural Information Processing Systems, 36:46595–
+46623, 2023.
+
+Terry Yue Zhuo, Minh Chien Vu, Jenny Chim, Han Hu, Wenhao Yu, Ratnadira Widyasari,
+Imam Nur Bani Yusuf, Haolan Zhan, Junda He, Indraneil Paul, et al. Bigcodebench:
+Benchmarking code generation with diverse function calls and complex instructions.
+arXiv preprint arXiv:2406.15877, 2024.
+
+32
+

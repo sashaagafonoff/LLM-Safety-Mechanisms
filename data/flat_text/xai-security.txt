@@ -1,0 +1,203 @@
+SOURCE_ID: xai-security
+SOURCE_TITLE: xAI Trust & Security
+SOURCE_URI: https://x.ai/security
+--------------------
+Welcome | xAI
+xAI Trust Statement
+At xAI, we prioritize the responsible management of data and the trust our users place in our technology.
+For more information please visit
+https://trust.x.ai
+Data privacy and security are fundamental to our mission of empowering businesses with responsible AI solutions.
+We understand the importance of transparency and accountability in the field of AI, and we actively embrace open communication and ethical practices. Our commitment to trust is reflected in our:
+Robust security measures:
+We implement industry-leading safeguards to protect your data from unauthorized access, use, or disclosure.
+Adherence to industry standards:
+We comply with relevant data privacy regulations and adhere to industry best practices.
+Transparency and accountability:
+We provide clear and accessible information about our data handling practices and policies.
+We believe that trust is built through open communication and continuous improvement.
+Our Trust Portal provides detailed information about our security measures, certifications, and data handling practices.
+Vulnerability Reporting
+To report vulnerabilities, please contact the xAI security team through our HackerOne program at
+https://hackerone.com/x
+or by emailing
+vulnerabilities@x.ai
+with the subject line "Responsible Disclosure" All reported vulnerabilities will be tracked via our HackerOne bug bounty program for efficient resolution and acknowledgment.
+Explore the xAI Trust Portal to:
+Review our security and privacy policies
+Access our data handling procedures
+Learn about our compliance certifications
+Request copies of our security assessments
+Get answers to frequently asked questions about data privacy at xAI
+We are committed to building trust through responsible AI. Let us know how we can help you achieve your business goals with transparency and accountability.
+Product Security
+Audit Logging
+xAI offers an in-app 90 day Audit Trail for Business Tier accounts. Audit logs can be exported on demand via the admin console.
+Integrity Monitoring
+We provide a status page outlining the health of our services and current uptime available
+here
+.
+Data Security
+xAI includes a suite of Privacy tools to help your organization comply with regulations like HIPAA, the GDPR, and the CCPA.
+Please refer to our privacy policy to learn more.
+Team Management
+Information about Team Management capabilities within the xAI Enterprise Platform can be found
+here
+.
+Role-Based Access Control
+Access Management roles are available in the xAI Enterprise Platform.
+Additionally, predefined security groups are used to assign role-based access privileges and segregate access to systems and data in the production environment.
+Single Sign-On Support
+xAI supports Single Sign On for Business Tier accounts. You can use any SAML-based Identity Provider (IdP), for example Okta, X, OneLogin, or use GSuite to serve as your identity provider, delegating access to the application based on rules you create in your central identity management solution.
+Data Security
+Access Monitoring
+xAI retains security logs, which include application, tooling, and access logs, for 180 days. Data access logs are maintained for 365 days.
+Data Backups
+Backups of in-scope systems are performed on a regularly scheduled basis.
+Snapshot backups of critical databases are performed on a daily basis. Database snapshot backups are restored on at least a semi-annual basis to help ensure that processes and tools function as expected.
+Data Erasure
+xAI customers are able to export or delete their data/content using the self-service features of the enterprise platform.
+Encryption-at-rest
+Customer archive data stored in S3 is encrypted at rest using server-side encryption with Amazon S3 managed keys (SSE-S3).
+Encryption-in-transit
+The xAI web application and enterprise API are configured to use the TLS encryption protocol to encrypt communication sessions.
+Physical Security
+xAI data centers are equipped with full time security personnel, defense-in-depth access controls, and 24/7 monitoring solutions. All data center staff undergo comprehensive background checks and security training. Physical access to the data centers is restricted to only those requiring access to complete their job functions.
+Data Privacy
+Cookies
+Our cookie policy is available within the broader Privacy Notice and can be found
+here
+.
+Employee Privacy Training
+At least once per year, our employees must complete security and privacy training which covers our security policies, security best practices, and privacy principles.
+Security Incident Notification
+Our Security Incident Notification process is outlined in the Data Protection Addendum.
+Access Control
+Data Access
+We follow the principles of least privilege and need-to-know basis.
+Firewalls, network access controls, identity and access management (IAM) controls, and other techniques are used that are designed to prevent unauthorized access to systems processing customer data.
+Logging
+We retain security logs, which include application, tooling, and access logs, for 180 days.
+Password Security
+We adhere strictly to the guidelines set forth in NIST Special Publication 800-63B, ensuring that our password security policies align with the latest standards and best practices for digital identity and authentication.
+Application Security
+Responsible Disclosure
+xAI has a public bug bounty program that is utilized to encourage responsible disclosure of system security issues identified by external parties and to enable continuous assessment of product security.
+Bot Detection
+xAI utilizes Cloudflare WAF, and Wiz to bolster our application's resilience and security. Cloudflare ensures fast and secure content delivery, and also provides robust protection against DDoS attacks. Complementing these, Wiz offers continuous threat detection, helping us proactively identify and address potential security issues.
+Secure Development Training
+Secure coding and configuration guidelines have been established for the development and deployment of systems and services, and include requirements around logical access control, cryptography, and system configurations.
+Software Development Lifecycle
+xAI has a documented and management-approved SDLC and change management standards which are communicated and available to all personnel. The standards are reviewed on an annual basis as per the documented Policy and Standards review process.
+Vulnerability & Patch Management
+System vulnerability scans are performed on at least a weekly basis.
+All in-scope systems and applications are patched or replaced per documented processes and standards.
+Web Application Firewall
+xAI uses Cloudflare WAF to shield our application from potential web threats. It helps us identify and block harmful traffic, enhancing our application's security.
+Infrastructure Security
+BCP / DR
+An appropriate business continuity and disaster recovery plan is maintained, as well as processes to help ensure failover redundancy in systems, networks, and data storage.
+Capacity Monitoring
+A capacity management standard is in place to guide personnel in the capacity management process, including planning and forecasting, monitoring, and infrastructure auto-scaling. xAI’s production infrastructure is designed to use auto-scaling functionality to manage infrastructure capacity in real-time, helping to help ensure the availability of services.
+Amazon Web Services
+The computing systems, network technologies, and associated infrastructure supporting xAI’s enterprise services have been built using cloud-first architectures supported primarily by Amazon Web Services (AWS).
+The system uses various infrastructure components provided natively by the cloud service providers that include, but are not limited to, the following:
+Amazon Elastic Compute Cloud (EC2), including AWS Elastic Container Service (ECS)
+– scalable compute capacity and container orchestration.
+Amazon Simple Storage Service (S3)
+– object storage service with high degrees of scalability, data availability, security, and performance.
+Amazon Elastic Load Balancing (ELB)
+– service that automatically distributes incoming application traffic across multiple targets, such as compute instances, containers, and availability zones.
+Amazon CloudFront
+– fast content delivery network (CDN) service that securely delivers data globally with low latency and high transfer speeds.
+Amazon Key Management Service (KMS)
+– managed service to create and control encryption keys and the Amazon Hardware Security Modules to protect the security of keys.
+Amazon Identity and Access Management (IAM)
+– enables secure control of access to AWS services and resources for users.
+Amazon Elastic Kubernetes Service (EKS)
+– fully-managed service for running Kubernetes, an open-source system for automating deployment, scaling, and management of containerized applications, on AWS.
+Amazon Relational Database Service (RDS)
+– service for running scalable relational databases in the AWS cloud.
+Amazon DynamoDB
+– fully-managed NoSQL database service that supports key-value and document data structures.
+Amazon Elastic MapReduce (EMR)
+– cloud-native big data platform for processing vast amounts of data using open-source tools.
+Amazon Lambda
+– serverless compute service enabling code execution without provisioning or managing servers.
+Amazon CloudWatch
+– monitoring and observability service that provides data and actionable insights to monitor applications, respond to system-wide performance changes, optimize resource utilization, and get a unified view of operational health across the AWS environment.
+Amazon CloudTrail
+– continuous monitoring and logging of account activity related to actions across AWS infrastructure, including actions taken through the AWS Management Console, Amazon software development kit (SDK)s, command line tools, and other AWS services.
+Amazon GuardDuty
+– Comprehensive threat detection service that continuously monitors for malicious activity and unauthorized behavior within AWS, including data stored in Amazon S3.
+Amazon Inspector
+– automated security assessment service that automatically assesses applications for exposure, vulnerabilities, and deviations from best practices.
+Datacenter Services
+xAI utilizes a dedicated datacenter with dedicated capacity and support for our systems, and networking.
+The computing systems, network technologies, and associated infrastructure supporting xAI’s enterprise services have been built on trusted hardware, and Cloud Native Computing Foundation best practices to produce a private cloud environment.
+Dell and HPE servers
+- We utilize cutting edge, American-made server hardware from Dell and Hewlett-Packard Enterprise to minimize the risk of supply chain attacks. All servers include an intelligent platform management interfaces to allow for monitoring and maintenance.
+Kubernetes -
+An open-source system for automating deployment, scaling, and management of containerized applications.
+Infrastructure Availability
+Core production infrastructure is deployed across multiple active availability zones at the cloud service provider, and the core systems are duplicated in an idle state in a separate availability region for quick deployment during an availability event.
+Further, customer archive data stored in Amazon S3 is automatically replicated by AWS, and xAI has configured bucket versioning to help prevent unintended modification or deletion.
+Separate Production Environment
+Our production environment is logically segregated from non-production environments.
+Endpoint Security
+Disk Encryption
+Full disk encryption is enabled on company laptops via our MDM solution.
+VPN Access Required
+Access to production systems requires the use of a company issued VPN. VPN access is provided after workstation integrity has been verified.
+Endpoint Detection & Response
+A cloud-based anti-malware solution is deployed on xAI-owned laptops and is configured to analyze endpoint activities and behavior on a real-time basis to determine if malicious software is present.
+The security team is alerted of any identified endpoint security events.
+Mobile Device Management
+A device management tool is in place to manage company-owned employee laptops, and is configured to enforce certain configurations including, but not limited to, the following:
+Full disk encryption
+Automatic installation of security software
+Automatic installation of operating system updates
+Automatic screen saver / workstation lock engagement
+Ability to wipe remotely
+Network Security
+Firewall
+At xAI, while we operate in a cloud-first environment, we ensure robust perimeter security measures akin to traditional firewalls. Our security architecture integrates advanced cloud-native protections, delivering equivalent or enhanced security functionalities expected from conventional firewall systems.
+Security Information and Event Management
+Logging and monitoring software are configured to collect data from system components to monitor system events (including security events / IDS events), performance, and resource utilization.
+The security team is alerted of unusual or suspicious security events that are detected.
+Virtual Private Cloud
+Inbound external network traffic terminates in the public virtual private cloud (VPC), and security groups are in place to filter unauthorized network traffic from the internet and public VPC into the private VPC (e.g., firewall).
+Wireless Security
+Within xAI office spaces, we use encrypted wireless connections to ensure secure internal communications. However, these wireless networks are not involved in the actual delivery of our application services.
+Corporate Security
+HR Security
+At least once per year, our employees must complete security and privacy training which covers our security policies, security best practices, and privacy principles.
+Incident Response
+A formal incident management framework has been established that defines roles, responsibilities, escalation paths, and internal and external communication requirements in the event of incidents that impact the security or availability of the system.
+Internal SSO
+xAI uses Single Sign-On (SSO) to manage access to our internal applications. Our access management strategy includes the use of WebAuthn for secure authentication. Alongside SSO, we deploy hardware-based Multi-Factor Authentication (MFA), in the form of USB security keys, to enhance the security of our system access. This approach ensures robust protection against unauthorized access.
+Penetration Testing
+xAI management engages with a third-party specialist to conduct external penetration testing of the production application at least annually.
+Try Grok On
+Web
+iOS
+Android
+Grok on X
+Products
+Grok
+𝕏
+API
+Grok Enterprise
+Grokipedia
+Company
+Company
+Careers
+Contact
+News
+Resources
+Documentation
+Privacy policy
+Security
+Safety
+Legal
+Status
