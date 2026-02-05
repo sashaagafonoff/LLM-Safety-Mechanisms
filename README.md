@@ -11,12 +11,3 @@
 📊 **[View the Dataset on Observable](https://observablehq.com/d/88c345368b7d0fa1)**
 
 📊 **[View Interactive Dashboard](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/)**
-
-## 🚀 Quick Stats
-- 5 major providers tracked
-- 14 safety techniques documented  
-- 25+ evidence records with primary sources
-- Weekly automated verification
-
-## 🤝 Help Wanted
-We need evidence for 50+ missing safety implementations. [See open issues →](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues)
