@@ -6,6 +6,7 @@ import re
 from typing import List, Dict, Tuple
 from pathlib import Path
 from sentence_transformers import SentenceTransformer, CrossEncoder, util
+from robust_tokenizer import create_chunks_from_text
 
 # --- CONFIGURATION ---
 INPUT_DIR = Path("data/flat_text")
@@ -131,12 +132,13 @@ class NLUAnalyzer:
         return index
 
     def _chunk_text(self, text: str) -> List[str]:
-        sentences = [s.strip() for s in text.replace('\n', ' ').split('.') if len(s.strip()) > 20]
-        chunks = []
-        for i in range(0, len(sentences), STRIDE):
-            window = ". ".join(sentences[i : i + WINDOW_SIZE]) + "."
-            chunks.append(window)
-        return chunks
+        return create_chunks_from_text(
+            text,
+            window_size=WINDOW_SIZE,
+            stride=STRIDE,
+            min_sentence_length=20,  
+            min_chunk_length=20
+        )
 
     def analyze_document(self, text: str) -> List[Dict]:
         chunks = self._chunk_text(text)

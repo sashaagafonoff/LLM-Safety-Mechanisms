@@ -4,6 +4,7 @@ import glob
 import os
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict, Tuple
+from robust_tokenizer import create_chunks_from_text
 
 # --- CONFIGURATION ---
 TECHNIQUES_PATH = "data/techniques.json"
@@ -64,16 +65,13 @@ class SemanticRetriever:
         """
         Splits text into sliding windows of sentences.
         """
-        # Simple sentence splitting (in production, use spacy or nltk)
-        sentences = [s.strip() for s in text.replace('\n', ' ').split('.') if len(s.strip()) > 10]
-        
-        chunks = []
-        for i in range(0, len(sentences), STRIDE):
-            # Combine WINDOW_SIZE sentences
-            window = ". ".join(sentences[i : i + WINDOW_SIZE]) + "."
-            chunks.append(window)
-            
-        return chunks
+        return create_chunks_from_text(
+            text,
+            window_size=WINDOW_SIZE,
+            stride=STRIDE,
+            min_sentence_length=10,
+            min_chunk_length=20
+        )
 
     def scan_document(self, text: str) -> List[Dict]:
         """

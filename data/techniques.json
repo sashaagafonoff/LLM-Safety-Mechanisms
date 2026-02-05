@@ -1,22 +1,5 @@
 [
   {
-    "id": "tech-dpo",
-    "name": "Direct Preference Optimization (DPO)",
-    "categoryId": "cat-alignment",
-    "description": "A stable, performant alternative to RLHF that optimizes the policy directly from preferences",
-    "nlu_profile": {
-      "primary_concept": "Direct optimization of language model policy using preference pairs without an explicit reward model approximation step.",
-      "semantic_anchors": [
-        "DPO",
-        "preference optimization",
-        "Rafailov",
-        "direct policy optimization",
-        "implicit reward"
-      ],
-      "entailment_hypothesis": "The model was trained using Direct Preference Optimization (DPO)."
-    }
-  },
-  {
     "id": "tech-rlhf",
     "name": "Reinforcement Learning from Human Feedback",
     "categoryId": "cat-alignment",
@@ -28,7 +11,12 @@
         "PPO",
         "human feedback",
         "reward model training",
-        "preference learning"
+        "preference learning",
+        "Proximal Policy Optimization",
+        "InstructGPT",
+        "preference pair",
+        "comparison data",
+        "reward signal"
       ],
       "entailment_hypothesis": "The model utilizes reinforcement learning from human feedback (RLHF)."
     }
@@ -45,7 +33,14 @@
         "RLAIF",
         "self-critique",
         "principle-driven training",
-        "Anthropic"
+        "CAI",
+        "constitutional principles",
+        "self-revision",
+        "AI feedback",
+        "critique-revise loop",
+        "harmlessness principles",
+        "RL from AI feedback",
+        "critiques its own output"
       ],
       "entailment_hypothesis": "The model uses Constitutional AI or a self-critique mechanism."
     }
@@ -60,7 +55,12 @@
       "semantic_anchors": [
         "adversarial training",
         "robustness training",
-        "attack-defense training"
+        "attack-defense training",
+        "adversarial examples",
+        "perturbation training",
+        "adversarial fine-tuning",
+        "robustness fine-tuning",
+        "attack augmentation"
       ],
       "entailment_hypothesis": "The training process included adversarial examples to improve robustness."
     }
@@ -92,7 +92,14 @@
         "fairness tuning",
         "de-biasing",
         "bias reduction",
-        "counterfactual data augmentation"
+        "counterfactual data augmentation",
+        "demographic parity",
+        "equalized odds",
+        "fairness constraint",
+        "representation balance",
+        "bias audit",
+        "stereotype mitigation",
+        "demographic fairness"
       ],
       "entailment_hypothesis": "The model underwent specific fine-tuning to mitigate bias."
     }
@@ -125,7 +132,13 @@
         "metaprompt",
         "system message",
         "hidden context",
-        "developer instructions"
+        "developer instructions",
+        "system instruction",
+        "pre-prompt",
+        "instruction tuning context",
+        "behavioral guidelines",
+        "operator instructions",
+        "preamble"
       ],
       "entailment_hypothesis": "The system uses a hidden system prompt to enforce safety constraints."
     }
@@ -142,7 +155,14 @@
         "prompt classification",
         "Llama Guard",
         "NeMo Guardrails",
-        "input moderation"
+        "input moderation",
+        "input classifier",
+        "prompt filter",
+        "request classification",
+        "pre-generation filter",
+        "input safety classifier",
+        "ShieldGemma",
+        "Aegis Guard"
       ],
       "entailment_hypothesis": "The system employs an input classification layer to block unsafe prompts."
     }
@@ -158,7 +178,13 @@
         "output moderation",
         "response filtering",
         "toxicity detection",
-        "completion blocking"
+        "completion blocking",
+        "post-generation filter",
+        "output classifier",
+        "response moderation",
+        "generation blocking",
+        "safety filter",
+        "content moderation API"
       ],
       "entailment_hypothesis": "The system filters or blocks generated model outputs that violate safety policies."
     }
@@ -190,7 +216,14 @@
         "factuality check",
         "hallucination mitigation",
         "citation enforcement",
-        "grounding metric"
+        "grounding metric",
+        "factual grounding",
+        "source attribution",
+        "claim verification",
+        "confabulation",
+        "unfaithful generation",
+        "factuality evaluation",
+        "attribution"
       ],
       "entailment_hypothesis": "The model uses mechanisms to detect or reduce hallucinations."
     }
@@ -223,7 +256,13 @@
         "SynthID",
         "C2PA",
         "provenance",
-        "digital signature"
+        "digital signature",
+        "AI-generated content detection",
+        "synthetic content marking",
+        "content authenticity",
+        "AI watermark",
+        "generation fingerprint",
+        "metadata injection"
       ],
       "entailment_hypothesis": "The system applies watermarking or provenance metadata."
     }
@@ -255,7 +294,13 @@
         "red teaming",
         "adversarial testing",
         "penetration testing",
-        "attack simulation"
+        "attack simulation",
+        "red team",
+        "manual red teaming",
+        "human red teaming",
+        "safety testing",
+        "expert adversarial testing",
+        "jailbreak testing"
       ],
       "entailment_hypothesis": "The model underwent adversarial red teaming."
     }
@@ -271,7 +316,13 @@
         "LLM-as-a-Judge",
         "automated adversarial testing",
         "model-based red teaming",
-        "automated attacks"
+        "automated attacks",
+        "automatic red teaming",
+        "AI red teaming",
+        "synthetic adversarial",
+        "adversarial prompt generation",
+        "attack generation",
+        "automated jailbreak"
       ],
       "entailment_hypothesis": "The safety evaluation involved automated adversarial attacks."
     }
@@ -288,7 +339,16 @@
         "TruthfulQA",
         "RealToxicityPrompts",
         "Bold",
-        "safety suite"
+        "safety suite",
+        "HarmBench",
+        "AdvBench",
+        "Do-Not-Answer",
+        "safety evaluation",
+        "harmful prompt dataset",
+        "toxicity benchmark",
+        "safety metrics",
+        "BBQ",
+        "WinoBias"
       ],
       "entailment_hypothesis": "The model was evaluated against standardized safety benchmarks."
     }
@@ -305,7 +365,13 @@
         "System Card",
         "Transparency Note",
         "Safety Report",
-        "Datasheet"
+        "Datasheet",
+        "technical report",
+        "safety documentation",
+        "model documentation",
+        "capability card",
+        "AI service card",
+        "responsible AI documentation"
       ],
       "entailment_hypothesis": "The release includes a Model Card or System Card."
     }
@@ -369,7 +435,13 @@
         "PII redaction",
         "anonymization",
         "data masking",
-        "scrubbing"
+        "scrubbing",
+        "personally identifiable information",
+        "data anonymization",
+        "privacy filtering",
+        "named entity redaction",
+        "de-identification",
+        "sensitive data detection"
       ],
       "entailment_hypothesis": "The system detects and redacts personally identifiable information."
     }
@@ -404,21 +476,6 @@
         "logs storage limit"
       ],
       "entailment_hypothesis": "The system adheres to a data retention or deletion policy."
-    }
-  },
-  {
-    "id": "tech-privacy-impact-assessment",
-    "name": "Privacy Impact Assessments",
-    "categoryId": "cat-privacy-security",
-    "description": "Assessment of privacy risks throughout the model lifecycle",
-    "nlu_profile": {
-      "primary_concept": "Systematic evaluation of privacy risks.",
-      "semantic_anchors": [
-        "PIA",
-        "privacy review",
-        "privacy risk assessment"
-      ],
-      "entailment_hypothesis": "A Privacy Impact Assessment (PIA) was conducted."
     }
   },
   {
@@ -464,7 +521,14 @@
         "incident reporting",
         "bug bounty",
         "vulnerability disclosure",
-        "failure tracking"
+        "failure tracking",
+        "safety incident",
+        "violation reporting",
+        "abuse reporting",
+        "feedback mechanism",
+        "report abuse",
+        "trust and safety",
+        "T&S"
       ],
       "entailment_hypothesis": "A mechanism exists for reporting and tracking safety incidents."
     }
@@ -480,25 +544,16 @@
         "staged release",
         "phased deployment",
         "controlled rollout",
-        "gradual release"
+        "gradual release",
+        "limited release",
+        "alpha release",
+        "beta release",
+        "early access",
+        "preview release",
+        "staged deployment",
+        "incremental rollout"
       ],
       "entailment_hypothesis": "The model was released using a responsible release protocol."
-    }
-  },
-  {
-    "id": "tech-model-versioning",
-    "name": "Model Versioning Protocols",
-    "categoryId": "cat-governance",
-    "description": "Protocols for model updates and change management",
-    "nlu_profile": {
-      "primary_concept": "Strict version control for model weights and safety patches.",
-      "semantic_anchors": [
-        "version control",
-        "model lineage",
-        "change management",
-        "safety patch"
-      ],
-      "entailment_hypothesis": "The system uses formal versioning protocols."
     }
   },
   {
@@ -518,22 +573,6 @@
     }
   },
   {
-    "id": "tech-algorithmic-impact-assessment",
-    "name": "Algorithmic Impact Assessments",
-    "categoryId": "cat-evaluation",
-    "description": "Assessment of societal and ethical impacts",
-    "nlu_profile": {
-      "primary_concept": "Broader evaluation of societal, economic, and human rights impacts.",
-      "semantic_anchors": [
-        "AIA",
-        "societal impact",
-        "human rights assessment",
-        "ethical evaluation"
-      ],
-      "entailment_hypothesis": "An Algorithmic Impact Assessment (AIA) was conducted."
-    }
-  },
-  {
     "id": "tech-contextual-safety",
     "name": "Contextual Safety Assessment",
     "categoryId": "cat-runtime-safety",
@@ -544,7 +583,13 @@
         "adaptive safety",
         "context-aware filtering",
         "personalized safety",
-        "risk assessment"
+        "risk assessment",
+        "contextual harm",
+        "use-case specific safety",
+        "deployment context",
+        "application-specific",
+        "user context",
+        "situational safety"
       ],
       "entailment_hypothesis": "Safety mechanisms adapt based on user context."
     }
@@ -575,7 +620,13 @@
       "semantic_anchors": [
         "custom safety settings",
         "adjustable filters",
-        "configurable moderation"
+        "configurable moderation",
+        "safety mode",
+        "strictness level",
+        "moderation level",
+        "harm category toggle",
+        "safety threshold",
+        "content filter settings"
       ],
       "entailment_hypothesis": "Users can configure or customize the safety policies."
     }
@@ -607,7 +658,15 @@
         "prompt injection",
         "jailbreak defense",
         "indirect injection",
-        "DAN mode"
+        "DAN mode",
+        "jailbreak",
+        "prompt attack",
+        "adversarial prompt",
+        "instruction injection",
+        "system prompt extraction",
+        "prompt leaking",
+        "goal hijacking",
+        "context manipulation"
       ],
       "entailment_hypothesis": "The system includes defenses against prompt injection."
     }
@@ -623,7 +682,13 @@
         "CSAM",
         "hash matching",
         "PhotoDNA",
-        "NCMEC"
+        "NCMEC",
+        "child safety",
+        "child sexual abuse material",
+        "minor safety",
+        "child exploitation",
+        "CSAM hash",
+        "perceptual hashing"
       ],
       "entailment_hypothesis": "The system detects and blocks CSAM."
     }
@@ -639,7 +704,14 @@
         "data cleaning",
         "toxicity filtering",
         "harmful content removal",
-        "deduping"
+        "deduping",
+        "pre-training filtering",
+        "data curation",
+        "corpus filtering",
+        "quality filtering",
+        "content filtering",
+        "data sanitization",
+        "data quality"
       ],
       "entailment_hypothesis": "The training data was filtered to remove harmful content."
     }
@@ -669,7 +741,13 @@
       "semantic_anchors": [
         "Safety RM",
         "harmlessness reward model",
-        "safety signal"
+        "safety signal",
+        "safety reward",
+        "harmlessness signal",
+        "safety preference",
+        "safety-trained reward model",
+        "constitutional reward",
+        "rule-based reward"
       ],
       "entailment_hypothesis": "A specific safety reward model was used."
     }
@@ -685,7 +763,17 @@
         "dangerous capabilities",
         "bio-risk",
         "cyber-offense",
-        "capability overhang"
+        "capability overhang",
+        "CBRN",
+        "ASL-3",
+        "ASL-4",
+        "RSP",
+        "Responsible Scaling Policy",
+        "capability threshold",
+        "frontier risk",
+        "dangerous capability evaluation",
+        "uplift",
+        "capability elicitation"
       ],
       "entailment_hypothesis": "Dangerous capabilities are monitored against safety thresholds."
     }
@@ -700,7 +788,14 @@
       "semantic_anchors": [
         "crowdsourced testing",
         "community red teaming",
-        "public evaluation"
+        "public evaluation",
+        "external evaluation",
+        "third-party evaluation",
+        "independent testing",
+        "public beta",
+        "early access testing",
+        "external red team",
+        "domain expert evaluation"
       ],
       "entailment_hypothesis": "The model underwent community-based evaluation."
     }
@@ -716,7 +811,14 @@
         "visual safety",
         "multimodal alignment",
         "image safety",
-        "cross-modal"
+        "cross-modal",
+        "vision safety",
+        "image-to-text safety",
+        "audio safety",
+        "video safety",
+        "multimodal harm",
+        "visual content moderation",
+        "NSFW detection"
       ],
       "entailment_hypothesis": "The system employs multimodal safety alignment."
     }
@@ -738,22 +840,6 @@
     }
   },
   {
-    "id": "tech-opensource-tools",
-    "name": "Open Source Safety Tools",
-    "categoryId": "cat-transparency",
-    "description": "Usage of open-source tools for safety",
-    "nlu_profile": {
-      "primary_concept": "Usage of open libraries like Guardrails AI or LangChain.",
-      "semantic_anchors": [
-        "open source safety",
-        "Guardrails AI",
-        "LangChain",
-        "safety library"
-      ],
-      "entailment_hypothesis": "The system utilizes open source safety tools."
-    }
-  },
-  {
     "id": "tech-access-control-documentation",
     "name": "Access Control Documentation",
     "categoryId": "cat-governance",
@@ -764,7 +850,15 @@
         "access policy",
         "authentication rules",
         "API keys",
-        "role-based access"
+        "role-based access",
+        "RBAC",
+        "IAM",
+        "SSO",
+        "OAuth",
+        "API authentication",
+        "permission model",
+        "access tier",
+        "usage tier"
       ],
       "entailment_hypothesis": "Documentation defines access controls and authentication."
     }
@@ -781,7 +875,16 @@
         "declining harmful requests",
         "abstention",
         "safe refusal",
-        "I cannot answer"
+        "I cannot answer",
+        "refuse to",
+        "declined to",
+        "will not",
+        "cannot assist",
+        "unable to help",
+        "policy violation",
+        "content policy",
+        "not able to generate",
+        "respectfully decline"
       ],
       "entailment_hypothesis": "The model explicitly refuses or abstains from answering harmful prompts."
     }
