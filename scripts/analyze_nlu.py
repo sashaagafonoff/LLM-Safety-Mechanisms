@@ -16,11 +16,11 @@ OUTPUT_FILE = Path("data/model_technique_map.json")
 
 # STAGE 1: Retrieval Model
 RETRIEVAL_MODEL_NAME = "all-mpnet-base-v2"
-RETRIEVAL_THRESHOLD = 0.45
+RETRIEVAL_THRESHOLD = 0.35  # Lowered from 0.45 to improve recall
 
 # STAGE 2: Verification Model
 VERIFICATION_MODEL_NAME = "cross-encoder/nli-deberta-v3-small"
-VERIFICATION_THRESHOLD = 0.75
+VERIFICATION_THRESHOLD = 0.65  # Lowered from 0.75 to improve recall
 
 # Text Processing
 WINDOW_SIZE = 3
@@ -59,8 +59,8 @@ class NLUAnalyzer:
             data = json.load(f)
             sources = data.get('sources', [])
 
-        logger.info(f"Indexing {len(sources)} evidence sources for linkage...")
-        
+        logger.info(f"📋 Indexing {len(sources)} evidence sources for linkage...")
+
         for source in sources:
             # Determine the stable Unique Key for the Output Map
             # Preference: URL > Title > ID
@@ -69,41 +69,90 @@ class NLUAnalyzer:
                 unique_key = source.get('title')
 
             # create lookup keys pointing to this unique_key
-            
-            # 1. Map normalized Title
+
+            # 1. Map normalized Source ID (PRIMARY - matches flat text filenames!)
+            if source.get('id'):
+                lookup[normalize_string(source['id'])] = unique_key
+
+            # 2. Map normalized Title
             if source.get('title'):
                 lookup[normalize_string(source['title'])] = unique_key
-            
-            # 2. Map normalized Model IDs
+
+            # 3. Map normalized Model IDs
             for model in source.get('models', []):
                 if model.get('modelId'):
                     lookup[normalize_string(model['modelId'])] = unique_key
-        
+
+        logger.info(f"✓ Created {len(lookup)} lookup entries")
         return lookup
     
     def _is_low_quality_match(self, text: str, technique_name: str) -> bool:
         """
-        Heuristic filter to catch 'Glossary' definitions or weak references.
+        Enhanced heuristic filter to catch 'Glossary' definitions or weak references.
         Returns True if the text should be discarded.
         """
         text_lower = text.lower()
-        
-        # 1. The Glossary Trap
-        # If the text starts with "Glossary", "Definition", or looks like a dictionary entry
-        if "glossary" in text_lower[:50] or "definition:" in text_lower:
-            return True
-            
-        # 2. The "Future Work" Trap
-        # If they say "We plan to implement..." that isn't a current safety mechanism.
-        if "future work" in text_lower or "we plan to" in text_lower:
+
+        # 1. The Glossary/Reference Section Trap
+        glossary_patterns = [
+            "glossary", "definition:", "definitions:",
+            "overview:", "background:", "related work:",
+            "literature review:", "references:", "bibliography:"
+        ]
+        if any(pattern in text_lower[:100] for pattern in glossary_patterns):
             return True
 
-        # 3. Access Control specific fix
+        # 2. The "Future Work" Trap - Expanded
+        future_patterns = [
+            "future work", "we plan to", "we intend to",
+            "planned for", "will implement", "may implement",
+            "could implement", "should implement", "might use",
+            "proposed approach", "recommended approach",
+            "potential use of", "considering", "exploring the use"
+        ]
+        if any(pattern in text_lower for pattern in future_patterns):
+            return True
+
+        # 3. Comparative/Contrastive Mentions
+        comparative_patterns = [
+            "unlike", "compared to", "in contrast to",
+            "as opposed to", "rather than", "instead of"
+        ]
+        if any(pattern in text_lower for pattern in comparative_patterns):
+            return True
+
+        # 4. Discussion vs Implementation
+        # Check for implementation indicators
+        implementation_keywords = [
+            "we use", "we employ", "we implement", "we apply",
+            "we deploy", "we utilize", "our system", "our model",
+            "we train", "we trained", "incorporated", "deployed",
+            "used in", "applied to", "implemented in"
+        ]
+        has_implementation = any(keyword in text_lower for keyword in implementation_keywords)
+
+        # Check for discussion-only indicators
+        discussion_keywords = [
+            "discussed in", "described in", "mentioned in",
+            "refers to", "defined as", "known as",
+            "examples include", "such as", "e.g."
+        ]
+        has_discussion_only = any(keyword in text_lower for keyword in discussion_keywords)
+
+        # If has discussion markers but no implementation markers, likely not a real implementation
+        if has_discussion_only and not has_implementation:
+            return True
+
+        # 5. Access Control specific fix
         # "Access Control" must imply permissions/login, NOT "refusal"
         if technique_name == "Access Control Documentation":
             if any(w in text_lower for w in ["refus", "declin", "answer", "abstain"]):
                 return True # This is Refusal, not Access Control
-                
+
+        # 6. Proposed/Recommended (not implemented)
+        if re.search(r'\b(proposed|recommended|suggested)\s+(by|in|approach)', text_lower):
+            return True
+
         return False
     
     def _load_and_index_techniques(self) -> List[Dict]:
@@ -140,18 +189,21 @@ class NLUAnalyzer:
             min_chunk_length=20
         )
 
-    def analyze_document(self, text: str) -> List[Dict]:
+    def analyze_document(self, text: str, doc_id: str = "") -> List[Dict]:
         chunks = self._chunk_text(text)
-        if not chunks: return []
+        if not chunks:
+            logger.debug(f"   No chunks generated for {doc_id}")
+            return []
 
+        logger.debug(f"   Generated {len(chunks)} chunks")
         chunk_embeddings = self.retriever.encode(chunks, convert_to_tensor=True)
         candidates = []
-        
+
         for tech in self.technique_index:
             scores = util.cos_sim(tech['embeddings'], chunk_embeddings)
             max_scores_per_chunk, _ = scores.max(dim=0)
             passing_indices = (max_scores_per_chunk > RETRIEVAL_THRESHOLD).nonzero()
-            
+
             for idx in passing_indices:
                 idx = idx.item()
                 candidates.append({
@@ -160,32 +212,59 @@ class NLUAnalyzer:
                     "retrieval_score": max_scores_per_chunk[idx].item()
                 })
 
-        if not candidates: return []
+        if not candidates:
+            logger.debug(f"   No candidates passed retrieval threshold")
+            return []
+
+        logger.debug(f"   {len(candidates)} candidates passed Stage 1 (retrieval)")
 
         verified_matches = []
         pairs = [(c['chunk'], c['technique']['hypothesis']) for c in candidates]
         pred_scores = self.verifier.predict(pairs, apply_softmax=True)
-        entailment_idx = 1 
+        entailment_idx = 1
 
+        filtered_count = 0
         for i, score_dist in enumerate(pred_scores):
             entailment_score = score_dist[entailment_idx]
-            
+
             if entailment_score > VERIFICATION_THRESHOLD:
                 cand = candidates[i]
                 chunk_text = cand['chunk']
                 tech_name = cand['technique']['name']
-                
-                # --- NEW CHECK ---
+
+                # --- Quality Filter Check ---
                 if self._is_low_quality_match(chunk_text, tech_name):
-                    logger.info(f"   -> Dropped '{tech_name}' match (Quality Filter): {chunk_text[:30]}...")
+                    logger.debug(f"   -> Filtered: '{tech_name}' (Quality Filter)")
+                    filtered_count += 1
                     continue
-                # -----------------
-                
+                # ---------------------------
+
+                # Enhanced confidence scoring with implementation keywords
+                text_lower = chunk_text.lower()
+                implementation_keywords = [
+                    "we use", "we employ", "we implement", "we apply",
+                    "we deploy", "we utilize", "our system", "our model",
+                    "we train", "we trained", "incorporated", "deployed"
+                ]
+                has_strong_implementation = any(kw in text_lower for kw in implementation_keywords)
+
+                # Boost confidence if strong implementation language is present
+                if has_strong_implementation and entailment_score > 0.75:
+                    confidence = "High"
+                elif entailment_score > 0.85:
+                    confidence = "High"
+                else:
+                    confidence = "Medium"
+
                 verified_matches.append({
                     "techniqueId": cand['technique']['id'],
-                    "confidence": "High" if entailment_score > 0.85 else "Medium",
+                    "confidence": confidence,
                     "evidence": [chunk_text]
                 })
+
+        if filtered_count > 0:
+            logger.debug(f"   Quality filter removed {filtered_count} candidates")
+        logger.debug(f"   {len(verified_matches)} matches passed Stage 2 (verification)")
 
         return verified_matches
 
@@ -211,44 +290,79 @@ class NLUAnalyzer:
         return list(grouped.values())
 
 def run_analysis():
+    logger.info("="*70)
+    logger.info("NLU ANALYSIS PIPELINE")
+    logger.info("="*70)
+
     analyzer = NLUAnalyzer()
-    
+
     files = glob.glob(str(INPUT_DIR / "*.txt"))
-    full_map = {} 
-    
-    logger.info(f"🚀 Starting analysis on {len(files)} documents...")
-    
-    for file_path in files:
+    files = [f for f in files if not os.path.basename(f).startswith("temp_")]
+
+    logger.info(f"\n🚀 Starting analysis on {len(files)} documents...")
+    logger.info(f"Retrieval threshold: {RETRIEVAL_THRESHOLD}")
+    logger.info(f"Verification threshold: {VERIFICATION_THRESHOLD}\n")
+
+    full_map = {}
+    stats = {
+        'total_docs': len(files),
+        'processed': 0,
+        'linked': 0,
+        'unlinked': 0,
+        'total_techniques': 0
+    }
+
+    for i, file_path in enumerate(files, 1):
         filename_id = os.path.basename(file_path).replace(".txt", "")
-        if filename_id.startswith("temp_"): continue
-        
-        logger.info(f"Scanning: {filename_id}...")
-        
+
+        logger.info(f"[{i}/{len(files)}] Scanning: {filename_id}")
+
         # 1. Resolve Filename -> Evidence Key (URL)
         normalized_fname = normalize_string(filename_id)
-        # Try finding by title or model ID using the lookup map
         output_key = analyzer.evidence_map.get(normalized_fname, filename_id)
-        
-        # If we fell back to filename, log a warning
-        if output_key == filename_id and filename_id not in analyzer.evidence_map.values():
-             logger.warning(f"   ⚠️ Could not link file '{filename_id}' to an evidence entry. Using filename as key.")
 
+        # Track linkage
+        if output_key == filename_id and filename_id not in analyzer.evidence_map.values():
+            logger.warning(f"   ⚠️ Could not link '{filename_id}' to evidence entry - using filename as key")
+            stats['unlinked'] += 1
+        else:
+            logger.info(f"   ✓ Linked to: {output_key[:80]}...")
+            stats['linked'] += 1
+
+        # Read document
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
             parts = content.split("-" * 20 + "\n", 1)
             body = parts[1] if len(parts) > 1 else content
-            
-        raw_matches = analyzer.analyze_document(body)
+
+        # Analyze
+        raw_matches = analyzer.analyze_document(body, filename_id)
         consolidated = analyzer._aggregate_results(raw_matches)
-        
-        # 2. Save under the resolved key (URL or Title)
+
+        # Save results
         full_map[output_key] = consolidated
-        logger.info(f"   -> Linked to '{output_key}' with {len(consolidated)} verified techniques.")
+        stats['processed'] += 1
+        stats['total_techniques'] += len(consolidated)
+
+        logger.info(f"   → Found {len(consolidated)} verified techniques\n")
+
+    # Save results
+    logger.info("="*70)
+    logger.info("SAVING RESULTS")
+    logger.info("="*70)
 
     with open(OUTPUT_FILE, 'w') as f:
         json.dump(full_map, f, indent=2)
-    
-    logger.info(f"\n✅ Analysis Complete. Results saved to {OUTPUT_FILE}")
+
+    # Print summary
+    logger.info(f"\n✅ Analysis Complete!")
+    logger.info(f"\nSummary:")
+    logger.info(f"  Documents processed: {stats['processed']}/{stats['total_docs']}")
+    logger.info(f"  Linked to evidence: {stats['linked']}")
+    logger.info(f"  Unlinked (using filename): {stats['unlinked']}")
+    logger.info(f"  Total techniques detected: {stats['total_techniques']}")
+    logger.info(f"  Average per document: {stats['total_techniques']/stats['processed']:.1f}")
+    logger.info(f"\nResults saved to: {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     run_analysis()

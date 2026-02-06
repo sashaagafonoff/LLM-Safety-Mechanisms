@@ -1,156 +1,212 @@
 # LLM Safety Mechanisms - Dataset Summary
 
-*Generated: 2025-07-10 08:29*
+*Generated: 2026-02-06 13:27*
 
 ## 📊 Overall Statistics
 
-- **Providers**: 5
-- **Models**: 6
-- **Categories**: 6
-- **Techniques**: 31
-- **Evidence Records**: 291
+- **Providers**: 15
+- **Models**: 1
+- **Categories**: 7
+- **Techniques**: 44
+- **Source Documents**: 44
+- **Techniques Detected**: 40
 
 ## 🎯 Coverage by Category
 
-| Category | Techniques | Evidence Records |
-|----------|------------|------------------|
-| Alignment Methods | 5 | 22 |
-| Governance & Oversight | 7 | 62 |
-| Inference Safeguards | 9 | 90 |
-| Novel/Advanced Features | 1 | 3 |
-| Pre-training Safety | 5 | 41 |
-| Transparency | 4 | 41 |
+| Category | Total Techniques | Detected in Sources |
+|----------|------------------|---------------------|
+| Alignment & Fine-Tuning | 8 | 8 |
+| Evaluation & Red Teaming | 4 | 4 |
+| Governance & Oversight | 10 | 9 |
+| Pre-training Data Safety | 4 | 4 |
+| Privacy, Security & IP | 3 | 2 |
+| Runtime Guardrails & Monitoring | 14 | 12 |
+| Transparency & Documentation | 1 | 1 |
 
 ## 🏢 Provider Breakdown
 
 ### OpenAI
 
 - **Type**: commercial
-- **Models**: 1
-- **Evidence Records**: 36
-- **Techniques Covered**: 27
+- **Source Documents**: 5
+- **Techniques Detected**: 28
 
-**Implementation Ratings**:
-- High: 29
-- Medium: 7
-
-**Evidence Quality**:
-- Primary: 29
-- Claimed: 7
+**Detection Confidence**:
+- High: 26
+- Medium: 20
 
 ### Anthropic
 
 - **Type**: commercial
-- **Models**: 2
-- **Evidence Records**: 34
-- **Techniques Covered**: 26
+- **Source Documents**: 4
+- **Techniques Detected**: 24
 
-**Implementation Ratings**:
-- High: 20
-- Medium: 14
-
-**Evidence Quality**:
-- Primary: 31
-- Benchmarked: 1
-- Claimed: 2
+**Detection Confidence**:
+- High: 27
+- Medium: 10
 
 ### Google
 
 - **Type**: commercial
-- **Models**: 1
-- **Evidence Records**: 30
-- **Techniques Covered**: 22
+- **Source Documents**: 5
+- **Techniques Detected**: 23
 
-**Implementation Ratings**:
-- High: 6
-- Medium: 24
-
-**Evidence Quality**:
-- Primary: 22
-- Benchmarked: 3
-- Claimed: 5
+**Detection Confidence**:
+- High: 39
+- Medium: 5
 
 ### Meta
 
 - **Type**: commercial
-- **Models**: 1
-- **Evidence Records**: 33
-- **Techniques Covered**: 28
+- **Source Documents**: 4
+- **Techniques Detected**: 25
 
-**Implementation Ratings**:
-- High: 10
-- Medium: 22
-- Low: 1
-
-**Evidence Quality**:
-- Primary: 27
-- Benchmarked: 1
-- Claimed: 5
+**Detection Confidence**:
+- High: 33
+- Medium: 19
 
 ### Amazon
 
 - **Type**: commercial
-- **Models**: 1
-- **Evidence Records**: 24
-- **Techniques Covered**: 21
+- **Source Documents**: 2
+- **Techniques Detected**: 3
 
-**Implementation Ratings**:
-- High: 6
-- Medium: 13
-- Low: 5
+**Detection Confidence**:
+- High: 1
+- Medium: 2
 
-**Evidence Quality**:
-- Primary: 21
-- Benchmarked: 1
-- Claimed: 2
+### Microsoft
+
+- **Type**: commercial
+- **Source Documents**: 2
+- **Techniques Detected**: 22
+
+**Detection Confidence**:
+- High: 13
+- Medium: 18
+
+### DeepSeek
+
+- **Type**: commercial
+- **Source Documents**: 3
+- **Techniques Detected**: 18
+
+**Detection Confidence**:
+- High: 17
+- Medium: 7
+
+### xAI
+
+- **Type**: commercial
+- **Source Documents**: 4
+- **Techniques Detected**: 12
+
+**Detection Confidence**:
+- High: 14
+- Medium: 2
+
+### Cohere
+
+- **Type**: commercial
+- **Source Documents**: 2
+- **Techniques Detected**: 21
+
+**Detection Confidence**:
+- High: 23
+- Medium: 5
+
+### Mistral AI
+
+- **Type**: commercial
+- **Source Documents**: 4
+- **Techniques Detected**: 4
+
+**Detection Confidence**:
+- High: 3
+- Medium: 1
+
+### Alibaba
+
+- **Type**: commercial
+- **Source Documents**: 4
+- **Techniques Detected**: 20
+
+**Detection Confidence**:
+- High: 15
+- Medium: 9
+
+### Nvidia
+
+- **Type**: commercial
+- **Source Documents**: 1
+- **Techniques Detected**: 14
+
+**Detection Confidence**:
+- High: 11
+- Medium: 3
+
+### TII
+
+- **Type**: academic
+- **Source Documents**: 3
+- **Techniques Detected**: 0
 
 ## 📋 Technique Coverage Matrix
 
 | Technique | OpenAI | Anthropic | Google | Meta | Amazon |
 |-----------|--------|-----------|---------|------|---------|
-| Academic Partnerships | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Adversarial Training | 🟡 Med | 🟡 Med | 🟡 Med | — | — |
-| Audit Logging | 🟡 Med | 🟡 Med | 🟡 Med | 🟡 Med | ✅ High |
-| Bias Detection in Training Data | 🟡 Med | — | — | 🟡 Med | 🟠 Low |
-| Capability Threshold Monitoring | ✅ High | ✅ High | 🟡 Med | 🟡 Med | — |
-| Configurable Safety Policies | 🟡 Med | 🟡 Med | 🟡 Med | 🟡 Med | ✅ High |
-| Constitutional AI / Self-Critique | — | ✅ High | 🟡 Med | — | — |
-| Contextual Safety Assessment | 🟡 Med | ✅ High | 🟡 Med | 🟡 Med | — |
-| Copyright Content Filtering | ✅ High | — | — | 🟡 Med | 🟠 Low |
-| CSAM Detection & Removal | ✅ High | — | 🟡 Med | 🟡 Med | 🟠 Low |
-| Incident Reporting Systems | ✅ High | ✅ High | — | — | 🟡 Med |
-| Input Content Classification | ✅ High | 🟡 Med | 🟡 Med | 🟡 Med | 🟡 Med |
-| Model Cards & Technical Specs | ✅ High | 🟡 Med | 🟡 Med | 🟡 Med | 🟡 Med |
-| Multi-stage Safety Pipeline | ✅ High | ✅ High | 🟡 Med | 🟡 Med | 🟡 Med |
-| Output Content Filtering | ✅ High | — | 🟡 Med | 🟡 Med | 🟡 Med |
-| PII Detection & Redaction | 🟡 Med | 🟡 Med | 🟡 Med | 🟡 Med | ✅ High |
-| PII Reduction | ✅ High | 🟡 Med | — | — | 🟡 Med |
-| Policy & Compliance Documentation | ✅ High | ✅ High | — | 🟡 Med | 🟡 Med |
-| Prompt Injection Protection | 🟡 Med | — | 🟡 Med | 🟡 Med | — |
-| Real-time Safety Monitoring | ✅ High | 🟡 Med | 🟡 Med | 🟡 Med | — |
-| Red Team Data Integration | ✅ High | ✅ High | 🟡 Med | — | — |
-| Red Team Exercises | ✅ High | ✅ High | 🟡 Med | 🟡 Med | — |
-| Regulatory Compliance Frameworks | ✅ High | 🟡 Med | ✅ High | 🟠 Low | 🟡 Med |
-| Reinforcement Learning from Human Feedback | — | ✅ High | 🟡 Med | ✅ High | 🟠 Low |
-| Independent Safety Advisory | ✅ High | ✅ High | — | — | — |
-| Comprehensive Safety Documentation | ✅ High | ✅ High | — | 🟡 Med | 🟡 Med |
-| Safety Research Publications | ✅ High | ✅ High | — | ✅ High | — |
-| Safety Reward Modeling | — | 🟡 Med | 🟡 Med | — | — |
-| Training Data Filtering | ✅ High | 🟡 Med | 🟡 Med | ✅ High | 🟠 Low |
-| Usage Monitoring & Analytics | ✅ High | 🟡 Med | — | — | ✅ High |
-| Watermarking Technology | — | 🟡 Med | ✅ High | — | — |
+| Access Control Documentation | 🟡 Med | 🟡 Med | — | 🟡 Med | — |
+| Adversarial Training | — | — | — | — | — |
+| Automated Red Teaming | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Dataset Auditing & Representat | — | 🟡 Med | — | — | — |
+| Bias Mitigation (Post-Training | 🟡 Med | ✅ High | — | ✅ High | — |
+| Capability Threshold Monitorin | ✅ High | ✅ High | ✅ High | ✅ High | 🟡 Med |
+| Circuit Breakers / Kill Switch | 🟡 Med | — | — | — | — |
+| Community-Based Evaluation | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Configurable Safety Policies | ✅ High | — | ✅ High | ✅ High | — |
+| Constitutional AI / Self-Criti | — | — | — | 🟡 Med | — |
+| Contextual Safety Assessment | 🟡 Med | ✅ High | ✅ High | ✅ High | — |
+| Copyright Content Filtering | ✅ High | — | — | — | — |
+| CSAM Detection & Removal | ✅ High | — | — | ✅ High | — |
+| Enterprise Integration Safety | — | — | — | — | — |
+| Regulatory Compliance | — | — | — | — | — |
+| Hallucination Detection & Grou | ✅ High | 🟡 Med | ✅ High | — | — |
+| Incident Reporting Systems | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
+| Input Guardrails | ✅ High | 🟡 Med | ✅ High | ✅ High | — |
+| Machine Unlearning | — | — | ✅ High | — | — |
+| Multimodal Safety Alignment | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Multi-stage Safety Pipeline | 🟡 Med | ✅ High | ✅ High | ✅ High | — |
+| Observability & Monitoring | — | — | — | — | — |
+| Output Content Filtering | ✅ High | ✅ High | ✅ High | ✅ High | 🟡 Med |
+| PII Detection & Redaction | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Jailbreak & Injection Defense | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| RAG Guardrails | — | — | 🟡 Med | ✅ High | — |
+| Red Team Data Integration | ✅ High | — | — | — | — |
+| Red Team Exercises | 🟡 Med | ✅ High | ✅ High | ✅ High | — |
+| Refusal / Abstention | ✅ High | ✅ High | — | — | — |
+| Responsible Release Protocols | — | ✅ High | — | — | — |
+| Reinforcement Learning from Hu | — | ✅ High | ✅ High | ✅ High | — |
+| Independent Safety Advisory | ✅ High | — | — | — | — |
+| Safety Benchmarking | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Safety Reward Modeling | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Data Sovereignty Controls | — | — | — | ✅ High | — |
+| Stakeholder Engagement | — | — | — | — | — |
+| System Prompts / Metaprompts | 🟡 Med | ✅ High | ✅ High | 🟡 Med | — |
+| Training Data Filtering | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Transparency Artifacts | ✅ High | ✅ High | ✅ High | — | — |
+| Provenance & Watermarking | 🟡 Med | — | 🟡 Med | 🟡 Med | — |
 
-## 🔄 Recent Updates
+## 📚 Recent Source Documents
 
-| Provider | Technique | Last Reviewed | Rating |
-|----------|-----------|---------------|--------|
-| OpenAI | Training Data Filtering | 2025-07-10 | high |
-| OpenAI | CSAM Detection & Removal | 2025-07-10 | high |
-| OpenAI | Capability Threshold Monitoring | 2025-07-10 | high |
-| OpenAI | Red Team Exercises | 2025-07-10 | high |
-| OpenAI | Regulatory Compliance Frameworks | 2025-07-10 | high |
-| OpenAI | Academic Partnerships | 2025-07-10 | high |
-| OpenAI | Comprehensive Safety Documentation | 2025-07-10 | high |
-| OpenAI | Model Cards & Technical Specs | 2025-07-10 | high |
-| OpenAI | Safety Research Publications | 2025-07-10 | high |
-| OpenAI | Policy & Compliance Documentation | 2025-07-10 | high |
+| Provider | Document | Type | Date Added |
+|----------|----------|------|------------|
+| Cohere | Command A Technical Report | Technical Report | 2026-02-06 |
+| Google | Gemini 3 Pro - Model Card | Model Card | 2026-02-06 |
+| Google | Gemini 2.5 Flash-Lite - Model Card | Model Card | 2026-02-06 |
+| xAI | Grok 4 Model Card | Model Card | 2026-02-06 |
+| Meta | Llama 3 & 4 Safety Protections | Website | 2026-02-06 |
+| Mistral AI | Mistral Guardrailing Capabilities | Documentation | 2026-02-06 |
+| Alibaba | Qwen3Guard Technical Report | Technical Report | 2026-02-06 |
+| Google | Gemini 3 Technical Report | Technical Report | 2026-01-22 |
+| Anthropic | Claude Opus 4.5 System Card | System Card | 2026-01-20 |
+| OpenAI | GPT-5 System Card | System Card | 2026-01-15 |
