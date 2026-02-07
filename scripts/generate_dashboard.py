@@ -144,99 +144,6 @@ class DashboardGenerator:
             return "High"
         return str(value)
 
-    def create_timeline_chart(self):
-        """Create source addition timeline"""
-        # Prepare timeline data
-        timeline_data = []
-
-        for source in self.sources:
-            if source.get('date_added'):
-                timeline_data.append({
-                    'Date': source['date_added'],
-                    'Provider': self.providers.get(source.get('provider'), {}).get('name', source.get('provider', 'Unknown')),
-                    'Title': source.get('title', 'Unknown')[:40],
-                    'Type': source.get('type', 'Unknown')
-                })
-
-        if not timeline_data:
-            return None
-
-        df = pd.DataFrame(timeline_data)
-        df['Date'] = pd.to_datetime(df['Date'])
-        df = df.sort_values('Date')
-
-        # Create timeline
-        fig = px.scatter(df, x='Date', y='Provider', color='Type',
-                        hover_data=['Title'],
-                        title='Source Document Timeline',
-                        height=400)
-
-        fig.update_traces(marker=dict(size=12))
-        fig.update_layout(
-            xaxis_title="Date Added",
-            yaxis_title="Provider"
-        )
-
-        return fig
-
-    def create_confidence_distribution(self):
-        """Create detection confidence distribution chart"""
-        # Count confidences by provider
-        confidence_counts = {}
-
-        for provider_id in self.providers:
-            counts = {'High': 0, 'Medium': 0, 'Low': 0}
-
-            for tech_id, confidences in self.provider_techniques[provider_id].items():
-                for conf in confidences:
-                    if conf in counts:
-                        counts[conf] += 1
-
-            if sum(counts.values()) > 0:
-                confidence_counts[self.providers[provider_id]['name']] = counts
-
-        # Create stacked bar chart
-        providers = list(confidence_counts.keys())
-        high_counts = [confidence_counts[p]['High'] for p in providers]
-        medium_counts = [confidence_counts[p]['Medium'] for p in providers]
-        low_counts = [confidence_counts[p]['Low'] for p in providers]
-
-        fig = go.Figure(data=[
-            go.Bar(name='High', x=providers, y=high_counts, marker_color='#4ecdc4'),
-            go.Bar(name='Medium', x=providers, y=medium_counts, marker_color='#ffd93d'),
-            go.Bar(name='Low', x=providers, y=low_counts, marker_color='#ff6b6b')
-        ])
-
-        fig.update_layout(
-            barmode='stack',
-            title='Detection Confidence Distribution by Provider',
-            xaxis_title='Provider',
-            yaxis_title='Number of Detections',
-            height=400
-        )
-
-        return fig
-
-    def create_source_type_chart(self):
-        """Create source type distribution"""
-        type_counts = defaultdict(int)
-        for source in self.sources:
-            source_type = source.get('type', 'Unknown')
-            type_counts[source_type] += 1
-
-        fig = go.Figure(data=[go.Pie(
-            labels=list(type_counts.keys()),
-            values=list(type_counts.values()),
-            hole=.3,
-            marker_colors=['#4ecdc4', '#6c5ce7', '#ffd93d', '#ff6b6b', '#a29bfe', '#fd79a8', '#fdcb6e']
-        )])
-
-        fig.update_layout(
-            title='Source Document Types',
-            height=400
-        )
-
-        return fig
 
     def create_risk_coverage_chart(self):
         """Create risk area coverage chart"""
@@ -272,34 +179,9 @@ class DashboardGenerator:
 
     def generate_html_dashboard(self):
         """Generate complete HTML dashboard"""
-        # Create all charts
+        # Create charts
         coverage_heatmap = self.create_coverage_heatmap()
-        timeline = self.create_timeline_chart()
-        confidence_dist = self.create_confidence_distribution()
-        source_types = self.create_source_type_chart()
         risk_coverage = self.create_risk_coverage_chart()
-
-        # Convert to HTML
-        charts_html = []
-
-        if coverage_heatmap:
-            charts_html.append(coverage_heatmap.to_html(include_plotlyjs=False, div_id="coverage-heatmap"))
-
-        if timeline:
-            charts_html.append(timeline.to_html(include_plotlyjs=False, div_id="timeline"))
-
-        charts_html.append(f'''
-        <div class="row">
-            <div class="col-md-6">
-                {confidence_dist.to_html(include_plotlyjs=False, div_id="confidence-dist")}
-            </div>
-            <div class="col-md-6">
-                {source_types.to_html(include_plotlyjs=False, div_id="source-types")}
-            </div>
-        </div>
-        ''')
-
-        charts_html.append(risk_coverage.to_html(include_plotlyjs=False, div_id="risk-coverage"))
 
         # Generate stats
         total_sources = len(self.sources)
@@ -395,22 +277,15 @@ class DashboardGenerator:
         </div>
 
         <div class="chart-container">
-            <h2>Coverage Heatmap</h2>
-            <p>Safety technique detection across providers via NLU analysis. Colors indicate detection confidence.</p>
-            {charts_html[0] if charts_html else ''}
-        </div>
-
-        {f'<div class="chart-container"><h2>Source Document Timeline</h2>{charts_html[1]}</div>' if len(charts_html) > 1 and timeline else ''}
-
-        <div class="chart-container">
-            <h2>Detection Confidence & Source Types</h2>
-            {charts_html[2] if len(charts_html) > 2 else charts_html[1] if len(charts_html) > 1 else ''}
+            <h2>Safety Technique Coverage by Provider</h2>
+            <p>This heatmap shows which safety techniques have been detected in each provider's documentation. Colors indicate detection confidence based on NLU analysis.</p>
+            {coverage_heatmap.to_html(include_plotlyjs=False, div_id="coverage-heatmap")}
         </div>
 
         <div class="chart-container">
             <h2>Risk Area Coverage</h2>
-            <p>Number of technique detections addressing each risk area.</p>
-            {charts_html[-1]}
+            <p>Number of safety technique detections addressing each risk area across all providers.</p>
+            {risk_coverage.to_html(include_plotlyjs=False, div_id="risk-coverage")}
         </div>
 
         <div class="row mt-4">
@@ -418,14 +293,23 @@ class DashboardGenerator:
                 <div class="card">
                     <div class="card-body">
                         <h3>About This Dashboard</h3>
-                        <p>This dashboard visualizes data from the LLM Safety Mechanisms dataset, which uses NLU analysis to detect safety technique implementations across {total_sources} source documents from major language model providers.</p>
-                        <p><strong>Detection Confidence:</strong></p>
+                        <p>This dashboard tracks safety mechanism implementations across {total_providers} major LLM providers by analyzing {total_sources} source documents (system cards, technical reports, model cards, and documentation).</p>
+
+                        <p><strong>What This Shows:</strong></p>
                         <ul>
-                            <li><strong>High:</strong> Strong evidence with implementation-specific language</li>
-                            <li><strong>Medium:</strong> Moderate evidence of technique usage</li>
-                            <li><strong>Low:</strong> Weak or indirect mentions</li>
+                            <li><strong>Coverage Heatmap:</strong> Which providers implement which safety techniques based on their public documentation</li>
+                            <li><strong>Risk Area Coverage:</strong> How well different categories of AI risk are addressed across the industry</li>
                         </ul>
-                        <p><strong>Methodology:</strong> Uses a two-stage NLU pipeline with semantic retrieval (all-mpnet-base-v2) and entailment verification (cross-encoder/nli-deberta-v3-small), enhanced with quality filters to avoid false positives.</p>
+
+                        <p><strong>Methodology:</strong> Safety techniques are detected using a two-stage NLU pipeline:</p>
+                        <ol>
+                            <li><strong>Semantic Retrieval:</strong> Identifies candidate text passages using sentence embeddings (all-mpnet-base-v2)</li>
+                            <li><strong>Entailment Verification:</strong> Validates technique presence using cross-encoder verification (nli-deberta-v3-small)</li>
+                            <li><strong>Quality Filtering:</strong> Removes glossary definitions, "future work" mentions, and other false positives</li>
+                        </ol>
+
+                        <p><strong>Confidence Levels:</strong> High confidence indicates strong implementation evidence with specific technical language; Medium indicates clear mentions; Low indicates indirect or weak references.</p>
+
                         <p>
                             <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms" class="btn btn-primary">View on GitHub</a>
                             <a href="SUMMARY.md" class="btn btn-secondary">View Text Summary</a>
