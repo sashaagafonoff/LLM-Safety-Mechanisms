@@ -130,7 +130,15 @@ def ingest_all(target_id=None):
             continue
 
         uri = fix_github_url(original_uri)
-        
+
+        # Check if flat text file already exists
+        output_filename = f"{sanitize_filename(doc_id)}.txt"
+        output_path = OUTPUT_DIR / output_filename
+
+        if output_path.exists():
+            logger.info(f"Skipping {doc_id}: Flat text file already exists (preserving manual edits)")
+            continue
+
         try:
             logger.info(f"Processing: {doc_id}...")
 
