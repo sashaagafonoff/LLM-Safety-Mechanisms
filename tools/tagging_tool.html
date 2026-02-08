@@ -429,32 +429,66 @@
 
   .tech-item.tagged .tech-name { color: var(--text); }
 
-  .tech-evidence-preview {
+  .tech-evidence-list {
+    margin-top: 3px;
+  }
+
+  .ev-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 1px 0;
+    min-height: 16px;
+  }
+
+  .ev-link {
     font-size: 10px;
     color: var(--text-faint);
-    margin-top: 2px;
     line-height: 1.3;
+    font-family: 'Overpass Mono', monospace;
+    flex: 1;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-family: 'Overpass Mono', monospace;
   }
 
-  .tech-evidence-preview.has-evidence { color: var(--tagged); opacity: 0.7; }
-  .tech-evidence-preview.ev-missing { color: var(--warning); opacity: 0.85; }
-  .tech-evidence-preview.ev-manual { color: var(--text-faint); }
+  .ev-link.has-evidence { color: var(--tagged); opacity: 0.7; }
+  .ev-link.ev-missing { color: var(--warning); opacity: 0.85; }
+  .ev-link.ev-manual { color: var(--text-faint); }
 
-  .tech-item.tagged.ev-missing-item {
-    background: rgba(240, 196, 90, 0.06);
-  }
-
-  .tech-evidence-preview.clickable {
+  .ev-link.clickable {
     cursor: pointer;
   }
 
-  .tech-evidence-preview.clickable:hover {
+  .ev-link.clickable:hover {
     opacity: 1;
     text-decoration: underline;
+  }
+
+  .ev-remove {
+    font-size: 9px;
+    color: var(--text-faint);
+    cursor: pointer;
+    padding: 0 3px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    line-height: 1.4;
+    opacity: 0;
+    transition: opacity 0.1s, color 0.1s, background 0.1s;
+  }
+
+  .ev-row:hover .ev-remove {
+    opacity: 1;
+  }
+
+  .ev-remove:hover {
+    color: var(--danger);
+    background: rgba(224, 99, 86, 0.15);
+  }
+
+  .tech-item.tagged.ev-missing-item {
+    background: rgba(240, 196, 90, 0.06);
   }
 
   /* Scroll-target pulse on evidence highlight */
@@ -834,7 +868,8 @@
   // Flag for save state
   let dirtyCount = 0;  // unsaved changes
 
-  // Evidence match tracking: techId → 'matched' | 'unmatched' | 'manual' | null
+  // Evidence match tracking per technique per snippet:
+  // techId → { overall: 'matched'|'unmatched'|'manual', snippets: [{index, state, text}] }
   const evidenceMatchState = new Map();
 
   // File handle for File System Access API
@@ -996,11 +1031,14 @@
     const existing = tagState[currentDocId].findIndex(t => t.techniqueId === techId);
 
     if (existing >= 0 && pendingSelection) {
-      // Already tagged + text selected → update evidence
-      tagState[currentDocId][existing].evidence = [pendingSelection.text];
-      flash(`↻ Updated evidence for ${techName}`, 'tag');
+      // Already tagged + text selected → append evidence snippet
+      const entry = tagState[currentDocId][existing];
+      // Remove "Manual annotation" placeholder if present
+      entry.evidence = entry.evidence.filter(e => e !== 'Manual annotation');
+      entry.evidence.push(pendingSelection.text);
+      flash(`+ Added evidence for ${techName}`, 'tag');
     } else if (existing >= 0) {
-      // Already tagged + no selection → untag
+      // Already tagged + no selection → untag entirely
       tagState[currentDocId].splice(existing, 1);
       flash(`− ${techName}`, 'untag');
     } else {
@@ -1015,6 +1053,29 @@
     }
 
     pendingSelection = null;
+    dirtyCount++;
+    updateVisuals();
+  }
+
+  function removeEvidence(techId, snippetIndex) {
+    if (!currentDocId) return;
+    const tags = tagState[currentDocId] || [];
+    const entry = tags.find(t => t.techniqueId === techId);
+    if (!entry) return;
+
+    const techName = techLookup.get(techId)?.name || techId;
+
+    if (entry.evidence.length <= 1) {
+      // Last snippet — remove the whole tag
+      const idx = tags.indexOf(entry);
+      tags.splice(idx, 1);
+      flash(`− ${techName}`, 'untag');
+    } else {
+      // Remove just this snippet
+      entry.evidence.splice(snippetIndex, 1);
+      flash(`− Removed passage from ${techName}`, 'untag');
+    }
+
     dirtyCount++;
     updateVisuals();
   }
@@ -1046,7 +1107,7 @@
           <div class="tech-check">✓</div>
           <div class="tech-body">
             <div class="tech-name">${t.name}</div>
-            <div class="tech-evidence-preview" data-tech-ev="${t.id}"></div>
+            <div class="tech-evidence-list" data-tech-ev="${t.id}"></div>
           </div>
           <div class="tech-info-btn" data-info="${t.id}" title="View technique details">ⓘ</div>
         `;
@@ -1057,14 +1118,16 @@
           toggleTech(t.id);
         });
 
-        // Name click — if tagged with evidence, scroll to it; otherwise toggle
+        // Name click — if tagged with evidence, scroll to first matched snippet; otherwise toggle
         item.querySelector('.tech-name').addEventListener('click', (e) => {
           e.stopPropagation();
           if (isTagged(t.id) && !pendingSelection) {
-            const state = evidenceMatchState.get(t.id);
-            if (state === 'matched') {
-              scrollToEvidence(t.id);
-            } else if (state === 'unmatched') {
+            const matchInfo = evidenceMatchState.get(t.id);
+            if (matchInfo?.overall === 'matched') {
+              // Scroll to first matched snippet
+              const firstMatched = matchInfo.snippets.find(s => s.state === 'matched');
+              if (firstMatched) scrollToEvidence(t.id, firstMatched.index);
+            } else if (matchInfo?.overall === 'unmatched') {
               flash(`⚠ Evidence text not found in document`, 'error');
             }
             // 'manual' — do nothing on name click (use checkbox to untag)
@@ -1278,22 +1341,28 @@
 
     if (!currentDocText) {
       content.innerHTML = '';
-      // Still classify tags for sidebar display
       tags.forEach(tag => {
         const snippets = (tag.evidence || []);
-        const hasRealEvidence = snippets.some(s => s !== 'Manual annotation');
-        if (!hasRealEvidence) {
-          evidenceMatchState.set(tag.techniqueId, 'manual');
-        } else {
-          evidenceMatchState.set(tag.techniqueId, 'unmatched');
-        }
+        const snippetDetails = [];
+        snippets.forEach((s, i) => {
+          snippetDetails.push({
+            index: i,
+            state: s === 'Manual annotation' ? 'manual' : 'unmatched',
+            text: s
+          });
+        });
+        const hasReal = snippetDetails.some(s => s.state !== 'manual');
+        evidenceMatchState.set(tag.techniqueId, {
+          overall: hasReal ? 'unmatched' : (snippetDetails.length > 0 ? 'manual' : 'manual'),
+          snippets: snippetDetails
+        });
       });
-      console.log('No document text loaded, all real evidence marked unmatched');
+      console.log('No document text loaded');
       console.groupEnd();
       return;
     }
 
-    // Collect all evidence ranges and track match results
+    // Collect all evidence ranges, tracking snippet index for unique IDs
     const ranges = [];
     tags.forEach(tag => {
       const tech = techLookup.get(tag.techniqueId);
@@ -1303,37 +1372,43 @@
       }
 
       const snippets = (tag.evidence || []);
-      const hasRealEvidence = snippets.some(s => s !== 'Manual annotation');
+      const snippetDetails = [];
 
-      if (!hasRealEvidence) {
-        evidenceMatchState.set(tag.techniqueId, 'manual');
-        console.log(`  ○ ${tech.name}: manual`);
-        return;
-      }
-
-      let anyMatched = false;
-      snippets.forEach(snippet => {
-        if (snippet === 'Manual annotation') return;
+      snippets.forEach((snippet, sIdx) => {
+        if (snippet === 'Manual annotation') {
+          snippetDetails.push({ index: sIdx, state: 'manual', text: snippet });
+          console.log(`  ○ ${tech.name}[${sIdx}]: manual`);
+          return;
+        }
         const match = findEvidence(currentDocText, snippet);
         if (match) {
-          anyMatched = true;
+          snippetDetails.push({ index: sIdx, state: 'matched', text: snippet });
           ranges.push({
             start: match.start,
             end: match.end,
             techId: tag.techniqueId,
             techName: tech.name,
+            snippetIndex: sIdx,
             catName: catLookup.get(tech.categoryId)?.name || ''
           });
-          console.log(`  ● ${tech.name}: MATCHED at ${match.start}-${match.end}`);
+          console.log(`  ● ${tech.name}[${sIdx}]: MATCHED at ${match.start}-${match.end}`);
         } else {
-          console.log(`  ⚠ ${tech.name}: NOT FOUND — snippet starts: "${snippet.substring(0, 60)}…"`);
+          snippetDetails.push({ index: sIdx, state: 'unmatched', text: snippet });
+          console.log(`  ⚠ ${tech.name}[${sIdx}]: NOT FOUND — "${snippet.substring(0, 60)}…"`);
         }
       });
 
-      evidenceMatchState.set(tag.techniqueId, anyMatched ? 'matched' : 'unmatched');
+      const anyMatched = snippetDetails.some(s => s.state === 'matched');
+      const anyReal = snippetDetails.some(s => s.state !== 'manual');
+      evidenceMatchState.set(tag.techniqueId, {
+        overall: anyMatched ? 'matched' : (anyReal ? 'unmatched' : 'manual'),
+        snippets: snippetDetails
+      });
     });
 
-    console.log('Evidence match summary:', Object.fromEntries(evidenceMatchState));
+    console.log('Evidence match summary:', Object.fromEntries(
+      [...evidenceMatchState].map(([k, v]) => [k, v.overall + ` (${v.snippets.length} snippets)`])
+    ));
     console.groupEnd();
 
     // Sort ranges by start position
@@ -1343,21 +1418,22 @@
     let html = '';
     let cursor = 0;
 
-    // Merge overlapping ranges
+    // Merge overlapping ranges — keep all snippet references
     const merged = [];
     ranges.forEach(r => {
       if (merged.length > 0) {
         const last = merged[merged.length - 1];
         if (r.start < last.end) {
           last.end = Math.max(last.end, r.end);
-          if (!last.techNames) last.techNames = [last.techName];
-          if (!last.techIds) last.techIds = [last.techId];
-          last.techNames.push(r.techName);
-          last.techIds.push(r.techId);
+          last.refs.push({ techId: r.techId, techName: r.techName, snippetIndex: r.snippetIndex });
           return;
         }
       }
-      merged.push({ ...r, techNames: [r.techName], techIds: [r.techId] });
+      merged.push({
+        start: r.start,
+        end: r.end,
+        refs: [{ techId: r.techId, techName: r.techName, snippetIndex: r.snippetIndex }]
+      });
     });
 
     merged.forEach(r => {
@@ -1365,14 +1441,16 @@
         html += escapeAndFormat(currentDocText.slice(cursor, r.start));
       }
 
-      const labelHtml = r.techNames.map((name, i) =>
-        `<span class="ev-tag" data-tech-id="${r.techIds[i]}">${name}</span>`
+      // Build label tags and collect IDs
+      const labelHtml = r.refs.map(ref =>
+        `<span class="ev-tag" data-tech-id="${ref.techId}" data-snippet-idx="${ref.snippetIndex}">${ref.techName}</span>`
       ).join('');
 
-      // Add id for each techId so we can scroll to it
-      const idAttrs = r.techIds.map(id => `ev-${id}`).join(' ');
+      // Use first ref for primary ID, add data attrs for all
+      const primaryId = `ev-${r.refs[0].techId}-${r.refs[0].snippetIndex}`;
+      const allIds = r.refs.map(ref => `ev-${ref.techId}-${ref.snippetIndex}`).join(' ');
 
-      html += `<span class="evidence-highlight" id="ev-${r.techIds[0]}" data-tech-ids="${r.techIds.join(',')}">`
+      html += `<span class="evidence-highlight" id="${primaryId}" data-ev-ids="${allIds}" data-tech-ids="${r.refs.map(ref => ref.techId).join(',')}">`
            +  escapeHtml(currentDocText.slice(r.start, r.end))
            +  labelHtml
            +  `</span>`;
@@ -1385,6 +1463,15 @@
     }
 
     content.innerHTML = html;
+
+    // Also set IDs on merged highlights for non-primary refs (so each snippet has a scroll target)
+    merged.forEach(r => {
+      if (r.refs.length > 1) {
+        const el = document.getElementById(`ev-${r.refs[0].techId}-${r.refs[0].snippetIndex}`);
+        // Additional refs that share this highlight can find it via data-ev-ids
+        // We don't create duplicate elements, scrollToEvidence will search by data attr
+      }
+    });
 
     // Click on evidence tags in document → flash sidebar item
     content.querySelectorAll('.ev-tag').forEach(tag => {
@@ -1400,7 +1487,6 @@
   }
 
   function escapeAndFormat(text) {
-    // Escape HTML and convert double newlines to paragraph breaks
     let html = escapeHtml(text);
     html = html.replace(/\n{2,}/g, '</p><p style="margin-top:12px;">');
     html = html.replace(/\n/g, '<br>');
@@ -1410,40 +1496,38 @@
   // ========================================================================
   // SCROLL NAVIGATION
   // ========================================================================
-  function scrollToEvidence(techId) {
-    const state = evidenceMatchState.get(techId);
-    if (state === 'matched') {
-      const el = document.getElementById(`ev-${techId}`);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  function scrollToEvidence(techId, snippetIndex) {
+    // Try exact ID first
+    let el = document.getElementById(`ev-${techId}-${snippetIndex}`);
 
-        // Pulse animation
-        el.classList.remove('pulse');
-        void el.offsetWidth;
-        el.classList.add('pulse');
-
-        // Select the evidence text (excluding the tag labels)
-        try {
-          const sel = window.getSelection();
-          sel.removeAllRanges();
-          const range = document.createRange();
-
-          // Select only the text nodes, not the ev-tag spans
-          const textNodes = [];
-          el.childNodes.forEach(node => {
-            if (node.nodeType === Node.TEXT_NODE) textNodes.push(node);
-          });
-
-          if (textNodes.length > 0) {
-            range.setStart(textNodes[0], 0);
-            range.setEnd(textNodes[textNodes.length - 1], textNodes[textNodes.length - 1].length);
-            sel.addRange(range);
-          }
-        } catch(e) { /* selection not critical */ }
-        return;
-      }
+    // If not found as primary ID, search data-ev-ids attribute
+    if (!el) {
+      const target = `ev-${techId}-${snippetIndex}`;
+      el = document.querySelector(`[data-ev-ids*="${target}"]`);
     }
-    if (state === 'unmatched') {
+
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.remove('pulse');
+      void el.offsetWidth;
+      el.classList.add('pulse');
+
+      // Select the evidence text
+      try {
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        const range = document.createRange();
+        const textNodes = [];
+        el.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) textNodes.push(node);
+        });
+        if (textNodes.length > 0) {
+          range.setStart(textNodes[0], 0);
+          range.setEnd(textNodes[textNodes.length - 1], textNodes[textNodes.length - 1].length);
+          sel.addRange(range);
+        }
+      } catch(e) { /* not critical */ }
+    } else {
       flash(`⚠ Evidence text not found in document`, 'error');
     }
   }
@@ -1480,7 +1564,7 @@
 
   // Hide hint when clicking outside doc or when selection clears
   document.addEventListener('mousedown', (e) => {
-    if (!e.target.closest('.doc-content') && !e.target.closest('.tech-item')) {
+    if (!e.target.closest('.doc-content') && !e.target.closest('.tech-item') && !e.target.closest('.ev-row')) {
       pendingSelection = null;
       selHint.classList.remove('visible');
     }
@@ -1608,53 +1692,65 @@
       const tagged = taggedIds.has(techId);
       item.classList.toggle('tagged', tagged);
 
-      const matchState = evidenceMatchState.get(techId) || null;
-      item.classList.toggle('ev-missing-item', tagged && matchState === 'unmatched');
+      const matchInfo = evidenceMatchState.get(techId);
+      const overall = matchInfo?.overall || null;
+      item.classList.toggle('ev-missing-item', tagged && overall === 'unmatched');
 
-      // Evidence preview line
-      const evEl = item.querySelector('.tech-evidence-preview');
-      // Remove old click listener by replacing node
-      const newEvEl = evEl.cloneNode(true);
-      evEl.parentNode.replaceChild(newEvEl, evEl);
+      // Evidence list
+      const listEl = item.querySelector('.tech-evidence-list');
+      listEl.innerHTML = '';
 
-      if (tagged && currentDocId) {
-        const entry = tags.find(t => t.techniqueId === techId);
-        const evText = entry?.evidence?.[0] || '';
+      if (tagged && currentDocId && matchInfo && matchInfo.snippets.length > 0) {
+        listEl.style.display = '';
 
-        newEvEl.style.display = '';
-        newEvEl.className = 'tech-evidence-preview';
+        matchInfo.snippets.forEach((snip) => {
+          const row = document.createElement('div');
+          row.className = 'ev-row';
 
-        if (matchState === 'matched') {
-          // Evidence found in document — clickable to scroll
-          const preview = evText.substring(0, 55) + (evText.length > 55 ? '…' : '');
-          newEvEl.textContent = '● ' + preview;
-          newEvEl.classList.add('has-evidence', 'clickable');
-          newEvEl.addEventListener('click', (e) => {
+          const link = document.createElement('span');
+          link.className = 'ev-link';
+
+          const preview = snip.text === 'Manual annotation'
+            ? snip.text
+            : snip.text.substring(0, 50) + (snip.text.length > 50 ? '…' : '');
+
+          if (snip.state === 'matched') {
+            link.textContent = '● ' + preview;
+            link.classList.add('has-evidence', 'clickable');
+            link.addEventListener('click', (e) => {
+              e.stopPropagation();
+              scrollToEvidence(techId, snip.index);
+            });
+          } else if (snip.state === 'unmatched') {
+            link.textContent = '⚠ ' + preview;
+            link.classList.add('ev-missing');
+          } else {
+            link.textContent = '○ ' + preview;
+            link.classList.add('ev-manual');
+          }
+
+          const remove = document.createElement('span');
+          remove.className = 'ev-remove';
+          remove.textContent = '✕';
+          remove.title = 'Remove this passage';
+          remove.addEventListener('click', (e) => {
             e.stopPropagation();
-            scrollToEvidence(techId);
+            removeEvidence(techId, snip.index);
           });
-        } else if (matchState === 'unmatched') {
-          // Evidence text exists but not found in flat text
-          const preview = evText.substring(0, 45) + (evText.length > 45 ? '…' : '');
-          newEvEl.textContent = '⚠ not found: ' + preview;
-          newEvEl.classList.add('ev-missing');
-        } else if (matchState === 'manual') {
-          newEvEl.textContent = '○ manual annotation';
-          newEvEl.classList.add('ev-manual');
-        } else {
-          newEvEl.textContent = '';
-          newEvEl.style.display = 'none';
-        }
+
+          row.appendChild(link);
+          row.appendChild(remove);
+          listEl.appendChild(row);
+        });
       } else {
-        newEvEl.style.display = 'none';
-        newEvEl.className = 'tech-evidence-preview';
+        listEl.style.display = 'none';
       }
     });
 
     // Tag counter with match quality
-    const matched = tags.filter(t => evidenceMatchState.get(t.techniqueId) === 'matched').length;
-    const unmatched = tags.filter(t => evidenceMatchState.get(t.techniqueId) === 'unmatched').length;
-    const manual = tags.filter(t => evidenceMatchState.get(t.techniqueId) === 'manual').length;
+    const matched = tags.filter(t => evidenceMatchState.get(t.techniqueId)?.overall === 'matched').length;
+    const unmatched = tags.filter(t => evidenceMatchState.get(t.techniqueId)?.overall === 'unmatched').length;
+    const manual = tags.filter(t => evidenceMatchState.get(t.techniqueId)?.overall === 'manual').length;
 
     let counterHtml = `${tags.length}<span> / ${techniques.length}</span>`;
     if (tags.length > 0 && currentDocId) {
