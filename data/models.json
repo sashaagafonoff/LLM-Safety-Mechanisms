@@ -2,7 +2,7 @@
   "models": [
     {
       "id": "nova-pro",
-      "name": "Nova",
+      "family": "Nova",
       "provider": "amazon",
       "status": "active",
       "version": "Nova Pro",
@@ -10,7 +10,7 @@
     },
     {
       "id": "nova-lite",
-      "name": "Nova",
+      "family": "Nova",
       "provider": "amazon",
       "status": "active",
       "version": "Nova Lite",
@@ -18,7 +18,7 @@
     },
     {
       "id": "nova-micro",
-      "name": "Nova",
+      "family": "Nova",
       "provider": "amazon",
       "status": "active",
       "version": "Nova Micro",
@@ -26,7 +26,7 @@
     },
     {
       "id": "gpt-5.2",
-      "name": "GPT",
+      "family": "GPT",
       "provider": "openai",
       "status": "active",
       "version": "GPT-5.2",
@@ -34,7 +34,7 @@
     },
     {
       "id": "o3-pro",
-      "name": "o",
+      "family": "o",
       "provider": "openai",
       "status": "active",
       "version": "o3-pro",
@@ -42,7 +42,7 @@
     },
     {
       "id": "o3",
-      "name": "o",
+      "family": "o",
       "provider": "openai",
       "status": "active",
       "version": "o3",
@@ -50,15 +50,23 @@
     },
     {
       "id": "gpt-5-mini",
-      "name": "GPT",
+      "family": "GPT",
       "provider": "openai",
       "status": "active",
       "version": "GPT-5 mini",
       "notes": "<n/a>"
     },
     {
+      "id": "gpt-5-thinking",
+      "family": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5 Thinking",
+      "notes": "Reasoning-focused variant of GPT-5"
+    },
+    {
       "id": "o4-mini",
-      "name": "o",
+      "family": "o",
       "provider": "openai",
       "status": "active",
       "version": "o4-mini",
@@ -66,7 +74,7 @@
     },
     {
       "id": "gpt-oss-120b",
-      "name": "GPT",
+      "family": "GPT",
       "provider": "openai",
       "status": "active",
       "version": "GPT-oss-120b",
@@ -74,7 +82,7 @@
     },
     {
       "id": "claude-opus-4.5",
-      "name": "Claude",
+      "family": "Claude",
       "provider": "anthropic",
       "status": "active",
       "version": "Claude Opus 4.5",
@@ -82,7 +90,7 @@
     },
     {
       "id": "claude-sonnet-4.5",
-      "name": "Claude",
+      "family": "Claude",
       "provider": "anthropic",
       "status": "active",
       "version": "Claude Sonnet 4.5",
@@ -90,15 +98,31 @@
     },
     {
       "id": "claude-haiku-4.5",
-      "name": "Claude",
+      "family": "Claude",
       "provider": "anthropic",
       "status": "active",
       "version": "Claude Haiku 4.5",
       "notes": "Delivers near-frontier results at minimal latency and low price for everyday chat and document tasks"
     },
     {
+      "id": "claude-3-opus",
+      "family": "Claude",
+      "provider": "anthropic",
+      "status": "active",
+      "version": "Claude 3 Opus",
+      "notes": "Previous generation flagship model with strong reasoning capabilities"
+    },
+    {
+      "id": "claude-3-5-sonnet",
+      "family": "Claude",
+      "provider": "anthropic",
+      "status": "active",
+      "version": "Claude 3.5 Sonnet",
+      "notes": "Previous generation balanced model"
+    },
+    {
       "id": "gemini-3-pro",
-      "name": "Gemini",
+      "family": "Gemini",
       "provider": "google",
       "status": "active",
       "version": "Gemini 3 Pro",
@@ -106,7 +130,7 @@
     },
     {
       "id": "gemini-3-deep-think",
-      "name": "Gemini",
+      "family": "Gemini",
       "provider": "google",
       "status": "active",
       "version": "Gemini 3 Deep Think",
@@ -114,7 +138,7 @@
     },
     {
       "id": "gemini-3-flash",
-      "name": "Gemini",
+      "family": "Gemini",
       "provider": "google",
       "status": "active",
       "version": "Gemini 3 Flash",
@@ -122,15 +146,23 @@
     },
     {
       "id": "gemini-2.5-flash-lite",
-      "name": "Gemini",
+      "family": "Gemini",
       "provider": "google",
       "status": "active",
       "version": "Gemini 2.5 Flash-Lite",
       "notes": "Cost-effective model optimized for speed and efficiency, suitable for high-volume tasks"
     },
     {
+      "id": "gemini-1-5-pro",
+      "family": "Gemini",
+      "provider": "google",
+      "status": "active",
+      "version": "Gemini 1.5 Pro",
+      "notes": "Previous generation multimodal model with strong reasoning and long context support"
+    },
+    {
       "id": "llama-4-maverick",
-      "name": "Llama",
+      "family": "Llama",
       "provider": "meta",
       "status": "active",
       "version": "Llama 4 Maverick",
@@ -138,7 +170,7 @@
     },
     {
       "id": "llama-4-scout",
-      "name": "Llama",
+      "family": "Llama",
       "provider": "meta",
       "status": "active",
       "version": "Llama 4 Scout",
@@ -146,7 +178,7 @@
     },
     {
       "id": "llama-4-8b",
-      "name": "Llama",
+      "family": "Llama",
       "provider": "meta",
       "status": "active",
       "version": "Llama 4 8B",
@@ -154,15 +186,31 @@
     },
     {
       "id": "llama-4-17b",
-      "name": "Llama",
+      "family": "Llama",
       "provider": "meta",
       "status": "active",
       "version": "Llama 4 17B",
       "notes": "<n/a>"
     },
     {
+      "id": "llama-3-1-405b",
+      "family": "Llama",
+      "provider": "meta",
+      "status": "active",
+      "version": "Llama 3.1 405B",
+      "notes": "Previous generation flagship model with 405 billion parameters"
+    },
+    {
+      "id": "llama-3-70b",
+      "family": "Llama",
+      "provider": "meta",
+      "status": "active",
+      "version": "Llama 3 70B",
+      "notes": "Previous generation model with 70 billion parameters"
+    },
+    {
       "id": "mistral-large-3",
-      "name": "Mistral",
+      "family": "Mistral",
       "provider": "mistral",
       "status": "active",
       "version": "Mistral Large 3",
@@ -170,7 +218,7 @@
     },
     {
       "id": "magistral-medium-1.2",
-      "name": "Magistral",
+      "family": "Magistral",
       "provider": "mistral",
       "status": "active",
       "version": "Magistral Medium 1.2",
@@ -178,7 +226,7 @@
     },
     {
       "id": "ministral-3",
-      "name": "Ministral",
+      "family": "Ministral",
       "provider": "mistral",
       "status": "active",
       "version": "Ministral 3",
@@ -186,7 +234,7 @@
     },
     {
       "id": "pixtral",
-      "name": "Pixtral",
+      "family": "Pixtral",
       "provider": "mistral",
       "status": "active",
       "version": "Pixtral",
@@ -194,7 +242,7 @@
     },
     {
       "id": "deepseek-v3.2",
-      "name": "DeepSeek",
+      "family": "DeepSeek",
       "provider": "deepseek",
       "status": "active",
       "version": "DeepSeek-V3.2",
@@ -202,7 +250,7 @@
     },
     {
       "id": "deepseek-r1",
-      "name": "DeepSeek",
+      "family": "DeepSeek",
       "provider": "deepseek",
       "status": "active",
       "version": "DeepSeek-R1",
@@ -210,7 +258,7 @@
     },
     {
       "id": "deepseek-r1-distill",
-      "name": "DeepSeek",
+      "family": "DeepSeek",
       "provider": "deepseek",
       "status": "active",
       "version": "DeepSeek-R1-Distill",
@@ -218,15 +266,23 @@
     },
     {
       "id": "deepseek-v3-lite",
-      "name": "DeepSeek",
+      "family": "DeepSeek",
       "provider": "deepseek",
       "status": "active",
       "version": "DeepSeek-V3-Lite",
       "notes": "<n/a>"
     },
     {
+      "id": "deepseek-v3",
+      "family": "DeepSeek",
+      "provider": "deepseek",
+      "status": "active",
+      "version": "DeepSeek-V3",
+      "notes": "Mixture-of-Experts model with strong reasoning capabilities"
+    },
+    {
       "id": "qwen3-max",
-      "name": "Qwen",
+      "family": "Qwen",
       "provider": "alibaba",
       "status": "active",
       "version": "Qwen3-Max",
@@ -234,7 +290,7 @@
     },
     {
       "id": "qwen3-thinking",
-      "name": "Qwen",
+      "family": "Qwen",
       "provider": "alibaba",
       "status": "active",
       "version": "Qwen3-Thinking",
@@ -242,15 +298,23 @@
     },
     {
       "id": "qwen3-turbo",
-      "name": "Qwen",
+      "family": "Qwen",
       "provider": "alibaba",
       "status": "active",
       "version": "Qwen3-Turbo",
       "notes": "<n/a>"
     },
     {
+      "id": "qwen-2-5-72b",
+      "family": "Qwen",
+      "provider": "alibaba",
+      "status": "active",
+      "version": "Qwen 2.5 72B",
+      "notes": "Previous generation model with 72 billion parameters"
+    },
+    {
       "id": "grok-4",
-      "name": "Grok",
+      "family": "Grok",
       "provider": "xai",
       "status": "active",
       "version": "Grok 4",
@@ -258,7 +322,7 @@
     },
     {
       "id": "grok-4-thinking",
-      "name": "Grok",
+      "family": "Grok",
       "provider": "xai",
       "status": "active",
       "version": "Grok 4 Thinking",
@@ -266,7 +330,7 @@
     },
     {
       "id": "grok-4-fast",
-      "name": "Grok",
+      "family": "Grok",
       "provider": "xai",
       "status": "active",
       "version": "Grok 4 Fast",
@@ -274,7 +338,7 @@
     },
     {
       "id": "phi-5",
-      "name": "Phi",
+      "family": "Phi",
       "provider": "microsoft",
       "status": "active",
       "version": "Phi-5",
@@ -282,7 +346,7 @@
     },
     {
       "id": "phi-4",
-      "name": "Phi",
+      "family": "Phi",
       "provider": "microsoft",
       "status": "active",
       "version": "Phi-4",
@@ -290,7 +354,7 @@
     },
     {
       "id": "phi-4-multimodal",
-      "name": "Phi",
+      "family": "Phi",
       "provider": "microsoft",
       "status": "active",
       "version": "Phi-4-multimodal",
@@ -298,7 +362,7 @@
     },
     {
       "id": "command-a",
-      "name": "Command",
+      "family": "Command",
       "provider": "cohere",
       "status": "active",
       "version": "Command A",
@@ -306,7 +370,7 @@
     },
     {
       "id": "command-r-plus",
-      "name": "Command",
+      "family": "Command",
       "provider": "cohere",
       "status": "active",
       "version": "Command R+",
@@ -314,7 +378,7 @@
     },
     {
       "id": "nemotron-4",
-      "name": "Nemotron",
+      "family": "Nemotron",
       "provider": "nvidia",
       "status": "active",
       "version": "Nemotron-4",
@@ -322,7 +386,7 @@
     },
     {
       "id": "llama-3.1-nemotron",
-      "name": "Nemotron",
+      "family": "Nemotron",
       "provider": "nvidia",
       "status": "active",
       "version": "Llama-3.1-Nemotron",
@@ -330,7 +394,7 @@
     },
     {
       "id": "falcon-3",
-      "name": "Falcon",
+      "family": "Falcon",
       "provider": "tii",
       "status": "active",
       "version": "Falcon 3",
@@ -338,7 +402,7 @@
     },
     {
       "id": "falcon-180b",
-      "name": "Falcon",
+      "family": "Falcon",
       "provider": "tii",
       "status": "active",
       "version": "Falcon 180B",
@@ -346,7 +410,7 @@
     },
     {
       "id": "hunyuan-large",
-      "name": "Hunyuan",
+      "family": "Hunyuan",
       "provider": "tencent",
       "status": "active",
       "version": "Hunyuan-Large (MoE 389B)",
@@ -354,7 +418,7 @@
     },
     {
       "id": "hunyuan-7b-instruct",
-      "name": "Hunyuan",
+      "family": "Hunyuan",
       "provider": "tencent",
       "status": "active",
       "version": "Hunyuan-7B-Instruct",
@@ -362,7 +426,7 @@
     },
     {
       "id": "hunyuan-2.0",
-      "name": "Hunyuan",
+      "family": "Hunyuan",
       "provider": "tencent",
       "status": "active",
       "version": "2.0",
