@@ -139,13 +139,14 @@ def ingest_all(target_id=None):
             logger.info(f"Skipping {doc_id}: Flat text file already exists (preserving manual edits)")
             continue
 
+        ext = None  # Initialize to avoid UnboundLocalError in exception handler
         try:
             logger.info(f"Processing: {doc_id}...")
 
             # 1. Fetch
             response = requests.get(uri, headers=headers, stream=True, timeout=30)
             response.raise_for_status()
-            
+
             # 2. Detect Type
             content_type = response.headers.get('Content-Type', '')
             ext = determine_extension_from_header(content_type, uri)
@@ -188,8 +189,11 @@ def ingest_all(target_id=None):
 
         except Exception as e:
             logger.error(f"❌ Failed processing {doc_id}: {str(e)}")
-            if os.path.exists(f"temp_{sanitize_filename(doc_id)}{ext}"):
-                 os.remove(f"temp_{sanitize_filename(doc_id)}{ext}")
+            # Clean up temp file if it was created
+            if ext:
+                temp_file = f"temp_{sanitize_filename(doc_id)}{ext}"
+                if os.path.exists(temp_file):
+                    os.remove(temp_file)
 
     if target_id and not found_target:
         logger.warning(f"Target ID '{target_id}' not found in evidence sources.")
