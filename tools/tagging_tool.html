@@ -1047,7 +1047,8 @@
       tagState[currentDocId].push({
         techniqueId: techId,
         confidence: 'High',
-        evidence: evidenceText
+        evidence: evidenceText,
+        created_by: 'Manual Tagging'
       });
       flash(`✓ ${techName}`, 'tag');
     }

@@ -259,7 +259,8 @@ class NLUAnalyzer:
                 verified_matches.append({
                     "techniqueId": cand['technique']['id'],
                     "confidence": confidence,
-                    "evidence": [chunk_text]
+                    "evidence": [chunk_text],
+                    "created_by": "NLU Analysis"
                 })
 
         if filtered_count > 0:
@@ -276,7 +277,8 @@ class NLUAnalyzer:
                 grouped[tid] = {
                     "techniqueId": tid,
                     "confidence": m['confidence'],
-                    "evidence": []
+                    "evidence": [],
+                    "created_by": m.get('created_by', 'NLU Analysis')
                 }
             # Simple dedup and append
             for evid in m['evidence']:
