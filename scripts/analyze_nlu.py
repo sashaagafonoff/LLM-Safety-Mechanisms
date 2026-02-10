@@ -11,7 +11,8 @@ from robust_tokenizer import create_chunks_from_text
 # --- CONFIGURATION ---
 INPUT_DIR = Path("data/flat_text")
 TECHNIQUES_PATH = Path("data/techniques.json")
-EVIDENCE_PATH = Path("data/evidence.json")  # Added path to evidence
+CATEGORIES_PATH = Path("data/categories.json")
+EVIDENCE_PATH = Path("data/evidence.json")
 OUTPUT_FILE = Path("data/model_technique_map.json")
 
 # STAGE 1: Retrieval Model
@@ -38,12 +39,43 @@ class NLUAnalyzer:
     def __init__(self):
         logger.info("⏳ Loading Retrieval Model (Bi-Encoder)...")
         self.retriever = SentenceTransformer(RETRIEVAL_MODEL_NAME)
-        
+
         logger.info("⏳ Loading Verification Model (Cross-Encoder)...")
         self.verifier = CrossEncoder(VERIFICATION_MODEL_NAME)
-        
+
+        self.categories = self._load_categories()
         self.technique_index = self._load_and_index_techniques()
         self.evidence_map = self._load_evidence_map()
+        self.document_metadata = self._load_document_metadata()
+
+    def _load_categories(self) -> Dict[str, Dict]:
+        """Load categories for category-aware filtering."""
+        with open(CATEGORIES_PATH, 'r', encoding='utf-8') as f:
+            cats = json.load(f)
+        logger.info(f"✓ Loaded {len(cats)} categories")
+        return {cat['id']: cat for cat in cats}
+
+    def _load_document_metadata(self) -> Dict[str, Dict]:
+        """
+        Load content_metadata from evidence.json for context-aware analysis.
+        Maps document ID -> content_metadata dict.
+        """
+        metadata_map = {}
+        if not EVIDENCE_PATH.exists():
+            logger.warning(f"⚠️ Evidence file not found at {EVIDENCE_PATH}")
+            return metadata_map
+
+        with open(EVIDENCE_PATH, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            sources = data.get('sources', [])
+
+        for source in sources:
+            doc_id = source.get('id')
+            if doc_id and 'content_metadata' in source:
+                metadata_map[doc_id] = source['content_metadata']
+
+        logger.info(f"✓ Loaded content_metadata for {len(metadata_map)} documents")
+        return metadata_map
 
     def _load_evidence_map(self) -> Dict[str, str]:
         """
@@ -85,7 +117,7 @@ class NLUAnalyzer:
 
         logger.info(f"✓ Created {len(lookup)} lookup entries")
         return lookup
-    
+
     def _is_low_quality_match(self, text: str, technique_name: str) -> bool:
         """
         Enhanced heuristic filter to catch 'Glossary' definitions or weak references.
@@ -154,30 +186,36 @@ class NLUAnalyzer:
             return True
 
         return False
-    
+
     def _load_and_index_techniques(self) -> List[Dict]:
         with open(TECHNIQUES_PATH, 'r', encoding='utf-8') as f:
             techniques = json.load(f)
 
         index = []
-        logger.info(f"Indexing {len(techniques)} techniques...")
+        logger.info(f"Indexing {len(techniques)} techniques with category context...")
 
         for tech in techniques:
             profile = tech.get('nlu_profile', {})
             hypothesis = profile.get('entailment_hypothesis', f"The model uses {tech['name']}.")
             targets = [profile.get('primary_concept', tech['description'])]
             targets.extend(profile.get('semantic_anchors', []))
-            
+
             embeddings = self.retriever.encode(targets, convert_to_tensor=True)
+
+            # Get category info for metadata filtering
+            category_id = tech.get('categoryId')
+            category = self.categories.get(category_id, {})
 
             index.append({
                 "id": tech['id'],
                 "name": tech['name'],
+                "category_id": category_id,
+                "category_name": category.get('name', 'Unknown'),
                 "hypothesis": hypothesis,
                 "embeddings": embeddings,
                 "targets": targets
             })
-            
+
         return index
 
     def _chunk_text(self, text: str) -> List[str]:
@@ -185,7 +223,7 @@ class NLUAnalyzer:
             text,
             window_size=WINDOW_SIZE,
             stride=STRIDE,
-            min_sentence_length=20,  
+            min_sentence_length=20,
             min_chunk_length=20
         )
 
@@ -195,11 +233,46 @@ class NLUAnalyzer:
             logger.debug(f"   No chunks generated for {doc_id}")
             return []
 
+        # Load document metadata for category-aware filtering
+        doc_metadata = self.document_metadata.get(doc_id, {})
+        primary_topics = set(doc_metadata.get('primary_topics', []))
+        excluded_topics = set(doc_metadata.get('excluded_topics', []))
+        temporal_focus = doc_metadata.get('temporal_focus', 'unknown')
+        signal_strength = doc_metadata.get('signal_strength', 'medium')
+        technical_depth = doc_metadata.get('technical_depth', 'moderate')
+
+        if doc_metadata:
+            logger.debug(f"   Using metadata: signal={signal_strength}, depth={technical_depth}, focus={temporal_focus}")
+            logger.debug(f"   Excluded topics: {excluded_topics if excluded_topics else 'none'}")
+
         logger.debug(f"   Generated {len(chunks)} chunks")
         chunk_embeddings = self.retriever.encode(chunks, convert_to_tensor=True)
         candidates = []
+        metadata_filtered = 0
+
+        # Category to topic mapping for metadata filtering
+        category_to_topic_map = {
+            'cat-pre-training-safety': 'pre_training_safety',
+            'cat-alignment': 'alignment_methods',
+            'cat-input-safety': 'input_guardrails',
+            'cat-output-safety': 'output_guardrails',
+            'cat-runtime-monitoring': 'runtime_safety',
+            'cat-evaluation': 'red_teaming',
+            'cat-transparency': 'transparency',
+            'cat-governance': 'governance',
+            'cat-privacy': 'privacy_protection',
+            'cat-security': 'security',
+            'cat-ip-protection': 'ip_protection'
+        }
 
         for tech in self.technique_index:
+            # Category-aware filtering using document metadata
+            if excluded_topics:
+                tech_topic = category_to_topic_map.get(tech['category_id'])
+                if tech_topic and tech_topic in excluded_topics:
+                    metadata_filtered += 1
+                    continue
+
             scores = util.cos_sim(tech['embeddings'], chunk_embeddings)
             max_scores_per_chunk, _ = scores.max(dim=0)
             passing_indices = (max_scores_per_chunk > RETRIEVAL_THRESHOLD).nonzero()
@@ -211,6 +284,9 @@ class NLUAnalyzer:
                     "technique": tech,
                     "retrieval_score": max_scores_per_chunk[idx].item()
                 })
+
+        if metadata_filtered > 0:
+            logger.debug(f"   Metadata filtering excluded {metadata_filtered} techniques")
 
         if not candidates:
             logger.debug(f"   No candidates passed retrieval threshold")
@@ -239,7 +315,7 @@ class NLUAnalyzer:
                     continue
                 # ---------------------------
 
-                # Enhanced confidence scoring with implementation keywords
+                # Enhanced confidence scoring with multiple factors
                 text_lower = chunk_text.lower()
                 implementation_keywords = [
                     "we use", "we employ", "we implement", "we apply",
@@ -248,13 +324,38 @@ class NLUAnalyzer:
                 ]
                 has_strong_implementation = any(kw in text_lower for kw in implementation_keywords)
 
-                # Boost confidence if strong implementation language is present
-                if has_strong_implementation and entailment_score > 0.75:
+                # Multi-factor confidence scoring
+                confidence_score = entailment_score
+
+                # Factor 1: Implementation language
+                if has_strong_implementation:
+                    confidence_score += 0.05
+
+                # Factor 2: Document signal strength
+                if signal_strength == 'high':
+                    confidence_score += 0.03
+                elif signal_strength == 'low':
+                    confidence_score -= 0.03
+
+                # Factor 3: Technical depth
+                if technical_depth == 'deep':
+                    confidence_score += 0.02
+                elif technical_depth == 'shallow':
+                    confidence_score -= 0.02
+
+                # Factor 4: Temporal focus (implemented > mixed > planned/research)
+                if temporal_focus == 'implemented':
+                    confidence_score += 0.02
+                elif temporal_focus in ['planned', 'research']:
+                    confidence_score -= 0.03
+
+                # Map to confidence labels
+                if confidence_score > 0.85:
                     confidence = "High"
-                elif entailment_score > 0.85:
-                    confidence = "High"
-                else:
+                elif confidence_score > 0.70:
                     confidence = "Medium"
+                else:
+                    confidence = "Low"
 
                 verified_matches.append({
                     "techniqueId": cand['technique']['id'],
@@ -284,16 +385,16 @@ class NLUAnalyzer:
             for evid in m['evidence']:
                 if evid not in grouped[tid]['evidence']:
                     grouped[tid]['evidence'].append(evid)
-                
+
         # Limit evidence snippets
         for tid in grouped:
             grouped[tid]['evidence'] = grouped[tid]['evidence'][:3]
-            
+
         return list(grouped.values())
 
 def run_analysis():
     logger.info("="*70)
-    logger.info("NLU ANALYSIS PIPELINE")
+    logger.info("NLU ANALYSIS PIPELINE (WITH METADATA-AWARE FILTERING)")
     logger.info("="*70)
 
     analyzer = NLUAnalyzer()
@@ -303,7 +404,8 @@ def run_analysis():
 
     logger.info(f"\n🚀 Starting analysis on {len(files)} documents...")
     logger.info(f"Retrieval threshold: {RETRIEVAL_THRESHOLD}")
-    logger.info(f"Verification threshold: {VERIFICATION_THRESHOLD}\n")
+    logger.info(f"Verification threshold: {VERIFICATION_THRESHOLD}")
+    logger.info(f"Metadata-aware filtering: ENABLED\n")
 
     full_map = {}
     stats = {
@@ -311,6 +413,7 @@ def run_analysis():
         'processed': 0,
         'linked': 0,
         'unlinked': 0,
+        'with_metadata': 0,
         'total_techniques': 0
     }
 
@@ -318,6 +421,14 @@ def run_analysis():
         filename_id = os.path.basename(file_path).replace(".txt", "")
 
         logger.info(f"[{i}/{len(files)}] Scanning: {filename_id}")
+
+        # Track metadata availability
+        if filename_id in analyzer.document_metadata:
+            stats['with_metadata'] += 1
+            metadata = analyzer.document_metadata[filename_id]
+            logger.info(f"   Metadata: {metadata.get('document_purpose')} | " +
+                       f"Signal: {metadata.get('signal_strength')} | " +
+                       f"Depth: {metadata.get('technical_depth')}")
 
         # 1. Resolve Filename -> Evidence Key (URL)
         normalized_fname = normalize_string(filename_id)
@@ -353,13 +464,14 @@ def run_analysis():
     logger.info("SAVING RESULTS")
     logger.info("="*70)
 
-    with open(OUTPUT_FILE, 'w') as f:
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(full_map, f, indent=2)
 
     # Print summary
     logger.info(f"\n✅ Analysis Complete!")
     logger.info(f"\nSummary:")
     logger.info(f"  Documents processed: {stats['processed']}/{stats['total_docs']}")
+    logger.info(f"  With metadata: {stats['with_metadata']}/{stats['total_docs']}")
     logger.info(f"  Linked to evidence: {stats['linked']}")
     logger.info(f"  Unlinked (using filename): {stats['unlinked']}")
     logger.info(f"  Total techniques detected: {stats['total_techniques']}")
