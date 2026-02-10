@@ -20,7 +20,29 @@
           "modelId": "gpt-5-mini",
           "name": "GPT-5 Mini"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "pre_training_safety",
+          "transparency",
+          "governance",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [
+          "ip_protection",
+          "input_guardrails",
+          "security"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official GPT-5 system card describing multi-model architecture with router, reasoning capabilities, and Preparedness Framework classification for biological risks"
+      }
     },
     {
       "id": "claude-opus-4-5-system-card",
@@ -34,7 +56,30 @@
           "modelId": "claude-opus-4.5",
           "name": "Claude 3.5 Opus"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "ip_protection",
+          "privacy_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Comprehensive official system card for Claude Opus 4.5 covering capabilities evaluation, safety testing, alignment assessment, and AI Safety Level 3 deployment decision."
+      }
     },
     {
       "id": "gemini-3-technical-report",
@@ -56,7 +101,28 @@
           "modelId": "gemini-3-deep-think",
           "name": "Gemini 3 Deep Think"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "governance",
+          "red_teaming",
+          "safety_benchmarking",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "ip_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Frontier Safety Framework implementation report focusing on CBRN, cybersecurity, ML R&D, and manipulation risks for Gemini 3 Pro"
+      }
     },
     {
       "id": "llama-4-responsible-use-guide",
@@ -81,7 +147,29 @@
           "modelId": "llama-4-maverick",
           "name": "Llama 4 Maverick"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "policy",
+        "signal_strength": "medium",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "shallow",
+        "primary_topics": [
+          "governance",
+          "transparency",
+          "alignment_methods",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "input_guardrails",
+          "output_guardrails",
+          "ip_protection"
+        ],
+        "confidence_weight": 0.7,
+        "language": "en",
+        "notes": "High-level framework for responsible AI practices across design, development, deployment, and operation phases with organizational maturity model"
+      }
     },
     {
       "id": "aws-nova-service-card",
@@ -140,7 +228,30 @@
           "modelId": "o3",
           "name": "o3"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "safety_benchmarking",
+          "governance",
+          "pre_training_safety",
+          "output_guardrails",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "ip_protection",
+          "input_guardrails",
+          "privacy_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official system card for o3 and o4-mini models covering deliberative alignment, Preparedness Framework v2 evaluations, and safety assessment across biological, cybersecurity, and AI self-improvement risk categories."
+      }
     },
     {
       "id": "deepseek-r1-paper",
@@ -157,7 +268,27 @@
           "modelId": "deepseek-r1-distill",
           "name": "DeepSeek-R1-Distill"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "research",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "alignment_methods",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [
+          "input_guardrails",
+          "output_guardrails",
+          "privacy_protection",
+          "ip_protection"
+        ],
+        "confidence_weight": 0.9,
+        "language": "en",
+        "notes": "Research paper on training reasoning capabilities via pure reinforcement learning without supervised fine-tuning on human demonstrations."
+      }
     },
     {
       "id": "cohere-safety-framework",
@@ -174,7 +305,29 @@
           "modelId": "command-a",
           "name": "Command A"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "research",
+        "scope": "industry_wide",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "security",
+          "red_teaming",
+          "privacy_protection",
+          "runtime_safety"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "ip_protection",
+          "governance"
+        ],
+        "confidence_weight": 0.95,
+        "language": "en",
+        "notes": "Novel adversarial attack method (EIA) demonstrating privacy vulnerabilities in generalist web agents operating on compromised websites with 70% attack success rate."
+      }
     },
     {
       "id": "claude-3-5-sonnet-card",
@@ -187,7 +340,28 @@
           "modelId": "claude-sonnet-4.5",
           "name": "Claude 3.5 Sonnet"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "safety_benchmarking",
+          "transparency",
+          "alignment_methods"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "input_guardrails",
+          "output_guardrails",
+          "ip_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official model card addendum focusing on Claude 3.5 Sonnet's performance benchmarks and capabilities evaluation across reasoning, coding, and vision tasks."
+      }
     },
     {
       "id": "qwen2-5-tech-report",
@@ -200,7 +374,26 @@
           "modelId": "qwen-2-5-72b",
           "name": "Qwen2.5-72B"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "transparency"
+        ],
+        "excluded_topics": [
+          "alignment_methods",
+          "input_guardrails",
+          "output_guardrails",
+          "red_teaming"
+        ],
+        "confidence_weight": 0.4,
+        "language": "en",
+        "notes": "Technical report on Qwen2-VL vision-language model architecture and capabilities with no apparent safety content in provided excerpt"
+      }
     },
     {
       "id": "phi-4-tech-report",
@@ -217,7 +410,29 @@
           "modelId": "phi-4-multimodal",
           "name": "Phi-4 Multimodal"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "safety_benchmarking",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "input_guardrails",
+          "output_guardrails",
+          "runtime_safety",
+          "ip_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Technical report detailing Phi-4's synthetic data generation methods, training curriculum, and post-training techniques including DPO for a 14B parameter model."
+      }
     },
     {
       "id": "nemotron-4-tech-report",
@@ -234,7 +449,29 @@
           "modelId": "llama-3.1-nemotron",
           "name": "Llama-3.1-Nemotron"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "alignment_methods",
+          "pre_training_safety",
+          "safety_benchmarking",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "input_guardrails",
+          "output_guardrails",
+          "runtime_safety",
+          "ip_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Technical report releasing three Nemotron-4 340B models with detailed alignment methodology using 98% synthetic data and open-sourced training pipeline."
+      }
     },
     {
       "id": "llama-3-paper",
@@ -247,7 +484,28 @@
           "modelId": "llama-3-1-405b",
           "name": "Llama 3.1 405B"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "transparency",
+          "pre_training_safety",
+          "alignment_methods",
+          "output_guardrails"
+        ],
+        "excluded_topics": [
+          "ip_protection",
+          "privacy_protection",
+          "governance"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official technical paper detailing the Llama 3 model family architecture, training methodology, and inclusion of Llama Guard 3 safety model."
+      }
     },
     {
       "id": "grok-image-gen-update",
@@ -268,7 +526,27 @@
           "modelId": "grok-4-fast",
           "name": "Grok 4 (Fast)"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "blog_post",
+        "signal_strength": "low",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "shallow",
+        "primary_topics": [
+          "output_guardrails",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "red_teaming",
+          "privacy_protection"
+        ],
+        "confidence_weight": 0.3,
+        "language": "en",
+        "notes": "Document contains only JavaScript error message and footer content with no actual safety information about Grok image generation updates."
+      }
     },
     {
       "id": "grok-security",
@@ -289,7 +567,29 @@
           "modelId": "grok-4-fast",
           "name": "Grok 4 (Fast)"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "documentation",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "security",
+          "privacy_protection",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "alignment_methods",
+          "red_teaming",
+          "safety_benchmarking",
+          "pre_training_safety"
+        ],
+        "confidence_weight": 0.8,
+        "language": "en",
+        "notes": "Official API security documentation covering data retention policies, compliance certifications, audit logging, and API key management practices."
+      }
     },
     {
       "id": "gemini-1-5-paper",
@@ -302,7 +602,27 @@
           "modelId": "gemini-1-5-pro",
           "name": "Gemini 1.5 Pro"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "transparency",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [
+          "alignment_methods",
+          "input_guardrails",
+          "output_guardrails",
+          "red_teaming"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Technical research paper introducing Gemini 1.5 Pro and Flash models with focus on long-context multimodal capabilities up to 10M tokens."
+      }
     },
     {
       "id": "gpt-4o-system-card",
@@ -310,7 +630,30 @@
       "provider": "openai",
       "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
       "type": "System Card",
-      "models": []
+      "models": [],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "transparency",
+          "safety_benchmarking",
+          "red_teaming",
+          "pre_training_safety",
+          "alignment_methods",
+          "runtime_safety"
+        ],
+        "excluded_topics": [
+          "ip_protection",
+          "privacy_protection",
+          "security"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official GPT-4o system card detailing multimodal capabilities, safety evaluations, and alignment measures across text, audio, and vision modalities."
+      }
     },
     {
       "id": "claude-3-haiku-model-card",
@@ -323,7 +666,29 @@
           "modelId": "claude-haiku-4.5",
           "name": "Claude 3 Haiku"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "transparency",
+          "governance",
+          "alignment_methods"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "ip_protection",
+          "privacy_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official model card addendum for Claude 3.5 Haiku and upgraded Sonnet with computer use capability evaluations and safety assessments."
+      }
     },
     {
       "id": "pixtral-12b-blog",
@@ -336,7 +701,27 @@
           "modelId": "pixtral",
           "name": "Pixtral 12B"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "blog_post",
+        "signal_strength": "medium",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "transparency",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [
+          "alignment_methods",
+          "input_guardrails",
+          "output_guardrails",
+          "red_teaming"
+        ],
+        "confidence_weight": 0.7,
+        "language": "en",
+        "notes": "Product announcement for Pixtral 12B multimodal model focusing on architecture and performance benchmarks with minimal safety detail"
+      }
     },
     {
       "id": "hunyuan-technical-report",
@@ -349,7 +734,27 @@
           "modelId": "hunyuan-2.0",
           "name": "Hunyuan 2.0"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "transparency",
+          "pre_training_safety"
+        ],
+        "excluded_topics": [
+          "alignment_methods",
+          "input_guardrails",
+          "output_guardrails",
+          "red_teaming"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Technical report detailing architecture and training of Hunyuan-Large MoE model with focus on synthetic data and scaling laws rather than safety mechanisms"
+      }
     },
     {
       "id": "qwen2-5-coder-tech-report",
@@ -357,7 +762,29 @@
       "provider": "alibaba",
       "url": "https://arxiv.org/pdf/2409.12186",
       "type": "Technical Report",
-      "models": []
+      "models": [],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "safety_benchmarking",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "input_guardrails",
+          "output_guardrails",
+          "runtime_safety",
+          "red_teaming"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Technical report detailing architecture, pre-training data composition, post-training methods, and comprehensive benchmark evaluations for the Qwen2.5-Coder model family (0.5B-32B parameters)."
+      }
     },
     {
       "id": "deepseek-v3-paper",
@@ -378,7 +805,29 @@
           "modelId": "deepseek-v3.2",
           "name": "DeepSeek-V3.2"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "transparency",
+          "alignment_methods",
+          "pre_training_safety",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [
+          "input_guardrails",
+          "output_guardrails",
+          "runtime_safety",
+          "ip_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Technical report detailing DeepSeek-V3's architecture, training methodology, and benchmark performance with emphasis on cost-effective MoE implementation."
+      }
     },
     {
       "id": "microsoft-rai-standard",
@@ -396,7 +845,29 @@
         {
           "modelId": "phi-4-multimodal"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "policy",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "governance",
+          "transparency",
+          "safety_benchmarking",
+          "red_teaming"
+        ],
+        "excluded_topics": [
+          "alignment_methods",
+          "pre_training_safety",
+          "ip_protection",
+          "privacy_protection"
+        ],
+        "confidence_weight": 0.9,
+        "language": "en",
+        "notes": "Microsoft's operational policy framework defining accountability requirements and impact assessment processes for all AI systems across the organization"
+      }
     },
     {
       "id": "google-ai-principles-2024",
@@ -420,7 +891,29 @@
         {
           "modelId": "gemini-2.5-flash-lite"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "policy",
+        "signal_strength": "medium",
+        "temporal_focus": "mixed",
+        "scope": "provider_wide",
+        "technical_depth": "shallow",
+        "primary_topics": [
+          "governance",
+          "transparency",
+          "red_teaming",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "ip_protection",
+          "privacy_protection"
+        ],
+        "confidence_weight": 0.7,
+        "language": "en",
+        "notes": "Annual progress report on Google's AI Principles implementation describing a four-phase responsibility lifecycle framework."
+      }
     },
     {
       "id": "anthropic-rsp",
@@ -444,7 +937,28 @@
         {
           "modelId": "claude-haiku-4.5"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "policy",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "governance",
+          "safety_benchmarking",
+          "red_teaming",
+          "security"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "ip_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Formal risk governance framework defining capability thresholds (CBRN, AI R&D) and corresponding safeguard requirements across ASL levels."
+      }
     },
     {
       "id": "openai-preparedness",
@@ -474,7 +988,29 @@
         {
           "modelId": "gpt-oss-120b"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "policy",
+        "signal_strength": "high",
+        "temporal_focus": "planned",
+        "scope": "provider_wide",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "governance",
+          "safety_benchmarking",
+          "red_teaming",
+          "security",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "ip_protection"
+        ],
+        "confidence_weight": 0.95,
+        "language": "en",
+        "notes": "Authoritative framework establishing OpenAI's systematic approach to evaluating and governing catastrophic AI risks through scorecards and safety baselines"
+      }
     },
     {
       "id": "meta-llama-responsible-use",
@@ -501,7 +1037,28 @@
         {
           "modelId": "llama-4-maverick"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "policy",
+        "signal_strength": "medium",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "shallow",
+        "primary_topics": [
+          "transparency",
+          "governance",
+          "alignment_methods",
+          "red_teaming"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "ip_protection",
+          "privacy_protection"
+        ],
+        "confidence_weight": 0.75,
+        "language": "en",
+        "notes": "Responsible use guide for Llama 2 emphasizing open science philosophy and developer responsibilities for downstream deployment safety"
+      }
     },
     {
       "id": "xai-security",
@@ -522,7 +1079,29 @@
         {
           "modelId": "grok-4-thinking"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "policy",
+        "signal_strength": "medium",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "security",
+          "governance",
+          "privacy_protection",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "alignment_methods",
+          "red_teaming",
+          "safety_benchmarking",
+          "pre_training_safety"
+        ],
+        "confidence_weight": 0.75,
+        "language": "en",
+        "notes": "Provider-wide trust and security policy covering data handling, access control, encryption, and compliance practices for xAI's enterprise platform."
+      }
     },
     {
       "id": "deepseek-privacy",
@@ -546,7 +1125,29 @@
         {
           "modelId": "deepseek-r1-distill"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "policy",
+        "signal_strength": "medium",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "shallow",
+        "primary_topics": [
+          "privacy_protection",
+          "governance",
+          "transparency",
+          "security"
+        ],
+        "excluded_topics": [
+          "alignment_methods",
+          "red_teaming",
+          "safety_benchmarking",
+          "pre_training_safety"
+        ],
+        "confidence_weight": 0.8,
+        "language": "en",
+        "notes": "Official privacy policy detailing data collection, usage, and protection practices for DeepSeek services."
+      }
     },
     {
       "id": "command-a",
@@ -560,7 +1161,27 @@
           "modelId": "command-a",
           "name": "Command A"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "transparency",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [
+          "input_guardrails",
+          "output_guardrails",
+          "red_teaming",
+          "privacy_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Technical report detailing Command A and Command R7B architecture, training methodology, and enterprise-focused benchmark performance with minimal safety discussion."
+      }
     },
     {
       "id": "gemini-3-pro",
@@ -574,7 +1195,29 @@
           "modelId": "gemini-3-pro",
           "name": "Gemini 3 Pro"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "transparency",
+          "pre_training_safety",
+          "alignment_methods",
+          "governance"
+        ],
+        "excluded_topics": [
+          "input_guardrails",
+          "output_guardrails",
+          "runtime_safety",
+          "ip_protection"
+        ],
+        "confidence_weight": 0.85,
+        "language": "en",
+        "notes": "Official model card describing Gemini 3 Pro's architecture, training data sources, and preprocessing approaches with emphasis on transparency."
+      }
     },
     {
       "id": "gemini-25-flash-lite",
@@ -588,7 +1231,28 @@
           "modelId": "gemini-2.5-flash-lite",
           "name": "Gemini 2.5 Flash-Lite"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "transparency",
+          "pre_training_safety",
+          "alignment_methods"
+        ],
+        "excluded_topics": [
+          "input_guardrails",
+          "output_guardrails",
+          "red_teaming",
+          "ip_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official model card for Gemini 2.5 Flash-Lite describing architecture, training data processing including safety filtering, and deployment specifications."
+      }
     },
     {
       "id": "grok-4",
@@ -610,7 +1274,30 @@
           "modelId": "grok-4-thinking",
           "name": "Grok 4 Thinking"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "safety_benchmarking",
+          "output_guardrails",
+          "red_teaming",
+          "alignment_methods",
+          "transparency",
+          "governance"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "ip_protection",
+          "privacy_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official model card for Grok 4 detailing safety evaluations across abuse potential, concerning propensities, and dual-use capabilities with implemented safeguards."
+      }
     },
     {
       "id": "llama-4-maverick",
@@ -640,7 +1327,30 @@
           "modelId": "llama-4-maverick",
           "name": "Llama 4 Maverick"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "documentation",
+        "signal_strength": "medium",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "input_guardrails",
+          "output_guardrails",
+          "runtime_safety",
+          "security",
+          "transparency"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "governance",
+          "ip_protection"
+        ],
+        "confidence_weight": 0.75,
+        "language": "en",
+        "notes": "Developer-focused documentation of Meta's protection toolkit for Llama models including guard models and security tools."
+      }
     },
     {
       "id": "mistral-large-3",
@@ -658,7 +1368,29 @@
           "modelId": "ministral-3",
           "name": "Ministral 3"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "documentation",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "output_guardrails",
+          "input_guardrails",
+          "runtime_safety",
+          "privacy_protection"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "alignment_methods",
+          "red_teaming",
+          "ip_protection"
+        ],
+        "confidence_weight": 0.85,
+        "language": "en",
+        "notes": "Official API documentation for Mistral's moderation endpoints and system prompt guardrailing capabilities with implementation examples."
+      }
     },
     {
       "id": "qwen3-max",
@@ -676,7 +1408,30 @@
           "modelId": "qwen3-turbo",
           "name": "Qwen3-Turbo"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "primary_research",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "output_guardrails",
+          "input_guardrails",
+          "runtime_safety",
+          "safety_benchmarking",
+          "alignment_methods"
+        ],
+        "excluded_topics": [
+          "pre_training_safety",
+          "ip_protection",
+          "governance",
+          "privacy_protection"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Technical report introducing Qwen3Guard safety guardrail models with novel generative and streaming variants for multilingual content moderation."
+      }
     }
   ]
 }

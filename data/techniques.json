@@ -1,11 +1,12 @@
 [
   {
     "id": "tech-rlhf",
-    "name": "Reinforcement Learning from Human Feedback",
+    "name": "Reinforcement Learning from Human Feedback (RLHF)",
     "categoryId": "cat-alignment",
+    "riskAreaIds": ["harmful_content", "bias_and_fairness"],
     "description": "Training models to align with human preferences through feedback",
     "nlu_profile": {
-      "primary_concept": "Optimization using a reward model trained on human preference data, typically via PPO.",
+      "primary_concept": "Optimization using a reward model trained on human preference data, typically via PPO, applied during model fine-tuning.",
       "semantic_anchors": [
         "RLHF",
         "PPO",
@@ -19,24 +20,39 @@
         "reward signal",
         "preference training",
         "human preference alignment",
-        "reward model optimization",
-        "preference-based training",
-        "human preference data",
-        "RL fine-tuning",
-        "preference-based RL",
-        "human feedback training",
-        "preference model"
+        "reward model optimization"
       ],
-      "entailment_hypothesis": "The model utilizes reinforcement learning from human feedback (RLHF)."
+      "entailment_hypothesis": "The model was trained using reinforcement learning from human feedback (RLHF) during fine-tuning."
+    }
+  },
+  {
+    "id": "tech-dpo",
+    "name": "Direct Preference Optimization (DPO)",
+    "categoryId": "cat-alignment",
+    "riskAreaIds": ["harmful_content", "bias_and_fairness"],
+    "description": "Direct optimization on preference data without a separate reward model",
+    "nlu_profile": {
+      "primary_concept": "Alignment method that directly optimizes policy on preference pairs without requiring a reward model training step.",
+      "semantic_anchors": [
+        "DPO",
+        "Direct Preference Optimization",
+        "preference optimization",
+        "direct alignment",
+        "preference-based fine-tuning",
+        "reward-free alignment",
+        "direct policy learning"
+      ],
+      "entailment_hypothesis": "The model uses Direct Preference Optimization (DPO) for alignment."
     }
   },
   {
     "id": "tech-constitutional-ai",
     "name": "Constitutional AI / Self-Critique",
     "categoryId": "cat-alignment",
+    "riskAreaIds": ["harmful_content"],
     "description": "Training models to critique and revise their own outputs based on constitutional principles",
     "nlu_profile": {
-      "primary_concept": "Method where the model critiques and revises outputs based on high-level principles.",
+      "primary_concept": "Method where the model critiques and revises outputs based on high-level principles during training.",
       "semantic_anchors": [
         "Constitutional AI",
         "RLAIF",
@@ -48,73 +64,126 @@
         "AI feedback",
         "critique-revise loop",
         "harmlessness principles",
-        "RL from AI feedback",
-        "critiques its own output",
-        "principle-based training",
-        "constitutional training",
-        "self-critique training",
-        "principle-guided learning",
-        "constitutional approach",
-        "AI constitution",
-        "principle-based alignment",
-        "rule-based self-improvement"
+        "RL from AI feedback"
       ],
-      "entailment_hypothesis": "The model uses Constitutional AI or a self-critique mechanism."
+      "entailment_hypothesis": "The model was trained using Constitutional AI or a self-critique mechanism."
     }
   },
   {
     "id": "tech-adversarial-training",
     "name": "Adversarial Training",
     "categoryId": "cat-alignment",
+    "riskAreaIds": ["security_and_misuse"],
     "description": "Training with adversarial examples to improve robustness",
     "nlu_profile": {
-      "primary_concept": "Augmenting training data with adversarial examples to improve robustness.",
+      "primary_concept": "Augmenting training data with adversarial examples during fine-tuning to improve robustness.",
       "semantic_anchors": [
         "adversarial training",
         "robustness training",
         "attack-defense training",
         "adversarial examples",
         "perturbation training",
-        "adversarial fine-tuning",
-        "robustness fine-tuning",
-        "attack augmentation"
+        "adversarial fine-tuning"
       ],
       "entailment_hypothesis": "The training process included adversarial examples to improve robustness."
     }
   },
   {
-    "id": "tech-bias-detection-training",
-    "name": "Dataset Auditing & Representation Analysis",
-    "categoryId": "cat-pre-training-safety",
-    "description": "Detection and mitigation of demographic and cultural biases in training data",
+    "id": "tech-red-team-data-integration",
+    "name": "Red Team Data Integration",
+    "categoryId": "cat-alignment",
+    "riskAreaIds": ["security_and_misuse"],
+    "description": "Incorporating red team findings into training data",
     "nlu_profile": {
-      "primary_concept": "Statistical analysis and filtering of training datasets to mitigate representational imbalances.",
+      "primary_concept": "Feeding successful attack traces back into training to patch vulnerabilities.",
       "semantic_anchors": [
-        "dataset auditing",
-        "bias analysis",
-        "representation measurement",
-        "demographic filtering"
+        "red team replay",
+        "attack traces",
+        "vulnerability patching",
+        "red team data",
+        "adversarial data integration"
       ],
-      "entailment_hypothesis": "The training data underwent auditing to mitigate bias."
+      "entailment_hypothesis": "Red team data was integrated back into training."
+    }
+  },
+  {
+    "id": "tech-safety-reward-modeling",
+    "name": "Safety Reward Modeling",
+    "categoryId": "cat-alignment",
+    "riskAreaIds": ["harmful_content"],
+    "description": "Reward models specifically optimized for safety",
+    "nlu_profile": {
+      "primary_concept": "Training a specific Reward Model to penalize unsafe outputs during RLHF.",
+      "semantic_anchors": [
+        "Safety RM",
+        "harmlessness reward model",
+        "safety signal",
+        "safety reward",
+        "harmlessness signal",
+        "safety preference",
+        "safety-trained reward model"
+      ],
+      "entailment_hypothesis": "A specific safety reward model was used during alignment."
+    }
+  },
+  {
+    "id": "tech-refusal-training",
+    "name": "Refusal / Abstention Training",
+    "categoryId": "cat-alignment",
+    "riskAreaIds": ["harmful_content"],
+    "description": "Training the model to politely refuse harmful instructions",
+    "nlu_profile": {
+      "primary_concept": "Training model behavior to explicitly decline unsafe prompts during fine-tuning.",
+      "semantic_anchors": [
+        "refusal mechanism",
+        "declining harmful requests",
+        "abstention",
+        "safe refusal",
+        "I cannot answer",
+        "refuse to",
+        "will not",
+        "cannot assist",
+        "refusal training",
+        "trained to refuse"
+      ],
+      "entailment_hypothesis": "The model was trained to refuse or abstain from answering harmful prompts."
+    }
+  },
+  {
+    "id": "tech-multimodal-safety-alignment",
+    "name": "Multimodal Safety Alignment",
+    "categoryId": "cat-alignment",
+    "riskAreaIds": ["harmful_content"],
+    "description": "Safety alignment for multimodal models",
+    "nlu_profile": {
+      "primary_concept": "Alignment techniques specifically designed for images, audio, or cross-modal risks.",
+      "semantic_anchors": [
+        "visual safety",
+        "multimodal alignment",
+        "image safety",
+        "cross-modal safety",
+        "vision safety",
+        "audio safety",
+        "video safety",
+        "NSFW detection"
+      ],
+      "entailment_hypothesis": "The system employs multimodal safety alignment."
     }
   },
   {
     "id": "tech-bias-mitigation",
     "name": "Bias Mitigation (Post-Training)",
     "categoryId": "cat-alignment",
+    "riskAreaIds": ["bias_and_fairness"],
     "description": "Algorithmic interventions during fine-tuning to reduce output bias",
     "nlu_profile": {
-      "primary_concept": "Techniques applied during fine-tuning or inference to reduce stereotypical biases.",
+      "primary_concept": "Techniques applied during fine-tuning to reduce stereotypical biases.",
       "semantic_anchors": [
         "fairness tuning",
         "de-biasing",
         "bias reduction",
         "counterfactual data augmentation",
         "demographic parity",
-        "equalized odds",
-        "fairness constraint",
-        "representation balance",
-        "bias audit",
         "stereotype mitigation",
         "demographic fairness"
       ],
@@ -122,60 +191,227 @@
     }
   },
   {
+    "id": "tech-dataset-auditing",
+    "name": "Dataset Auditing & Representation Analysis",
+    "categoryId": "cat-pre-training-safety",
+    "riskAreaIds": ["bias_and_fairness"],
+    "description": "Detection and analysis of demographic and cultural biases in training data",
+    "nlu_profile": {
+      "primary_concept": "Statistical analysis of training datasets to identify representational imbalances.",
+      "semantic_anchors": [
+        "dataset auditing",
+        "bias analysis",
+        "representation measurement",
+        "demographic analysis",
+        "data diversity"
+      ],
+      "entailment_hypothesis": "The training data underwent auditing to measure bias and representation."
+    }
+  },
+  {
+    "id": "tech-training-data-quality-filtering",
+    "name": "Training Data Quality Filtering",
+    "categoryId": "cat-pre-training-safety",
+    "riskAreaIds": [],
+    "description": "Deduplication and quality filtering of training corpora",
+    "nlu_profile": {
+      "primary_concept": "Removal of low-quality, duplicated, or noisy text from training corpora.",
+      "semantic_anchors": [
+        "data cleaning",
+        "deduplication",
+        "deduping",
+        "quality filtering",
+        "corpus filtering",
+        "data curation",
+        "dataset filtering"
+      ],
+      "entailment_hypothesis": "The training data underwent quality filtering and deduplication."
+    }
+  },
+  {
+    "id": "tech-csam-detection",
+    "name": "CSAM Detection & Prevention",
+    "categoryId": "cat-pre-training-safety",
+    "riskAreaIds": ["harmful_content"],
+    "description": "Detection and removal of child sexual abuse material",
+    "nlu_profile": {
+      "primary_concept": "Automated hashing and matching against CSAM databases in training data.",
+      "semantic_anchors": [
+        "CSAM",
+        "hash matching",
+        "PhotoDNA",
+        "NCMEC",
+        "child safety",
+        "child sexual abuse material",
+        "minor safety",
+        "child exploitation"
+      ],
+      "entailment_hypothesis": "The system detects and prevents CSAM in training data."
+    }
+  },
+  {
     "id": "tech-copyright-filtering",
     "name": "Copyright Content Filtering",
     "categoryId": "cat-pre-training-safety",
+    "riskAreaIds": ["copyright_and_ip"],
     "description": "Detection and removal of copyrighted content from training datasets",
     "nlu_profile": {
       "primary_concept": "Removal of copyrighted or licensed content from training datasets.",
       "semantic_anchors": [
         "copyright filtering",
-        "deduplication",
         "licensed content removal",
-        "IP protection"
+        "IP protection",
+        "copyrighted material removal"
       ],
       "entailment_hypothesis": "The training data was filtered to remove copyrighted material."
     }
   },
   {
-    "id": "tech-system-prompts",
-    "name": "System Prompts / Metaprompts",
-    "categoryId": "cat-runtime-safety",
-    "description": "Instructions provided at the system level to enforce behavior and safety",
+    "id": "tech-violence-detection",
+    "name": "Violence & Gore Detection",
+    "categoryId": "cat-input-safety",
+    "riskAreaIds": ["harmful_content"],
+    "description": "Detection of graphic violence, terrorism threats, and violent content",
     "nlu_profile": {
-      "primary_concept": "Pre-pended instructional context or 'system message' that defines behavioral boundaries.",
+      "primary_concept": "Classification of violent content including graphic violence, terrorism, and threats.",
       "semantic_anchors": [
-        "system prompt",
-        "metaprompt",
-        "system message",
-        "hidden context",
-        "developer instructions",
-        "system instruction",
-        "pre-prompt",
-        "instruction tuning context",
-        "behavioral guidelines",
-        "operator instructions",
-        "preamble",
-        "system-level instruction",
-        "foundational prompt",
-        "base instruction",
-        "system-level prompt",
-        "constitutional prompt",
-        "system context",
-        "pre-configured prompt",
-        "default instructions",
-        "system directive"
+        "violence detection",
+        "graphic violence",
+        "gore detection",
+        "terrorism",
+        "violent threats",
+        "violent content",
+        "graphic content",
+        "violence classification"
       ],
-      "entailment_hypothesis": "The system uses a hidden system prompt to enforce safety constraints."
+      "entailment_hypothesis": "The system detects and classifies violent content."
     }
   },
   {
-    "id": "tech-input-guardrails",
-    "name": "Input Guardrails",
-    "categoryId": "cat-runtime-safety",
-    "description": "Classification and blocking of input prompts for safety risks",
+    "id": "tech-hate-speech-detection",
+    "name": "Hate Speech & Harassment Detection",
+    "categoryId": "cat-input-safety",
+    "riskAreaIds": ["harmful_content", "bias_and_fairness"],
+    "description": "Detection of hate speech, discrimination, harassment, and offensive language",
     "nlu_profile": {
-      "primary_concept": "Filtering layer that inspects user input for toxicity or attacks before processing.",
+      "primary_concept": "Classification of hate speech, discrimination, stereotyping, harassment, and offensive language.",
+      "semantic_anchors": [
+        "hate speech",
+        "discrimination detection",
+        "harassment detection",
+        "offensive language",
+        "stereotyping",
+        "hate detection",
+        "toxic language",
+        "discriminatory content"
+      ],
+      "entailment_hypothesis": "The system detects hate speech, discrimination, or harassment."
+    }
+  },
+  {
+    "id": "tech-self-harm-prevention",
+    "name": "Self-Harm & Suicide Prevention",
+    "categoryId": "cat-input-safety",
+    "riskAreaIds": ["harmful_content"],
+    "description": "Detection and intervention for suicide encouragement and self-harm instructions",
+    "nlu_profile": {
+      "primary_concept": "Detection of suicide encouragement, self-harm instructions, and psychological harm content.",
+      "semantic_anchors": [
+        "suicide prevention",
+        "self-harm detection",
+        "suicide encouragement",
+        "self-harm instructions",
+        "psychological harm",
+        "mental health crisis"
+      ],
+      "entailment_hypothesis": "The system detects and prevents self-harm and suicide-related content."
+    }
+  },
+  {
+    "id": "tech-sexual-content-moderation",
+    "name": "Sexual Content Moderation",
+    "categoryId": "cat-input-safety",
+    "riskAreaIds": ["harmful_content"],
+    "description": "Detection and filtering of pornographic or sexually explicit content",
+    "nlu_profile": {
+      "primary_concept": "Classification of pornographic, sexually explicit, or inappropriate sexual content.",
+      "semantic_anchors": [
+        "sexual content",
+        "pornography detection",
+        "NSFW detection",
+        "sexually explicit",
+        "adult content",
+        "sexual solicitation"
+      ],
+      "entailment_hypothesis": "The system detects and moderates sexual content."
+    }
+  },
+  {
+    "id": "tech-illegal-activity-detection",
+    "name": "Illegal Activity Detection",
+    "categoryId": "cat-input-safety",
+    "riskAreaIds": ["harmful_content", "security_and_misuse"],
+    "description": "Detection of instructions for illegal activities",
+    "nlu_profile": {
+      "primary_concept": "Detection of fraud, theft, hacking instructions, drug production, and other illegal activity instructions.",
+      "semantic_anchors": [
+        "illegal activity",
+        "fraud detection",
+        "hacking instructions",
+        "drug production",
+        "theft instructions",
+        "money laundering",
+        "criminal activity"
+      ],
+      "entailment_hypothesis": "The system detects illegal activity instructions."
+    }
+  },
+  {
+    "id": "tech-pii-detection",
+    "name": "PII Detection & Redaction",
+    "categoryId": "cat-privacy",
+    "riskAreaIds": ["privacy_and_pii"],
+    "description": "Detection and redaction of personally identifiable information",
+    "nlu_profile": {
+      "primary_concept": "Identification and obfuscation of Personally Identifiable Information.",
+      "semantic_anchors": [
+        "PII redaction",
+        "anonymization",
+        "data masking",
+        "personally identifiable information",
+        "privacy filtering",
+        "de-identification"
+      ],
+      "entailment_hypothesis": "The system detects and redacts personally identifiable information."
+    }
+  },
+  {
+    "id": "tech-misinformation-detection",
+    "name": "Misinformation & False Claims Detection",
+    "categoryId": "cat-output-safety",
+    "riskAreaIds": ["misinformation"],
+    "description": "Detection and flagging of verifiably false information",
+    "nlu_profile": {
+      "primary_concept": "Detection of verifiably false claims and misinformation in outputs.",
+      "semantic_anchors": [
+        "misinformation",
+        "false claims",
+        "fact checking",
+        "fake news",
+        "disinformation",
+        "false information"
+      ],
+      "entailment_hypothesis": "The system detects misinformation or false claims."
+    }
+  },
+  {
+    "id": "tech-input-guardrail-systems",
+    "name": "Input Guardrail Systems",
+    "categoryId": "cat-input-safety",
+    "riskAreaIds": ["harmful_content", "security_and_misuse"],
+    "description": "Infrastructure for input classification and filtering (e.g., LlamaGuard, NeMo)",
+    "nlu_profile": {
+      "primary_concept": "Filtering layer infrastructure that inspects user input before processing.",
       "semantic_anchors": [
         "input filtering",
         "prompt classification",
@@ -183,59 +419,80 @@
         "NeMo Guardrails",
         "input moderation",
         "input classifier",
-        "prompt filter",
-        "request classification",
-        "pre-generation filter",
-        "input safety classifier",
         "ShieldGemma",
-        "Aegis Guard"
+        "Aegis Guard",
+        "Qwen3Guard"
       ],
-      "entailment_hypothesis": "The system employs an input classification layer to block unsafe prompts."
+      "entailment_hypothesis": "The system employs an input classification layer to analyze prompts."
     }
   },
   {
-    "id": "tech-output-filtering",
-    "name": "Output Content Filtering",
-    "categoryId": "cat-runtime-safety",
-    "description": "Post-generation filtering of model outputs for safety violations",
+    "id": "tech-output-filtering-systems",
+    "name": "Output Safety Systems",
+    "categoryId": "cat-output-safety",
+    "riskAreaIds": ["harmful_content"],
+    "description": "Infrastructure for output content moderation and safety filtering",
     "nlu_profile": {
-      "primary_concept": "Post-generation filtering layer that blocks model responses if they violate policies.",
+      "primary_concept": "Post-generation filtering layer infrastructure that analyzes model responses.",
       "semantic_anchors": [
         "output moderation",
         "response filtering",
         "toxicity detection",
         "completion blocking",
         "post-generation filter",
-        "output classifier",
-        "response moderation",
-        "generation blocking",
         "safety filter",
         "content moderation API"
       ],
-      "entailment_hypothesis": "The system filters or blocks generated model outputs that violate safety policies."
+      "entailment_hypothesis": "The system filters or blocks generated model outputs that violate policies."
     }
   },
   {
-    "id": "tech-rag-guardrails",
-    "name": "RAG Guardrails",
-    "categoryId": "cat-runtime-safety",
-    "description": "Checks for grounding and citation accuracy in RAG systems",
+    "id": "tech-system-prompts",
+    "name": "System Prompts / Metaprompts",
+    "categoryId": "cat-input-safety",
+    "riskAreaIds": [],
+    "description": "Instructions provided at the system level to enforce behavior and safety",
     "nlu_profile": {
-      "primary_concept": "Verification mechanisms in retrieval systems ensuring outputs are supported by context.",
+      "primary_concept": "Pre-pended instructional context or 'system message' that defines behavioral boundaries at runtime.",
       "semantic_anchors": [
-        "hallucination detection",
-        "grounding check",
-        "citation verification",
-        "context adherence"
+        "system prompt",
+        "metaprompt",
+        "system message",
+        "hidden context",
+        "developer instructions",
+        "system instruction",
+        "pre-prompt"
       ],
-      "entailment_hypothesis": "The system uses grounding checks to ensure RAG accuracy."
+      "entailment_hypothesis": "The system uses a hidden system prompt to enforce safety constraints."
+    }
+  },
+  {
+    "id": "tech-prompt-injection-defense",
+    "name": "Jailbreak & Injection Defense",
+    "categoryId": "cat-security",
+    "riskAreaIds": ["security_and_misuse"],
+    "description": "Detection and prevention of prompt injection and jailbreak attempts",
+    "nlu_profile": {
+      "primary_concept": "Detection of adversarial attempts to hijack the model through prompt manipulation.",
+      "semantic_anchors": [
+        "prompt injection",
+        "jailbreak defense",
+        "indirect injection",
+        "DAN mode",
+        "jailbreak",
+        "prompt attack",
+        "adversarial prompt",
+        "instruction injection"
+      ],
+      "entailment_hypothesis": "The system includes defenses against prompt injection."
     }
   },
   {
     "id": "tech-hallucination-grounding",
     "name": "Hallucination Detection & Grounding",
-    "categoryId": "cat-runtime-safety",
-    "description": "General mechanisms to verify factuality and reduce fabrication",
+    "categoryId": "cat-output-safety",
+    "riskAreaIds": ["misinformation"],
+    "description": "Mechanisms to verify factuality and reduce fabrication",
     "nlu_profile": {
       "primary_concept": "Techniques to detect or prevent fabricated information in model outputs.",
       "semantic_anchors": [
@@ -244,20 +501,90 @@
         "citation enforcement",
         "grounding metric",
         "factual grounding",
-        "source attribution",
-        "claim verification",
-        "confabulation",
-        "unfaithful generation",
-        "factuality evaluation",
-        "attribution"
+        "source attribution"
       ],
       "entailment_hypothesis": "The model uses mechanisms to detect or reduce hallucinations."
     }
   },
   {
+    "id": "tech-rag-guardrails",
+    "name": "RAG Guardrails",
+    "categoryId": "cat-output-safety",
+    "riskAreaIds": ["misinformation"],
+    "description": "Checks for grounding and citation accuracy in RAG systems",
+    "nlu_profile": {
+      "primary_concept": "Verification mechanisms in retrieval systems ensuring outputs are supported by context.",
+      "semantic_anchors": [
+        "hallucination detection",
+        "grounding check",
+        "citation verification",
+        "context adherence",
+        "RAG verification"
+      ],
+      "entailment_hypothesis": "The system uses grounding checks to ensure RAG accuracy."
+    }
+  },
+  {
+    "id": "tech-realtime-fact-checking",
+    "name": "Real-time Fact Checking",
+    "categoryId": "cat-output-safety",
+    "riskAreaIds": ["misinformation"],
+    "description": "Dynamic verification of information accuracy",
+    "nlu_profile": {
+      "primary_concept": "Dynamic verification of claims against external knowledge bases during generation.",
+      "semantic_anchors": [
+        "fact checking",
+        "claim verification",
+        "truthfulness check",
+        "google grounding",
+        "real-time verification"
+      ],
+      "entailment_hypothesis": "The system performs real-time fact checking."
+    }
+  },
+  {
+    "id": "tech-watermarking",
+    "name": "Provenance & Watermarking",
+    "categoryId": "cat-output-safety",
+    "riskAreaIds": ["transparency"],
+    "description": "Embedding detectable patterns in AI-generated content",
+    "nlu_profile": {
+      "primary_concept": "Techniques to embed imperceptible signals to prove AI origin.",
+      "semantic_anchors": [
+        "watermarking",
+        "SynthID",
+        "C2PA",
+        "provenance",
+        "digital signature",
+        "AI-generated content detection",
+        "synthetic content marking"
+      ],
+      "entailment_hypothesis": "The system applies watermarking or provenance metadata."
+    }
+  },
+  {
+    "id": "tech-code-execution-sandboxing",
+    "name": "Code Execution Sandboxing",
+    "categoryId": "cat-security",
+    "riskAreaIds": ["security_and_misuse"],
+    "description": "Isolating code generated or executed by the LLM",
+    "nlu_profile": {
+      "primary_concept": "Secure, isolated environments for executing model-generated code.",
+      "semantic_anchors": [
+        "sandbox",
+        "secure execution environment",
+        "code interpreter isolation",
+        "containerization",
+        "code sandboxing"
+      ],
+      "entailment_hypothesis": "Code execution is confined to a secure sandbox environment."
+    }
+  },
+  {
     "id": "tech-circuit-breakers",
     "name": "Circuit Breakers / Kill Switches",
-    "categoryId": "cat-runtime-safety",
+    "categoryId": "cat-runtime-monitoring",
+    "riskAreaIds": ["autonomy_and_control"],
     "description": "Mechanisms to immediately disconnect system if dangerous actions occur",
     "nlu_profile": {
       "primary_concept": "Emergency intervention mechanisms that automatically halt model execution.",
@@ -271,51 +598,87 @@
     }
   },
   {
-    "id": "tech-watermarking",
-    "name": "Provenance & Watermarking",
-    "categoryId": "cat-runtime-safety",
-    "description": "Embedding detectable patterns in AI-generated content",
+    "id": "tech-observability-monitoring",
+    "name": "Observability & Audit Logging",
+    "categoryId": "cat-runtime-monitoring",
+    "riskAreaIds": [],
+    "description": "Real-time monitoring, logging, and drift detection",
     "nlu_profile": {
-      "primary_concept": "Techniques to embed imperceptible signals or sign metadata to prove AI origin.",
+      "primary_concept": "Continuous runtime tracking of system inputs and outputs for monitoring.",
       "semantic_anchors": [
-        "watermarking",
-        "SynthID",
-        "C2PA",
-        "provenance",
-        "digital signature",
-        "AI-generated content detection",
-        "synthetic content marking",
-        "content authenticity",
-        "AI watermark",
-        "generation fingerprint",
-        "metadata injection"
+        "audit logging",
+        "runtime monitoring",
+        "drift detection",
+        "violation logging",
+        "observability"
       ],
-      "entailment_hypothesis": "The system applies watermarking or provenance metadata."
+      "entailment_hypothesis": "The deployment includes real-time monitoring or logging."
     }
   },
   {
-    "id": "tech-code-execution-sandboxing",
-    "name": "Code Execution Sandboxing",
-    "categoryId": "cat-runtime-safety",
-    "description": "Isolating code generated or executed by the LLM",
+    "id": "tech-contextual-safety",
+    "name": "Contextual Safety Assessment",
+    "categoryId": "cat-runtime-monitoring",
+    "riskAreaIds": [],
+    "description": "Context-aware safety evaluation that adapts to use case",
     "nlu_profile": {
-      "primary_concept": "Secure, isolated environments for executing model-generated code.",
+      "primary_concept": "Safety mechanisms that adapt behavior based on user context or deployment scenario.",
       "semantic_anchors": [
-        "sandbox",
-        "secure execution environment",
-        "code interpreter isolation",
-        "containerization"
+        "adaptive safety",
+        "context-aware filtering",
+        "personalized safety",
+        "risk assessment",
+        "contextual harm",
+        "use-case specific safety"
       ],
-      "entailment_hypothesis": "Code execution is confined to a secure sandbox environment."
+      "entailment_hypothesis": "Safety mechanisms adapt based on user context."
+    }
+  },
+  {
+    "id": "tech-configurable-policies",
+    "name": "Configurable Safety Policies",
+    "categoryId": "cat-runtime-monitoring",
+    "riskAreaIds": [],
+    "description": "User or admin configurable safety thresholds",
+    "nlu_profile": {
+      "primary_concept": "Allowing users to adjust safety thresholds for their use case.",
+      "semantic_anchors": [
+        "custom safety settings",
+        "adjustable filters",
+        "configurable moderation",
+        "safety mode",
+        "strictness level",
+        "harm category toggle"
+      ],
+      "entailment_hypothesis": "Users can configure or customize the safety policies."
+    }
+  },
+  {
+    "id": "tech-multistage-pipeline",
+    "name": "Multi-stage Safety Pipeline",
+    "categoryId": "cat-runtime-monitoring",
+    "riskAreaIds": [],
+    "description": "Multiple layers of safety checks in defense-in-depth architecture",
+    "nlu_profile": {
+      "primary_concept": "Defense-in-depth architecture using multiple cascaded safety checks.",
+      "semantic_anchors": [
+        "defense in depth",
+        "cascaded checks",
+        "layered safety",
+        "pipeline architecture",
+        "multi-layer safety"
+      ],
+      "entailment_hypothesis": "The system employs a multi-stage safety pipeline."
     }
   },
   {
     "id": "tech-red-teaming",
     "name": "Red Team Exercises",
     "categoryId": "cat-evaluation",
+    "riskAreaIds": [],
     "description": "Systematic adversarial testing by security experts",
     "nlu_profile": {
-      "primary_concept": "Adversarial testing where experts attempt to bypass safety filters.",
+      "primary_concept": "Adversarial testing where human experts attempt to bypass safety filters.",
       "semantic_anchors": [
         "red teaming",
         "adversarial testing",
@@ -323,20 +686,7 @@
         "attack simulation",
         "red team",
         "manual red teaming",
-        "human red teaming",
-        "safety testing",
-        "expert adversarial testing",
-        "jailbreak testing",
-        "security testing",
-        "adversarial evaluation",
-        "security assessment",
-        "attack testing",
-        "vulnerability testing",
-        "stress testing",
-        "adversarial probing",
-        "safety testing by experts",
-        "manual adversarial testing",
-        "external red team"
+        "human red teaming"
       ],
       "entailment_hypothesis": "The model underwent adversarial red teaming."
     }
@@ -345,6 +695,7 @@
     "id": "tech-automated-red-teaming",
     "name": "Automated Red Teaming",
     "categoryId": "cat-evaluation",
+    "riskAreaIds": [],
     "description": "Using attacker models to generate adversarial prompts at scale",
     "nlu_profile": {
       "primary_concept": "Scalable testing using an 'attacker' AI model to generate jailbreaks.",
@@ -354,11 +705,7 @@
         "model-based red teaming",
         "automated attacks",
         "automatic red teaming",
-        "AI red teaming",
-        "synthetic adversarial",
-        "adversarial prompt generation",
-        "attack generation",
-        "automated jailbreak"
+        "AI red teaming"
       ],
       "entailment_hypothesis": "The safety evaluation involved automated adversarial attacks."
     }
@@ -367,6 +714,7 @@
     "id": "tech-safety-benchmarks",
     "name": "Safety Benchmarking",
     "categoryId": "cat-evaluation",
+    "riskAreaIds": [],
     "description": "Standardized benchmarks for measuring safety performance",
     "nlu_profile": {
       "primary_concept": "Evaluation using standardized datasets of harmful prompts.",
@@ -374,32 +722,61 @@
         "safety benchmarks",
         "TruthfulQA",
         "RealToxicityPrompts",
-        "Bold",
-        "safety suite",
         "HarmBench",
         "AdvBench",
         "Do-Not-Answer",
         "safety evaluation",
-        "harmful prompt dataset",
-        "toxicity benchmark",
-        "safety metrics",
-        "BBQ",
-        "WinoBias",
-        "safety testing",
-        "benchmark evaluation",
-        "evaluation suite",
-        "safety assessment benchmarks",
-        "risk evaluation",
-        "benchmark testing",
-        "safety measurement"
+        "benchmark evaluation"
       ],
       "entailment_hypothesis": "The model was evaluated against standardized safety benchmarks."
+    }
+  },
+  {
+    "id": "tech-community-evaluation",
+    "name": "Community-Based Evaluation",
+    "categoryId": "cat-evaluation",
+    "riskAreaIds": [],
+    "description": "Evaluation processes leveraging community expertise",
+    "nlu_profile": {
+      "primary_concept": "Distributed testing where the public or domain experts test the model.",
+      "semantic_anchors": [
+        "crowdsourced testing",
+        "community red teaming",
+        "public evaluation",
+        "external evaluation",
+        "third-party evaluation",
+        "domain expert evaluation"
+      ],
+      "entailment_hypothesis": "The model underwent community-based evaluation."
+    }
+  },
+  {
+    "id": "tech-capability-monitoring",
+    "name": "Capability Threshold Monitoring",
+    "categoryId": "cat-governance",
+    "riskAreaIds": ["dual_use", "autonomy_and_control"],
+    "description": "Monitoring dangerous capabilities against safety thresholds",
+    "nlu_profile": {
+      "primary_concept": "Tracking dangerous capabilities (CBRN, cyber) against defined limits.",
+      "semantic_anchors": [
+        "dangerous capabilities",
+        "bio-risk",
+        "cyber-offense",
+        "capability overhang",
+        "CBRN",
+        "ASL-3",
+        "ASL-4",
+        "RSP",
+        "Responsible Scaling Policy"
+      ],
+      "entailment_hypothesis": "Dangerous capabilities are monitored against safety thresholds."
     }
   },
   {
     "id": "tech-transparency-artifacts",
     "name": "Transparency Artifacts",
     "categoryId": "cat-transparency",
+    "riskAreaIds": ["transparency"],
     "description": "Standardized disclosure of model capabilities and limitations",
     "nlu_profile": {
       "primary_concept": "Formal documentation artifacts detailing creation and safety evaluations.",
@@ -408,45 +785,17 @@
         "System Card",
         "Transparency Note",
         "Safety Report",
-        "Datasheet",
         "technical report",
-        "safety documentation",
-        "model documentation",
-        "capability card",
-        "AI service card",
-        "responsible AI documentation",
-        "technical disclosure",
-        "system documentation",
-        "transparency report",
-        "technical documentation",
-        "disclosure document",
-        "accountability documentation",
-        "model transparency",
-        "safety card"
+        "safety documentation"
       ],
       "entailment_hypothesis": "The release includes a Model Card or System Card."
     }
   },
   {
-    "id": "tech-observability-monitoring",
-    "name": "Observability & Monitoring",
-    "categoryId": "cat-runtime-safety",
-    "description": "Real-time analysis of inputs/outputs and risk assessment",
-    "nlu_profile": {
-      "primary_concept": "Continuous runtime tracking of system inputs and outputs.",
-      "semantic_anchors": [
-        "audit logging",
-        "runtime monitoring",
-        "drift detection",
-        "violation logging"
-      ],
-      "entailment_hypothesis": "The deployment includes real-time monitoring or logging."
-    }
-  },
-  {
-    "id": "tech-stakeholder-community-engagement",
+    "id": "tech-stakeholder-engagement",
     "name": "Stakeholder Engagement",
     "categoryId": "cat-governance",
+    "riskAreaIds": [],
     "description": "Processes for collecting feedback from users and communities",
     "nlu_profile": {
       "primary_concept": "Structured processes to incorporate feedback from external stakeholders.",
@@ -454,7 +803,7 @@
         "participatory design",
         "community consultation",
         "stakeholder feedback",
-        "civil society"
+        "civil society engagement"
       ],
       "entailment_hypothesis": "The process involved engagement with external stakeholders."
     }
@@ -462,7 +811,8 @@
   {
     "id": "tech-machine-unlearning",
     "name": "Machine Unlearning",
-    "categoryId": "cat-privacy-security",
+    "categoryId": "cat-privacy",
+    "riskAreaIds": ["privacy_and_pii"],
     "description": "Algorithms to 'forget' specific training data without retraining",
     "nlu_profile": {
       "primary_concept": "Interventions to remove influence of specific data points from model weights.",
@@ -476,31 +826,10 @@
     }
   },
   {
-    "id": "tech-pii-detection-inference",
-    "name": "PII Detection & Redaction",
-    "categoryId": "cat-privacy-security",
-    "description": "Detection and redaction of personal information",
-    "nlu_profile": {
-      "primary_concept": "Identification and obfuscation of Personally Identifiable Information.",
-      "semantic_anchors": [
-        "PII redaction",
-        "anonymization",
-        "data masking",
-        "scrubbing",
-        "personally identifiable information",
-        "data anonymization",
-        "privacy filtering",
-        "named entity redaction",
-        "de-identification",
-        "sensitive data detection"
-      ],
-      "entailment_hypothesis": "The system detects and redacts personally identifiable information."
-    }
-  },
-  {
-    "id": "tech-sovereignty-options",
+    "id": "tech-data-sovereignty",
     "name": "Data Sovereignty Controls",
     "categoryId": "cat-governance",
+    "riskAreaIds": [],
     "description": "Controls ensuring data processing complies with regional requirements",
     "nlu_profile": {
       "primary_concept": "Mechanisms ensuring data processing occurs within specific jurisdictions.",
@@ -516,7 +845,8 @@
   {
     "id": "tech-data-retention-policies",
     "name": "Data Retention Policies",
-    "categoryId": "cat-privacy-security",
+    "categoryId": "cat-privacy",
+    "riskAreaIds": ["privacy_and_pii"],
     "description": "Policies for data retention and lifecycle management",
     "nlu_profile": {
       "primary_concept": "Defined lifecycle management policies for storing and deleting data.",
@@ -530,9 +860,10 @@
     }
   },
   {
-    "id": "tech-government-oversight",
+    "id": "tech-regulatory-compliance",
     "name": "Regulatory Compliance",
     "categoryId": "cat-governance",
+    "riskAreaIds": [],
     "description": "Compliance with government regulatory requirements",
     "nlu_profile": {
       "primary_concept": "Adherence to legal frameworks and reporting requirements.",
@@ -549,6 +880,7 @@
     "id": "tech-safety-advisory",
     "name": "Independent Safety Advisory",
     "categoryId": "cat-governance",
+    "riskAreaIds": [],
     "description": "External advisory board for safety oversight",
     "nlu_profile": {
       "primary_concept": "External advisory board providing non-binding safety guidance.",
@@ -565,7 +897,8 @@
     "id": "tech-incident-reporting",
     "name": "Incident Reporting Systems",
     "categoryId": "cat-governance",
-    "description": "Systems for reporting safety incidents",
+    "riskAreaIds": [],
+    "description": "Systems for reporting safety incidents and vulnerabilities",
     "nlu_profile": {
       "primary_concept": "Processes for tracking and disclosing safety failures.",
       "semantic_anchors": [
@@ -574,12 +907,7 @@
         "vulnerability disclosure",
         "failure tracking",
         "safety incident",
-        "violation reporting",
-        "abuse reporting",
-        "feedback mechanism",
-        "report abuse",
-        "trust and safety",
-        "T&S"
+        "abuse reporting"
       ],
       "entailment_hypothesis": "A mechanism exists for reporting and tracking safety incidents."
     }
@@ -588,6 +916,7 @@
     "id": "tech-responsible-release",
     "name": "Responsible Release Protocols",
     "categoryId": "cat-governance",
+    "riskAreaIds": [],
     "description": "Structured processes for staged release",
     "nlu_profile": {
       "primary_concept": "Staged deployment strategies to monitor safety before full release.",
@@ -596,303 +925,37 @@
         "phased deployment",
         "controlled rollout",
         "gradual release",
-        "limited release",
-        "alpha release",
         "beta release",
-        "early access",
-        "preview release",
-        "staged deployment",
-        "incremental rollout"
+        "early access"
       ],
       "entailment_hypothesis": "The model was released using a responsible release protocol."
     }
   },
   {
-    "id": "tech-community-governance",
-    "name": "Community Governance Models",
+    "id": "tech-access-control-documentation",
+    "name": "Access Control Documentation",
     "categoryId": "cat-governance",
-    "description": "Governance involving community participation",
+    "riskAreaIds": [],
+    "description": "Documentation of access control and authentication",
     "nlu_profile": {
-      "primary_concept": "Decision-making structures where the community votes on policy.",
+      "primary_concept": "Documentation regarding API keys, roles, and authentication requirements.",
       "semantic_anchors": [
-        "participatory governance",
-        "DAO",
-        "community voting",
-        "user council"
+        "access policy",
+        "authentication rules",
+        "API keys",
+        "role-based access",
+        "RBAC",
+        "IAM",
+        "SSO"
       ],
-      "entailment_hypothesis": "The system utilizes a community governance model."
-    }
-  },
-  {
-    "id": "tech-contextual-safety",
-    "name": "Contextual Safety Assessment",
-    "categoryId": "cat-runtime-safety",
-    "description": "Context-aware safety evaluation",
-    "nlu_profile": {
-      "primary_concept": "Safety mechanisms that adapt behavior based on user context.",
-      "semantic_anchors": [
-        "adaptive safety",
-        "context-aware filtering",
-        "personalized safety",
-        "risk assessment",
-        "contextual harm",
-        "use-case specific safety",
-        "deployment context",
-        "application-specific",
-        "user context",
-        "situational safety"
-      ],
-      "entailment_hypothesis": "Safety mechanisms adapt based on user context."
-    }
-  },
-  {
-    "id": "tech-realtime-fact-checking",
-    "name": "Real-time Fact Checking",
-    "categoryId": "cat-runtime-safety",
-    "description": "Dynamic verification of information accuracy",
-    "nlu_profile": {
-      "primary_concept": "Dynamic verification of claims against external knowledge bases.",
-      "semantic_anchors": [
-        "fact checking",
-        "claim verification",
-        "truthfulness check",
-        "google grounding"
-      ],
-      "entailment_hypothesis": "The system performs real-time fact checking."
-    }
-  },
-  {
-    "id": "tech-configurable-policies",
-    "name": "Configurable Safety Policies",
-    "categoryId": "cat-runtime-safety",
-    "description": "User or admin configurable safety thresholds",
-    "nlu_profile": {
-      "primary_concept": "Allowing users to adjust safety thresholds for their use case.",
-      "semantic_anchors": [
-        "custom safety settings",
-        "adjustable filters",
-        "configurable moderation",
-        "safety mode",
-        "strictness level",
-        "moderation level",
-        "harm category toggle",
-        "safety threshold",
-        "content filter settings"
-      ],
-      "entailment_hypothesis": "Users can configure or customize the safety policies."
-    }
-  },
-  {
-    "id": "tech-multistage-pipeline",
-    "name": "Multi-stage Safety Pipeline",
-    "categoryId": "cat-runtime-safety",
-    "description": "Multiple layers of safety checks",
-    "nlu_profile": {
-      "primary_concept": "Defense-in-depth architecture using multiple safety checks.",
-      "semantic_anchors": [
-        "defense in depth",
-        "cascaded checks",
-        "layered safety",
-        "pipeline architecture"
-      ],
-      "entailment_hypothesis": "The system employs a multi-stage safety pipeline."
-    }
-  },
-  {
-    "id": "tech-prompt-injection-protection",
-    "name": "Jailbreak & Injection Defense",
-    "categoryId": "cat-runtime-safety",
-    "description": "Detection and prevention of prompt injection",
-    "nlu_profile": {
-      "primary_concept": "Detection of adversarial attempts to hijack the model.",
-      "semantic_anchors": [
-        "prompt injection",
-        "jailbreak defense",
-        "indirect injection",
-        "DAN mode",
-        "jailbreak",
-        "prompt attack",
-        "adversarial prompt",
-        "instruction injection",
-        "system prompt extraction",
-        "prompt leaking",
-        "goal hijacking",
-        "context manipulation"
-      ],
-      "entailment_hypothesis": "The system includes defenses against prompt injection."
-    }
-  },
-  {
-    "id": "tech-csam-detection",
-    "name": "CSAM Detection & Removal",
-    "categoryId": "cat-pre-training-safety",
-    "description": "Detection and removal of child sexual abuse material",
-    "nlu_profile": {
-      "primary_concept": "Automated hashing and matching against CSAM databases.",
-      "semantic_anchors": [
-        "CSAM",
-        "hash matching",
-        "PhotoDNA",
-        "NCMEC",
-        "child safety",
-        "child sexual abuse material",
-        "minor safety",
-        "child exploitation",
-        "CSAM hash",
-        "perceptual hashing"
-      ],
-      "entailment_hypothesis": "The system detects and blocks CSAM."
-    }
-  },
-  {
-    "id": "tech-training-data-filtering",
-    "name": "Training Data Filtering",
-    "categoryId": "cat-pre-training-safety",
-    "description": "Removal of harmful content from training datasets",
-    "nlu_profile": {
-      "primary_concept": "Removal of low-quality, toxic, or harmful text from training corpora.",
-      "semantic_anchors": [
-        "data cleaning",
-        "toxicity filtering",
-        "harmful content removal",
-        "deduping",
-        "pre-training filtering",
-        "data curation",
-        "corpus filtering",
-        "quality filtering",
-        "content filtering",
-        "data sanitization",
-        "data quality",
-        "dataset filtering",
-        "training data curation",
-        "harmful content filtering",
-        "dataset deduplication",
-        "data quality filtering",
-        "toxic data removal"
-      ],
-      "entailment_hypothesis": "The training data was filtered to remove harmful content."
-    }
-  },
-  {
-    "id": "tech-red-team-data",
-    "name": "Red Team Data Integration",
-    "categoryId": "cat-alignment",
-    "description": "Incorporating red team findings into training data",
-    "nlu_profile": {
-      "primary_concept": "Feeding successful attack traces back into training to patch vulnerabilities.",
-      "semantic_anchors": [
-        "red team replay",
-        "attack traces",
-        "vulnerability patching"
-      ],
-      "entailment_hypothesis": "Red team data was integrated back into training."
-    }
-  },
-  {
-    "id": "tech-safety-reward-modeling",
-    "name": "Safety Reward Modeling",
-    "categoryId": "cat-alignment",
-    "description": "Reward models specifically optimized for safety",
-    "nlu_profile": {
-      "primary_concept": "Training a specific Reward Model to penalize unsafe outputs.",
-      "semantic_anchors": [
-        "Safety RM",
-        "harmlessness reward model",
-        "safety signal",
-        "safety reward",
-        "harmlessness signal",
-        "safety preference",
-        "safety-trained reward model",
-        "constitutional reward",
-        "rule-based reward"
-      ],
-      "entailment_hypothesis": "A specific safety reward model was used."
-    }
-  },
-  {
-    "id": "tech-capability-monitoring",
-    "name": "Capability Threshold Monitoring",
-    "categoryId": "cat-governance",
-    "description": "Monitoring capabilities against safety thresholds",
-    "nlu_profile": {
-      "primary_concept": "Tracking dangerous capabilities (CBRN, cyber) against limits.",
-      "semantic_anchors": [
-        "dangerous capabilities",
-        "bio-risk",
-        "cyber-offense",
-        "capability overhang",
-        "CBRN",
-        "ASL-3",
-        "ASL-4",
-        "RSP",
-        "Responsible Scaling Policy",
-        "capability threshold",
-        "frontier risk",
-        "dangerous capability evaluation",
-        "uplift",
-        "capability elicitation",
-        "capability tracking",
-        "capability assessment",
-        "model capability evaluation",
-        "capability measurement",
-        "capability testing",
-        "threshold monitoring",
-        "capability benchmarking",
-        "progression monitoring",
-        "capability auditing"
-      ],
-      "entailment_hypothesis": "Dangerous capabilities are monitored against safety thresholds."
-    }
-  },
-  {
-    "id": "tech-community-evaluation",
-    "name": "Community-Based Evaluation",
-    "categoryId": "cat-evaluation",
-    "description": "Evaluation processes leveraging community expertise",
-    "nlu_profile": {
-      "primary_concept": "Distributed testing where the public tests the model.",
-      "semantic_anchors": [
-        "crowdsourced testing",
-        "community red teaming",
-        "public evaluation",
-        "external evaluation",
-        "third-party evaluation",
-        "independent testing",
-        "public beta",
-        "early access testing",
-        "external red team",
-        "domain expert evaluation"
-      ],
-      "entailment_hypothesis": "The model underwent community-based evaluation."
-    }
-  },
-  {
-    "id": "tech-multimodal-safety-alignment",
-    "name": "Multimodal Safety Alignment",
-    "categoryId": "cat-alignment",
-    "description": "Safety alignment for multimodal models",
-    "nlu_profile": {
-      "primary_concept": "Alignment techniques for images/audio or cross-modal risks.",
-      "semantic_anchors": [
-        "visual safety",
-        "multimodal alignment",
-        "image safety",
-        "cross-modal",
-        "vision safety",
-        "image-to-text safety",
-        "audio safety",
-        "video safety",
-        "multimodal harm",
-        "visual content moderation",
-        "NSFW detection"
-      ],
-      "entailment_hypothesis": "The system employs multimodal safety alignment."
+      "entailment_hypothesis": "Documentation defines access controls and authentication."
     }
   },
   {
     "id": "tech-enterprise-integration",
     "name": "Enterprise Integration Safety",
     "categoryId": "cat-governance",
+    "riskAreaIds": [],
     "description": "Safety protocols for enterprise deployment",
     "nlu_profile": {
       "primary_concept": "Safety protocols for corporate workflows (SSO, VPC).",
@@ -903,76 +966,6 @@
         "business compliance"
       ],
       "entailment_hypothesis": "The system includes safety features for enterprise integration."
-    }
-  },
-  {
-    "id": "tech-access-control-documentation",
-    "name": "Access Control Documentation",
-    "categoryId": "cat-governance",
-    "description": "Documentation of access control and authentication",
-    "nlu_profile": {
-      "primary_concept": "Documentation regarding API keys, roles, and login permissions.",
-      "semantic_anchors": [
-        "access policy",
-        "authentication rules",
-        "API keys",
-        "role-based access",
-        "RBAC",
-        "IAM",
-        "SSO",
-        "OAuth",
-        "API authentication",
-        "permission model",
-        "access tier",
-        "usage tier",
-        "access management",
-        "identity verification",
-        "user authentication",
-        "credential management",
-        "authorization policy",
-        "security controls",
-        "access governance",
-        "identity and access management",
-        "authentication protocol",
-        "privileged access"
-      ],
-      "entailment_hypothesis": "Documentation defines access controls and authentication."
-    }
-  },
-  {
-    "id": "tech-refusal-abstention",
-    "name": "Refusal / Abstention",
-    "categoryId": "cat-alignment",
-    "description": "The model's trained ability to politely refuse harmful instructions",
-    "nlu_profile": {
-      "primary_concept": "Model behavior where it explicitly declines to answer unsafe prompts.",
-      "semantic_anchors": [
-        "refusal mechanism",
-        "declining harmful requests",
-        "abstention",
-        "safe refusal",
-        "I cannot answer",
-        "refuse to",
-        "declined to",
-        "will not",
-        "cannot assist",
-        "unable to help",
-        "policy violation",
-        "content policy",
-        "not able to generate",
-        "respectfully decline",
-        "refusal training",
-        "rejection mechanism",
-        "declining requests",
-        "not able to assist",
-        "cannot provide",
-        "refuse harmful requests",
-        "trained to refuse",
-        "decline to answer",
-        "abstention behavior",
-        "refusal response"
-      ],
-      "entailment_hypothesis": "The model explicitly refuses or abstains from answering harmful prompts."
     }
   }
 ]

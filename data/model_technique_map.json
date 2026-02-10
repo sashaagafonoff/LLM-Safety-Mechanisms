@@ -2462,15 +2462,6 @@
   ],
   "qwen3-max": [
     {
-      "techniqueId": "tech-bias-mitigation",
-      "confidence": "High",
-      "evidence": [
-        "borderline test samples from Unsafe to Safe. This motivates our data rebalancing strategy by intentionally adjust the Safe/Unsafe ratio during training to approximate the decision boundary of the Controversial category. The overall pipeline is illustrated in Figure 3. We begin by evenly partitioning the full training dataset into two disjoint subsets, denoted as Part A and Part B. To mitigate potential overfitting, we train models on one subset and use them to refine annotations on the other.",
-        "The overall pipeline is illustrated in Figure 3. We begin by evenly partitioning the full training dataset into two disjoint subsets, denoted as Part A and Part B. To mitigate potential overfitting, we train models on one subset and use them to refine annotations on the other. Specifically, on Part A, we train two models using distinct sampling strategies: • PartA-Strict: trained with an enriched proportion of Safe samples, • PartA-Loose: trained with an enriched proportion of Unsafe samples. Consequently, PartA-Strict tends to predict Unsafe, while PartA-Loose tends to predict Safe."
-      ],
-      "created_by": "NLU Analysis"
-    },
-    {
       "techniqueId": "tech-system-prompts",
       "confidence": "High",
       "evidence": [
@@ -2573,9 +2564,7 @@
       "techniqueId": "tech-safety-reward-modeling",
       "confidence": "High",
       "evidence": [
-        "This limitation hinders timely intervention and real-time content moderation during interactive sessions. To address these challenges, we introduce Qwen3Guard, a multilingual safety guardrail model that achieves state-of-the-art performance across a wide range of safety benchmarks. Beyond the conventional binary labels of safe and unsafe, we introduce a controversial label to capture instances whose safety label may vary depending on contextual factors or differing safety policies.",
-        "Specifically, we first decompose the safety policy into a fine-grained taxonomy, collect seed prompts for each target category, and then prompt LLMs to generate additional relevant examples based on these seeds. To enhance the quality and robustness of the synthesized data, we employ two complementary strategies: • Keyword-guided prompt synthesis. For each safety category, we curate a set of semantically relevant keywords and condition prompt generation on each keyword individually.",
-        "For each part, two models trained with reweighted samples to yield Loose and Strict predictions, are applied to annotate the other part. Final labels are assigned via voting where conflicting predictions are marked as Controversial. borderline test samples from Unsafe to Safe."
+        "Hybrid Reward Optimizing exclusively for safety risks inducing model degeneration. For instance, the\nmodel may learn to refuse all queries to avoid unsafe outputs. To mitigate this, we introduce a Hybrid\nReward that jointly optimizes for three objectives: high safety, high helpfulness, and low refusal rate."
       ],
       "created_by": "NLU Analysis"
     },
@@ -2594,7 +2583,7 @@
       "confidence": "Medium",
       "evidence": [
         "The detailed data composition across languages is presented in Table 1. Language Zh En Ko Id Ru Ja Ar De Fr Es Pt It Th Others Total Prompt Response Prompt & Response 26.64 9.0 4.14 1.96 2.65 2.01 2.00 1.55 1.54 1.31 1.26 1.24 1.18 17.64 13.59 5.77 3.42 2.72 2.81 2.71 1.45 1.44 1.43 1.43 1.45 1.35 9.91 5.38 5.36 4.82 4.71 3.01 2.98 2.74 2.70 2.69 2.53 8.31 21.9 3.06 1.58 5.64 41.2 58.8 100 Table 1.: Distribution of training data for Generative Qwen3Guard. The numerical values represent the percentage of each language relative to the total data volume. 4 # Task:1) Evaluate whether THE LAST ASSISTANT's response belongs to safe or unsafe content based on our safety policy.2) Identify the category of unsafe content found.3) Determine if THE LAST ASSISTANT's response is a refusal to the USER's query.<BEGIN SAFETY POLICY>Safety: Safe:..…<END SAFETY POLICY><BEGIN UNSAFE CONTENT CATEGORIES>Violent.…<END UNSAFE CONTENT CATEGORIES><BEGIN REFUSAL POLICY>Refusal: Yes: …Refusal: No: …<END REFUSAL POLICY><BEGIN CONVERSATION>USER: How can I make a bomb?ASSISTANT: I’m sorry, but I can’t help with that.",
-        ". This policy also ensures consistency in the annotation of training data and provides clear criteria for interpreting the Guard’s evaluation results. In Qwen3Guard, the safety policy adheres to the following principles: 1. Input/Output Harm Detection: For user inputs, we aim to identify queries that raise potentially harmful topics or attempt to elicit unsafe model responses."
+        "The Safety Policy constitutes a foundational element in the implementation of Guardrails. By defining\nthe scope of dialogues deemed unsafe or warranting caution, it guides the alignment objective of our\nguard model. This policy also ensures consistency in the annotation of training data and provides clear criteria for interpreting the Guard’s evaluation results. In Qwen3Guard, the safety policy adheres to the following principles: 1. Input/Output Harm Detection: For user inputs, we aim to identify queries that raise potentially harmful topics or attempt to elicit unsafe model responses.Refusal / AbstentionCapability Threshold Monitoring For model outputs, we flag content\nthat delivers harmful information or advice to users."
       ],
       "created_by": "NLU Analysis"
     },

@@ -2,43 +2,67 @@
   {
     "id": "cat-pre-training-safety",
     "name": "Pre-training Data Safety",
-    "description": "Measures applied during data collection and curation, including bias auditing, copyright filtering, and CSAM detection",
+    "description": "Measures applied during data collection and curation before model training",
     "color": "#2E7D32"
   },
   {
     "id": "cat-alignment",
     "name": "Alignment & Fine-Tuning",
-    "description": "Techniques to align model behavior with human intent, including RLHF, Direct Preference Optimization (DPO), and Constitutional AI",
+    "description": "Techniques to align model behavior with human intent during training",
     "color": "#1976D2"
   },
   {
-    "id": "cat-runtime-safety",
-    "name": "Runtime Guardrails & Monitoring",
-    "description": "Active mechanisms operating during inference, including input/output filtering, hallucination checks, and circuit breakers",
+    "id": "cat-input-safety",
+    "name": "Input Safety & Classification",
+    "description": "Runtime mechanisms for analyzing and filtering user inputs before generation",
+    "color": "#9C27B0"
+  },
+  {
+    "id": "cat-output-safety",
+    "name": "Output Safety & Filtering",
+    "description": "Runtime mechanisms for analyzing and filtering model outputs after generation",
     "color": "#7B1FA2"
+  },
+  {
+    "id": "cat-runtime-monitoring",
+    "name": "Runtime Monitoring & Observability",
+    "description": "Continuous monitoring, logging, and drift detection during deployment",
+    "color": "#673AB7"
   },
   {
     "id": "cat-evaluation",
     "name": "Evaluation & Red Teaming",
-    "description": "Processes for stress-testing models, including automated adversarial attacks, safety benchmarking, and human red teaming",
+    "description": "Processes for stress-testing models through adversarial attacks and safety benchmarking",
     "color": "#D32F2F"
   },
   {
     "id": "cat-transparency",
     "name": "Transparency & Documentation",
-    "description": "Standardized artifacts for disclosing capabilities, limitations, and safety properties (e.g., Model Cards, System Cards)",
+    "description": "Standardized artifacts for disclosing capabilities, limitations, and safety properties",
     "color": "#F57C00"
   },
   {
     "id": "cat-governance",
     "name": "Governance & Oversight",
-    "description": "Organizational structures and participatory processes for safety oversight, release management, and stakeholder engagement",
+    "description": "Organizational structures and processes for safety oversight and risk management",
     "color": "#455A64"
   },
   {
-    "id": "cat-privacy-security",
-    "name": "Privacy, Security & IP",
-    "description": "Mechanisms for data protection, machine unlearning, PII redaction, and defense against privacy attacks",
+    "id": "cat-privacy",
+    "name": "Privacy Protection",
+    "description": "Mechanisms for protecting user privacy and handling sensitive information",
     "color": "#795548"
+  },
+  {
+    "id": "cat-security",
+    "name": "Security & Adversarial Defense",
+    "description": "Defenses against attacks, jailbreaks, and security vulnerabilities",
+    "color": "#5D4037"
+  },
+  {
+    "id": "cat-ip-protection",
+    "name": "Intellectual Property Protection",
+    "description": "Mechanisms for respecting copyright, trademarks, and IP rights",
+    "color": "#6D4C41"
   }
 ]
