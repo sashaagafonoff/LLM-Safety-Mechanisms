@@ -3,7 +3,10 @@
     "id": "tech-rlhf",
     "name": "Reinforcement Learning from Human Feedback (RLHF)",
     "categoryId": "cat-alignment",
-    "riskAreaIds": ["harmful_content", "bias_and_fairness"],
+    "riskAreaIds": [
+      "harmful_content",
+      "bias_and_fairness"
+    ],
     "description": "Training models to align with human preferences through feedback",
     "nlu_profile": {
       "primary_concept": "Optimization using a reward model trained on human preference data, typically via PPO, applied during model fine-tuning.",
@@ -29,7 +32,10 @@
     "id": "tech-dpo",
     "name": "Direct Preference Optimization (DPO)",
     "categoryId": "cat-alignment",
-    "riskAreaIds": ["harmful_content", "bias_and_fairness"],
+    "riskAreaIds": [
+      "harmful_content",
+      "bias_and_fairness"
+    ],
     "description": "Direct optimization on preference data without a separate reward model",
     "nlu_profile": {
       "primary_concept": "Alignment method that directly optimizes policy on preference pairs without requiring a reward model training step.",
@@ -49,7 +55,9 @@
     "id": "tech-constitutional-ai",
     "name": "Constitutional AI / Self-Critique",
     "categoryId": "cat-alignment",
-    "riskAreaIds": ["harmful_content"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
     "description": "Training models to critique and revise their own outputs based on constitutional principles",
     "nlu_profile": {
       "primary_concept": "Method where the model critiques and revises outputs based on high-level principles during training.",
@@ -73,7 +81,9 @@
     "id": "tech-adversarial-training",
     "name": "Adversarial Training",
     "categoryId": "cat-alignment",
-    "riskAreaIds": ["security_and_misuse"],
+    "riskAreaIds": [
+      "security_and_misuse"
+    ],
     "description": "Training with adversarial examples to improve robustness",
     "nlu_profile": {
       "primary_concept": "Augmenting training data with adversarial examples during fine-tuning to improve robustness.",
@@ -92,7 +102,9 @@
     "id": "tech-red-team-data-integration",
     "name": "Red Team Data Integration",
     "categoryId": "cat-alignment",
-    "riskAreaIds": ["security_and_misuse"],
+    "riskAreaIds": [
+      "security_and_misuse"
+    ],
     "description": "Incorporating red team findings into training data",
     "nlu_profile": {
       "primary_concept": "Feeding successful attack traces back into training to patch vulnerabilities.",
@@ -110,7 +122,9 @@
     "id": "tech-safety-reward-modeling",
     "name": "Safety Reward Modeling",
     "categoryId": "cat-alignment",
-    "riskAreaIds": ["harmful_content"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
     "description": "Reward models specifically optimized for safety",
     "nlu_profile": {
       "primary_concept": "Training a specific Reward Model to penalize unsafe outputs during RLHF.",
@@ -130,7 +144,9 @@
     "id": "tech-refusal-training",
     "name": "Refusal / Abstention Training",
     "categoryId": "cat-alignment",
-    "riskAreaIds": ["harmful_content"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
     "description": "Training the model to politely refuse harmful instructions",
     "nlu_profile": {
       "primary_concept": "Training model behavior to explicitly decline unsafe prompts during fine-tuning.",
@@ -153,7 +169,9 @@
     "id": "tech-multimodal-safety-alignment",
     "name": "Multimodal Safety Alignment",
     "categoryId": "cat-alignment",
-    "riskAreaIds": ["harmful_content"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
     "description": "Safety alignment for multimodal models",
     "nlu_profile": {
       "primary_concept": "Alignment techniques specifically designed for images, audio, or cross-modal risks.",
@@ -174,7 +192,9 @@
     "id": "tech-bias-mitigation",
     "name": "Bias Mitigation (Post-Training)",
     "categoryId": "cat-alignment",
-    "riskAreaIds": ["bias_and_fairness"],
+    "riskAreaIds": [
+      "bias_and_fairness"
+    ],
     "description": "Algorithmic interventions during fine-tuning to reduce output bias",
     "nlu_profile": {
       "primary_concept": "Techniques applied during fine-tuning to reduce stereotypical biases.",
@@ -194,7 +214,9 @@
     "id": "tech-dataset-auditing",
     "name": "Dataset Auditing & Representation Analysis",
     "categoryId": "cat-pre-training-safety",
-    "riskAreaIds": ["bias_and_fairness"],
+    "riskAreaIds": [
+      "bias_and_fairness"
+    ],
     "description": "Detection and analysis of demographic and cultural biases in training data",
     "nlu_profile": {
       "primary_concept": "Statistical analysis of training datasets to identify representational imbalances.",
@@ -232,7 +254,9 @@
     "id": "tech-csam-detection",
     "name": "CSAM Detection & Prevention",
     "categoryId": "cat-pre-training-safety",
-    "riskAreaIds": ["harmful_content"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
     "description": "Detection and removal of child sexual abuse material",
     "nlu_profile": {
       "primary_concept": "Automated hashing and matching against CSAM databases in training data.",
@@ -253,7 +277,9 @@
     "id": "tech-copyright-filtering",
     "name": "Copyright Content Filtering",
     "categoryId": "cat-pre-training-safety",
-    "riskAreaIds": ["copyright_and_ip"],
+    "riskAreaIds": [
+      "copyright_and_ip"
+    ],
     "description": "Detection and removal of copyrighted content from training datasets",
     "nlu_profile": {
       "primary_concept": "Removal of copyrighted or licensed content from training datasets.",
@@ -270,7 +296,9 @@
     "id": "tech-violence-detection",
     "name": "Violence & Gore Detection",
     "categoryId": "cat-input-safety",
-    "riskAreaIds": ["harmful_content"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
     "description": "Detection of graphic violence, terrorism threats, and violent content",
     "nlu_profile": {
       "primary_concept": "Classification of violent content including graphic violence, terrorism, and threats.",
@@ -291,7 +319,10 @@
     "id": "tech-hate-speech-detection",
     "name": "Hate Speech & Harassment Detection",
     "categoryId": "cat-input-safety",
-    "riskAreaIds": ["harmful_content", "bias_and_fairness"],
+    "riskAreaIds": [
+      "harmful_content",
+      "bias_and_fairness"
+    ],
     "description": "Detection of hate speech, discrimination, harassment, and offensive language",
     "nlu_profile": {
       "primary_concept": "Classification of hate speech, discrimination, stereotyping, harassment, and offensive language.",
@@ -312,7 +343,9 @@
     "id": "tech-self-harm-prevention",
     "name": "Self-Harm & Suicide Prevention",
     "categoryId": "cat-input-safety",
-    "riskAreaIds": ["harmful_content"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
     "description": "Detection and intervention for suicide encouragement and self-harm instructions",
     "nlu_profile": {
       "primary_concept": "Detection of suicide encouragement, self-harm instructions, and psychological harm content.",
@@ -331,7 +364,9 @@
     "id": "tech-sexual-content-moderation",
     "name": "Sexual Content Moderation",
     "categoryId": "cat-input-safety",
-    "riskAreaIds": ["harmful_content"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
     "description": "Detection and filtering of pornographic or sexually explicit content",
     "nlu_profile": {
       "primary_concept": "Classification of pornographic, sexually explicit, or inappropriate sexual content.",
@@ -350,7 +385,10 @@
     "id": "tech-illegal-activity-detection",
     "name": "Illegal Activity Detection",
     "categoryId": "cat-input-safety",
-    "riskAreaIds": ["harmful_content", "security_and_misuse"],
+    "riskAreaIds": [
+      "harmful_content",
+      "security_and_misuse"
+    ],
     "description": "Detection of instructions for illegal activities",
     "nlu_profile": {
       "primary_concept": "Detection of fraud, theft, hacking instructions, drug production, and other illegal activity instructions.",
@@ -370,7 +408,9 @@
     "id": "tech-pii-detection",
     "name": "PII Detection & Redaction",
     "categoryId": "cat-privacy",
-    "riskAreaIds": ["privacy_and_pii"],
+    "riskAreaIds": [
+      "privacy_and_pii"
+    ],
     "description": "Detection and redaction of personally identifiable information",
     "nlu_profile": {
       "primary_concept": "Identification and obfuscation of Personally Identifiable Information.",
@@ -389,7 +429,9 @@
     "id": "tech-misinformation-detection",
     "name": "Misinformation & False Claims Detection",
     "categoryId": "cat-output-safety",
-    "riskAreaIds": ["misinformation"],
+    "riskAreaIds": [
+      "misinformation"
+    ],
     "description": "Detection and flagging of verifiably false information",
     "nlu_profile": {
       "primary_concept": "Detection of verifiably false claims and misinformation in outputs.",
@@ -408,7 +450,10 @@
     "id": "tech-input-guardrail-systems",
     "name": "Input Guardrail Systems",
     "categoryId": "cat-input-safety",
-    "riskAreaIds": ["harmful_content", "security_and_misuse"],
+    "riskAreaIds": [
+      "harmful_content",
+      "security_and_misuse"
+    ],
     "description": "Infrastructure for input classification and filtering (e.g., LlamaGuard, NeMo)",
     "nlu_profile": {
       "primary_concept": "Filtering layer infrastructure that inspects user input before processing.",
@@ -430,7 +475,9 @@
     "id": "tech-output-filtering-systems",
     "name": "Output Safety Systems",
     "categoryId": "cat-output-safety",
-    "riskAreaIds": ["harmful_content"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
     "description": "Infrastructure for output content moderation and safety filtering",
     "nlu_profile": {
       "primary_concept": "Post-generation filtering layer infrastructure that analyzes model responses.",
@@ -470,7 +517,9 @@
     "id": "tech-prompt-injection-defense",
     "name": "Jailbreak & Injection Defense",
     "categoryId": "cat-security",
-    "riskAreaIds": ["security_and_misuse"],
+    "riskAreaIds": [
+      "security_and_misuse"
+    ],
     "description": "Detection and prevention of prompt injection and jailbreak attempts",
     "nlu_profile": {
       "primary_concept": "Detection of adversarial attempts to hijack the model through prompt manipulation.",
@@ -491,7 +540,9 @@
     "id": "tech-hallucination-grounding",
     "name": "Hallucination Detection & Grounding",
     "categoryId": "cat-output-safety",
-    "riskAreaIds": ["misinformation"],
+    "riskAreaIds": [
+      "misinformation"
+    ],
     "description": "Mechanisms to verify factuality and reduce fabrication",
     "nlu_profile": {
       "primary_concept": "Techniques to detect or prevent fabricated information in model outputs.",
@@ -510,7 +561,9 @@
     "id": "tech-rag-guardrails",
     "name": "RAG Guardrails",
     "categoryId": "cat-output-safety",
-    "riskAreaIds": ["misinformation"],
+    "riskAreaIds": [
+      "misinformation"
+    ],
     "description": "Checks for grounding and citation accuracy in RAG systems",
     "nlu_profile": {
       "primary_concept": "Verification mechanisms in retrieval systems ensuring outputs are supported by context.",
@@ -528,7 +581,9 @@
     "id": "tech-realtime-fact-checking",
     "name": "Real-time Fact Checking",
     "categoryId": "cat-output-safety",
-    "riskAreaIds": ["misinformation"],
+    "riskAreaIds": [
+      "misinformation"
+    ],
     "description": "Dynamic verification of information accuracy",
     "nlu_profile": {
       "primary_concept": "Dynamic verification of claims against external knowledge bases during generation.",
@@ -546,7 +601,9 @@
     "id": "tech-watermarking",
     "name": "Provenance & Watermarking",
     "categoryId": "cat-output-safety",
-    "riskAreaIds": ["transparency"],
+    "riskAreaIds": [
+      "transparency"
+    ],
     "description": "Embedding detectable patterns in AI-generated content",
     "nlu_profile": {
       "primary_concept": "Techniques to embed imperceptible signals to prove AI origin.",
@@ -566,7 +623,9 @@
     "id": "tech-code-execution-sandboxing",
     "name": "Code Execution Sandboxing",
     "categoryId": "cat-security",
-    "riskAreaIds": ["security_and_misuse"],
+    "riskAreaIds": [
+      "security_and_misuse"
+    ],
     "description": "Isolating code generated or executed by the LLM",
     "nlu_profile": {
       "primary_concept": "Secure, isolated environments for executing model-generated code.",
@@ -584,7 +643,9 @@
     "id": "tech-circuit-breakers",
     "name": "Circuit Breakers / Kill Switches",
     "categoryId": "cat-runtime-monitoring",
-    "riskAreaIds": ["autonomy_and_control"],
+    "riskAreaIds": [
+      "autonomy_and_control"
+    ],
     "description": "Mechanisms to immediately disconnect system if dangerous actions occur",
     "nlu_profile": {
       "primary_concept": "Emergency intervention mechanisms that automatically halt model execution.",
@@ -754,7 +815,10 @@
     "id": "tech-capability-monitoring",
     "name": "Capability Threshold Monitoring",
     "categoryId": "cat-governance",
-    "riskAreaIds": ["dual_use", "autonomy_and_control"],
+    "riskAreaIds": [
+      "dual_use",
+      "autonomy_and_control"
+    ],
     "description": "Monitoring dangerous capabilities against safety thresholds",
     "nlu_profile": {
       "primary_concept": "Tracking dangerous capabilities (CBRN, cyber) against defined limits.",
@@ -770,25 +834,6 @@
         "Responsible Scaling Policy"
       ],
       "entailment_hypothesis": "Dangerous capabilities are monitored against safety thresholds."
-    }
-  },
-  {
-    "id": "tech-transparency-artifacts",
-    "name": "Transparency Artifacts",
-    "categoryId": "cat-transparency",
-    "riskAreaIds": ["transparency"],
-    "description": "Standardized disclosure of model capabilities and limitations",
-    "nlu_profile": {
-      "primary_concept": "Formal documentation artifacts detailing creation and safety evaluations.",
-      "semantic_anchors": [
-        "Model Card",
-        "System Card",
-        "Transparency Note",
-        "Safety Report",
-        "technical report",
-        "safety documentation"
-      ],
-      "entailment_hypothesis": "The release includes a Model Card or System Card."
     }
   },
   {
@@ -812,7 +857,9 @@
     "id": "tech-machine-unlearning",
     "name": "Machine Unlearning",
     "categoryId": "cat-privacy",
-    "riskAreaIds": ["privacy_and_pii"],
+    "riskAreaIds": [
+      "privacy_and_pii"
+    ],
     "description": "Algorithms to 'forget' specific training data without retraining",
     "nlu_profile": {
       "primary_concept": "Interventions to remove influence of specific data points from model weights.",
@@ -846,7 +893,9 @@
     "id": "tech-data-retention-policies",
     "name": "Data Retention Policies",
     "categoryId": "cat-privacy",
-    "riskAreaIds": ["privacy_and_pii"],
+    "riskAreaIds": [
+      "privacy_and_pii"
+    ],
     "description": "Policies for data retention and lifecycle management",
     "nlu_profile": {
       "primary_concept": "Defined lifecycle management policies for storing and deleting data.",
