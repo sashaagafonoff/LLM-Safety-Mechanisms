@@ -456,6 +456,26 @@
   .ev-link.has-evidence { color: var(--tagged); opacity: 0.7; }
   .ev-link.ev-missing { color: var(--warning); opacity: 0.85; }
   .ev-link.ev-manual { color: var(--text-faint); }
+  .ev-link.ev-deleted-link { color: var(--text-faint); opacity: 0.5; }
+  .ev-link.ev-deleted-link s { text-decoration: line-through; }
+
+  /* Provenance markers */
+  .prov-marker {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    margin-right: 2px;
+  }
+  .prov-nlu { color: #7cacf8; }  /* Blue for NLU */
+  .prov-llm { color: #c49cf8; }  /* Purple for LLM */
+  .prov-manual { color: var(--tagged); }  /* Green for Manual */
+  .prov-legacy { color: var(--text-faint); }  /* Gray for legacy/unknown */
+
+  /* Deleted evidence row */
+  .ev-row.ev-deleted {
+    opacity: 0.5;
+    background: rgba(224, 99, 86, 0.05);
+  }
 
   .ev-link.clickable {
     cursor: pointer;
@@ -1034,8 +1054,17 @@
       // Already tagged + text selected → append evidence snippet
       const entry = tagState[currentDocId][existing];
       // Remove "Manual annotation" placeholder if present
-      entry.evidence = entry.evidence.filter(e => e !== 'Manual annotation');
-      entry.evidence.push(pendingSelection.text);
+      entry.evidence = entry.evidence.filter(e => {
+        if (typeof e === 'string') return e !== 'Manual annotation';
+        return e.text !== 'Manual annotation';
+      });
+      // Add new evidence in structured format
+      entry.evidence.push({
+        text: pendingSelection.text,
+        created_by: 'manual',
+        active: true,
+        deleted_by: null
+      });
       flash(`+ Added evidence for ${techName}`, 'tag');
     } else if (existing >= 0) {
       // Already tagged + no selection → untag entirely
@@ -1043,12 +1072,15 @@
       flash(`− ${techName}`, 'untag');
     } else {
       // Not tagged → tag, with evidence if text is selected
-      const evidenceText = pendingSelection ? [pendingSelection.text] : ['Manual annotation'];
+      const evidenceEntry = pendingSelection
+        ? { text: pendingSelection.text, created_by: 'manual', active: true, deleted_by: null }
+        : { text: 'Manual annotation', created_by: 'manual', active: true, deleted_by: null };
       tagState[currentDocId].push({
         techniqueId: techId,
         confidence: 'High',
-        evidence: evidenceText,
-        created_by: 'Manual Tagging'
+        active: true,
+        deleted_by: null,
+        evidence: [evidenceEntry]
       });
       flash(`✓ ${techName}`, 'tag');
     }
@@ -1066,14 +1098,32 @@
 
     const techName = techLookup.get(techId)?.name || techId;
 
-    if (entry.evidence.length <= 1) {
-      // Last snippet — remove the whole tag
-      const idx = tags.indexOf(entry);
-      tags.splice(idx, 1);
+    // Count active evidence (ignore already-deleted ones)
+    const activeEvidence = entry.evidence.filter(e => {
+      if (typeof e === 'object' && e !== null) return e.active !== false;
+      return true;
+    });
+
+    if (activeEvidence.length <= 1) {
+      // Last active snippet — mark entire technique as deleted (soft delete)
+      entry.active = false;
+      entry.deleted_by = 'manual';
       flash(`− ${techName}`, 'untag');
     } else {
-      // Remove just this snippet
-      entry.evidence.splice(snippetIndex, 1);
+      // Soft delete just this snippet
+      const evItem = entry.evidence[snippetIndex];
+      if (typeof evItem === 'object' && evItem !== null) {
+        evItem.active = false;
+        evItem.deleted_by = 'manual';
+      } else {
+        // Old string format - convert to object and mark deleted
+        entry.evidence[snippetIndex] = {
+          text: evItem,
+          created_by: 'legacy',
+          active: false,
+          deleted_by: 'manual'
+        };
+      }
       flash(`− Removed passage from ${techName}`, 'untag');
     }
 
@@ -1316,7 +1366,7 @@
         <div class="empty-icon">⚠️</div>
         <p>No flat text file found for this document.<br>
         <span style="font-size:12px;color:var(--text-faint);">
-          Expected: <code style="font-family:'Overpass Mono',monospace;background:var(--surface-2);padding:2px 6px;border-radius:3px;">/data/flat_text/${docId}.txt</code><br>
+          Expected: <code style="font-family:'Overpass Mono',monospace;background:var(--surface-2);padding:2px 6px;border-radius:3px;">data/flat_text/${docId}.txt</code><br>
           Run <code style="font-family:'Overpass Mono',monospace;background:var(--surface-2);padding:2px 6px;border-radius:3px;">ingest_universal.py</code> to generate it.
         </span></p>
       </div>`;
@@ -1343,19 +1393,33 @@
     if (!currentDocText) {
       content.innerHTML = '';
       tags.forEach(tag => {
-        const snippets = (tag.evidence || []);
+        // Normalize evidence to array and handle new structured format
+        let rawEvidence = tag.evidence || [];
+        const snippets = Array.isArray(rawEvidence) ? rawEvidence : [rawEvidence];
         const snippetDetails = [];
         snippets.forEach((s, i) => {
+          // Handle both old string format and new object format
+          const isObject = typeof s === 'object' && s !== null;
+          const text = isObject ? (s.text || '') : s;
+          const createdBy = isObject ? (s.created_by || 'legacy') : (text === 'Manual annotation' ? 'manual' : 'legacy');
+          const isActive = isObject ? (s.active !== false) : true;
+          const deletedBy = isObject ? s.deleted_by : null;
+
           snippetDetails.push({
             index: i,
-            state: s === 'Manual annotation' ? 'manual' : 'unmatched',
-            text: s
+            state: text === 'Manual annotation' ? 'manual' : 'unmatched',
+            text: text,
+            createdBy: createdBy,
+            active: isActive,
+            deletedBy: deletedBy
           });
         });
-        const hasReal = snippetDetails.some(s => s.state !== 'manual');
+        const hasReal = snippetDetails.some(s => s.state !== 'manual' && s.active);
         evidenceMatchState.set(tag.techniqueId, {
           overall: hasReal ? 'unmatched' : (snippetDetails.length > 0 ? 'manual' : 'manual'),
-          snippets: snippetDetails
+          snippets: snippetDetails,
+          techActive: tag.active !== false,
+          techDeletedBy: tag.deleted_by || null
         });
       });
       console.log('No document text loaded');
@@ -1372,18 +1436,35 @@
         return;
       }
 
-      const snippets = (tag.evidence || []);
+      // Normalize evidence to array and handle new structured format
+      let rawEvidence = tag.evidence || [];
+      const snippets = Array.isArray(rawEvidence) ? rawEvidence : [rawEvidence];
       const snippetDetails = [];
 
       snippets.forEach((snippet, sIdx) => {
-        if (snippet === 'Manual annotation') {
-          snippetDetails.push({ index: sIdx, state: 'manual', text: snippet });
+        // Handle both old string format and new object format
+        const isObject = typeof snippet === 'object' && snippet !== null;
+        const text = isObject ? (snippet.text || '') : snippet;
+        const createdBy = isObject ? (snippet.created_by || 'legacy') : (text === 'Manual annotation' ? 'manual' : 'legacy');
+        const isActive = isObject ? (snippet.active !== false) : true;
+        const deletedBy = isObject ? snippet.deleted_by : null;
+
+        if (text === 'Manual annotation') {
+          snippetDetails.push({ index: sIdx, state: 'manual', text: text, createdBy: 'manual', active: true, deletedBy: null });
           console.log(`  ○ ${tech.name}[${sIdx}]: manual`);
           return;
         }
-        const match = findEvidence(currentDocText, snippet);
+
+        // Skip deleted evidence for matching purposes but still track it
+        if (!isActive) {
+          snippetDetails.push({ index: sIdx, state: 'deleted', text: text, createdBy: createdBy, active: false, deletedBy: deletedBy });
+          console.log(`  ✗ ${tech.name}[${sIdx}]: DELETED by ${deletedBy}`);
+          return;
+        }
+
+        const match = findEvidence(currentDocText, text);
         if (match) {
-          snippetDetails.push({ index: sIdx, state: 'matched', text: snippet });
+          snippetDetails.push({ index: sIdx, state: 'matched', text: text, createdBy: createdBy, active: true, deletedBy: null });
           ranges.push({
             start: match.start,
             end: match.end,
@@ -1392,18 +1473,20 @@
             snippetIndex: sIdx,
             catName: catLookup.get(tech.categoryId)?.name || ''
           });
-          console.log(`  ● ${tech.name}[${sIdx}]: MATCHED at ${match.start}-${match.end}`);
+          console.log(`  ● ${tech.name}[${sIdx}]: MATCHED at ${match.start}-${match.end} (${createdBy})`);
         } else {
-          snippetDetails.push({ index: sIdx, state: 'unmatched', text: snippet });
-          console.log(`  ⚠ ${tech.name}[${sIdx}]: NOT FOUND — "${snippet.substring(0, 60)}…"`);
+          snippetDetails.push({ index: sIdx, state: 'unmatched', text: text, createdBy: createdBy, active: true, deletedBy: null });
+          console.log(`  ⚠ ${tech.name}[${sIdx}]: NOT FOUND — "${text.substring(0, 60)}…" (${createdBy})`);
         }
       });
 
-      const anyMatched = snippetDetails.some(s => s.state === 'matched');
-      const anyReal = snippetDetails.some(s => s.state !== 'manual');
+      const anyMatched = snippetDetails.some(s => s.state === 'matched' && s.active);
+      const anyReal = snippetDetails.some(s => s.state !== 'manual' && s.active);
       evidenceMatchState.set(tag.techniqueId, {
         overall: anyMatched ? 'matched' : (anyReal ? 'unmatched' : 'manual'),
-        snippets: snippetDetails
+        snippets: snippetDetails,
+        techActive: tag.active !== false,
+        techDeletedBy: tag.deleted_by || null
       });
     });
 
@@ -1682,7 +1765,12 @@
   // ========================================================================
   function updateVisuals() {
     const tags = getDocTags();
-    const taggedIds = new Set(tags.map(t => t.techniqueId));
+    // Only count techniques that are active (not soft-deleted)
+    const activeTags = tags.filter(t => t.active !== false);
+    const taggedIds = new Set(activeTags.map(t => t.techniqueId));
+    // Also track deleted techniques for display purposes
+    const deletedTags = tags.filter(t => t.active === false);
+    const deletedIds = new Set(deletedTags.map(t => t.techniqueId));
 
     // Render document FIRST to populate evidenceMatchState
     renderDocument();
@@ -1708,25 +1796,39 @@
           const row = document.createElement('div');
           row.className = 'ev-row';
 
+          // Handle deleted evidence
+          if (snip.state === 'deleted' || !snip.active) {
+            row.classList.add('ev-deleted');
+          }
+
           const link = document.createElement('span');
           link.className = 'ev-link';
 
+          // Provenance marker: (N)=NLU, (L)=LLM, (M)=Manual
+          const provenanceMap = { 'nlu': 'N', 'llm': 'L', 'manual': 'M', 'legacy': '?' };
+          const provenance = provenanceMap[snip.createdBy] || '?';
+
           const preview = snip.text === 'Manual annotation'
             ? snip.text
-            : snip.text.substring(0, 50) + (snip.text.length > 50 ? '…' : '');
+            : snip.text.substring(0, 45) + (snip.text.length > 45 ? '…' : '');
 
-          if (snip.state === 'matched') {
-            link.textContent = '● ' + preview;
+          if (snip.state === 'deleted' || !snip.active) {
+            // Show deleted with strikethrough style
+            link.innerHTML = `<span class="prov-marker prov-${snip.createdBy}">(${provenance})</span> <s>${preview}</s>`;
+            link.classList.add('ev-deleted-link');
+            link.title = `Deleted by: ${snip.deletedBy || 'unknown'}`;
+          } else if (snip.state === 'matched') {
+            link.innerHTML = `<span class="prov-marker prov-${snip.createdBy}">(${provenance})</span> ● ${preview}`;
             link.classList.add('has-evidence', 'clickable');
             link.addEventListener('click', (e) => {
               e.stopPropagation();
               scrollToEvidence(techId, snip.index);
             });
           } else if (snip.state === 'unmatched') {
-            link.textContent = '⚠ ' + preview;
+            link.innerHTML = `<span class="prov-marker prov-${snip.createdBy}">(${provenance})</span> ⚠ ${preview}`;
             link.classList.add('ev-missing');
           } else {
-            link.textContent = '○ ' + preview;
+            link.innerHTML = `<span class="prov-marker prov-manual">(M)</span> ○ ${preview}`;
             link.classList.add('ev-manual');
           }
 

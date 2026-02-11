@@ -30,3 +30,11 @@ kaleido>=0.2.1  # For static image export
 
 # GitHub automation
 PyGithub>=2.1.0
+
+# LLM-assisted extraction (optional)
+anthropic>=0.39.0
+
+# NLU-based extraction (optional, heavy dependencies)
+# Uncomment if using analyze_nlu.py or semantic_retriever.py
+# sentence-transformers>=2.2.0
+# torch>=2.0.0

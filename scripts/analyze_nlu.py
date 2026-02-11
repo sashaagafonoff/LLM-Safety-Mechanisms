@@ -360,8 +360,14 @@ class NLUAnalyzer:
                 verified_matches.append({
                     "techniqueId": cand['technique']['id'],
                     "confidence": confidence,
-                    "evidence": [chunk_text],
-                    "created_by": "NLU Analysis"
+                    "active": True,
+                    "deleted_by": None,
+                    "evidence": [{
+                        "text": chunk_text,
+                        "created_by": "nlu",
+                        "active": True,
+                        "deleted_by": None
+                    }]
                 })
 
         if filtered_count > 0:
@@ -378,13 +384,26 @@ class NLUAnalyzer:
                 grouped[tid] = {
                     "techniqueId": tid,
                     "confidence": m['confidence'],
-                    "evidence": [],
-                    "created_by": m.get('created_by', 'NLU Analysis')
+                    "active": True,
+                    "deleted_by": None,
+                    "evidence": []
                 }
-            # Simple dedup and append
+            # Simple dedup by text and append evidence objects
+            existing_texts = {e['text'] for e in grouped[tid]['evidence']}
             for evid in m['evidence']:
-                if evid not in grouped[tid]['evidence']:
-                    grouped[tid]['evidence'].append(evid)
+                evid_text = evid['text'] if isinstance(evid, dict) else evid
+                if evid_text not in existing_texts:
+                    if isinstance(evid, dict):
+                        grouped[tid]['evidence'].append(evid)
+                    else:
+                        # Legacy format fallback
+                        grouped[tid]['evidence'].append({
+                            "text": evid,
+                            "created_by": "nlu",
+                            "active": True,
+                            "deleted_by": None
+                        })
+                    existing_texts.add(evid_text)
 
         # Limit evidence snippets
         for tid in grouped:
@@ -430,17 +449,17 @@ def run_analysis():
                        f"Signal: {metadata.get('signal_strength')} | " +
                        f"Depth: {metadata.get('technical_depth')}")
 
-        # 1. Resolve Filename -> Evidence Key (URL)
-        normalized_fname = normalize_string(filename_id)
-        output_key = analyzer.evidence_map.get(normalized_fname, filename_id)
+        # Use document ID as the output key (consistent with LLM extraction)
+        output_key = filename_id
 
-        # Track linkage
-        if output_key == filename_id and filename_id not in analyzer.evidence_map.values():
-            logger.warning(f"   ⚠️ Could not link '{filename_id}' to evidence entry - using filename as key")
-            stats['unlinked'] += 1
-        else:
-            logger.info(f"   ✓ Linked to: {output_key[:80]}...")
+        # Check if document exists in evidence.json
+        normalized_fname = normalize_string(filename_id)
+        if normalized_fname in analyzer.evidence_map:
+            logger.info(f"   ✓ Found in evidence.json")
             stats['linked'] += 1
+        else:
+            logger.warning(f"   ⚠️ '{filename_id}' not found in evidence.json")
+            stats['unlinked'] += 1
 
         # Read document
         with open(file_path, 'r', encoding='utf-8') as f:
