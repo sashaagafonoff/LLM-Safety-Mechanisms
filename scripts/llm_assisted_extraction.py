@@ -28,6 +28,18 @@ import time
 from datetime import datetime
 from difflib import SequenceMatcher
 
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    # Try API_key.env first, then fall back to .env
+    env_file = Path(__file__).parent.parent / "API_key.env"
+    if env_file.exists():
+        load_dotenv(env_file)
+    else:
+        load_dotenv()  # Default .env in current directory
+except ImportError:
+    pass  # dotenv not installed, rely on environment variables
+
 try:
     import anthropic
 except ImportError:

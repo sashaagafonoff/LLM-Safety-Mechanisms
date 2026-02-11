@@ -28,6 +28,18 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set
 from datetime import datetime
 
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    # Try API_key.env first, then fall back to .env
+    env_file = Path(__file__).parent.parent / "API_key.env"
+    if env_file.exists():
+        load_dotenv(env_file)
+    else:
+        load_dotenv()  # Default .env in current directory
+except ImportError:
+    pass  # dotenv not installed, rely on environment variables
+
 # Paths
 DATA_DIR = Path("data")
 OUTPUT_PATH = DATA_DIR / "model_technique_map.json"
