@@ -152,17 +152,11 @@ class SemanticRetriever:
             # Map technique category to topic taxonomy
             # This helps filter false positives where document metadata excludes the category
             category_to_topic_map = {
-                'cat-pre-training-safety': 'pre_training_safety',
-                'cat-alignment': 'alignment_methods',
-                'cat-input-safety': 'input_guardrails',
-                'cat-output-safety': 'output_guardrails',
-                'cat-runtime-monitoring': 'runtime_safety',
-                'cat-evaluation': 'red_teaming',
-                'cat-transparency': 'transparency',
-                'cat-governance': 'governance',
-                'cat-privacy': 'privacy_protection',
-                'cat-security': 'security',
-                'cat-ip-protection': 'ip_protection'
+                'cat-model-development': 'cat_model_development',
+                'cat-evaluation': 'cat_evaluation',
+                'cat-runtime-safety': 'cat_runtime_safety',
+                'cat-harm-classification': 'cat_harm_classification',
+                'cat-governance': 'cat_governance'
             }
 
             topic = category_to_topic_map.get(tech_cat_id)

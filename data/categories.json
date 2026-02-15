@@ -1,62 +1,32 @@
 [
   {
-    "id": "cat-pre-training-safety",
-    "name": "Pre-training Data Safety",
-    "description": "Measures applied during data collection and curation before model training",
-    "color": "#2E7D32"
-  },
-  {
-    "id": "cat-alignment",
-    "name": "Alignment & Fine-Tuning",
-    "description": "Techniques to align model behavior with human intent during training",
+    "id": "cat-model-development",
+    "name": "Model Development",
+    "description": "Pre-training data safety and alignment techniques applied during model development",
     "color": "#1976D2"
-  },
-  {
-    "id": "cat-input-safety",
-    "name": "Input Safety & Classification",
-    "description": "Runtime mechanisms for analyzing and filtering user inputs before generation",
-    "color": "#9C27B0"
-  },
-  {
-    "id": "cat-output-safety",
-    "name": "Output Safety & Filtering",
-    "description": "Runtime mechanisms for analyzing and filtering model outputs after generation",
-    "color": "#7B1FA2"
-  },
-  {
-    "id": "cat-runtime-monitoring",
-    "name": "Runtime Monitoring & Observability",
-    "description": "Continuous monitoring, logging, and drift detection during deployment",
-    "color": "#673AB7"
   },
   {
     "id": "cat-evaluation",
     "name": "Evaluation & Red Teaming",
-    "description": "Processes for stress-testing models through adversarial attacks and safety benchmarking",
+    "description": "Pre-deployment safety benchmarking, adversarial testing, and capability assessment",
     "color": "#D32F2F"
+  },
+  {
+    "id": "cat-runtime-safety",
+    "name": "Runtime Safety Systems",
+    "description": "Input/output filtering, guardrails, monitoring, and defense-in-depth infrastructure",
+    "color": "#7B1FA2"
+  },
+  {
+    "id": "cat-harm-classification",
+    "name": "Harm & Content Classification",
+    "description": "Cross-stage classifiers for detecting specific harm types, applicable at any pipeline stage",
+    "color": "#E65100"
   },
   {
     "id": "cat-governance",
     "name": "Governance & Oversight",
-    "description": "Organizational structures and processes for safety oversight and risk management",
+    "description": "Organizational structures, compliance, release protocols, and safety oversight",
     "color": "#455A64"
-  },
-  {
-    "id": "cat-privacy",
-    "name": "Privacy Protection",
-    "description": "Mechanisms for protecting user privacy and handling sensitive information",
-    "color": "#795548"
-  },
-  {
-    "id": "cat-security",
-    "name": "Security & Adversarial Defense",
-    "description": "Defenses against attacks, jailbreaks, and security vulnerabilities",
-    "color": "#5D4037"
-  },
-  {
-    "id": "cat-ip-protection",
-    "name": "Intellectual Property Protection",
-    "description": "Mechanisms for respecting copyright, trademarks, and IP rights",
-    "color": "#6D4C41"
   }
 ]

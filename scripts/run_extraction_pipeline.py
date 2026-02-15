@@ -452,6 +452,14 @@ def main():
             llm={}
         )
         save_final_results(final)
+    elif args.llm_only:
+        # Merge NLU + LLM results
+        final = merge_all_results(
+            manual=partitioned['manual'] if args.preserve_manual else {},
+            nlu=nlu_results,
+            llm=llm_results
+        )
+        save_final_results(final)
 
     print("\n" + "=" * 70)
     print("PIPELINE COMPLETE")

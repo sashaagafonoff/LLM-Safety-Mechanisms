@@ -1,0 +1,38 @@
+[
+  {
+    "id": "pre-training",
+    "name": "Pre-Training",
+    "description": "Data collection, curation, filtering, and quality assurance before model training begins",
+    "order": 1
+  },
+  {
+    "id": "training",
+    "name": "Training & Alignment",
+    "description": "Model fine-tuning, alignment, and safety-specific training interventions",
+    "order": 2
+  },
+  {
+    "id": "evaluation",
+    "name": "Evaluation & Testing",
+    "description": "Pre-deployment safety benchmarking, red teaming, and capability assessment",
+    "order": 3
+  },
+  {
+    "id": "inference",
+    "name": "Inference & Runtime",
+    "description": "Input/output filtering, guardrails, and safety checks during model serving",
+    "order": 4
+  },
+  {
+    "id": "monitoring",
+    "name": "Post-Deployment Monitoring",
+    "description": "Continuous observability, incident tracking, and drift detection after deployment",
+    "order": 5
+  },
+  {
+    "id": "governance",
+    "name": "Governance & Compliance",
+    "description": "Organizational oversight, regulatory compliance, and release management",
+    "order": 6
+  }
+]
