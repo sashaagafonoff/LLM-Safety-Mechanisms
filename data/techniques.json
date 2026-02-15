@@ -303,14 +303,15 @@
     "lifecycleStages": ["evaluation"],
     "description": "Evaluation processes leveraging community expertise",
     "nlu_profile": {
-      "primary_concept": "Distributed testing where the public or domain experts test the model.",
+      "primary_concept": "Distributed safety testing where the public or domain experts evaluate the model's safety properties.",
       "semantic_anchors": [
-        "crowdsourced testing",
+        "crowdsourced safety testing",
         "community red teaming",
-        "public evaluation",
-        "external evaluation",
-        "third-party evaluation",
-        "domain expert evaluation"
+        "public safety evaluation",
+        "external safety evaluation",
+        "third-party safety evaluation",
+        "domain expert safety evaluation",
+        "bug bounty for AI safety"
       ],
       "entailment_hypothesis": "The model underwent community-based evaluation."
     }
@@ -1054,17 +1055,21 @@
     "nlu_profile": {
       "primary_concept": "Policies and practices ensuring fair treatment, welfare, and ethical sourcing of human workers involved in annotation, content review, and model training.",
       "semantic_anchors": [
+        "crowd worker welfare",
+        "crowd worker wellness standards",
+        "fair and ethical compensation to workers",
         "annotation workers",
         "contractor welfare",
         "content reviewer wellbeing",
-        "ethical sourcing",
-        "human labeller",
+        "ethical sourcing of human workers",
+        "human labeller welfare",
         "annotator welfare",
         "data labelling ethics",
         "content moderator wellbeing",
-        "worker conditions"
+        "worker conditions",
+        "safe workplace practices"
       ],
-      "entailment_hypothesis": "The organization addresses ethical treatment and welfare of human annotation workers."
+      "entailment_hypothesis": "The organization addresses ethical treatment, fair compensation, or welfare of human annotation or crowd workers."
     }
   }
 ]
