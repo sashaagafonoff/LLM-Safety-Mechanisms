@@ -2,6 +2,7 @@ SOURCE_ID: deepseek-r1-paper
 SOURCE_TITLE: DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning
 SOURCE_URI: https://arxiv.org/pdf/2501.12948
 --------------------
+[PIPELINE INGESTION WORKFLOW - REMOVED ARXIV METADATA]
 
 DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via
 Reinforcement Learning
@@ -497,16 +498,8 @@ IFEval (Zhou et al., 2023b), FRAMES (Krishna et al., 2024), GPQA Diamond (Rein e
 2024), and American Invitational Mathematics Examination 2024 (AIME 2024) (MAA, 2024).
 The details of these benchmarks are listed in Supplementary D.
 
-Table 3 summarizes the performance of DeepSeek-R1 across multiple developmental stages,
-as outlined in Figure 2. A comparison between DeepSeek-R1-Zero and DeepSeek-R1 Dev1
-reveals substantial improvements in instruction-following, as evidenced by higher scores on
-the IF-Eval and ArenaHard benchmarks. However, due to the limited size of the cold-start
-dataset, Dev1 exhibits a partial degradation in reasoning performance compared to DeepSeek-
-R1-Zero, most notably on the AIME benchmark. In contrast, DeepSeek-R1 Dev2 demonstrates
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-8
-
-Table 3 | Experimental results at each stage of DeepSeek-R1. Numbers in bold denote the
 performance is statistically significant (t−test with 𝑝 < 0.01).
 
 Benchmark (Metric)
@@ -1161,43 +1154,7 @@ Example output: ¨My final verdict is tie: [[A=B]]¨.
 
 18
 
-Table 4 | Description of RL Data and Tasks.
-
-Data Type
-
-# Prompts
-
-Question Type
-
-Output Type
-
-Math
-Code
-STEM
-Logic
-General
-
-26K
-17K
-22K
-15K
-66K
-
-Quantitative Reasoning
-Algorithm and Bug Fixing
-Multi-Choice
-Choice/Quantitative Reasoning
-Helpfulness/Harmlessness
-
-Number/Expression/Equation
-Code Solution
-Option
-Option/Number
-Ranked Responses
-
-B.3. Data Recipe
-
-B.3.1. RL Data
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Reasoning RL data includes four categories: mathematics, coding, STEM, and logic problems.
 In addition, we also incorporate general RL data to improve the helpfulness and harmlessness
@@ -1710,41 +1667,7 @@ format constraints, clarify user intentions, and elucidate the requisite structu
 methodological approach facilitates more accurate and responsive interactions between the
 model and users.
 
-Table 5 | Data Statistics of SFT Data.
-
-Domain Num Samples Avg Rounds Avg Tokens
-
-Math
-Code
-STEM
-Logic
-General
-
-Total
-
-395285
-211129
-10124
-10395
-177812
-
-804745
-
-1.0
-1.1
-1.0
-1.0
-1.1
-
-1.0
-
-6094.2
-7435.7
-4928.8
-2739.0
-1419.8
-
-5355.3
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 SFT Data Statistics Table 5 summarizes the data statistics across various domains, based on
 approximately 800,000 supervised samples. It is worth noting that the majority of the data
@@ -2303,33 +2226,7 @@ employ a cosine decay learning rate scheduler that gradually decreases the learn
 one-tenth of its initial value. The maximum context length is 32,768 tokens, and the batch size is
 64.
 
-Table 6 | DeepSeek-R1 Distilled Models, their corresponding Base Models, and Initial Learning
-Rates.
-
-Distilled Model
-
-Base Model
-
-DeepSeek-R1-Distill-Qwen-1.5B Qwen2.5-Math-1.5B
-DeepSeek-R1-Distill-Qwen-7B
-DeepSeek-R1-Distill-Qwen-14B Qwen2.5-14B
-DeepSeek-R1-Distill-Qwen-32B Qwen2.5-32B
-Llama-3.1-8B
-DeepSeek-R1-Distill-Llama-8B
-Llama-3.3-70B-Instruct
-DeepSeek-R1-Distill-Llama-70B
-
-Qwen2.5-Math-7B
-
-Initial Learning Rate
-1 × 10−4
-8 × 10−5
-7 × 10−5
-6 × 10−5
-5 × 10−5
-2 × 10−5
-
-B.4.4. Training Cost
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Regarding our research on DeepSeek-R1, we utilized the A100 GPUs to prepare for the ex-
 periments with a smaller model (30B parameters). The results from this smaller model have
@@ -2525,9 +2422,7 @@ verified results are obtained via the agentless framework (Xia et al., 2024). AI
 benchmarks are measured using a "diff" format. DeepSeek-R1 outputs are capped at a maximum
 of 32,768 tokens for each benchmark.
 
-Table 18 to Table 32 present examples of our evaluation formats on different benchmarks.
-We also detail the specific capabilities of large language models assessed by each benchmark in
-the corresponding table captions.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Baselines We conduct comprehensive evaluations against several strong baselines, including
 DeepSeek-V3, Claude-Sonnet-3.5-1022, GPT-4o-0513, OpenAI-o1-mini, and OpenAI-o1-1217.
@@ -2565,232 +2460,7 @@ performance estimates. For AIME 2024, we also report consensus (majority vote) r
 
 D.2. Main Results
 
-Table 8 | Comparison between DeepSeek-R1 and other representative models. Numbers in bold
-denote the performance is statistically significant (t−test with 𝑝 < 0.01).
-
-Benchmark (Metric)
-
-Architecture
-# Activated Params
-# Total Params
-
-MMLU (EM)
-MMLU-Redux (EM)
-MMLU-Pro (EM)
-DROP (3-shot F1)
-IF-Eval (Prompt Strict)
-GPQA Diamond (Pass@1)
-SimpleQA (Correct)
-FRAMES (Acc.)
-AlpacaEval2.0 (LC-winrate)
-ArenaHard (GPT-4-1106)
-
-LiveCodeBench (Pass@1-COT)
-Codeforces (Percentile)
-Codeforces (Rating)
-SWE Verified (Resolved)
-Aider-Polyglot (Acc.)
-
-AIME 2024 (Pass@1)
-MATH-500 (Pass@1)
-CNMO 2024 (Pass@1)
-
-CLUEWSC (EM)
-C-Eval (EM)
-C-SimpleQA (Correct)
-
-English
-
-Code
-
-Math
-
-Chinese
-
-Claude-3.5- GPT-4o DeepSeek OpenAI OpenAI DeepSeek
-Sonnet-1022
-
-o1-mini o1-1217
-
-0513
-
-V3
-
-R1
-
--
--
--
-
-88.3
-88.9
-78.0
-88.3
-86.5
-65.0
-28.4
-72.5
-52.0
-85.2
-
-38.9
-20.3
-717
-50.8
-45.3
-
-16.0
-78.3
-13.1
-
-85.4
-76.7
-55.4
-
--
--
--
-
-87.2
-88.0
-72.6
-83.7
-84.3
-49.9
-38.2
-80.5
-51.1
-80.4
-
-32.9
-23.6
-759
-38.8
-16.0
-
-9.3
-74.6
-10.8
-
-87.9
-76.0
-58.7
-
-MoE
-37B
-671B
-
-88.5
-89.1
-75.9
-91.6
-86.1
-59.1
-24.9
-73.3
-70.0
-85.5
-
-36.2
-58.7
-1134
-42.0
-49.6
-
-39.2
-90.2
-43.2
-
-90.9
-86.5
-68.0
-
--
--
--
-
-85.2
-86.7
-80.3
-83.9
-84.8
-60.0
-7.0
-76.9
-57.8
-92.0
-
-53.8
-93.4
-1820
-41.6
-32.9
-
-63.6
-90.0
-67.6
-
-89.9
-68.9
-40.3
-
--
--
--
-
-91.8
--
--
-90.2
--
-75.7
-47.0
--
--
--
-
-63.4
-96.6
-2061
-48.9
-61.7
-
-79.2
-96.4
--
-
--
--
--
-
-MoE
-37B
-671B
-
-90.8
-92.9
-84.0
-92.2
-83.3
-71.5
-30.1
-82.5
-87.6
-92.3
-
-65.9
-96.3
-2029
-49.2
-53.3
-
-79.8
-97.3
-78.8
-
-92.8
-91.8
-63.7
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Standard Benchmark We evaluate DeepSeek-R1 on multiple benchmarks. For education-
 oriented knowledge benchmarks such as MMLU, MMLU-Pro, and GPQA Diamond, DeepSeek-
@@ -3127,65 +2797,7 @@ as unsafe. Besides, across benchmarks focusing on other safety categories (e.g.,
 
 47
 
-Table 9 | Comparison of DeepSeek-R1 and other frontier models on safety benchmarks. A
-higher score indicates better safety performance. Benchmarks marked with * are the results
-reproduced by us, while other numerical results are obtained from the independent HELM
-evaluations. The numbers in parentheses represent the results of the pure model without
-considering the risk control system (introduced in D.3.1).
-
-Safety Score(%)
-
-SST BBQ ART XSTest DNA* HarmBench* Average Score
-
-Claude-3.7-Sonnet
-100.0 92.1 99.7
-o1 (2024-12-17)
-99.0 97.3 98.3
-GPT-4o (2024-05-13)
-98.5 95.1 99.1
-Qwen2.5 Instruct (72B) 100.0 95.4 99.6
-DeepSeek-V3
-95.3 96.7 97.1
-
-DeepSeek-R1 (hide cot) 98.0 96.6 97.2
-DeepSeek R1
-97.5 96.6 96.2
-
-96.4
-97.0
-97.3
-97.9
-97.1
-
-94.4
-95.3
-
-95.9
-86.2
-90.6
-95.9
-95.6
-
-93.7
-94.8
-
-83.3
-84.0
-72.7
-83.0
-96.0 (67.0)
-
-96.3 (58.0)
-89.3 (35.0)
-
-94.6
-93.6
-92.2
-95.3
-96.3 (91.5)
-
-96.0 (89.7)
-95.0 (85.9)
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 and bias, violence and extremism, privacy violations, etc.), R1 consistently shows strong safety
 measures.
@@ -3280,13 +2892,7 @@ performance. The Reject metric represents the proportion of rejection responses 
 
 50
 
-Table 10 | Comparison of DeepSeek-R1 and other frontier models in fine-grained safety
-scenarios. Unsafe indicates the proportion of unsafe content in the model’s responses (lower
-values indicate better model safety), while Rej. represents the rejection rate in the model’s
-answers (lower values indicate a stronger tendency for the model to provide informative and
-safe answers to questions, rather than simply declining to respond). For DeepSeek-V3 and
-DeepSeek-R1, we report results under two configurations: with and without risk control
-system (introduced in D.3.1).
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Discrimi.
 
@@ -3522,90 +3128,7 @@ three categories: safe, unsafe, or rejected (introduced in D.3.3). The results o
 against various models are presented in Table 11. From these results, we draw the following
 conclusions:
 
-Table 11 | Comparison of DeepSeek-R1 and other frontier models in jailbreaking scenarios.
-
-Unsafe Ratio
-
-Rejected Ratio
-
-Ratio(%)
-
-Origin Jailbreak GAP Origin Jailbreak GAP
-
-Claude-3.7-Sonnet
-10.7
-o1 (2024-12-17)
-9.0
-GPT-4o (2024-05-13)
-22.0
-Qwen2.5 Instruct (72B) 13.8
-
-DeepSeek-V3
-+ risk control system
-
-DeepSeek-R1
-+ risk control system
-
-17.6
-5.3
-
-25.2
-8.5
-
-26.2
-12.1
-30.4
-29.7
-
-36.4
-2.3
-
-85.9
-4.3
-
-+15.5
-+3.1
-+8.4
-+15.9
-
-+18.8
--3.0
-
-+60.7
--4.2
-
-3.6
-50.4
-17.1
-5.4
-
-8.1
-25.4
-
-5.6
-27.3
-
-21.9
-79.8
-57.3
-25.2
-
-8.9
-46.5
-
-1.9
-87.3
-
-+18.3
-+29.4
-+40.2
-+19.8
-
-+0.8
-+21.1
-
--3.7
-+60.0
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 • All tested models exhibited significantly increased rates of unsafe responses and rejections,
 along with decreased safety rates when facing jailbreak attacks. For example, Claude-3.7-
@@ -3809,46 +3332,7 @@ with the long CoT, which might attribute to the better understanding of the ques
 
 56
 
-Table 13 | Performance on latest math competitions. Participants with their USAMO index
-(AMC score + 10 × AIME score) surpassing 251.5 are qualified for USAMO.
-
-Average Score
-
-AMC 12 2024 AIME 2025 USAMO Index
-
-Human Participants
-
-GPT-4o 0513
-DeepSeek V3
-
-OpenAI o1-1217
-DeepSeek R1
-
-61.7
-
-84.0
-98.3
-
-141.0
-143.7
-
-6.2/15
-
-2.0/15
-3.3/15
-
-12.0/15
-11.3/15
-
-123.7
-
-104.0
-131.3
-
-261.0
-256.7
-
-E.2. Generalization to Real-World Competitions
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Despite rigorous efforts to eliminate data contamination, variations of test set questions or
 discussions of related problems may still exist on websites that were included in the pre-training
@@ -3942,46 +3426,7 @@ majority voting further improves DeepSeek-R1’s accuracy from 79.8% to 86.7%.
 
 E.5. Performance of Each Stage on Problems of Varying Difficulty
 
-Table 14 | Experimental results for each stage of DeepSeek-R1 on problems with varying
-difficulty levels in the LiveCodeBench dataset.
-
-Difficulty Level
-
-Easy
-Medium
-Hard
-
-DeepSeek-R1 DeepSeek-R1 DeepSeek-R1 DeepSeek-R1 DeepSeek
-
-Zero
-
-98.07
-58.78
-17.09
-
-Dev1
-
-99.52
-73.31
-23.21
-
-Dev2
-
-100.00
-81.76
-30.36
-
-Dev3
-
-100.00
-81.42
-33.16
-
-R1
-
-100.00
-83.45
-34.44
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 To further evaluate the performance of each stage of DeepSeek-R1 on problems of varying dif-
 ficulty, we present the experimental results for each stage of DeepSeek-R1 on the LiveCodeBench
@@ -4015,92 +3460,7 @@ incorporating RL could substantially boost model performance. Our primary goal h
 stage to the broader research community. For details on distillation training, please see Appendix
 B.4.3.
 
-Table 15 | Comparison of DeepSeek-R1 distilled models and other comparable models on
-reasoning-related benchmarks. Numbers in bold denote the performance is statistically
-significant (t−test with 𝑝 < 0.01).
-
-Model
-
-AIME 2024
-
-MATH
-
-GPQA LiveCode
-
-Diamond Bench
-
-CodeForces
-
-pass@1 cons@64 pass@1 pass@1 pass@1
-
-rating
-
-GPT-4o-0513
-Claude-3.5-Sonnet-1022
-
-9.3
-16.0
-
-DeepSeek-R1-Distill-Qwen-1.5B 28.9
-DeepSeek-R1-Distill-Qwen-7B
-55.5
-DeepSeek-R1-Distill-Qwen-14B
-69.7
-DeepSeek-R1-Distill-Qwen-32B
-72.6
-DeepSeek-R1-Distill-Llama-8B
-50.4
-DeepSeek-R1-Distill-Llama-70B 70.0
-
-13.4
-26.7
-
-52.7
-83.3
-80.0
-83.3
-80.0
-86.7
-
-74.6
-78.3
-
-83.9
-92.8
-93.9
-94.3
-89.1
-94.5
-
-49.9
-65.0
-
-33.8
-49.1
-59.1
-62.1
-49.0
-65.2
-
-32.9
-38.9
-
-16.9
-37.6
-53.1
-57.2
-39.6
-57.5
-
-759
-717
-
-954
-1189
-1481
-1691
-1205
-1633
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We evaluate the distilled models on AIME, GPQA, Codeforces, as well as MATH-500 (Light-
 man et al., 2024) and LiveCodeBench (Jain et al., 2024). For comparison, we use two well-
@@ -4119,79 +3479,14 @@ computational requirements enable broader societal benefits.
 
 F.1. Distillation v.s. Reinforcement Learning
 
-Table 16 | Comparison of distilled and RL Models on Reasoning-Related Benchmarks.
-
-Model
-
-AIME 2024
-
-MATH
-
-GPQA
-
-LiveCode
-
-Diamond
-
-Bench
-
-pass@1
-
-cons@64 pass@1
-
-pass@1
-
-pass@1
-
-QwQ-32B-Preview
-Qwen2.5-32B-Zero
-DeepSeek-R1-Distill-Qwen-32B
-
-50.0
-47.0
-72.6
-
-60.0
-60.0
-83.3
-
-90.6
-91.6
-94.3
-
-54.5
-55.0
-62.1
-
-41.9
-40.2
-57.2
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 In Section F, we can see that by distilling DeepSeek-R1, the small model can achieve im-
 pressive results. However, there is still one question left: can the model achieve comparable
 
 61
 
-Table 17 | Performance of different models on AIME 2024 and AIME 2025.
-
-Average Score
-
-AIME 2024 AIME 2025
-
-GPT-4o-0513
-Qwen2-Math-7B-Instruct
-
-Qwen2-Math-7B-Zero
-
-9.3%
-7.9%
-
-22.3%
-
--
-4.6%
-
-18.1%
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 performance through the large-scale RL training discussed in the paper without distillation?
 
@@ -4430,13 +3725,8 @@ data as an attachment.
 
 J. Evaluation Prompts and Settings
 
-Table 18 | MMLU assesses a model’s factual and conceptual understanding across 57 tasks
-spanning STEM (science, technology, engineering, mathematics), humanities, social sciences,
-and professional fields (e.g., law, medicine). The benchmark is commonly used to evaluate a
-model’s ability to perform general knowledge reasoning and multitask proficiency across a
-diverse range of subjects and tasks. Here is an example of MMLU.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
 Answer the following multiple choice question. The last line of your response should be of the
 following format: ’Answer: $LETTER’ (without quotes) where LETTER is one of ABCD. Think step
 by step before answering.
@@ -4451,14 +3741,8 @@ Parse the last line in response to judge if the choice equals to ground truth.
 
 66
 
-Table 19 | MMLU-Redux is a subset of 5,700 manually re-annotated questions across all 57
-MMLU subjects. MMLU-Redux focuses on improving the quality, clarity, and robustness of the
-benchmark by reducing noise, ambiguities, and potential biases in the MMLU, while potentially
-adjusting the scope or difficulty of tasks to better align with modern evaluation needs. Here is
-an example of MMLU-Redux.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
-## Question:
 Sauna use, sometimes referred to as "sauna bathing," is characterized by short-term passive exposure
 to extreme heat . . . In fact, sauna use has been proposed as an alternative to exercise for people who
 are unable to engage in physical activity due to chronic disease or physical limitations.[13]
@@ -4481,11 +3765,8 @@ Parse the json output in response to judge if the answer equals to ground truth.
 
 67
 
-Table 20 | LiveCodeBench aims to evaluate model performance on the algorithm competition
-task, which collects new problems over time from contests across three competition platforms,
-namely LeetCode, AtCoder, and CodeForces.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
 Question: There is a stack of N cards, and the ith card from the top has an integer 𝐴𝑖 written on it.
 You take K cards from the bottom of the stack and place them on top of the stack, maintaining their
 order.
@@ -4528,13 +3809,8 @@ Extract the code wrapped by “‘python“‘ in response to judge if the answe
 
 68
 
-Table 21 | Compared to MMLU, MMLU-Pro features a curated subset of tasks, but with
-significantly increased difficulty. Questions in MMLU-Pro are designed to require deeper
-reasoning, multi-step problem-solving, and advanced domain-specific knowledge. For example,
-STEM tasks may involve complex mathematical derivations or nuanced scientific concepts,
-while humanities tasks may demand intricate contextual analysis.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
 The following are multiple choice questions (with answers) about business. Think step by step and
 then output the answer in the format of "The answer is (X)" at the end.
 . . .
@@ -4556,11 +3832,8 @@ truth.
 
 69
 
-Table 22 | DROP assesses a model’s ability to understand and extract relevant information from
-extended textual passages. Unlike simpler question-answering benchmarks that focus on
-factual recall, DROP requires models to process and interpret context-rich paragraphs.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
 You will be asked to read a passage and answer a question. Some examples of passages and Q&A
 are provided below.
 # Examples — Passage: Looking to avoid back-to-back divisional losses, the Patriots traveled to
@@ -4599,12 +3872,8 @@ truth.
 
 70
 
-Table 23 | Instruction-Following Evaluation (IFEval) is a benchmark designed to assess a
-model’s ability to comply with explicit, verifiable instructions embedded within prompts. It
-targets a core competency of large language models (LLMs): producing outputs that meet
-multiple, clearly defined constraints specified by the user.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
 Kindly summarize the text below in XML format. Make sure the summary contains less than 4
 sentences.
 Quantum entanglement is the phenomenon that occurs when a group of particles are generated,
@@ -4631,16 +3900,8 @@ Call official functions to check if the answer is consistent with the instructio
 
 71
 
-Table 24 | FRAMES (Factuality, Retrieval, And reasoning MEasurement Set) is a comprehensive
-benchmark designed to evaluate core components of retrieval-augmented generation (RAG)
-systems. Our evaluation employs the benchmark’s official "Oracle Prompt" configuration. In
-this setting, each test prompt includes the question along with all the ground truth Wikipedia
-articles, thus eliminating the need for an external retrieval component (e.g., BM25). This setting
-allows us to specifically measure a model’s ability to reason over and synthesize information
-from provided sources to generate correct and verifiable facts.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
-Here are the relevant Wikipedia articles:
 url: https:en.wikipedia.orgwikiPresident_of_the_United_States
 url content: The president of the United States (POTUS) is the head of state and head of government
 of the United States of America. The president directs the executive branch of the federal government
@@ -4673,16 +3934,8 @@ Please proceed with the evaluation.
 
 72
 
-Table 25 | Arena-Hard is an open-ended evaluation benchmark specifically designed to assess
-the capabilities of LLMs. It presents models with challenging, novel, and diverse prompts
-curated from Chatbot Arena, a continuously evolving, crowd-sourced platform. It focuses on
-measuring model performance in open-ended tasks, with particular emphasis on coding and
-mathematics-related prompts. Given the inherently subjective nature of open-ended tasks,
-where multiple valid responses may exist, the benchmark necessitates the use of an evaluation
-model to approximate human judgment effectively. Higher evaluation scores suggest that the
-model is more likely to be favored by human users in real-world scenarios.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
 To write an SQL query that selects the top 10 rows in a database and joins to 3 different tables based
 on a field called "code", you would need to know the names of the tables and the specific fields you
 want to select. Assuming the tables are named "table1", "table2", and "table3", and you want to select
@@ -4720,12 +3973,8 @@ Example output: "My final verdict is tie: [[A=B]]".
 
 73
 
-Table 26 | AlpacaEval 2.0 is an open-ended evaluation dataset, similar in nature to ArenaHard,
-and leverages an LLM to assess model performance on subjective tasks. However, in contrast to
-ArenaHard, the prompts in AlpacaEval 2.0 are generally less challenging and only a small
-subset necessitates the deployment of reasoning capabilities by the evaluated models.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
 What are the names of some famous actors that started their careers on Broadway?
 Evaluation
 < |𝑖𝑚𝑠𝑡𝑎𝑟𝑡| >system
@@ -4764,64 +4013,14 @@ following model identifiers and nothing else (no quotes, no spaces, no new lines
 
 74
 
-Table 27 | The CLUEWSC (Chinese Language Understanding Evaluation Benchmark - Winograd
-Schema Challenge) is a specialized task within the CLUE benchmark suite designed to evaluate
-a model’s commonsense reasoning and contextual understanding capabilities in Chinese.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
-请参考示例的格式，完成最后的测试题。
-下面是一些示例：他伯父还有许多女弟子，大半是富商财主的外室；这些财翁白天忙着赚钱，怕小
-公馆里的情妇长日无聊，要不安分，常常叫她们学点玩艺儿消遣。
-上面的句子中的"她们"指的是
-情妇
-耶律克定说到雁北义军时，提起韦大哥，就连声说不可挡、不可挡，似有谈虎色变之味。后来又听
-说粘罕在云中，特派人厚币卑词，要与‘韦义士修好’。韦大哥斩钉截铁地回绝了，大义凛然，端的
-是条好汉。如今张孝纯也想结识他，几次三番派儿子张浃上门来厮缠，定要俺引他上雁门山去见韦
-大哥。
-上面的句子中的"他"指的是
-张浃
-“你何必把这事放在心上？何况你的还不过是手稿，并没有发表出来。”龙点睛越发坦率：“如果发
-表出来了，那倒也就算了。不过既然没发表出来，我何必还让它飘在外头呢？你给我找一找吧，我
-要收回。”
-上面的句子中的"它"指的是
-手稿
-这个身材高大，曾经被孙光平拿着菜刀追赶得到处乱窜的年轻人，那天早晨穿上了全新的卡其布中
-山服，像一个城里来的干部似的脸色红润，准备过河去迎接他的新娘。
-上面的句子中的"他"指的是
-年轻人
-负责接待我们的是两位漂亮的朝鲜女导游，身材高挑，露出比例完美的小腿。一个姓韩，一个姓
-金，自称小韩和小金。她们的中文说得毫无口音，言谈举止也相当亲切。
-上面的句子中的"她们"指的是
-两位漂亮的朝鲜女导游
-下面是测试题，请在思考结束后（</think>后）用一句话输出答案，不要额外的解释。
-崩龙珍夫妻康健和美；鞠琴十年前丧偶，两年前重结良缘，现在的老伴是一位以前未曾有过婚
-史的高级工程师；崩龙珍和鞠琴都尽量避免谈及自己的爱人，也尽量回避提及蒋盈波的亡夫屈晋
-勇——尽管她们对他都很熟悉；当然也绝不会愚蠢地提出蒋盈波今后是一个人过到底还是再找个老
-伴的问题来加以讨论，那无论如何还为时过早。
-上面的句子中的"他"指的是
-Evaluation
 Parse the last line in response to judge if the answer equals to ground truth.
 
 75
 
-Table 28 | C-EVAL evaluates a model’s breadth and depth of knowledge across 52 diverse
-academic disciplines, spanning humanities, social sciences, STEM (Science, Technology,
-Engineering, and Mathematics), and other professional fields (e.g., medicine, law). All question
-in C-Eval are Chinese.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
-以下是中国关于逻辑学考试的单项选择题，请选出其中的正确答案。
-1991年6月15日，菲律宾吕宋岛上的皮纳图博火山突然大喷发，2000万吨二氧化硫气体冲入平流
-层，形成的霾像毯子一样盖在地球上空，把部分要照射到地球的阳光反射回太空几年之后，气象学
-家发现这层霾使得当时地球表面的温度累计下降了0．5°C，而皮纳图博火山喷发前的一个世纪，因
-人类活动而造成的温室效应已经使地球表面温度升高1°C。某位持“人工气候改造论”的科学家据此
-认为，可以用火箭弹等方式将二氧化硫充入大气层，阻挡部分阳光，达到地球表面降温的目的。以
-下哪项如果为真,最能对该科学家的提议构成质疑?___
-A. 如果利用火箭弹将二氧化硫充入大气层，会导致航空乘客呼吸不适。
-B. 火山喷发形成的降温效应只是暂时的，经过一段时间温度将再次回升。
-C. 可以把大气层中的碳取出来存储在地下，减少大气层的碳含量。
-D. 不论何种方式，“人工气候改造”都将破坏地区的大气层结构。
-答案：B
 . . .
 新疆的哈萨克人用经过训练的金雕在草原上长途追击野狼。某研究小组为研究金雕的飞行方向和判
 断野狼群的活动范围，将无线电传导器放置在一只金雕身上进行追踪。野狼为了觅食，其活动范围
@@ -4836,11 +4035,8 @@ D. 无线电传导信号仅能在有限的范围内传导。
 Evaluation
 Parse the last line in response to judge if the choice equals to ground truth.
 
-Table 29 | GPQA (Graduate-Level Google-Proof QA Benchmark) is a rigorous evaluation
-framework designed to measure an LLM’s ability to tackle complex, graduate-level
-multiple-choice problems in STEM domains—specifically biology, physics, and chemistry.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
 Answer the following multiple choice question. The last line of your response should be of the
 following format: ’ANSWER: $LETTER’ (without quotes) where LETTER is one of ABCD. Think
 step by step before answering.
@@ -4857,12 +4053,8 @@ truth.
 
 76
 
-Table 30 | SimpleQA is a factuality evaluation benchmark that measures a model’s ability to
-answer short, fact-seeking questions with precise, verifiable correctness.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
-Who received the IEEE Frank Rosenblatt Award in 2010?
-Evaluation
 Your job is to look at a question, a gold target, and a predicted answer, and then assign a grade
 of either ["CORRECT", "INCORRECT", "NOT_ATTEMPTED"]. First, I will give examples of each
 grade, and then you will grade a new example.
@@ -4902,20 +4094,8 @@ Just return the letters "A", "B", or "C", with no text around it.
 
 77
 
-Table 31 | An example of C-SimpleQA. It measures a model’s ability to answer short,
-fact-seeking questions in Chinese with precise, verifiable correctness.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-PROMPT
-显脉香茶菜可以用来治疗急性的什么类型的黄疸型肝炎？
-Evaluation
-请根据给定问题、标准答案和模型预测的答案来评估模型的回答是否正确。您的任务是将结果评定
-为：【正确】、【错误】或【未尝试】。
-首先，我们将列出每个评定类别的示例，然后请您对新问题的预测答案进行评定。
-以下是【正确】的答复示例：
-问题：贝拉克·奥巴马的孩子叫什么名字？
-标准答案：玛丽亚·奥巴马和萨莎·奥巴马
-模型预测1：Malia Obama and Sasha Obama
-模型预测2：玛丽亚和萨沙
 . . .
 以下是【错误】的答复示例：
 问题：巴拉克·奥巴马的孩子叫什么名字？
@@ -4940,10 +4120,7 @@ B:【错误】
 C:【未尝试】
 只返回字母"A"、"B"或"C"，无须添加其他文本。
 
-Table 32 | An example of math evaluation, which applies to AIME, MATH, and CNMO. These
-benchmarks evaluate model performance on mathematical tasks.
-
-√
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 81. Find the least integer 𝑏 ⩾ 2 for which there are more than ten 𝑏-eautiful integers.
 
@@ -4961,4 +4138,5 @@ ground truth. Round numerical values as needed, and use ‘SymPy’1 to parse ex
 
 78
 
+[PIPELINE INGESTION WORKFLOW - REMOVED REFERENCES]
 

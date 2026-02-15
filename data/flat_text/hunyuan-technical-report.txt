@@ -199,37 +199,7 @@ and specialized experts. We use Rotary Position Embedding (RoPE) for position le
 2024) and SwiGLU for activation (Shazeer, 2020). Table 1 displays the overview of our model’s
 architecture and key hyper-parameters.
 
-Table 1: Overview of the architecture and key hyper-parameters of Hunyuan-Large. This model has
-389B total parameters and 52B activated parameters. There are 1 shared expert and 1 specialized
-expert activated for each token.
-
-Configuration
-
-Hunyuan-Large
-
-# Layers
-# Attention Heads
-# Key/Value Heads
-# Shared Experts
-# Specialized Experts
-# Activated Specialized Experts
-# Trained Tokens
-Activation Function
-Vocabulary Size
-Hidden Size
-
-64
-80
-8
-1
-16
-1
-7T
-SwiGLU
-128K
-6,400
-
-2.2.2 KV Cache Compression
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 To alleviate memory pressure of KV cache and reduce the cost during inference, we jointly integrate
 two classical strategies for KV cache compression: (a) Grouped-Query Attention (GQA) (Ainslie
@@ -245,28 +215,7 @@ considering both effectiveness and efficiency. Table 2 presents a comparison of 
 nearly 95% KV cache in total compared to the original MHA mechanism, significantly improving the
 inference efficiency without much side effect on model performance.
 
-Table 2: Comparisons of KV cache memory (in bytes on bf16) for different attention mechanisms.
-The attention mechanisms include Multi-Head Attention (MHA), Grouped-Query Attention (GQA),
-Multi-Query Attention (MQA), Cross-Layer Attention (CLA), and GQA+CLA (the final setting in
-Hunyuan-Large). nh, dh, l, and ng represent the number of attention heads, the dimension per head,
-the number of layers, and the number of groups in GQA (ng<nh), respectively. Our CLA shares the
-KV cache every 2 layers.
-
-Attention Mechanism KV Cache Memory
-
-MHA
-GQA
-MQA
-CLA
-GQA+CLA
-
-4nhdhl
-4ngdhl
-4dhl
-2nhdhl
-2ngdhl
-
-2.2.3 Expert Routing Strategy
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Shared and Specialized Experts. The expert routing strategy of MoE is essential to efficiently
 activate each expert’s capability while maintaining a relatively balanced load. Conventional routing
@@ -596,36 +545,7 @@ evaluation metrics and the numbers of shots) of various types of benchmarks in e
 
 10
 
-Table 3: Performance of Hunyuan-Large’s pre-trained model and its competitors.
-
-Model
-Architecture
-# Activated Params
-# Total Params
-Context Length
-
-MMLU
-MMLU-Pro
-BBH
-HellaSwag
-CommonsenseQA
-WinoGrande
-PIQA
-NaturalQuestions
-DROP
-ARC-C
-TriviaQA
-
-CMMLU
-C-Eval
-C3
-
-GSM8K
-MATH
-CMATH
-
-HumanEval
-MBPP
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 LLama3.1-405B LLama3.1-70B Mixtral-8x22B DeepSeek-V2 Hunyuan-Large
 MoE
@@ -787,16 +707,8 @@ publicly reported or those reproduced by ourselves for baselines.
 
 4.1.2 Model Performance of Pre-Training
 
-Table 3 illustrates the performance of Hunyuan-Large and other competitive pre-trained models. In
-general, Hunyuan-Large achieves the best overall performance compared to both Dense and MoE
-based competitors having similar activated parameter sizes. For aggregated benchmarks such as
-MMLU, Hunyuan-Large not only surpasses the performance of the LLama3.1-405B model but does so
-with a significantly lower count of activation parameters, achieving an impressive 3.2% improvement.
-Hunyuan-Large also shows superior performance in commonsense understanding and reasoning,
-and classical NLP tasks such as QA and reading comprehension tasks (e.g., CommonsenseQA,
-PIQA, and TriviaQA). For the mathematics capability, Hunyuan-Large outperforms all baselines
-in math datasets of GSM8K and MATH, and also gains the best results on CMATH in Chinese. It
-also achieves the first-tier results in code datasets like HumanEval and MBPP. We also observe that
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
 Hunyuan-Large achieves the overall best performance in all Chinese tasks (e.g., CMMLU, C-Eval).
 In-depth analyses throughout Hunyuan-Large’s development process indicate that the impressive
 all-aspect improvement mainly derives from: (a) the high-quality pre-training data armed with
@@ -809,26 +721,8 @@ long-context pre-training.
 
 11
 
-Table 4: Performance of our Hunyuan-Large-Instruct and its competitors.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Model
-
-MMLU
-CMMLU
-C-Eval
-BBH
-ARC-C
-GPQA_diamond
-MATH
-HumanEval
-
-AlignBench
-MT-Bench
-IFEval strict-prompt
-Arena-Hard
-AlpacaEval-2.0
-
-LLama3.1
 405B Inst.
 
 LLama3.1
@@ -937,16 +831,8 @@ best performance among the publicly reported scores and the results that we repr
 
 4.2.2 Model Performance of Post-Training
 
-Table 4 shows the results of Hunyuan-Large-Instruct and its competitors on public benchmarks, from
-which we could observe that our Hunyuan-Large-Instruct achieves consistent improvements on most
-types of tasks compared to LLMs having similar activated parameters, indicating the effectiveness
-of our post-training. Delving into the model performance in different categories of benchmarks,
-we find that our instruct model achieves the best performance on MMLU and MATH dataset.
-Notably, on the MMLU dataset, our model demonstrates a significant improvement, outperforming
-the LLama3.1-405B model by 2.6%. This enhancement is not just marginal but indicative of the
-Hunyuan-Large-Instruct’s superior understanding and reasoning capabilities across a wide array of
-language understanding tasks. The model’s prowess is further underscored in its performance on the
-MATH dataset, where it surpasses the LLama3.1-405B by a notable margin of 3.6%. Remarkably,
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
 this leap in accuracy is achieved with only 52 billion activated parameters, underscoring the efficiency
 of our model.
 
@@ -997,40 +883,7 @@ original metrics, we employed LLM as an evaluator, providing a more accurate ref
 performance. As illustrated in Table 5, Hunyuan-Large-Instruct consistently outperforms LLama3.1-
 70B-Instruct across all length intervals, underscoring its excellence in long-context processing.
 
-Table 5: The performance of Hunyuan-Large-Instruct on RULER and LV-Eval.
-
-Model
-
-LLama3.1-70B-Instruct
-Hunyuan-Large-Instruct
-
-RULER
-
-LV-Eval
-
-0-8K 8K-32K 32K-64K 64K-128K 0-32K 32K-64K 64K-128K
-95.89
-94.39
-
-94.72
-93.02
-
-95.39
-94.94
-
-86.48
-89.53
-
-75.73
-81.92
-
-61.57
-67.87
-
-62.39
-71.15
-
-4.3.2 In-House Evaluation with PenguinScrolls
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 To address the gaps in existing benchmarks, such as insufficient real-world content diversity and lack
 of multilingual and multi-turn dialogue data, we developed PenguinScrolls. This benchmark aims to
@@ -1052,37 +905,7 @@ Instruct demonstrates superior performance over LLama3.1-70B-Instruct across all
 
 13
 
-Table 6: The performance of Hunyuan-Large-Instruct on PenguinScrolls.
-
-Model
-
-LLama3.1-70B-Instruct
-Hunyuan-Large-Instruct
-
-Information
-Extraction
-82.51
-91.14
-
-Information
-Localization
-69.70
-89.56
-
-Qualitative
-Analysis
-75.77
-92.78
-
-Numerical
-Reasoning
-49.52
-67.46
-
-Overall
-
-69.37
-85.23
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Internal user studies corroborate that the improvements on PenguinScrolls strongly correlate with
 enhancements in actual user experiences. We will release PenguinScrolls to advance long-context
@@ -1104,27 +927,5 @@ performing MoE-based Hunyuan-Large could spark more ripple of debate about more 
 techniques of LLMs among the community, in turn to further improve our model from more practical
 aspects and contribute to the more helpful AGI in the future.
 
-Contributors and Acknowledgements
-
-Hunyuan-Large has seen significant participation and contributions from many teams at Tencent, for
-which we are deeply grateful. Here, we acknowledge the most central contributors involved in this
-project.
-
-Xingwu Sun, Yanfeng Chen, Yiqing Huang, Ruobing Xie, Jiaqi Zhu, Kai Zhang, Shuaipeng Li,
-Zhen Yang, Jonny Han, Xiaobo Shu, Jiahao Bu, Zhongzhi Chen, Xuemeng Huang, Fengzong Lian,
-Saiyong Yang, Jianfeng Yan, Yuyuan Zeng, Xiaoqin Ren, Chao Yu, Lulu Wu, Yue Mao, Jun Xia,
-Tao Yang, Suncong Zheng, Kan Wu, Dian Jiao, Jinbao Xue, Xipeng Zhang, Decheng Wu, Kai Liu,
-Dengpeng Wu, Guanghui Xu, Shaohua Chen, Shuang Chen, Xiao Feng, Yigeng Hong, Junqiang
-Zheng, Chengcheng Xu, Zongwei Li, Xiong Kuang, Jianglu Hu, Yiqi Chen, Yuchi Deng, Guiyang
-Li, Ao Liu, Chenchen Zhang, Shihui Hu, Zilong Zhao, Zifan Wu, Yao Ding, Weichao Wang, Han
-Liu, Roberts Wang, Hao Fei, Peijie Yu, Ze Zhao, Xun Cao, Hai Wang, Fusheng Xiang, Mengyuan
-Huang, Zhiyuan Xiong, Bin Hu, Xuebin Hou, Lei Jiang, Jianqiang Ma, Jiajia Wu, Yaping Deng, Yi
-Shen, Qian Wang, Weijie Liu, Jie Liu, Meng Chen, Liang Dong, Weiwen Jia, Hu Chen, Feifei Liu,
-Rui Yuan, Huilin Xu, Zhenxiang Yan, Tengfei Cao, Zhichao Hu, Xinhua Feng, Dong Du, Tinghao
-Yu, Yangyu Tao, Feng Zhang, Jianchen Zhu, Chengzhong Xu, Xirui Li, Chong Zha, Wen Ouyang,
-Yinben Xia, Xiang Li, Zekun He, Rongpeng Chen, Jiawei Song, Ruibin Chen, Fan Jiang, Chongqing
-Zhao, Bo Wang, Hao Gong, Rong Gan, Winston Hu, Zhanhui Kang, Yong Yang, Yuhong Liu, Di
-Wang, and Jie Jiang.
-
-14
+[PIPELINE INGESTION WORKFLOW - REMOVED CONTRIBUTOR LIST]
 

@@ -1298,9 +1298,7 @@ InFoBench
 87.2
 88.3
 
-Table 3: Results for Command A and Command R7B on standard academic benchmarks. ∗Note that for
-IFEval, Liu et al. (2024a) report only the prompt-level strict accuracy. We report the average of the prompt-
-and instruction-level strict accuracies for all other models (see Appendix B.7).
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We note that academic benchmarks have various limitations such as saturation, bias and alignment to
 real-world performance (Kiela et al., 2021). Human assessment of model capabilities can be undesirably
@@ -1312,52 +1310,8 @@ variance (Kirk et al., 2024), and demonstrates imperfect correlation to academic
 2025). Enterprise-relevant capabilities are often not well-represented in these benchmarks, so we augment our
 evaluations with enterprise-oriented signal (e.g. §4.2, §4.7), and human annotation based evaluation (§4.11).
 
-Table 3 shows results on these selected benchmarks. Command A is competitive across all benchmarks,
-generally outperforming similarly-sized models while remaining competitive with considerably larger and
-less-efficient models. On the instruction-following benchmarks, we observe that Command A performs com-
-petitively across both IFEval and InFoBench. Specifically, it outperforms all similarly sized models on In-
-FoBench and is outperformed only by Llama 3.3 70B Instruct on IFEval. We also note that Command A
-represents a substantial improvement over our previous Command R+ Refresh model.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-4.2 Agentic Tool Use
-
-Model
-
-Command A
-GPT-4o
-DeepSeek V3
-
-ChatRAGBench
-
-StrategyQA
-
-Bamboogle
-
-DROP
-
-HotPotQA
-
-72.9
-66.6
-40.3
-
-76.7
-81.2
-73.8
-
-76.0
-76.0
-70.4
-
-91.1
-89.5
-85.7
-
-92.1
-92.1
-90.1
-
-Table 4: Standard RAG evaluations. Correctness is determined following the procedure in Verga et al.
 (2024) where a panel of LLMs judges the model’s generation against a reference answer.
 
 Model
@@ -1428,104 +1382,8 @@ Multi-turn
 11.4
 7.6
 
-Table 5: BFCL Results. All numbers taken from official leaderboard. Where leaderboard entries exist for
-both function calling and prompted, we take the larger of the two reported values.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Model
-
-Taubench Retail
-
-Taubench Airline
-
-Command A
-Llama 3.3 70B Instruct
-Mistral Large 2
-Llama 3.1 405B Instruct
-DeepSeek V3
-GPT-4o
-Claude 3.5 Sonnet
-
-P@1
-
-P@2
-
-P@3
-
-P@4
-
-P@1
-
-P@2
-
-P@3
-
-P@4
-
-60.0
-6.2
-53.3
-29.1
-54.8
-60.6
-69.2
-
-49.8
-5.7
-37.8
-17.5
-41.2
-49.0
-57.6
-
-44.1
-5.49
-29.0
-12.8
-34.1
-42.4
-50.9
-
-40.4
-5.3
-23.1
-10.4
-30.4
-37.7
-46.2
-
-45.3
-35.3
-27.2
-26.0
-25.5
-43.0
-46.0
-
-36.9
-33.6
-14.2
-17.3
-14.0
-31.8
-32.6
-
-32.2
-32.4
-9.4
-13.5
-12.0
-26.3
-26.3
-
-29.0
-31.5
-7.1
-12.0
-12.0
-22.3
-22.5
-
-Table 6: Taubench Results. We follow the original experimental setup from Yao et al. (2024). Pass@k (P@k)
 evaluates a model’s consistency; for example, Pass@4 is the probability that a model answers the same
 question correctly 4 times. Scores are aggregated over 10 runs.
 
@@ -5035,200 +4893,8 @@ ko
 34.0
 21.9
 
-Table 9: Multilingual Taubench Results: We follow the original experimental setup from Yao et al.
-(2024). We report the per language pass@1 (P@1) score. Scores aggregated over 3 runs.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Command A
-Command R+ Refresh
-Qwen 2.5 72B Instruct Turbo
-Claude 3.7 Sonnet
-Llama 3.3 70B Instruct
-Gemini 1.5 Pro
-DeepSeek V3
-GPT-4o
-Mistral Large 2
-
-Avg
-
-93.0
-95.5
-93.0
-91.8
-91.3
-90.6
-90.6
-88.9
-75.9
-
-ar
-
-de
-
-es
-
-fr
-
-hi
-
-id
-
-it
-
-ja
-
-ko
-
-pt
-
-ru
-
-tr
-
-vi
-
-zh
-
-98.2
-94.8
-96.4
-94.5
-90.5
-91.7
-94.9
-92.2
-85.3
-
-95.5
-98.2
-94.0
-95.5
-94.7
-94.4
-93.8
-91.0
-64.7
-
-94.8
-97.2
-94.3
-93.2
-92.9
-94.5
-94.2
-94.9
-83.4
-
-93.5
-97.2
-93.7
-94.2
-93.0
-92.0
-93.5
-91.7
-78.3
-
-94.6
-96.5
-94.1
-93.6
-98.2
-93.5
-92.2
-91.9
-86.9
-
-84.2
-89.0
-86.6
-78.9
-92.1
-82.9
-82.6
-80.9
-65.0
-
-94.9
-97.5
-94.0
-94.0
-93.3
-93.3
-92.8
-90.4
-69.6
-
-93.2
-96.2
-91.3
-93.6
-83.3
-86.1
-85.5
-85.3
-82.6
-
-93.4
-94.7
-93.0
-93.9
-78.9
-90.6
-91.5
-87.4
-76.1
-
-89.6
-91.6
-87.9
-84.1
-91.2
-86.7
-85.3
-87.0
-75.2
-
-93.7
-96.9
-95.8
-95.9
-95.0
-93.4
-92.9
-87.9
-75.6
-
-93.6
-97.8
-95.4
-92.6
-92.9
-94.8
-92.3
-90.7
-69.3
-
-92.2
-98.3
-95.7
-95.3
-95.9
-95.6
-91.8
-88.0
-73.1
-
-90.3
-90.6
-89.2
-86.2
-86.5
-79.1
-84.3
-85.5
-77.2
-
-Table 10: Crosslingual line-level pass rate (LPR) from the Language Confusion Benchmark (Marchisio et al.,
 2024). Models are prompted in English with an instruction to reply in a different language. LPR measures
 the percentage of answers with all lines in the requested language.
 
@@ -5331,223 +4997,8 @@ Command R+ Refresh
 
 Llama 3.3 70B Instruct
 
-86.0 / 81.0
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Mistral Large 2
-
-Qwen 2.5 72B Instruct
-
-84.7
-
-88.6
-
-Llama 3.1 405B Instruct
-
-88.6 / 87.0
-
-DeepSeek V3
-
-90.0
-
-26.9
-
-24.9
-
-32.9
-
-9.0
-
-11.0
-
-14.4
-
-32.9
-
-26.7
-
-26.3
-
-29.3
-
-33.5
-
-45.4
-
-47.4
-59.7∗
-
-30.9
-
-34.3
-
-25.8
-
-46.9 / 41.9
-
-44.7
-
-45.8 / 43.6
-
-46.2
-
-50.0 / 48.6
-
-51.5
-
-50.8
-
-65.4
-
-21.9
-
-24.7
-
-25.6
-
-47.8
-
-54.0
-
-48.3
-
-52.7
-
-61.5
-
-25.3
-
-29.8
-
-55.7
-
-64.6
-
-76.2
-
-77.5
-
-—
-
-50.7
-
-54.7
-
-54.4
-
-75.5
-
-—
-
-7.0
-
-1.9
-
-2.5
-
-3.2
-
-82.9
-
-10.8
-
-78.5
-
-76.7
-
-6.3
-
-3.2
-
-83.5
-
-15.2
-
-—
-
-35.4
-
-34.2
-
-43.7
-
-46.2
-
-46.8
-
-55.7
-
-59.5
-
-63.3
-
-92.6
-
-91.8
-
-—
-
-69.6
-
-73.2
-
-77.0
-
-85.6
-
-88.0
-
-83.2
-
-90.4
-
-92.2
-
-Table 12: Code Understanding Benchmarks across Python, Multi-language, and COBOL groups re-
-porting 1-shot pass@1 and RepoQA reporting match accuracy. HE is HumanEval. All results are internal
-reproductions using an identical prompt except where ‘/’ indicates external value first and internal repro-
-duction second. Best score ±1% is bolded. ∗For BigCodeBench, we use 3 tool-use execution feedback tests.
-
-Command A
-Command A Expert
-
-Command R7B
-Command R Refresh
-Command R+ Refresh
-Llama 3.3 70B Instruct
-Mistral Large 2
-Qwen 2.5 72B Instruct
-Llama 3.1 405B Instruct
-DeepSeek V3
-
-SWE-Bench Verified
-
-Aider Polyglot
-
-26.8
-23.4
-
-3.6
-11.6
-17.0
-29.4
-30.0
-33.0
-33.4
-42.0 / 45.8
-
-14.7
-8.9
-
-2.7
-1.8
-2.2
-8.4
-16.0
-8.0
-13.8
-49.6 / 51.6
-
-Table 13: Code Editing Benchmarks. All results are internal reproductions using an identical prompt
 except where ‘/’ indicates externally reported value first and internal reproduction second.
 
 Code Understanding evaluates code generation across multiple languages. For Python generation, we
@@ -5786,9 +5237,7 @@ PL/SQL T-SQL
 
 62.0
 
-Table 14: SQL Generation Benchmarks reporting execution accuracy against gold databases. All results
-are internal reproductions using an identical prompt. Avg. is the sample-weighted average across internal
-multi-dialect evaluation datasets. Best score ±1% is bolded.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 to Python similar to Muennighoff et al. (2023). The translation setting tests model capability to update
 legacy codebases into a modern language.
@@ -5847,11 +5296,7 @@ in an enterprise database context, we also report results for an internal benchm
 MySQL, Oracle PL/SQL, and Microsoft T-SQL. Performance on these dialects better reflects real usage of
 SQL to access commercial database systems.
 
-Table 14 demonstrates that Command A offers state-of-the-art performance across multiple datasets. Com-
-mand A leads in both Spider Dev, and Bird to provide accurate SQL generation to solve challenging queries
-in even “dirty” database contexts. Across models of similar size, Command A also demonstrates the strongest
-average performance across 5 enterprise-critical SQL dialects in our internal benchmark. This further punc-
-tuates the capability of Command A in both academic and enterprise scenarios for SQL.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We highlight the performance benefit of Command A relative to size in Figure 6. Across 3 datasets, Command
 A and Command A Code Expert provide best-in-class performance, often surpassing similar and larger
@@ -5897,10 +5342,7 @@ GPQA (Diamond)
 49.0
 48.6
 
-Table 15: Reasoning performance of Command A compared to similarly-sized models. Benchmarks are MATH
-(Hendrycks et al., 2021), the 2024 AIME mathematics competition, and GPQA Diamond (Rein et al., 2023).
-Results for external models are taken from officially-reported sources, unless indicated with an asterisk (*),
-which denotes internal evaluation since official public results were not available.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 In our qualitative assessments, we also find that reasoning-expert models provide generalised gains in coding
 and structured data manipulation tasks, and that these are additive in the final Command A model.
@@ -6170,12 +5612,7 @@ Command R Refresh
 82.1
 50.4
 
-Table 16: Default safety performance of Command A and Command R7B compared to similarly sized
-models across various categories of unsafe content. Relative safety is the winrate vs. Command A. Absolute
-safety score is computed as an average of safe response rates for all categories. Large models are shown in
-the top half of the table, while small models are shown in the bottom half. The top performing model for
-each size category is bolded in each column. As indicated by the upwards-pointing arrows, higher winrates
-and higher safe response rates correspond to better performance for each competitor.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 occurs because the relative safety evaluation considers the intersection of safety and quality. Critically, in
 the event that both models provide a safe response, the relative safety evaluations then consider the winner
@@ -6413,73 +5850,7 @@ Enterprise Pass Rate (%)
 
 60.4
 
-Table 18: Enterprise generative evaluation performance across all 22 tasks.
-
-Model
-
-Command A
-
-Command R+ Refresh
-
-Claude 3.5 Sonnet v2
-
-DeepSeek V3
-
-GPT-4o
-
-Llama 3.3 70B Instruct
-
-Llama 3.1 405B Instruct
-
-Command R7B
-
-Gemma 2 9B
-
-Llama 3.1 8B
-
-Workplace Policies QA
-
-Technical QA
-
-4.59
-
-4.08
-
-4.63
-
-4.52
-
-4.50
-
-4.45
-
-4.41
-
-4.16
-
-3.23
-
-3.99
-
-4.86
-
-4.42
-
-4.81
-
-4.64
-
-4.81
-
-4.78
-
-4.62
-
-4.48
-
-4.66
-
-4.37
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Avg.
 
@@ -6503,76 +5874,7 @@ Avg.
 
 4.18
 
-Table 19: Enterprise RAG evaluation performances of Command A models. The table shows the LLama
-Index Correctness metric which ranges from 1-5. Best performances are marked in bold.
-
-Model
-
-Command A
-
-Command R+ Refresh
-
-Claude 3.5 Sonnet v2
-
-DeepSeek V3
-
-GPT-4o
-
-Llama 3.3 70B Instruct
-
-Llama 3.1 405B Instruct
-
-Command R7B
-
-Gemma 2 9B
-
-Llama 3.1 8B
-
-Answerable Acc. (%)
-
-Unanswerable Acc. (%)
-
-96
-
-78
-
-89
-
-93
-
-94
-
-95
-
-94
-
-86
-
-90
-
-88
-
-91
-
-95
-
-92
-
-86
-
-88
-
-87
-
-90
-
-76
-
-90
-
-91
-
-Table 20: Enterprise RAG Answerable and Unanswerable Accuracy.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 These metrics ensure that the model generates accurate responses while demonstrating robust judgement in
 handling questions beyond the scope of the provided context. Table 19 shows the LLama Index Correctness
@@ -6797,119 +6099,7 @@ Gemini-2.0-Flash (exp)
 
 95.1
 
-Table 21: Results on the RULER long context benchmark. Not all models support contexts up to 256k.
-
-Command A
-
-Mistral Large 2
-
-Llama 3.1 70B
-
-Llama 3.1 405B
-
-Command R+ Refresh
-
-GPT-4o(11-20)
-
-Claude 3.5 Sonnet (10-22)
-
-Overall
-
-Short
-
-Medium
-
-Long
-
-Easy
-
-Hard
-
-43.4
-
-34.4
-
-31.8
-
-37.8
-
-27.8
-
-46.0
-
-40.7
-
-44.1
-
-41.7
-
-37.2
-
-39.7
-
-36.7
-
-42.9
-
-44.9
-
-47.4
-
-30.7
-
-28.8
-
-39.0
-
-23.7
-
-52.1
-
-41.3
-
-34.3
-
-29.6
-
-28.7
-
-32.1
-
-21.3
-
-35.3
-
-31.6
-
-45.3
-
-38.0
-
-35.4
-
-39.0
-
-30.2
-
-52.1
-
-45.8
-
-42.3
-
-32.2
-
-29.6
-
-37.0
-
-26.4
-
-42.2
-
-38.6
-
-Table 22: LongBench-V2 results for Command A.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Tables 21 and 22 highlight Command A’s exceptional long-context capabilities. Our hybrid architecture
 enables this level of performance while requiring significantly less KV cache memory compared to models
@@ -7105,9 +6295,7 @@ Code
 
 61.6
 
-Table 23: Win rate of human-annotated pairwise evaluation between Command A and different competitor
-models on our internal test set. Win rates are from the perspective of Command A (50% is tie, higher
-numbers mean Command A wins by a larger margin).
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Interestingly, we also observe that GPT-4.5-preview improves significantly over its predecessor on reasoning-
 heavy prompts.
@@ -7509,45 +6697,7 @@ zh
 
 81.5
 
-Table 24: MGSM scores using simple-evals. ⋆: we did not train with the simple-evals template and our French
-outputs sometimes contain a comma (used as a decimal separator), which simple-evals counts as wrong. With
-our internal implementation of MGSM, we score 90.0% on French.
-
-51
-
-Command A
-
-Claude 3.7 Sonnet
-
-Gemini 2.0 Flash
-
-GPT-4o
-
-DeepSeek V3
-
-Gemini 1.5 Pro
-
-Llama 3.1 405B Instruct
-
-Llama 3.3 70B Instruct
-
-Qwen 2.5 72B Instruct Turbo
-
-Mistral Large 2
-
-Command R7B
-
-Gemini 1.5 Flash-8B
-
-Claude 3 Haiku
-
-Gemma 2 9B Instruct
-
-Qwen 2.5 7B Instruct Turbo
-
-Llama 3.1 8B Instruct
-
-Ministral 8B
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Avg.
 
@@ -8305,11 +7455,8 @@ zh
 
 50.6
 
-Table 25: INCLUDE-44 scores for individual languages.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-B.3 Code
-
-B.3.1 Expert Training Considerations
 Stage 1 large-scale supervised learning. This expert is trained using Adam optimisation, a learning
 rate peak of 5×10−5, cosine decay to 5×10−6, beta values (β1 = 0.9, β2 = 0.95), weight decay factor of 0.1,
 and gradient norm clipping at peak 1.0. Our regularisation is inspired by similar code expert training such
@@ -8686,10 +7833,7 @@ Go
 
 52.8
 
-Table 26: Full pass@1 results for HumanEval and LBPP across Python, C++, Rust Java, Javascript, Go.
-and COBOL. All results are internal reproductions using an identical prompt except where ‘/’ indicates an
-external value first, and footnote citation, and the internal reproduction second. Average (Avg.) results are
-a sample-weighted average across Python, C++, Rust Java, Javascript and Go languages.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Sources of externally reported numbers in all code-related tables in this report are as follows:
 
@@ -8830,13 +7974,7 @@ Strict Accuracy
 74.7
 68.0
 
-Table 27: Safety mode performance compared to similarly sized models. We pass the instructions for each
-safety mode to competitors as system message or first message to allow for the mode comparison. Note
-that the over-refusal set was developed by red-teaming Command R+ Refresh, and therefore is specifically
-challenging for Command A models. The top performing model for each size category is bolded in each
-column. Higher accuracy and lower over-refusal rates correspond to better performance.
-
-53
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Figure 15: Absolute safety performance for large models in the default setting.
 
@@ -8851,11 +7989,8 @@ Offline preference tuning. We train the Safety expert using the same hyper-param
 the peak learning rate is 10−6 decayed to 10−7. We use IPO with a KL regularisation parameter, β = 0.03.
 
 B.6.2 Results
-Table 27 provides additional results for the safety mode performance of the Command A models, while
-Figures 15 and 16 show absolute safety performance for large and small models respectively in the default
-safety setting, further highlighting our models’ competitive safety performance.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-B.7 Evaluation on Standard Benchmarks
 We provide further details about how we measure performance on standard benchmarks:
 
 • MMLU (Hendrycks et al., 2021) measures university-level academic knowledge across a diverse range

@@ -82,9 +82,12 @@ data/
 
 scripts/
 ├── ingest_universal.py              # Document ingestion (PDF, HTML, text)
+├── clean_flat_text.py               # Post-ingestion cleanup (TOC, refs, tables)
 ├── analyze_nlu.py                   # NLU technique extraction
 ├── run_extraction_pipeline.py       # Full pipeline orchestration
+├── llm_assisted_extraction.py       # LLM-based technique extraction (Claude API)
 ├── compare_taxonomy_runs.py         # Evaluation against ground truth
+├── check_sources.py                 # Source change detection for automation
 ├── generate_dashboard.py            # Interactive dashboard generation
 ├── generate_report.py               # Summary report generation
 └── semantic_retriever.py            # Semantic search utility
@@ -95,6 +98,7 @@ tools/
 reports/
 └── taxonomy_comparison.md           # Latest pipeline evaluation results
 
+cache/                               # Source checksums and pipeline logs
 docs/                                # Generated dashboard (GitHub Pages)
 ```
 
@@ -111,22 +115,39 @@ pip install sentence-transformers
 
 ### Running the Pipeline
 
-```bash
-# Full pipeline (NLU + LLM):
-python scripts/run_extraction_pipeline.py
+There are two workflow modes:
 
-# Individual stages:
+**Mode A: Full collection** (after changing taxonomy or semantic anchors):
+```bash
+python scripts/run_extraction_pipeline.py --regenerate
+```
+
+**Mode B: Single document** (after adding or updating a document):
+```bash
+python scripts/ingest_universal.py --id <document-id>
+python scripts/run_extraction_pipeline.py --id <document-id> --regenerate
+```
+
+**Individual stages:**
+```bash
+# NLU only:
 python scripts/run_extraction_pipeline.py --nlu-only
+
+# LLM only (uses existing NLU results):
 python scripts/run_extraction_pipeline.py --llm-only
 
-# Ingest a new document:
-python scripts/ingest_universal.py --id <document-id>
+# Re-download all sources (--force overwrites existing files):
+python scripts/ingest_universal.py --force
+
+# Clean flat text files (remove TOCs, references, tables):
+python scripts/clean_flat_text.py
 
 # Evaluate against ground truth:
 python scripts/compare_taxonomy_runs.py --detailed
 
-# Regenerate dashboard:
-python scripts/generate_report.py && python scripts/generate_dashboard.py
+# Check sources for updates:
+python scripts/check_sources.py                     # Report only
+python scripts/check_sources.py --update --analyse   # Re-ingest and analyse changed docs
 ```
 
 ## Contributing

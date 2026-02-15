@@ -29,35 +29,7 @@ gpt-5-thinking-pro.
 
 It can be helpful to think of the GPT-5 models as successors to previous models:
 
-Table 1: Model progressions
-
-Previous model
-
-GPT-5 model
-
-GPT-4o
-
-gpt-5-main
-
-GPT-4o-mini
-
-gpt-5-main-mini
-
-OpenAI o3
-
-gpt-5-thinking
-
-OpenAI o4-mini
-
-gpt-5-thinking-mini
-
-GPT-4.1-nano
-
-gpt-5-thinking-nano
-
-OpenAI o3 Pro
-
-gpt-5-thinking-pro
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 This system card focuses primarily on gpt-5-thinking and gpt-5-main, while evaluations for other
 models are available in the appendix. The GPT-5 system not only outperforms previous models
@@ -155,94 +127,7 @@ checking that the model did not produce unsafe output according to relevant Open
 Note that the production benchmark set is designed specifically to be more challenging, to provide
 useful signal; scores are therefore expected to be lower than the standard evaluation.
 
-Table 2: Standard Disallowed Content Evaluation (higher is better):
-
-Category
-
-hate (aggregate)1
-
-illicit/non-violent
-
-illicit/violent
-
-personal-data
-
-personal-data/restricted
-
-self-harm/intent and self-
-harm/instructions
-
-sexual/exploitative
-
-sexual/minors
-
-gpt-5-thinking OpenAI o3
-
-gpt-5-main GPT-4o
-
-1.000
-
-0.991
-
-1.000
-
-0.881
-
-0.989
-
-1.000
-
-1.000
-
-0.990
-
-0.992
-
-0.991
-
-1.000
-
-0.930
-
-0.921
-
-1.000
-
-1.000
-
-1.000
-
-0.987
-
-0.991
-
-0.992
-
-0.980
-
-0.989
-
-1.000
-
-1.000
-
-1.000
-
-0.996
-
-0.983
-
-1.000
-
-0.967
-
-0.978
-
-1.000
-
-1.000
-
-1.000
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 For the standard disallowed content evaluation, we observe that not_unsafe for personal-data is
 slightly lower for gpt-5-thinking than OpenAI o3, and represents natural noise in the evaluation.
@@ -279,99 +164,7 @@ self-harm/intent
 
 self-harm/instructions
 
-Table 3: Production Benchmarks
-
-gpt-5-thinking OpenAI o3
-
-gpt-5-main GPT-4o
-
-0.883
-
-0.877
-
-0.755
-
-0.931
-
-0.958
-
-0.954
-
-0.822
-
-0.790
-
-0.912
-
-0.950
-
-0.955
-
-0.842
-
-0.830
-
-0.666
-
-0.939
-
-0.957
-
-0.920
-
-0.677
-
-0.717
-
-0.829
-
-0.824
-
-0.864
-
-0.851
-
-0.980
-
-0.689
-
-0.826
-
-0.910
-
-0.910
-
-0.727
-
-0.701
-
-0.786
-
-0.849
-
-0.759
-
-0.882
-
-0.967
-
-0.745
-
-0.927
-
-0.939
-
-0.919
-
-0.867
-
-0.573
-
-0.633
-
-0.849
-
-0.735
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 While gpt-5-thinking generally performs on par or higher than OpenAI o3, gpt-5-main underper-
 forms GPT-4o in several areas while overperforming in others.
@@ -413,39 +206,7 @@ for paid users in comparison to the most recent GPT-4o model (based on a random 
 assistant responses). While these numbers show meaningful improvement, we plan to continue
 working on this challenge and look forward to making further improvements.
 
-Table 4: Sycophancy evaluation
-
-Model
-
-Test Type
-
-Result (lower is better)
-
-GPT-4o (baseline)
-
-Offline evaluation
-
-gpt-5-main
-
-Offline evaluation
-
-gpt-5-thinking
-
-Offline evaluation
-
-0.145
-
-0.052
-
-0.040
-
-gpt-5-main
-
-Preliminary online prevalence
-measurement compared to 4o
-(early A/B tests)
-
--0.69 for free users -0.75 for paid users
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 gpt-5-main and gpt-5-thinking show meaningful improvement in avoiding sycophantic behavior in
 both offline evaluations and preliminary online measurement.
@@ -474,67 +235,7 @@ for not_unsafe according to relevant policy.
 
 8
 
-Table 5: Jailbreak evaluations
-
-Category
-
-metric
-
-gpt-5-thinking OpenAI o3
-
-gpt-5-main GPT-4o
-
-illicit/non-violent-
-crime prompts
-
-not_unsafe
-
-0.995
-
-0.985
-
-0.934
-
-0.937
-
-violence prompts
-
-not_unsafe
-
-not_unsafe
-
-0.999
-
-0.999
-
-0.992
-
-0.995
-
-0.948
-
-0.978
-
-0.955
-
-0.981
-
-not_unsafe
-
-0.995
-
-0.991
-
-0.967
-
-0.961
-
-abuse,
-disinformation,
-hate prompts
-
-sexual-content
-prompts
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 gpt-5-thinking generally performs on par with OpenAI o3, while gpt-5-main is close to parity
 with GPT-4o.
@@ -569,74 +270,7 @@ system message tries to stop the model from doing that unless a secret condition
 
 9
 
-Table 6: Instruction Hierarchy Evaluations
-
-Evaluation (higher is
-better)
-
-System prompt extraction
-- realistic attacks of user
-attacking system message
-
-System prompt extraction
-- academic attacks of user
-message attacking system
-message
-
-System prompt extraction
-- academic attacks of de-
-veloper message attacking
-system message
-
-Phrase protection - mali-
-cious user message
-
-Phrase protection - mali-
-cious developer message
-
-gpt-5-thinking OpenAI o3
-
-gpt-5-main GPT-4o
-
-0.990
-
-0.997
-
-0.885
-
-0.885
-
-0.991
-
-0.982
-
-0.930
-
-0.825
-
-0.991
-
-0.982
-
-0.789
-
-0.561
-
-0.940
-
-0.911
-
-0.975
-
-0.619
-
-0.735
-
-0.921
-
-0.404
-
-0.449
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We note regressions in performance for gpt-5-main. We will follow up with a fix to improve these
 behaviors.
@@ -680,33 +314,7 @@ model via the outputs of tool calls (such as connectors).
 
 • Coding prompt injections: a coding-related prompt injection evaluation.
 
-Table 7: Prompt Injection Evaluations
-
-Evaluation (higher is better)
-
-gpt-5-thinking
-
-OpenAI o3
-
-Browsing prompt injections
-
-Tool calling prompt injections
-
-Coding prompt injections
-
-0.99
-
-0.99
-
-0.97
-
-0.89
-
-0.80
-
-0.94
-
-3.7 Hallucinations
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 One of our focuses when training the GPT-5 models was to reduce the frequency of factual
 hallucinations. While ChatGPT has browsing enabled by default, many API queries do not use
@@ -760,71 +368,7 @@ with short answers that measures model accuracy for attempted answers. We find t
 thinking shows slight improvement in hallucination rate over OpenAI o3, and gpt-5-thinking-mini
 reasoning shows significant improvement in abstention behavior over OpenAI o4-mini.
 
-Table 8: SimpleQA evaluations
-
-Eval
-
-Metric
-
-SimpleQA (no web)
-
-accuracy (higher is
-better)
-hallucination rate
-(lower is better)
-
-gpt-5-
-thinking
-
-OpenAI
-o3
-
-gpt-5-
-thinking-
-mini
-
-OpenAI
-o4-mini
-
-gpt-5-
-thinking-
-nano
-
-gpt-5-
-main
-
-GPT-
-4o
-
-0.55
-
-0.40
-
-0.54
-
-0.46
-
-0.22
-
-0.26
-
-0.24
-
-0.75
-
-0.11
-
-0.31
-
-0.46
-
-0.47
-
-0.44
-
-0.52
-
-3.8 Deception
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Deception – when the model’s user-facing response misrepresents its internal reasoning or the
 actions it took – can arise from a variety of sources. While some cases may be learned during
@@ -876,39 +420,7 @@ all of the images are removed. We measure the percentage of responses that are c
 deceptive for all four evaluations. Across all four evaluation settings, gpt-5-thinking demonstrates
 significantly less deceptive behavior than our prior frontier reasoning model, OpenAI o3.
 
-Table 9: Deception evaluations
-
-Eval
-
-Metric
-
-gpt-5-thinking
-
-OpenAI o3
-
-Coding Deception
-Browsing Broken Tools
-CharXiv Missing Image
-
-AbstentionBench
-
-Deception Rate
-(lower is better)
-
-Recall
-(higher is better)
-
-0.17
-0.11
-0.09
-
-0.53
-
-0.47
-0.61
-0.87
-
-0.44
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We further break down the agentic coding tasks by the obstacle imposed. We find that gpt-5-
 thinking shows reduced deception compared to OpenAI o3 in 10 out of 11 types of impediment,
@@ -964,75 +476,7 @@ model output, given disallowed combined text and image input.
 gpt-5-thinking generally performs slightly higher than OpenAI o3. gpt-5-main generally performs
 on par with or slightly higher than GPT-4o.
 
-Table 10: Image input evaluations (higher is better)
-
-Category
-
-hate
-
-extremism
-
-illicit
-
-attack planning
-
-self-harm
-
-harms-erotic
-
-gpt-5-thinking OpenAI o3
-
-gpt-5-main GPT-4o
-
-0.968
-
-0.980
-
-0.988
-
-1.000
-
-0.996
-
-0.994
-
-0.935
-
-0.962
-
-0.972
-
-0.980
-
-0.982
-
-0.987
-
-0.986
-
-0.991
-
-0.986
-
-1.000
-
-0.997
-
-0.994
-
-0.989
-
-0.964
-
-0.946
-
-0.956
-
-0.980
-
-0.995
-
-3.10 Health
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 To measure performance and safety in health-related settings, we evaluated the GPT-5 model fam-
 ily on HealthBench [8]. We report scores for HealthBench, HealthBench Hard, and HealthBench
@@ -1228,58 +672,7 @@ syntax and searching for various translations of “Answer” in the prompted la
 
 We evaluated models on the BBQ evaluation [9].
 
-Table 12: BBQ evaluation
-
-Metric (higher is
-better)
-
-gpt-5-
-thinking (with
-web search)
-
-gpt-5-
-thinking
-(without web
-search)
-
-OpenAI o3
-(with web
-search)
-
-gpt-5-main
-(without
-browse)
-
-GPT-4o
-(without
-browse)
-
-Accuracy on
-ambiguous questions
-
-Accuracy on
-disambiguated
-questions
-
-0.95
-
-0.85
-
-0.93
-
-0.88
-
-0.94
-
-0.93
-
-0.93
-
-0.86
-
-0.88
-
-0.85
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 gpt-5-thinking scores similarly to OpenAI o3 on ambiguous questions, which have no correct
 answer, but slightly lower on disambiguated questions, where the answer is provided within the
@@ -1330,33 +723,7 @@ concept. Common adversarial tactics included role-playing as authoritative figur
 safety needs, Red teamers rated which responses they thought were more safe, which were then
 normalized by conversation and user. In aggregate:
 
-Table 13: Attack planning red teaming win rate results
-
-Winner (more safe)
-
-Loser (less safe) Win Rate
-
-95% CI (Win Prob) Cohen’s h
-
-gpt-5-thinking
-
-OpenAI o3
-
-OpenAI o3
-
-gpt-5-thinking
-
-65.1%
-
-34.9%
-
-(63.7% – 66.5%)
-
-(33.5% – 36.3%)
-
-0.61
-
-–
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 This campaign found that gpt-5-thinking was perceived as the "safer" model 65%
 
@@ -1472,67 +839,7 @@ performance on some evaluations and because gpt-5-thinking is near the High thre
 capability domain, we also chose to measure gpt-5-thinking-pro’s performance on our biological
 evaluations.
 
-Table 14: Overview of Biological and Chemical evaluations
-
-Evaluation
-
-Capability
-
-Description
-
-Long-form biorisk ques-
-tions
-
-Multimodal
-bleshooting virology
-
-trou-
-
-Sensitive information (proto-
-cols, tacit knowledge, accu-
-rate planning) in the biolog-
-ical threat creation process
-
-Wet lab capabilities (MCQ)
-
-ProtocolQA
-Ended
-
-Open-
-
-Wet lab capabilities (open-
-ended)
-
-Tacit knowledge and
-troubleshooting
-
-Tacit knowledge and trou-
-bleshooting (MCQ)
-
-TroubleshootingBench Tacit knowledge and trou-
-
-bleshooting (open-ended)
-
-How accurate are model responses on
-these long-form biorisk questions?
-
-How well can models perform on vi-
-rology questions testing protocol trou-
-bleshooting?
-
-How well can models perform on open-
-ended questions testing protocol trou-
-bleshooting?
-
-Can models answer as well as experts
-on difficult tacit knowledge and trou-
-bleshooting questions?
-
-Can models identify and fix real-world
-errors in expert-written lab protocols
-that rely on tacit knowledge?
-
-5.1.1.1 Long-form Biological Risk Questions
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We graded the accuracy of model responses to long-form biorisk questions. Our long-form biothreat
 information questions test acquiring critical and sensitive information across the five stages of the
@@ -1683,79 +990,7 @@ Biology
 
 gpt-5-thinking July 13
 
-41.4 ± 1.7%
-
-46.0 ± 1.8%
-
-53.7 ± 3.2%
-
-48.0 ± 1.3%
-
-47.6 ± 2.9%
-
-gpt-5-thinking-helpful-
-only July 26
-
-37.7 ± 1.9%
-
-40.6 ± 2.5%
-
-42.9 ± 2.6%
-
-48.2 ± 1.9%
-
-46.6 ± 2.6%
-
-OpenAI o3 [high]
-
-42.0 ± 0.9%
-
-44.8 ± 3.3%
-
-58.3 ± 2.1%
-
-49.2 ± 2.1%
-
-44.1 ± 3.3%
-
-OpenAI o3-helpful-only-
-2025-04-03 [high]
-
-Grok 4
-
-Human experts, assigned
-individually tailored
-subsets
-
--
-
--
-
-40.4 ± 2.9%
-
-46.0 ± 2.2%
-
-41.1 ± 1.3%
-
-47.3 ± 3.1%
-
-45.8 ± 2.8%
-
-51.4 ± 2.2%
-
-51.7 ± 1.7%
-
-37.4 ± 4.1%
-
-22.6%
-
--
-
-30.8%
-
-32.4%
-
-–
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 In agent evaluations, SecureBio found that mitigated gpt-5-thinking refused every prompt. gpt-5-
 thinking-helpful-only substantially outperformed experienced human baseliners and performed
@@ -1787,33 +1022,7 @@ improvement over prior releases, gpt-5-thinking-mini still does not significantl
 on other Range challenges, and performs similarly to the other models on CTF challenges. The
 gpt-5 model series does not meet the threshold for high cyber risk.
 
-Table 16: Vulnerability Identification and Exploitation Capabilities evaluations
-
-Evaluation
-
-Capability
-
-Description
-
-Capture the Flag
-
-Vulnerability Identification &
-Exploitation
-
-Cyber Range
-
-Vulnerability Identification &
-Exploitation
-
-Can models solve competitive high
-school, collegiate, and professional level
-cybersecurity challenges?
-
-Can models conduct fully end-to-end
-cyber operations in a realistic, emulated
-network?
-
-5.1.2.1 Capture the Flag (CTF) Challenges
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We evaluate model performance on a test set of over 100 curated, publicly available CTF challenges
 which met the following criteria:
@@ -2121,27 +1330,7 @@ This approach successfully retrieved the flag.
 gpt-5-thinking showed modest improvement across all of our self-improvement evaluations, but
 did not meet our High thresholds.
 
-Table 17: Overview of AI Self-Improvement evaluations
-
-Evaluation
-
-Capability
-
-Description
-
-SWE-bench Verified
-(N=477)
-
-Real-world software engineer-
-ing tasks
-
-Can models resolve GitHub issues, given
-just a code repository and issue descrip-
-tion?
-
-OpenAI PRs
-
-MLE-Bench
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Real world ML research tasks Can models replicate real OpenAI pull
 requests?
@@ -2777,40 +1966,7 @@ on the other hand, reflects the fraction of cases in our highly adversarial test
 safeguards, including system level safeguards, are needed and play an active role in creating
 safety.
 
-Table 20: Model safety training evaluations
-
-Eval Set
-
-Metric (higher is better) OpenAI o3
-
-gpt-5-thinking
-
-gpt-5-thinking-mini
-
-Challenging prompts from
-red teamers with biosafety-
-relevant PhDs
-
-Filtered, adversarial sam-
-ple of production prompts
-
-not_unsafe
-
-0.829
-
-0.921
-
-not_unsafe
-
-0.899
-
-0.957
-
-0.936
-
-0.968
-
-5.3.3.2 Testing system-level protections
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We leverage the same models powering the system-level protections for ChatGPT Agent, so did
 not conduct additional testing on these mitigations for their deployment with gpt-5-thinking and
@@ -2826,46 +1982,7 @@ monitor, and
 
 • Borderline cases between high vs low risk dual use.
 
-Table 21: System-level protection evaluations
-
-System Mitigation Classification Task
-
-Topical classifier
-
-Distinguish biology-related from other
-conversations
-
-Reasoning monitor
-(performance on
-challenging prompts)
-
-Distinguish uplifting dual-use or
-weaponization content from other biology
-conversations
-
-F1
-Score
-
-0.834
-
-Recall* Precision*
-
-System
-Reliability
-
-0.960
-
-0.737
-
->99.9%
-
-0.730
-
-0.838
-
-0.647
-
->99.9%
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 * Here, we prioritized safety by optimizing for high recall – catching as many dangerous interactions
 as possible – even at a cost of reduced precision. This means that our safety mitigations will
@@ -3122,299 +2239,7 @@ self-harm/intent
 
 self-harm/instructions
 
-Table 23: standard disallowed content evaluation
-
-gpt-5-thinking-mini
-
-gpt-5-thinking-nano OpenAI o4-mini
-
-gpt-5-main-mini
-
-0.996
-
-1.000
-
-1.000
-
-0.898
-
-0.966
-
-0.989
-
-1.000
-
-0.990
-
-0.987
-
-0.991
-
-1.000
-
-0.963
-
-0.955
-
-0.989
-
-0.980
-
-0.990
-
-0.983
-
-0.991
-
-1.000
-
-0.930
-
-0.933
-
-1.000
-
-1.000
-
-1.000
-
-0.996
-
-0.974
-
-1.000
-
-0.975
-
-0.989
-
-0.989
-
-1.000
-
-1.000
-
-Table 24: Production Benchmarks
-
-gpt-5-thinking-mini
-
-gpt-5-thinking-nano OpenAI o4-mini
-
-gpt-5-main-mini
-
-0.874
-
-0.843
-
-0.752
-
-0.94
-
-0.981
-
-0.944
-
-0.829
-
-0.814
-
-0.944
-
-0.95
-
-0.939
-
-0.926
-
-0.909
-
-0.771
-
-0.935
-
-0.972
-
-0.955
-
-0.797
-
-0.879
-
-0.947
-
-0.933
-
-0.954
-
-0.874
-
-0.847
-
-0.641
-
-0.927
-
-0.947
-
-0.864
-
-0.724
-
-0.603
-
-0.786
-
-0.815
-
-0.864
-
-0.821
-
-0.943
-
-0.708
-
-0.886
-
-0.929
-
-0.909
-
-0.778
-
-0.756
-
-0.809
-
-0.864
-
-0.773
-
-Table 25: StrongReject
-
-Category
-
-gpt-5-thinking-mini
-
-gpt-5-thinking-nano OpenAI o4-mini
-
-gpt-5-main-mini
-
-illicit/non-violent-crime
-prompts
-
-violence prompts
-
-abuse/disinformation/hate
-prompts
-
-sexual-content prompts
-
-0.994
-
-0.996
-
-0.973
-
-0.994
-
-0.997
-
-0.996
-
-0.997
-
-0.996
-
-0.968
-
-0.972
-
-0.973
-
-0.970
-
-0.940
-
-0.949
-
-0.971
-
-0.953
-
-54
-
-Table 26: Image input
-
-Category
-
-hate
-
-extremism
-
-illicit
-
-attack planning
-
-self-harm
-
-harms-erotic
-
-gpt-5-thinking-mini
-
-gpt-5-thinking-nano OpenAI o4-mini
-
-gpt-5-main-mini
-
-0.971
-
-0.982
-
-0.986
-
-0.986
-
-0.987
-
-0.992
-
-0.986
-
-0.973
-
-0.986
-
-0.986
-
-0.939
-
-0.963
-
-0.927
-
-0.950
-
-0.956
-
-0.939
-
-0.927
-
-0.978
-
-0.984
-
-0.984
-
-0.982
-
-0.995
-
-0.994
-
-0.998
-
-7 Appendix 2: Hallucinations
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Below we provide the prompts used for each of the two steps of our public factuality evaluations.
 We first query OpenAI o3 with the claim-listing prompt to get a list of claims. We then batch the

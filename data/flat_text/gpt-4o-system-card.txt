@@ -347,20 +347,7 @@ classifiers to ensure the conversation is discontinued if this occurs making the
 voice generation minimal. Finally, our moderation behavior may result in over-refusals when the
 conversation is not in English, which is an active area of improvement5.
 
-Table 2: Our voice output classifier performance over a conversation by language:
-
-English
-Non-English5
-
-Precision Recall
-
-0.96
-0.95
-
-1.0
-1.0
-
-3.3.2 Speaker identification
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Risk Description: Speaker identification is the ability to identify a speaker based on input
 audio. This presents a potential privacy risk, particularly for private individuals as well as for
@@ -380,18 +367,7 @@ identify a speaker based on their voice, mitigating the potential privacy issue.
 there may be situations in which the model incorrectly refuses to identify the speaker of a famous
 quote.
 
-Table 3: Speaker identification safe behavior accuracy
-
-GPT-4o-early GPT-4o-deployed
-
-Should Refuse
-Should Comply
-
-0.83
-0.70
-
-0.98
-0.83
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 4The system voice is one of pre-defined voices set by OpenAI. The model should only produce audio in that
 
@@ -475,17 +451,7 @@ Evaluation: Compared to our initial model, we saw a 24 point improvement in the 
 correctly responding to requests to identify sensitive traits (e.g, refusing UGI and safely complying
 with STA).
 
-Table 4: Ungrounded Inference and Sensitive Trait Attribution safe behavior accuracy
-
-GPT-4o-early GPT-4o-deployed
-
-Accuracy
-
-0.60
-
-0.84
-
-3.3.5 Violative and disallowed content
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Risk Description: GPT-4o may be prompted to output harmful content through audio that
 would be disallowed through text, such as audio speech output that gives instructions on how to
@@ -504,20 +470,7 @@ evaluate the text transcript of the audio output with the standard text rule-bas
 Our evaluations show strong text-audio transfer for refusals on pre-existing content policy areas.
 Further evaluations can be found in Appendix A.
 
-Table 5: Performance comparison of safety evaluations: Text vs. Audio
-
-Text Audio
-
-Not Unsafe
-Not Over-refuse5
-
-0.95
-0.81
-
-0.93
-0.82
-
-3.3.6 Erotic and violent speech content
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Risk Description: GPT-4o may be prompted to output erotic or violent speech content, which
 may be more evocative or harmful than the same context in text. Because of this, we decided to
@@ -835,13 +788,7 @@ Performance
 
 •◦◦
 
-Table 6: Evaluations Apollo Research ran on GPT-4o. The model shows strong capability (•••)
-if it passes >=50% of the tasks in the section on the hard difficulty level. The model shows a
-moderate capability (••◦) if it passes on the medium difficulty, weak (•◦◦) if it passes on the easy
-difficulty, and very weak if it fails on all difficulties. Note that for agent tasks, they use basic
-agents with modest capability elicitation effort.
-
-5 Societal Impacts
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Omni models could have broad societal impacts. Researchers at OpenAI and elsewhere have
 discussed a range of possible impacts, from societal harms (including representational harms
@@ -994,10 +941,7 @@ GPT-4o
 0.77
 0.79
 
-Table 7: Comparison of GPT-4T (May 2024) and GPT-4o on various medical and clinical
-knowledge tasks.
-
-Limitations
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 While text-based evaluations appear promising, additional future work is needed to test whether
 text-audio transfer, which occurred for refusal behavior, extends to these evaluations. These
@@ -1152,100 +1096,7 @@ Yoruba
 31.7
 65.8
 
-Table 8: Accuracy on Translated ARC-Easy (%, higher is better), 0-shot
-
-Model
-
-English
-(n=809)
-
-Amharic
-(n=808)
-
-Hausa
-(n=808)
-
-GPT 3.5 Turbo
-GPT-4o mini
-GPT-4
-GPT-4o
-
-53.6
-66.5
-81.3
-81.4
-
-26.1
-33.9
-42.6
-55.4
-
-29.1
-42.1
-37.6
-59.2
-
-Northern
-Sotho
-(Sepedi)
-(n=809)
-
-29.3
-36.1
-42.9
-59.1
-
-Swahili
-(n=808)
-
-Yoruba
-(n=809)
-
-40
-48.4
-62
-64.4
-
-28.3
-35.8
-41.3
-51.1
-
-Table 9: Accuracy on Translated TruthfulQA (%, higher is better), 0-shot
-
-24
-
-Model
-
-Amharic (n=77)
-
-Hausa (n=155)
-
-Yoruba (n=258)
-
-GPT 3.5 Turbo
-GPT-4o mini
-GPT-4
-GPT-4o
-
-22.1
-33.8
-41.6
-44.2
-
-32.3
-43.2
-41.9
-59.4
-
-28.3
-44.2
-41.9
-60.5
-
-Table 10: Accuracy on Uhura-Eval (%, higher is better), 0-shot
-
-6 Conclusion and Next Steps
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 OpenAI has implemented various safety measurements and mitigations throughout the GPT-
 4o development and deployment process. As a part of our iterative deployment process, we
@@ -1657,6 +1508,8 @@ Alabi, Jonas Kgomo, Naome A. Etori, Shamsuddeen Hassan Muhammad
 
 28
 
+[PIPELINE INGESTION WORKFLOW - REMOVED REFERENCES]
+
 A Violative & Disallowed Content - Full Evaluations
 
 We used TTS to convert existing text safety evals to audio. We then evaluate the text transcript of the audio output with
@@ -1725,13 +1578,5 @@ self_harm_not_unsafe
 1.0
 1.0
 
-Table 11: Comparison of Current and New GPT-4o Text and Audio Safety Metrics
-
-B Sample tasks from METR Evaluations
-
-32
-
-Figure 3: Sample tasks from METR Evaluations
-
-33
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 

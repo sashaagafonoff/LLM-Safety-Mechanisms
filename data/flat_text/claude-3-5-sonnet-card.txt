@@ -277,99 +277,8 @@ Mixed evaluations
 GSM8K [15]
 Grade school math
 
-Table 1 This table shows evaluation results for reasoning, math, coding, reading comprehension, and ques-
-tion answering evaluations.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-MMMU [18] (validation)
-Visual question answering
-
-MathVista (testmini)
-Math
-
-AI2D (test)
-Science diagrams
-
-ChartQA (test, relaxed accuracy)
-Chart understanding
-
-DocVQA (test, ANLS score)
-Document understanding
-
-Claude 3.5
-Sonnet
-
-Claude 3
-Opus
-
-Claude 3
-Sonnet
-
-GPT-4o [8] GPT-4T [8]
-
-Gemini
-1.5 Pro [9]
-
-68.3%
-
-59.4%
-
-53.1%
-
-69.1%
-
-63.1%
-
-62.2%
-
-67.7%
-
-50.5%
-
-47.9%
-
-63.8%
-
-58.1%
-
-63.9%
-
-94.7%
-
-88.1%
-
-88.7%
-
-94.2%
-
-89.4%
-
-94.4%
-
-90.8%
-
-80.8%
-
-81.1%
-
-85.7%
-
-78.1%
-
-87.2%
-
-95.2%
-
-89.3%
-
-89.5%
-
-92.8%
-
-87.2%
-
-93.1%
-
-Table 2 This table shows evaluation results for multimodal tasks. All of these evaluations are 0-shot.
 On MMMU, MathVista, and ChartQA, all models use chain-of-thought reasoning before providing a final
 answer.
 
@@ -405,10 +314,7 @@ Haiku
 
 17%
 
-Table 3 This table shows the results of our internal agentic coding evaluation. For each model, we indicate
-the percent of problems for which the model’s final solution passed all the tests.
-
-Refusals
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We assessed Claude 3.5 Sonnet’s ability to differentiate between harmful and benign requests. These tests,
 which use the Wildchat [19] and XSTest [20] datasets, are designed to measure the model’s ability to avoid
@@ -461,10 +367,7 @@ Haiku
 
 33.1%
 
-Table 4 This table shows refusal rates for the toxic prompts in the Wildchat dataset, and incorrect refusal
-rates for the non-toxic prompts in the Wildchat and XSTest datasets.
-
-Needle In A Haystack
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We evaluated Claude 3.5 Sonnet on our version [21] of the “Needle In a Haystack” task [22] to confirm its
 retrieval abilities at context lengths up to 200k tokens. The average recall outperformed Claude 3 Opus. The
@@ -502,9 +405,7 @@ All context lengths
 94.5%
 92.7%
 
-Table 5 Comparison of average recall achieved by our models on the Needle In A Haystack evaluation.
-
-2.1 Human Feedback Evaluations
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We evaluated Claude 3.5 Sonnet via direct comparison to prior Claude models. We asked raters to chat with
 our models and evaluate them on a number of tasks, using task-specific instructions. The charts in Figure 3

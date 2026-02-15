@@ -2,43 +2,7 @@ SOURCE_ID: falcon-series-paper
 SOURCE_TITLE: The Falcon Series of Open Language Models
 SOURCE_URI: https://arxiv.org/pdf/2311.16867
 --------------------
-3
-2
-0
-2
-
-v
-o
-N
-9
-2
-
-]
-L
-C
-.
-s
-c
-[
-
-2
-v
-7
-6
-8
-6
-1
-.
-1
-1
-3
-2
-:
-v
-i
-X
-r
-a
+[PIPELINE INGESTION WORKFLOW - REMOVED ARXIV METADATA]
 
 The Falcon Series of Open Language Models
 
@@ -148,86 +112,7 @@ At variance with these works, we extensively document the pretraining of the Fal
 ments of large language models, we openly release Falcon-7/40/180B, and a 600 billion
 tokens extract of the RefinedWeb dataset: https://huggingface.co/tiiuae/.
 
-Table 1: The Falcon series of models covers a wide range of capabilities and inference require-
-ments, enabled by large-scale web data. Falcon-7B can efficiently run on consumer hardware
-(e.g., Apple M2), while Falcon-180B typically requires dedicated inference infrastructure (e.g.,
-8 × A100 80GB ). We report steady zero-shot performance gains across the entire Falcon series.
-
-Falcon-7B Falcon-40B
-
-Falcon-180B
-
-Pretraining [tokens]
-Compute [PF-days]
-Training [A100s]
-Availability
-Agg. performance (Section 6.5)
-Closest model
-
-1,500B
-730
-384
-
-1,000B
-2,800
-384
-
-Apache 2.0 Apache 2.0
-
-60.8
-<GPT-3
-
-67.1
-Chinchilla
-
-3,500B
-43,500
-4,096
-Responsible use license
-70.3
-PaLM-2 Large
-
-2
-
-Contents
-
-1 Introduction
-
-2 State-of-the-art: from language modeling to frontier models
-
-3 Design philosophy
-
-4 Experiments and motivations for data, architecture, and hyperparameters
-
-4.1 Setup for small-scale experiments
-
-. . . . . . . . . . . . . . . . . . . . . . . . . .
-
-4.2 Data: web vs curated, code and multilinguality impact on English performance . .
-
-4.2.1 Web data alone can outperform curated corpora . . . . . . . . . . . . . . .
-
-2
-
-5
-
-6
-
-7
-
-7
-
-8
-
-8
-
-4.2.2 Against a strong web baseline, curated data can even be detrimental
-
-. . . .
-
-10
-
-4.2.3
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Limited code and multilingual data do not strongly degrade English performance 11
 
@@ -248,98 +133,15 @@ Small tweaks help scalability: parallel layers and no biases in linear layers
 
 15
 
-4.3.5 Validating best practices for hyperparameters: z-loss, weight decay, LR search 15
+[PIPELINE INGESTION WORKFLOW - REMOVED TOC]
 
-4.4 Further experimentation required: ideas that did not make the cut . . . . . . . . . .
-
-4.5 Wrapping-it up: validating overall dataset and architecture recipes . . . . . . . . .
-
-5 Implementation
-
-5.1 The Falcon dataset: predominantly web, with added curated and conversational data
-
-5.1.1 The Macrodata Refinement pipeline and the RefinedWeb dataset . . . . . .
-
-5.1.2 The Microdata curated corpora and conversational masking . . . . . . . . .
-5.2 The Falcon architecture and recipe for efficient inference and (stable) training . . .
-
-17
-
-18
-
-19
-
-19
-
-20
-
-21
-
-22
-
-5.2.1 Architectural nitpicks: separate layer norms, tied embeddings, and scaling-up 22
-
-5.2.2 Large language model alchemy: hyperparameters for pretraining . . . . . .
-
-5.3 Large-scale distributed training on cloud infrastructure with Gigatron . . . . . . .
-
-5.3.1 Combining 3D parallelism for fine-grained control, and ZeRO for scalability
-
-24
-
-24
-
-25
-
-28
-State-of-the-art throughput with dedicated Triton kernels . . . . . . . . . .
 5.3.2
 5.3.3 Efficient memory use via selective recomputation implemented as a monolayer 28
 5.3.4 Numerical precision: all you need is bfloat16? . . . . . . .
 
 . . . . . .
 
-29
-
-.
-
-5.3.5 Quality-of-life features for improved flexibility and reliability . . . . . . .
-
-5.4 Run management: keeping large-scale infrastructure running . . . . . . . . . . . .
-
-6 Results
-
-6.1 To prompt or not to prompt: comparing evaluations across codebases . . . . . . . .
-
-6.2 Comparisons with PaLM on a natural language tasks aggregate . . . . . . . . . . .
-
-6.3 Comparisons with GPT-3.5 and GPT-4 on a limited set of tasks . . . . . . . . . . .
-
-29
-
-29
-
-30
-
-31
-
-33
-
-34
-
-3
-
-6.4 State-of-the-art comparisons on common sense, question answering, and code tasks
-
-6.5 Comparison with other models using the EleutherAI Evaluation Harness . . . . . .
-
-7 Limitations
-
-7.1 Limitations of our findings and ablations . . . . . . . . . . . . . . . . . . . . . . .
-
-7.2 Limitations of the Falcon models . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-8 Conclusion
+[PIPELINE INGESTION WORKFLOW - REMOVED TOC]
 
 A Contributions
 
@@ -367,11 +169,7 @@ Zero-1 pseudo-code .
 
 .
 
-. . . .
-
-. . .
-
-. . . . . . . . . . . . . . . . . . . . . . . .
+[PIPELINE INGESTION WORKFLOW - REMOVED TOC]
 
 G Prompts
 
@@ -560,118 +358,7 @@ et al., 2021) and BigBench (Srivastava et al., 2023); note that our inference an
 differ significantly between this setup and the final results we report in Section 6, so results are not
 directly comparable. We present an outline of the aggregates in Table 2.
 
-Table 2: To evaluate small models used in ablations (1/3B models trained on 30/60B tokens), we
-build four aggregates across 11 tasks on which to measure zero-shot performance and perplexity.
-We trained 15 reference models on subsets of The Pile and with random seeds to identify tasks with
-performance better than random and low variablity at this scale. All evaluations leverage the EAI
-Harness (Gao et al., 2021) except date which is taken from BigBench (Srivastava et al., 2023). main
-was built for architecture and hyperparameters ablations; data for data mixtures experiments; web
-for small-scale ablations on web data; and core for its low variance on a reduced number of tasks.
-This setup only covers natural language abilities. For main, data, and web, differences are mostly
-due to individual preferences at the time of the experiments.
-
-Tasks
-
-Type
-
-Random
-
-main
-
-comp
-
-data
-
-web
-
-core
-
-pile
-
-LAMBADA (Paperno et al., 2016)
-RACE (Lai et al., 2017)
-HellaSwag (Zellers et al., 2019)
-Winogrande (Sakaguchi et al., 2019)
-PIQA (Bisk et al., 2020)
-BoolQ (Clark et al., 2019)
-COPA (Gordon et al., 2012)
-Date (Srivastava et al., 2023)
-ARC (Clark et al., 2018)
-OpenBookQA (Mihaylov et al., 2018)
-SciQ (Johannes Welbl, 2017)
-The Pile (Gao et al., 2020)
-
-Reading Comprehension
-Reading Comprehension
-Common Sense
-Common Sense
-Common Sense
-Common Sense
-Common Sense
-Common Sense
-Question Answering
-Question Answering
-Question Answering
-Language Modeling
-
-0.0
-25.0
-25.0
-50.0
-50.0
-50.0
-50.0
-25.0
-25.0
-25.0
-25.0
-
-✓
-✓
-✓
-
-✓
-✓
-✓
-✓
-✓
-
-✓
-
-✓
-✓
-✓
-
-✓
-✓
-
-✓
-✓
-✓
-✓
-✓
-
-✓
-
-✓
-
-✓
-
-✓
-
-✓
-
-✓
-
-✓
-
-✓
-
-✓
-
-✓
-
-7
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 4.2 Data: web vs curated, code and multilinguality impact on English performance
 
@@ -712,51 +399,7 @@ round of heuristics, similar to the ones used by Rae et al. (2021); finally, Ref
 to our final web dataset, with deduplication applied in two stages. We evaluate all models on the
 zs-web aggregate–see Table 2 for details of its composition.
 
-Table 3: Following the recommendations of Hoffmann et al. (2022), pretraining datasets have
-increased in size, causing an increase in the prevalence of web data. Web data sources are
-massive web scrapes such as C4 (Raffel et al., 2019), sourced from CommonCrawl. Curated web data
-undergoes a targeted domain filtering: this includes CC-News (Hamborg et al., 2017) for instance.
-We consider sources such as arXiv, Wikipedia, or PubMed as technical curated data, and sources such
-as Reddit, HackerNews, or StackOverflow as conversational. We report not the size of the overall
-dataset, but the amount of tokens used for pretraining. For LaMDA (Thoppilan et al., 2022), numbers
-are roughly estimated as only rough counts are provided in the paper.
-
-Web Curated web Curated
-
-GPT-3
-The Pile
-MT-NLG
-Gopher
-LaMDA
-PaLM
-
-Chinchilla
-LLaMA
-Falcon
-
-60 %
-18 %
-38 %
-58 %
-25 %
-27 %
-
-55 %
-82 %
-84 %
-
-22 %
-10 %
-29 %
-10 %
-0 %
-1 %
-
-10 %
-0 %
-0 %
-
-Books
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Tech.
 
@@ -866,61 +509,7 @@ massive web scrapes are likely to be mostly devoid of it except for some inciden
 Finding. Challenging beliefs on data quality, filtered and deduplicated web data alone allows
 models to match the natural language tasks performance of models trained on curated data.
 
-Table 4: Curation is not a silver bullet for zero-shot generalization: small-scale models trained
-on RefinedWeb outperform models trained on web data (C4, OSCAR), and on curated corpora
-(The Pile). Zero-shot accuracy on zs-web aggregate (σ = 0.69, likely ±0.69%, very likely ±1.38%
-differences in scores). All models trained with identical architectures and hyperparameters, for
-the same amount of tokens. We find that OSCAR-22.01 underperforms other datasets signficantly,
-perhaps because deduplication is only optional. C4 is a strong baseline, with OSCAR-21.09 lagging
-slightly behind, but we find that RefinedWeb outperforms both web datasets and the curated dataset,
-The Pile–performance gap with C4 is insufficient to be conclusive, but C4 would be too small for our
-models. Both filtering and deduplication contribute significantly to improving zero-shot performance.
-
-Massive web datasets
-
-Curated
-
-Ours
-
-OSCAR-21.09
-
-OSCAR-22.01
-
-C4
-
-The Pile
-
-RW-Raw
-
-RW-Filtered
-
-RefinedWeb
-
-1B@27GT
-3B@60GT
-
-55.0%
-59.1%
-
-52.7%
-55.9%
-
-55.7%
-59.6%
-
-53.4%
-57.9%
-
-52.7%
-57.4%
-
-54.3%
-58.2%
-
-56.2%
-59.8%
-
-9
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 102103104105106Compute[PF-days]103104Pretrainingdata[tokens]CleandataavailableinCommonCrawlPre-ChinchillatrendPost-ChinchillatrendGPT-4Falcon-180BFalcon-40BLLaMA2ChinchillaGopherPaLM-2PaLMGPT-3LaMDAMT-NLGMPTGPT-NeoX-20BPre-ChinchillaPost-Chinchilla7Bparams.40Bparams.180Bparams.Table 5: We split curated data in three broad categories: conversations, books, and technical.
 Individual components inspired by Gao et al. (2020), but and processed through our own data pipeline.
@@ -1017,19 +606,7 @@ alphabet, and focus on those for which we can collect a non-trivial amount out o
 with a fixed 10% multilingual data (weighing individual languages according to their prevalence in
 CommonCrawl), and evaluate on English tasks. Each data split uses a dedicated tokenizer.
 
-Table 6: We split languages in three categories: English-only, Restricted (adding the 3 most
-spoken languages in Europe), and European. We only consider languages with a Latin alphabet,
-and sufficient presence in CommonCrawl to collect at least 10 billion tokens.
-
-Set
-
-Languages
-
-English
-
-English
-Restricted English, German, Spanish, French
-European
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 English, German, Spanish, French, Italian, Dutch, Polish, Portuguese, Czech,
 Swedish, Romanian, Danish, Norwegian, Catalan, Slovene, Bulgarian
@@ -1120,53 +697,7 @@ architectural modification, which has notably been adopted by LLaMA-2 (Touvron e
 
 12
 
-Table 8: Multiquery/group schemes significantly reduces the size of the K,V-cache for inference.
-Assuming TP=1 for Falcon-7B and TP=8 for Falcon-40/180B, sequence length 2,048.
-
-Attention scheme
-
-nq
-
-nkv
-
-K,V-cache for a 2,048 sequence
-40B
-
-7B
-
-180B
-
-√
-
-Vanilla
-Multiquery (Shazeer, 2019)
-Multigroup (Ainslie et al., 2023)
-
-nhead
-nhead
-nhead
-
-nhead O(
-
-N log(n))
-
-1
-TP
-
-O(log(N))
-O(log(N))
-
-1GB
-20MB
-N/A
-
-10GB
-4GB
-30MB
-40MB
-250MB 335MB
-
-√
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Scaling. Interestingly, multiquery is disproportionately effective for larger models. With N the
 total number of parameters, dmodel the model size, nlayer the number of layers, and assuming a fixed
@@ -1196,74 +727,8 @@ in zero-shot performance, even without compensating for the reduction in trainab
 Recipe decision. To improve performance scalability for the largest models, the Falcon series
 implement multigroup with KV=TP for all models (respectively 1/8/8 for Falcon-7/40/180B).
 
-Table 9: Even without controlling for the reduction in parameters, multiquery only comes at a
-limited zero-shot performance cost. Impact on perplexity is more directly measurable, whereas
-impact on zero-shot performance is less consistent. Multigroup with KV=8 consistently performs
-close to the vanilla baseline. Underlined values have crossed the very likely 2-σ degradation threshold.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Model size
-
-KV
-
-Very likely threshold (2-σ)
-
-Performance
-zs-main ↑
-±2.2
-
-zs-small ↑
-±0.8
-
-ppl-pile ↓
-±0.005
-
-1B
-
-3B
-
-1
-2
-4
-8
-Vanilla
-
-1
-8
-Vanilla
-
-48.5
-48.2
-48.9
-48.6
-49.2
-
-52.7
-54.6
-54.4
-
-13
-
-42.6
-42.1
-42.4
-42.8
-43.1
-
-48.6
-50.1
-49.8
-
-0.908
-0.899
-0.908
-0.903
-0.895
-
-0.825
-0.819
-0.807
-
-Table 10: Although at small-scale URPE and RoPE may likely be better than ALiBi, that
 advantage isn’t as clear at increased size. We find ALiBi to be likely worst than rotary on two of
 our three aggregates for 1B models, but to be closer to the performance of rotary at the 3B scale.
 Underlined values have crossed the likely 1-σ degradation threshold over RoPE.
@@ -1360,12 +825,7 @@ parameters in the MLP: the activation memory per parameter for the MLP is thus i
 
 14
 
-Table 11: Small architectural tweaks like GLU, z-loss, and removing biases are unlikely to
-improve zero-shot performance. However, in some scenarios, these have been proposed to improve
-scalability and/or stability, which may warrant their adoption. Underlined values have crossed above
-the unlikely 0.4-σ improvement threshold over our baseline.
-
-Model size
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Pos. Emb.
 
@@ -1494,34 +954,7 @@ this point, and discard any learning rate which has already caused spikes.
 
 We test this method at small scale, picking 7 learning rates for a 1B model, and then comparing the
 ranking obtained after warmup against the actual final ranking achieved. Results are presented in
-Table 13. We find that this naive method succeeds at finding the best learning rate from the rankings
-at the end of warm-up. More broadly, ranks at the end of warm-up and at the end of training are
-relatively stable, with only the 2nd and 3rd best switching places.
-
-Recipe decision. From candidates LRs, we pick the one with the lowest loss after warm-up.
-
-Table 12: Weight decay is likely to improve performance, especially so for datasets such as The
-Pile, which may not have been adequately deduplicated. Surprisingly, the effect of weight decay
-is disproportionately strong depending on the underlying dataset.
-
-Dataset
-
-Weight decay Performance
-
-Likely threshold (1-σ)
-
-zs-main ↑
-±1.1
-
-zs-small ↑
-±0.4
-
-ppl-pile ↓
-±0.002
-
-RefinedWeb
-
-The Pile
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 0.
 1.
@@ -1549,71 +982,7 @@ The Pile
 
 16
 
-Table 13: Loss rankings at the end of learning rate warm-up broadly reflects rankings at the
-end of training, enabling us to search for optimal learning rates efficiently This simple heuristic
-is easy to use, and consume only a fraction of resources for a larger run.
-
-Learning rate
-LR
-2 × 10−4
-4 × 10−4
-1 × 10−3
-2 × 10−3
-4 × 10−3
-1 × 10−2
-2 × 10−2
-
-Factor
-x1
-x2
-x5
-x10
-x20
-x50
-x100
-
-End LR warm-up [0.5GT] End of run [27GT]
-Improv. ↓
-Rank
-±0.0%
-(4)
-−2.0%
-(3)
-−2.6%
-(1)
-−1.4%
-(2)
-+1.3%
-(5)
-+7.6%
-(6)
-
-Improv. ↓
-±0.0%
-−1.7%
-−2.5%
-−1.9%
-+1.9%
-+6.8%
-
-Rank
-(4)
-(2)
-(1)
-(3)
-(5)
-(6)
-
-Run stability
-
-No spikes
-No spikes
-No spikes
-One small spike
-Multiple spikes
-Multiple large spikes
-
-Diverging after 0.2GT
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 4.4 Further experimentation required: ideas that did not make the cut
 
@@ -1690,149 +1059,7 @@ multiquery model would likely close that gap. Nevertheless, it’s interesting t
 data improvements have very significant effects, architecture improvements are mostly focused on
 improving training and inference scalability; they do not result in an uplift in task performance.
 
-Table 14: Our data recipe, predominantly based on our work on RefinedWeb (Penedo et al.,
-2023), significantly improves upon The Pile and other models from the state-of-the-art. Because
-multiquery makes models smaller (and we do not control for that effect), our architecture comes
-with a small zero-shot performance degradation. We suspect controlling for parameter count
-would bring our architecture to be on-par or better than the baseline. Nevertheless, improvements
-to the architecture mostly deliver improvements in hardware scalability for inference and training,
-while improvements to the data recipe significantly uplift the downstream performance of models.
-Underline for relevant changes, bold for improvement over baseline, italics for degradation over
-baseline. † flags independent evaluations with the EleutherAI Harness (Gao et al., 2021), and a
-indicates our architecture run is better, while d shows our data run is better.
-
-Scale
-
-Dataset
-
-Architecture
-
-Performance
-zs-main ↑
-
-zs-comp ↑
-
-zs-small ↑
-
-ppl-pile ↓
-
-45.0
-
-48.8
-48.4
-
-45.1
-
-54.0
-
-55.7
-
-52.7
-
-0.868
-
-0.870
-
-0.763
-
-0.775
-
-1B@27GT
-
-The Pile
-
-Falcon
-RefinedWeb
-
-The Pile
-
-The Pile
-
-1B@350GT
-
-RefinedWeb
-
-1B@300GT
-1B@380GT
-1B@300GT
-1B@300GT
-
-The Pile
-
-OpenAI
-The Pile
-The Pile
-The Pile
-
-7B@350GT RefinedWeb
-6B@300GT
-6B@400GT
-
-OpenAI
-The Pile
-
-Baseline
-
-Baseline
-Baseline
-
-Falcon
-
-Baseline
-
-Baseline
-
-Falcon
-
-babbage†
-GPT-Neo†
-BS-A&S†
-Pythia†
-
-Baseline
-curie†
-GPT-J†
-
-40.3
-
-42.3
-43.4
-
-40.0
-
-47.1
-
-50.1
-
-46.1
-
-47.8d
-44.3a,d
-46.1d
-45.2a,d
-
-55.3
-53.7d
-53.5d
-
-51.7
-
-53.5
-53.2
-
-51.1
-
-57.8
-
-59.8
-
-56.6
-
-18
-
-5
-
-Implementation
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Based on our findings from the previous ablations Section 4, and further tests and best practices from
 the literature, we now describe the codebases and methods used to train the Falcon series of models.
@@ -1867,80 +1094,7 @@ The final Falcon mixture is presented in Table 15. We designed the mixture based
 pretraining dataset, not allowing any upsampling of the curated sources. Despite differing training
 lengths, the same mixture (in %) is used for Falcon-7B, 40B, and 180B.
 
-Table 15: The final Falcon mixture is predominantly web-based (nearly 85%), but includes
-other curated corpora (without any upsampling) to broaden the expressiveness of the model.
-Individual curated corpora are inspired from The Pile (Gao et al., 2020), but rebuilt from scratch to
-ensure high-quality and compatibility with our data pipeline. Code stock is a rough estimate based
-on an updated pipeline; code data used in Falcon was sourced from permissively licensed GitHub
-repositories. Mixture was designed to avoid upsampling; note that total stocks for RefinedWeb were
-not known at the beginning of training, as processing was still in-progress. Quantities in tokens.
-
-Corpora
-Name
-
-RefinedWeb-English
-
-RefinedWeb-Euro
-
-Books
-Conversations
-
-Code
-Technical
-
-Source
-
-Filtered and deduplicated Common-
-Crawl, see Penedo et al. (2023)
-Filtered and deduplicated multi-
-lingual (Europe-focused) Common-
-Crawl, see Penedo et al. (2023)
-Project Gutenberg
-Reddit,
-erNews, IRC, YouTube Subtitles
-GitHub
-arXiv, PubMed, USPTO, Wikipedia
-
-StackOverflow, Hack-
-
-Stock
-
-Pretraining
-Fraction
-
-Used
-
-∼5,000B
-
-76%
-
-2,700B
-
-∼2,000B
-
-8%
-
-400B
-
-215B
-170B
-
-∼1,000B
-60B
-
-6%
-5%
-
-3%
-2%
-
-214B
-168B
-
-115B
-57B
-
-19
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 5.1.1 The Macrodata Refinement pipeline and the RefinedWeb dataset
 
@@ -2233,59 +1387,7 @@ adding additional risks to the training of the Falcon series, we keep our embedd
 
 22
 
-Table 16: Summary of the shape, hyperparameters, and distribution strategy of the Falcon
-models. Falcon-7B was trained after Falcon-40/180B, with an experimental increased batch size.
-
-Data
-
-Shape
-nlayer
-dmodel
-dhead
-nq
-nkv
-dvocab
-ntokens
-Pretraining
-Learning rate
-Decay
-Ramp-up
-
-Batch-size
-
-Warm-up
-Weight decay
-Gradient clipping
-Z-loss
-
-Parallelism
-TP
-PP
-DP
-
-Falcon-7B
-
-Falcon-40B
-
-Falcon-180B
-
-1,500B
-
-1,000B
-
-3,500B
-
-32
-4,544
-
-71
-1
-
-6 × 10−4
-
-4B
-2,304
-30B
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 1.
 
@@ -2886,84 +1988,7 @@ beneficial for larger and more capable models, but detrimental for smaller ones.
 
 31
 
-Table 17: At different model sizes, different prompt formulations and metrics calculations deliver
-the best zero-shot performance. Notably, we finding that outlining multiple-choice questions
-options in the prompt explicitly (CH) nearly always improve performance for larger models, but
-degrades it for smaller, less capable models. Unconditional normalization (UN) has a smaller effect,
-with improvements on some tasks but not others. Using both tricks together (BT) never improves
-performance over using the best one individually. Degradation, improvement over baseline: Gao et al.
-(2021) default prompt and length-normalized logprob calculation for CH and UN, best of CH/UN for BT.
-
-ARC-Easy
-UN
-
-73,7
-Falcon-7B
-Falcon-40B
-81,2
-Falcon-180B 84,7
-
-68,1
-76,6
-79,5
-
-CH
-
-33,3
-80,5
-94,4
-
-BT
-
-24,7
-78,8
-84,6
-
-ARC-Challenge
-CH
-UN
-
-44,5
-56,7
-63,7
-
-49,5
-59,0
-63,9
-
-27,4
-62,1
-83,5
-
-BT
-
-24,8
-61,3
-81,6
-
-OpenBookQA
-
-UN
-
-39,2
-43,2
-48,8
-
-CH
-
-24,4
-61,2
-76,4
-
-BT
-
-24,0
-56,4
-71,8
-
-44,6
-48,0
-47,6
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Metrics. On most tasks, accuracy is typically reported; however, practices on the calculation of
 the logprobabilities used to evaluate candidate answers differ. For tasks with multiple choices,
@@ -3037,218 +2062,8 @@ observed that ANLI typically exhibits staggered progression throughout training,
 increase (e.g., like HellaSwag)–it’s possible Falcon-180B is just under the next phase transition that
 would allow it to catch-up to the range of performance of PaLM-2 Large.
 
-Table 18: Falcon-180B matches the performance of PaLM-2 Large on most tasks, with the
-notable exception of ANLI and RACE for which it performs closer to PaLM-2 Medium. We
-found these tasks to be very sensitive to the prompt format used, in particular RACE, and suspect that
-further improvements could be unlocked with additional tweaking–however, for fairness, we stay
-close to the prompts proposed by Brown et al. (2020). Overall, we find that Falcon-180B recovers
-99.5% of the performance of PaLM-2 Large, significantly above the 94.8% of PaLM-2 Medium.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Task
-
-Subtask
-
-PaLM
-
-WebQuestions (EM)
-
-HellaSwag
-LAMBADA
-
-WSC
-Winogrande
-
-RACE
-
-PIQA
-ARC
-
-OpenBookQA
-
-BoolQ
-CB
-COPA
-RTE
-WiC
-ReCORD
-
-ANLI
-
-Task average
-Fraction of PaLM-2 L
-
-Hard
-
-Challenge
-Easy
-Overall
-
-R1
-R2
-R3
-
-22,6
-
-83,6
-81,8
-
-86,3
-83,7
-
-52,1
-
-83,9
-60,1
-85,0
-72,6
-53,6
-
-88,7
-83,9
-91,0
-78,7
-63,2
-92,8
-
-52,6
-48,7
-52,3
-
-73,1
-94,4
-
-33
-
-PaLM-2
-M
-
-26,9
-
-84,0
-83,7
-
-88,1
-79,2
-
-57,2
-
-83,2
-64,9
-88,0
-76,5
-56,2
-
-88,6
-80,4
-90,0
-81,8
-52,0
-92,4
-
-58,1
-49,5
-54,5
-
-73,4
-94,8
-
-L
-
-28,2
-
-86,8
-86,9
-
-86,9
-83,0
-
-62,3
-
-85,0
-69,2
-89,7
-79,5
-58,5
-
-90,9
-87,5
-96,0
-79,3
-66,8
-93,8
-
-73,1
-63,4
-67,1
-
-77,5
-
-Falcon
-180B
-
-31,9
-
-87,5
-84,4
-
-87,5
-85,1
-
-56,7
-
-86,1
-67,8
-88,8
-78,3
-64,2
-
-89,0
-89,3
-96,0
-80,1
-66,1
-93,2
-
-60,5
-55,5
-56,8
-
-77,1
-99,5
-
-S
-
-21,8
-
-82,0
-80,7
-
-84,6
-77,9
-
-53,3
-
-82,2
-59,6
-85,6
-72,6
-57,4
-
-88,1
-82,1
-89,0
-78,7
-50,6
-92,1
-
-53,1
-48,8
-53,2
-
-71,6
-92,4
-
-Table 19: Falcon-180B delivers downstream performance between GPT-3.5 and GPT-4. Falcon-
 180B performs well on commonsense tasks (HellaSwag and Winogrande), where it is well ahead of
 GPT-3.5. For multiple choice question answering (ARC and MMLU), Falcon-180B performs above
 GPT-3.5 but not as significantly so.∗ we report 2-shot, not 25-shot performance on ARC Challenge.
@@ -3325,130 +2140,7 @@ underperforms LLaMA-2 7B; this time the difference in compute is smaller (730PF-
 
 34
 
-Table 20: Outside of PaLM-2 Large and GPT-4, Falcon-180B significantly improves other state-
-of-the-art models such as LLaMA-2 or Inflection-1 on commonsense tasks. Falcon-40B performs
-slightly under LLaMA-2 34B, because of a significantly smaller compute budget (2,800PF-days
-against 4,700PF-days, 70% more for LLaMA-2). We note the exceptional performance of Inflection-1
-on BoolQ; conversely, we note that, despite our best prompt engineering efforts, we were unable
-to reproduce the performance reported by the LLaMA-2 paper on BoolQ for the Falcon series: the
-results we report can likely be improved. Bold for best, underline for second-best.
-
-PIQA HellaSwag
-
-Winogrande
-
-BoolQ LAMBADA
-
-(10-shot)
-
-(5-shot)
-
-GPT-3
-Gopher
-Chinchilla
-MT-NLG
-PaLM
-LLaMA-2
-
-Inflection-1
-
-Falcon
-
-81,0
-81,8
-81,8
-82,0
-82,3
-78,8
-80,5
-81,9
-82,8
-84,2
-
-80,3
-83,0
-84,9
-
-78,9
-79,2
-80,8
-80,2
-83,4
-77,2
-80,7
-83,3
-85,3
-84,3
-
-76,3
-82,7
-85,9
-
-7B
-13B
-34B
-70B
-
-7B
-40B
-180B
-
-70,2
-70,1
-74,9
-73
-81,1
-69,2
-72,8
-76,7
-80,2
-
-67,2
-76,0
-80,3
-
-78,6
-82,1
-
-87,3
-85,8
-
-78,1
-85,3
-89,0
-
-83,3
-
-72,6
-81,8
-87,1
-
-60,5
-79,4
-83,7
-78,2
-88,0
-77,4
-81,7
-83,7
-85,0
-89,7
-
-73,8
-81,9
-87,8
-
-76,2
-74,5
-77,4
-76,6
-77,9
-
-78,5
-
-74,9
-77,3
-79,8
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 970PF-days, 30% more), but we suspect that multiquery with a single head of dimension 64 is a very
 aggressive configuration for Falcon-7B. We find that LLaMA-2 and Inflection-1 achieve relatively
@@ -3466,73 +2158,8 @@ being trained on only 3% code, Falcon-180B nearly matches the performance of bot
 and PaLM-2 S∗, two models which have undergone dedicated code specialization following their
 pretraining. This is an encouraging result for the development of a Falcon-Coder specialization.
 
-Table 21: Falcon-180B improves significantly over GPT-3, PaLM, and LLaMA-2 on question
-answering datasets, while Falcon-40B performs in-line with LLaMA-2 34B. ∗: for Falcon-7B on
-OpenBookQA, we report accuracy without outlining candidates, as performance is otherwise close to
-random (see Table 17 for details). Bold for best, underline for second-best.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-ARC-Challenge ARC-Easy OpenBookQA MMLU
-
-GPT-3
-PaLM
-LLaMA-2
-
-Falcon
-
-7B
-13B
-34B
-70B
-
-7B
-40B
-180B
-
-51,4
-53,0
-45,9
-49,4
-54,5
-57,4
-
-44,5
-56,7
-63,7
-
-68,8
-76,6
-75,2
-77,3
-79,4
-80,2
-
-73,6
-81,2
-84,7
-
-35
-
-57,6
-53,4
-58,6
-57,0
-58,2
-60,2
-44,6∗
-61,2
-76,4
-
-69,3
-45,3
-54,8
-62,6
-68,9
-
-28,0
-57,0
-70,6
-
-Table 22: Falcon-180B outperforms all other predominantly English language models on
 HumanEval. Morever, despite being trained on only 3% code, it nearly matches the performance
 of PaLM-Coder and PaLM-2 S∗, both having undergone code specialization. †: the GPT-3.5 and
 GPT-4 models are somewhat unique in being pretrained on a large fraction of code on top of natural
@@ -3795,747 +2422,7 @@ of large language models. We hope the Falcon series can be a small step towards 
 
 39
 
-References
-
-Abadi, M., Agarwal, A., Barham, P., Brevdo, E., Chen, Z., Citro, C., Corrado, G. S., Davis, A., Dean,
-J., Devin, M., Ghemawat, S., Goodfellow, I., Harp, A., Irving, G., Isard, M., Jia, Y., Jozefowicz,
-R., Kaiser, L., Kudlur, M., Levenberg, J., Mané, D., Monga, R., Moore, S., Murray, D., Olah, C.,
-Schuster, M., Shlens, J., Steiner, B., Sutskever, I., Talwar, K., Tucker, P., Vanhoucke, V., Vasudevan,
-V., Viégas, F., Vinyals, O., Warden, P., Wattenberg, M., Wicke, M., Yu, Y., and Zheng, X. (2015).
-TensorFlow: Large-scale machine learning on heterogeneous systems. Software available from
-tensorflow.org.
-
-Abadji, J., Ortiz Suarez, P., Romary, L., and Sagot, B. (2022). Towards a Cleaner Document-Oriented
-
-Multilingual Crawled Corpus. arXiv e-prints, page arXiv:2201.06642.
-
-Adiwardana, D., Luong, M.-T., So, D. R., Hall, J., Fiedel, N., Thoppilan, R., Yang, Z., Kulshreshtha,
-A., Nemade, G., Lu, Y., et al. (2020). Towards a human-like open-domain chatbot. arXiv preprint
-arXiv:2001.09977.
-
-Aghajanyan, A., Yu, L., Conneau, A., Hsu, W.-N., Hambardzumyan, K., Zhang, S., Roller, S., Goyal,
-N., Levy, O., and Zettlemoyer, L. (2023). Scaling laws for generative mixed-modal language
-models. arXiv preprint arXiv:2301.03728.
-
-Ainslie, J., Lee-Thorp, J., de Jong, M., Zemlyanskiy, Y., Lebrón, F., and Sanghai, S. (2023). Gqa:
-Training generalized multi-query transformer models from multi-head checkpoints. arXiv preprint
-arXiv:2305.13245.
-
-Aleph Alpha (2023). Luminous: performance benchmarks. arXiv preprint arXiv:1810.12885.
-
-Allal, L. B., Li, R., Kocetkov, D., Mou, C., Akiki, C., Ferrandis, C. M., Muennighoff, N., Mishra, M.,
-Gu, A., Dey, M., et al. (2023). Santacoder: don’t reach for the stars! In Deep Learning for Code
-(DL4C) Workshop.
-
-Anil, R., Dai, A. M., Firat, O., Johnson, M., Lepikhin, D., Passos, A., Shakeri, S., Taropa, E., Bailey,
-
-P., Chen, Z., et al. (2023). Palm 2 technical report. arXiv preprint arXiv:2305.10403.
-
-Artetxe, M., Bhosale, S., Goyal, N., Mihaylov, T., Ott, M., Shleifer, S., Lin, X. V., Du, J., Iyer, S.,
-Pasunuru, R., et al. (2021). Efficient large scale language modeling with mixtures of experts. arXiv
-preprint arXiv:2112.10684.
-
-Bahdanau, D., Cho, K., and Bengio, Y. (2014). Neural machine translation by jointly learning to
-
-align and translate. arXiv preprint arXiv:1409.0473.
-
-Bai, Y., Jones, A., Ndousse, K., Askell, A., Chen, A., DasSarma, N., Drain, D., Fort, S., Ganguli, D.,
-Henighan, T., et al. (2022a). Training a helpful and harmless assistant with reinforcement learning
-from human feedback. arXiv preprint arXiv:2204.05862.
-
-Bai, Y., Kadavath, S., Kundu, S., Askell, A., Kernion, J., Jones, A., Chen, A., Goldie, A., Mirhoseini,
-A., McKinnon, C., et al. (2022b). Constitutional ai: Harmlessness from ai feedback. arXiv preprint
-arXiv:2212.08073.
-
-Baumgartner, J., Zannettou, S., Keegan, B., Squire, M., and Blackburn, J. (2020). The pushshift
-
-reddit dataset.
-
-Bavarian, M., Jun, H., Tezak, N., Schulman, J., McLeavey, C., Tworek, J., and Chen, M. (2022).
-Efficient training of language models to fill in the middle. arXiv preprint arXiv:2207.14255.
-
-Beltagy, I., Lo, K., and Cohan, A. (2019). Scibert: A pretrained language model for scientific text. In
-Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and
-the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP), pages
-3615–3620.
-
-Biderman, S., Schoelkopf, H., Anthony, Q. G., Bradley, H., O’Brien, K., Hallahan, E., Khan, M. A.,
-Purohit, S., Prashanth, U. S., Raff, E., et al. (2023). Pythia: A suite for analyzing large language
-models across training and scaling. In International Conference on Machine Learning, pages
-2397–2430. PMLR.
-
-40
-
-Bisk, Y., Zellers, R., Bras, R. L., Gao, J., and Choi, Y. (2020). Piqa: Reasoning about physical
-commonsense in natural language. In Thirty-Fourth AAAI Conference on Artificial Intelligence.
-
-Black, S., Biderman, S., Hallahan, E., Anthony, Q., Gao, L., Golding, L., He, H., Leahy, C., McDonell,
-K., Phang, J., et al. (2022). Gpt-neox-20b: An open-source autoregressive language model. In
-Proceedings of BigScience Episode# 5–Workshop on Challenges & Perspectives in Creating Large
-Language Models, pages 95–136.
-
-Black, S., Gao, L., Wang, P., Leahy, C., and Biderman, S. (2021). GPT-Neo: Large Scale Autoregres-
-sive Language Modeling with Mesh-Tensorflow. If you use this software, please cite it using these
-metadata.
-
-Bradbury, J., Frostig, R., Hawkins, P., Johnson, M. J., Leary, C., Maclaurin, D., Necula, G., Paszke,
-A., VanderPlas, J., Wanderman-Milne, S., et al. (2021). Jax: Autograd and xla. Astrophysics
-Source Code Library, pages ascl–2111.
-
-Broder, A. Z. (1997). On the resemblance and containment of documents. In Proceedings. Compres-
-
-sion and Complexity of Sequences 1997, pages 21–29. IEEE.
-
-Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J. D., Dhariwal, P., Neelakantan, A., Shyam,
-P., Sastry, G., Askell, A., Agarwal, S., Herbert-Voss, A., Krueger, G., Henighan, T., Child, R.,
-Ramesh, A., Ziegler, D., Wu, J., Winter, C., Hesse, C., Chen, M., Sigler, E., Litwin, M., Gray, S.,
-Chess, B., Clark, J., Berner, C., McCandlish, S., Radford, A., Sutskever, I., and Amodei, D. (2020).
-Language models are few-shot learners. In Advances in Neural Information Processing Systems,
-volume 33, pages 1877–1901.
-
-Carlini, N., Ippolito, D., Jagielski, M., Lee, K., Tramer, F., and Zhang, C. (2022). Quantifying
-In The Eleventh International Conference on
-
-memorization across neural language models.
-Learning Representations.
-
-Chelba, C., Mikolov, T., Schuster, M., Ge, Q., Brants, T., Koehn, P., and Robinson, T. (2013). One
-billion word benchmark for measuring progress in statistical language modeling. arXiv preprint
-arXiv:1312.3005.
-
-Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. d. O., Kaplan, J., Edwards, H., Burda, Y., Joseph,
-N., Brockman, G., et al. (2021). Evaluating large language models trained on code. arXiv preprint
-arXiv:2107.03374.
-
-Chen, S., Wong, S., Chen, L., and Tian, Y. (2023). Extending context window of large language
-
-models via positional interpolation. arXiv preprint arXiv:2306.15595.
-
-Chiang, C.-H. and Lee, H.-y. (2023). Can large language models be an alternative to human
-
-evaluations? arXiv preprint arXiv:2305.01937.
-
-Chiang, W.-L., Li, Z., Lin, Z., Sheng, Y., Wu, Z., Zhang, H., Zheng, L., Zhuang, S., Zhuang, Y.,
-Gonzalez, J. E., Stoica, I., and Xing, E. P. (2023). Vicuna: An open-source chatbot impressing
-gpt-4 with 90%* chatgpt quality.
-
-Chowdhery, A., Narang, S., Devlin, J., Bosma, M., Mishra, G., Roberts, A., Barham, P., Chung,
-H. W., Sutton, C., Gehrmann, S., et al. (2022). Palm: Scaling language modeling with pathways.
-arXiv preprint arXiv:2204.02311.
-
-Clark, A., De Las Casas, D., Guy, A., Mensch, A., Paganini, M., Hoffmann, J., Damoc, B., Hechtman,
-B., Cai, T., Borgeaud, S., et al. (2022). Unified scaling laws for routed language models. In
-International Conference on Machine Learning, pages 4057–4086. PMLR.
-
-Clark, C., Lee, K., Chang, M.-W., Kwiatkowski, T., Collins, M., and Toutanova, K. (2019). Boolq:
-
-Exploring the surprising difficulty of natural yes/no questions. In NAACL.
-
-Clark, P., Cowhey, I., Etzioni, O., Khot, T., Sabharwal, A., Schoenick, C., and Tafjord, O. (2018).
-Think you have solved question answering? try arc, the AI2 reasoning challenge. CoRR,
-abs/1803.05457.
-
-41
-
-Cobbe, K., Kosaraju, V., Bavarian, M., Chen, M., Jun, H., Kaiser, L., Plappert, M., Tworek, J., Hilton,
-J., Nakano, R., et al. (2021). Training verifiers to solve math word problems. arXiv preprint
-arXiv:2110.14168.
-
-Conneau, A., Khandelwal, K., Goyal, N., Chaudhary, V., Wenzek, G., Guzmán, F., Grave, É., Ott, M.,
-Zettlemoyer, L., and Stoyanov, V. (2020). Unsupervised cross-lingual representation learning at
-scale. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics,
-pages 8440–8451.
-
-Costa-jussà, M. R., Cross, J., Çelebi, O., Elbayad, M., Heafield, K., Heffernan, K., Kalbassi, E., Lam,
-J., Licht, D., Maillard, J., et al. (2022). No language left behind: Scaling human-centered machine
-translation. arXiv preprint arXiv:2207.04672.
-
-Dao, T. (2023). Flashattention-2: Faster attention with better parallelism and work partitioning. arXiv
-
-preprint arXiv:2307.08691.
-
-Dao, T., Fu, D., Ermon, S., Rudra, A., and Ré, C. (2022). Flashattention: Fast and memory-
-efficient exact attention with io-awareness. Advances in Neural Information Processing Systems,
-35:16344–16359.
-
-Dettmers, T., Lewis, M., Belkada, Y., and Zettlemoyer, L. (2022). Llm.int8(): 8-bit matrix multipli-
-cation for transformers at scale. Advances in Neural Information Processing Systems, 35:30318–
-30332.
-
-Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K. (2018). Bert: Pre-training of deep bidirectional
-
-transformers for language understanding. arXiv preprint arXiv:1810.04805.
-
-Dey, N., Gosal, G., Khachane, H., Marshall, W., Pathria, R., Tom, M., Hestness, J., et al. (2023).
-Cerebras-gpt: Open compute-optimal language models trained on the cerebras wafer-scale cluster.
-arXiv preprint arXiv:2304.03208.
-
-Dinan, E., Yaida, S., and Zhang, S. (2023). Effective theory of transformers at initialization. arXiv
-
-preprint arXiv:2304.02034.
-
-Dodge, J., Sap, M., Marasovi´c, A., Agnew, W., Ilharco, G., Groeneveld, D., Mitchell, M., and Gardner,
-M. (2021). Documenting large webtext corpora: A case study on the colossal clean crawled corpus.
-In Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing,
-pages 1286–1305.
-
-Dubois, Y., Li, X., Taori, R., Zhang, T., Gulrajani, I., Ba, J., Guestrin, C., Liang, P., and Hashimoto,
-T. B. (2023). Alpacafarm: A simulation framework for methods that learn from human feedback.
-arXiv preprint arXiv:2305.14387.
-
-Eberhard, D. M., Simons, G. F., and Fennig, C. D. (2023). Ethnologue: Languages of the World. SIL
-
-International, Dallas, TX, USA, twenty-sixth edition.
-
-Fedus, W., Zoph, B., and Shazeer, N. (2022). Switch transformers: Scaling to trillion parameter
-models with simple and efficient sparsity. The Journal of Machine Learning Research, 23(1):5232–
-5270.
-
-Flamary, R., Courty, N., Gramfort, A., Alaya, M. Z., Boisbunon, A., Chambon, S., Chapel, L.,
-Corenflos, A., Fatras, K., Fournier, N., Gautheron, L., Gayraud, N. T., Janati, H., Rakotomamonjy,
-A., Redko, I., Rolet, A., Schutz, A., Seguy, V., Sutherland, D. J., Tavenard, R., Tong, A., and Vayer,
-T. (2021). Pot: Python optimal transport. Journal of Machine Learning Research, 22(78):1–8.
-
-Fourrier, C., Habib, N., Launay, J., and Wolf, T. (2023). What’s going on with the open llm
-
-leaderboard? "https://huggingface.co/blog/evaluating-mmlu-leaderboard".
-
-Fu, D. Y., Dao, T., Saab, K. K., Thomas, A. W., Rudra, A., and Re, C. (2022). Hungry hungry hippos:
-Towards language modeling with state space models. In The Eleventh International Conference on
-Learning Representations.
-
-Ganguli, D., Lovitt, L., Kernion, J., Askell, A., Bai, Y., Kadavath, S., Mann, B., Perez, E., Schiefer,
-N., Ndousse, K., et al. (2022). Red teaming language models to reduce harms: Methods, scaling
-behaviors, and lessons learned. arXiv preprint arXiv:2209.07858.
-
-42
-
-Gao, L., Biderman, S., Black, S., Golding, L., Hoppe, T., Foster, C., Phang, J., He, H., Thite, A.,
-Nabeshima, N., Presser, S., and Leahy, C. (2020). The Pile: an 800GB dataset of diverse text for
-language modeling. arXiv preprint arXiv:2101.00027.
-
-Gao, L., Tow, J., Biderman, S., Black, S., DiPofi, A., Foster, C., Golding, L., Hsu, J., McDonell, K.,
-Muennighoff, N., Phang, J., Reynolds, L., Tang, E., Thite, A., Wang, B., Wang, K., and Zou, A.
-(2021). A framework for few-shot language model evaluation.
-
-Gordon, A., Kozareva, Z., and Roemmele, M. (2012). SemEval-2012 task 7: Choice of plausible
-alternatives: An evaluation of commonsense causal reasoning. In *SEM 2012: The First Joint
-Conference on Lexical and Computational Semantics – Volume 1: Proceedings of the main
-conference and the shared task, and Volume 2: Proceedings of the Sixth International Workshop
-on Semantic Evaluation (SemEval 2012), pages 394–398, Montréal, Canada. Association for
-Computational Linguistics.
-
-Gunasekar, S., Zhang, Y., Aneja, J., Mendes, C. C. T., Del Giorno, A., Gopi, S., Javaheripi, M.,
-Kauffmann, P., de Rosa, G., Saarikivi, O., et al. (2023). Textbooks are all you need. arXiv preprint
-arXiv:2306.11644.
-
-Hamborg, F., Meuschke, N., Breitinger, C., and Gipp, B. (2017). news-please: A generic news
-crawler and extractor. In Proceedings of the 15th International Symposium of Information Science,
-pages 218–223.
-
-Haviv, A., Ram, O., Press, O., Izsak, P., and Levy, O. (2022). Transformer language models
-without positional encodings still learn positional information. In Findings of the Association for
-Computational Linguistics: EMNLP 2022, pages 1382–1390.
-
-Hendrycks, D., Burns, C., Basart, S., Zou, A., Mazeika, M., Song, D., and Steinhardt, J. (2020).
-Measuring massive multitask language understanding. In International Conference on Learning
-Representations.
-
-Hernandez, D., Brown, T., Conerly, T., DasSarma, N., Drain, D., El-Showk, S., Elhage, N., Hatfield-
-Dodds, Z., Henighan, T., Hume, T., et al. (2022). Scaling laws and interpretability of learning from
-repeated data. arXiv preprint arXiv:2205.10487.
-
-Hestness, J., Narang, S., Ardalani, N., Diamos, G., Jun, H., Kianinejad, H., Patwary, M. M. A.,
-Yang, Y., and Zhou, Y. (2017). Deep learning scaling is predictable, empirically. arXiv preprint
-arXiv:1712.00409.
-
-Hoffmann, J., Borgeaud, S., Mensch, A., Buchatskaya, E., Cai, T., Rutherford, E., Casas, D. d. L.,
-Hendricks, L. A., Welbl, J., Clark, A., et al. (2022). Training compute-optimal large language
-models. arXiv preprint arXiv:2203.15556.
-
-Hooker, S. (2021). The hardware lottery. Communications of the ACM, 64(12):58–65.
-
-Howard, J. and Ruder, S. (2018). Universal language model fine-tuning for text classification. In
-Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume
-1: Long Papers), pages 328–339.
-
-Inan, H., Khosravi, K., and Socher, R. (2016). Tying word vectors and word classifiers: A loss
-
-framework for language modeling. arXiv preprint arXiv:1611.01462.
-
-Inflection (2023). Inflection 1.
-
-Johannes Welbl, Nelson F. Liu, M. G. (2017). Crowdsourcing multiple choice science questions.
-
-Jozefowicz, R., Vinyals, O., Schuster, M., Shazeer, N., and Wu, Y. (2016). Exploring the limits of
-
-language modeling. arXiv preprint arXiv:1602.02410.
-
-kaiokenmdenv (2023). Extending context is hard. . . but not impossible. Accessed: 2023-10-02.
-
-Kaplan, J., McCandlish, S., Henighan, T., Brown, T. B., Chess, B., Child, R., Gray, S., Radford,
-A., Wu, J., and Amodei, D. (2020). Scaling laws for neural language models. arXiv preprint
-arXiv:2001.08361.
-
-43
-
-Kenton, J. D. M.-W. C. and Toutanova, L. K. (2019). Bert: Pre-training of deep bidirectional
-transformers for language understanding. In Proceedings of NAACL-HLT, pages 4171–4186.
-
-Kocetkov, D., Li, R., Jia, L., Mou, C., Jernite, Y., Mitchell, M., Ferrandis, C. M., Hughes, S., Wolf,
-T., Bahdanau, D., et al. (2022). The stack: 3 tb of permissively licensed source code. Transactions
-on Machine Learning Research.
-
-Kreutzer, J., Caswell, I., Wang, L., Wahab, A., van Esch, D., Ulzii-Orshikh, N., Tapo, A. A.,
-Subramani, N., Sokolov, A., Sikasote, C., et al. (2022). Quality at a glance: An audit of web-
-crawled multilingual datasets. Transactions of the Association for Computational Linguistics,
-10:50–72.
-
-Lai, G., Xie, Q., Liu, H., Yang, Y., and Hovy, E. (2017). Race: Large-scale reading comprehension
-dataset from examinations. In Proceedings of the 2017 Conference on Empirical Methods in
-Natural Language Processing, pages 785–794.
-
-Laurençon, H., Saulnier, L., Wang, T., Akiki, C., del Moral, A. V., Scao, T. L., Werra, L. V., Mou, C.,
-Ponferrada, E. G., Nguyen, H., Frohberg, J., Šaško, M., Lhoest, Q., McMillan-Major, A., Dupont,
-G., Biderman, S., Rogers, A., allal, L. B., Toni, F. D., Pistilli, G., Nguyen, O., Nikpoor, S., Masoud,
-M., Colombo, P., de la Rosa, J., Villegas, P., Thrush, T., Longpre, S., Nagel, S., Weber, L., Muñoz,
-M. R., Zhu, J., Strien, D. V., Alyafeai, Z., Almubarak, K., Chien, V. M., Gonzalez-Dios, I., Soroa,
-A., Lo, K., Dey, M., Suarez, P. O., Gokaslan, A., Bose, S., Adelani, D. I., Phan, L., Tran, H., Yu,
-I., Pai, S., Chim, J., Lepercq, V., Ilic, S., Mitchell, M., Luccioni, S., and Jernite, Y. (2022). The
-bigscience ROOTS corpus: A 1.6TB composite multilingual dataset. In Thirty-sixth Conference
-on Neural Information Processing Systems Datasets and Benchmarks Track.
-
-Le Scao, T., Wang, T., Hesslow, D., Bekman, S., Bari, M. S., Biderman, S., Elsahar, H., Muennighoff,
-N., Phang, J., Press, O., et al. (2022). What language model to train if you have one million
-gpu hours? In Findings of the Association for Computational Linguistics: EMNLP 2022, pages
-765–782.
-
-Lee, K., Ippolito, D., Nystrom, A., Zhang, C., Eck, D., Callison-Burch, C., and Carlini, N. (2022).
-Deduplicating training data makes language models better. In Proceedings of the 60th Annual
-Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 8424–
-8445.
-
-Levine, Y., Wies, N., Sharir, O., Bata, H., and Shashua, A. (2020). Limits to depth efficiencies of
-
-self-attention. Advances in Neural Information Processing Systems, 33:22640–22651.
-
-Lewkowycz, A., Andreassen, A., Dohan, D., Dyer, E., Michalewski, H., Ramasesh, V., Slone, A.,
-Anil, C., Schlag, I., Gutman-Solo, T., Wu, Y., Neyshabur, B., Gur-Ari, G., and Misra, V. (2022).
-Solving quantitative reasoning problems with language models.
-
-Li, R., Allal, L. B., Zi, Y., Muennighoff, N., Kocetkov, D., Mou, C., Marone, M., Akiki, C., Li, J.,
-Chim, J., et al. (2023a). Starcoder: may the source be with you! arXiv preprint arXiv:2305.06161.
-
-Li, S., Xue, F., Li, Y., and You, Y. (2021). Sequence parallelism: Making 4d parallelism possible.
-
-arXiv preprint arXiv:2105.13120.
-
-Li, Y., Bubeck, S., Eldan, R., Del Giorno, A., Gunasekar, S., and Lee, Y. T. (2023b). Textbooks are
-
-all you need ii: phi-1.5 technical report. arXiv preprint arXiv:2309.05463.
-
-Liang, D., Gonen, H., Mao, Y., Hou, R., Goyal, N., Ghazvininejad, M., Zettlemoyer, L., and Khabsa,
-M. (2023). Xlm-v: Overcoming the vocabulary bottleneck in multilingual masked language models.
-arXiv preprint arXiv:2301.10472.
-
-Liang, P., Bommasani, R., Lee, T., Tsipras, D., Soylu, D., Yasunaga, M., Zhang, Y., Narayanan,
-D., Wu, Y., Kumar, A., et al. (2022). Holistic evaluation of language models. arXiv preprint
-arXiv:2211.09110.
-
-Lieber, O., Sharir, O., Lenz, B., and Shoham, Y. (2021). Jurassic-1: Technical details and evaluation.
-
-Technical report, AI21 Labs.
-
-44
-
-Lin, X. V., Mihaylov, T., Artetxe, M., Wang, T., Chen, S., Simig, D., Ott, M., Goyal, N., Bhosale, S.,
-Du, J., Pasunuru, R., Shleifer, S., Koura, P. S., Chaudhary, V., O’Horo, B., Wang, J., Zettlemoyer,
-L., Kozareva, Z., Diab, M., Stoyanov, V., and Li, X. (2021). Few-shot learning with multilingual
-language models. ArXiv, abs/2112.10668.
-
-Longpre, S., Hou, L., Vu, T., Webson, A., Chung, H. W., Tay, Y., Zhou, D., Le, Q. V., Zoph, B., Wei,
-J., et al. (2023). The flan collection: Designing data and methods for effective instruction tuning.
-arXiv preprint arXiv:2301.13688.
-
-Loshchilov, I. and Hutter, F. (2017). Decoupled weight decay regularization. arXiv preprint
-
-arXiv:1711.05101.
-
-Loshchilov, I. and Hutter, F. (2018). Decoupled weight decay regularization.
-
-In International
-
-Conference on Learning Representations.
-
-Luo, S., Li, S., Zheng, S., Liu, T.-Y., Wang, L., and He, D. (2022). Your transformer may not be as
-
-powerful as you expect. arXiv preprint arXiv:2205.13401.
-
-Luo, Z., Xu, C., Zhao, P., Sun, Q., Geng, X., Hu, W., Tao, C., Ma, J., Lin, Q., and Jiang, D.
-(2023). Wizardcoder: Empowering code large language models with evol-instruct. arXiv preprint
-arXiv:2306.08568.
-
-Madaan, A., Zhou, S., Alon, U., Yang, Y., and Neubig, G. (2022). Language models of code are
-few-shot commonsense learners. In Proceedings of the 2022 Conference on Empirical Methods in
-Natural Language Processing, pages 1384–1403.
-
-Manber, U. and Myers, G. (1993). Suffix arrays: a new method for on-line string searches. Journal
-
-on Computing, 22(5):935–948.
-
-Mémoli, F. (2011). Gromov–wasserstein distances and the metric approach to object matching.
-
-Foundations of computational mathematics, 11:417–487.
-
-Mihaylov, T., Clark, P., Khot, T., and Sabharwal, A. (2018). Can a suit of armor conduct electricity?
-
-a new dataset for open book question answering. In EMNLP.
-
-Mikolov, T., Chen, K., Corrado, G., and Dean, J. (2013). Efficient estimation of word representations
-
-in vector space. arXiv preprint arXiv:1301.3781.
-
-Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji, I. D.,
-and Gebru, T. (2019). Model cards for model reporting. In Proceedings of the conference on
-fairness, accountability, and transparency, pages 220–229.
-
-MosaicML (2023).
-
-Introducing mpt-30b: Raising the bar for open-source foundation models.
-
-Accessed: 2023-06-22.
-
-Muennighoff, N., Rush, A. M., Barak, B., Scao, T. L., Piktus, A., Tazi, N., Pyysalo, S., Wolf, T., and
-Raffel, C. (2023). Scaling data-constrained language models. arXiv preprint arXiv:2305.16264.
-
-Narayanan, D., Phanishayee, A., Shi, K., Chen, X., and Zaharia, M. (2021a). Memory-efficient
-pipeline-parallel dnn training. In International Conference on Machine Learning, pages 7937–7947.
-PMLR.
-
-Narayanan, D., Shoeybi, M., Casper, J., LeGresley, P., Patwary, M., Korthikanti, V., Vainbrand, D.,
-Kashinkunti, P., Bernauer, J., Catanzaro, B., et al. (2021b). Efficient large-scale language model
-training on gpu clusters using megatron-lm. In Proceedings of the International Conference for
-High Performance Computing, Networking, Storage and Analysis, pages 1–15.
-
-OpenAI (2023a). Gpt-4 technical report. arXiv, pages 2303–08774.
-
-OpenAI (2023b). Model index for researchers. Accessed: 2023-09-26.
-
-Ortiz Suárez, P. J., Sagot, B., and Romary, L. (2019). Asynchronous pipelines for processing huge
-corpora on medium to low resource infrastructures. Proceedings of the Workshop on Challenges
-in the Management of Large Corpora (CMLC-7) 2019. Cardiff, 22nd July 2019, pages 9 – 16,
-Mannheim. Leibniz-Institut für Deutsche Sprache.
-
-45
-
-Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C., Mishkin, P., Zhang, C., Agarwal, S.,
-Slama, K., Ray, A., et al. (2022). Training language models to follow instructions with human
-feedback. Advances in Neural Information Processing Systems, 35:27730–27744.
-
-Paperno, D., Kruszewski, G., Lazaridou, A., Pham, N. Q., Bernardi, R., Pezzelle, S., Baroni, M.,
-Boleda, G., and Fernández, R. (2016). The LAMBADA dataset: Word prediction requiring a broad
-discourse context. In Proceedings of the 54th Annual Meeting of the Association for Computa-
-tional Linguistics (Volume 1: Long Papers), pages 1525–1534, Berlin, Germany. Association for
-Computational Linguistics.
-
-Paresh, D. (2023). Stack overflow will charge ai giants for training data.
-
-Paszke, A., Gross, S., Chintala, S., Chanan, G., Yang, E., DeVito, Z., Lin, Z., Desmaison, A., Antiga,
-
-L., and Lerer, A. (2017). Automatic differentiation in pytorch. In NIPS-W.
-
-Penedo, G., Malartic, Q., Hesslow, D., Cojocaru, R., Cappelli, A., Alobeidli, H., Pannier, B.,
-Almazrouei, E., and Launay, J. (2023). The RefinedWeb dataset for Falcon LLM: outperforming
-curated corpora with web data, and web data only. arXiv preprint arXiv:2306.01116.
-
-Pennington, J., Socher, R., and Manning, C. D. (2014). Glove: Global vectors for word representation.
-In Proceedings of the 2014 conference on empirical methods in natural language processing
-(EMNLP), pages 1532–1543.
-
-Peters, M. E., Neumann, M., Iyyer, M., Gardner, M., Clark, C., Lee, K., and Zettlemoyer, L.
-(2018). Deep contextualized word representations. In Proceedings of the 2018 Conference of the
-North American Chapter of the Association for Computational Linguistics: Human Language
-Technologies, Volume 1 (Long Papers), pages 2227–2237, New Orleans, Louisiana. Association
-for Computational Linguistics.
-
-Pope, R., Douglas, S., Chowdhery, A., Devlin, J., Bradbury, J., Heek, J., Xiao, K., Agrawal, S., and
-Dean, J. (2023). Efficiently scaling transformer inference. Proceedings of Machine Learning and
-Systems, 5.
-
-Press, O., Smith, N., and Lewis, M. (2022). Train short, test long: Attention with linear biases enables
-
-input length extrapolation. In International Conference on Learning Representations.
-
-Press, O. and Wolf, L. (2016). Using the output embedding to improve language models. arXiv
-
-preprint arXiv:1608.05859.
-
-Rabe, M. N. and Staats, C. (2021). Self-attention does not need o(n2) memory. arXiv preprint
-
-arXiv:2112.05682.
-
-Radford, A., Narasimhan, K., Salimans, T., and Sutskever, I. (2018). Improving language understand-
-
-ing by generative pre-training. OpenAI Blog.
-
-Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., Sutskever, I., et al. (2019). Language models
-
-are unsupervised multitask learners. OpenAI blog, 1(8):9.
-
-Rae, J. W., Borgeaud, S., Cai, T., Millican, K., Hoffmann, J., Song, F., Aslanides, J., Henderson, S.,
-Ring, R., Young, S., et al. (2021). Scaling language models: Methods, analysis & insights from
-training gopher. arXiv preprint arXiv:2112.11446.
-
-Rae, J. W., Potapenko, A., Jayakumar, S. M., and Lillicrap, T. P. (2019). Compressive transformers
-
-for long-range sequence modelling.
-
-Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., and Liu, P. J.
-(2019). Exploring the limits of transfer learning with a unified text-to-text transformer. CoRR,
-abs/1910.10683.
-
-Rajbhandari, S., Rasley, J., Ruwase, O., and He, Y. (2020). Zero: Memory optimizations toward
-training trillion parameter models. In SC20: International Conference for High Performance
-Computing, Networking, Storage and Analysis, pages 1–16. IEEE.
-
-46
-
-Roberts, A., Chung, H. W., Levskaya, A., Mishra, G., Bradbury, J., Andor, D., Narang, S., Lester, B.,
-Gaffney, C., Mohiuddin, A., Hawthorne, C., Lewkowycz, A., Salcianu, A., van Zee, M., Austin, J.,
-Goodman, S., Soares, L. B., Hu, H., Tsvyashchenko, S., Chowdhery, A., Bastings, J., Bulian, J.,
-Garcia, X., Ni, J., Chen, A., Kenealy, K., Clark, J. H., Lee, S., Garrette, D., Lee-Thorp, J., Raffel,
-C., Shazeer, N., Ritter, M., Bosma, M., Passos, A., Maitin-Shepard, J., Fiedel, N., Omernick, M.,
-Saeta, B., Sepassi, R., Spiridonov, A., Newlan, J., and Gesmundo, A. (2022). Scaling up models
-and data with t5x and seqio. arXiv preprint arXiv:2203.17189.
-
-Rozière, B., Gehring, J., Gloeckle, F., Sootla, S., Gat, I., Tan, X. E., Adi, Y., Liu, J., Remez, T., Rapin,
-J., et al. (2023). Code llama: Open foundation models for code. arXiv preprint arXiv:2308.12950.
-
-Sakaguchi, K., Bras, R. L., Bhagavatula, C., and Choi, Y. (2019). Winogrande: An adversarial
-
-winograd schema challenge at scale. arXiv preprint arXiv:1907.10641.
-
-Sanh, V., Webson, A., Raffel, C., Bach, S. H., Sutawika, L. A., Alyafeai, Z., Chaffin, A., Stiegler,
-A., Scao, T. L., Raja, A., Dey, M., BARI, M. S., Xu, C., Thakker, U., Sharma, S. S., Szczechla,
-E., Kim, T., Chhablani, G., Nayak, N. V., Datta, D., Chang, J., Jiang, M. T.-J., Wang, H., Manica,
-M., Shen, S., Yong, Z. X., Pandey, H., Bawden, R., Wang, T., Neeraj, T., Rozen, J., Sharma, A.,
-Santilli, A., Févry, T., Fries, J. A., Teehan, R., Biderman, S. R., Gao, L., Bers, T. G. O., Wolf, T.,
-and Rush, A. M. (2021). Multitask prompted training enables zero-shot task generalization. ArXiv,
-abs/2110.08207.
-
-Scao, T. L., Fan, A., Akiki, C., Pavlick, E., Ili´c, S., Hesslow, D., Castagné, R., Luccioni, A. S., Yvon,
-F., Gallé, M., et al. (2022a). Bloom: A 176b-parameter open-access multilingual language model.
-arXiv preprint arXiv:2211.05100.
-
-Scao, T. L., Wang, T., Hesslow, D., Saulnier, L., Bekman, S., Bari, M. S., Bideman, S., Elsahar, H.,
-Muennighoff, N., Phang, J., et al. (2022b). What language model to train if you have one million
-gpu hours? arXiv preprint arXiv:2210.15424.
-
-Shaham, U., Elbayad, M., Goswami, V., Levy, O., and Bhosale, S. (2022). Causes and cures for
-
-interference in multilingual translation. arXiv preprint arXiv:2212.07530.
-
-Shannon, C. E. (1951). Prediction and entropy of printed english. Bell system technical journal,
-
-30(1):50–64.
-
-Shaw, P., Uszkoreit, J., and Vaswani, A. (2018). Self-attention with relative position representations.
-
-arXiv preprint arXiv:1803.02155.
-
-Shazeer, N. (2019). Fast transformer decoding: One write-head is all you need. arXiv preprint
-
-arXiv:1911.02150.
-
-Shazeer, N. (2020). Glu variants improve transformer. arXiv preprint arXiv:2002.05202.
-
-Shazeer, N., Cheng, Y., Parmar, N., Tran, D., Vaswani, A., Koanantakool, P., Hawkins, P., Lee, H.,
-Hong, M., Young, C., Sepassi, R., and Hechtman, B. (2018). Mesh-TensorFlow: Deep learning for
-supercomputers. In Neural Information Processing Systems.
-
-Shoeybi, M., Patwary, M., Puri, R., LeGresley, P., Casper, J., and Catanzaro, B. (2019). Megatron-
-lm: Training multi-billion parameter language models using model parallelism. arXiv preprint
-arXiv:1909.08053.
-
-Smith, S., Patwary, M., Norick, B., LeGresley, P., Rajbhandari, S., Casper, J., Liu, Z., Prabhumoye, S.,
-Zerveas, G., Korthikanti, V., et al. (2022). Using deepspeed and megatron to train megatron-turing
-nlg 530b, a large-scale generative language model. arXiv preprint arXiv:2201.11990.
-
-Soldaini, L., Lo, K., Kinney, R., Naik, A., Ravichander, A., Bhagia, A., Groeneveld, D., Schwenk, D.,
-
-Magnusson, I., and Chandu, K. (2023). Dolma.
-
-Srivastava, A., Rastogi, A., Rao, A., Shoeb, A. A. M., Abid, A., Fisch, A., Brown, A. R., Santoro,
-A., Gupta, A., Garriga-Alonso, A., et al. (2023). Beyond the imitation game: Quantifying and
-extrapolating the capabilities of language models. Transactions on Machine Learning Research.
-
-47
-
-Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., and Salakhutdinov, R. (2014). Dropout: A
-simple way to prevent neural networks from overfitting. Journal of Machine Learning Research,
-15(56):1929–1958.
-
-Stiennon, N., Ouyang, L., Wu, J., Ziegler, D., Lowe, R., Voss, C., Radford, A., Amodei, D., and
-Christiano, P. F. (2020). Learning to summarize with human feedback. Advances in Neural
-Information Processing Systems, 33:3008–3021.
-
-Su, J., Lu, Y., Pan, S., Wen, B., and Liu, Y. (2021). Roformer: Enhanced transformer with rotary
-
-position embedding. arXiv preprint arXiv:2104.09864.
-
-Sutton, R. (2019). The bitter lesson. Incomplete Ideas (blog), 13(1).
-
-Taori, R., Gulrajani, I., Zhang, T., Dubois, Y., Li, X., Guestrin, C., Liang, P., and Hashimoto,
-T. B. (2023). Stanford alpaca: An instruction-following llama model. https://github.com/
-tatsu-lab/stanford_alpaca.
-
-Tay, Y., Dehghani, M., Rao, J., Fedus, W., Abnar, S., Chung, H. W., Narang, S., Yogatama, D.,
-Vaswani, A., and Metzler, D. (2021). Scale efficiently: Insights from pre-training and fine-tuning
-transformers. ArXiv, abs/2109.10686.
-
-Tay, Y., Dehghani, M., Tran, V. Q., Garcia, X., Wei, J., Wang, X., Chung, H. W., Bahri, D., Schuster,
-In The Eleventh
-
-T., Zheng, S., et al. (2022a). Ul2: Unifying language learning paradigms.
-International Conference on Learning Representations.
-
-Tay, Y., Wei, J., Chung, H. W., Tran, V. Q., So, D. R., Shakeri, S., Garcia, X., Zheng, H. S., Rao, J.,
-Chowdhery, A., et al. (2022b). Transcending scaling laws with 0.1% extra compute. arXiv preprint
-arXiv:2210.11399.
-
-Thoppilan, R., De Freitas, D., Hall, J., Shazeer, N., Kulshreshtha, A., Cheng, H.-T., Jin, A., Bos, T.,
-Baker, L., Du, Y., et al. (2022). Lamda: Language models for dialog applications. arXiv preprint
-arXiv:2201.08239.
-
-Tian, R. and Parikh, A. P. (2022). Amos: An adam-style optimizer with adaptive weight decay
-
-towards model-oriented scale. arXiv preprint arXiv:2210.11693.
-
-Tiedemann, J. (2016). Finding alternative translations in a large corpus of movie subtitle. In Proceed-
-ings of the Tenth International Conference on Language Resources and Evaluation (LREC’16),
-pages 3518–3522, Portorož, Slovenia. European Language Resources Association (ELRA).
-
-Tillet, P., Kung, H.-T., and Cox, D. (2019). Triton: an intermediate language and compiler for tiled
-neural network computations. In Proceedings of the 3rd ACM SIGPLAN International Workshop
-on Machine Learning and Programming Languages, pages 10–19.
-
-Touvron, H., Lavril, T., Izacard, G., Martinet, X., Lachaux, M.-A., Lacroix, T., Rozière, B., Goyal,
-N., Hambro, E., Azhar, F., et al. (2023a). Llama: Open and efficient foundation language models.
-arXiv preprint arXiv:2302.13971.
-
-Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y., Bashlykov, N., Batra, S.,
-Bhargava, P., Bhosale, S., et al. (2023b). Llama 2: Open foundation and fine-tuned chat models.
-arXiv preprint arXiv:2307.09288.
-
-Trinh, T. H. and Le, Q. V. (2018). A simple method for commonsense reasoning. arXiv preprint
-
-arXiv:1806.02847.
-
-Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., and
-Polosukhin, I. (2017). Attention is all you need. In Advances in neural information processing
-systems, pages 5998–6008.
-
-Villalobos, P., Sevilla, J., Heim, L., Besiroglu, T., Hobbhahn, M., and Ho, A. (2022). Will we run
-out of data? an analysis of the limits of scaling datasets in machine learning. arXiv preprint
-arXiv:2211.04325.
-
-48
-
-Wang, A., Pruksachatkun, Y., Nangia, N., Singh, A., Michael, J., Hill, F., Levy, O., and Bowman, S.
-(2019). Superglue: A stickier benchmark for general-purpose language understanding systems.
-Advances in neural information processing systems, 32.
-
-Wang, A., Singh, A., Michael, J., Hill, F., Levy, O., and Bowman, S. R. (2018). Glue: A multi-task
-benchmark and analysis platform for natural language understanding. In International Conference
-on Learning Representations.
-
-Wang, B. and Komatsuzaki, A. (2021). GPT-J-6B: A 6 Billion Parameter Autoregressive Language
-
-Model. https://github.com/kingoflolz/mesh-transformer-jax.
-
-Wang, P., Li, L., Chen, L., Zhu, D., Lin, B., Cao, Y., Liu, Q., Liu, T., and Sui, Z. (2023). Large
-
-language models are not fair evaluators. arXiv preprint arXiv:2305.17926.
-
-Wang, T., Roberts, A., Hesslow, D., Scao, T. L., Chung, H. W., Beltagy, I., Launay, J., and Raffel,
-C. (2022a). What language model architecture and pretraining objective work best for zero-shot
-generalization? arXiv preprint arXiv:2204.05832.
-
-Wang, Y., Kordi, Y., Mishra, S., Liu, A., Smith, N. A., Khashabi, D., and Hajishirzi, H.
-(2022b). Self-instruct: Aligning language model with self generated instructions. arXiv preprint
-arXiv:2212.10560.
-
-Wei, J., Tay, Y., Bommasani, R., Raffel, C., Zoph, B., Borgeaud, S., Yogatama, D., Bosma, M., Zhou,
-D., Metzler, D., et al. (2022a). Emergent abilities of large language models. Transactions on
-Machine Learning Research.
-
-Wei, J., Wang, X., Schuurmans, D., Bosma, M., Xia, F., Chi, E., Le, Q. V., Zhou, D., et al. (2022b).
-Chain-of-thought prompting elicits reasoning in large language models. Advances in Neural
-Information Processing Systems, 35:24824–24837.
-
-Welbl, J., Glaese, A., Uesato, J., Dathathri, S., Mellor, J., Hendricks, L. A., Anderson, K., Kohli, P.,
-Coppin, B., and Huang, P.-S. (2021). Challenges in detoxifying language models. In Findings of
-the Association for Computational Linguistics: EMNLP 2021, pages 2447–2469.
-
-Wenzek, G., Lachaux, M.-A., Conneau, A., Chaudhary, V., Guzmán, F., Joulin, A., and Grave, É.
-(2020). Ccnet: Extracting high quality monolingual datasets from web crawl data. In Proceedings
-of the 12th Language Resources and Evaluation Conference, pages 4003–4012.
-
-Wu, Y., Schuster, M., Chen, Z., Le, Q. V., Norouzi, M., Macherey, W., Krikun, M., Cao, Y., Gao,
-Q., Macherey, K., et al. (2016). Google’s neural machine translation system: Bridging the gap
-between human and machine translation. arXiv preprint arXiv:1609.08144.
-
-Xiong, W., Liu, J., Molybog, I., Zhang, H., Bhargava, P., Hou, R., Martin, L., Rungta, R., Sankarara-
-man, K. A., Oguz, B., Khabsa, M., Fang, H., Mehdad, Y., Narang, S., Malik, K., Fan, A., Bhosale,
-S., Edunov, S., Lewis, M., Wang, S., and Ma, H. (2023). Effective long-context scaling of
-foundation models.
-
-Xue, F., Fu, Y., Zhou, W., Zheng, Z., and You, Y. (2023). To repeat or not to repeat: Insights from
-
-scaling llm under token-crisis. arXiv preprint arXiv:2305.13230.
-
-Xue, L., Barua, A., Constant, N., Al-Rfou, R., Narang, S., Kale, M., Roberts, A., and Raffel, C.
-(2022). Byt5: Towards a token-free future with pre-trained byte-to-byte models. Transactions of
-the Association for Computational Linguistics, 10:291–306.
-
-Xue, L., Constant, N., Roberts, A., Kale, M., Al-Rfou, R., Siddhant, A., Barua, A., and Raffel, C.
-(2021). mt5: A massively multilingual pre-trained text-to-text transformer. In Proceedings of the
-2021 Conference of the North American Chapter of the Association for Computational Linguistics:
-Human Language Technologies, pages 483–498.
-
-Yang, G., Hu, E. J., Babuschkin, I., Sidor, S., Liu, X., Farhi, D., Ryder, N., Pachocki, J., Chen, W.,
-and Gao, J. (2022). Tensor programs v: Tuning large neural networks via zero-shot hyperparameter
-transfer. arXiv preprint arXiv:2203.03466.
-
-49
-
-Zellers, R., Holtzman, A., Bisk, Y., Farhadi, A., and Choi, Y. (2019). HellaSwag: Can a machine
-really finish your sentence? In Proceedings of the 57th Annual Meeting of the Association for
-Computational Linguistics, pages 4791–4800, Florence, Italy. Association for Computational
-Linguistics.
-
-Zeng, W., Ren, X., Su, T., Wang, H., Liao, Y., Wang, Z., Jiang, X., Yang, Z., Wang, K., Zhang,
-X., et al. (2021). Pangu-α: Large-scale autoregressive pretrained chinese language models with
-auto-parallel computation. arXiv preprint arXiv:2104.12369.
-
-Zhang, S., Roller, S., Goyal, N., Artetxe, M., Chen, M., Chen, S., Dewan, C., Diab, M., Li, X.,
-Lin, X. V., et al. (2022). Opt: Open pre-trained transformer language models. arXiv preprint
-arXiv:2205.01068.
-
-Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., Lin, Z., Li, Z., Li, D.,
-Xing, E., et al. (2023). Judging llm-as-a-judge with mt-bench and chatbot arena. arXiv preprint
-arXiv:2306.05685.
-
-Zhong, W., Cui, R., Guo, Y., Liang, Y., Lu, S., Wang, Y., Saied, A., Chen, W., and Duan, N.
-(2023). Agieval: A human-centric benchmark for evaluating foundation models. arXiv preprint
-arXiv:2304.06364.
-
-Zhu, Y., Kiros, R., Zemel, R., Salakhutdinov, R., Urtasun, R., Torralba, A., and Fidler, S. (2015).
-Aligning books and movies: Towards story-like visual explanations by watching movies and
-reading books. In Proceedings of the IEEE international conference on computer vision, pages
-19–27.
-
-50
+[PIPELINE INGESTION WORKFLOW - REMOVED REFERENCES]
 
 A Contributions
 
@@ -4685,11 +2572,7 @@ Training data
 
 See the dedicated datasheet in Penedo et al. (2023).
 
-Table 23: Model card for Falcon, following the framework introduced by Mitchell et al. (2019).
-
-52
-
-D Datasheet
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 See the dedicated RefinedWeb paper (Penedo et al., 2023).
 
@@ -4790,12 +2673,7 @@ train set for illustrative purpose thereafter, but the test or validation sets a
 for actual evaluation). Weay write down the candidates in a comma-separated list [candidate1,
 candidate2, ...]. Candidates are always preceded by a space for tokenization.
 
-Table 24: ANLI.
-
-Context
-Sample(s)
-
-Candidates
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Determine whether the statement made about the extract is true, false, or unsure.
 Extract: Ernest Jones is a British jeweller and watchmaker. Established in 1949,
@@ -4807,13 +2685,7 @@ Question: true, false, or unsure?
 Answer:
 [true, false, unsure]
 
-Table 25: ARC. When options are not provided in the prompt, the candidates are directly the possible
-answers (e.g., dry palms, wet palms, etc.) instead of the letter keys.
-
-Context
-Sample(s)
-
-Candidates
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Answer the following multiple-choice questions.
 Question: George wants to warm his hands quickly by rubbing them. Which skin
@@ -4827,12 +2699,7 @@ Answer:
 
 54
 
-Table 26: RTE.
-
-Context
-Sample(s)
-
-Candidates
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Determine whether the statement made about an extract is True, or False.
 Extract: Herceptin was already approved to treat the sickest breast cancer patients,
@@ -4845,16 +2712,8 @@ Answer:
 Context
 Sample(s)
 
-Table 27: LAMBADA. We evaluate whether the correct answer is the most likely one according to
-the model overall, without constraint to a set of predetermined candidates.
-Complete the ____ in the following extracts.
-Extract: My wife refused to allow me to come to Hong Kong when the plague was at
-its height and –" "Your wife, Johanne? You are married at last ?" Johanne grinned.
-"Well, when a man gets to my age, he starts to need a few home comforts. After my
-dear mother passed away ten years ago now, I became ____
-Completion:
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Table 28: OpenBookQA. When options are not provided in the prompt, the candidates are directly
 the possible answers (e.g., puppies learning new tricks, etc.) instead of the letter keys.
 
 Context
@@ -4873,13 +2732,7 @@ Answer:
 
 55
 
-Table 29: RACE. Note that the way Brown et al. (2020) and Gao et al. (2021) implement RACE
-means that the number of shots is at the article level; 3 questions regarding each article are always
-provided, even in 0-shot.
-
-Sample(s)
-
-Candidates
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Article: Last week I talked with some of my students about what they wanted to
 do after they graduated, and what kind of job prospects they thought they had.
@@ -4932,12 +2785,7 @@ Answer:
 
 56
 
-Table 30: BoolQ.
-
-Context
-Sample(s)
-
-Candidates
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Answer the following questions about an extract by yes, or no.
 Extract: Powdered sugar, also called confectioners’ sugar, icing sugar, and icing
@@ -4950,13 +2798,7 @@ Question: is confectionary sugar the same as powdered suga, yes or no?
 Answer:
 [yes, no]
 
-Table 31: CB.
-
-Context
-
-Sample(s)
-
-Candidates
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Determine whether the statement made about by the extract is True, False, or
 Unsure.
@@ -4967,14 +2809,7 @@ Question: True, False, or Unsure?
 Answer:
 [True, False, Unsure]
 
-Table 32: COPA. We keep the formatting of Gao et al. (2021) unchanged, but add an instruction.
-Context Complete the following sentences.
-
-Table 33: WiC.
-
-Sample(s)
-
-Candidates
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Extract: place has a similar meaning in the following two sentences. Yes or no?
 Sentence 1: Do you want to come over to my place later?
@@ -4982,10 +2817,5 @@ Sentence 2: A political system with no place for the less prominent groups.
 Answer:
 [yes, no]
 
-Table 34: Winograd. We keep the formatting of Gao et al. (2021) unchanged, but switch yes/no in
-the candidates for true/false.
-Candidates
-[true, false]
-
-57
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 

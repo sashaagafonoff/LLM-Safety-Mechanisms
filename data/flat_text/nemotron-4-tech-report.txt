@@ -311,12 +311,7 @@ Nemotron-4-340B-Base
 
 57.32
 
-Table 3: Results on standard reasoning benchmarks. The values marked with ∗ are taken from Qwen-Team
-(2024)
-
-3 Alignment
-
-3.1 Reward Modeling
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 The reward model plays a pivotal role in model alignment, serving as a crucial judge for preference ranking
 and quality filtering in the training of a strong instruction-following model. To develop a strong reward
@@ -411,10 +406,7 @@ Claude-3-Opus-02292024
 72.6
 -
 
-Table 4: Model Accuracy on Reward Bench. Higher is better for each category (Allen AI, 2024). Nemotron-
-4-340B-Reward achieves the top accuracy on Reward Bench’s primary dataset, in particular on the challeng-
-ing “Chat-Hard” category. Note that its comparatively lower accuracy on Prior Sets is likely due to not using
-the training data from those datasets.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 This strong overall score of Nemotron-4-340B-Reward demonstrates the strength of our Nemotron-4-340B-
 Base model, the high quality of HelpSteer2 dataset, and the efficacy of our methodology. Furthermore, this
@@ -1125,10 +1117,7 @@ Instruction-Strict-Acc
 
 86.1
 
-Table 6: Evaluation results of each intermediate model in the alignment process, where the last column
-corresponds to our Nemotron-4-340B-Instruct.
-
-3.4.2 Human Evaluation
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Besides automatic evaluations, we also conducted a human evaluation of our model using a dedicated team
 of trained annotators. These annotators were presented with 136 prompts, categorized into 10 different task
@@ -1185,17 +1174,7 @@ Too long/verbose
 74.02%
 25.74%
 
-Table 7: Human evaluation results regarding perception of response length. Underlined indicates the model
-with the higher rate of perceived appropriate length.
-
-16
-
-33.33%33.33%19.05%33.33%3.03%27.78%33.33%33.33%20.83%41.67%28.19%50.00%42.22%58.73%55.56%30.30%46.30%41.67%46.67%33.33%41.67%46.57%16.67%24.44%22.22%11.11%66.67%25.93%25.00%20.00%45.83%16.67%25.24%0%10%20%30%40%50%60%70%80%90%100%Open QASummarizationClassificationClosed QARewriteGenerationOtherBrainstormingExtractionMulti-turn chatOverallWin RateTie RateLoss RateAs for the secondary endpoint in our human evaluation, length perception by annotators can be found in
-Table 7. Results show that annotators consider Nemotron-4-340B-Instruct to have a slightly higher rate of
-appropriate response length (79.41% vs 74.02%) when compared to GPT-4-1106-preview. It is noteworthy
-that this gain comes mainly from a lower rate of long/verbose responses (20.10% vs 25.74%).
-
-3.4.3 Safety Evaluations
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We performed extensive safety evaluation including adversarial testing via these distinct methods:
 
@@ -1343,13 +1322,7 @@ Performing transactions
 
 Order a large pepperoni pizza from the nearest Domino’s
 
-Table 8: Examples of tasks that are incapable of being performed by the LLM itself.
-
-B Prompts Used for Synthetic Prompt Generation
-
-B.1 Topics Generation
-
-Prompt: Generate Macro Topics
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Can you generate {n_macro_topics} comprehensive topics that encompass various
 aspects of our daily life, the world, and science? Your answer should be a list
@@ -1683,30 +1656,7 @@ Total
 
 136
 
-Table 10: Distribution of the human evaluation dataset according to the different categories.
-
-H Safety Taxonomy
-
-32
-
-Category
-
-Definition
-
-Hate/ Iden-
-tity Hate
-
-Sexual
-
-Violence
-
-Suicide and
-Self Harm
-
-Threat
-
-Sexual (mi-
-nor)
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Content that expresses, incites, or promotes hate based on race, age, gen-
 der, ethnicity, religion, nationality, sexual orientation, disability status,
@@ -1834,7 +1784,5 @@ Profanity
 Swear words, curse words, or other obscene or profane language. This
 includes offensive words used without any intention to act on them.
 
-Table 11: Definitions of our safety taxonomy.
-
-34
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 

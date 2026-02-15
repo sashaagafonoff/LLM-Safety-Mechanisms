@@ -243,9 +243,7 @@ PhiBench
 
 72.4
 
-Table 1: Performance of phi-4 on a set of standard benchmarks. The first set of benchmarks uses OpenAI’s
-simple-evals framework [Ope24b], specifying the prompts/extraction/temperature=0.5. We compare to small
-models of similar inference cost, as well as to larger models.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 relevance. We change our training curriculum and create new pretraining and midtraining data
 mixtures to increase the allocation of synthetic tokens, compared to older generations of phi.
@@ -637,12 +635,7 @@ Synthetic + Web Rewrites
 -14.8
 -7.7
 
-Table 3: Benchmark performance of 13B models (used for ablations only) trained on data mixtures containing
-no web data. The respective training tokens are either from synthetic sources, or an equal share of synthetic
-data and web rewrites. All numbers are reported relative to the performance of phi-3-medium, which has seen a
-combination of web and synthetic data.
-
-3.2 Data Mixture
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 To design our pretraining data mixture for a given training token budget, we search over different
 allocation of tokens coming from various sources, namely, 1) synthetic, 2) web rewrites5, 3) filtered web
@@ -658,12 +651,7 @@ transfer the findings to phi-4. Among the numerous ablations, we highlight a few
 on our data composition. Specifically, we freeze the ratio of tokens coming from targeted acquisitions
 and code categories, and change the ratio of tokens for the synthetic, web, and web rewrites clusters.
 
-Table 4 summarizes the results for the hand-picked ablations, as compared with the data mixture
-that was used for the final training run. A uniform allocation of tokens among the three categories is
-suboptimal due to the higher quality of synthetic data and the only benchmark that shows a clear benefit
-from web data is TQA. While the synthetic-heavy variations on rows 2 and 3 of the table are marginally
-better than the chosen final data mixture, we decided to integrate the targeted and knowledge-heavy
-filtered web data sources to improve knowledge benchmarks (see Section 3.1) to balance all model
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 5Web rewrites is a sub-category of synthetic data that is substantially large and contains direct rewrites of web content.
 
@@ -721,9 +709,7 @@ S + W
 +0.4
 0.0
 
-Table 4: Ablations on the allocation of 75% of training tokens to synthetic (S), filtered web (W), and web rewrite
-(WR) categories, while other data sources are held constant in the remaining 25% token budget. All benchmark
-numbers are measured relative to the final data mixture used for training phi-4.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 capabilities. We also note that we observed the gap between the chosen data mixture and the synthetic
 heavy runs largely closes as the model goes through the post-training stage. An end-to-end optimization
@@ -949,23 +935,7 @@ cpp, go, java, js, rust data
 16,080
 21,806
 
-Table 7: Data Mixture for Pivotal Token DPO
-
-4 Post-Training
-
-Dataset Name
-
-Sample Count
-
-unknown + safety data
-any vs any overall
-any vs any accuracy
-
-43,842
-266,000
-532,000
-
-Table 8: Data Mixture for Judge Guided DPO
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Post-training is aimed at transforming the pretrained language model into an AI assistant that users
 can safely interact with. We align the pretrained model with one round of SFT 4.1, one round of
@@ -1263,9 +1233,8 @@ To alleviate these effects, we employ a method we call Pivotal Token Search (PTS
 preference data that specifically targets pivotal tokens in isolation, creating DPO pairs in which the
 preference optimization takes effect with respect to a single token.
 
-PTS identifies points of a completion token sequence Tfull = t1, t2, . . . for some user query Q where
-the next token ti has a significant impact on the probability of success p(success ∣ t1, . . . , ti). PTS es-
-timates these probabilities by sampling completions starting from Q + t1, . . . , ti, which are checked for
+[PIPELINE INGESTION WORKFLOW - REMOVED TOC]
+
 correctness with an oracle6 for Q. Figure 4 shows a basic instantiation of the algorithm. The proce-
 dure Subdivide recursively splits the sequence into segments ti, . . . , tj until the change in probability
 ∣ p(success ∣ t1, . . . , ti−1) − p(success ∣ t1, . . . , tj) ∣ for each segment is below a threshold pgap or the segment
@@ -1767,16 +1736,8 @@ address the RAI harm categories in safety post-training.
 
 7.1 RAI Benchmarks
 
-Table 10 shows the results of in-house RAI benchmarks [MHJ+23] for phi-4 compared to the phi-3 models
-[AAA+24], Mistral-7b-v0.1 [JSM+23], Mistral-7b-v0.2, Gemma 7b [TMH+24], and Llama-3-instruct-8b
-[AI23]. This benchmark utilized GPT-4o to simulate multi-turn conversations in five different cate-
-gories and to evaluate the model responses. Grounding is scored between 0 (not grounded) and 5 (fully
-grounded), and measures if the information in a response is based on a given prompt. In other cate-
-gories, responses were evaluated in terms of the severity of harmfulness and scored from 0 (no harm)
-to 7 (severe harm) and the defect rates (DR-x) were computed as the percentage of samples with the
-severity score being greater than or equal to x. The Jailbreak (DR1) benchmark consists of simulated
-conversations around child grooming, illegal persuasion, leaking of 100 words of guidelines, popular con-
-spiracy, prejudice against real people, step-by-step illegal advice, and violence against real people. For
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
 more details on the RAI prompts and evaluation framework, see [HPBP+24].
 
 7.2 Red Teaming

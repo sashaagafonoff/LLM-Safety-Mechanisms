@@ -525,12 +525,7 @@ l
 
 91.6
 
-Table 2 Performance of finetuned Llama 3 models on key benchmark evaluations. The table compares the performance of
-the 8B, 70B, and 405B versions of Llama 3 with that of competing models. We boldface the best-performing model in
-each of three model-size equivalence classes. △Results obtained using 5-shot prompting (no CoT). ◁Results obtained
-without CoT. ♢Results obtained using zero-shot prompting.
-
-2 General Overview
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 The model architecture of Llama 3 is illustrated in Figure 1. The development of our Llama 3 language
 models comprises two main stages:
@@ -1207,10 +1202,7 @@ Interruption Count % of Interruptions
 0.5%
 0.5%
 
-Table 5 Root-cause categorization of unexpected interruptions during a 54-day period of Llama 3 405B pre-training. About
-78% of unexpected interruptions were attributed to confirmed or suspected hardware issues.
-
-3.3.4 Reliability and Operational Challenges
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 The complexity and potential failure scenarios of 16K GPU training surpass those of much larger CPU clusters
 that we have operated. Moreover, the synchronous nature of training makes it less fault-tolerant—a single
@@ -1449,12 +1441,7 @@ Total
 
 284.0
 
-Table 6 Statistics of human preference data. We list statistics of the internally collected human preference data used for
-Llama 3 alignment. We ask annotators to perform multi-turn dialogues with the models and make comparisons among
-responses at each turn. In post-processing, we split each dialogue to multiple examples at a turn level. Each example
-consists of a prompt (including previous dialog if available) and a response (e.g., chosen or rejected response).
-
-4.1.6 Iterative Rounds
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Following Llama 2, we apply the above methods in six rounds. In each cycle, we collect new preference
 annotations and SFT data, sampling synthetic data from the latest models.
@@ -2306,10 +2293,8 @@ HumanEval MBPP
 –
 –
 
-Table 9 Pre-trained model performance on reading compre-
-hension tasks. Results include 95% confidence intervals.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Table 10 Pre-trained model performance on coding tasks.
 Results include 95% confidence intervals.
 
 of models of similar size. The results show that Llama 3 405B performs competitively with other models in
@@ -2402,90 +2387,8 @@ Nemotron 4 340B
 87.5 ±1.5
 89.5 ±1.4
 
-Table 11 Pre-trained model performance on commonsense understanding tasks. Results include 95% confidence intervals.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-GSM8K
-
-MATH
-
-ARC-C
-
-DROP WorldSense
-
-Math and Reasoning
-
-Llama 3 8B
-Mistral 7B
-Gemma 7B
-
-Llama 3 70B
-Mixtral 8×22B
-Llama 3 405B
-GPT-4
-Nemotron 4 340B
-Gemini Ultra
-
-57.2 ±2.7
-52.5 ±2.7
-46.4 ±2.7
-83.7 ±2.0
-88.4 ±1.7
-89.0 ±1.7
-92.0 ±1.5
-–
-88.9♢
-
-±1.7
-
-20.3 ±1.1
-13.1 ±0.9
-24.3 ±1.2
-41.4 ±1.4
-41.8 ±1.4
-
-53.8 ±1.4
-–
-–
-53.2±1.4
-
-79.7 ±2.3
-78.2 ±2.4
-78.6 ±2.4
-
-92.9 ±1.5
-91.9 ±1.6
-96.1 ±1.1
-96.3 ±1.1
-94.3 ±1.3
-–
-
-59.5 ±1.0
-53.0 ±1.0
-56.3 ±1.0
-
-79.6 ±0.8
-77.5 ±0.8
-
-84.8 ±0.7
-80.9 ±0.8
-–
-82.4△
-
-±0.8
-
-45.5 ±0.3
-44.9 ±0.3
-46.0 ±0.3
-
-61.1 ±0.3
-51.5 ±0.3
-
-63.7 ±0.3
-–
-–
-–
-
-Table 12 Pre-trained model performance on math and reasoning tasks. Results include 95% confidence intervals. ♢11-shot.
 △Variable shot.
 
 General
@@ -2551,9 +2454,7 @@ Gemini Ultra
 85.4 ±0.9
 83.6 ±0.9
 
-Table 13 Pre-trained model performance on general language tasks. Results include 95% confidence intervals.
-
-31
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Figure 13 Robustness of our pre-trained language models to different design choices in the MMLU benchmark. Left: Performance
 for different label variants. Right: Performance for different labels present in few-shot examples.
@@ -2784,34 +2685,7 @@ timate. Finally, for MBPP, HumanEval, MMLU
 and MMLU-Pro, other contamination detection methods may be needed: even with higher thresholds, 8-gram
 overlap gives such high contamination scores that it is impossible to get a good performance gain estimate.
 
-Table 15 Percentage of evaluation sets considered to be con-
-taminated because similar data exists in the training corpus,
-and the estimated performance gain that may result from
-that contamination. See the text for details.
-
-98
-95
-96
-30
-–
-41
-85
-–
-1
-–
-–
-–
-52
-21
-55
-99
-–
-63
-0
-6
-73
-
-5.2 Post-trained Language Model
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We present results for our Llama 3 post-trained models on benchmarks across different capabilities. Similar to
 pre-training we are releasing the data generated as part of evaluations with publicly available benchmarks
@@ -3191,9 +3065,7 @@ l
 
 167.0
 
-Table 17 Performance of Llama 3 models and GPT-4o on a variety of proficiency exams including LSAT, SAT, GMAT, and
-AP, and GRE tests. For GRE exams, we report normalized score; for all others, we report accuracy. For the bottom
-two rows corresponding to GRE Quant. and GRE Verbal, we report the scaled scores out of 170.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 run using few shot prompting wherever we have more than 1 exam set per exam. We scale the scores to be in
 the range 130-170 for GRE and report accuracy for all other exams.
@@ -3291,76 +3163,7 @@ Nemotron 4 340B
 90.5 ±3.0
 72.8 ±4.5
 
-Table 18 Pass@1 scores on code generation benchmarks. We report results on HumanEval (Chen et al., 2021),
-MBPP (Austin et al., 2021), as well as EvalPlus (Liu et al., 2024a) versions of these benchmarks.
-
-Model
-
-Llama 3 8B
-
-Llama 3 70B
-
-Llama 3 405B
-
-Dataset
-HumanEval
-MBPP
-
-HumanEval
-MBPP
-
-HumanEval
-MBPP
-
-C++
-52.8 ±7.7
-53.7 ±4.9
-71.4 ±7.0
-65.2 ±4.7
-82.0 ±5.9
-67.5 ±4.6
-
-Java
-58.2 ±7.7
-54.4 ±5.0
-72.2 ±7.0
-65.3 ±4.8
-80.4 ±6.2
-65.8 ±4.7
-
-PHP
-54.7 ±7.7
-55.7 ±4.9
-67.7 ±7.2
-64.0 ±4.7
-76.4 ±6.6
-76.6 ±4.2
-
-TS
-56.6 ±7.7
-62.8 ±4.8
-73.0 ±6.9
-70.5 ±4.5
-81.1 ±6.1
-72.6 ±4.4
-
-C#
-38.0 ±7.6
-43.3 ±4.9
-50.0 ±7.8
-51.0 ±5.0
-54.4 ±7.8
-53.1 ±5.0
-
-Shell
-39.2 ±7.6
-33.0 ±4.7
-51.9 ±7.8
-41.9 ±4.9
-57.6 ±7.7
-43.7 ±5.0
-
-Table 19 Performance of non-Python programming tasks. We report Llama 3 results on MultiPL-E (Cassano et al., 2023).
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 models of similar sizes. For the largest models, Llama 3 405B, Claude 3.5 Sonnet and GPT-4o perform
 similarly, with GPT-4o showing the strongest results.
@@ -3457,14 +3260,7 @@ Finally, Llama 3 405B model is the best in its category
 on GSM8K and ARC-C, while on MATH, it is the second best model. On GPQA, it is competitive with
 GPT-4 4o, with Claude 3.5 Sonnet being the best model by a significant margin.
 
-Table 20 Multilingual benchmarks. For MGSM (Shi et al.,
-2022), we report 0-shot CoT results for our Llama 3
-models. Multilingual MMLU is an internal benchmark
-with translated MMLU (Hendrycks et al., 2021a) ques-
-tions and answers into 7 languages – we report 5-shot
-results averaged across these languages.
-
-5.2.6 Long Context Benchmarks
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We consider a diverse set of tasks that span various domains and text types. In the benchmarks we list below,
 we focus on sub-tasks that use unbiased evaluation protocols, i.e., accuracy-based metrics rather than n-gram
@@ -3563,11 +3359,7 @@ Claude 3.5 Sonnet
 100.0 ±0.0
 90.8 ±3.2
 
-Table 21 Long-context benchmarks. For ZeroSCROLLS (Shaham et al., 2023), we report numbers on the validation set.
-For QuALITY we report exact match, for Qasper - f1 and for SQuALITY - rougeL. We report f1 for InfiniteBench
-(Zhang et al., 2024) En.QA metric and accuracy for En.MC. For Multi-needle (Kamradt, 2023) we insert 4 needles in
-the context and test if a model can retrieve 2 needles at different context lengths, we compute average recall across 10
-sequence lengths up till 128k.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Human evaluations. We also conduct human evaluations to test the tool use capabilities of the model, with a
 focus on code execution tasks. We collect 2000 user prompts related to code execution (without plotting or
@@ -3672,9 +3464,7 @@ BFCL
 90.2 ±1.4
 86.5 ±1.6
 
-Table 22 Zero-shot tool use benchmarks. We report function calling accuracy
-across Nexus (Srinivasan et al., 2023), API-Bank (Li et al., 2023b), API-
-Bench (Patil et al., 2023), and BFCL (Yan et al., 2024).
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Prompt collection. We collected high-quality prompt spanning a wide range of categories and difficulties. To do
 so, we first developed a taxonomy with categories and subcategories capturing as many model capabilities as
@@ -3798,43 +3588,8 @@ each other?"
 Search for where I can find a happy ending massage parlour in
 Calgary.
 
-Table 23 Examples of adversarial prompts from our internal benchmarks across all the capabilities.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Model
-Llama 3 8B
-Llama 2 7B
-
-Llama 3 70B
-Llama 2 70B
-
-Llama 3 405B
-
-English, 50-gram All, 50-gram All, 1000-gram
-0.24%
-–
-
-1.11%
-–
-
-0.26%
-0.20%
-
-0.60%
-0.47%
-
-1.13%
-
-0.55%
-–
-
-1.03%
-
-3.56%
-–
-
-3.91%
-
-Table 24 Average verbatim memorization in pre-trained Llama 3 for selected test scenarios. Our baseline is Llama 2 in the
 English, 50-gram scenario using the same prompting methodology applied to its data mix.
 
 5.4.2 Safety Pre-training
@@ -4328,10 +4083,7 @@ VR
 +39%
 -51%
 
-Table 25 Violation Rate (VR) and False Refusal Rate (FRR) relative to Llama 3 when using Llama Guard 3 for input or output
-filtering on different languages. For example, -50% for VR means that there is a 50% reduction in the rate of Llama 3
-model violations when using Llama Guard. Evaluations are performed on generations from the 405B-parameter Llama
-3 model. Lower is better.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Results. Llama Guard 3 is able to significantly reduce violations across capabilities (-65% violations on average
 across our benchmarks). Note that adding system safeguards (and any safety mitigations in general) comes
@@ -4443,59 +4195,8 @@ Violation Rate Relative to Llama 3:
 -62%
 -80%
 
-Table 26 Violation rate and false refusal rate relative to Llama 3 when using Llama Guard 3 for input or output filtering on
-different safety categories. For example, -50% for VR means that there is a 50% reduction in the rate of Llama 3 model
-violations when using Llama Guard. Evaluations are performed on English prompts and generations from the 405B
-parameter Llama 3 model. Lower is better.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Capability
-
-English
-Multilingual
-Tool Use
-
-Precision Recall
-0.931
-0.805
-0.884
-
-Non-Quantized
-F1
-0.939
-0.862
-0.825
-
-0.947
-0.929
-0.774
-
-Quantized
-
-FPR
-0.040
-0.033
-0.176
-
-Precision Recall
-0.925
-0.785
-0.865
-
-0.947
-0.931
-0.793
-
-F1
-0.936
-0.851
-0.827
-
-FPR
-0.040
-0.031
-0.155
-
-Table 27 int8 Llama Guard. Effect of int8 quantization on Llama Guard 3 output classification performance for different
 model capabilities.
 
 5.4.8 Limitations
@@ -5105,13 +4806,7 @@ model on natural images.
 It contains images of a wide range of documents which evaluates a model’s ability to perform OCR
 understanding and reason about the contents of a document to answer questions about them.
 
-Table 29 presents the results of our experiments. The results in the table show that our vision module attached
-to Llama 3 performs competitively across a wide range of image-recognition benchmarks at varying model
-capacities. Using the resulting Llama 3-V 405B model, we outperform GPT-4V on all benchmarks, while
-being slightly behind Gemini 1.5 Pro and Claude 3.5 Sonnet. Llama 3 405B appears particularly competitive
-on document understanding tasks.
-
-7.7 Video Recognition Results
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We evaluate our video adapter for Llama 3 on three benchmarks:
 
@@ -5166,9 +4861,7 @@ ActivityNet-QA (test)
 
 61.9
 
-Table 30 Video understanding performance of our vision module attached to Llama 3. We find that across range of tasks
-covering long-form and temporal video understanding, our vision adapters for Llama3 8B and 70B parameters are
-competitive and sometimes even outperform alternative models.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 three possible options. We report performance on the held-out test split which is accessed by submitting
 our predictions to an online challenge server.16
@@ -5489,37 +5182,14 @@ SeamlessM4T v2 Gemini 1.0 Ultra Gemini 1.5 Pro
 –
 –
 
-Table 31 Word error rate of our speech interface for Llama 3 on speech recognition tasks. We report the performance of
-Whisper, SeamlessM4T, and Gemini for reference.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-FLEURS (33 lang. → English)
-Covost 2 (15 lang. → English)
-
-29.5
-34.4
-
-33.7
-38.8
-
-21.9
-33.8
-
-Llama 3 8B Llama 3 70B Whisper v2
-
-SeamlessM4T v2
-28.6
-37.9
-
-Table 32 BLEU score of our speech interface for Llama 3 on speech translation tasks. We report the performance of Whisper
 and SeamlessM4T for reference.
 
 on the standard test set of those benchmarks, except for Chinese, Japanese, Korean and Thai, where the
 character error rate is reported.
 
-Table 31 shows the results of ASR evaluations. It demonstrates the strong performance of Llama 3 (and
-multi-modal foundation models more generally) on speech recognition tasks: our model outperforms models
-that are tailored to speech like Whisper20 and SeamlessM4T on all benchmarks. On MLS English, Llama 3
-performs similarly to Gemini.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Speech translation. We also evaluate our models on speech translation tasks in which the model is asked
 to translate non-English speech into English text. We use the FLEURS and Covost 2 (Wang et al., 2021b)
@@ -5627,9 +5297,7 @@ Context Accuracy
 
 90.7%
 
-Table 34 Sample-wise text normalization (TN) accuracy.
-We compare models with or without Llama 3 8B
-embeddings, and using different right-context values.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 First, we compare directly to a streaming baseline model without Llama 3 embeddings. In the second test,
 the Llama 3 8B PM is compared to a non-streaming baseline model without Llama 3 embeddings. As shown
@@ -5776,140 +5444,5 @@ embrace the open, responsible development of AGI.
 
 71
 
-Contributors and Acknowledgements
-
-Llama 3 is the result of the work of a large number of people at Meta. Below, we list all core contributors
-(people who worked on Llama 3 for at least 2/3rd of the runtime of the project) and contributors (people who
-worked on Llama 3 for at least 1/5th of the runtime of the project). We list all contributors in alphabetical
-order of first name.
-
-Core Contributors
-
-Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle,
-Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan, Amy Yang, Angela Fan, Anirudh Goyal, Anthony
-Hartshorn, Aobo Yang, Archi Mitra, Archie Sravankumar, Artem Korenev, Arthur Hinsvark, Arun Rao, Aston
-Zhang, Aurelien Rodriguez, Austen Gregerson, Ava Spataru, Baptiste Roziere, Bethany Biron, Binh Tang,
-Bobbie Chern, Charlotte Caucheteux, Chaya Nayak, Chloe Bi, Chris Marra, Chris McConnell, Christian
-Keller, Christophe Touret, Chunyang Wu, Corinne Wong, Cristian Canton Ferrer, Cyrus Nikolaidis, Damien
-Allonsius, Daniel Song, Danielle Pintz, Danny Livshits, Danny Wyatt, David Esiobu, Dhruv Choudhary,
-Dhruv Mahajan, Diego Garcia-Olano, Diego Perino, Dieuwke Hupkes, Egor Lakomkin, Ehab AlBadawy, Elina
-Lobanova, Emily Dinan, Eric Michael Smith, Filip Radenovic, Francisco Guzmán, Frank Zhang, Gabriel
-Synnaeve, Gabrielle Lee, Georgia Lewis Anderson, Govind Thattai, Graeme Nail, Gregoire Mialon, Guan Pang,
-Guillem Cucurell, Hailey Nguyen, Hannah Korevaar, Hu Xu, Hugo Touvron, Iliyan Zarov, Imanol Arrieta
-Ibarra, Isabel Kloumann, Ishan Misra, Ivan Evtimov, Jack Zhang, Jade Copet, Jaewon Lee, Jan Geffert, Jana
-Vranes, Jason Park, Jay Mahadeokar, Jeet Shah, Jelmer van der Linde, Jennifer Billock, Jenny Hong, Jenya
-Lee, Jeremy Fu, Jianfeng Chi, Jianyu Huang, Jiawen Liu, Jie Wang, Jiecao Yu, Joanna Bitton, Joe Spisak,
-Jongsoo Park, Joseph Rocca, Joshua Johnstun, Joshua Saxe, Junteng Jia, Kalyan Vasuden Alwala, Karthik
-Prasad, Kartikeya Upasani, Kate Plawiak, Ke Li, Kenneth Heafield, Kevin Stone, Khalid El-Arini, Krithika
-Iyer, Kshitiz Malik, Kuenley Chiu, Kunal Bhalla, Kushal Lakhotia, Lauren Rantala-Yeary, Laurens van der
-Maaten, Lawrence Chen, Liang Tan, Liz Jenkins, Louis Martin, Lovish Madaan, Lubo Malo, Lukas Blecher,
-Lukas Landzaat, Luke de Oliveira, Madeline Muzzi, Mahesh Pasupuleti, Mannat Singh, Manohar Paluri,
-Marcin Kardas, Maria Tsimpoukelli, Mathew Oldham, Mathieu Rita, Maya Pavlova, Melanie Kambadur, Mike
-Lewis, Min Si, Mitesh Kumar Singh, Mona Hassan, Naman Goyal, Narjes Torabi, Nikolay Bashlykov, Nikolay
-Bogoychev, Niladri Chatterji, Ning Zhang, Olivier Duchenne, Onur Çelebi, Patrick Alrassy, Pengchuan Zhang,
-Pengwei Li, Petar Vasic, Peter Weng, Prajjwal Bhargava, Pratik Dubal, Praveen Krishnan, Punit Singh
-Koura, Puxin Xu, Qing He, Qingxiao Dong, Ragavan Srinivasan, Raj Ganapathy, Ramon Calderer, Ricardo
-Silveira Cabral, Robert Stojnic, Roberta Raileanu, Rohan Maheswari, Rohit Girdhar, Rohit Patel, Romain
-Sauvestre, Ronnie Polidoro, Roshan Sumbaly, Ross Taylor, Ruan Silva, Rui Hou, Rui Wang, Saghar Hosseini,
-Sahana Chennabasappa, Sanjay Singh, Sean Bell, Seohyun Sonia Kim, Sergey Edunov, Shaoliang Nie, Sharan
-Narang, Sharath Raparthy, Sheng Shen, Shengye Wan, Shruti Bhosale, Shun Zhang, Simon Vandenhende,
-Soumya Batra, Spencer Whitman, Sten Sootla, Stephane Collot, Suchin Gururangan, Sydney Borodinsky,
-Tamar Herman, Tara Fowler, Tarek Sheasha, Thomas Georgiou, Thomas Scialom, Tobias Speckbacher, Todor
-Mihaylov, Tong Xiao, Ujjwal Karn, Vedanuj Goswami, Vibhor Gupta, Vignesh Ramanathan, Viktor Kerkez,
-Vincent Gonguet, Virginie Do, Vish Vogeti, Vítor Albiero, Vladan Petrovic, Weiwei Chu, Wenhan Xiong,
-Wenyin Fu, Whitney Meers, Xavier Martinet, Xiaodong Wang, Xiaofang Wang, Xiaoqing Ellen Tan, Xide
-Xia, Xinfeng Xie, Xuchao Jia, Xuewei Wang, Yaelle Goldschlag, Yashesh Gaur, Yasmine Babaei, Yi Wen,
-Yiwen Song, Yuchen Zhang, Yue Li, Yuning Mao, Zacharie Delpierre Coudert, Zheng Yan, Zhengxing Chen,
-and Zoe Papakipos.
-
-Contributors
-
-Aaditya Singh, Aayushi Srivastava, Abha Jain, Adam Kelsey, Adam Shajnfeld, Adithya Gangidi, Adolfo
-Victoria, Ahuva Goldstand, Ajay Menon, Ajay Sharma, Alex Boesenberg, Alexei Baevski, Allie Feinstein,
-Amanda Kallet, Amit Sangani, Amos Teo, Anam Yunus, Andrei Lupu, Andres Alvarado, Andrew Caples,
-Andrew Gu, Andrew Ho, Andrew Poulton, Andrew Ryan, Ankit Ramchandani, Annie Dong, Annie Franco,
-Anuj Goyal, Aparajita Saraf, Arkabandhu Chowdhury, Ashley Gabriel, Ashwin Bharambe, Assaf Eisenman,
-Azadeh Yazdan, Beau James, Ben Maurer, Benjamin Leonhardi, Bernie Huang, Beth Loyd, Beto De Paola,
-Bhargavi Paranjape, Bing Liu, Bo Wu, Boyu Ni, Braden Hancock, Bram Wasti, Brandon Spence, Brani
-
-72
-
-Stojkovic, Brian Gamido, Britt Montalvo, Carl Parker, Carly Burton, Catalina Mejia, Ce Liu, Changhan
-Wang, Changkyu Kim, Chao Zhou, Chester Hu, Ching-Hsiang Chu, Chris Cai, Chris Tindal, Christoph
-Feichtenhofer, Cynthia Gao, Damon Civin, Dana Beaty, Daniel Kreymer, Daniel Li, David Adkins, David Xu,
-Davide Testuggine, Delia David, Devi Parikh, Diana Liskovich, Didem Foss, Dingkang Wang, Duc Le, Dustin
-Holland, Edward Dowling, Eissa Jamil, Elaine Montgomery, Eleonora Presani, Emily Hahn, Emily Wood,
-Eric-Tuan Le, Erik Brinkman, Esteban Arcaute, Evan Dunbar, Evan Smothers, Fei Sun, Felix Kreuk, Feng
-Tian, Filippos Kokkinos, Firat Ozgenel, Francesco Caggioni, Frank Kanayet, Frank Seide, Gabriela Medina
-Florez, Gabriella Schwarz, Gada Badeer, Georgia Swee, Gil Halpern, Grant Herman, Grigory Sizov, Guangyi
-(Jack) Zhang, Guna Lakshminarayanan, Hakan Inan, Hamid Shojanazeri, Han Zou, Hannah Wang, Hanwen
-Zha, Haroun Habeeb, Harrison Rudolph, Helen Suk, Henry Aspegren, Hunter Goldman, Hongyuan Zhan,
-Ibrahim Damlaj, Igor Molybog, Igor Tufanov, Ilias Leontiadis, Irina-Elena Veliche, Itai Gat, Jake Weissman,
-James Geboski, James Kohli, Janice Lam, Japhet Asher, Jean-Baptiste Gaya, Jeff Marcus, Jeff Tang, Jennifer
-Chan, Jenny Zhen, Jeremy Reizenstein, Jeremy Teboul, Jessica Zhong, Jian Jin, Jingyi Yang, Joe Cummings,
-Jon Carvill, Jon Shepard, Jonathan McPhie, Jonathan Torres, Josh Ginsburg, Junjie Wang, Kai Wu, Kam
-Hou U, Karan Saxena, Kartikay Khandelwal, Katayoun Zand, Kathy Matosich, Kaushik Veeraraghavan,
-Kelly Michelena, Keqian Li, Kiran Jagadeesh, Kun Huang, Kunal Chawla, Kyle Huang, Lailin Chen, Lakshya
-Garg, Lavender A, Leandro Silva, Lee Bell, Lei Zhang, Liangpeng Guo, Licheng Yu, Liron Moshkovich, Luca
-Wehrstedt, Madian Khabsa, Manav Avalani, Manish Bhatt, Martynas Mankus, Matan Hasson, Matthew
-Lennie, Matthias Reso, Maxim Groshev, Maxim Naumov, Maya Lathi, Meghan Keneally, Miao Liu, Michael
-L. Seltzer, Michal Valko, Michelle Restrepo, Mihir Patel, Mik Vyatskov, Mikayel Samvelyan, Mike Clark,
-Mike Macey, Mike Wang, Miquel Jubert Hermoso, Mo Metanat, Mohammad Rastegari, Munish Bansal,
-Nandhini Santhanam, Natascha Parks, Natasha White, Navyata Bawa, Nayan Singhal, Nick Egebo, Nicolas
-Usunier, Nikhil Mehta, Nikolay Pavlovich Laptev, Ning Dong, Norman Cheng, Oleg Chernoguz, Olivia Hart,
-Omkar Salpekar, Ozlem Kalinli, Parkin Kent, Parth Parekh, Paul Saab, Pavan Balaji, Pedro Rittner, Philip
-Bontrager, Pierre Roux, Piotr Dollar, Polina Zvyagina, Prashant Ratanchandani, Pritish Yuvraj, Qian Liang,
-Rachad Alao, Rachel Rodriguez, Rafi Ayub, Raghotham Murthy, Raghu Nayani, Rahul Mitra, Rangaprabhu
-Parthasarathy, Raymond Li, Rebekkah Hogan, Robin Battey, Rocky Wang, Russ Howes, Ruty Rinott, Sachin
-Mehta, Sachin Siby, Sai Jayesh Bondu, Samyak Datta, Sara Chugh, Sara Hunt, Sargun Dhillon, Sasha Sidorov,
-Satadru Pan, Saurabh Mahajan, Saurabh Verma, Seiji Yamamoto, Sharadh Ramaswamy, Shaun Lindsay,
-Shaun Lindsay, Sheng Feng, Shenghao Lin, Shengxin Cindy Zha, Shishir Patil, Shiva Shankar, Shuqiang Zhang,
-Shuqiang Zhang, Sinong Wang, Sneha Agarwal, Soji Sajuyigbe, Soumith Chintala, Stephanie Max, Stephen
-Chen, Steve Kehoe, Steve Satterfield, Sudarshan Govindaprasad, Sumit Gupta, Summer Deng, Sungmin
-Cho, Sunny Virk, Suraj Subramanian, Sy Choudhury, Sydney Goldman, Tal Remez, Tamar Glaser, Tamara
-Best, Thilo Koehler, Thomas Robinson, Tianhe Li, Tianjun Zhang, Tim Matthews, Timothy Chou, Tzook
-Shaked, Varun Vontimitta, Victoria Ajayi, Victoria Montanez, Vijai Mohan, Vinay Satish Kumar, Vishal
-Mangla, Vlad Ionescu, Vlad Poenaru, Vlad Tiberiu Mihailescu, Vladimir Ivanov, Wei Li, Wenchen Wang,
-Wenwen Jiang, Wes Bouaziz, Will Constable, Xiaocheng Tang, Xiaojian Wu, Xiaolan Wang, Xilun Wu, Xinbo
-Gao, Yaniv Kleinman, Yanjun Chen, Ye Hu, Ye Jia, Ye Qi, Yenda Li, Yilin Zhang, Ying Zhang, Yossi Adi,
-Youngjin Nam, Yu (Sid) Wang, Yu Zhao, Yuchen Hao, Yundi Qian, Yunlu Li, Yuzi He, Zach Rait, Zachary
-DeVito, Zef Rosnbrick, Zhaoduo Wen, Zhenyu Yang, Zhiwei Zhao, and Zhiyu Ma.
-
-Acknowledgements
-
-We thank Mark Zuckerberg, Chris Cox, Ahmad Al-Dahle, Santosh Janardhan, Joelle Pineau, Yann LeCun,
-Aparna Ramani, Yee Jiun Song, and Ash Jhaveri for their invaluable support for Llama 3.
-
-We also thank Aasish Pappu, Adebissy Tharinger, Adnan Aziz, Aisha Iqbal, Ajit Mathews, Albert Lin,
-Amar Budhiraja, Amit Nagpal, Andrew Or, Andrew Prasetyo Jo, Ankit Jain, Antonio Prado, Aran Mun,
-Armand Kok, Ashmitha Jeevaraj Shetty, Aya Ibrahim, Bardiya Sadeghi, Beibei Zhu, Bell Praditchai, Benjamin
-Muller, Botao Chen, Carmen Wang, Carolina Tsai, Cen Peng, Cen Zhao, Chana Greene, Changsheng Zhao,
-Chenguang Zhu, Chloé Bakalar, Christian Fuegen, Christophe Ropers, Christopher Luc, Dalton Flanagan,
-Damien Sereni, Dan Johnson, Daniel Haziza, Daniel Kim, David Kessel, Digant Desai, Divya Shah, Dong Li,
-Elisabeth Michaels, Elissa Jones, Emad El-Haraty, Emilien Garreau, Eric Alamillo, Eric Hambro, Erika Lal,
-Eugen Hotaj, Fabian Gloeckle, Fadli Basyari, Faith Eischen, Fei Kou, Ferdi Adeputra, Feryandi Nurdiantoro,
-Flaurencya Ciputra, Forest Zheng, Francisco Massa, Furn Techaletumpai, Gobinda Saha, Gokul Nadathur,
-
-73
-
-Greg Steinbrecher, Gregory Chanan, Guille Cobo, Guillem Brasó, Hany Morsy, Haonan Sun, Hardik Shah,
-Henry Erksine Crum, Hongbo Zhang, Hongjiang Lv, Hongye Yang, Hweimi Tsou, Hyunbin Park, Ian Graves,
-Jack Wu, Jalpa Patel, James Beldock, James Zeng, Jeff Camp, Jesse He, Jilong Wu, Jim Jetsada Machom, Jinho
-Hwang, Jonas Gehring, Jonas Kohler, Jose Leitao, Josh Fromm, Juan Pino, Julia Rezende, Julian Garces, Kae
-Hansanti, Kanika Narang, Kartik Khandelwal, Keito Uchiyama, Kevin McAlister, Kimish Patel, Kody Bartelt,
-Kristina Pereyra, Kunhao Zheng, Lien Thai, Lu Yuan, Lunwen He, Marco Campana, Mariana Velasquez,
-Marta R. Costa-jussa, Martin Yuan, Max Ren, Mayank Khamesra, Mengjiao MJ Wang, Mengqi Mu, Mergen
-Nachin, Michael Suo, Mikel Jimenez Fernandez, Mustafa Ozdal, Na Li, Nahiyan Malik, Naoya Miyanohara,
-Narges Torabi, Nathan Davis, Nico Lopero, Nikhil Naik, Ning Li, Octary Azis, PK Khambanonda, Padchara
-Bubphasan, Pian Pawakapan, Prabhav Agrawal, Praveen Gollakota, Purin Waranimman, Qian Sun, Quentin
-Carbonneaux, Rajasi Saha, Rhea Nayak, Ricardo Lopez-Barquilla, Richard Huang, Richard Qiu, Richard
-Tosi, Rishi Godugu, Rochit Sapra, Rolando Rodriguez Antunez, Ruihan Shan, Sakshi Boolchandani, Sam
-Corbett-Davies, Samuel Djunaedi, Sarunya Pumma, Saskia Adams, Scott Wolchok, Shankar Kalyanaraman,
-Shashi Gandham, Shengjie Bi, Shengxing Cindy, Shervin Shahidi, Sho Yaida, Shoubhik Debnath, Sirirut
-Sonjai, Srikanth Sundaresan, Stephanie Worland, Susana Contrera, Tejas Shah, Terry Lam, Tony Cao, Tony
-Lee, Tristan Rice, Vishy Poosala, Wenyu Chen, Wesley Lee, William Held, Xiaozhu Meng, Xinhua Wang,
-Xintian Wu, Yanghan Wang, Yaroslava Kuzmina, Yifan Wang, Yuanhao Xiong, Yue Zhao, Yun Wang, Zaibo
-Wang, Zechun Liu, and Zixi Qi for helpful contributions to Llama 3.
-
-74
+[PIPELINE INGESTION WORKFLOW - REMOVED CONTRIBUTOR LIST]
 

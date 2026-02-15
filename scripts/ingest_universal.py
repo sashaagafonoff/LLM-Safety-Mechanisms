@@ -8,6 +8,12 @@ from pathlib import Path
 from urllib.parse import urlparse
 from markitdown import MarkItDown
 from bs4 import BeautifulSoup
+try:
+    from clean_flat_text import clean_file
+except ImportError:
+    import sys
+    sys.path.insert(0, str(Path(__file__).parent))
+    from clean_flat_text import clean_file
 
 # Setup
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -78,7 +84,7 @@ def determine_extension_from_header(content_type, url):
     ext = mimetypes.guess_extension(content_type)
     return ext if ext else ".html"
 
-def ingest_all(target_id=None):
+def ingest_all(target_id=None, force=False):
     sources = load_sources(EVIDENCE_PATH)
     if not sources:
         logger.warning("No sources found to process.")
@@ -135,8 +141,8 @@ def ingest_all(target_id=None):
         output_filename = f"{sanitize_filename(doc_id)}.txt"
         output_path = OUTPUT_DIR / output_filename
 
-        if output_path.exists():
-            logger.info(f"Skipping {doc_id}: Flat text file already exists (preserving manual edits)")
+        if output_path.exists() and not force:
+            logger.info(f"Skipping {doc_id}: Flat text file already exists (use --force to re-download)")
             continue
 
         ext = None  # Initialize to avoid UnboundLocalError in exception handler
@@ -184,7 +190,13 @@ def ingest_all(target_id=None):
                 f.write(processed_content)
                 
             logger.info(f"   -> ✅ Saved to {output_filename}")
-            
+
+            # 6. Clean up flat text (remove TOCs, references, tables)
+            was_modified, log_entries = clean_file(output_path)
+            if was_modified:
+                removal_types = set(e[0] for e in log_entries if e[0] != "skip")
+                logger.info(f"   -> 🧹 Cleaned: {', '.join(sorted(removal_types))}")
+
             if os.path.exists(temp_filename): os.remove(temp_filename)
 
         except Exception as e:
@@ -201,6 +213,8 @@ def ingest_all(target_id=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ingest safety documentation.")
     parser.add_argument("--id", help="Target a specific document ID to ingest.", default=None)
+    parser.add_argument("--force", action="store_true",
+                       help="Re-download and overwrite existing flat text files")
     args = parser.parse_args()
-    
-    ingest_all(target_id=args.id)
+
+    ingest_all(target_id=args.id, force=args.force)

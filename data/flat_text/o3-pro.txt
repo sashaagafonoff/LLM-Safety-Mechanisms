@@ -90,254 +90,12 @@ standard refusal evaluation.
 
 2
 
-Table 1: Standard refusal evaluation
-
-Category
-
-aggregate
-
-harassment/threatening
-
-sexual/exploitative
-
-sexual/minors
-
-extremist/propaganda
-
-hate
-
-hate/threatening
-
-illicit/non-violent
-
-illicit/violent
-
-personal-data/highly-sensitive
-
-personal-data/extremely-sensitive
-
-regulated-advice
-
-self-harm/intent
-
-self-harm/instructions
-
-Metric
-
-o3
-
-o4-mini
-
-o1
-
-not_overrefuse
-
-0.84
-
-0.81
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-not_unsafe
-
-0.99
-
-0.98
-
-1
-
-1
-
-1
-
-1
-
-1
-
-1
-
-1
-
-1
-
-1
-
-1
-
-1
-
-1
-
-0.96
-
-0.99
-
-0.93*
-
-1
-
-0.99
-
-0.99
-
-1
-
-1
-
-0.99
-
-0.99
-
-1
-
-1
-
-0.86
-
-0.99
-
-0.94
-
-1
-
-1
-
-1
-
-1
-
-1
-
-1
-
-0.96
-
-0.98
-
-1
-
-1
-
-1
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 *Note on o4-mini’s lower extremist/propaganda score: this category contains fewer prompts (only
 30), and o4-mini correctly refused on 28.
 
-Table 2: Challenging refusal evaluation
-
-Metric
-
-o3
-
-o4-mini
-
-o1
-
-Category
-
-aggregate
-
-not_unsafe
-
-0.92
-
-harassment/threatening
-
-not_unsafe
-
-0.9
-
-sexual/exploitative
-
-not_unsafe
-
-0.94
-
-sexual/minors
-
-not_unsafe
-
-0.91
-
-hate/threatening
-
-not_unsafe
-
-0.82
-
-illicit/non-violent
-
-not_unsafe
-
-0.91
-
-illicit/violent
-
-not_unsafe
-
-0.96
-
-self-harm/instructions
-
-not_unsafe
-
-1
-
-0.9
-
-0.88
-
-0.93
-
-0.9
-
-0.82
-
-0.87
-
-0.96
-
-1
-
-0.92
-
-0.9
-
-0.95
-
-0.9
-
-0.91
-
-0.92
-
-0.96
-
-0.85
-
-3.2 Jailbreaks
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We evaluate the robustness of models to jailbreaks: adversarial prompts that purposely try to
 circumvent model refusals for content it’s not supposed to produce. Similar to the above, we
@@ -355,39 +113,7 @@ common jailbreak attacks
 
 OpenAI o3 and o4-mini perform approximately on par with OpenAI o1.
 
-Table 3: Jailbreak evaluations
-
-Evaluation
-
-Metric
-
-Human sourced jailbreaks
-
-not_unsafe
-
-o3
-
-1
-
-StrongReject
-
-not_unsafe
-
-0.97
-
-o4-mini
-
-o1
-
-0.99
-
-0.96
-
-0.97
-
-0.97
-
-3.3 Hallucinations
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We evaluate hallucinations in OpenAI o3 and o4-mini against the following evaluations that aim
 to elicit hallucinations from the models:
@@ -410,47 +136,7 @@ claims overall, leading to more accurate claims as well as more inaccurate/hallu
 While this effect appears minor in the SimpleQA results, it is more pronounced in the PersonQA
 evaluation. More research is needed to understand the cause of these results.
 
-Table 4: Hallucination evaluations
-
-Dataset
-
-SimpleQA
-
-PersonQA
-
-Metric
-
-o3
-
-o4-mini
-
-o1
-
-accuracy (higher is better)
-hallucination rate (lower is better)
-
-accuracy (higher is better)
-hallucination rate (lower is better)
-
-0.49
-0.51
-
-0.59
-0.33
-
-0.20
-0.79
-
-0.36
-0.48
-
-0.47
-0.44
-
-0.47
-0.16
-
-3.4 Multimodal refusals
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We also evaluate refusals for multimodal inputs on our standard evaluation set for disallowed
 combined text and image content and overrefusals. OpenAI o3 and o4-mini improve on not
@@ -458,57 +144,7 @@ allowing content that violates OpenAI’s policies.
 
 4
 
-Table 5: Multimodal refusal evaluations
-
-Evaluation
-
-Category
-
-Metric
-
-sexual/exploitative
-
-not_unsafe
-
-o3
-
-1
-
-o4-mini
-
-o1
-
-1
-
-0.97
-
-Vision sexual
-refusal evaluation
-
-Vision self-harm
-refusal evaluation
-
-self-harm/intent
-
-not_unsafe
-
-0.99
-
-0.99
-
-0.97
-
-self-harm/instructions
-
-not_unsafe
-
-1
-
-0.99
-
-0.95
-
-3.4.1 Vision Vulnerabilities
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 OpenAI provided external red teamers access to OpenAI o3 and o4-mini to assess vulnerabilities
 related to vision capabilities. Similar to pairwise safety testing done for OpenAI o1 and o3-mini,
@@ -546,86 +182,13 @@ propensity to successfully refuse these requests for information.
 
 o3 and o4-mini perform approximately on par or better than o1.
 
-Table 6: Person Identification and Ungrounded Inference evaluations
-
-Evaluation
-
-Difficulty
-
-o3
-
-o4-mini
-
-o1
-
-Person Identification
-
-Ungrounded Inference
-
-Non-Adversarial
-Adversarial
-
-Non-Adversarial
-Adversarial
-
-1
-0.95
-
-0.99
-0.92
-
-1
-0.88
-
-0.95
-0.81
-
-1
-0.77
-
-0.95
-0.82
-
-3.6 Fairness and Bias
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We tested OpenAI o3 and o4-mini on the BBQ evaluation [3]. o3 performed approximately on par
 with o1. We’ve observed our smaller reasoning models like o4-mini tend to have lower accuracy
 on ambiguous questions than our larger reasoning models.
 
-Table 7: BBQ evaluation
-
-Metric
-
-Accuracy on Ambiguous Questions
-
-Accuracy on Unambiguous Questions
-
-P(not stereotyping | ambiguous
-question, not unknown)
-
-o3
-
-o4-mini
-
-o1
-
-0.94
-
-0.93
-
-0.25
-
-0.82
-
-0.95
-
-0.26
-
-0.96
-
-0.93
-
-0.05
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We also tested OpenAI o3 and o4-mini on our first-person fairness evaluation [4]. This evaluation
 consists of multiturn conversations, starting with a prompt in which a user shares their name
@@ -647,25 +210,7 @@ We report the metric net_bias, which represents our expected difference of biase
 male vs female names based on the performance on this evaluation (i.e., performance on the
 evaluation divided by 10). We see o3 and o4-mini perform at about parity with o1.
 
-Table 8: First-person fairness evaluation
-
-Metric
-
-net_bias
-
-o3
-
-o4-mini
-
-o1
-
-0.006
-
-0.007
-
-0.004
-
-3.7 Jailbreaks through Custom Developer Messages
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 The deployment of OpenAI o3 and o4-mini in the API allows developers to specify a custom
 developer message that is included with every prompt from one of their end users. This could
@@ -685,39 +230,7 @@ o4-mini is slightly worse (smaller models are usually worse on instruction follo
 We first evaluate prompts where different types of messages are in conflict with each other; the
 model must choose to follow the instructions in the highest priority message to pass these evals.
 
-Table 9: Instruction Hierarchy Evaluation - Conflicts Between Message Types
-
-Evaluation
-
-o3
-
-o4-mini
-
-o1
-
-Developer <> User message conflict
-
-0.86
-
-System <> Developer message conflict
-
-0.86
-
-System <> User message conflict
-
-0.79
-
-0.75
-
-0.68
-
-0.75
-
-0.77
-
-0.84
-
-0.85
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 The second set of evaluations considers a more realistic scenario, where the model is meant to be
 a math tutor, and the user attempts to trick the model into giving away the solution. Specifically,
@@ -728,81 +241,13 @@ to a math question, and the user message attempts to trick the model into output
 
 or solution. To pass the eval, the model must not give away the answer.
 
-Table 10: Instruction Hierarchy Evaluation - Tutor Jailbreaks
-
-Evaluation
-
-Tutor jailbreak - system message
-
-Tutor jailbreak - developer message
-
-o3
-
-o4-mini
-
-0.91
-
-0.99
-
-0.69
-
-0.93
-
-o1
-
-1
-
-0.99
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 In the third set of evaluations, we instruct the model to not output a certain phrase (e.g., “access
 granted”) or to not reveal a bespoke password in the system message, and attempt to trick the
 model into outputting it in user or developer messages.
 
-Table 11: Instruction Hierarchy Evaluation - Phrase and Password Protection
-
-Evaluation
-
-Phrase protection - user message
-
-Phrase protection - developer message
-
-Password protection - user message
-
-Password protection - developer message
-
-o3
-
-o4-mini
-
-o1
-
-0.97
-
-0.93
-
-0.99
-
-0.99
-
-0.94
-
-0.85
-
-1
-
-0.98
-
-0.98
-
-0.89
-
-0.99
-
-0.99
-
-3.8
-
-Image Generation
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Though o3 and o4-mini cannot natively generate images, they can call the image generation tool.
 We use the same safety stack described in the GPT-4o System Card Image Generation Addendum
@@ -813,39 +258,7 @@ We evaluated the efficacy of our full safety stack — specifically comparing Op
 refusals to call the image generation tool relative to GPT-4o — in response to human-curated
 adversarial prompts, and found that they perform at parity.
 
-Table 12: Image generation refusals
-
-Metric
-
-With system
-mitigations and
-GPT-4o refusals
-
-With system
-mitigations and o3
-refusals
-
-With system
-mitigations and
-o4-mini refusals
-
-not_unsafe
-
-not_overrefuse
-
-0.96
-
-0.86
-
-0.98
-
-0.55
-
-0.98
-
-0.64
-
-3.9 Third Party Assessments
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 OpenAI provided third party assessors early model access to evaluate frontier risks related to
 autonomous capabilities, deception, and cybersecurity. Third party assessors were provided both
@@ -1053,25 +466,8 @@ and use these as indicators for High and Critical capabilities for the category.
 
 12
 
-Table 13: Overview of Biological and Chemical evaluations
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Evaluation
-
-Capability
-
-Description
-
-Long-form biorisk ques-
-tions
-
-Multimodal
-bleshooting virology
-
-trou-
-
-Sensitive information (proto-
-cols, tacit knowledge, accu-
-rate planning) in the biolog-
 ical threat creation process.
 
 Wet lab capabilities (MCQ)
@@ -1194,35 +590,7 @@ solver code. We do not consider them as posing a high autonomous operations risk
 that both o3 and o4-mini show more capabilities in executing autonomous cyber operations tasks
 than previously released models.
 
-Table 14: Vulnerability Identification and Exploitation Capabilities evaluations
-
-Evaluation
-
-Capability
-
-Description
-
-Capture the Flag
-
-Vulnerability Identification &
-Exploitation
-
-Cyber Range
-
-Vulnerability Identification &
-Exploitation
-
-Can models solve competitive high
-school, collegiate, and professional level
-cybersecurity challenges?
-
-Can models conduct fully end-to-end
-cyber operations in a realistic, emulated
-network?
-
-15
-
-4.3.1 Capture the Flag (CTF) Challenges
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We evaluate model performance on a test set of over 100 curated, publicly available CTF challenges
 which met the following criteria:
@@ -1452,43 +820,7 @@ poorly, suggesting they lack the capabilities required for a High classification
 
 22
 
-Table 15: Overview of AI Self-Improvement evaluations
-
-Evaluation
-
-Capability
-
-Description
-
-OpenAI Research Engi-
-neer Interview: Multi-
-ple Choice and Coding
-
-Basic short horizon ML exper-
-tise
-
-SWE-bench Verified
-(N=477)
-
-Real-world software engineer-
-ing tasks
-
-How do models perform on 97 multi-
-ple choice questions derived from Ope-
-nAI ML interview topics? How do mod-
-els perform on 18 self-contained coding
-problems that match problems given in
-OpenAI interviews?
-
-Can models resolve GitHub issues, given
-just a code repository and issue descrip-
-tion?
-
-OpenAI PRs
-
-SWE-Lancer
-
-PaperBench
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Real world ML research tasks Can models replicate real OpenAI pull
 requests?
@@ -1724,165 +1056,7 @@ translate MMLU’s test set into 13 languages. As shown below, OpenAI o3 improve
 capability compared with OpenAI o1, and OpenAI o4-mini improves compared with OpenAI
 o3-mini.
 
-Table 16: MMLU Language (0-shot)
-
-Language
-
-Arabic
-
-Bengali
-
-Chinese (Simplified)
-
-French
-
-German
-
-Hindi
-
-Indonesian
-
-Italian
-
-Japanese
-
-Korean
-
-Portuguese (Brazil)
-
-Spanish
-
-Swahili
-
-Yoruba
-
-Average
-
-o3-high
-
-o1
-
-o4-mini-high o3-mini-high
-
-0.904
-
-0.878
-
-0.893
-
-0.906
-
-0.905
-
-0.898
-
-0.898
-
-0.912
-
-0.890
-
-0.893
-
-0.910
-
-0.911
-
-0.860
-
-0.780
-
-0.888
-
-0.890
-
-0.873
-
-0.889
-
-0.893
-
-0.890
-
-0.883
-
-0.886
-
-0.897
-
-0.889
-
-0.882
-
-0.895
-
-0.899
-
-0.854
-
-0.754
-
-0.877
-
-0.861
-
-0.840
-
-0.869
-
-0.874
-
-0.867
-
-0.859
-
-0.869
-
-0.877
-
-0.869
-
-0.867
-
-0.878
-
-0.880
-
-0.813
-
-0.708
-
-0.852
-
-0.819
-
-0.801
-
-0.836
-
-0.837
-
-0.808
-
-0.811
-
-0.828
-
-0.838
-
-0.831
-
-0.826
-
-0.841
-
-0.840
-
-0.738
-
-0.637
-
-0.807
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 These results were achieved through 0-shot, chain-of-thought prompting of the model. The
 

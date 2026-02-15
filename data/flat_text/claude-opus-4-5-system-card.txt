@@ -812,157 +812,8 @@ procedures to ensure that benchmark data does not appear in the training data.
 
 2.3 Overall results summary
 
-Table 2.3.A summarizes many of the evaluations that we discuss in more detail below.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Claude family models
-
-Other models
-
-Claude
-Opus 4.5
-
-Claude
-Sonnet 4.5
-
-Claude
-Opus 4.1
-
-Gemini 3
-Pro
-
-GPT-5.1
-
-80.9%4
-
-77.2%
-
-74.5%
-
-76.2%
-
-76.3%
-
-59.3%5
-
-50.0%
-
-46.5%
-
-54.2%
-
-47.6%
-
-77.9% w/
-Codex-Max
-
-Evaluation
-
-SWE-bench
-Veriﬁed
-
-Terminal-bench
-2.0
-
-τ²-Bench (Retail)6
-
-88.9%4
-
-86.2%
-
-86.8%
-
-85.3%
-
-τ²-Bench (Telecom)  98.2%4
-
-98.0%
-
-71.5%
-
-98.0%
-
-MCP Atlas
-
-62.3%4
-
-43.8%
-
-40.9%
-
-OSWorld
-
-66.3%
-
-61.4%
-
-44.4%
-
-—
-
-—
-
-58.1% w/
-Codex-Max
-
-—
-
-—
-
-—
-
-—
-
-ARC-AGI-2
-(Veriﬁed)
-
-37.6%
-
-13.6%
-
-—
-
-31.1%
-
-17.6%
-
-GPQA Diamond
-
-87.0%
-
-83.40%
-
-81.0%
-
-91.9%
-
-88.1%
-
-MMMU
-(validation)
-
-80.7%
-
-77.8%
-
-77.1%
-
-—
-
-85.4%7
-
-MMMLU
-
-90.8%
-
-89.1%
-
-89.5%
-
-91.8%
-
-91.0%
-
-Table 2.3.A All evaluation results are an average over 5 trials and run with a 64k thinking budget, interleaved
 scratchpads, 200k context window, default effort (high), and default sampling settings (temperature, top_p).
 Exceptions noted in footnotes.
 
@@ -1014,9 +865,7 @@ Claude Opus 4.5
 Claude Opus 4.5
 (no thinking)
 
-Table 2.4.A Results for the three variants of the SWE-bench evaluation. All scores are averaged over 5 trials.
-
-2.5 Terminal-Bench
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Terminal-Bench, developed by researchers at Stanford University and the Laude Institute,
 tests AI models on real-world tasks within terminal or command-line environments.
@@ -1083,10 +932,7 @@ GPT-5
 
 72.89% (auto-truncation)
 
-Table 2.6.A Methodology: the model was given a Qwen3-Embedding-8B search tool and no get-document
-(fetch) tool. Each of these are a single run where Claude Sonnet 4.5 was used as the grader model with a grader
-prompt that can be found in the appendix. GPT-5’s “auto-truncation” is similar but not identical to “with tool
-result clearing and memory.”
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We also used BrowseComp-Plus as an evaluation for judging the performance of various
 memory and context management tools for our agent harness. For these tests, we wanted
@@ -1267,12 +1113,7 @@ Telecom
 
 71.5%
 
-Table 2.8.A All above results used Claude Opus 4.1 to simulate the user and included a prompt addendum
-instructing Claude to better target its known failure modes when using the vanilla prompt. A prompt
-addendum was also added to the Telecom User prompt to avoid failure modes from the user ending the
-interaction incorrectly.
-
-2.8.1 Policy loophole discovery in agentic tasks
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 During agentic evaluations simulating customer service scenarios, we observed Claude
 Opus 4.5 spontaneously discovering and exploiting technical loopholes in simulated
@@ -1628,9 +1469,7 @@ OpenAI CUA
 
 –
 
-Table 2.22.A Performance on WebArena. Methodology: All scores use the ofﬁcial WebArena grader. Claude models
-were evaluated using the Computer Use API with additional browser tool deﬁnitions and no website speciﬁc
-prompt engineering. Scores are reported as the average of 5 independent runs.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Claude Opus 4.5 achieved state-of-the-art performance among single-agent systems on
 WebArena. Multi-agent systems with website-speciﬁc prompts and advanced tooling
@@ -1660,9 +1499,7 @@ Claude Opus 4.5
 
 72.4%
 
-Table 2.22.B Pass@k results for Claude Opus 4.5 on WebArena using the ofﬁcial grader.
-
-2.22.1 Evaluation setup
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Environment: WebArena’s self-hosted web applications (shopping, CMS, Reddit, GitLab,
 maps)
@@ -1723,95 +1560,8 @@ thinking
 
 Claude Opus 4.5
 
-99.78% (± 0.03%)
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-99.70% (± 0.05%)
-
-99.85% (± 0.04%)
-
-Claude Haiku 4.5
-
-99.31% (± 0.07%)
-
-99.22% (± 0.12%)
-
-99.40% (± 0.08%)
-
-Claude Sonnet 4.5
-
-98.87% (± 0.06%)
-
-98.32% (± 0.14%)
-
-99.42% (± 0.08%)
-
-Claude Opus 4.1
-
-99.14% (± 0.05%)
-
-98.86% (± 0.13%)
-
-99.42% (± 0.08%)
-
-Table 3.1.1.A Single-turn violative request evaluation results, all tested languages. Percentages refer to
-harmless response rates; higher numbers are better. Bold indicates the highest rate of harmless responses and
-the second-best score is underlined. “Default” refers to standard Claude mode; “extended thinking” refers to a
-mode where the model reasons for longer about the request. Evaluations were run in Arabic, English, French,
-Korean, Mandarin Chinese, and Russian.
-
-Overall harmless response rate
-
-Model
-
-English  Arabic
-
-Chinese
-
-French  Korean  Russian
-
-Claude Opus 4.5
-
-99.59%
-
-99.85%
-
-99.75%
-
-99.90%  99.88%  99.76%
-
-Claude Haiku 4.5
-
-99.38%
-
-99.28%
-
-99.14%
-
-99.54%  99.10%  99.45%
-
-Claude Sonnet 4.5
-
-99.31%
-
-98.99%
-
-98.50%
-
-98.50%  98.08%  99.00%
-
-Claude Opus 4.1
-
-98.76%
-
-99.52%
-
-99.23%
-
-99.41%
-
-98.52%  99.40%
-
-Table 3.1.1.B Single-turn violative request evaluation results by language. Percentages refer to harmless
 response rates; higher numbers are better. Bold indicates the highest rate of harmless responses for each
 language and the second-best score is underlined. Rates include both standard and extended thinking
 evaluations combined. Error bars are omitted, and English results may show slight variance from previous
@@ -1837,111 +1587,8 @@ extended thinking
 
 Claude Opus 4.5
 
-0.23% (± 0.03%)
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-0.18% (± 0.03%)
-
-0.27% (± 0.06%)
-
-Claude Haiku 4.5
-
-0.10% (± 0.03%)
-
-0.12% (± 0.05%)
-
-0.08% (± 0.02%)
-
-Claude Sonnet 4.5
-
-0.05% (± 0.02%)
-
-0.05% (± 0.03%)
-
-0.04% (± 0.02%)
-
-Claude Opus 4.1
-
-0.13% (± 0.03%)
-
-0.17% (± 0.06%)
-
-0.08% (± 0.03%)
-
-Table 3.1.2.A Single-turn benign request evaluation results, all tested languages. Percentages refer to rates of
-over-refusal (i.e. the refusal to answer a prompt that is in fact benign); lower is better. Bold indicates the lowest
-rate of over-refusal and the second-best score is underlined. “Default” refers to standard Claude mode;
-“extended thinking” refers to a mode where the model reasons for longer about the request. Evaluations were
-run in Arabic, English, French, Korean, Mandarin Chinese, and Russian.
-
-Overall refusal rate
-
-Model
-
-English
-
-Arabic
-
-Chinese
-
-French
-
-Korean
-
-Russian
-
-Claude Opus 4.5
-
-0.17%
-
-0.32%
-
-0.30%
-
-0.24%
-
-0.17%
-
-0.22%
-
-Claude Haiku 4.5  0.03%
-
-0.09%
-
-0.14%
-
-0.09%
-
-0.14%
-
-0.12%
-
-Claude Sonnet 4.5  0.03%
-
-0.03%
-
-0.05%
-
-0.06%
-
-0.05%
-
-0.08%
-
-Claude Opus 4.1
-
-0.09%
-
-0.29%
-
-0.08%
-
-0.11%
-
-0.08%
-
-0.11%
-
-Table 3.1.2.B Single-turn benign request evaluation results by language. Percentages refer to rates of
 over-refusal (i.e. the refusal to answer a prompt that is in fact benign); lower is better. Bold indicates the lowest
 rate of over-refusal for each language and the second-best score is underlined. Rates include both standard and
 extended thinking evaluations combined. Error bars are omitted, and English results may show slight variance
@@ -2219,9 +1866,7 @@ Claude Opus 4.1
 
 0.20
 
-Table 3.5.2.A Bias scores on the Bias Benchmark for Question Answering (BBQ) evaluation. Closer to zero is
-better. The better score in each column is bolded and the second-best score is underlined (but this does not
-take into account the margin of error). Results shown are for standard (non-extended) thinking mode.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 16 Parrish, A., et al. (2021). BBQ: A hand-built bias benchmark for question answering. arXiv:2110.08193.
 https://arxiv.org/abs/2110.08193
@@ -2256,9 +1901,7 @@ Claude Opus 4.1
 
 99.8
 
-Table 3.5.2.B Accuracy scores on the Bias Benchmark for Question Answering (BBQ) evaluation. Higher is
-better. The higher score in each column is bolded and the second-best score is underlined (but this does not
-take into account the margin of error). Results shown are for standard (non-extended) thinking mode.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Results for Claude Opus 4.5 and Claude Opus 4.1 were similar for both accuracy and bias,
 and well within the margin of error. Overall, we observed minimal bias on both ambiguous
@@ -2590,9 +2233,7 @@ Claude Opus 4.1
 
 66.96%
 
-Table 5.1.3.A Malicious computer use evaluation results without mitigations. Higher is better. The best score
-in each column is bolded and the second-best score is underlined (but does not take into account the margin of
-error).
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 In our simulated test scenarios, Claude Opus 4.5 demonstrated the most signiﬁcant
 improvement in refusing harmful content generation and distribution tasks. Claude Opus
@@ -2733,10 +2374,7 @@ Standard thinking
 
 87.5%
 
-Table 5.2.2.1.A Attack success rate of Shade indirect prompt injection attacks against models without
-additional safeguards. Lower is better. The best score in each column is bolded (but does not take into account
-the margin of error). We report ASR for a single-attempt attacker and for an adaptive attacker given 200
-attempts to reﬁne their attack.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Claude Opus 4.5 demonstrated signiﬁcantly improved resistance to adaptive indirect
 prompt injection attacks compared to Claude Sonnet 4.5 at both 1 and 200 attempts.
@@ -2818,10 +2456,7 @@ thinking
 
 92.9%
 
-Table 5.2.2.2.A Attack success rate of Shade indirect prompt injection attacks against models with and
-without additional safeguards. Lower is better. The best score in each column is bolded (but does not take into
-account the margin of error). We report ASR for a single-attempt attacker and for an adaptive attacker given
-200 attempts to reﬁne their attack.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Claude Opus 4.5 with extended thinking fully saturated this benchmark, with no attacks
 deemed successful even without safeguards present. To continue improvements in this
@@ -4254,10 +3889,7 @@ Opus 4.1
 
 10%
 
-Table 6.10.1.A Claude Opus 4.5 signiﬁcantly improves on hacking propensity from Claude Opus 4.1 and is
-roughly in line with Claude Sonnet 4.5 for most metrics. However, Claude Opus 4.5 does appear to be
-somewhat less steerable on the anti-hack prompted variant of Impossible Tasks compared to Claude Sonnet 4.5
-and Claude Haiku 4.5.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Claude Opus 4.5 showed somewhat higher average hacking propensity compared to our
 most recent Claude Sonnet 4.5 and Claude Haiku 4.5 models across our internal reward
@@ -4531,12 +4163,7 @@ Narrative storytelling prose
 
 Narrative storytelling prose
 
-Table 6.12.1.A Notable increasing features over training. Selected features with highly increasing activations
-from an early snapshot of Claude Opus 4.5 to the ﬁnal model, across several evaluation datasets. Ranks indicate
-the rank among features that most increased in activation over the course of training for the corresponding
-dataset.
-
-110
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We also conducted a similar analysis of the features with the most decreasing activations:
 
@@ -4598,10 +4225,7 @@ Extramarital affairs and illicit relationships
 
 AI internal reasoning about response strategy
 
-Table 6.12.1.B Notable decreasing features over training. Selected features with highly decreasing activations
-from an early snapshot of Claude Opus 4.5 to the ﬁnal model, across several evaluation datasets. Ranks indicate
-the rank among features that most decreased in activation over the course of training for the corresponding
-dataset.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 The increasing salience of prompt injection-related features on the deception evaluation
 indicates that the model may have learned to decline these harmful requests by regarding
@@ -4998,25 +4622,7 @@ LAB-Bench subset
 How well do models perform on questions about protocols
 relevant to wet-lab research?
 
-Table 7.2.3.A CBRN evaluations for AI Safety Level 3.
-
-121
-
-Evaluation
-
-Description
-
-Creative biology
-
-Can models answer complex questions about how to engineer
-and modify harmless biological systems?
-
-Short-horizon
-computational biology
-tasks
-
-ASL-4 expert red
-teaming
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Can models perform end-to-end computational tasks related to
 modifying and engineering biological agents?
@@ -5040,13 +4646,8 @@ Bioinformatics
 Can models complete basic workﬂows for bioinformatics
 analysis?
 
-Table 7.2.3.B CBRN evaluations for AI Safety Level 4.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-7.2.4 Biological risk results
-
-7.2.4.1 Long-form virology tasks
-
-Details
 These are task-based agentic evaluations developed with SecureBio, Deloitte, and
 Signature Science, testing end-to-end completion of complex pathogen acquisition
 processes. We have two evaluations for two different agents, and each consists of two main
@@ -5373,33 +4974,7 @@ SWE-bench Veriﬁed
 Can models resolve real-world GitHub issues like a software
 engineer?
 
-Table 7.3.A Checkpoint evaluations.
-
-Evaluation
-
-Description
-
-Internal AI Research
-Evaluation Suite 1
-
-Can models optimize machine learning code and train smaller
-models to solve machine learning problems?
-
-Internal AI Research
-Evaluation Suite 2
-
-Can models autonomously do self-contained AI/ML research
-tasks?
-
-Internal model
-evaluation and use
-survey
-
-How do Anthropic researchers and engineers experience
-models’ strengths and weaknesses with respect to autonomous
-research and engineering?
-
-Table 7.3.B AI R&D-4 evaluations.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 38 Our RSP states that, for this situation, at least the ASL-4 Security Standard is required. This would
 protect against model-weight theft by state-level adversaries.

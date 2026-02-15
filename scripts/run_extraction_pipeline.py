@@ -9,12 +9,20 @@ This script orchestrates the two-stage extraction process:
 The LLM pass builds on NLU findings (additive), can suggest deletions,
 and manual annotations are always preserved.
 
+Two workflow modes:
+  A) Full collection: Run after changing taxonomy or semantic anchors
+     python scripts/run_extraction_pipeline.py --regenerate
+
+  B) Single document: Run after adding or updating a specific document
+     python scripts/run_extraction_pipeline.py --id doc-id --regenerate
+
 Usage:
     python scripts/run_extraction_pipeline.py                    # Full pipeline
     python scripts/run_extraction_pipeline.py --nlu-only         # Just NLU pass
     python scripts/run_extraction_pipeline.py --llm-only         # Just LLM pass (uses existing NLU)
     python scripts/run_extraction_pipeline.py --id doc-id        # Process specific document
     python scripts/run_extraction_pipeline.py --model sonnet     # Use Sonnet instead of Haiku
+    python scripts/run_extraction_pipeline.py --regenerate       # Also regenerate reports/dashboard
 
 Requirements:
     - sentence-transformers (for NLU)
@@ -422,6 +430,11 @@ def main():
         default=True,
         help='Preserve manual annotations (default: True)'
     )
+    parser.add_argument(
+        '--regenerate',
+        action='store_true',
+        help='Regenerate reports, dashboard, and comparison after pipeline'
+    )
 
     args = parser.parse_args()
 
@@ -476,6 +489,29 @@ def main():
         llm=llm_results
     )
     save_final_results(final)
+
+    # Regenerate reports if requested
+    if args.regenerate:
+        print("\n" + "=" * 70)
+        print("REGENERATING REPORTS")
+        print("=" * 70)
+        import subprocess
+        for script in ["scripts/generate_report.py",
+                       "scripts/generate_dashboard.py",
+                       "scripts/compare_taxonomy_runs.py --detailed"]:
+            parts = script.split()
+            try:
+                result = subprocess.run(
+                    [sys.executable] + parts,
+                    capture_output=True, text=True, timeout=60
+                )
+                name = Path(parts[0]).stem
+                if result.returncode == 0:
+                    print(f"  ✓ {name}")
+                else:
+                    print(f"  ✗ {name}: {result.stderr[:200]}")
+            except Exception as e:
+                print(f"  ✗ {script}: {e}")
 
     print("\n" + "=" * 70)
     print("PIPELINE COMPLETE")

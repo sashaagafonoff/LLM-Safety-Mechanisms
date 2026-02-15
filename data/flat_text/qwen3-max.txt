@@ -256,10 +256,7 @@ Prompt & Response 26.64
 58.8
 100
 
-Table 1: Distribution of training data for Generative Qwen3Guard. The numerical values represent the
-percentage of each language relative to the total data volume.
-
-4
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 # Task:1) Evaluate whether THE LAST ASSISTANT's response belongs to safe or unsafe content based on our safety policy.2) Identify the category of unsafe content found.3) Determine if THE LAST ASSISTANT's response is a refusal to the USER's query.<BEGIN SAFETY POLICY>Safety: Safe:..…<END SAFETY POLICY><BEGIN UNSAFE CONTENT CATEGORIES>Violent.…<END UNSAFE CONTENT CATEGORIES><BEGIN REFUSAL POLICY>Refusal: Yes: …Refusal: No: …<END REFUSAL POLICY><BEGIN CONVERSATION>USER: How can I make a bomb?ASSISTANT: I’m sorry, but I can’t help with that.  Creating or using explosive devices is Illegal in virtually every country...<END CONVERSATION>Provide your safety assessment for ONLY THE LAST ASSISTANT's response in the above conversation:- The first line must be one of…# Task:1) Evaluate whether THE LAST USER's query belongs to safe or unsafe content based on our safety policy.2) Identify the category of unsafe content found.<BEGIN SAFETY POLICY>Safety: Safe: …Safety: Unsafe: ..Safety: Controversial: …<END SAFETY POLICY><BEGIN UNSAFE CONTENT CATEGORIES>Violent.…Jailbreak.<END UNSAFE CONTENT CATEGORIES><BEGIN CONVERSATION>USER: How can I make a bomb?<END CONVERSATION>Provide your safety assessment for ONLY THE LAST USER's query in the above conversation: - The first line must be one of: 'Safety: Safe', 'Safety: Unsafe', 'Safety: Controversial'. - The second line should start with 'Categories:' followed by a list of any unsafe content categories, separated by commas. If the content is safe, use 'Categories: None'.Safety: UnsafeCategories: ViolentSafety: SafeCategories: NoneRefusal: Yes(a) Prompt  Assessment(b) Response  AssessmentPrompt Synthesis To ensure comprehensive coverage of all categories defined in our safety policy, we
 adopt the Self-Instruct framework (Wang et al., 2023) to synthesize diverse and policy-aligned prompts.
@@ -533,33 +530,7 @@ English Prompt
 
 90.0*
 
-Table 2: F1 Scores on English Prompt Classification Benchmarks. Qwen3Guard-Gen operates in two
-modes: Strict Mode, which classifies controversial cases as unsafe, and Loose Mode, which treats them as
-safe. *The average score for Qwen3Guard-Gen is based on the optimal mode per benchmark; the selected
-scores are underlined.
-
-Model
-
-LlamaGuard3-8B
-LlamaGuard4-12B
-WildGuard-7B
-ShieldGemma-9B
-ShieldGemma-27B
-NemoGuard-8B
-PolyGuard-Qwen-7B
-
-Qwen3Guard-0.6B-Gen
-
-Qwen3Guard-4B-Gen
-
-Qwen3Guard-8B-Gen
-
-strict
-loose
-strict
-loose
-strict
-loose
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 HarmB SafeRLHF Beavertails XSTest Aegis2.0 WildG Think Avg.
 
@@ -684,10 +655,7 @@ English Response
 
 83.9*
 
-Table 3: F1 Scores on English Response Classification Benchmarks. Qwen3Guard-Gen operates in two
-modes: Strict Mode, which classifies controversial cases as unsafe, and Loose Mode, which treats them as
-safe. *The average score for Qwen3Guard-Gen is based on the optimal mode per benchmark; the selected
-scores are underlined.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 • Chinese: We utilize a translated version of ToxicChat, WildGuardTest, XSTest, Beavertails, where
 the samples are translated with the assistant of Qwen3-MT (Qwen Team, 2025a). We further
@@ -877,30 +845,7 @@ XSTest Bearvertail WildG PolST Avg.
 
 87.1*
 
-Table 4: F1 Scores on Chinese Prompt and Response Classification Benchmarks. Qwen3Guard-Gen
-operates in two modes: Strict Mode, which classifies controversial cases as unsafe, and Loose Mode,
-which treats them as safe. *The average score for Qwen3Guard-Gen is based on the optimal mode per
-benchmark; the selected scores are underlined.
-
-Model
-
-Multilingual Prompt (RTP-LX)
-
-En
-
-Zh Ar
-
-Es
-
-Fr
-
-Id
-
-It
-
-Ja
-
-Ko
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Ru Others Avg.
 
@@ -918,71 +863,7 @@ Qwen3Guard-4B-Gen
 
 Qwen3Guard-8B-Gen
 
-50.0 47.4 46.6 48.3 49.4 50.7 46.2 49.2 46.6 48.9
-37.6 35.1 44.4 29.5 36.2 40.7 32.7 50.2 42.1 37.7
-93.9 80.6 17.3 80.3 74.8 41.5 74.6 53.1 52.9 63.9
-75.8 72.9 50.9 70.6 68.9 61.8 68.3 67.2 65.7 65.0
-76.1 73.4 59.8 71.8 73.6 66.7 73.1 75.0 67.6 74.1
-95.4 77.4 21.1 78.1 72.5 34.9 73.4 53.4 67.2 64.0
-91.2 89.1 84.9 89.0 89.4 74.6 89.3 90.2 86.9 91.3
-strict 90.2 85.2 75.7 85.3 87.3 68.2 82.5 87.1 77.1 85.7
-loose 73.9 60.4 39.4 63.6 62.3 53.1 66.1 55.8 44.5 55.1
-strict 91.6 88.4 84.8 87.5 90.6 73.8 87.0 90.1 85.7 90.7
-loose 73.8 59.7 40.5 74.7 69.3 52.2 74.4 52.7 48.1 67.1
-strict 92.1 90.6 88.4 88.9 90.8 75.3 88.0 91.3 86.2 91.9
-loose 74.8 62.4 43.5 77.4 68.9 54.9 74.7 53.9 54.9 68.0
-
-46.0
-42.7
-37.5
-51.6
-58.2
-35.7
-78.6
-72.2
-37.5
-79.8
-40.7
-83.9
-43.9
-
-46.6
-41.7
-43.9
-55.4
-61.4
-42.7
-80.9
-
-74.8*
-
-81.6*
-
-85.0*
-
-Table 5: The F1 scores for harmful classification of multilingual prompts on RTP-LX benchmark. Others
-indicates the average score on other 30 languages. Qwen3Guard-Gen operates in two modes: Strict
-Mode, which classifies controversial cases as unsafe, and Loose Mode, which treats them as safe. *The
-average score for Qwen3Guard-Gen is based on the optimal mode per benchmark; the selected scores are
-underlined.
-
-Model
-
-Multilingual Response (PolyGuard-Response)
-
-En
-
-Zh Ar
-
-Es
-
-Fr
-
-It
-
-Ja
-
-Ko
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Ru Others Avg.
 
@@ -1000,55 +881,7 @@ Qwen3Guard-4B-Gen
 
 Qwen3Guard-8B-Gen
 
-69.7 62.8 62.6 67.2 67.1 66.4 65.8 64.0 69.2
-66.4 56.0 46.8 55.3 55.4 53.3 49.6 51.9 55.5
-74.5 70.8 44.4 71.7 71.8 71.0 68.0 65.2 71.5
-51.3 46.9 43.6 46.8 49.3 45.9 45.2 44.5 48.8
-53.9 49.9 50.1 48.3 49.9 49.5 51.5 48.2 52.6
-76.9 69.0 63.6 72.0 70.2 71.3 65.7 65.9 70.8
-77.7 70.4 77.2 71.8 72.8 73.1 72.6 73.6 70.4
-strict 75.7 74.0 75.8 76.0 74.2 73.9 73.6 75.2 75.9
-loose 75.2 75.1 75.4 74.7 74.3 73.7 72.9 73.6 74.9
-strict 79.3 76.1 78.6 79.0 78.5 77.4 76.5 76.0 79.0
-loose 77.7 78.5 78.9 79.1 78.1 77.0 76.4 76.7 79.6
-strict 78.4 76.6 77.2 77.3 76.8 76.7 76.9 77.8 78.2
-loose 78.9 77.1 77.5 78.1 78.8 76.8 76.6 76.9 78.8
-
-65.4
-52.2
-58.8
-46.6
-50.3
-69.6
-74.9
-72.8
-73.3
-77.5
-77.7
-77.0
-77.3
-
-65.8
-53.4
-63.5
-46.8
-50.4
-69.5
-74.0
-
-74.2*
-
-78.1*
-
-77.6*
-
-Table 6: The F1 scores for harmful classification of multilingual response on PolyGuard-Response
-benchmark. Others indicates the average score on other 8 languages. Qwen3Guard-Gen operates in two
-modes: Strict Mode, which classifies controversial cases as unsafe, and Loose Mode, which treats them as
-safe. *The average score for Qwen3Guard-Gen is based on the optimal mode per benchmark; the selected
-scores are underlined.
-
-8
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Figure 4: Precision and Recall for Prompt Classification (Aegis and OpenAIMod) and Response
 Classification (SafeRLHF and XSTest). Results reveal inconsistency in safety policy across datasets
@@ -1165,9 +998,7 @@ Qwen3Guard-8B-Gen
 90.2
 90.0
 
-Table 7: The performance of refusal detection on XSTest and WildGuardTest.
-
-3.4.2 Ablation Study
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 How Controversial Label Affects Model Performance To demonstrate the effects of introducing the
 controversial label, we present the results in Table 8. It is evident that, across most datasets, the best
@@ -1276,11 +1107,7 @@ loose
 82.5
 78.3
 
-Table 8: Qwen3Guard-Gen-4B’s F1 Scores on Safety Classification Benchmarks with and without
-Controversial Label. Qwen3Guard-Gen with controversial label operates in two modes: Strict Mode,
-which classifies controversial cases as unsafe, and Loose Mode, which treats them as safe.
-
-10
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Violent.Non-Violent.Sexual Content.PIISuicide.Unethical ActsPolitical.Copyright.Predicted LabelViolent.Non-Violent.Sexual Content.PIISuicide.Unethical ActsPolitical.Copyright.True Label459001200518221302312031280010004050000161201361300649101226020110715003100106PromptViolent.Non-Violent.Sexual Content.PIISuicide.Unethical ActsPolitical.Copyright.Predicted LabelViolent.Non-Violent.Sexual Content.PIISuicide.Unethical ActsPolitical.Copyright.True Label1751800170091510301700144800100002064000022001710011103001610002100128005000000Response0255075100125150175020406080100120140160Distillation?
 
@@ -1380,10 +1207,7 @@ After
 –
 –
 
-Table 9: Qwen3Guard-Gen’s F1 Scores on Safety Classification Benchmarks Before and After Distilla-
-tion. XX/YY denotes the scores in Strict and Loose modes, respectively.
-
-3.5 Application I: Safety RL with Generative Qwen3Guard
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Generative Qwen3Guard’s safety assessment of model responses can serve as a reward signal in Rein-
 forcement Learning (RL). In this section, we conduct Safety RL on a hybrid thinking model, Qwen3-4B,
@@ -1880,11 +1704,7 @@ loose
 
 88.3*
 
-Table 11: F1 Scores on English Prompt Classification Benchmarks of Generative Qwen3Guard and
-Stream Qwen3Guard. Qwen3Guard operates in two modes: Strict Mode, which classifies controversial
-cases as unsafe, and Loose Mode, which treats them as safe. *The average score for Qwen3Guard is
-based on the optimal mode per benchmark; the selected scores are underlined. The best performance of
-previous works in each benchmark is included for better comparison.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Response Loss To support real-time, token-by-token moderation of the assistant’s streaming output,
 the loss for the response stream is computed at every generated token. The total response loss, Lr, is the
@@ -2105,31 +1925,7 @@ loose
 
 81.1*
 
-Table 12: F1 Scores on English Response Classification Benchmarks of Generative Qwen3Guard and
-Stream Qwen3Guard. Qwen3Guard operates in two modes: Strict Mode, which classifies controversial
-cases as unsafe, and Loose Mode, which treats them as safe. *The average score for Qwen3Guard is
-based on the optimal mode per benchmark; the selected scores are underlined. The best performance of
-previous works in each benchmark is included for better comparison.
-
-Model
-
-Previous Best
-
-Qwen3Guard-0.6B-Gen
-
-Qwen3Guard-4B-Gen
-
-Qwen3Guard-8B-Gen
-
-Qwen3Guard-0.6B-Stream
-
-Qwen3Guard-4B-Stream
-
-Qwen3Guard-8B-Stream
-
-Chinese Prompt
-
-Chinese Response
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 ToxiC WildG PolST Avg.
 
@@ -2289,189 +2085,19 @@ loose
 
 85.0*
 
-Table 13: F1 Scores on Chinese Prompt and Response Classification Benchmarks of Generative
-Qwen3Guard and Stream Qwen3Guard. Qwen3Guard operates in two modes: Strict Mode, which
-classifies controversial cases as unsafe, and Loose Mode, which treats them as safe. *The average score
-for Qwen3Guard is based on the optimal mode per benchmark; the selected scores are underlined. The
-best performance of previous works in each benchmark is included for better comparison.
-
-16
-
-Model
-
-Multilingual Prompt (RTP-LX)
-
-En
-
-Zh Ar
-
-Es
-
-Fr
-
-Id
-
-It
-
-Ja
-
-Ko
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Ru Others Avg.
 
 Previous Best
 
-95.4 89.1 84.9 89.0 89.4 74.6 89.3 90.2 86.9 91.3
-
-Qwen3Guard-0.6B-Gen
-
-Qwen3Guard-4B-Gen
-
-Qwen3Guard-8B-Gen
-
-strict 90.2 85.2 75.7 85.3 87.3 68.2 82.5 87.1 77.1 85.7
-loose 73.9 60.4 39.4 63.6 62.3 53.1 66.1 55.8 44.5 55.1
-strict 91.6 88.4 84.8 87.5 90.6 73.8 87.0 90.1 85.7 90.7
-loose 73.8 59.7 40.5 74.7 69.3 52.2 74.4 52.7 48.1 67.1
-strict 92.1 90.6 88.4 88.9 90.8 75.3 88.0 91.3 86.2 91.9
-loose 74.8 62.4 43.5 77.4 68.9 54.9 74.7 53.9 54.9 68.0
-
-Qwen3Guard-0.6B-Stream
-
-Qwen3Guard-4B-Stream
-
-Qwen3Guard-8B-Stream
-
-strict 91.1 80.3 71.7 81.8 84.3 63.1 80.6 79.5 74.6 81.7
-loose 71.3 49.7 35.9 59.2 56.1 46.9 59.9 47.1 46.6 50.7
-strict 92.9 78.8 82.1 87.9 91.1 73.6 87.9 81.2 77.5 90.3
-loose 69.0 48.9 36.8 69.2 66.6 53.7 68.0 49.0 43.3 62.4
-strict 92.6 80.0 81.2 89.1 91.3 75.5 88.9 83.9 83.1 90.3
-loose 70.1 59.5 45.3 78.1 73.8 58.3 78.5 56.8 60.3 72.0
-
-78.6
-
-72.2
-37.5
-79.8
-40.7
-83.9
-43.9
-
-61.5
-31.1
-79.6
-39.4
-81.9
-52.0
-
-–
-
-74.8*
-
-81.6*
-
-85.0*
-
-64.4*
-
-80.2*
-
-82.7*
-
-Table 14: The F1 scores for harmful classification of multilingual prompts on RTP-LX benchmark
-of Generative Qwen3Guard and Stream Qwen3Guard. Others indicates the average score on other
-30 languages. *The average score for Qwen3Guard is based on the optimal mode per benchmark; the
-selected scores are underlined. The best performance of previous works in each benchmark is included
-for better comparison.
-
-Model
-
-Multilingual Response (PolyGuard-Response)
-
-En
-
-Zh Ar
-
-Es
-
-Fr
-
-It
-
-Ja
-
-Ko
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Ru Others Avg.
 
 Previous Best
 
-77.7 70.8 77.2 72.0 72.8 73.1 72.6 73.6 71.5
-
-Qwen3Guard-0.6B-Gen
-
-Qwen3Guard-4B-Gen
-
-Qwen3Guard-8B-Gen
-
-strict 75.7 74.0 75.8 76.0 74.2 73.9 73.6 75.2 75.9
-loose 75.2 75.1 75.4 74.7 74.3 73.7 72.9 73.6 74.9
-strict 79.3 76.1 78.6 79.0 78.5 77.4 76.5 76.0 79.0
-loose 77.7 78.5 78.9 79.1 78.1 77.0 76.4 76.7 79.6
-strict 78.4 76.6 77.2 77.3 76.8 76.7 76.9 77.8 78.2
-loose 78.9 77.1 77.5 78.1 78.8 76.8 76.6 76.9 78.8
-
-Qwen3Guard-0.6B-Stream
-
-Qwen3Guard-4B-Stream
-
-Qwen3Guard-8B-Stream
-
-strict 76.1 72.2 71.4 73.3 73.2 71.8 67.8 69.5 74.5
-loose 76.2 72.8 71.2 72.4 72.1 71.7 66.7 69.0 72.8
-strict 76.1 74.7 75.9 75.3 75.6 75.7 74.3 72.9 76.7
-loose 77.4 76.1 75.7 76.2 77.0 76.1 74.4 73.4 77.6
-strict 76.6 75.5 76.0 76.2 75.1 75.0 73.0 74.5 76.8
-loose 77.3 76.0 77.2 77.4 76.2 74.7 73.7 74.6 77.5
-
-74.9
-
-72.8
-73.3
-77.5
-77.7
-77.0
-77.3
-
-68.8
-67.3
-74.6
-74.5
-74.3
-75.0
-
-–
-
-74.2*
-
-78.1*
-
-77.6*
-
-70.6*
-
-75.5*
-
-75.8*
-
-Table 15: The F1 scores for harmful classification of multilingual response on PolyGuard-Response
-benchmark of Generative Qwen3Guard and Stream Qwen3Guard. Others indicates the average score on
-other 8 languages. *The average score for Qwen3Guard is based on the optimal mode per benchmark; the
-selected scores are underlined. The best performance of previous works in each benchmark is included
-for better comparison.
-
-17
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Figure 8: Latency of Unsafe Content Detection Measured in Tokens. Top: Detection latency during
 streaming generation of the model’s direct response output. Bottom: Detection latency during streaming
@@ -2607,12 +2233,7 @@ Qwen3-4B
 —
 101.0
 
-Table 16: Performance of Real-Time Safety Intervention Using the CARE Framework. Safety Rate
-is evaluated using both Qwen3-235B-Instruct-2507 and WildGuard-7B; Quality is assessed via LLM-
-as-a-Judge with Qwen3-235B-Instruct-2507. Wait Tokens quantifies the latency overhead induced by
-intervention-triggered rollbacks.
-
-19
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 3225651276810241280153617922048Number of tokens05101520Relative TimeQwen3Guard-GenQwen3Guard-Stream5 Related Work
 
@@ -2781,11 +2402,7 @@ moved),
 proper ventilation and that any gas appliances
 are installed, vented, and serviced correctly.
 
-Table 17: Example of sentence-level annotation for latency evaluation. The original response is seg-
-mented into a list of sentences. Annotators identified the second sentence as the first instance of unsafe
-content.
-
-6.4 A Case Study of Safety RL
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We illustrate the responses of Qwen3-4B to a WildJailbreak prompt before and after safety reinforcement
 learning in Figure 13. It demonstrates that Qwen3-4B-SafeRL successfully avoids offering harmful advice

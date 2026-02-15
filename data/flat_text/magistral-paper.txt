@@ -482,17 +482,7 @@ many genuinely difficult problems by incorrectly classifying them as unsolvable.
 RL-trained model for a second pass, we ensured that these valuable and challenging training examples
 were accurately assessed and retained.
 
-Table 1: Number of math training samples after different filtering stages.
-
-Initial data w/ Format filtering w/ Difficulty filtering
-
-699k
-
-501k
-
-38k
-
-4.2 Code
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 We gathered code contest data from various sources. Each data point includes a problem statement
 and, when available, correct solutions and related tests. For the training process, we want problem
@@ -560,9 +550,7 @@ number of concurrent requests running nasync, the batch size nbatch, and the min
 nminibatch. The impact of batch size is discussed in Section 6.3. During training we decreased
 batch size twice as 8k → 4k and 4k → 2k.
 
-Table 2 shows the results of Magistral Medium trained with pure RL, compared against analogous
-experiments from [DeepSeek-AI et al., 2025]. We find our RL pipeline alone yields a nearly 50%
-accuracy increase in AIME ’24 (pass@1), and 30% on LiveCodeBench (v5).
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 5.3 Magistral Small – RL on top of reasoning SFT bootstrapping
 
@@ -593,13 +581,8 @@ our generations, as it provided the best balance between avoiding the lack of di
 temperatures and the incoherent outputs generated at higher temperatures. We use a εhigh of 0.3, to
 encourage exploration, as the cold-started model yielded responses with far lower entropy.
 
-Table 3 shows the performance of the 24B model trained under three different paradigms: with SFT
-alone; with RL alone; and with RL on top of the cold-start checkpoint. Here, contrary to findings
-from [DeepSeek-AI et al., 2025], we find one can get substantial boosts with RL even on a smaller
-base model, over and above distillation from the larger teacher. This underscores the strength of the
-RL stack introduced in this work.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
-Table 2: Results of Magistral Medium trained solely with RL. To reduce variance, we compute the average
 over 64 runs for AIME (shown as pass@1/maj@64) and over 16 runs for LiveCodeBench. Humanity’s Last
 Exam is evaluated only for the text subset.
 
@@ -700,86 +683,7 @@ all of the reasoning and the final response are conducted in the input language 
 
 9
 
-Table 3: Performance of Magistral Small compared with different training setups across various bench-
-marks. We report the performance of three distinct 24B models: Mistral Small 24B fine-tuned on reasoning
-traces from Magistral Medium (SFT), Mistral Small 24B trained from scratch with RL (RL only), and Mistral
-Small 24B fine-tuned on Magistral Medium traces and subsequently enhanced with RL (SFT + RL) which is the
-final Magistral Small. We observe that the combination of fine-tuning on reasoning traces with RL leads to the
-best performance. For the evaluation of Humanity’s Last Exam, only the text subset was considered.
-
-Task
-
-SFT RL-only
-
-SFT + RL (Magistral Small)
-
-65.4
-AIME’24pass@1
-90.0
-AIME’24maj@64
-55.6
-AIME’25pass@1
-76.7
-AIME’25maj@64
-93.2
-MATH-500
-63.4
-GPQA
-52.2
-LiveCodeBench (v5)
-44.6
-LiveCodeBench (v6)
-Humanity’s Last Exam 5.3
-
-65.8
-86.7
-51.9
-66.7
-95.4
-68.8
-46.4
-42.4
-6.1
-
-70.7
-83.3
-62.8
-76.7
-95.9
-68.2
-55.8
-47.4
-6.4
-
-Table 4: Magistral Medium’s pass@1 performance on multilingual versions of the AIME 2024 benchmark.
-
-Language
-
-English
-
-French
-
-Spanish German
-
-Italian Russian Chinese
-
-AIME’24 (pass@1)
-
-73.6
-
-68.5
-
-69.3
-
-66.8
-
-66.7
-
-65.0
-
-63.7
-
-6 Ablations
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 In this section, we tweak parameters of the training process to investigate what happens when RL is
 performed on only one modality, compare RL to the distillation SFT baseline, and shed light on two
@@ -799,27 +703,7 @@ Previous works [DeepSeek-AI et al., 2025] have observed that smaller models rely
 may not be able to achieve performance comparable to those distilled from larger reasoning models.
 However, our findings contradict this observation: we achieved strong results even with pure RL on
 
-Table 5: Cross-domain generalization during math-only and code-only RL for a 24B model
-
-Model
-
-AIME’24
-
-LiveCodeBench v5
-
-Starting Checkpoint
-RL (Math only)
-RL (Code only)
-
-32.2
-62.5
-49.7 (+17.5)
-
-22.7
-38.3 (+15.6)
-42.7
-
-10
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 top of Mistral Small 3. As shown in Figure 5, our Mistral Small 3 with pure RL achieves similar
 performance on AIME’24 as the distilled version. It even outperforms the distilled version on MATH
@@ -962,33 +846,7 @@ Similar to the multimodal capabilities mentioned in Section 7.2, our RL checkpoi
 even improves its tool calling and instruction following capabilities [Zhou et al., 2023] (Table 6).
 This allows us to integrate the model out-of-the-box with existing tools as shown.
 
-Table 6: Benchmarks before and after reinforcement learning. Internal bench is Mistral’s internal function
-calling benchmark. We use an internal version of IFEval that fixes some issues with the public version. The
-scores are not comparable with other publicly shared scores.
-
-Category
-
-Benchmark
-
-Mistral Medium 3 Magistral Medium
-
-Function calling
-
-Internal bench
-
-Instruction following
-
-IFEval
-
-87.2
-
-86.8
-
-87.4
-
-87.4
-
-7.4 Unsuccessful approaches
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 In this section, we present various approaches that we tried but ultimately did not adopt, as they did
 not yield any performance improvements.
@@ -1076,51 +934,8 @@ science in a transparent and optimistic manner.
 
 16
 
-Core contributors
+[PIPELINE INGESTION WORKFLOW - REMOVED CONTRIBUTOR LIST]
 
-Abhinav Rastogi, Albert Q. Jiang, Andy Lo, Gabrielle Berrada, Guillaume Lample, Jason Rute, Joep
-Barmentlo, Karmesh Yadav, Kartik Khandelwal, Khyathi Raghavi Chandu, Léonard Blier, Lucile
-Saulnier, Matthieu Dinot, Maxime Darrin, Neha Gupta, Roman Soletskyi, Sagar Vaze, Teven Le
-Scao, Yihan Wang
-
-Contributors
-
-Adam Yang, Alexander H. Liu, Alexandre Sablayrolles, Amélie Héliou, Amélie Martin, Andy
-Ehrenberg, Anmol Agarwal, Antoine Roux, Arthur Darcet, Arthur Mensch, Baptiste Bout, Baptiste
-Rozière, Baudouin De Monicault, Chris Bamford, Christian Wallenwein, Christophe Renaudin,
-Clémence Lanfranchi, Darius Dabert, Devon Mizelle, Diego de las Casas, Elliot Chane-Sane, Emilien
-Fugier, Emma Bou Hanna, Gauthier Delerce, Gauthier Guinet, Georgii Novikov, Guillaume Martin,
-Himanshu Jaju, Jan Ludziejewski, Jean-Hadrien Chabran, Jean-Malo Delignon, Joachim Studnia,
-Jonas Amar, Josselin Somerville Roberts, Julien Denize, Karan Saxena, Kush Jain, Lingxiao Zhao,
-Louis Martin, Luyu Gao, Lélio Renard Lavaud, Marie Pellat, Mathilde Guillaumin, Mathis Felardos,
-Maximilian Augustin, Mickaël Seznec, Nikhil Raghuraman, Olivier Duchenne, Patricia Wang,
-Patrick von Platen, Patryk Saffer, Paul Jacob, Paul Wambergue, Paula Kurylowicz, Pavankumar
-Reddy Muddireddy, Philomène Chagniot, Pierre Stock, Pravesh Agrawal, Romain Sauvestre, Rémi
-Delacourt, Sanchit Gandhi, Sandeep Subramanian, Shashwat Dalal, Siddharth Gandhi, Soham Ghosh,
-Srijan Mishra, Sumukh Aithal, Szymon Antoniak, Thibault Schueller, Thibaut Lavril, Thomas Robert,
-Thomas Wang, Timothée Lacroix, Valeriia Nemychnikova, Victor Paltz, Virgile Richard, Wen-Ding
-Li, William Marshall, Xuanyu Zhang, Yunhao Tang
-
-17
-
-References
-
-Marcin Andrychowicz, Anton Raichuk, Piotr Sta´nczyk, Manu Orsini, Sertan Girgin, Raphael Marinier,
-Léonard Hussenot, Matthieu Geist, Olivier Pietquin, Marcin Michalski, Sylvain Gelly, and Olivier
-Bachem. What matters in on-policy reinforcement learning? a large-scale empirical study, 2020.
-URL https://arxiv.org/abs/2006.05990.
-
-DeepSeek-AI, Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Ruoyu Zhang, Runxin Xu,
-Qihao Zhu, Shirong Ma, Peiyi Wang, Xiao Bi, Xiaokang Zhang, Xingkai Yu, Yu Wu, Z. F. Wu,
-Zhibin Gou, Zhihong Shao, Zhuoshu Li, Ziyi Gao, Aixin Liu, Bing Xue, Bingxuan Wang, Bochao
-Wu, Bei Feng, Chengda Lu, Chenggang Zhao, Chengqi Deng, Chenyu Zhang, Chong Ruan,
-Damai Dai, Deli Chen, Dongjie Ji, Erhang Li, Fangyun Lin, Fucong Dai, Fuli Luo, Guangbo Hao,
-Guanting Chen, Guowei Li, H. Zhang, Han Bao, Hanwei Xu, Haocheng Wang, Honghui Ding,
-Huajian Xin, Huazuo Gao, Hui Qu, Hui Li, Jianzhong Guo, Jiashi Li, Jiawei Wang, Jingchang
-Chen, Jingyang Yuan, Junjie Qiu, Junlong Li, J. L. Cai, Jiaqi Ni, Jian Liang, Jin Chen, Kai Dong,
-Kai Hu, Kaige Gao, Kang Guan, Kexin Huang, Kuai Yu, Lean Wang, Lecong Zhang, Liang Zhao,
-Litong Wang, Liyue Zhang, Lei Xu, Leyi Xia, Mingchuan Zhang, Minghua Zhang, Minghui Tang,
-Meng Li, Miaojun Wang, Mingming Li, Ning Tian, Panpan Huang, Peng Zhang, Qiancheng Wang,
 Qinyu Chen, Qiushi Du, Ruiqi Ge, Ruisong Zhang, Ruizhe Pan, Runji Wang, R. J. Chen, R. L.
 Jin, Ruyi Chen, Shanghao Lu, Shangyan Zhou, Shanhuang Chen, Shengfeng Ye, Shiyu Wang,
 Shuiping Yu, Shunfeng Zhou, Shuting Pan, S. S. Li, Shuang Zhou, Shaoqing Wu, Shengfeng

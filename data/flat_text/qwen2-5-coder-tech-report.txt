@@ -85,208 +85,7 @@ a
 
 Technical Report
 
-Contents
-
-1 Introduction
-
-2 Model Architecture
-
-3 Pre-training
-
-3.1 Pretraining Data .
-
-.
-
-.
-
-.
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-3.1.1 Data Composition .
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-3.1.2 Data Mixture .
-.
-
-3.2 Training Policy .
-
-.
-
-.
-
-.
-
-. . .
-. . . . . . . . . . . . . . . . . . . . . . . . . . . .
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-3.2.1
-
-File-Level Pretraining . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-3.2.2 Repo-Level Pretraining . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-4 Post-training
-
-4.1 A Recipe for Instruction Data . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-4.2 Training Policy .
-
-.
-
-.
-
-.
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-5 Decontamination
-
-6 Evaluation on Base Models
-.
-6.1 Code Generation .
-.
-6.2 Code Completion .
-
-.
-.
-
-6.3 Code Reasoning .
-
-6.4 Math Reasoning .
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-6.5 General Natural Language . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-6.6 Long-Context Evaluation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-7 Evaluation on Instruct Models
-
-7.1 Code Generation .
-.
-7.2 Code Reasoning .
-
-7.3 Code Editing .
-
-7.4 Text-to-SQL .
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-.
-
-.
-
-.
-
-.
-.
-
-.
-
-.
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-7.5 Math Reasoning and General Natural Language . . . . . . . . . . . . . . . .
-
-7.6 Table Understanding .
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-8 Discussion: Scaling is All You Need
-
-9 Conclusion
-
-2
-
-3
-
-3
-
-4
-
-4
-
-5
-
-6
-6
-
-6
-
-7
-
-7
-
-7
-
-9
-
-9
-
-10
-10
-11
-
-14
-
-15
-
-15
-
-16
-
-16
-18
-22
-
-23
-
-25
-
-27
-
-27
-
-28
-
-28
+[PIPELINE INGESTION WORKFLOW - REMOVED TOC]
 
 Technical Report
 
@@ -461,41 +260,7 @@ Vocabulary Size
 151,646
 5.5T
 
-Table 1: Architecture of Qwen2.5-Coder.
-
-Token
-
-Token ID Description
-
-<|endoftext|>
-<|fim_prefix|>
-<|fim_middle|>
-<|fim_suffix|>
-<|fim_pad|>
-<|repo_name|>
-<|file_sep|>
-
-151643
-151659
-151660
-151661
-151662
-151663
-151664
-
-end of text/sequence
-FIM prefix
-FIM middle
-FIM suffix
-FIM pad
-repository name
-file separator
-
-Table 2: Overview of the special tokens.
-
-3 Pre-training
-
-3.1 Pretraining Data
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Large-scale, high-quality, and diverse data forms the foundation of pre-trained models. To
 this end, we constructed a dataset named Qwen2.5-Coder-Data. This dataset comprises
@@ -636,9 +401,7 @@ Average
 48.9
 55.0
 
-Table 3: The performance of Qwen2.5-Coder training on different data mixture policy.
-
-3.2 Training Policy
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Figure 2: The three-stage training pipeline for Qwen2.5-Coder.
 
@@ -903,9 +666,7 @@ https://hf.co/deepseek-ai/deepseek-coder-33b-base
 https://hf.co/deepseek-ai/DeepSeek-Coder-V2-Lite-Base
 https://hf.co/deepseek-ai/DeepSeek-Coder-V2-Base
 
-Table 4: All artifacts released and used in this section.
-
-6.1 Code Generation
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 HumanEval and MBPP Code generation serves as a fundamental capability for code
 models to handle more complex tasks. We selected two popular code generation benchmarks
@@ -1464,15 +1225,7 @@ of code within tasks derived from Humaneval. We use the single-line infilling se
 across Python, Java, and JavaScript, focusing on predicting a single line of code within
 given contexts. Performance was measured using the Exact Match metric, which determines
 the proportion of the first generated code line that precisely match the ground truth. The
-table 7 illustrates that Qwen2.5-Coder surpasses alternative models concerning model
-size. Specifically, Qwen2.5-Coder-1.5B achieves an average performance improvement of
-3.7%, rivaling the majority of models exceeding 6 billion parameters. Moreover, Qwen2.5-
-Coder-7B stands as the leading model among those over 6 billion parameters, matching the
-performance of the formidable 33 billion parameter model, DS-Coder-33B-Base. Notably,
-we excluded DS-Coder-v2-236B from comparison due to its design focus not being on code
-completion tasks.
-
-12
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Humaneval-FIMSAFIMCrossCodeEvalRepoEvalCrossCodeLongEval88.371.257.151.636.986.167.748.843.731.985.067.247.843.430.4Qwen2.5-Coder-32B-BaseDS-Coder-33B-BaseDS-Coder-V2-Lite-Base1Technical Report
 
@@ -2689,10 +2442,7 @@ Qwen2.5-Coder-32B
 39.4
 43.1
 
-Table 12: Performance of various models on four math benchmarks, named MATH, GSM8K,
-MMLU STEM and TheoremQA respectively.
-
-7.1 Code Generation
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Building on the performance improvements of the Qwen2.5-Coder series base models, our
 Qwen2.5-Coder series instruct models similarly demonstrated outstanding performance in
@@ -3020,58 +2770,7 @@ Qwen2.5-Coder-32B
 86.0
 83.0
 
-Table 14: General performance of different models on four popular general benchmarks,
-ARC-Challenge, TruthfulQA, WinoGrande and HellaSwag.
-
-Artifact
-
-Public link
-
-Qwen2.5-Coder-0.5B-Instruct
-Qwen2.5-Coder-1.5B-Instruct
-Qwen2.5-Coder-3B-Instruct
-Qwen2.5-Coder-7B-Instruct
-Qwen2.5-Coder-14B-Instruct
-Qwen2.5-Coder-32B-Instruct
-
-https://hf.co/Qwen/Qwen2.5-Coder-0.5B-Instruct
-https://hf.co/Qwen/Qwen2.5-Coder-1.5B-Instruct
-https://hf.co/Qwen/Qwen2.5-Coder-3B-Instruct
-https://hf.co/Qwen/Qwen2.5-Coder-7B-Instruct
-https://hf.co/Qwen/Qwen2.5-Coder-14B-Instruct
-https://hf.co/Qwen/Qwen2.5-Coder-32B-Instruct
-
-CodeQwen1.5-7B-Chat
-CodeLlama-7B-Instruct
-CodeLlama-13B-Instruct
-CodeLlama-34B-Instruct
-CodeLlama-70B-Instruct
-DS-Coder-1.3B-instruct
-DS-Coder-6.7B-instruct
-DS-Coder-33B-instruct
-DS-Coder-V2-Lite-Instruct
-DS-Coder-V2-Instruct
-Starcoder2-15B-Instruct-v0.1
-CodeStral-22B-v0.1
-Yi-Coder-1.5B-Chat
-Yi-Coder-9B-Chat
-
-https://hf.co/Qwen/CodeQwen1.5-7B-Chat
-https://hf.co/meta-llama/CodeLlama-7b-Instruct-hf
-https://hf.co/meta-llama/CodeLlama-13b-Instruct-hf
-https://hf.co/meta-llama/CodeLlama-34b-Instruct-hf
-https://hf.co/meta-llama/CodeLlama-70b-Instruct-hf
-https://hf.co/deepseek-ai/deepseek-coder-1.3b-instruct
-https://hf.co/deepseek-ai/deepseek-coder-6.7b-instruct
-https://hf.co/deepseek-ai/deepseek-coder-33b-instruct
-https://hf.co/deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct
-https://hf.co/deepseek-ai/DeepSeek-Coder-V2-Instruct
-https://hf.co/bigcode/starcoder2-15b-instruct-v0.1
-https://hf.co/mistralai/Codestral-22B-v0.1
-https://hf.co/01-ai/Yi-Coder-1.5B-Chat
-https://hf.co/01-ai/Yi-Coder-9B-Chat
-
-Table 15: All artifacts released and used in this section.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 V2-Lite-Instruct, in code generation tasks across eight programming languages. Both
 Qwen2.5-Coder-7B-Instruct and Qwen2.5-Coder-14B-Instruct even surpass larger models,
@@ -3413,9 +3112,7 @@ Closed-APIs
 60.0
 43.1
 
-Table 16: The performance of different instruct models on code generation by HumanEval,
-MBPP, bigcodebench and livecodebench. For bigcodebench here, we report “instruct” tasks
-score.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 Instruct model with only 32 billion parameters, bringing it very close to the performance of
 several closed-source APIs.
@@ -4074,9 +3771,7 @@ o1-preview
 96.2
 81.4
 
-Table 18: The CRUXEval performance of different instruct models, with Input-CoT and
-Output-CoT settings.
-7.4 Text-to-SQL
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 SQL is one of the essential tools in daily software development and production, but its
 steep learning curve often hinders free interaction between non-programming experts and
@@ -4263,10 +3958,7 @@ o1-preview
 70.7
 88.0
 
-Table 19: The code editing ability of different instruct models evaluated by Aider benchmark.
-The whole edit-format was consistently applied across all our experiments.
-
-7.5 Math Reasoning and General Natural Language
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
 
 In this section, we provide a comparative analysis of the performance between our Qwen2.5-
 Coder series models and the DS-Coder-V2 series models, with a focus on both mathematical
