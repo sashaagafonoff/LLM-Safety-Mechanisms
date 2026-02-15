@@ -1,6 +1,6 @@
 # LLM Safety Mechanisms - Dataset Summary
 
-*Generated: 2026-02-15 22:47*
+*Generated: 2026-02-16 08:30*
 
 ## 📊 Overall Statistics
 
@@ -8,7 +8,7 @@
 - **Models**: 1
 - **Categories**: 5
 - **Techniques**: 50
-- **Source Documents**: 37
+- **Source Documents**: 40
 - **Techniques Detected**: 54
 
 ## 🎯 Coverage by Category
@@ -30,8 +30,8 @@
 - **Techniques Detected**: 35
 
 **Detection Confidence**:
-- High: 66
-- Medium: 8
+- High: 64
+- Medium: 7
 
 ### Anthropic
 
@@ -47,12 +47,12 @@
 
 - **Type**: commercial
 - **Source Documents**: 5
-- **Techniques Detected**: 28
+- **Techniques Detected**: 27
 
 **Detection Confidence**:
-- High: 48
-- Medium: 11
-- Low: 2
+- High: 47
+- Medium: 10
+- Low: 1
 
 ### Meta
 
@@ -62,26 +62,27 @@
 
 **Detection Confidence**:
 - High: 51
-- Medium: 13
+- Medium: 12
 - Low: 3
 
 ### Amazon
 
 - **Type**: commercial
 - **Source Documents**: 1
-- **Techniques Detected**: 7
+- **Techniques Detected**: 11
 
 **Detection Confidence**:
-- High: 7
+- High: 10
+- Medium: 1
 
 ### Microsoft
 
 - **Type**: commercial
 - **Source Documents**: 2
-- **Techniques Detected**: 15
+- **Techniques Detected**: 14
 
 **Detection Confidence**:
-- High: 19
+- High: 18
 - Medium: 2
 
 ### DeepSeek
@@ -91,66 +92,70 @@
 - **Techniques Detected**: 28
 
 **Detection Confidence**:
-- High: 27
+- High: 24
 - Medium: 9
 
 ### xAI
 
 - **Type**: commercial
 - **Source Documents**: 4
-- **Techniques Detected**: 18
+- **Techniques Detected**: 16
 
 **Detection Confidence**:
 - High: 18
-- Medium: 5
+- Medium: 3
 
 ### Cohere
 
 - **Type**: commercial
 - **Source Documents**: 2
-- **Techniques Detected**: 24
+- **Techniques Detected**: 23
 
 **Detection Confidence**:
-- High: 25
-- Medium: 3
+- High: 22
+- Medium: 4
 
 ### Mistral AI
 
 - **Type**: commercial
-- **Source Documents**: 3
-- **Techniques Detected**: 14
+- **Source Documents**: 4
+- **Techniques Detected**: 15
 
 **Detection Confidence**:
-- High: 12
+- High: 13
 - Medium: 3
 - Low: 2
 
 ### Alibaba
 
 - **Type**: commercial
-- **Source Documents**: 3
-- **Techniques Detected**: 31
+- **Source Documents**: 4
+- **Techniques Detected**: 30
 
 **Detection Confidence**:
-- High: 31
-- Medium: 7
+- High: 32
+- Medium: 8
 - Low: 2
 
 ### Nvidia
 
 - **Type**: commercial
 - **Source Documents**: 1
-- **Techniques Detected**: 17
+- **Techniques Detected**: 16
 
 **Detection Confidence**:
-- High: 15
+- High: 14
 - Medium: 2
 
 ### TII
 
 - **Type**: academic
-- **Source Documents**: 0
-- **Techniques Detected**: 0
+- **Source Documents**: 1
+- **Techniques Detected**: 4
+
+**Detection Confidence**:
+- High: 2
+- Medium: 2
 
 ## 📋 Technique Coverage Matrix
 
@@ -158,16 +163,16 @@
 |-----------|--------|-----------|---------|------|---------|
 | Access Control Documentation | — | — | — | 🟡 Med | — |
 | Adversarial Training | — | ✅ High | — | ✅ High | — |
-| Autonomous Behaviour Classific | ✅ High | ✅ High | — | — | — |
+| Autonomous Behaviour Classific | 🟡 Med | ✅ High | — | — | — |
 | Bias Mitigation (Post-Training | 🟡 Med | ✅ High | 🟡 Med | ✅ High | ✅ High |
 | Capability Threshold Monitorin | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Code Execution Sandboxing | — | — | — | ✅ High | — |
 | Community-Based Evaluation | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Configurable Safety Policies | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Configurable Safety Policies | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
 | Constitutional AI / Self-Criti | ✅ High | ✅ High | — | ✅ High | — |
 | Copyright & IP Violation Detec | ✅ High | — | — | — | — |
 | CSAM Detection & Prevention | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| Cybersecurity Threat Detection | ✅ High | — | 🟡 Med | ✅ High | — |
+| Cybersecurity Threat Detection | ✅ High | — | — | ✅ High | — |
 | Data Retention Policies | — | — | — | — | — |
 | Data Sovereignty Controls | — | — | — | ✅ High | — |
 | Dataset Auditing & Representat | — | ✅ High | — | ✅ High | — |
@@ -176,9 +181,9 @@
 | Ethical Human Labour Sourcing | — | ✅ High | — | — | — |
 | Hallucination Detection & Grou | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Hate Speech & Harassment Detec | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Incident Reporting Systems | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Incident Reporting Systems | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
 | Input Guardrail Systems | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| Misinformation & False Claims  | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Misinformation & False Claims  | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
 | Multimodal Safety Alignment | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Multi-stage Safety Pipeline | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Observability & Audit Logging | ✅ High | ✅ High | ✅ High | — | — |
@@ -201,7 +206,7 @@
 | Sycophancy Detection | ✅ High | ✅ High | — | — | — |
 | System Prompts / Metaprompts | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Training Data Quality Filterin | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Violence & Gore Detection | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Violence & Gore Detection | ✅ High | ✅ High | ✅ High | ✅ High | 🟡 Med |
 | Provenance & Watermarking | — | — | 🟡 Med | 🟡 Med | — |
 | Weapons & Illegal Activity Det | ✅ High | ✅ High | — | ✅ High | — |
 
@@ -209,6 +214,9 @@
 
 | Provider | Document | Type | Date Added |
 |----------|----------|------|------------|
+| TII | The Falcon Series of Open Language Models | Technical Report | 2026-02-16 |
+| Mistral AI | Magistral Technical Report | Technical Report | 2026-02-16 |
+| Alibaba | Qwen3 Technical Report | Technical Report | 2026-02-16 |
 | Cohere | Command A Technical Report | Technical Report | 2026-02-06 |
 | Google | Gemini 3 Pro - Model Card | Model Card | 2026-02-06 |
 | Google | Gemini 2.5 Flash-Lite - Model Card | Model Card | 2026-02-06 |
@@ -216,6 +224,3 @@
 | Meta | Llama 3 & 4 Safety Protections | Website | 2026-02-06 |
 | Mistral AI | Mistral Guardrailing Capabilities | Documentation | 2026-02-06 |
 | Alibaba | Qwen3Guard Technical Report | Technical Report | 2026-02-06 |
-| Google | Gemini 3 Technical Report | Technical Report | 2026-01-22 |
-| Anthropic | Claude Opus 4.5 System Card | System Card | 2026-01-20 |
-| OpenAI | GPT-5 System Card | System Card | 2026-01-15 |

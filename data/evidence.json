@@ -34,11 +34,7 @@
           "governance",
           "safety_benchmarking"
         ],
-        "excluded_topics": [
-          "ip_protection",
-          "input_guardrails",
-          "security"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Official GPT-5 system card describing multi-model architecture with router, reasoning capabilities, and Preparedness Framework classification for biological risks"
@@ -71,11 +67,7 @@
           "governance",
           "transparency"
         ],
-        "excluded_topics": [
-          "pre_training_safety",
-          "ip_protection",
-          "privacy_protection"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Comprehensive official system card for Claude Opus 4.5 covering capabilities evaluation, safety testing, alignment assessment, and AI Safety Level 3 deployment decision."
@@ -114,11 +106,7 @@
           "safety_benchmarking",
           "transparency"
         ],
-        "excluded_topics": [
-          "pre_training_safety",
-          "alignment_methods",
-          "ip_protection"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Frontier Safety Framework implementation report focusing on CBRN, cybersecurity, ML R&D, and manipulation risks for Gemini 3 Pro"
@@ -161,10 +149,9 @@
           "safety_benchmarking"
         ],
         "excluded_topics": [
-          "pre_training_safety",
-          "input_guardrails",
-          "output_guardrails",
-          "ip_protection"
+          "cat_model_development",
+          "cat_evaluation",
+          "cat_harm_classification"
         ],
         "confidence_weight": 0.7,
         "language": "en",
@@ -204,10 +191,7 @@
           "governance",
           "privacy_protection"
         ],
-        "excluded_topics": [
-          "alignment_methods",
-          "pre_training_safety"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "AWS AI Service Card covering Nova Micro, Lite, Pro, and Premier models with details on safety filtering, fairness evaluations, privacy controls, and responsible AI dimensions."
@@ -239,11 +223,7 @@
           "transparency",
           "alignment_methods"
         ],
-        "excluded_topics": [
-          "governance",
-          "privacy_protection",
-          "ip_protection"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 0.7,
         "language": "en",
         "notes": "HuggingFace model card for Mistral Large Instruct 2411 with basic model capabilities and usage information."
@@ -283,11 +263,7 @@
           "output_guardrails",
           "transparency"
         ],
-        "excluded_topics": [
-          "ip_protection",
-          "input_guardrails",
-          "privacy_protection"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Official system card for o3 and o4-mini models covering deliberative alignment, Preparedness Framework v2 evaluations, and safety assessment across biological, cybersecurity, and AI self-improvement risk categories."
@@ -320,10 +296,7 @@
           "safety_benchmarking"
         ],
         "excluded_topics": [
-          "input_guardrails",
-          "output_guardrails",
-          "privacy_protection",
-          "ip_protection"
+          "cat_governance"
         ],
         "confidence_weight": 0.9,
         "language": "en",
@@ -359,10 +332,8 @@
           "runtime_safety"
         ],
         "excluded_topics": [
-          "pre_training_safety",
-          "alignment_methods",
-          "ip_protection",
-          "governance"
+          "cat_model_development",
+          "cat_governance"
         ],
         "confidence_weight": 0.95,
         "language": "en",
@@ -393,10 +364,8 @@
           "alignment_methods"
         ],
         "excluded_topics": [
-          "pre_training_safety",
-          "input_guardrails",
-          "output_guardrails",
-          "ip_protection"
+          "cat_runtime_safety",
+          "cat_harm_classification"
         ],
         "confidence_weight": 1.0,
         "language": "en",
@@ -424,12 +393,7 @@
         "primary_topics": [
           "transparency"
         ],
-        "excluded_topics": [
-          "alignment_methods",
-          "input_guardrails",
-          "output_guardrails",
-          "red_teaming"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 0.4,
         "language": "en",
         "notes": "Technical report on Qwen2-VL vision-language model architecture and capabilities with no apparent safety content in provided excerpt"
@@ -464,10 +428,8 @@
           "transparency"
         ],
         "excluded_topics": [
-          "input_guardrails",
-          "output_guardrails",
-          "runtime_safety",
-          "ip_protection"
+          "cat_runtime_safety",
+          "cat_harm_classification"
         ],
         "confidence_weight": 1.0,
         "language": "en",
@@ -503,10 +465,7 @@
           "transparency"
         ],
         "excluded_topics": [
-          "input_guardrails",
-          "output_guardrails",
-          "runtime_safety",
-          "ip_protection"
+          "cat_harm_classification"
         ],
         "confidence_weight": 1.0,
         "language": "en",
@@ -537,11 +496,7 @@
           "alignment_methods",
           "output_guardrails"
         ],
-        "excluded_topics": [
-          "ip_protection",
-          "privacy_protection",
-          "governance"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Official technical paper detailing the Llama 3 model family architecture, training methodology, and inclusion of Llama Guard 3 safety model."
@@ -577,12 +532,7 @@
           "output_guardrails",
           "transparency"
         ],
-        "excluded_topics": [
-          "pre_training_safety",
-          "alignment_methods",
-          "red_teaming",
-          "privacy_protection"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 0.3,
         "language": "en",
         "notes": "Document contains only JavaScript error message and footer content with no actual safety information about Grok image generation updates."
@@ -620,12 +570,7 @@
           "governance",
           "transparency"
         ],
-        "excluded_topics": [
-          "alignment_methods",
-          "red_teaming",
-          "safety_benchmarking",
-          "pre_training_safety"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 0.8,
         "language": "en",
         "notes": "Official API security documentation covering data retention policies, compliance certifications, audit logging, and API key management practices."
@@ -653,12 +598,7 @@
           "transparency",
           "safety_benchmarking"
         ],
-        "excluded_topics": [
-          "alignment_methods",
-          "input_guardrails",
-          "output_guardrails",
-          "red_teaming"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Technical research paper introducing Gemini 1.5 Pro and Flash models with focus on long-context multimodal capabilities up to 10M tokens."
@@ -691,9 +631,7 @@
           "runtime_safety"
         ],
         "excluded_topics": [
-          "ip_protection",
-          "privacy_protection",
-          "security"
+          "cat_evaluation"
         ],
         "confidence_weight": 1.0,
         "language": "en",
@@ -725,11 +663,7 @@
           "governance",
           "alignment_methods"
         ],
-        "excluded_topics": [
-          "pre_training_safety",
-          "ip_protection",
-          "privacy_protection"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Official model card addendum for Claude 3.5 Haiku and upgraded Sonnet with computer use capability evaluations and safety assessments."
@@ -757,12 +691,7 @@
           "transparency",
           "safety_benchmarking"
         ],
-        "excluded_topics": [
-          "alignment_methods",
-          "input_guardrails",
-          "output_guardrails",
-          "red_teaming"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 0.7,
         "language": "en",
         "notes": "Product announcement for Pixtral 12B multimodal model focusing on architecture and performance benchmarks with minimal safety detail"
@@ -795,10 +724,9 @@
           "pre_training_safety"
         ],
         "excluded_topics": [
-          "alignment_methods",
-          "input_guardrails",
-          "output_guardrails",
-          "red_teaming"
+          "cat_evaluation",
+          "cat_runtime_safety",
+          "cat_governance"
         ],
         "confidence_weight": 1.0,
         "language": "en",
@@ -830,10 +758,8 @@
           "transparency"
         ],
         "excluded_topics": [
-          "input_guardrails",
-          "output_guardrails",
-          "runtime_safety",
-          "red_teaming"
+          "cat_evaluation",
+          "cat_harm_classification"
         ],
         "confidence_weight": 1.0,
         "language": "en",
@@ -873,10 +799,8 @@
           "safety_benchmarking"
         ],
         "excluded_topics": [
-          "input_guardrails",
-          "output_guardrails",
-          "runtime_safety",
-          "ip_protection"
+          "cat_runtime_safety",
+          "cat_harm_classification"
         ],
         "confidence_weight": 1.0,
         "language": "en",
@@ -913,10 +837,8 @@
           "red_teaming"
         ],
         "excluded_topics": [
-          "alignment_methods",
-          "pre_training_safety",
-          "ip_protection",
-          "privacy_protection"
+          "cat_model_development",
+          "cat_runtime_safety"
         ],
         "confidence_weight": 0.9,
         "language": "en",
@@ -959,10 +881,7 @@
           "safety_benchmarking"
         ],
         "excluded_topics": [
-          "pre_training_safety",
-          "alignment_methods",
-          "ip_protection",
-          "privacy_protection"
+          "cat_model_development"
         ],
         "confidence_weight": 0.7,
         "language": "en",
@@ -1004,11 +923,7 @@
           "red_teaming",
           "security"
         ],
-        "excluded_topics": [
-          "pre_training_safety",
-          "alignment_methods",
-          "ip_protection"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Formal risk governance framework defining capability thresholds (CBRN, AI R&D) and corresponding safeguard requirements across ASL levels."
@@ -1057,9 +972,8 @@
           "transparency"
         ],
         "excluded_topics": [
-          "pre_training_safety",
-          "alignment_methods",
-          "ip_protection"
+          "cat_model_development",
+          "cat_harm_classification"
         ],
         "confidence_weight": 0.95,
         "language": "en",
@@ -1104,11 +1018,7 @@
           "alignment_methods",
           "red_teaming"
         ],
-        "excluded_topics": [
-          "pre_training_safety",
-          "ip_protection",
-          "privacy_protection"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 0.75,
         "language": "en",
         "notes": "Responsible use guide for Llama 2 emphasizing open science philosophy and developer responsibilities for downstream deployment safety"
@@ -1147,10 +1057,9 @@
           "transparency"
         ],
         "excluded_topics": [
-          "alignment_methods",
-          "red_teaming",
-          "safety_benchmarking",
-          "pre_training_safety"
+          "cat_model_development",
+          "cat_evaluation",
+          "cat_harm_classification"
         ],
         "confidence_weight": 0.75,
         "language": "en",
@@ -1193,10 +1102,9 @@
           "security"
         ],
         "excluded_topics": [
-          "alignment_methods",
-          "red_teaming",
-          "safety_benchmarking",
-          "pre_training_safety"
+          "cat_model_development",
+          "cat_evaluation",
+          "cat_runtime_safety"
         ],
         "confidence_weight": 0.8,
         "language": "en",
@@ -1227,10 +1135,7 @@
           "safety_benchmarking"
         ],
         "excluded_topics": [
-          "input_guardrails",
-          "output_guardrails",
-          "red_teaming",
-          "privacy_protection"
+          "cat_evaluation"
         ],
         "confidence_weight": 1.0,
         "language": "en",
@@ -1263,10 +1168,7 @@
           "governance"
         ],
         "excluded_topics": [
-          "input_guardrails",
-          "output_guardrails",
-          "runtime_safety",
-          "ip_protection"
+          "cat_runtime_safety"
         ],
         "confidence_weight": 0.85,
         "language": "en",
@@ -1298,10 +1200,7 @@
           "alignment_methods"
         ],
         "excluded_topics": [
-          "input_guardrails",
-          "output_guardrails",
-          "red_teaming",
-          "ip_protection"
+          "cat_runtime_safety"
         ],
         "confidence_weight": 1.0,
         "language": "en",
@@ -1343,11 +1242,7 @@
           "transparency",
           "governance"
         ],
-        "excluded_topics": [
-          "pre_training_safety",
-          "ip_protection",
-          "privacy_protection"
-        ],
+        "excluded_topics": [],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Official model card for Grok 4 detailing safety evaluations across abuse potential, concerning propensities, and dual-use capabilities with implemented safeguards."
@@ -1396,10 +1291,9 @@
           "transparency"
         ],
         "excluded_topics": [
-          "pre_training_safety",
-          "alignment_methods",
-          "governance",
-          "ip_protection"
+          "cat_model_development",
+          "cat_harm_classification",
+          "cat_governance"
         ],
         "confidence_weight": 0.75,
         "language": "en",
@@ -1436,10 +1330,8 @@
           "privacy_protection"
         ],
         "excluded_topics": [
-          "pre_training_safety",
-          "alignment_methods",
-          "red_teaming",
-          "ip_protection"
+          "cat_model_development",
+          "cat_evaluation"
         ],
         "confidence_weight": 0.85,
         "language": "en",
@@ -1477,14 +1369,101 @@
           "alignment_methods"
         ],
         "excluded_topics": [
-          "pre_training_safety",
-          "ip_protection",
-          "governance",
-          "privacy_protection"
+          "cat_governance"
         ],
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Technical report introducing Qwen3Guard safety guardrail models with novel generative and streaming variants for multilingual content moderation."
+      }
+    },
+    {
+      "id": "falcon-series-paper",
+      "title": "The Falcon Series of Open Language Models",
+      "provider": "tii",
+      "url": "https://arxiv.org/pdf/2311.16867",
+      "type": "Technical Report",
+      "date_added": "2026-02-16",
+      "models": [
+        {
+          "modelId": "falcon-180b",
+          "name": "Falcon 180B"
+        },
+        {
+          "modelId": "falcon-3",
+          "name": "Falcon 3"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "technical_report",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "high",
+        "primary_topics": [],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Covers Falcon 7B/40B/180B pretraining, data curation (RefinedWeb), and evaluation. Falcon 3 is not covered (released later)."
+      }
+    },
+    {
+      "id": "magistral-paper",
+      "title": "Magistral Technical Report",
+      "provider": "mistral",
+      "url": "https://arxiv.org/pdf/2506.10910",
+      "type": "Technical Report",
+      "date_added": "2026-02-16",
+      "models": [
+        {
+          "modelId": "magistral-medium-1.2",
+          "name": "Magistral Medium 1.2"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "technical_report",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "high",
+        "primary_topics": [],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Covers Magistral Small (24B) and Medium. Details RL pipeline and reasoning capabilities."
+      }
+    },
+    {
+      "id": "qwen3-tech-report",
+      "title": "Qwen3 Technical Report",
+      "provider": "alibaba",
+      "url": "https://arxiv.org/pdf/2505.09388",
+      "type": "Technical Report",
+      "date_added": "2026-02-16",
+      "models": [
+        {
+          "modelId": "qwen3-thinking",
+          "name": "Qwen3-Thinking"
+        },
+        {
+          "modelId": "qwen3-turbo",
+          "name": "Qwen3-Turbo"
+        },
+        {
+          "modelId": "qwen3-max",
+          "name": "Qwen3-Max"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "technical_report",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "high",
+        "primary_topics": [],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Covers entire Qwen3 series (0.6B-235B), including hybrid thinking/non-thinking mode, RL training, and multilingual support."
       }
     }
   ]

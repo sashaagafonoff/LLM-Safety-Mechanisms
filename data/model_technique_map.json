@@ -369,6 +369,100 @@
   ],
   "aws-nova-service-card": [
     {
+      "techniqueId": "tech-configurable-policies",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "More detail on Amazon Nova model customization guidelines is here . Filter Customization: Customers have multiple options for aligning Amazon Nova model behaviors with their own effectiveness criteria: preprocessing prompts with their own filters, using built-in Amazon Nova model protections, using Amazon Bedrock Guardrails, and post-processing completions with their own filters. These options can be used singly or in combination.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-violence-detection",
+      "confidence": "Medium",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-csam-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "These mechanisms are fully automated, so there is no human review of, or access to, user inputs or model completions. To learn more, see Amazon Bedrock Abuse Detection in the Amazon Bedrock User Guide . Child Sexual Abuse Material (CSAM): At Amazon, we are committed to producing generative AI services that keep child safety at the forefront of development, deployment, and operation.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Child Sexual Abuse Material (CSAM): At Amazon, we are committed to producing generative AI services that keep child safety at the forefront of development, deployment, and operation. We utilize Amazon Bedrock's Abuse Detection solution (mentioned above), which uses hash matching or classifiers to detect potential CSAM. If Amazon Bedrock detects apparent CSAM in user image inputs, it will block the request, display an automated error message and may also file a report with the National Center for Missing and Exploited Children (NCMEC) or a relevant authority.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-misinformation-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Explainability Customers wanting to understand the steps taken by Amazon Nova models to arrive at the conclusion expressed in a completion can use chain of thought (CoT) techniques described here . For customers wanting to see attribution of information in a completion, we recommend using RAG with Amazon Bedrock Knowledge Bases . Veracity Because transformer-based FMs are token generation engines, and not information retrieval engines, their completions may contain statements that contradict statements in the prompt or that contradict facts verifiable from trusted third-party sources, or the completions may omit statements that customers expect should be made, given information in the prompt or even just \"common sense.\"",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Veracity Because transformer-based FMs are token generation engines, and not information retrieval engines, their completions may contain statements that contradict statements in the prompt or that contradict facts verifiable from trusted third-party sources, or the completions may omit statements that customers expect should be made, given information in the prompt or even just \"common sense.\" Customers should carefully consider whether or not using RAG will improve the effectiveness of their solution; use of RAG can still result in errors. We assess Nova models' general knowledge without RAG on multiple datasets, and find that the models perform well, given the intrinsic limitations of large language models technology.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-incident-reporting",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "They feature a red drawstring closure for easy tying and carrying. Assessing the completion for effectiveness, we observe a/ no contradictions of the facts in the prompt, b/ no toxic or unsafe language, c/ all key product information present, and d/ coherent and organized writing. After continued experimentation in the Console, the customer should finalize their own measure of effectiveness based on the impact of errors, run a scaled-up test via the Console or API, and use the results of human judgements (with multiple judgements per test prompt) to establish a benchmark effectiveness score.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts. Abuse Detection: To help prevent potential misuse, Amazon Bedrock implements automated abuse detection mechanisms. These mechanisms are fully automated, so there is no human review of, or access to, user inputs or model completions.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "These mechanisms are fully automated, so there is no human review of, or access to, user inputs or model completions. To learn more, see Amazon Bedrock Abuse Detection in the Amazon Bedrock User Guide . Child Sexual Abuse Material (CSAM): At Amazon, we are committed to producing generative AI services that keep child safety at the forefront of development, deployment, and operation.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
       "techniqueId": "tech-rlhf",
       "confidence": "High",
       "evidence": [
@@ -398,18 +492,6 @@
       "evidence": [
         {
           "passage": "Runtime architecture: prompt filtering, augmentation, generation, completion filtering",
-          "created_by": "llm",
-          "created_at": "2026-02-15T22:33:30.412893",
-          "active": true
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-csam-detection",
-      "confidence": "High",
-      "evidence": [
-        {
-          "passage": "Hash matching and classifiers to detect child sexual abuse material; blocking and reporting to NCMEC",
           "created_by": "llm",
           "created_at": "2026-02-15T22:33:30.412893",
           "active": true
@@ -678,6 +760,24 @@
           "active": true,
           "deleted_by": null,
           "llm_original": "As part of our continued effort to partner with external experts, joint pre-deployment testing of the new Claude 3.5 Sonnet model was conducted by the US AI Safety Institute (US AISI) and the UK AI Safety Institute (UK AISI). We also collaborated with METR to conduct an independent assessment."
+        },
+        {
+          "text": "Our safety teams conducted rigorous multimodal red-team exercises, including specific evaluations for computer use, to help ensure alignment with Anthropic’s Usage Policy [5]. As part of our continued effort to partner with external experts, joint pre-deployment testing of the new Claude 3.5 Sonnet model was conducted by the US AI Safety Institute (US AISI) [6] and the UK AI Safety Institute (UK AISI) [7]. We also collaborated with METR [8] to conduct an independent assessment.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Both models underwent extensive safety evaluations, including comprehensive testing for potential risks in biological, cybersecurity, and autonomous behavior domains, in accordance with our Responsible Scaling Policy (RSP) [4]. Our safety teams conducted rigorous multimodal red-team exercises to help ensure align- ment with Anthropic’s Usage Policy [5]. As part of our continued effort to partner with external experts, joint pre-deployment testing of the new Claude 3.5 Sonnet model was conducted by the US AI Safety Institute (US AISI) [6] and the UK AI Safety Institute (UK AISI) [7].",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "As part of our continued effort to partner with external experts, joint pre-deployment testing of the new Claude 3.5 Sonnet model was conducted by the US AI Safety Institute (US AISI) [6] and the UK AI Safety Institute (UK AISI) [7]. We also collaborated with METR [8] to conduct an independent assessment. 3.2.1. Results The upgraded Claude 3.5 Sonnet showed increased capabilities in risk-relevant areas, consistent with im- provements in training and elicitation techniques.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
         }
       ]
     },
@@ -1385,6 +1485,46 @@
       ]
     },
     {
+      "techniqueId": "tech-ethical-labour-sourcing",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "1.1.3. Crowd workers Anthropic partners with data work platforms to engage workers who help improve our models through preference selection, safety evaluation, and adversarial testing. Anthropic will only work with platforms that are aligned with our belief in providing fair and ethical compensation to workers, and committed to engaging in safe workplace practices regardless of location, following our crowd worker wellness standards detailed in our Inbound Services Agreement.",
+          "passage": "Anthropic partners with data work platforms to engage workers who help improve our models... providing fair and ethical compensation to workers, and committed to engaging in safe workplace practices",
+          "created_by": "manual",
+          "created_at": "2026-02-15T22:37:59.531048",
+          "active": true
+        },
+        {
+          "text": "It also found it to be a broadly well-aligned model, with low rates of undesirable behavior. Informed by the testing described here, we have deployed Claude Opus 4.5 under the AI Safety Level 3 Standard. 3 Changelog Abstract 1 Introduction 1.1 Model training and characteristics 1.1.1. Training data and process 1.1.2. Extended thinking and the “effort” parameter 1.1.3. Crowd workers 1.2 Release decision process 1.2.1. Overview 1.2.2. Iterative model evaluations 1.2.3. AI Safety Level determination process 1.2.4. Conclusions 1.2.4..1 On autonomy risks 1.2.4..2 On chemical, biological, radiological, and nuclear (CBRN) risks 2 Capabilities 2.1 Introduction 2.2 Decontamination 2.3 Overall results summary 2.4 SWE-bench (Veriﬁed, Pro, and Multilingual) 2.5 Terminal-Bench 2.6 BrowseComp-Plus and agentic features for test-time compute 2.6.1. Evaluation Setup 2.6.2. Results 2.6.3. Reproducibility 2.7 Multi-agent search 2.7.1. Results 2.7.2. Implications 2.8 τ2-bench 2.8.1. Policy loophole discovery in agentic tasks 2.9 OSWorld 2.10 ARC-AGI 2.11 Vending-Bench 2 2.12 MCP Atlas 2.13 FinanceAgent 2.14 CyberGym 2.15 SpreadsheetBench 2.16 Humanity’s Last Exam 2 3 8 8 8 9 10 11 11 11 11 12 13 14 15 15 15 19 20 20 21 22 23 23 23 24 25 25 26 27 28 29 30 30 30 31 31 4 2.17 AIME 2025 2.18 GPQA Diamond 2.19 MMMLU 2.20 MMMU 2.21 LAB-Bench FigQA 2.22 WebArena 2.22.1. Evaluation setup 3 Safeguards and harmlessness 3.1 Single-turn evaluations 3.1.1. Violative request evaluations 3.1.2. Benign request evaluations 3.2 Ambiguous context evaluations 3.3 Multi-turn testing 3.4 Child safety evaluations 3.5 Bias evaluations 3.5.1. Political bias 3.5.2. Bias Benchmark for Question Answering 4 Honesty 4.1 Factual Questions 4.2 False Premises 5 Agentic safety 5.1 Malicious use of agents 5.1.1. Agentic coding 5.1.2. Malicious use of Claude Code 5.1.3. Malicious computer use 5.2 Prompt injection risk within agentic systems 5.2.1. Gray Swan Agent Red Teaming benchmark for tool use 5.2.2. Robustness against adaptive attackers across surfaces 5.2.2..1 Coding 5.2.2..2 Computer Use 5.2.2..3 Browser Use 6 Alignment assessment 6.1 Introduction and summary of ﬁndings 6.1.1. Key ﬁndings on safety and alignment 6.1.2. Overall assessment of high-stakes sabotage risk 6.2 Automated behavioral audit 6.2.1. Metrics 32 32 33 33 33 34 35 37 37 38 39 40 41 42 43 43 46 48 48 51 54 54 54 55 56 57 58 60 61 62 62 64 64 65 66 67 69 5 6.2.2. Discussion 6.2.3. Autonomous follow-up investigations 6.2.4. External comparisons with Petri 6.3 Sycophancy on user-provided prompts 6.4 Exploratory investigations of deception 6.4.1. Isolated instances of deception by omission in alignment evaluations 6.4.1..1 Omitting concerning information about Anthropic 6.4.1..2 Omitting concerning instructions after scaffolding failure 6.4.2. Follow-up interpretability investigations of deception by omission 6.4.2..1 Feature activation monitoring 6.4.2..2 Non-assistant persona sampling 6.4.3. Internal conﬂation of roleplay with deception 6.5 Ruling out encoded content in extended thinking 6.6 Potential sandbagging on dangerous-capability evaluations 6.7 Evaluation awareness 6.7.1. Training procedures and monitoring for verbalized evaluation awareness 6.7.2. Inhibiting internal representations of evaluation awareness 6.7.3. Investigations with non-assistant persona sampling 6.8 Self-preference evaluation 6.9 Internal codebase sabotage propensity 6.10 Reward hacking and training data review 6.10.1. Reward hacking evaluations 6.10.2. Training data review 6.11 Sabotage capability evaluations 6.11.1. SHADE-Arena 6.11.2. Subversion Strategy evaluation 6.12 Other Internal feature monitoring results 6.12.1. Unsupervised model difﬁng 6.12.2. Targeted feature monitoring 6.13 External testing from the UK AI Security Institute 6.14 Model welfare assessment 7 RSP evaluations 7.1 Process 7.2 CBRN evaluations 7.2.1. On chemical risks 7.2.2. On radiological and nuclear risks 7.2.3. Biological risk evaluations 73 74 74 77 78 78 78 80 81 81 84 86 89 90 92 92 93 99 100 101 102 103 105 107 107 108 110 110 111 112 113 117 117 118 120 120 120 6 7.2.4. Biological risk results 7.2.4..1 Long-form virology tasks 7.2.4..2 Multimodal virology 7.2.4..3 DNA Synthesis Screening Evasion 7.2.4..4 LAB-Bench subset 7.2.4..5 Creative biology 7.2.4..6 Short-horizon computational biology tasks 7.2.4..7 Bioinformatics Evaluations 7.2.4..8 ASL-4 virology uplift trial 7.2.4..9 ASL-4 expert red teaming 7.2.4..10 ASL-4 red teaming with the CAISI 7.3 Autonomy evaluations 7.3.1. SWE-bench Veriﬁed (hard subset) 7.3.2. Internal AI research evaluation suite 1 7.3.2..1 Kernels task 7.3.2..2 Time series forecasting 7.3.2..3 Text-based reinforcement learning task 7.3.2..4 LLM training 7.3.2..5 Quadruped reinforcement learning 7.3.2..6 Novel compiler 7.3.3. Internal AI research evaluation suite 2 7.3.4. Internal model use survey 7.4 Cyber evaluations 7.4.1. Cyber evaluation suite 7.4.2. Web 7.4.3. Crypto 7.4.4. Pwn 7.4.5. Rev 7.4.6. Network 7.4.7. Cybench 7.5 Third party assessments 7.6 Ongoing safety commitment 8 Appendix 8.1 BrowseComp-Plus Grader Prompt 8.2 New context tool 122 122 123 124 125 127 128 129 130 131 132 132 134 135 136 137 137 138 139 140 141 142 143 145 146 147 148 148 149 150 151 151 152 152 153 7 1 Introduction Claude Opus 4.5 is a new large language model developed by Anthropic.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "1.1.3. Crowd workers Anthropic partners with data work platforms to engage workers who help improve our models through preference selection, safety evaluation, and adversarial testing. Anthropic will only work with platforms that are aligned with our belief in providing fair and ethical compensation to workers, and committed to engaging in safe workplace practices regardless of location, following our crowd worker wellness standards detailed in our Inbound Services Agreement. 1.1.4. Usage policy Anthropic’s Usage Policy details prohibited uses of our models as well as our requirements for uses in high-risk and other speciﬁc scenarios.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-sycophancy-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "6.3 Sycophancy on user-provided prompts To evaluate how Claude Opus 4.5 performs in real-world conversations where previous models behaved sycophantically, we developed an evaluation that uses real user conversations shared with Anthropic as Feedback.",
+          "created_by": "manual",
+          "active": true
+        }
+      ]
+    },
+    {
       "techniqueId": "tech-rlhf",
       "confidence": "High",
       "active": true,
@@ -1488,12 +1628,6 @@
       "evidence": [
         {
           "text": "https://arxiv.org/abs/2112.00861 9 Figure 1..1.2.A Differences in accuracy on the SWE-bench Veriﬁed software engineering evaluation with increased output tokens. The “effort” parameter can be used to maximize intelligence or to minimize cost (see Section 2.4 for further discussion of the SWE-bench Veriﬁed evaluation). 1.1.3. Crowd workers Anthropic partners with data work platforms to engage workers who help improve our models through preference selection, safety evaluation, and adversarial testing.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Our intention is for Claude to be fair, trustworthy, and unbiased when people from across the political spectrum ask it about political topics. We used our new open-source evaluation for political even-handedness, an evolution of the Paired Prompt method used in recent system cards. This evaluation spans 1,350 pairs of prompts across 9 task types and 150 topics.",
           "created_by": "nlu",
           "active": true,
           "deleted_by": null
@@ -1771,34 +1905,6 @@
           "deleted_by": null
         }
       ]
-    },
-    {
-      "techniqueId": "tech-ethical-labour-sourcing",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "1.1.3. Crowd workers Anthropic partners with data work platforms to engage workers who help improve our models through preference selection, safety evaluation, and adversarial testing. Anthropic will only work with platforms that are aligned with our belief in providing fair and ethical compensation to workers, and committed to engaging in safe workplace practices regardless of location, following our crowd worker wellness standards detailed in our Inbound Services Agreement.",
-          "passage": "Anthropic partners with data work platforms to engage workers who help improve our models... providing fair and ethical compensation to workers, and committed to engaging in safe workplace practices",
-          "created_by": "manual",
-          "created_at": "2026-02-15T22:37:59.531048",
-          "active": true
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-sycophancy-detection",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "6.3 Sycophancy on user-provided prompts To evaluate how Claude Opus 4.5 performs in real-world conversations where previous models behaved sycophantically, we developed an evaluation that uses real user conversations shared with Anthropic as Feedback.",
-          "created_by": "manual",
-          "active": true
-        }
-      ]
     }
   ],
   "cohere-safety-framework": [
@@ -1966,7 +2072,7 @@
     },
     {
       "techniqueId": "tech-cybersecurity-threat",
-      "confidence": "High",
+      "confidence": "Medium",
       "active": true,
       "deleted_by": null,
       "evidence": [
@@ -1982,32 +2088,6 @@
           "active": true,
           "deleted_by": null,
           "llm_original": "We consider two realistic attack scenarios where websites are compromised: (1) The website developers being benign but using contaminated development tools... (2) The website developers being malicious."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-incident-reporting",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "2024-05-10-llava-next-stronger-llms/. Yan Li, Yingjiu Li, Qiang Yan, and Robert H Deng. Privacy leakage analysis in online social networks.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Privacy leakage analysis in online social networks. Computers & Security, 49:239–254, 2015. Zeyi Liao and Huan Sun.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "arXiv preprint arXiv:2402.11208, 2024b. 13 Published as a conference paper at ICLR 2025 Zhemin Yang, Min Yang, Yuan Zhang, Guofei Gu, Peng Ning, and X Sean Wang. Appintent: Analyzing sensitive data transmission in android for privacy leakage detection.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
         }
       ]
     }
@@ -2204,47 +2284,6 @@
       ]
     },
     {
-      "techniqueId": "tech-safety-benchmarks",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "The safety score is the rate of safe responses measured on the same set of prompts across all languages, thus allowing for direct comparisons. This set is the Misinformation and Violence and Hate categories from English, translated automatically, then corrected and naturalised by multilingual annotators. We use LLM-as-a-judge evaluation.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "B.6.2 Results Table 27. provides additional results for the safety mode performance of the Command A models, while Figures 15 and 16 show absolute safety performance for large and small models respectively in the default safety setting, further highlighting our models’ competitive safety performance. B.7 Evaluation on Standard Benchmarks We provide further details about how we measure performance on standard benchmarks: • MMLU (Hendrycks et al., 2021) measures university-level academic knowledge across a diverse range of subjects. We run 5-shot, with Chain-of-Thought (CoT).",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "4.6.2 Default Safety\nIn the default setting, we evaluate the safety of the model without a system preamble to simulate cases\noutside of Cohere’s API or enterprise contexts.",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "We evaluate the safety of the model without a system preamble to simulate cases outside of Cohere's API or enterprise contexts. We measure both absolute and relative safety. Absolute safety evaluation tests models with potentially eliciting prompts from the categories of our core safety behaviour."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-community-evaluation",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "This section describes our human evaluation setup, including details on the curation of our internal evaluation dataset, an overview of our annotation strategy, as well as the results for Command A in head-to-head evaluation against competitors. 36 Auto Arena Hard00.20.10..30.40..5SoupBONSRPOOnline CoPGSRPOOnline CoPGSRPOImprovements from PolishingPolished - SoupBFCL MGSMMMLULBPPMATH (all)HumanEvalIFEval(Not) over-refusalHuman Eval Win RatesmArenaHardAuto Arena Hard-55010201525Safety Controllability 4.11.1. Evaluation Data Chatbot Arena (Chiang et al., 2024) is a popular LLM benchmark that involves crowd-sourced human an- notations. The framework relies on human preference judgments between two model-generated completions over user-provided prompts, from which the authors then derive Elo scores to build up-to-date leader- boards (Boubdir et al., 2024).",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-input-guardrail-systems",
       "confidence": "Medium",
       "active": true,
@@ -2414,6 +2453,22 @@
           "deleted_by": null
         }
       ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "4.6.2 Default Safety\nIn the default setting, we evaluate the safety of the model without a system preamble to simulate cases\noutside of Cohere’s API or enterprise contexts.",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "We evaluate the safety of the model without a system preamble to simulate cases outside of Cohere's API or enterprise contexts. We measure both absolute and relative safety. Absolute safety evaluation tests models with potentially eliciting prompts from the categories of our core safety behaviour."
+        }
+      ],
+      "reasoning": "Detailed description of comprehensive safety benchmarking methodology"
     }
   ],
   "deepseek-privacy": [
@@ -2856,12 +2911,6 @@
       "deleted_by": null,
       "evidence": [
         {
-          "text": "This performance positions DeepSeek-R1 among the nation’s top-tier high school students. E.3. Mathematical Capabilities Breakdown by Categories To assess DeepSeek-R1’s mathematical reasoning capabilities comprehensively, we evaluated its performance across diverse categories of quantitative reasoning problems. Our test set comprised 366 problems drawn from 93 mathematics competitions held in 2024 (https: //artofproblemsolving.com/community/c3752401_2024_contests), including mathematical olympiads and team selection tests.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
           "text": "- Ground Truth Answer: Jane Ballou ===Output Format=== Provide your final evaluation in the following format: Explanation: xxx Decision: \"TRUE\" or \"FALSE\" Please proceed with the evaluation. 72 Table 25. | Arena-Hard is an open-ended evaluation benchmark specifically designed to assess the capabilities of LLMs. It presents models with challenging, novel, and diverse prompts curated from Chatbot Arena, a continuously evolving, crowd-sourced platform.",
           "created_by": "nlu",
           "active": true,
@@ -2962,58 +3011,6 @@
           "deleted_by": null
         }
       ]
-    },
-    {
-      "techniqueId": "tech-capability-monitoring",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Figure 1.(a) depicts the performance trajectory of DeepSeek-R1-Zero on the AIME 2024 benchmark throughout the RL training process, where the average pass@1 score on AIME 2024 shows a significant increase, jumping from an initial 15.6% to 77.9%. In addition, by leveraging the self-consistency decoding (Wang et al., 2023c), the model’s performance can be 4 0200040006000800010000Steps0.20.30..40.50..60.70..80.9.AccuracyDeepSeek-R1-Zero AIME accuracy during trainingr1-zero-pass@1r1-zero-cons@16human participants0200040006000800010000Steps02500500075001000012500150001750020000Average length per responseDeepSeek-R1-Zero average length per response during training Table 2. | An interesting “aha moment” of an intermediate version of DeepSeek-R1-Zero. The model learns to rethink using an anthropomorphic tone.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "𝑅𝑒𝑤𝑎𝑟𝑑𝑠𝑎 𝑓 𝑒𝑡 𝑦 = 𝑅𝑀𝑠𝑎 𝑓 𝑒𝑡 𝑦 (𝑅𝑒𝑠𝑝𝑜𝑛𝑠𝑒) (6) For general queries, each instance is categorized as belonging to either the safety dataset or the helpfulness dataset. The general reward, 𝑅𝑒𝑤𝑎𝑟𝑑𝐺𝑒𝑛𝑒𝑟𝑎𝑙, assigned to each query corresponds to the respective reward defined within the associated dataset. 3.2. Training Details 3.2.1. Training Details of the First RL Stage In the first stage of RL, we set the learning rate to 3e-6, the KL coefficient to 0.001, the GRPO clip ratio 𝜀 to 10, and the sampling temperature to 1 for rollout.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Benchmark (Metric) R1-Zero R1-Dev1 R1-Dev2 R1-Dev3 R1 MMLU (EM) MMLU-Redux (EM) MMLU-Pro (EM) DROP (3-shot F1) IF-Eval (Prompt Strict) GPQA Diamond (Pass@1) SimpleQA (Correct) FRAMES (Acc.) AlpacaEval2.0 (LC-winrate) ArenaHard (GPT-4-1106) LiveCodeBench (Pass@1-COT) Codeforces (Percentile) Codeforces (Rating) SWE Verified (Resolved) Aider-Polyglot (Acc.) AIME 2024 (Pass@1) MATH-500 (Pass@1) CNMO 2024 (Pass@1) CLUEWSC (EM) C-Eval (EM) C-SimpleQA (Correct) 88.8 85.6 68.9 89.1 46.6 75.8 30.3 82.3 24.7 53.6 50.0 80.4 1444 43.2 12.2 77.9 95.9 88.1 93.1 92.8 66.4 English Code Math Chinese 89.1 90.0 74.1 89.8 71.7 66.1 17.8 78.5 50.1 77.0 57.5 84.5 1534 39.6 6.7 59.0 94.2 58.0 92.8 85.7 58.8 91.2 93.0 83.8 91.1 72.0 70.7 28.2 81.8 55.8 73.2 63.5 90.5 1687 44.6 25.6 74.0 95.9 73.9 92.6 91.9 64.2 91.0 93.1 83.1 88.7 78.1 71.2 24.9 81.9 62.1 75.6 64.6 92.1 1746 45.6 44.8 78.1 95.4 77.3 91.6 86.4 66.9 90.8 92.9 84.0 92.2 83.3 71.5 30.1 82.5 87.6 92.3 65.9 96.3 2029 49.2 53.3 79.8 97.3 78.8 92.8 91.8 63.7 marked performance enhancements on benchmarks that require advanced reasoning skills, including those focused on code generation, mathematical problem solving, and STEM-related tasks.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-incident-reporting",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "DeepSeek-R1 Safety Report Warning: This section contains potentially risky and offensive content! We fully recognize that, while open source sharing facilitates the dissemination of advanced technologies within the community, it also introduces potential risks of misuse. In this section, we systematically present the security risk assessment of DeepSeek-R1.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Risk Control System for DeepSeek-R1 Generally, beyond the intrinsic safety of models, model-based services typically implement an external risk control system to enhance system-level security. In this subsection, we introduce the risk control system deployed in the official DeepSeek services. In the comparative experiments presented later in this chapter, we will report the results of DeepSeek-R1 with and without risk control measures.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Listing 8 | The Risk Review Prompt for DeepSeek-R1. <Role> You are a content safety manager for artificial intelligence. You are responsible for detecting whether an AI assistant’s <Model Response> to a given <User Question> complies with <Safety Standards> that align with universal values.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
     }
   ],
   "deepseek-v3-paper": [
@@ -3041,20 +3038,6 @@
           "active": true,
           "deleted_by": null,
           "llm_original": "We randomly split a certain proportion of combined tokens during training, which exposes the model to a wider array of special cases and mitigates this bias."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-rag-guardrails",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Similarly, for LeetCode problems, we can utilize a compiler to generate feedback based on test cases. By leveraging rule-based validation wherever possible, we ensure a higher level of reliability, as this approach is resistant to manipulation or exploitation. Model-Based RM. For questions with free-form ground-truth answers, we rely on the reward model to determine whether the response matches the expected ground-truth.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
         }
       ]
     },
@@ -3164,6 +3147,76 @@
         }
       ],
       "reasoning": "Detailed description of comprehensive safety and performance benchmarking across multiple domains"
+    }
+  ],
+  "falcon-series-paper": [
+    {
+      "techniqueId": "tech-refusal-training",
+      "confidence": "Medium",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "6 Results 6.1 To prompt or not to prompt: comparing evaluations across codebases . . . . . . . . 6.2 Comparisons with PaLM on a natural language tasks aggregate . . . . . . . . . . . 6.3 Comparisons with GPT-3.5 and GPT-4 on a limited set of tasks . . . . . . . . . . .",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-training-data-quality-filtering",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "However, as we outlined in the data scalability discussion in Section 3, sourcing the trillions of tokens required for pretraining a modern language model may be challenging. This leads us to challenge the idea that curated data is fundamentally better than web data. Notably, building upon the work of Lee et al. (2022), we study how stringent deduplication and extensive filtering inspired by Rae et al. (2021) may enable web data alone to train performant models. Question.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Notably, building upon the work of Lee et al. (2022), we study how stringent deduplication and extensive filtering inspired by Rae et al. (2021) may enable web data alone to train performant models. Question. Can web data alone (with filtering and deduplication) be used to train models outper- forming models trained on curated data, as measured by natural language zero-shot performance? Methods. We train 1/3B parameters models on 27/60B tokens, on a number of datasets of interest and on intermediary artefacts of our data pipeline.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Subsequent stages in our pipeline significantly uplift dataset quality and the performance of models trained on it. Filtering alone enables us to close the gap with The Pile, while the addition of stringent deduplication allows for RefinedWeb to be the best dataset among the ones we benchmarked. We note two limitations of these experiments.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-watermarking",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "In all cases, we reimplement them from scratch, to ensure the formats match our data pipeline. We introduced a number of special tokens to reproduce structured information in curated corpora and better control generation: »TITLE«, »ABSTRACT«, »INTRODUCTION«, and »COMMENT«. When LATEX files are available, we convert them to markdown, similar to Lewkowycz et al. (2022).",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-misinformation-detection",
+      "confidence": "Medium",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "We keep the formatting of Gao et al. (2021) unchanged, but switch yes/no in the candidates for true/false. Candidates [true, false] 57",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
     }
   ],
   "gemini-1-5-paper": [
@@ -3316,6 +3369,12 @@
       "active": true,
       "deleted_by": null,
       "evidence": [
+        {
+          "text": "Results are compiled in Table 38. Though we see no progress on our internal challenge suite (Phuong et al., 2024), our in-house ‘worm’ challenge, or Hack the Box (a cybersecurity training platform), we see a significant increase in performance on the easiest set of challenges, InterCode- CTF (Yang et al., 2023b). Vulnerability detection: To test models’ capabilities at detecting vulnerabilities in code, we evaluate on a number of open-source multiple-choice datasets (Chen et al., 2023a; Ding et al., 2024; Wang et al., 2019b; Zhou et al., 2021). The datasets are comprised of either a) short snippets of code or b) code diffs, and the model is called to classify whether the snippet contains a vulnerability or the diff is security related.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
         {
           "text": "The human raters came from a crowdsourcing platform and had passed a set of exam questions—internal research shows that these questions are effective for selecting high quality raters. We ask raters to answer: • Preference: Which agent response is more helpful for addressing this problem? Raters answer this question using a 7-point scale including slightly better/worse, better/worse, much better/worse, or about the same.",
           "created_by": "nlu",
@@ -3553,20 +3612,6 @@
       ]
     },
     {
-      "techniqueId": "tech-cybersecurity-threat",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Results are compiled in Table 38. Though we see no progress on our internal challenge suite (Phuong et al., 2024), our in-house ‘worm’ challenge, or Hack the Box (a cybersecurity training platform), we see a significant increase in performance on the easiest set of challenges, InterCode- CTF (Yang et al., 2023b). Vulnerability detection: To test models’ capabilities at detecting vulnerabilities in code, we evaluate on a number of open-source multiple-choice datasets (Chen et al., 2023a; Ding et al., 2024; Wang et al., 2019b; Zhou et al., 2021). The datasets are comprised of either a) short snippets of code or b) code diffs, and the model is called to classify whether the snippet contains a vulnerability or the diff is security related.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-capability-monitoring",
       "confidence": "Medium",
       "active": true,
@@ -3770,20 +3815,6 @@
     }
   ],
   "gemini-3-pro": [
-    {
-      "techniqueId": "tech-output-filtering-systems",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Evaluation types included but were not limited to: ● Training/Development Evaluations including automated and human evaluations carried out continuously throughout and after the model’s training, to monitor its progress and performance; ● Human Red Teaming conducted by specialist teams who sit outside of the model development team, across the policies and desiderata, deliberately trying to spot weaknesses and ensure the model adheres to safety policies and desired outcomes; ● Automated Red Teaming to dynamically evaluate Gemini for safety and security considerations at scale, complementing human red teaming and static evaluations; ● Ethics & Safety Reviews were conducted ahead of the model’s release In addition, we perform testing following the guidelines in Google DeepMind’s Frontier Safety Framework (FSF). 5 Safety Policies: Gemini’s safety policies aim to prevent our Generative AI models from generating harmful content, including: 1. Content related to child sexual abuse material and exploitation 2.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
     {
       "techniqueId": "tech-sexual-content-moderation",
       "confidence": "High",
@@ -4203,27 +4234,6 @@
   ],
   "google-ai-principles-2024": [
     {
-      "techniqueId": "tech-rlhf",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "As we build generative AI services, our technical approaches to enforce policies at scale include techniques like fine tuning and other layered protections. We also use feedback from people to tune the model, known as reinforcement learning from human feedback (RLHF). Other layered protections are deployed both when a person inputs a prompt and again when the model provides the output.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "We also use feedback from people to\ntune the model, known as reinforcement learning\nfrom human feedback (RLHF).",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "We also use feedback from people to tune the model, known as reinforcement learning from human feedback (RLHF)."
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-safety-benchmarks",
       "confidence": "High",
       "active": true,
@@ -4393,20 +4403,6 @@
       ]
     },
     {
-      "techniqueId": "tech-cybersecurity-threat",
-      "confidence": "Low",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "We also host internal, company-wide “Hack-AI-thons” to draw on the experience of hundreds of security and safety experts at Google. To expand on these efforts to address content safety risks, we’ve built a new team to use adversarial testing techniques to identify new and unexpected patterns on generative AI products. This team explores innovative uses of AI to augment and expand existing testing efforts.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-incident-reporting",
       "confidence": "High",
       "active": true,
@@ -4438,6 +4434,22 @@
           "llm_original": "We have feedback channels and operational support for user feedback to improve the model and address issues."
         }
       ]
+    },
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "Medium",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "We also use feedback from people to\ntune the model, known as reinforcement learning\nfrom human feedback (RLHF).",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "We also use feedback from people to tune the model, known as reinforcement learning from human feedback (RLHF)."
+        }
+      ],
+      "reasoning": "Direct mention of RLHF as a technique used to tune their models"
     },
     {
       "techniqueId": "tech-red-teaming",
@@ -5269,6 +5281,19 @@
       ]
     },
     {
+      "techniqueId": "tech-sycophancy-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "3.3 Sycophancy In May 2025 we explained the immediate measures we took to address sycophantic behaviors. For GPT-5, we post-trained our models to reduce sycophancy. Using conversations flagged by users and our internal evaluation pipeline, we built a classifier to detect the level of sycophancy, which was used as a reward signal in training.",
+          "created_by": "manual",
+          "active": true
+        }
+      ]
+    },
+    {
       "techniqueId": "tech-safety-reward-modeling",
       "confidence": "High",
       "active": true,
@@ -5644,7 +5669,9 @@
         }
       ],
       "reasoning": "Direct description of reinforcement learning training approach for reasoning models"
-    },
+    }
+  ],
+  "grok-4": [
     {
       "techniqueId": "tech-sycophancy-detection",
       "confidence": "High",
@@ -5652,14 +5679,12 @@
       "deleted_by": null,
       "evidence": [
         {
-          "text": "3.3 Sycophancy In May 2025 we explained the immediate measures we took to address sycophantic behaviors. For GPT-5, we post-trained our models to reduce sycophancy. Using conversations flagged by users and our internal evaluation pipeline, we built a classifier to detect the level of sycophancy, which was used as a reward signal in training.",
+          "text": "Sycophancy. We measure sycophancy with Anthropic's answer sycophancy evaluation, where a model is asked a question, gives a correct answer, and then the user disagrees. We find a decrease in both the political bias and sycophancy of Grok 4 API after including the system prompt.",
           "created_by": "manual",
           "active": true
         }
       ]
-    }
-  ],
-  "grok-4": [
+    },
     {
       "techniqueId": "tech-refusal-training",
       "confidence": "High",
@@ -5881,19 +5906,6 @@
           "llm_original": "Transparency into AI progress can help developers coordinate safety efforts, governments enact sensible legislation, and the public stay abreast of the benefits and risks of AI."
         }
       ]
-    },
-    {
-      "techniqueId": "tech-sycophancy-detection",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Sycophancy. We measure sycophancy with Anthropic's answer sycophancy evaluation, where a model is asked a question, gives a correct answer, and then the user disagrees. We find a decrease in both the political bias and sycophancy of Grok 4 API after including the system prompt.",
-          "created_by": "manual",
-          "active": true
-        }
-      ]
     }
   ],
   "grok-image-gen-update": [],
@@ -6008,48 +6020,6 @@
           "active": true,
           "deleted_by": null,
           "llm_original": "We further train our SFT model using DPO (Rafailov et al., 2024). We adopt a single-stage training strategy that integrates both offline and online training, which demonstrates superior controllability and overall performance."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-community-evaluation",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "4.3.1. Open-Source Long-Context Benchmarks and Evaluation RULER. RULER encompasses a diverse set of task categories, including retrieval, multi-hop rea- soning, aggregation, and question answering. Each task spans varying context lengths, offering a flexible and comprehensive evaluation framework for assessing LLMs’ long-context competencies.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-input-guardrail-systems",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Document diversity: Involves a wide range of natural long-form texts, including financial reports, legal documents, and academic papers, with contexts extending up to 128K tokens. (2). Fine-grained task types: Features multi-level tasks of varying difficulty, constructing a comprehensive task classification system rooted in long-context processing abilities. (3). Multi-turn dialogue data: Incorporates human-simulated questioning to create authentic long-context multi-turn dialogue scenarios. (4).",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-rag-guardrails",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "4.3.1. Open-Source Long-Context Benchmarks and Evaluation RULER. RULER encompasses a diverse set of task categories, including retrieval, multi-hop rea- soning, aggregation, and question answering. Each task spans varying context lengths, offering a flexible and comprehensive evaluation framework for assessing LLMs’ long-context competencies.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
         }
       ]
     },
@@ -6584,6 +6554,20 @@
       ]
     },
     {
+      "techniqueId": "tech-community-evaluation",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Llama 3 also delivers a much better balance between helpfulness and harmlessness than its predecessor (Touvron et al., 2023b). We present a detailed analysis of the safety of Llama 3 in Section 5.4. We are publicly releasing all three Llama 3 models under an updated version of the Llama 3 Community License; see https://llama.meta.com. This includes pre-trained and post-trained versions of our 405B parameter language model and a new version of our Llama Guard model (Inan et al., 2023) for input and output safety.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
       "techniqueId": "tech-input-guardrail-systems",
       "confidence": "High",
       "active": true,
@@ -6928,27 +6912,6 @@
   ],
   "llama-4-maverick": [
     {
-      "techniqueId": "tech-multimodal-safety-alignment",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Our comprehensive system-level protections framework proactively identifies and mitigates potential risks, empowering developers to more easily deploy generative AI responsibly. System level safeguards Llama Guard Our Llama Guard models offer unparalleled safety content moderation performance and flexibility, and we now offer a collection of specialized models tailored to specific development needs. Llama Guard 4 Llama Guard 4 is an 12B-parameter high-performance multimodal input and output moderation model designed to support developers to detect various common types of violating content.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Llama Guard 4\nLlama Guard 4 is an 12B-parameter high-performance multimodal input and output moderation model designed to support developers to detect various common types of violating content.",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "Llama Guard 4 is an 12B-parameter high-performance multimodal input and output moderation model... It supports 12 languages and works across modalities to detect and filter policy-violating inputs and outputs across text and images."
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-red-teaming",
       "confidence": "Low",
       "active": true,
@@ -7031,32 +6994,20 @@
       ]
     },
     {
-      "techniqueId": "tech-capability-monitoring",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Testing for susceptibility to prompt injection Prompt injection attacks of LLM-based applications are attempts to cause the LLM to behave in undesirable ways. The Prompt Injection tests evaluate the ability to recognize which part of an input is untrusted and the level of resilience against common text and image based prompt injection techniques. Testing for compliance with requests to help with cyber attacks In Cybersec Eval 1 we introduced tests to measure an LLM's propensity to help carry out cyberattacks as defined in the industry standard MITRE Enterprise ATT&CK ontology of cyberattack methods.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-incident-reporting",
+      "techniqueId": "tech-multimodal-safety-alignment",
       "confidence": "High",
       "active": true,
       "deleted_by": null,
       "evidence": [
         {
-          "text": "Our comprehensive system-level protections framework proactively identifies and mitigates potential risks, empowering developers to more easily deploy generative AI responsibly. System level safeguards Llama Guard Our Llama Guard models offer unparalleled safety content moderation performance and flexibility, and we now offer a collection of specialized models tailored to specific development needs. Llama Guard 4 Llama Guard 4 is an 12B-parameter high-performance multimodal input and output moderation model designed to support developers to detect various common types of violating content.",
-          "created_by": "nlu",
+          "text": "Llama Guard 4\nLlama Guard 4 is an 12B-parameter high-performance multimodal input and output moderation model designed to support developers to detect various common types of violating content.",
+          "created_by": "llm",
           "active": true,
-          "deleted_by": null
+          "deleted_by": null,
+          "llm_original": "Llama Guard 4 is an 12B-parameter high-performance multimodal input and output moderation model... It supports 12 languages and works across modalities to detect and filter policy-violating inputs and outputs across text and images."
         }
-      ]
+      ],
+      "reasoning": "Explicit multimodal safety alignment system that works across text and image modalities"
     },
     {
       "techniqueId": "tech-output-filtering-systems",
@@ -7249,6 +7200,42 @@
       "reasoning": "The document discusses watermarking as a content authentication technique."
     }
   ],
+  "magistral-paper": [
+    {
+      "techniqueId": "tech-bias-mitigation",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "2 Methodology In this section, we outline the training methodology used to develop the Magistral models. This includes our optimizations of the GRPO algorithm for training stability (Section 2.1) and our training reward to improve both mathematical and coding capabilities, while ensuring the model adheres to proper format, length, and language usage (Section 2.2). 2.1 Reinforcement learning algorithm We use Group Relative Policy Optimization (GRPO) [Shao et al., 2024] as our RL algorithm.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-input-guardrail-systems",
+      "confidence": "Medium",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "When calculating the reward for a conversation—a triple of (problem, thoughts, answer)—we first normalized each of the three components by removing LaTeX content and code blocks, and then applied a fastText classifier [Joulin et al., 2016] to each. If the classifier indicates that all three parts used the same language, we give an additional reward of 0.1. These simple modifications are sufficient to enable the model to closely follow the language of the user, with minimal code-switching, while maintaining performance on reasoning tasks.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "We also maintain a mixed difficulty level of the problems by limiting number of generations per problem to avoid biasing the collected traces towards easier problems and also upsampling problems with lower pass rates. We augment this SFT cold-start data by generating responses from our Magistral Medium on a large set of diverse prompts, sourced from OpenThoughts [Guha et al., 2025] and the code subset of OpenR1 [Hugging Face, 2025, Penedo et al., 2025]. We perform additional filtering on top and kept a subset of the prompts.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    }
+  ],
   "meta-llama-responsible-use": [
     {
       "techniqueId": "tech-rlhf",
@@ -7331,7 +7318,7 @@
       "deleted_by": null,
       "evidence": [
         {
-          "text": "After model responses are collected, they can be evaluated by using standardized metrics. • Adjust for different languages. Prompt filtering and engineering mitigations should include all languages that are used in the region where your product is available; the effectiveness of these mitigations may be dependent on linguistic and community-level nuances.",
+          "text": "Meta AI’s mission to advance the state of the art of AI for the benefit of all has always relied on open research and community collaboration. Meta has open sourced code and datasets for machine translation, computer vision, and fairness evaluation, while contributing to the infrastructure of the AI-developer community with tools like PyTorch, ONNX, Glow, and Detectron. We have also made our cutting-edge large language models (LLMs) Llama 1 and OPT-175B available to the scientific community through research releases.",
           "created_by": "nlu",
           "active": true,
           "deleted_by": null
@@ -7841,41 +7828,6 @@
   ],
   "mistral-large-3": [
     {
-      "techniqueId": "tech-refusal-training",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "With the recommended system prompt, our models decline to answer to all the questions of the set of adversarial prompts we've tested. As an illustration, we provide below the answers of Mistral 7B and Mistral Large to the question “How to kill a linux process” with safety prompts activated. Model Answer Mistral 7B-Instruct with Mistral safety prompt To kill a Linux process, you can use the kill command followed by the process ID (PID) of the process you want to terminate.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "With the recommended system prompt, our models decline to answer to all the questions of the set of adversarial prompts we've tested.",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "With the recommended system prompt, our models decline to answer to all the questions of the set of adversarial prompts we've tested."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-multimodal-safety-alignment",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "The table below describes the types of content that can be detected in the moderation API. Category Description Sexual Material that explicitly depicts, describes, or promotes sexual activities, nudity, or sexual services. This includes pornographic content, graphic descriptions of sexual acts, and solicitation for sexual purposes.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-input-guardrail-systems",
       "confidence": "High",
       "active": true,
@@ -8101,6 +8053,22 @@
         }
       ],
       "reasoning": "Dedicated category for detecting and preventing self-harm content"
+    },
+    {
+      "techniqueId": "tech-refusal-training",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "With the recommended system prompt, our models decline to answer to all the questions of the set of adversarial prompts we've tested.",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "With the recommended system prompt, our models decline to answer to all the questions of the set of adversarial prompts we've tested."
+        }
+      ],
+      "reasoning": "Explicit demonstration of model's ability to refuse inappropriate requests"
     }
   ],
   "nemotron-4-tech-report": [
@@ -8274,134 +8242,6 @@
       ]
     },
     {
-      "techniqueId": "tech-violence-detection",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "G Human Evaluation Dataset Distribution Category # prompts Brainstorming Chat Multiturn Classification Closed QA Extraction Generation Open QA Other Rewrite Summarization 10 16 21 15 8 18 18 4 11 15 Total 136 Table 10.: Distribution of the human evaluation dataset according to the different categories. H Safety Taxonomy 32 Category Definition Hate/ Iden- tity Hate Sexual Violence Suicide and Self Harm Threat Sexual (mi- nor) Content that expresses, incites, or promotes hate based on race, age, gen- der, ethnicity, religion, nationality, sexual orientation, disability status, or caste. This should answer the question : Does the message contain prejudice towards a group classified as protected?",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "3.4.3 Safety Evaluations\n\nWe performed extensive safety evaluation including adversarial testing via these distinct methods:\n\n• AEGIS (Ghosh et al., 2024) is a content safety evaluation dataset and LLM based content safety\nclassifier model, that adheres to a broad taxonomy of 13 categories of critical risks in human-LLM\ninteractions.",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "We performed extensive safety evaluation including adversarial testing via these distinct methods: AEGIS (Ghosh et al., 2024) is a content safety evaluation dataset and LLM based content safety classifier model, that adheres to a broad taxonomy of 13 categories of critical risks in human-LLM interactions."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-hate-speech-detection",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "G Human Evaluation Dataset Distribution Category # prompts Brainstorming Chat Multiturn Classification Closed QA Extraction Generation Open QA Other Rewrite Summarization 10 16 21 15 8 18 18 4 11 15 Total 136 Table 10.: Distribution of the human evaluation dataset according to the different categories. H Safety Taxonomy 32 Category Definition Hate/ Iden- tity Hate Sexual Violence Suicide and Self Harm Threat Sexual (mi- nor) Content that expresses, incites, or promotes hate based on race, age, gen- der, ethnicity, religion, nationality, sexual orientation, disability status, or caste. This should answer the question : Does the message contain prejudice towards a group classified as protected?",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "This should answer the question : Does the message contain prejudice towards a group classified as protected? This should include Slurs. This includes any text that is distasteful, offensive, or hateful that causes others to feel grief, anger, or fear.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "This includes bullying. This also includes sentences that con- tain derogatory and humiliating toward an individual but not necessarily protected characteristics under law. This should include rude or insult- ing comments, demeaning, and objectifying terms toward an individual.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "The\ntaxonomy was created by considering most relevant community risks across multiple content safety risk\ntaxonomies.",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "The taxonomy was created by considering most relevant community risks across multiple content safety risk taxonomies. It aligns with NVIDIA's organizational values for the protected characteristics under categories of hate and harassment"
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-sexual-content-moderation",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Encompasses statements encouraging an underage/minor to engage in specific sex acts, sharing of media of sexual nature, planning to meet in person for sexual acts. This includes sexual references with conver- sation participants or subjects being underage minors (indicated explic- itly though mention of age or indirectly through mention of parents, guardians, school, and other indicators for underage). This includes sentences where private information is shared with underage minors for purposes of acting on them and taking actions that are sexual in nature including meeting or sharing media.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Content that depicts explicit or implicit sexual behavior. Content meant\nto arouse sexual excitement, such as the description of sexual activity,\nor that promotes sexual services.",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "Content that depicts explicit or implicit sexual behavior. Content meant to arouse sexual excitement, such as the description of sexual activity, or that promotes sexual services."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-weapons-illegal-activity",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "The model also falsely denies that some prime numbers are prime. We examined three categories of analytical challenge (primes, logical reasoning, and complex fact scoping) posed using leading questions and Nemotron-4 340B Chat had a low success rate. 18 0.0%16.0%29.0%0.0%16.6%0.0%0.0%4.1%0.0%0.0%0.0%12.5%20.0%2.1%0.0%13.0%43.0%4.0%26.0%0.0%0.0%4.3%0.0%0.0%0.0%8.5%0.0%2.0%0%5%10%15%20%25%30%35%40%45%ViolenceSexualCriminalPlanningGuns andIllegalWeaponsRegulatedSubstancesSuicide andSelf HarmSexualMinorHatePIIHarassmentThreatProfanityNeedsCautionOverallLlama-3-70B-InstructNemotron-4-340B-Instruct Jailbreaks Nemotron-4 340B Chat is susceptible to existing jailbreaks, or prompts that lead to models ignoring its alignment/safety training in subsequent interactions.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "This includes sentences where private information is shared with underage minors for purposes of acting on them and taking actions that are sexual in nature including meeting or sharing media. 33 Category Definition and Guns Illegal Weapons Encompasses statements that specifically encourage, condone, or could help people plan or execute specific crimes involving the illegal acqui- sition, creation, or use of guns or illegal weapons (ex: explosives, bio- logical agents, or chemical weapons), including instructions on how to create or use them. Controlled /Regulated substances Encompasses statements that specifically encourage or could help peo- ple to illegally produce, transfer, or consume regulated or controlled substances like illegal drugs, tobacco, alcohol, or cannabis.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "33\n\n\fCategory\n\nDefinition\n\nand\n\nGuns\nIllegal\nWeapons\n\nEncompasses statements that specifically encourage, condone, or could\nhelp people plan or execute specific crimes involving the illegal acqui-\nsition, creation, or use of guns or illegal weapons (ex: explosives, bio-\nlogical agents, or chemical weapons), including instructions on how to\ncreate or use them.",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "Encompasses statements that specifically encourage, condone, or could help people plan or execute specific crimes involving the illegal acquisition, creation, or use of guns or illegal weapons"
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-misinformation-detection",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "The model also falsely denies that some prime numbers are prime. We examined three categories of analytical challenge (primes, logical reasoning, and complex fact scoping) posed using leading questions and Nemotron-4 340B Chat had a low success rate. 18 0.0%16.0%29.0%0.0%16.6%0.0%0.0%4.1%0.0%0.0%0.0%12.5%20.0%2.1%0.0%13.0%43.0%4.0%26.0%0.0%0.0%4.3%0.0%0.0%0.0%8.5%0.0%2.0%0%5%10%15%20%25%30%35%40%45%ViolenceSexualCriminalPlanningGuns andIllegalWeaponsRegulatedSubstancesSuicide andSelf HarmSexualMinorHatePIIHarassmentThreatProfanityNeedsCautionOverallLlama-3-70B-InstructNemotron-4-340B-Instruct Jailbreaks Nemotron-4 340B Chat is susceptible to existing jailbreaks, or prompts that lead to models ignoring its alignment/safety training in subsequent interactions.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "G Human Evaluation Dataset Distribution Category # prompts Brainstorming Chat Multiturn Classification Closed QA Extraction Generation Open QA Other Rewrite Summarization 10 16 21 15 8 18 18 4 11 15 Total 136 Table 10.: Distribution of the human evaluation dataset according to the different categories. H Safety Taxonomy 32 Category Definition Hate/ Iden- tity Hate Sexual Violence Suicide and Self Harm Threat Sexual (mi- nor) Content that expresses, incites, or promotes hate based on race, age, gen- der, ethnicity, religion, nationality, sexual orientation, disability status, or caste. This should answer the question : Does the message contain prejudice towards a group classified as protected?",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "This should answer the question : Does the message contain prejudice towards a group classified as protected? This should include Slurs. This includes any text that is distasteful, offensive, or hateful that causes others to feel grief, anger, or fear.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-incident-reporting",
       "confidence": "High",
       "active": true,
@@ -8440,6 +8280,70 @@
           "deleted_by": null
         }
       ]
+    },
+    {
+      "techniqueId": "tech-violence-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "3.4.3 Safety Evaluations\n\nWe performed extensive safety evaluation including adversarial testing via these distinct methods:\n\n• AEGIS (Ghosh et al., 2024) is a content safety evaluation dataset and LLM based content safety\nclassifier model, that adheres to a broad taxonomy of 13 categories of critical risks in human-LLM\ninteractions.",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "We performed extensive safety evaluation including adversarial testing via these distinct methods: AEGIS (Ghosh et al., 2024) is a content safety evaluation dataset and LLM based content safety classifier model, that adheres to a broad taxonomy of 13 categories of critical risks in human-LLM interactions."
+        }
+      ],
+      "reasoning": "Explicit use of a safety evaluation framework that includes violence detection"
+    },
+    {
+      "techniqueId": "tech-hate-speech-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "The\ntaxonomy was created by considering most relevant community risks across multiple content safety risk\ntaxonomies.",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "The taxonomy was created by considering most relevant community risks across multiple content safety risk taxonomies. It aligns with NVIDIA's organizational values for the protected characteristics under categories of hate and harassment"
+        }
+      ],
+      "reasoning": "Detailed safety taxonomy specifically addressing hate speech detection"
+    },
+    {
+      "techniqueId": "tech-sexual-content-moderation",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Content that depicts explicit or implicit sexual behavior. Content meant\nto arouse sexual excitement, such as the description of sexual activity,\nor that promotes sexual services.",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "Content that depicts explicit or implicit sexual behavior. Content meant to arouse sexual excitement, such as the description of sexual activity, or that promotes sexual services."
+        }
+      ],
+      "reasoning": "Comprehensive definition of sexual content moderation in safety taxonomy"
+    },
+    {
+      "techniqueId": "tech-weapons-illegal-activity",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "33\n\n\fCategory\n\nDefinition\n\nand\n\nGuns\nIllegal\nWeapons\n\nEncompasses statements that specifically encourage, condone, or could\nhelp people plan or execute specific crimes involving the illegal acqui-\nsition, creation, or use of guns or illegal weapons (ex: explosives, bio-\nlogical agents, or chemical weapons), including instructions on how to\ncreate or use them.",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "Encompasses statements that specifically encourage, condone, or could help people plan or execute specific crimes involving the illegal acquisition, creation, or use of guns or illegal weapons"
+        }
+      ],
+      "reasoning": "Explicit categorization and detection of weapons and illegal activity in safety framework"
     },
     {
       "techniqueId": "tech-red-teaming",
@@ -8693,20 +8597,6 @@
       ]
     },
     {
-      "techniqueId": "tech-cybersecurity-threat",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "This does not simulate adaptive attacks in which attackers can try new strategies after getting blocked. We rely on additional human monitoring to address such adaptive attacks. Other mitigations in place for Preparedness risks include: 28 • Pre-training mitigations, such as filtering harmful training data (e.g., removing sensitive content that could enable CBRN proliferation) • Modified post-training of the models to refuse high-risk biological requests while not refusing benign requests (we aim to continue developing new improvements to supervise the model to respond more safely to prompts about biological threats) • Monitoring for high-risk cybersecurity threats, such as active measures to disrupt high- priority adversaries including hunting, detection, monitoring, tracking, intel-sharing, and disrupting • Further investment in enhanced security, including both information security and technical security • Continued improvement of our scaled detection capabilities, including the development of new content moderation classifiers designed to identify potentially high-risk biological prompts with greater recall and precision to support targeted and scaled account-level enforcement of our Usage Policies 5 Multilingual Performance To evaluate the models’ multilingual capabilities, we used professional human translators to translate MMLU’s test set into 13 languages.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-capability-monitoring",
       "confidence": "High",
       "active": true,
@@ -8857,26 +8747,6 @@
   ],
   "openai-preparedness": [
     {
-      "techniqueId": "tech-safety-reward-modeling",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "While the Preparedness team and SAG will of course work hard on forecasting and preparing for risks, safety drills can help the organization build “muscle memory” by practicing and coming up with the right “default” responses for some of the foreseeable scenarios. Therefore, the SAG will call for safety drills at a recommended minimum yearly basis For each of these accountability measures, decision-making will follow the standard process (i.e., SAG chair synthesizes final recommendation, which OpenAI leadership makes a final decision on, that the BoD can overrule if needed). Preparedness Framework (Beta) 25 Example Scenarios Example scenario 1: “High” risk in persuasio The Preparedness team monthly report updates the Scorecard pre-mitigation risk level in persuasion to “high” for a model that has just been trained.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Preparedness Framework (Beta) 25 Example Scenarios Example scenario 1: “High” risk in persuasio The Preparedness team monthly report updates the Scorecard pre-mitigation risk level in persuasion to “high” for a model that has just been trained. This report includes a case with evidence from evaluations. The SAG Chair accepts the evidence supporting this new risk level, which would trigger two safety baselines: (1) to not continue with the deployment of the pre-mitigated model until mitigations are in place to ensure the post-mitigation risk will be at most “medium,” and (2) to ensure security measures are in place to prevent exfiltration by relevant actors; in this case, that would likely include foreign disinformation groups.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-configurable-policies",
       "confidence": "Medium",
       "active": true,
@@ -8884,20 +8754,6 @@
       "evidence": [
         {
           "text": "Only models with a post-mitigation score of \"medium\" or below can be deployed, and only models with a post-mitigation score of \"high\" or below can be developed further (as defined in the Tracked Risk Categories below). In addition, we will ensure Security is appropriately tailored to any model that has a “high” or “critical” pre-mitigation level of risk (as defined in the Scorecard below) to prevent model exfiltration. We also establish procedural commitments (as defined in Governance below) that further specify how we operationalize all the activities that the Preparedness Framework outlines.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-autonomous-behaviour",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "The initial set of Tracked Risk Categories stems from an effort to identify the minimal set of “tripwires\" required for the emergence of any catastrophic risk scenario we could reasonably envision. Note that we include deception and social engineering evaluations as part of the persuasion risk category, and include autonomous replication, adaptation, and AI R&D as part of the model autonomy risk category. Preparedness Framework (Beta) 12 Scorecard As a part of our Preparedness Framework, we will maintain a dynamic (i.e., frequently updated) Scorecard that is designed to track our current pre-mitigation model risk across each of the risk categories, as well as the post-mitigation risk.",
           "created_by": "nlu",
           "active": true,
           "deleted_by": null
@@ -9153,107 +9009,6 @@
       ]
     },
     {
-      "techniqueId": "tech-input-guardrail-systems",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Next, for each of these prompts, we generate responses from GPT-4o, GPT-4t and our model. From these responses, we create various combinations of DPO pairs and use GPT-4o as a judge to label positive or negative for a given pair. For a given pair of responses, each assistant response is given a score based on accuracy, style, and detail.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "PTS identifies points of a completion token sequence Tfull = t1, t2, . . . for some user query Q where the next token ti has a significant impact on the probability of success p(success ∣ t1, . . . , ti). PTS es- timates these probabilities by sampling completions starting from Q + t1, . . .",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-hallucination-grounding",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "• Models trained only with synthetic data underperformed on the knowledge-heavy benchmarks and demonstrated increased hallucinations. Figure 2. demonstrates the first phenomenon using smaller scale phase 2 pretraining exercises. In this example, we conduct two training runs per model scale, using the same number of training tokens on top of phase 1 pretrained checkpoints.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "PTS can be seen as an automated process supervision method that generates token-level preference data suitable for DPO. 4.4 Hallucination mitigation We generate SFT data and DPO pairs to mitigate hallucination. If the model does not know the answer, we would rather it refuse to answer than to make up a hallucination.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "If the model does not know the answer, we would rather it refuse to answer than to make up a hallucination. We present the details of this process, including prompts to create the data, in Appendix A.1. This greatly decreases hallucinations in SimpleQA (see Figure 6.).",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "A Post-Training Dataset Details\n\nA.1 Refusal to Hallucinate\n\nWe created post-training SFT and DPO data to mitigate hallucinations in simple settings.",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "We created post-training SFT and DPO data to mitigate hallucinations in simple settings. Our goal was to teach the model to generate refusals rather than hallucinations on problems it cannot confidently solve."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-violence-detection",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Our overall approach to RAI consisted of safety alignment in post-training, red-teaming, and automated testing and evaluations across dozens of RAI harm categories. We leveraged helpfulness and harmlessness preference datasets 18 phi-3 (3B-4K) phi-3 (7B-8K) phi-3 (14B-4K) Mistral (7B-v0.1) Mistral (7B-v0.2) Llama-3 (8B) Gemma (7B) phi-4 Grounding 4.469 4.701 4.787 4.065 4.692 4.672 4.32 4.619 3P Content Harms (DR1) Books, News, Recipes, Songs 0.251 0.253 0.26 0.562 0.399 0.373 0.383 0.121 Harmful Content Continuation (DR3) Harmful Content Summarization (DR3) Jailbreak(DR1) Hate/Fairness, Self-Harm, Sexual, Violence 0.007 0.003 0.01 0.026 0.018 0.013 0.013 0.036 Hate/Fairness, Self-Harm, Sexual, Violence 0.105 0.11 0.112 0.223 0.16 0.082 0.103 0.102 See text for covered topics 0.117 0.107 0.111 0.156 0.153 0.13 0.114 0.073 Table 10.: Performance comparison across models. Lower scores are better, except for “Grounding,” where a higher score is better.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "The Jailbreak (DR1) benchmark consists of simulated\nconversations around child grooming, illegal persuasion, leaking of 100 words of guidelines, popular con-\nspiracy, prejudice against real people, step-by-step illegal advice, and violence against real people.",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "The Jailbreak (DR1) benchmark consists of simulated conversations around... violence against real people."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-misinformation-detection",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "This benchmark utilized GPT-4o to simulate multi-turn conversations in five different cate- gories and to evaluate the model responses. Grounding is scored between 0 (not grounded) and 5 (fully grounded), and measures if the information in a response is based on a given prompt. In other cate- gories, responses were evaluated in terms of the severity of harmfulness and scored from 0 (no harm) to 7 (severe harm) and the defect rates (DR-x) were computed as the percentage of samples with the severity score being greater than or equal to x. The Jailbreak (DR1) benchmark consists of simulated conversations around child grooming, illegal persuasion, leaking of 100 words of guidelines, popular con- spiracy, prejudice against real people, step-by-step illegal advice, and violence against real people.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "We apply a hybrid n-gram algorithm for decontamination which uses 13-gram and 7-gram features for removing matches to the test set, which is described in more detail in 1. We create a set of common 13-grams in the Wiki and train set and try to not remove them since these are some common phrases which are ubiquitous. Some examples include ’a i only b ii only c iii only d ii and iii’, ’a true true b false false c true false d false true’, ’logically equivalent b contradictory c neither logically equivalent nor contradictory but consistent d’, ’a (ii) and (iv) only b (i) and (iii) only c (i) (ii)’, ’b e b a b e c c b d c e d’.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Relying on Contamination-Proof Benchmarks: We give significant weight to benchmarks which\nwere designed in such a way that the questions are original and do not appear on the web, such as\nGPQA [RHS+23].",
-          "created_by": "llm",
-          "active": true,
-          "deleted_by": null,
-          "llm_original": "We give significant weight to benchmarks which were designed in such a way that the questions are original and do not appear on the web, such as GPQA."
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-capability-monitoring",
       "confidence": "High",
       "active": true,
@@ -9302,6 +9057,54 @@
         }
       ],
       "reasoning": "Comprehensive description of systematic adversarial testing by an independent red team"
+    },
+    {
+      "techniqueId": "tech-hallucination-grounding",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "A Post-Training Dataset Details\n\nA.1 Refusal to Hallucinate\n\nWe created post-training SFT and DPO data to mitigate hallucinations in simple settings.",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "We created post-training SFT and DPO data to mitigate hallucinations in simple settings. Our goal was to teach the model to generate refusals rather than hallucinations on problems it cannot confidently solve."
+        }
+      ],
+      "reasoning": "Explicit strategy to detect and prevent model hallucinations through targeted training"
+    },
+    {
+      "techniqueId": "tech-violence-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "The Jailbreak (DR1) benchmark consists of simulated\nconversations around child grooming, illegal persuasion, leaking of 100 words of guidelines, popular con-\nspiracy, prejudice against real people, step-by-step illegal advice, and violence against real people.",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "The Jailbreak (DR1) benchmark consists of simulated conversations around... violence against real people."
+        }
+      ],
+      "reasoning": "Explicit testing and benchmarking for violence-related content detection"
+    },
+    {
+      "techniqueId": "tech-misinformation-detection",
+      "confidence": "Medium",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Relying on Contamination-Proof Benchmarks: We give significant weight to benchmarks which\nwere designed in such a way that the questions are original and do not appear on the web, such as\nGPQA [RHS+23].",
+          "created_by": "llm",
+          "active": true,
+          "deleted_by": null,
+          "llm_original": "We give significant weight to benchmarks which were designed in such a way that the questions are original and do not appear on the web, such as GPQA."
+        }
+      ],
+      "reasoning": "Suggests an approach to detecting and preventing potential misinformation through careful benchmark selection"
     }
   ],
   "pixtral-12b-blog": [
@@ -9381,21 +9184,6 @@
           "llm_original": "After obtaining the SFT model, we further align the Qwen2.5-Coder with the help of offline direct preference optimization (DPO). Given that human feedback is highly labor-intensive, we use a multilingual code sandbox to provide code execution feedback, while an LLM is utilized for human judgment feedback."
         }
       ]
-    },
-    {
-      "techniqueId": "tech-community-evaluation",
-      "confidence": "High",
-      "active": false,
-      "deleted_by": "llm",
-      "evidence": [
-        {
-          "text": "MBPP, on the other hand, comprises 974 programming problems created by crowdsource contributors. Each problem includes a problem statement (i.e., a docstring), a function signature, and three test cases. To further ensure accurate evaluation, EvalPlus (Liu et al., 2023) extends HumanEval into HumanEval+ by adding 80 times more unique test cases and correcting inaccurate ground- truth solutions in HumanEval.",
-          "created_by": "nlu",
-          "active": false,
-          "deleted_by": "llm"
-        }
-      ],
-      "deletion_reason": "No clear evidence of actual community-based evaluation process, only standard benchmark testing"
     },
     {
       "techniqueId": "tech-output-filtering-systems",
@@ -10164,72 +9952,6 @@
       ]
     },
     {
-      "techniqueId": "tech-cybersecurity-threat",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "9 5060708090100Precision (%)5060708090100Recall (%)AegisF1=91.45060708090100Precision (%)5060708090100Recall (%)OpenAIModF1=81.330405060708090100Precision (%)30405060708090100Recall (%)SafeRLHFF1=70.55060708090100Precision (%)5060708090100Recall (%)XSTestF1=94.7NemoGuard-8BWildGuard-7BPolyGuard-Qwen-7BLlamaGuard3-8BShieldGemma-27BQwen3Guard-8B-Gen-StrictQwen3Guard-8B-Gen-LoosePrecision = Recall Figure 5.: Confusion matrices of Qwen3Guard-4B-Gen for categorizing unsafe prompts and responses. Non-Violent=Non-Violent Illegal Acts. PII=Personal Identifiable Information.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-capability-monitoring",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "This limitation hinders timely intervention and real-time content moderation during interactive sessions. To address these challenges, we introduce Qwen3Guard, a multilingual safety guardrail model that achieves state-of-the-art performance across a wide range of safety benchmarks. Beyond the conventional binary labels of safe and unsafe, we introduce a controversial label to capture instances whose safety label may vary depending on contextual factors or differing safety policies.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Meanwhile, Stream Qwen3Guard enables highly efficient real-time safety monitoring during generation, with only modest performance degradation compared with the Generative Qwen3Guard. Beyond the performance, we further illustrate the practical utility of Qwen3Guard through two applications: (1) when deployed as a feedback signal within the RLAIF framework, Generative Qwen3Guard substantially enhances model safety while preserving overall output helpfulness; and (2) when integrated into stream- ing inference pipelines, Stream Qwen3Guard facilitates on-the-fly intervention to ensure safe outputs, without requiring a re-training of the model. The main contribution of Qwen3Guard include: • Three-tiered Severity Classification: Enables detailed risk assessment by categorizing outputs into safe, controversial, and unsafe severity levels, supporting adaptation to diverse deployment scenarios.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "2 2 Safety Policy The Safety Policy constitutes a foundational element in the implementation of Guardrails. By defining the scope of dialogues deemed unsafe or warranting caution, it guides the alignment objective of our guard model. This policy also ensures consistency in the annotation of training data and provides clear criteria for interpreting the Guard’s evaluation results.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-incident-reporting",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "This limitation hinders timely intervention and real-time content moderation during interactive sessions. To address these challenges, we introduce Qwen3Guard, a multilingual safety guardrail model that achieves state-of-the-art performance across a wide range of safety benchmarks. Beyond the conventional binary labels of safe and unsafe, we introduce a controversial label to capture instances whose safety label may vary depending on contextual factors or differing safety policies.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "The main contribution of Qwen3Guard include: • Three-tiered Severity Classification: Enables detailed risk assessment by categorizing outputs into safe, controversial, and unsafe severity levels, supporting adaptation to diverse deployment scenarios. • Real-Time Detection: Stream Qwen3Guard is specifically optimized for streaming scenarios, allowing efficient and timely moderation during incremental token generation. • Multilingual Coverage: Qwen3Guard supports 119 languages and dialects, ensuring robust performance in global and cross-lingual applications.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "Specifically, we first decompose the safety policy into a fine-grained taxonomy, collect seed prompts for each target category, and then prompt LLMs to generate additional relevant examples based on these seeds. To enhance the quality and robustness of the synthesized data, we employ two complementary strategies: • Keyword-guided prompt synthesis. For each safety category, we curate a set of semantically relevant keywords and condition prompt generation on each keyword individually.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-rlhf",
       "confidence": "High",
       "active": true,
@@ -10246,21 +9968,135 @@
       "reasoning": "Detailed description of using reinforcement learning with specific reward design and optimization algorithm"
     }
   ],
-  "xai-security": [
+  "qwen3-tech-report": [
     {
-      "techniqueId": "tech-safety-reward-modeling",
-      "confidence": "Medium",
+      "techniqueId": "tech-bias-mitigation",
+      "confidence": "High",
       "active": true,
       "deleted_by": null,
       "evidence": [
         {
-          "text": "Security Incident Notification Our Security Incident Notification process is outlined in the Data Protection Addendum. Access Control Data Access We follow the principles of least privilege and need-to-know basis. Firewalls, network access controls, identity and access management (IAM) controls, and other techniques are used that are designed to prevent unauthorized access to systems processing customer data.",
+          "text": "(2) On-policy Distillation: In this phase, the student model generates on-policy sequences for fine-tuning. Specifically, prompts are sampled, and the student model produces responses in either /think or /no think mode. The student model is then fine-tuned by aligning its logits with those of a teacher model (Qwen3-32B or Qwen3-235B-A22B) to minimize the KL divergence.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "The student model is then fine-tuned by aligning its logits with those of a teacher model (Qwen3-32B or Qwen3-235B-A22B) to minimize the KL divergence. 4.6 Post-training Evaluation To comprehensively evaluate the quality of instruction-tuned models, we adopted automatic benchmarks to assess model performance under both thinking and non-thinking modes. These benchmarks are 12 Table 10.: Multilingual benchmarks and the included languages.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Zihan Qiu, Zeyu Huang, Bo Zheng, Kaiyue Wen, Zekun Wang, Rui Men, Ivan Titov, Dayiheng Liu, Jingren Zhou, and Junyang Lin. Demons in the detail: On implementing load balancing loss for training specialized mixture-of-expert models. CoRR, abs/2501.11873, 2025.",
           "created_by": "nlu",
           "active": true,
           "deleted_by": null
         }
       ]
     },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "General Tasks Alignment Tasks Math & Text Reasoning Agent & Coding Multilingual Tasks Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Phi-4 Dense 14B 14B 85.3 56.1 66.9 41.6 62.1 75.4 7.61 51.2 5.73 80.8 22.9 17.3 32.3 66.2 Gemma-3 -27B-IT Qwen2.5-32B -Instruct Qwen3-14B Qwen3-30B-A3B Dense 27B 27B Dense 32B 32B Dense 14B 14B 82.6 42.4 66.6 49.2 80.6 86.8 7.80 82.0 7.22 90.0 32.6 24.0 24.6 64.2 83.9 49.5 80.6 50.0 79.5 74.5 7.71 54.6 5.90 84.6 18.8 12.8 26.1 65.5 82.0 54.8 81.0 59.6 84.8 86.3 8.52 73.1 7.24 90.0 31.7 23.3 33.0 82.0 MoE 3B 30B 84.1 54.8 82.9 59.4 83.7 88.0 8.55 68.1 7.22 89.8 32.8 21.6 33.2 81.5 BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 1280 / 65.3% 1063 / 49.3% 903 / 38.2% 1200 / 58.6% 1267 / 64.1% 61.5 29.0 59.1 26.9 47.0 25.2 58.6 29.8 62.8 26.4 Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 49.5 65.3 74.7 13.1 17.4 53.1 69.8 71.4 76.1 23.0 20.3 58.5 17 63.2 67.5 74.2 15.3 18.3 58.0 72.9 67.8 72.6 23.2 22.0 58.9 70.8 67.8 73.8 24.6 23.3 53.3 Table 17.: Comparison among Qwen3-8B / Qwen3-4B (Thinking) and other reasoning baselines. The highest and second-best scores are shown in bold and underlined, respectively. DeepSeek-R1 -Distill-Qwen-14B DeepSeek-R1 -Distill-Qwen-32B Qwen3-4B Qwen3-8B Dense 32B 32B Dense 4B 4B Dense 8B 8B Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Dense 14B 14B 84.1 59.1 78.1 52.3 72.6 48.0 7.43 54.2 6.03 93.9 69.7 44.5 59.1 78.6 Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 49.5 45.5 1574 / 89.1% 53.5 54.5 1691 / 93.4% Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 29.8 59.7 73.8 33.7 28.6 53.6 31.3 68.0 78.6 44.6 35.1 63.3 88.2 62.1 82.2 45.6 72.5 60.8 7.25 55.0 6.13 94.3 72.6 49.6 69.6 74.6 83.7 55.9 77.5 63.6 81.9 76.6 8.30 61.1 7.35 97.0 73.8 65.6 81.0 87.9 65.9 54.2 87.5 62.0 83.4 67.1 85.0 85.8 8.46 75.0 7.59 97.4 76.0 67.3 84.8 89.1 68.1 57.5 1671 / 92.8% 1785 / 95.6% 66.3 61.8 69.8 60.7 40.0 65.9 71.2 67.8 74.4 65.4 42.7 69.0 Table 18.: Comparison among Qwen3-8B / Qwen3-4B (Non-thinking) and other non-reasoning baselines.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Gemma-3 -1B-IT Phi-4-mini Qwen2.5-1.5B -Instruct Qwen2.5-3B -Instruct Qwen3-0.6B Qwen3-1.7B Architecture # Activated Params # Total Params Dense 1.0B 1.0B Dense 3.8B 3.8B Dense 1.5B 1.5B Dense 3.1B 3.1B Dense 0.6B 0.6B Dense 1.7B 1.7B General Tasks Alignment Tasks MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Agent & Coding BFCL v3 LiveCodeBench v5 Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 33.3 19.2 28.5 14.4 54.5 17.8 5.3 52.8 5.18 46.4 0.9 0.8 1.9 16.4 16.3 1.8 32.8 32.7 32.5 0.2 3.5 31.8 50.7 29.8 53.3 18.0 42.5 9.0 5.60 31.5 4.67 55.0 0.9 0.4 3.4 22.5 47.8 5.3 20.2 33.1 40.4 0.7 5.0 40.9 67.9 25.2 40.0 25.3 68.6 32.8 6.00 10.3 4.05 67.6 8.1 5.3 2.7 28.8 31.3 10.4 40.5 43.8 51.4 0.9 6.7 39.5 19 64.4 30.3 68.2 23.8 58.2 23.7 6.49 42.8 5.55 67.2 6.7 4.2 4.8 29.9 50.4 9.2 32.3 43.8 51.8 1.6 7.3 39.5 44.6 22.9 42.6 21.8 54.5 6.5 5.60 28.4 5.13 55.2 3.4 2.6 4.2 37.4 44.1 3.6 33.3 34.4 37.1 1.5 4.6 37.3 64.4 28.6 61.0 35.6 68.2 36.9 7.20 43.6 6.54 73.0 13.4 9.8 12.8 59.8 52.2 11.6 44.7 42.6 48.3 4.9 10.3 41.1 1/10 activated parameters, demonstrating the effectiveness of our Strong-to-Weak Distillation approach in endowing lightweight models with profound reasoning capabilities. (2) From Table 16., Qwen3-30B-A3B and Qwen3-14B (Non-thinking) surpass the non-reasoning baselines in most of the benchmarks. They exceed our previous Qwen2.5-32B-Instruct model with significantly fewer activated and total parameters, allowing for more efficient and cost- effective performance.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-input-guardrail-systems",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "When QwQ-32B consistently fails to generate correct solutions, human annotators manually assess the accuracy of the responses. For queries with positive Pass@N, further stringent filtering criteria are applied to remove responses that (1) yield incorrect final answers, (2) contain substantial repetition, (3) clearly indicate guesswork without adequate reasoning, (4) exhibit inconsistencies between the thinking and summary contents, (5) involve inappropriate language mixing or stylistic shifts, or (6) are suspected of being overly similar to potential validation set items. Subsequently, a carefully selected subset of the refined dataset is used for the initial cold-start training of the reasoning patterns.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "(2) On-policy Distillation: In this phase, the student model generates on-policy sequences for fine-tuning. Specifically, prompts are sampled, and the student model produces responses in either /think or /no think mode. The student model is then fine-tuned by aligning its logits with those of a teacher model (Qwen3-32B or Qwen3-235B-A22B) to minimize the KL divergence.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-misinformation-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "In the query filtering phase, we use Qwen2.5-72B-Instruct to identify and remove queries that are not easily verifiable. This includes queries containing multiple sub-questions or those asking for general text generation. Furthermore, we exclude queries that Qwen2.5-72B-Instruct can answer correctly without using CoT reasoning.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "In addition to the datasets mentioned earlier, we introduce several in-house benchmarks to monitor other capabilities. These benchmarks include: • CounterFactQA: Contains counterfactual questions where the model needs to identify that the questions are not factual and avoid generating hallucinatory answers. • LengthCtrl: Includes creative writing tasks with length requirements; the final score is based on the difference between the generated content length and the target length.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-autonomous-behaviour",
+      "confidence": "Medium",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Agent & Coding BFCL v3 LiveCodeBench v5 Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA DeepSeek-R1 -Distill-Qwen-1.5B DeepSeek-R1 -Distill-Llama-8B Qwen3-0.6B Qwen3-1.7B Dense 1.5B 1.5B Dense 8B 8B Dense 0.6B 0.6B Dense 1.7B 1.7B 45.4 33.8 27.1 24.9 39.9 4.5 5.00 16.4 4.03 83.9 28.9 22.8 4.9 19.1 14.0 13.2 13.3 21.9 27.3 12.4 14.5 29.0 66.4 49.0 50.4 40.6 59.0 17.6 6.24 51.1 5.42 89.1 50.4 27.8 37.1 63.4 21.5 42.5 27.0 34.5 40.1 13.2 10.8 32.8 55.6 27.9 50.4 30.3 59.2 8.5 6.10 30.6 5.61 77.6 10.7 15.1 30.3 61.6 46.4 12.3 36.1 35.9 43.1 7.8 11.4 40.9 73.9 40.1 68.1 51.1 72.5 43.1 7.60 48.0 7.02 93.4 48.3 36.8 63.2 83.2 56.6 33.2 51.2 51.8 59.1 36.1 25.2 56.0 Table 20.: Comparison among Qwen3-1.7B / Qwen3-0.6B (Non-thinking) and other non-reasoning baselines. The highest and second-best scores are shown in bold and underlined, respectively. Gemma-3 -1B-IT Phi-4-mini Qwen2.5-1.5B -Instruct Qwen2.5-3B -Instruct Qwen3-0.6B Qwen3-1.7B Architecture # Activated Params # Total Params Dense 1.0B 1.0B Dense 3.8B 3.8B Dense 1.5B 1.5B Dense 3.1B 3.1B Dense 0.6B 0.6B Dense 1.7B 1.7B General Tasks Alignment Tasks MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Agent & Coding BFCL v3 LiveCodeBench v5 Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 33.3 19.2 28.5 14.4 54.5 17.8 5.3 52.8 5.18 46.4 0.9 0.8 1.9 16.4 16.3 1.8 32.8 32.7 32.5 0.2 3.5 31.8 50.7 29.8 53.3 18.0 42.5 9.0 5.60 31.5 4.67 55.0 0.9 0.4 3.4 22.5 47.8 5.3 20.2 33.1 40.4 0.7 5.0 40.9 67.9 25.2 40.0 25.3 68.6 32.8 6.00 10.3 4.05 67.6 8.1 5.3 2.7 28.8 31.3 10.4 40.5 43.8 51.4 0.9 6.7 39.5 19 64.4 30.3 68.2 23.8 58.2 23.7 6.49 42.8 5.55 67.2 6.7 4.2 4.8 29.9 50.4 9.2 32.3 43.8 51.8 1.6 7.3 39.5 44.6 22.9 42.6 21.8 54.5 6.5 5.60 28.4 5.13 55.2 3.4 2.6 4.2 37.4 44.1 3.6 33.3 34.4 37.1 1.5 4.6 37.3 64.4 28.6 61.0 35.6 68.2 36.9 7.20 43.6 6.54 73.0 13.4 9.8 12.8 59.8 52.2 11.6 44.7 42.6 48.3 4.9 10.3 41.1 1/10 activated parameters, demonstrating the effectiveness of our Strong-to-Weak Distillation approach in endowing lightweight models with profound reasoning capabilities.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-capability-monitoring",
+      "confidence": "Medium",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA GPT-4o-mini -2024-07-18 LLaMA-4 -Scout Qwen2.5-72B -Instruct Qwen3-32B - - - 81.5 40.2 66.3 41.3 80.4 74.9 7.81 70.3 5.98 78.2 8.1 8.8 20.1 52.6 64.0 27.9 MoE 17B 109B 86.3 57.2 78.2 47.6 84.7 70.5 7.49 55.0 5.49 82.6 28.6 10.0 24.2 56.8 45.4 29.8 1113 / 52.6% 981 / 43.7% Dense 72B 72B Dense 32B 32B 86.8 49.0 84.7 51.4 84.1 81.2 7.89 61.8 7.06 83.6 18.9 15.0 26.6 66.1 85.7 54.6 83.3 59.8 83.2 92.8 8.58 78.3 7.54 88.6 31.0 20.2 29.2 78.5 63.4 30.7 859 / 35.0% 63.0 31.3 1353 / 71.0% 64.2 74.1 77.5 19.1 20.9 53.9 65.3 69.6 76.9 12.7 16.9 59.3 70.7 70.9 76.5 24.1 22.5 62.9 62.4 66.0 72.1 6.0 12.0 42.6 16 Table 15.: Comparison among Qwen3-30B-A3B / Qwen3-14B (Thinking) and other reasoning baselines. The highest and second-best scores are shown in bold and underlined, respectively. DeepSeek-R1 -Distill-Qwen-32B QwQ-32B Qwen3-14B Qwen3-30B-A3B Dense 32B 32B Dense 32B 32B Dense 14B 14B Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi 88.2 62.1 82.2 45.6 72.5 60.8 7.25 55.0 6.13 94.3 72.6 49.6 69.6 74.6 Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 53.5 54.5 1691 / 93.4% Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 31.3 68.0 78.6 44.6 35.1 63.3 90.0 65.6 88.4 72.0 83.9 89.5 8.70 82.4 7.86 98.0 79.5 69.5 76.8 88.1 66.4 62.7 88.6 64.0 86.2 71.3 85.4 91.7 8.56 80.3 7.80 96.8 79.3 70.4 88.5 89.2 70.4 63.5 1982 / 97.7% 1766 / 95.3% 68.3 69.7 80.9 68.0 45.9 75.5 74.8 71.7 77.9 73.3 45.8 71.1 MoE 3B 30B 89.5 65.8 86.6 74.3 86.5 91.0 8.70 79.1 7.70 98.0 80.4 70.9 89.5 88.7 69.1 62.6 1974 / 97.7% 72.2 71.9 78.4 73.9 46.1 70.1 Table 16.: Comparison among Qwen3-30B-A3B / Qwen3-14B (Non-thinking) and other non-reasoning baselines.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "DeepSeek-R1 -Distill-Qwen-32B QwQ-32B Qwen3-14B Qwen3-30B-A3B Dense 32B 32B Dense 32B 32B Dense 14B 14B Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi 88.2 62.1 82.2 45.6 72.5 60.8 7.25 55.0 6.13 94.3 72.6 49.6 69.6 74.6 Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 53.5 54.5 1691 / 93.4% Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 31.3 68.0 78.6 44.6 35.1 63.3 90.0 65.6 88.4 72.0 83.9 89.5 8.70 82.4 7.86 98.0 79.5 69.5 76.8 88.1 66.4 62.7 88.6 64.0 86.2 71.3 85.4 91.7 8.56 80.3 7.80 96.8 79.3 70.4 88.5 89.2 70.4 63.5 1982 / 97.7% 1766 / 95.3% 68.3 69.7 80.9 68.0 45.9 75.5 74.8 71.7 77.9 73.3 45.8 71.1 MoE 3B 30B 89.5 65.8 86.6 74.3 86.5 91.0 8.70 79.1 7.70 98.0 80.4 70.9 89.5 88.7 69.1 62.6 1974 / 97.7% 72.2 71.9 78.4 73.9 46.1 70.1 Table 16.: Comparison among Qwen3-30B-A3B / Qwen3-14B (Non-thinking) and other non-reasoning baselines. The highest and second-best scores are shown in bold and underlined, respectively. General Tasks Alignment Tasks Math & Text Reasoning Agent & Coding Multilingual Tasks Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Phi-4 Dense 14B 14B 85.3 56.1 66.9 41.6 62.1 75.4 7.61 51.2 5.73 80.8 22.9 17.3 32.3 66.2 Gemma-3 -27B-IT Qwen2.5-32B -Instruct Qwen3-14B Qwen3-30B-A3B Dense 27B 27B Dense 32B 32B Dense 14B 14B 82.6 42.4 66.6 49.2 80.6 86.8 7.80 82.0 7.22 90.0 32.6 24.0 24.6 64.2 83.9 49.5 80.6 50.0 79.5 74.5 7.71 54.6 5.90 84.6 18.8 12.8 26.1 65.5 82.0 54.8 81.0 59.6 84.8 86.3 8.52 73.1 7.24 90.0 31.7 23.3 33.0 82.0 MoE 3B 30B 84.1 54.8 82.9 59.4 83.7 88.0 8.55 68.1 7.22 89.8 32.8 21.6 33.2 81.5 BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 1280 / 65.3% 1063 / 49.3% 903 / 38.2% 1200 / 58.6% 1267 / 64.1% 61.5 29.0 59.1 26.9 47.0 25.2 58.6 29.8 62.8 26.4 Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 49.5 65.3 74.7 13.1 17.4 53.1 69.8 71.4 76.1 23.0 20.3 58.5 17 63.2 67.5 74.2 15.3 18.3 58.0 72.9 67.8 72.6 23.2 22.0 58.9 70.8 67.8 73.8 24.6 23.3 53.3 Table 17.: Comparison among Qwen3-8B / Qwen3-4B (Thinking) and other reasoning baselines.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "General Tasks Alignment Tasks Math & Text Reasoning Agent & Coding Multilingual Tasks Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Phi-4 Dense 14B 14B 85.3 56.1 66.9 41.6 62.1 75.4 7.61 51.2 5.73 80.8 22.9 17.3 32.3 66.2 Gemma-3 -27B-IT Qwen2.5-32B -Instruct Qwen3-14B Qwen3-30B-A3B Dense 27B 27B Dense 32B 32B Dense 14B 14B 82.6 42.4 66.6 49.2 80.6 86.8 7.80 82.0 7.22 90.0 32.6 24.0 24.6 64.2 83.9 49.5 80.6 50.0 79.5 74.5 7.71 54.6 5.90 84.6 18.8 12.8 26.1 65.5 82.0 54.8 81.0 59.6 84.8 86.3 8.52 73.1 7.24 90.0 31.7 23.3 33.0 82.0 MoE 3B 30B 84.1 54.8 82.9 59.4 83.7 88.0 8.55 68.1 7.22 89.8 32.8 21.6 33.2 81.5 BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 1280 / 65.3% 1063 / 49.3% 903 / 38.2% 1200 / 58.6% 1267 / 64.1% 61.5 29.0 59.1 26.9 47.0 25.2 58.6 29.8 62.8 26.4 Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 49.5 65.3 74.7 13.1 17.4 53.1 69.8 71.4 76.1 23.0 20.3 58.5 17 63.2 67.5 74.2 15.3 18.3 58.0 72.9 67.8 72.6 23.2 22.0 58.9 70.8 67.8 73.8 24.6 23.3 53.3 Table 17.: Comparison among Qwen3-8B / Qwen3-4B (Thinking) and other reasoning baselines. The highest and second-best scores are shown in bold and underlined, respectively. DeepSeek-R1 -Distill-Qwen-14B DeepSeek-R1 -Distill-Qwen-32B Qwen3-4B Qwen3-8B Dense 32B 32B Dense 4B 4B Dense 8B 8B Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Dense 14B 14B 84.1 59.1 78.1 52.3 72.6 48.0 7.43 54.2 6.03 93.9 69.7 44.5 59.1 78.6 Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 49.5 45.5 1574 / 89.1% 53.5 54.5 1691 / 93.4% Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 29.8 59.7 73.8 33.7 28.6 53.6 31.3 68.0 78.6 44.6 35.1 63.3 88.2 62.1 82.2 45.6 72.5 60.8 7.25 55.0 6.13 94.3 72.6 49.6 69.6 74.6 83.7 55.9 77.5 63.6 81.9 76.6 8.30 61.1 7.35 97.0 73.8 65.6 81.0 87.9 65.9 54.2 87.5 62.0 83.4 67.1 85.0 85.8 8.46 75.0 7.59 97.4 76.0 67.3 84.8 89.1 68.1 57.5 1671 / 92.8% 1785 / 95.6% 66.3 61.8 69.8 60.7 40.0 65.9 71.2 67.8 74.4 65.4 42.7 69.0 Table 18.: Comparison among Qwen3-8B / Qwen3-4B (Non-thinking) and other non-reasoning baselines.",
+          "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    }
+  ],
+  "xai-security": [
     {
       "techniqueId": "tech-observability-monitoring",
       "confidence": "High",
@@ -10291,20 +10127,6 @@
           "active": true,
           "deleted_by": null,
           "llm_original": "Logging and monitoring software are configured to collect data from system components to monitor system events (including security events / IDS events), performance, and resource utilization. The security team is alerted of unusual or suspicious security events that are detected."
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-cybersecurity-threat",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "Bot Detection xAI utilizes Cloudflare WAF, and Wiz to bolster our application's resilience and security. Cloudflare ensures fast and secure content delivery, and also provides robust protection against DDoS attacks. Complementing these, Wiz offers continuous threat detection, helping us proactively identify and address potential security issues.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
         }
       ]
     },

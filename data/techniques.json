@@ -816,17 +816,17 @@
     "lifecycleStages": ["evaluation", "inference"],
     "description": "Detection of cybersecurity attack instructions, exploit generation, and offensive cyber capabilities",
     "nlu_profile": {
-      "primary_concept": "A dedicated classifier or filter that blocks model-generated exploit code, malware, or cyberattack instructions at runtime.",
+      "primary_concept": "A dedicated runtime classifier or filter that blocks model-generated exploit code, malware instructions, or cyberattack content.",
       "semantic_anchors": [
-        "cyber attack filter",
-        "exploit code blocking",
-        "malware generation prevention",
-        "offensive cyber classifier",
-        "cyberattack instruction blocking",
-        "cyber uplift prevention",
-        "offensive cyber evaluation"
+        "cyber content classifier",
+        "block exploit code generation",
+        "malware generation filter",
+        "cyberattack content blocking",
+        "cybersecurity content policy",
+        "refuse cyber attack instructions"
       ],
-      "entailment_hypothesis": "The system has a dedicated classifier or filter to block cybersecurity attack content."
+      "entailment_hypothesis": "The system deploys a dedicated filter or classifier that blocks cybersecurity attack content at inference time.",
+      "excluded_terms": ["cyber capability evaluation", "offensive cyber benchmark", "cybersecurity assessment"]
     }
   },
   {

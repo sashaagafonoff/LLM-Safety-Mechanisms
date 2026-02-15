@@ -162,7 +162,11 @@ def apply_deletions(techniques: List[Dict], deletions: List[Dict]) -> List[Dict]
 
 
 def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]:
-    """Run NLU analysis and return results."""
+    """Run NLU analysis and return results.
+
+    When specific_doc_id is set, loads existing NLU results and merges
+    the new document's results in, preserving all other documents.
+    """
     print("\n" + "=" * 70)
     print("STAGE 1: NLU ANALYSIS")
     print("=" * 70)
@@ -177,19 +181,26 @@ def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]
 
     analyzer = NLUAnalyzer()
 
+    # Load existing results when processing a single document
+    if specific_doc_id and NLU_OUTPUT_PATH.exists():
+        with open(NLU_OUTPUT_PATH, 'r', encoding='utf-8') as f:
+            results = json.load(f)
+        print(f"  Loaded existing NLU results ({len(results)} documents)")
+    else:
+        results = {}
+
     # Get files to process
     if specific_doc_id:
         files = [INPUT_DIR / f"{specific_doc_id}.txt"]
         if not files[0].exists():
             print(f"Error: File not found: {files[0]}")
-            return {}
+            return results
     else:
         files = sorted(INPUT_DIR.glob("*.txt"))
         files = [f for f in files if not f.name.startswith("temp_")]
 
     print(f"\nProcessing {len(files)} documents...")
 
-    results = {}
     for i, file_path in enumerate(files, 1):
         doc_id = file_path.stem
         print(f"[{i}/{len(files)}] {doc_id}")
@@ -205,10 +216,10 @@ def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]
         results[doc_id] = consolidated
         print(f"   → {len(consolidated)} techniques found")
 
-    # Save NLU-only results
+    # Save NLU results
     with open(NLU_OUTPUT_PATH, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2)
-    print(f"\n✓ NLU results saved to {NLU_OUTPUT_PATH}")
+    print(f"\n✓ NLU results saved to {NLU_OUTPUT_PATH} ({len(results)} documents)")
 
     return results
 
@@ -218,6 +229,9 @@ def run_llm_pass(nlu_results: Dict[str, List[Dict]],
                  specific_doc_id: Optional[str] = None) -> Dict[str, Dict]:
     """
     Run LLM analysis with NLU context and return results.
+
+    When specific_doc_id is set, loads existing LLM results and merges
+    the new document's results in, preserving all other documents.
 
     Returns dict mapping doc_id -> {"additions": [...], "deletions": [...]}
     """
@@ -232,6 +246,13 @@ def run_llm_pass(nlu_results: Dict[str, List[Dict]],
         print(f"Error importing LLM extractor: {e}")
         print("Make sure anthropic is installed and ANTHROPIC_API_KEY is set")
         sys.exit(1)
+
+    # Load existing results when processing a single document
+    existing_llm = {}
+    if specific_doc_id and LLM_OUTPUT_PATH.exists():
+        with open(LLM_OUTPUT_PATH, 'r', encoding='utf-8') as f:
+            existing_llm = json.load(f)
+        print(f"  Loaded existing LLM results ({len(existing_llm)} documents)")
 
     extractor = LLMExtractor(model_name=model_name, resume=False)
 
@@ -255,10 +276,15 @@ def run_llm_pass(nlu_results: Dict[str, List[Dict]],
     # Get raw results with deletions
     raw_results = extractor.get_raw_results()
 
-    # Save LLM-only results
+    # Merge with existing results if processing incrementally
+    if existing_llm:
+        existing_llm.update(raw_results)
+        raw_results = existing_llm
+
+    # Save LLM results
     with open(LLM_OUTPUT_PATH, 'w', encoding='utf-8') as f:
         json.dump(raw_results, f, indent=2)
-    print(f"\n✓ LLM results saved to {LLM_OUTPUT_PATH}")
+    print(f"\n✓ LLM results saved to {LLM_OUTPUT_PATH} ({len(raw_results)} documents)")
 
     return raw_results
 
@@ -436,30 +462,20 @@ def main():
             specific_doc_id=args.id
         )
 
+    # Ensure we have complete stage results for merge
+    # When running a single stage, load the other stage's existing results
+    if args.nlu_only and not llm_results and LLM_OUTPUT_PATH.exists():
+        with open(LLM_OUTPUT_PATH, 'r', encoding='utf-8') as f:
+            llm_results = json.load(f)
+        print(f"  Loaded existing LLM results for merge ({len(llm_results)} documents)")
+
     # Merge all results
-    if not args.nlu_only and not args.llm_only:
-        final = merge_all_results(
-            manual=partitioned['manual'] if args.preserve_manual else {},
-            nlu=nlu_results,
-            llm=llm_results
-        )
-        save_final_results(final)
-    elif args.nlu_only:
-        # Just save NLU results as the main output
-        final = merge_all_results(
-            manual=partitioned['manual'] if args.preserve_manual else {},
-            nlu=nlu_results,
-            llm={}
-        )
-        save_final_results(final)
-    elif args.llm_only:
-        # Merge NLU + LLM results
-        final = merge_all_results(
-            manual=partitioned['manual'] if args.preserve_manual else {},
-            nlu=nlu_results,
-            llm=llm_results
-        )
-        save_final_results(final)
+    final = merge_all_results(
+        manual=partitioned['manual'] if args.preserve_manual else {},
+        nlu=nlu_results,
+        llm=llm_results
+    )
+    save_final_results(final)
 
     print("\n" + "=" * 70)
     print("PIPELINE COMPLETE")
