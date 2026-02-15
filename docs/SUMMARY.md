@@ -1,226 +1,116 @@
 # LLM Safety Mechanisms - Dataset Summary
 
-*Generated: 2026-02-16 08:30*
+*Generated: 2026-02-16 09:19*
 
-## 📊 Overall Statistics
+## Overall Statistics
 
-- **Providers**: 15
-- **Models**: 1
-- **Categories**: 5
-- **Techniques**: 50
-- **Source Documents**: 40
-- **Techniques Detected**: 54
+- **Providers**: 14
+- **Models tracked**: 57
+- **Technique categories**: 5
+- **Active techniques in taxonomy**: 48
+- **Aspirational techniques** (no provider evidence): 2
+- **Source documents**: 40
+- **Techniques with detections**: 48 / 48
 
-## 🎯 Coverage by Category
+## Coverage by Category
 
-| Category | Total Techniques | Detected in Sources |
-|----------|------------------|---------------------|
-| Evaluation & Red Teaming | 3 | 3 |
-| Governance & Oversight | 11 | 11 |
-| Harm & Content Classification | 12 | 12 |
-| Model Development | 11 | 10 |
-| Runtime Safety Systems | 13 | 12 |
+| Category | Techniques | System Detected | Manual Entry |
+|----------|------------|-----------------|--------------|
+| Evaluation & Red Teaming | 3 | 3 | 0 |
+| Governance & Oversight | 11 | 11 | 0 |
+| Harm & Content Classification | 12 | 12 | 0 |
+| Model Development | 11 | 10 | 0 |
+| Runtime Safety Systems | 13 | 12 | 0 |
 
-## 🏢 Provider Breakdown
+## Provider Breakdown
 
-### OpenAI
+| Provider | Type | Source Docs | Techniques | Detection Confidence |
+|----------|------|-------------|------------|----------------------|
+| Google | commercial | 5 | 27 | H:24 / M:3 / L:0 |
+| Alibaba | commercial | 4 | 30 | H:26 / M:4 / L:0 |
+| Anthropic | commercial | 4 | 38 | H:38 / M:0 / L:0 |
+| Meta | commercial | 4 | 39 | H:36 / M:2 / L:1 |
+| Mistral AI | commercial | 4 | 15 | H:12 / M:2 / L:1 |
+| OpenAI | commercial | 4 | 35 | H:32 / M:3 / L:0 |
+| xAI | commercial | 4 | 16 | H:15 / M:1 / L:0 |
+| DeepSeek | commercial | 3 | 28 | H:22 / M:6 / L:0 |
+| Cohere | commercial | 2 | 23 | H:20 / M:3 / L:0 |
+| Microsoft | commercial | 2 | 14 | H:14 / M:0 / L:0 |
+| Amazon | commercial | 1 | 11 | H:10 / M:1 / L:0 |
+| Nvidia | commercial | 1 | 16 | H:14 / M:2 / L:0 |
+| TII | academic | 1 | 4 | H:2 / M:2 / L:0 |
+| Tencent | commercial | 1 | 7 | H:4 / M:1 / L:2 |
 
-- **Type**: commercial
-- **Source Documents**: 4
-- **Techniques Detected**: 35
+## Technique Coverage Matrix
 
-**Detection Confidence**:
-- High: 64
-- Medium: 7
+| Technique | Google | Alibaba | Anthropic | Meta | Mistral AI | OpenAI | xAI | DeepSeek | Cohere | Microsoft | Amazon | Nvidia | TII | Tencent |
+|-----------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Community-Based Evaluation | ✅ | — | ✅ | ✅ | — | ✅ | — | ✅ | — | — | — | — | — | — |
+| Red Teaming | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | 🟡 | 🟡 | ✅ | ✅ | ✅ | — | — |
+| Safety Benchmarking | ✅ | 🟡 | ✅ | 🟠 | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | ✅ | — | — |
+| Access Control Documentation | — | — | — | 🟡 | — | — | ✅ | — | — | — | — | — | — | — |
+| Capability Threshold Monitoring | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | — | — |
+| Data Retention Policies | — | — | — | — | — | — | ✅ | — | — | — | — | — | — | — |
+| Data Sovereignty Controls | — | — | — | ✅ | — | — | 🟡 | ✅ | — | — | — | 🟡 | — | — |
+| Enterprise Integration Safety | — | — | — | — | — | — | ✅ | — | ✅ | — | — | — | — | — |
+| Ethical Human Labour Sourcing | — | — | ✅ | — | — | — | — | — | — | — | — | — | — | — |
+| Incident Reporting Systems | ✅ | — | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — |
+| Independent Safety Advisory | — | — | ✅ | ✅ | — | ✅ | — | — | — | — | — | — | — | — |
+| Regulatory Compliance | — | — | ✅ | — | — | ✅ | ✅ | ✅ | — | — | — | — | — | — |
+| Responsible Release Protocols | — | — | ✅ | — | — | — | — | — | — | — | — | — | — | — |
+| Stakeholder Engagement | — | — | ✅ | — | — | — | — | — | — | ✅ | — | — | — | — |
+| Autonomous Behaviour Classification | — | 🟡 | ✅ | — | — | 🟡 | — | — | — | — | — | — | — | — |
+| CSAM Detection & Prevention | ✅ | — | ✅ | ✅ | — | ✅ | — | — | ✅ | — | ✅ | — | — | — |
+| Copyright & IP Violation Detection | — | ✅ | — | — | — | ✅ | — | ✅ | — | — | — | — | — | — |
+| Cybersecurity Threat Detection | — | — | — | ✅ | — | ✅ | — | — | 🟡 | — | — | — | — | — |
+| Hate Speech & Harassment Detection | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | 🟡 | — | — | — | ✅ | — | — |
+| Misinformation & False Claims Detection | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | 🟡 | — |
+| PII Detection & Redaction | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | — | — | — | ✅ |
+| Self-Harm & Suicide Prevention | — | 🟡 | ✅ | ✅ | ✅ | 🟡 | — | ✅ | — | — | — | — | — | — |
+| Sexual Content Moderation | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | ✅ | — | — | ✅ | — | — |
+| Sycophancy Detection | — | — | ✅ | — | — | ✅ | ✅ | — | — | — | — | — | — | — |
+| Violence & Gore Detection | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | ✅ | 🟡 | ✅ | — | — |
+| Weapons & Illegal Activity Detection | — | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | — | — | — | ✅ | — | — |
+| Adversarial Training | — | ✅ | ✅ | ✅ | — | — | — | 🟡 | — | — | — | — | — | — |
+| Bias Mitigation (Post-Training) | 🟡 | ✅ | ✅ | ✅ | ✅ | 🟡 | — | ✅ | — | ✅ | ✅ | ✅ | — | 🟠 |
+| Constitutional AI / Self-Critique | — | ✅ | ✅ | ✅ | — | ✅ | — | 🟡 | — | — | — | — | — | — |
+| Dataset Auditing & Representation Analysis | — | ✅ | ✅ | ✅ | — | — | — | ✅ | — | ✅ | — | — | — | 🟡 |
+| Direct Preference Optimization (DPO) | — | ✅ | — | ✅ | — | — | — | — | ✅ | ✅ | — | ✅ | — | ✅ |
+| Machine Unlearning * | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| Multimodal Safety Alignment | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | — | ✅ | ✅ | — | — | ✅ | — | — |
+| Refusal / Abstention Training | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — | 🟡 | 🟠 |
+| Reinforcement Learning from Human Feedback (RLHF) | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | ✅ | ✅ | — | ✅ | — | — | ✅ |
+| Safety Reward Modeling | 🟡 | ✅ | — | ✅ | — | ✅ | — | ✅ | ✅ | — | — | ✅ | — | — |
+| Training Data Quality Filtering | ✅ | ✅ | ✅ | ✅ | 🟠 | ✅ | — | ✅ | ✅ | ✅ | — | — | ✅ | ✅ |
+| Circuit Breakers / Kill Switches * | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
+| Code Execution Sandboxing | — | — | — | ✅ | — | — | — | — | — | — | — | — | — | — |
+| Configurable Safety Policies | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | 🟡 | ✅ | — | ✅ | — | — | — |
+| Hallucination Detection & Grounding | ✅ | — | ✅ | ✅ | — | ✅ | — | — | ✅ | ✅ | — | — | — | — |
+| Input Guardrail Systems | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | 🟡 | — | — |
+| Jailbreak & Injection Defense | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | — | — | ✅ | — | — |
+| Multi-stage Safety Pipeline | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | ✅ | — | — | ✅ | — | — |
+| Observability & Audit Logging | ✅ | — | ✅ | — | — | ✅ | ✅ | — | — | — | — | — | — | — |
+| Output Safety Systems | ✅ | 🟡 | ✅ | ✅ | 🟡 | ✅ | — | — | — | — | ✅ | — | — | — |
+| Provenance & Watermarking | 🟡 | ✅ | — | 🟡 | — | — | — | — | 🟡 | — | — | — | ✅ | — |
+| RAG Guardrails | — | — | — | ✅ | — | — | — | ✅ | ✅ | — | — | ✅ | — | — |
+| Real-time Fact Checking | — | ✅ | ✅ | — | — | ✅ | — | — | ✅ | — | — | — | — | — |
+| System Prompts / Metaprompts | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 | — | — | — | — | — | — |
 
-### Anthropic
+**Key:** ✅ = High confidence | 🟡 = Medium | 🟠 = Low | — = Not detected
 
-- **Type**: commercial
-- **Source Documents**: 4
-- **Techniques Detected**: 38
+**\*** Aspirational technique — no tracked provider has documented production deployment.
 
-**Detection Confidence**:
-- High: 63
-- Medium: 8
+## Recent Source Documents
 
-### Google
-
-- **Type**: commercial
-- **Source Documents**: 5
-- **Techniques Detected**: 27
-
-**Detection Confidence**:
-- High: 47
-- Medium: 10
-- Low: 1
-
-### Meta
-
-- **Type**: commercial
-- **Source Documents**: 4
-- **Techniques Detected**: 39
-
-**Detection Confidence**:
-- High: 51
-- Medium: 12
-- Low: 3
-
-### Amazon
-
-- **Type**: commercial
-- **Source Documents**: 1
-- **Techniques Detected**: 11
-
-**Detection Confidence**:
-- High: 10
-- Medium: 1
-
-### Microsoft
-
-- **Type**: commercial
-- **Source Documents**: 2
-- **Techniques Detected**: 14
-
-**Detection Confidence**:
-- High: 18
-- Medium: 2
-
-### DeepSeek
-
-- **Type**: commercial
-- **Source Documents**: 3
-- **Techniques Detected**: 28
-
-**Detection Confidence**:
-- High: 24
-- Medium: 9
-
-### xAI
-
-- **Type**: commercial
-- **Source Documents**: 4
-- **Techniques Detected**: 16
-
-**Detection Confidence**:
-- High: 18
-- Medium: 3
-
-### Cohere
-
-- **Type**: commercial
-- **Source Documents**: 2
-- **Techniques Detected**: 23
-
-**Detection Confidence**:
-- High: 22
-- Medium: 4
-
-### Mistral AI
-
-- **Type**: commercial
-- **Source Documents**: 4
-- **Techniques Detected**: 15
-
-**Detection Confidence**:
-- High: 13
-- Medium: 3
-- Low: 2
-
-### Alibaba
-
-- **Type**: commercial
-- **Source Documents**: 4
-- **Techniques Detected**: 30
-
-**Detection Confidence**:
-- High: 32
-- Medium: 8
-- Low: 2
-
-### Nvidia
-
-- **Type**: commercial
-- **Source Documents**: 1
-- **Techniques Detected**: 16
-
-**Detection Confidence**:
-- High: 14
-- Medium: 2
-
-### TII
-
-- **Type**: academic
-- **Source Documents**: 1
-- **Techniques Detected**: 4
-
-**Detection Confidence**:
-- High: 2
-- Medium: 2
-
-## 📋 Technique Coverage Matrix
-
-| Technique | OpenAI | Anthropic | Google | Meta | Amazon |
-|-----------|--------|-----------|---------|------|---------|
-| Access Control Documentation | — | — | — | 🟡 Med | — |
-| Adversarial Training | — | ✅ High | — | ✅ High | — |
-| Autonomous Behaviour Classific | 🟡 Med | ✅ High | — | — | — |
-| Bias Mitigation (Post-Training | 🟡 Med | ✅ High | 🟡 Med | ✅ High | ✅ High |
-| Capability Threshold Monitorin | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Code Execution Sandboxing | — | — | — | ✅ High | — |
-| Community-Based Evaluation | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Configurable Safety Policies | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| Constitutional AI / Self-Criti | ✅ High | ✅ High | — | ✅ High | — |
-| Copyright & IP Violation Detec | ✅ High | — | — | — | — |
-| CSAM Detection & Prevention | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| Cybersecurity Threat Detection | ✅ High | — | — | ✅ High | — |
-| Data Retention Policies | — | — | — | — | — |
-| Data Sovereignty Controls | — | — | — | ✅ High | — |
-| Dataset Auditing & Representat | — | ✅ High | — | ✅ High | — |
-| Direct Preference Optimization | — | — | — | ✅ High | — |
-| Enterprise Integration Safety | — | — | — | — | — |
-| Ethical Human Labour Sourcing | — | ✅ High | — | — | — |
-| Hallucination Detection & Grou | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Hate Speech & Harassment Detec | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Incident Reporting Systems | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| Input Guardrail Systems | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| Misinformation & False Claims  | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| Multimodal Safety Alignment | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Multi-stage Safety Pipeline | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Observability & Audit Logging | ✅ High | ✅ High | ✅ High | — | — |
-| Output Safety Systems | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| PII Detection & Redaction | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Jailbreak & Injection Defense | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| RAG Guardrails | — | — | — | ✅ High | — |
-| Real-time Fact Checking | ✅ High | ✅ High | — | — | — |
-| Red Teaming | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| Refusal / Abstention Training | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Regulatory Compliance | ✅ High | ✅ High | — | — | — |
-| Responsible Release Protocols | — | ✅ High | — | — | — |
-| Reinforcement Learning from Hu | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
-| Independent Safety Advisory | ✅ High | ✅ High | — | ✅ High | — |
-| Safety Benchmarking | ✅ High | ✅ High | ✅ High | 🟠 Low | ✅ High |
-| Safety Reward Modeling | ✅ High | — | 🟡 Med | ✅ High | — |
-| Self-Harm & Suicide Prevention | 🟡 Med | ✅ High | — | ✅ High | — |
-| Sexual Content Moderation | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Stakeholder Engagement | — | ✅ High | — | — | — |
-| Sycophancy Detection | ✅ High | ✅ High | — | — | — |
-| System Prompts / Metaprompts | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Training Data Quality Filterin | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Violence & Gore Detection | ✅ High | ✅ High | ✅ High | ✅ High | 🟡 Med |
-| Provenance & Watermarking | — | — | 🟡 Med | 🟡 Med | — |
-| Weapons & Illegal Activity Det | ✅ High | ✅ High | — | ✅ High | — |
-
-## 📚 Recent Source Documents
-
-| Provider | Document | Type | Date Added |
-|----------|----------|------|------------|
-| TII | The Falcon Series of Open Language Models | Technical Report | 2026-02-16 |
-| Mistral AI | Magistral Technical Report | Technical Report | 2026-02-16 |
-| Alibaba | Qwen3 Technical Report | Technical Report | 2026-02-16 |
-| Cohere | Command A Technical Report | Technical Report | 2026-02-06 |
-| Google | Gemini 3 Pro - Model Card | Model Card | 2026-02-06 |
-| Google | Gemini 2.5 Flash-Lite - Model Card | Model Card | 2026-02-06 |
-| xAI | Grok 4 Model Card | Model Card | 2026-02-06 |
-| Meta | Llama 3 & 4 Safety Protections | Website | 2026-02-06 |
-| Mistral AI | Mistral Guardrailing Capabilities | Documentation | 2026-02-06 |
-| Alibaba | Qwen3Guard Technical Report | Technical Report | 2026-02-06 |
+| Provider | Document | Type | URI | Date Added |
+|----------|----------|------|-----|------------|
+| TII | The Falcon Series of Open Language Models | Technical Report | https://arxiv.org/pdf/2311.16867 | 2026-02-16 |
+| Mistral AI | Magistral Technical Report | Technical Report | https://arxiv.org/pdf/2506.10910 | 2026-02-16 |
+| Alibaba | Qwen3 Technical Report | Technical Report | https://arxiv.org/pdf/2505.09388 | 2026-02-16 |
+| Cohere | Command A Technical Report | Technical Report | https://arxiv.org/pdf/2504.00698 | 2026-02-06 |
+| Google | Gemini 3 Pro - Model Card | Model Card | https://storage.googleapis.com/deepmind-media/Model-Cards... | 2026-02-06 |
+| Google | Gemini 2.5 Flash-Lite - Model Card | Model Card | https://storage.googleapis.com/deepmind-media/Model-Cards... | 2026-02-06 |
+| xAI | Grok 4 Model Card | Model Card | https://data.x.ai/2025-08-20-grok-4-model-card.pdf | 2026-02-06 |
+| Meta | Llama 3 & 4 Safety Protections | Website | https://www.llama.com/llama-protections/ | 2026-02-06 |
+| Mistral AI | Mistral Guardrailing Capabilities | Documentation | https://docs.mistral.ai/capabilities/guardrailing | 2026-02-06 |
+| Alibaba | Qwen3Guard Technical Report | Technical Report | https://arxiv.org/pdf/2510.14276v1 | 2026-02-06 |

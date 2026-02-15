@@ -1,7 +1,7 @@
 # LLM Safety Mechanisms Dataset
 
 [![GitHub issues](https://img.shields.io/github/issues/sashaagafonoff/LLM-Safety-Mechanisms)](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTORS.md)
 [![Dashboard](https://img.shields.io/badge/dashboard-live-blue)](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/)
 
 **A structured dataset and analysis tool for tracking safety mechanisms implemented by LLM providers.**
@@ -12,9 +12,9 @@ As AI systems become more powerful, understanding their safety mechanisms is cri
 
 ## Dataset at a Glance
 
-- **50 safety techniques** across **5 categories**
-- **15 providers** (OpenAI, Anthropic, Google, Meta, Cohere, Mistral, xAI, and more)
-- **35 source documents** (system cards, technical reports, safety frameworks)
+- **48 active safety techniques** across **5 categories** (+2 aspirational)
+- **14 providers** (OpenAI, Anthropic, Google, Meta, Cohere, Mistral, xAI, and more)
+- **40 source documents** (system cards, technical reports, safety frameworks)
 - **455+ technique-document links** with provenance tracking
 
 ## Safety Taxonomy
@@ -152,7 +152,7 @@ python scripts/check_sources.py --update --analyse   # Re-ingest and analyse cha
 
 ## Contributing
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions are welcome! See [CONTRIBUTORS.md](CONTRIBUTORS.md) for acknowledgments.
 
 The most impactful contributions are:
 - Adding new source documents and evidence records

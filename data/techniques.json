@@ -186,6 +186,8 @@
     "categoryId": "cat-model-development",
     "riskAreaIds": ["privacy_and_pii"],
     "lifecycleStages": ["training"],
+    "status": "aspirational",
+    "status_note": "No tracked provider documents production use. Google DeepMind research (2024) questions effectiveness of current approaches.",
     "description": "Algorithms to 'forget' specific training data without retraining",
     "nlu_profile": {
       "primary_concept": "Interventions to remove influence of specific data points from model weights.",
@@ -524,6 +526,8 @@
     "categoryId": "cat-runtime-safety",
     "riskAreaIds": ["autonomy_and_control"],
     "lifecycleStages": ["monitoring"],
+    "status": "aspirational",
+    "status_note": "No tracked provider documents production deployment. Gray Swan AI (untracked) has early-stage Cygnet. Anthropic RSP and OpenAI Preparedness Framework reference emergency protocols at policy level only.",
     "description": "Mechanisms to immediately disconnect system if dangerous actions occur",
     "nlu_profile": {
       "primary_concept": "Emergency intervention mechanisms that automatically halt model execution.",

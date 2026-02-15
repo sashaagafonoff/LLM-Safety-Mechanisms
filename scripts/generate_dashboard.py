@@ -335,10 +335,7 @@ class DashboardGenerator:
 
         print(f"✅ Dashboard generated: {dashboard_path}")
 
-        # Also copy the markdown summary
-        import shutil
-        if Path('SUMMARY.md').exists():
-            shutil.copy('SUMMARY.md', self.output_dir / 'SUMMARY.md')
+        # SUMMARY.md is written directly to docs/ by generate_report.py
 
 def main():
     generator = DashboardGenerator()
