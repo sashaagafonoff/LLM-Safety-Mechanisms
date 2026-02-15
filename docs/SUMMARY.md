@@ -1,6 +1,6 @@
 # LLM Safety Mechanisms - Dataset Summary
 
-*Generated: 2026-02-15 22:34*
+*Generated: 2026-02-15 22:47*
 
 ## 📊 Overall Statistics
 
@@ -9,15 +9,15 @@
 - **Categories**: 5
 - **Techniques**: 50
 - **Source Documents**: 37
-- **Techniques Detected**: 52
+- **Techniques Detected**: 54
 
 ## 🎯 Coverage by Category
 
 | Category | Total Techniques | Detected in Sources |
 |----------|------------------|---------------------|
 | Evaluation & Red Teaming | 3 | 3 |
-| Governance & Oversight | 11 | 10 |
-| Harm & Content Classification | 12 | 11 |
+| Governance & Oversight | 11 | 11 |
+| Harm & Content Classification | 12 | 12 |
 | Model Development | 11 | 10 |
 | Runtime Safety Systems | 13 | 12 |
 
@@ -27,20 +27,20 @@
 
 - **Type**: commercial
 - **Source Documents**: 4
-- **Techniques Detected**: 34
+- **Techniques Detected**: 35
 
 **Detection Confidence**:
-- High: 65
+- High: 66
 - Medium: 8
 
 ### Anthropic
 
 - **Type**: commercial
 - **Source Documents**: 4
-- **Techniques Detected**: 36
+- **Techniques Detected**: 38
 
 **Detection Confidence**:
-- High: 61
+- High: 63
 - Medium: 8
 
 ### Google
@@ -98,10 +98,10 @@
 
 - **Type**: commercial
 - **Source Documents**: 4
-- **Techniques Detected**: 17
+- **Techniques Detected**: 18
 
 **Detection Confidence**:
-- High: 17
+- High: 18
 - Medium: 5
 
 ### Cohere
@@ -173,6 +173,7 @@
 | Dataset Auditing & Representat | — | ✅ High | — | ✅ High | — |
 | Direct Preference Optimization | — | — | — | ✅ High | — |
 | Enterprise Integration Safety | — | — | — | — | — |
+| Ethical Human Labour Sourcing | — | ✅ High | — | — | — |
 | Hallucination Detection & Grou | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Hate Speech & Harassment Detec | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Incident Reporting Systems | ✅ High | ✅ High | ✅ High | ✅ High | — |
@@ -197,6 +198,7 @@
 | Self-Harm & Suicide Prevention | 🟡 Med | ✅ High | — | ✅ High | — |
 | Sexual Content Moderation | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Stakeholder Engagement | — | ✅ High | — | — | — |
+| Sycophancy Detection | ✅ High | ✅ High | — | — | — |
 | System Prompts / Metaprompts | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Training Data Quality Filterin | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Violence & Gore Detection | ✅ High | ✅ High | ✅ High | ✅ High | — |

@@ -1786,6 +1786,19 @@
           "active": true
         }
       ]
+    },
+    {
+      "techniqueId": "tech-sycophancy-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "6.3 Sycophancy on user-provided prompts To evaluate how Claude Opus 4.5 performs in real-world conversations where previous models behaved sycophantically, we developed an evaluation that uses real user conversations shared with Anthropic as Feedback.",
+          "created_by": "manual",
+          "active": true
+        }
+      ]
     }
   ],
   "cohere-safety-framework": [
@@ -5631,6 +5644,19 @@
         }
       ],
       "reasoning": "Direct description of reinforcement learning training approach for reasoning models"
+    },
+    {
+      "techniqueId": "tech-sycophancy-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "3.3 Sycophancy In May 2025 we explained the immediate measures we took to address sycophantic behaviors. For GPT-5, we post-trained our models to reduce sycophancy. Using conversations flagged by users and our internal evaluation pipeline, we built a classifier to detect the level of sycophancy, which was used as a reward signal in training.",
+          "created_by": "manual",
+          "active": true
+        }
+      ]
     }
   ],
   "grok-4": [
@@ -5853,6 +5879,19 @@
           "active": true,
           "deleted_by": null,
           "llm_original": "Transparency into AI progress can help developers coordinate safety efforts, governments enact sensible legislation, and the public stay abreast of the benefits and risks of AI."
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-sycophancy-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Sycophancy. We measure sycophancy with Anthropic's answer sycophancy evaluation, where a model is asked a question, gives a correct answer, and then the user disagrees. We find a decrease in both the political bias and sycophancy of Grok 4 API after including the system prompt.",
+          "created_by": "manual",
+          "active": true
         }
       ]
     }

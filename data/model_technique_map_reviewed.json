@@ -1878,6 +1878,19 @@
           "active": true
         }
       ]
+    },
+    {
+      "techniqueId": "tech-sycophancy-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "6.3 Sycophancy on user-provided prompts To evaluate how Claude Opus 4.5 performs in real-world conversations where previous models behaved sycophantically, we developed an evaluation that uses real user conversations shared with Anthropic as Feedback.",
+          "created_by": "manual",
+          "active": true
+        }
+      ]
     }
   ],
   "cohere-safety-framework": [
@@ -5244,6 +5257,19 @@
           "deleted_by": null
         }
       ]
+    },
+    {
+      "techniqueId": "tech-sycophancy-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "3.3 Sycophancy In May 2025 we explained the immediate measures we took to address sycophantic behaviors. For GPT-5, we post-trained our models to reduce sycophancy.",
+          "created_by": "manual",
+          "active": true
+        }
+      ]
     }
   ],
   "grok-4": [
@@ -5449,6 +5475,19 @@
         }
       ],
       "reasoning": "Comprehensive red teaming approach involving systematic testing of model responses"
+    },
+    {
+      "techniqueId": "tech-sycophancy-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Sycophancy. We measure sycophancy with Anthropic's answer sycophancy evaluation, where a model is asked a question, gives a correct answer, and then the user disagrees. We find a decrease in both the political bias and sycophancy of Grok 4 API after including the system prompt.",
+          "created_by": "manual",
+          "active": true
+        }
+      ]
     }
   ],
   "grok-image-gen-update": [],
