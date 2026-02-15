@@ -175,7 +175,7 @@
       "id": "aws-nova-service-card",
       "title": "Amazon Nova Micro, Lite, Pro, and Premier - AWS AI Service Cards",
       "provider": "amazon",
-      "url": "https://d1.awsstatic.com/responsible-ai/Amazon%20Nova%20Micro%20Lite%20Pro%20and%20Premier%20AWS%20AI%20Service%20Cards.pdf",
+      "url": "https://docs.aws.amazon.com/ai/responsible-ai/nova-micro-lite-pro/overview.html",
       "type": "System Card",
       "models": [
         {
@@ -190,14 +190,35 @@
           "modelId": "nova-micro",
           "name": "Amazon Nova Micro"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "transparency",
+          "safety_benchmarking",
+          "runtime_safety",
+          "governance",
+          "privacy_protection"
+        ],
+        "excluded_topics": [
+          "alignment_methods",
+          "pre_training_safety"
+        ],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "AWS AI Service Card covering Nova Micro, Lite, Pro, and Premier models with details on safety filtering, fairness evaluations, privacy controls, and responsible AI dimensions."
+      }
     },
     {
       "id": "mistral-large-2411-card",
-      "title": "Mistral Large 2411 System Card",
+      "title": "Mistral Large 2411 Model Card",
       "provider": "mistral",
-      "url": "https://mistral.ai/news/mistral-large-2411-system-card.pdf",
-      "type": "System Card",
+      "url": "https://huggingface.co/mistralai/Mistral-Large-Instruct-2411",
+      "type": "Model Card",
       "models": [
         {
           "modelId": "mistral-large-3",
@@ -207,7 +228,26 @@
           "modelId": "ministral-3",
           "name": "Ministral 3"
         }
-      ]
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "medium",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "shallow",
+        "primary_topics": [
+          "transparency",
+          "alignment_methods"
+        ],
+        "excluded_topics": [
+          "governance",
+          "privacy_protection",
+          "ip_protection"
+        ],
+        "confidence_weight": 0.7,
+        "language": "en",
+        "notes": "HuggingFace model card for Mistral Large Instruct 2411 with basic model capabilities and usage information."
+      }
     },
     {
       "id": "o3-pro",
@@ -630,7 +670,12 @@
       "provider": "openai",
       "url": "https://cdn.openai.com/gpt-4o-system-card.pdf",
       "type": "System Card",
-      "models": [],
+      "models": [
+        {
+          "modelId": "gpt-4o",
+          "name": "GPT-4o"
+        }
+      ],
       "content_metadata": {
         "document_purpose": "system_card",
         "signal_strength": "high",
@@ -731,6 +776,10 @@
       "type": "Technical Report",
       "models": [
         {
+          "modelId": "hunyuan-large",
+          "name": "Hunyuan-Large"
+        },
+        {
           "modelId": "hunyuan-2.0",
           "name": "Hunyuan 2.0"
         }
@@ -762,7 +811,12 @@
       "provider": "alibaba",
       "url": "https://arxiv.org/pdf/2409.12186",
       "type": "Technical Report",
-      "models": [],
+      "models": [
+        {
+          "modelId": "qwen-2-5-coder",
+          "name": "Qwen 2.5 Coder"
+        }
+      ],
       "content_metadata": {
         "document_purpose": "primary_research",
         "signal_strength": "high",

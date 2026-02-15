@@ -367,6 +367,92 @@
       "reasoning": "Provides a detailed description of red teaming as a systematic adversarial testing approach"
     }
   ],
+  "aws-nova-service-card": [
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Unsupervised and supervised learning techniques",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-input-guardrail-systems",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Runtime architecture: prompt filtering, augmentation, generation, completion filtering",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-output-filtering-systems",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Runtime architecture: prompt filtering, augmentation, generation, completion filtering",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-csam-detection",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Hash matching and classifiers to detect child sexual abuse material; blocking and reporting to NCMEC",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Comprehensive evaluation across CBRN, Offensive Cyber Operations, and Automated AI R&D domains using external red teaming",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-bias-mitigation",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Using BOLD dataset evaluation: 99.9% or more fair completions across all models",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Amazon Nova models correctly produce safe responses to over 90% of harmful prompts",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ]
+    }
+  ],
   "claude-3-5-sonnet-card": [
     {
       "techniqueId": "tech-community-evaluation",
@@ -7671,6 +7757,32 @@
         }
       ],
       "reasoning": "The document mandates thorough dataset auditing to ensure representational inclusiveness"
+    }
+  ],
+  "mistral-large-2411-card": [
+    {
+      "techniqueId": "tech-system-prompts",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Better Long Context, Function Calling and System Prompt",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-refusal-training",
+      "confidence": "Low",
+      "evidence": [
+        {
+          "passage": "The model is designed to follow instructions",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ]
     }
   ],
   "mistral-large-3": [

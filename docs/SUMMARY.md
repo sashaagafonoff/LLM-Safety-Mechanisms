@@ -1,6 +1,6 @@
 # LLM Safety Mechanisms - Dataset Summary
 
-*Generated: 2026-02-15 16:56*
+*Generated: 2026-02-15 22:34*
 
 ## 📊 Overall Statistics
 
@@ -69,7 +69,10 @@
 
 - **Type**: commercial
 - **Source Documents**: 1
-- **Techniques Detected**: 0
+- **Techniques Detected**: 7
+
+**Detection Confidence**:
+- High: 7
 
 ### Microsoft
 
@@ -118,9 +121,9 @@
 - **Techniques Detected**: 14
 
 **Detection Confidence**:
-- High: 11
+- High: 12
 - Medium: 3
-- Low: 1
+- Low: 2
 
 ### Alibaba
 
@@ -156,14 +159,14 @@
 | Access Control Documentation | — | — | — | 🟡 Med | — |
 | Adversarial Training | — | ✅ High | — | ✅ High | — |
 | Autonomous Behaviour Classific | ✅ High | ✅ High | — | — | — |
-| Bias Mitigation (Post-Training | 🟡 Med | ✅ High | 🟡 Med | ✅ High | — |
+| Bias Mitigation (Post-Training | 🟡 Med | ✅ High | 🟡 Med | ✅ High | ✅ High |
 | Capability Threshold Monitorin | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Code Execution Sandboxing | — | — | — | ✅ High | — |
 | Community-Based Evaluation | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Configurable Safety Policies | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Constitutional AI / Self-Criti | ✅ High | ✅ High | — | ✅ High | — |
 | Copyright & IP Violation Detec | ✅ High | — | — | — | — |
-| CSAM Detection & Prevention | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| CSAM Detection & Prevention | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
 | Cybersecurity Threat Detection | ✅ High | — | 🟡 Med | ✅ High | — |
 | Data Retention Policies | — | — | — | — | — |
 | Data Sovereignty Controls | — | — | — | ✅ High | — |
@@ -173,23 +176,23 @@
 | Hallucination Detection & Grou | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Hate Speech & Harassment Detec | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Incident Reporting Systems | ✅ High | ✅ High | ✅ High | ✅ High | — |
-| Input Guardrail Systems | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Input Guardrail Systems | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
 | Misinformation & False Claims  | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Multimodal Safety Alignment | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Multi-stage Safety Pipeline | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Observability & Audit Logging | ✅ High | ✅ High | ✅ High | — | — |
-| Output Safety Systems | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Output Safety Systems | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
 | PII Detection & Redaction | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Jailbreak & Injection Defense | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | RAG Guardrails | — | — | — | ✅ High | — |
 | Real-time Fact Checking | ✅ High | ✅ High | — | — | — |
-| Red Teaming | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Red Teaming | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
 | Refusal / Abstention Training | ✅ High | ✅ High | ✅ High | ✅ High | — |
 | Regulatory Compliance | ✅ High | ✅ High | — | — | — |
 | Responsible Release Protocols | — | ✅ High | — | — | — |
-| Reinforcement Learning from Hu | ✅ High | ✅ High | ✅ High | ✅ High | — |
+| Reinforcement Learning from Hu | ✅ High | ✅ High | ✅ High | ✅ High | ✅ High |
 | Independent Safety Advisory | ✅ High | ✅ High | — | ✅ High | — |
-| Safety Benchmarking | ✅ High | ✅ High | ✅ High | 🟠 Low | — |
+| Safety Benchmarking | ✅ High | ✅ High | ✅ High | 🟠 Low | ✅ High |
 | Safety Reward Modeling | ✅ High | — | 🟡 Med | ✅ High | — |
 | Self-Harm & Suicide Prevention | 🟡 Med | ✅ High | — | ✅ High | — |
 | Sexual Content Moderation | ✅ High | ✅ High | ✅ High | ✅ High | — |
