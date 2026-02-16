@@ -1,10 +1,12 @@
 """
-generate_report.py - Generate docs/SUMMARY.md and data/stats.json from the dataset.
+generate_report.py - Generate docs/SUMMARY.md, data/stats.json, and update README.md.
 
 Writes to docs/SUMMARY.md only (single canonical location, served by GitHub Pages).
+Also patches the "Dataset at a Glance" section of README.md with live stats.
 """
 
 import json
+import re
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -283,6 +285,21 @@ def generate_summary():
     with open('data/stats.json', 'w') as f:
         json.dump(stats, f, indent=2)
 
+    # Count total technique-document links
+    total_links = sum(
+        len([t for t in techs if t.get('active', True)])
+        for techs in technique_map.values()
+    )
+
+    # Update README
+    update_readme(
+        num_techniques=len(active_techniques),
+        num_aspirational=len(aspirational_techniques),
+        num_providers=len(providers_with_sources),
+        num_sources=len(sources),
+        num_links=total_links,
+    )
+
     print("Generated docs/SUMMARY.md")
     print(f"  Providers: {len(providers_with_sources)}")
     print(f"  Models: {len(models_list)}")
@@ -291,6 +308,46 @@ def generate_summary():
           f" (+{len(aspirational_techniques)} aspirational)")
     print(f"  Techniques detected: "
           f"{len(active_detected)} / {len(active_techniques)}")
+    print(f"  Technique-document links: {total_links}")
+
+
+def update_readme(num_techniques, num_aspirational, num_providers,
+                  num_sources, num_links):
+    """Patch the 'Dataset at a Glance' section of README.md with live stats."""
+    readme_path = Path('README.md')
+    if not readme_path.exists():
+        return
+
+    text = readme_path.read_text(encoding='utf-8')
+
+    # Build replacement lines
+    new_glance = (
+        f"- **{num_techniques} active safety techniques** across "
+        f"**5 categories** (+{num_aspirational} aspirational)\n"
+        f"- **{num_providers} providers** (OpenAI, Anthropic, Google, "
+        f"Meta, Cohere, Mistral, xAI, and more)\n"
+        f"- **{num_sources} source documents** (system cards, technical "
+        f"reports, safety frameworks)\n"
+        f"- **{num_links}+ technique-document links** with provenance "
+        f"tracking"
+    )
+
+    # Match the glance block: lines starting with "- **" between
+    # "## Dataset at a Glance" and the next "##" heading
+    pattern = (
+        r'(## Dataset at a Glance\s*\n\s*\n)'
+        r'(- \*\*.*?)'
+        r'(\n\s*\n## )'
+    )
+    replacement = r'\1' + new_glance + r'\3'
+
+    new_text = re.sub(pattern, replacement, text, flags=re.DOTALL)
+
+    if new_text != text:
+        readme_path.write_text(new_text, encoding='utf-8')
+        print("Updated README.md (Dataset at a Glance)")
+    else:
+        print("README.md already up to date")
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ As AI systems become more powerful, understanding their safety mechanisms is cri
 - **48 active safety techniques** across **5 categories** (+2 aspirational)
 - **14 providers** (OpenAI, Anthropic, Google, Meta, Cohere, Mistral, xAI, and more)
 - **40 source documents** (system cards, technical reports, safety frameworks)
-- **455+ technique-document links** with provenance tracking
+- **461+ technique-document links** with provenance tracking
 
 ## Safety Taxonomy
 
