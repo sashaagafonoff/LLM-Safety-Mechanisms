@@ -103,9 +103,10 @@ docs/                                # Interactive dashboard (GitHub Pages)
 │   ├── lifecycle-chart.js           # Model lifecycle swim lanes
 │   ├── network-viz.js               # Document-provider network graph
 │   ├── filters.js                   # Multi-dimensional filter controls
-│   ├── tag-data.js                  # Tagging tool data transforms
-│   ├── tag-browser.js               # Source document browser
-│   └── tag-form.js                  # Review/add form + GitHub issue builder
+│   ├── tag-data.js                  # Tag tool data loading + key normalization
+│   ├── tag-viewer.js                # Document viewer + evidence highlighting
+│   ├── tag-sidebar.js               # Technique sidebar + evidence rows
+│   └── tag-issue.js                 # GitHub issue URL builders
 └── data/
     └── network-layout.json          # Saved node positions for doc network
 

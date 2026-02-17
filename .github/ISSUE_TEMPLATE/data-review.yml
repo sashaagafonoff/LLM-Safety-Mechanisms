@@ -1,6 +1,6 @@
 name: Data Review Submission
 description: Review an existing technique tag or suggest a new one
-title: "[Review] "
+title: "[Tag] "
 labels: ["data-review"]
 body:
   - type: markdown
@@ -9,12 +9,13 @@ body:
         **Tip:** For a better experience, use the [Tag & Review tool](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/tag) which pre-fills this form for you.
 
   - type: dropdown
-    id: submission_type
+    id: action
     attributes:
-      label: Submission Type
+      label: Action
       options:
-        - review_existing
         - add_new_tag
+        - delete_tag
+        - link_evidence
     validations:
       required: true
 
@@ -36,35 +37,20 @@ body:
     validations:
       required: true
 
-  - type: dropdown
-    id: action
-    attributes:
-      label: Action
-      options:
-        - add
-        - confirm
-        - adjust_confidence
-        - dispute
-    validations:
-      required: true
-
-  - type: dropdown
-    id: confidence
-    attributes:
-      label: Confidence Level
-      options:
-        - High
-        - Medium
-        - Low
-    validations:
-      required: true
-
   - type: textarea
     id: evidence
     attributes:
       label: Evidence Text
       description: Quote specific text from the source document that supports this tag
       placeholder: Paste the relevant excerpt here...
+    validations:
+      required: true
+
+  - type: input
+    id: github_username
+    attributes:
+      label: GitHub Username
+      description: "Your GitHub username for attribution"
     validations:
       required: true
 

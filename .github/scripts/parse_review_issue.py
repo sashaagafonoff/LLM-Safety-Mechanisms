@@ -8,10 +8,15 @@ import sys
 import urllib.request
 
 
-REQUIRED_FIELDS = ["submission_type", "source_id", "technique_id", "evidence_text"]
-VALID_SUBMISSION_TYPES = {"review_existing", "add_new_tag"}
-VALID_ACTIONS = {"confirm", "adjust_confidence", "dispute", "add"}
-VALID_CONFIDENCE = {"High", "Medium", "Low"}
+# Version 1 payloads (legacy form-based tool)
+V1_REQUIRED_FIELDS = ["submission_type", "source_id", "technique_id", "evidence_text"]
+V1_VALID_SUBMISSION_TYPES = {"review_existing", "add_new_tag"}
+V1_VALID_ACTIONS = {"confirm", "adjust_confidence", "dispute", "add"}
+V1_VALID_CONFIDENCE = {"High", "Medium", "Low"}
+
+# Version 2 payloads (two-panel annotation tool)
+V2_REQUIRED_FIELDS = ["action", "source_id", "technique_id", "evidence_text", "github_username"]
+V2_VALID_ACTIONS = {"delete_tag", "link_evidence", "add_new_tag"}
 
 
 def fetch_issue_body(issue_number: str) -> str:
@@ -34,17 +39,26 @@ def extract_json_block(body: str) -> dict:
 
 
 def validate(data: dict) -> None:
-    missing = [f for f in REQUIRED_FIELDS if not data.get(f)]
-    if missing:
-        raise ValueError(f"Missing required fields: {', '.join(missing)}")
-    if data["submission_type"] not in VALID_SUBMISSION_TYPES:
-        raise ValueError(f"Invalid submission_type: {data['submission_type']}")
-    action = data.get("action", "")
-    if action and action not in VALID_ACTIONS:
-        raise ValueError(f"Invalid action: {action}")
-    conf = data.get("new_confidence")
-    if conf and conf not in VALID_CONFIDENCE:
-        raise ValueError(f"Invalid confidence: {conf}")
+    version = data.get("version", 1)
+
+    if version == 2:
+        missing = [f for f in V2_REQUIRED_FIELDS if not data.get(f)]
+        if missing:
+            raise ValueError(f"Missing required fields: {', '.join(missing)}")
+        if data["action"] not in V2_VALID_ACTIONS:
+            raise ValueError(f"Invalid action: {data['action']}")
+    else:
+        missing = [f for f in V1_REQUIRED_FIELDS if not data.get(f)]
+        if missing:
+            raise ValueError(f"Missing required fields: {', '.join(missing)}")
+        if data["submission_type"] not in V1_VALID_SUBMISSION_TYPES:
+            raise ValueError(f"Invalid submission_type: {data['submission_type']}")
+        action = data.get("action", "")
+        if action and action not in V1_VALID_ACTIONS:
+            raise ValueError(f"Invalid action: {action}")
+        conf = data.get("new_confidence")
+        if conf and conf not in V1_VALID_CONFIDENCE:
+            raise ValueError(f"Invalid confidence: {conf}")
 
 
 def write_output(key: str, value: str) -> None:

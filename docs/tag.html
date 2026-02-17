@@ -1,113 +1,834 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tag & Review - LLM Safety Mechanisms</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag &amp; Review - LLM Safety Mechanisms</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #111318;
+    --surface: #191c24;
+    --surface-2: #21252f;
+    --surface-3: #2a2f3b;
+    --border: #2e3445;
+    --border-light: #3a4055;
+    --text: #d8dbe6;
+    --text-dim: #7d829a;
+    --text-faint: #555a6e;
+    --accent: #5eadf2;
+    --accent-dim: rgba(94, 173, 242, 0.15);
+    --tagged: #3dd9a0;
+    --tagged-dim: rgba(61, 217, 160, 0.12);
+    --tagged-border: rgba(61, 217, 160, 0.4);
+    --evidence-bg: rgba(61, 217, 160, 0.08);
+    --warning: #f0c45a;
+    --danger: #e06356;
+    --selection-bg: rgba(94, 173, 242, 0.25);
+    --selection-border: rgba(94, 173, 242, 0.5);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ==================== HEADER ==================== */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    white-space: nowrap;
+    border-right: 1px solid var(--border);
+    padding-right: 14px;
+  }
+
+  .logo em { color: var(--tagged); font-style: normal; }
+
+  .nav-link {
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    padding-right: 14px;
+    border-right: 1px solid var(--border);
+  }
+  .nav-link:hover { text-decoration: underline; }
+
+  .doc-select-wrap { flex: 1; max-width: 560px; }
+
+  .doc-select {
+    width: 100%;
+    padding: 6px 30px 6px 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12.5px;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%237d829a'%3E%3Cpath d='M5 7L0 2h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+  .doc-select:focus { outline: none; border-color: var(--accent); }
+  .doc-select option { background: var(--surface-2); }
+  .doc-select optgroup { color: var(--text-dim); font-weight: 600; }
+
+  .header-spacer { flex: 1; }
+
+  .header-stat {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .header-stat em { font-style: normal; color: var(--tagged); }
+
+  .username-display {
+    font-size: 11px;
+    color: var(--accent);
+    cursor: pointer;
+  }
+  .username-display:hover { text-decoration: underline; }
+
+  /* ==================== MAIN LAYOUT ==================== */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ==================== DOCUMENT VIEWER ==================== */
+  .doc-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .doc-toolbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    min-height: 38px;
+  }
+
+  .doc-toolbar .doc-title-bar {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--text);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .doc-toolbar .doc-type-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+
+  .doc-toolbar .doc-provider-badge {
+    font-size: 11px;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+
+  .doc-toolbar a {
+    color: var(--accent);
+    font-size: 11px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .doc-toolbar a:hover { text-decoration: underline; }
+
+  .doc-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 28px 40px 80px 40px;
+    line-height: 1.75;
+    font-family: 'Crimson Pro', serif;
+    font-size: 17px;
+    color: var(--text);
+    cursor: text;
+  }
+
+  .doc-content::selection { background: var(--selection-bg); }
+  .doc-content *::selection { background: var(--selection-bg); }
+
+  .doc-content::-webkit-scrollbar { width: 7px; }
+  .doc-content::-webkit-scrollbar-track { background: transparent; }
+  .doc-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .doc-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: var(--text-faint);
+    font-size: 14px;
+    text-align: center;
+    padding: 40px;
+  }
+
+  .doc-empty .empty-icon { font-size: 32px; margin-bottom: 10px; opacity: 0.4; }
+  .doc-empty p { max-width: 400px; line-height: 1.6; }
+
+  /* Evidence highlighting */
+  .evidence-highlight {
+    background: var(--evidence-bg);
+    border-bottom: 2px solid var(--tagged);
+    padding: 1px 0;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 2px;
+  }
+  .evidence-highlight:hover { background: rgba(61, 217, 160, 0.18); }
+
+  .evidence-highlight .ev-tag {
+    display: inline;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 9px;
+    background: var(--tagged);
+    color: var(--bg);
+    padding: 1px 4px;
+    border-radius: 2px;
+    margin-left: 3px;
+    vertical-align: super;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* Selection hint */
+  .selection-hint {
+    position: fixed;
+    background: var(--surface-2);
+    border: 1px solid var(--selection-border);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 11px;
+    color: var(--accent);
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0;
+    transition: opacity 0.15s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .selection-hint.visible { opacity: 1; }
+
+  /* ==================== SIDEBAR ==================== */
+  .sidebar {
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar-header h2 {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+  }
+
+  .tag-counter {
+    font-size: 12px;
+    color: var(--tagged);
+  }
+  .tag-counter span { color: var(--text-faint); }
+
+  .sidebar-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  .sidebar-scroll::-webkit-scrollbar { width: 5px; }
+  .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+  .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .cat-group { margin-bottom: 6px; }
+
+  .cat-header {
+    padding: 6px 14px 4px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 2;
+  }
+
+  .cat-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .tech-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: background 0.1s;
+    user-select: none;
+    position: relative;
+  }
+  .tech-item:hover { background: var(--surface-2); }
+  .tech-item.tagged { background: var(--tagged-dim); }
+  .tech-item.tagged:hover { background: rgba(61, 217, 160, 0.18); }
+
+  .tech-body { flex: 1; min-width: 0; }
+
+  .tech-name {
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--text-dim);
+    transition: color 0.1s;
+  }
+  .tech-item.tagged .tech-name { color: var(--text); }
+
+  .tech-evidence-list { margin-top: 3px; }
+
+  .ev-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 1px 0;
+    min-height: 16px;
+  }
+
+  .ev-link {
+    font-size: 10px;
+    color: var(--text-faint);
+    line-height: 1.3;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ev-link.has-evidence { color: var(--tagged); opacity: 0.7; }
+  .ev-link.ev-missing { color: var(--warning); opacity: 0.85; }
+  .ev-link.ev-manual { color: var(--text-faint); }
+  .ev-link.clickable { cursor: pointer; }
+  .ev-link.clickable:hover { opacity: 1; text-decoration: underline; }
+
+  .prov-marker {
+    font-size: 9px;
+    font-weight: 600;
+    margin-right: 2px;
+  }
+  .prov-nlu { color: #7cacf8; }
+  .prov-llm { color: #c49cf8; }
+  .prov-manual { color: var(--tagged); }
+  .prov-legacy { color: var(--text-faint); }
+
+  .ev-remove {
+    font-size: 9px;
+    color: var(--text-faint);
+    cursor: pointer;
+    padding: 0 3px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    line-height: 1.4;
+    opacity: 0;
+    transition: opacity 0.1s, color 0.1s, background 0.1s;
+  }
+  .ev-row:hover .ev-remove { opacity: 1; }
+  .ev-remove:hover { color: var(--danger); background: rgba(224, 99, 86, 0.15); }
+
+  .tech-item.tagged.ev-missing-item { background: rgba(240, 196, 90, 0.06); }
+
+  @keyframes ev-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(61, 217, 160, 0.5); }
+    50% { box-shadow: 0 0 0 4px rgba(61, 217, 160, 0.3); }
+    100% { box-shadow: 0 0 0 0 rgba(61, 217, 160, 0); }
+  }
+  .evidence-highlight.pulse { animation: ev-pulse 0.8s ease-out 2; }
+
+  @keyframes sidebar-flash {
+    0% { outline: 2px solid var(--accent); outline-offset: -1px; }
+    100% { outline: 2px solid transparent; outline-offset: -1px; }
+  }
+  .tech-item.flash-highlight { animation: sidebar-flash 1.5s ease-out forwards; }
+
+  /* ==================== FLASH MESSAGE ==================== */
+  .flash {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 7px 16px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 300;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  .flash.visible { opacity: 1; }
+  .flash.flash-info { background: var(--accent); color: #fff; }
+  .flash.flash-error { background: var(--danger); color: #fff; }
+
+  /* ==================== USERNAME MODAL ==================== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+  }
+  .modal-overlay.hidden { display: none; }
+
+  .modal-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 380px;
+    width: 90%;
+  }
+
+  .modal-box h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .modal-box p {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .modal-box input {
+    width: 100%;
+    padding: 8px 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .modal-box input:focus { outline: none; border-color: var(--accent); }
+
+  .modal-box button {
+    width: 100%;
+    padding: 8px;
+    background: var(--accent);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .modal-box button:hover { background: #4a9de0; }
+  .modal-box button:disabled { opacity: 0.5; cursor: default; }
+
+  /* ==================== LOADING ==================== */
+  .loading-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    z-index: 999;
+    gap: 14px;
+  }
+
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-overlay p { color: var(--text-dim); font-size: 12px; }
+</style>
 </head>
 <body>
-  <nav class="site-nav">
-    <a href="./">Explorer</a>
-    <a href="./tag.html" class="active">Tag &amp; Review</a>
-  </nav>
 
-  <main>
-    <h1>Tag &amp; Review Safety Techniques</h1>
-    <p>Help improve the LLM Safety Mechanisms dataset by reviewing existing technique tags or suggesting new ones. Submissions create a GitHub issue for maintainer review &mdash; approved submissions are automatically merged.</p>
+<!-- Loading overlay -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <p>Loading data&hellip;</p>
+</div>
 
-    <hr>
+<!-- Flash message -->
+<div class="flash" id="flashMsg"></div>
 
-    <h2>Source Documents</h2>
-    <p>Browse source documents by provider. Click a source to review its tags or add new ones.</p>
-    <div id="source-browser"><div class="loading">Loading&hellip;</div></div>
+<!-- Selection hint -->
+<div class="selection-hint" id="selectionHint">Click a technique to link &rarr;</div>
 
-    <hr>
+<!-- Username modal -->
+<div class="modal-overlay hidden" id="usernameModal">
+  <div class="modal-box">
+    <h3>GitHub Username</h3>
+    <p>Enter your GitHub username. This will be included in the issue for attribution and will be saved in your browser for future submissions.</p>
+    <input type="text" id="usernameInput" placeholder="your-github-username" autocomplete="username">
+    <button id="usernameSave" disabled>Continue</button>
+  </div>
+</div>
 
-    <h2>Review / Add Tag</h2>
-    <div id="review-form"></div>
+<!-- Header -->
+<div class="header" id="header" style="display:none;">
+  <div class="logo">LLM SAFETY <em>TAG</em></div>
+  <a class="nav-link" href="./">Explorer</a>
+  <div class="doc-select-wrap">
+    <select class="doc-select" id="docSelect">
+      <option value="">Select a document&hellip;</option>
+    </select>
+  </div>
+  <div class="header-spacer"></div>
+  <div class="header-stat" id="headerStat"></div>
+  <span class="username-display" id="usernameDisplay" title="Click to change username"></span>
+</div>
 
-    <hr>
+<!-- Main layout -->
+<div class="main" id="mainLayout" style="display:none;">
+  <!-- Document panel -->
+  <div class="doc-panel">
+    <div class="doc-toolbar" id="docToolbar" style="display:none;">
+      <span class="doc-title-bar" id="docTitleBar"></span>
+      <span class="doc-type-badge" id="docTypeBadge"></span>
+      <span class="doc-provider-badge" id="docProvBadge"></span>
+      <a href="#" id="docLink" target="_blank" style="display:none;">Open source &nearr;</a>
+    </div>
+    <div class="doc-empty" id="docEmpty">
+      <div>
+        <div class="empty-icon">&#128196;</div>
+        <p>Select a document from the dropdown to begin reviewing safety technique tags.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--text-faint)">
+          You can delete incorrect tags, link existing evidence to another technique, or select new text to tag.
+        </p>
+      </div>
+    </div>
+    <div class="doc-content" id="docContent" style="display:none;"></div>
+  </div>
 
-    <details>
-      <summary><strong>How this works</strong></summary>
-      <ol>
-        <li><strong>Browse sources</strong> &mdash; select a source document to see its existing technique tags</li>
-        <li><strong>Review existing tags</strong> &mdash; confirm accuracy, adjust confidence, or dispute incorrect mappings</li>
-        <li><strong>Add new tags</strong> &mdash; suggest a technique not yet mapped to this source</li>
-        <li><strong>Submit</strong> &mdash; generates a GitHub issue with structured data for maintainer review</li>
-        <li><strong>Automation</strong> &mdash; approved submissions are processed via GitHub Actions and merged as a PR</li>
-      </ol>
-      <p><strong>Requirements:</strong> GitHub account (for creating issues). Evidence must quote specific text from the source document.</p>
-      <p><strong>Confidence levels:</strong></p>
-      <ul>
-        <li><strong>High</strong> &mdash; technique is explicitly described with implementation details</li>
-        <li><strong>Medium</strong> &mdash; technique is implied or partially described</li>
-        <li><strong>Low</strong> &mdash; technique is briefly mentioned without detail</li>
-      </ul>
-    </details>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Techniques</h2>
+      <div class="tag-counter" id="tagCounter">0<span> / 0</span></div>
+    </div>
+    <div class="sidebar-scroll" id="sidebarList"></div>
+  </div>
+</div>
 
-    <hr>
+<script type="module">
+  import { loadTagData, fetchFlatText } from "./components/tag-data.js";
+  import { createDocViewer } from "./components/tag-viewer.js";
+  import { createSidebar } from "./components/tag-sidebar.js";
+  import { buildDeleteIssueUrl, buildLinkIssueUrl, buildNewTagIssueUrl } from "./components/tag-issue.js";
 
-    <footer>
-      <strong>Repository:</strong> <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms</a> &middot;
-      <strong>License:</strong> MIT &middot;
-      <strong>Maintainer:</strong> Sasha Agafonoff
-    </footer>
-  </main>
-
-  <script type="importmap">
-  {
-    "imports": {
-      "htl": "https://esm.sh/htl@0.3.1",
-      "d3": "https://esm.sh/d3@7.9.0"
-    }
+  // --- Flash message ---
+  let flashTimer = null;
+  function flash(msg, type = 'info') {
+    const el = document.getElementById('flashMsg');
+    el.textContent = msg;
+    el.className = `flash flash-${type} visible`;
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => el.classList.remove('visible'), 2500);
   }
-  </script>
 
-  <script type="module">
-    import * as d3 from "d3";
+  // --- Username management ---
+  function getUsername() {
+    return localStorage.getItem('tag-github-username') || '';
+  }
 
-    import {buildTaggingDataset} from "./components/tag-data.js";
-    import {createSourceBrowser} from "./components/tag-browser.js";
-    import {createReviewForm} from "./components/tag-form.js";
+  function setUsername(name) {
+    localStorage.setItem('tag-github-username', name);
+    updateUsernameDisplay();
+  }
 
-    // --- Data Loading ---
-    const ghBase = "https://raw.githubusercontent.com/sashaagafonoff/LLM-Safety-Mechanisms/main/data";
-    const fetchJson = (name) => fetch(`${ghBase}/${name}`).then((r) => r.json());
+  function updateUsernameDisplay() {
+    const el = document.getElementById('usernameDisplay');
+    const name = getUsername();
+    el.textContent = name ? `@${name}` : 'Set username';
+  }
 
-    const [evidence, techniques, categories, techniqueMap, providers] = await Promise.all([
-      fetchJson("evidence.json"),
-      fetchJson("techniques.json"),
-      fetchJson("categories.json"),
-      fetchJson("model_technique_map.json"),
-      fetchJson("providers.json")
-    ]);
+  function ensureUsername() {
+    return new Promise((resolve) => {
+      const existing = getUsername();
+      if (existing) { resolve(existing); return; }
 
-    // --- Build Dataset ---
-    const tagData = buildTaggingDataset(evidence, techniques, categories, techniqueMap, providers);
+      const modal = document.getElementById('usernameModal');
+      const input = document.getElementById('usernameInput');
+      const btn = document.getElementById('usernameSave');
+      modal.classList.remove('hidden');
+      input.value = '';
+      input.focus();
 
-    // --- Source Browser ---
-    const browser = createSourceBrowser(tagData, d3);
-    const browserContainer = document.getElementById("source-browser");
-    browserContainer.innerHTML = "";
-    browserContainer.appendChild(browser);
+      function onInput() {
+        btn.disabled = !input.value.trim();
+      }
 
-    // --- Review Form (reactive to selection) ---
-    const formContainer = document.getElementById("review-form");
+      function onSave() {
+        const name = input.value.trim();
+        if (!name) return;
+        setUsername(name);
+        modal.classList.add('hidden');
+        input.removeEventListener('input', onInput);
+        btn.removeEventListener('click', onSave);
+        input.removeEventListener('keydown', onKey);
+        resolve(name);
+      }
 
-    function renderForm(selectedSource) {
-      formContainer.innerHTML = "";
-      formContainer.appendChild(createReviewForm(selectedSource, tagData, d3));
+      function onKey(e) {
+        if (e.key === 'Enter' && input.value.trim()) onSave();
+      }
+
+      input.addEventListener('input', onInput);
+      btn.addEventListener('click', onSave);
+      input.addEventListener('keydown', onKey);
+    });
+  }
+
+  // Allow changing username by clicking display
+  document.getElementById('usernameDisplay').addEventListener('click', () => {
+    localStorage.removeItem('tag-github-username');
+    ensureUsername();
+  });
+
+  // --- Load data ---
+  let data;
+  try {
+    data = await loadTagData();
+  } catch (e) {
+    document.getElementById('loading').innerHTML =
+      `<p style="color:var(--danger);">Failed to load data: ${e.message}</p>`;
+    throw e;
+  }
+
+  const { sources, techniques, normalizedMap, techById, catById, provById, techByCategory } = data;
+
+  // --- Populate document dropdown grouped by provider ---
+  const docSelect = document.getElementById('docSelect');
+  const byProvider = new Map();
+  sources.forEach(s => {
+    const provName = provById.get(s.provider)?.name || s.provider;
+    if (!byProvider.has(provName)) byProvider.set(provName, []);
+    byProvider.get(provName).push(s);
+  });
+
+  Array.from(byProvider.entries())
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .forEach(([provName, docs]) => {
+      const group = document.createElement('optgroup');
+      group.label = provName;
+      docs.sort((a, b) => (a.title || a.id).localeCompare(b.title || b.id)).forEach(s => {
+        const tags = normalizedMap[s.id] || [];
+        const activeTags = tags.filter(t => t.active !== false);
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = `${s.title || s.id} (${activeTags.length})`;
+        group.appendChild(opt);
+      });
+      docSelect.appendChild(group);
+    });
+
+  // --- Initialize components ---
+  const docContentEl = document.getElementById('docContent');
+  const selHintEl = document.getElementById('selectionHint');
+  const viewer = createDocViewer(docContentEl, selHintEl);
+  const sidebar = createSidebar(document.getElementById('sidebarList'), techByCategory, catById);
+
+  // --- Document selection ---
+  let currentDocId = null;
+  let currentSource = null;
+
+  async function selectDocument(docId) {
+    currentDocId = docId;
+    currentSource = sources.find(s => s.id === docId);
+    if (!currentSource) return;
+
+    // Update toolbar
+    const toolbar = document.getElementById('docToolbar');
+    toolbar.style.display = 'flex';
+    document.getElementById('docTitleBar').textContent = currentSource.title || currentSource.id;
+    document.getElementById('docTypeBadge').textContent = currentSource.type || 'Document';
+    document.getElementById('docProvBadge').textContent = provById.get(currentSource.provider)?.name || currentSource.provider;
+    const docLink = document.getElementById('docLink');
+    if (currentSource.url) {
+      docLink.href = currentSource.url;
+      docLink.style.display = '';
+    } else {
+      docLink.style.display = 'none';
     }
 
-    // Initial state: no selection
-    renderForm(null);
+    // Hide empty state, show content
+    document.getElementById('docEmpty').style.display = 'none';
+    docContentEl.style.display = '';
+    docContentEl.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:40px;">Loading document text&hellip;</p>';
 
-    // Update form when a source is selected
-    browser.addEventListener("input", () => {
-      renderForm(browser.value);
+    // Fetch flat text
+    const flatText = await fetchFlatText(docId);
+    const tags = normalizedMap[docId] || [];
+
+    // Render document with highlights
+    viewer.render(flatText, tags, techById, catById);
+
+    // Update sidebar
+    sidebar.update(tags, viewer.getEvidenceMatchState(), techById);
+
+    // Update tag counter
+    const activeTags = tags.filter(t => t.active !== false);
+    document.getElementById('tagCounter').innerHTML =
+      `${activeTags.length}<span> / ${techniques.length}</span>`;
+
+    // Header stat
+    const totalTags = Object.values(normalizedMap).reduce((sum, arr) => sum + (arr?.length || 0), 0);
+    document.getElementById('headerStat').innerHTML = `<em>${totalTags}</em> total tags`;
+  }
+
+  docSelect.addEventListener('change', () => {
+    if (docSelect.value) selectDocument(docSelect.value);
+  });
+
+  // --- Wire viewer → sidebar scroll ---
+  viewer.onEvTagClick((techId) => {
+    sidebar.scrollToItem(techId);
+  });
+
+  // --- Wire sidebar actions ---
+
+  // 1. Delete: X button → issue
+  sidebar.onDeleteClick(async (techId, snippetIndex, evidenceText) => {
+    const username = await ensureUsername();
+    const tech = techById.get(techId);
+    const url = buildDeleteIssueUrl({
+      sourceId: currentDocId,
+      sourceTitle: currentSource.title || currentDocId,
+      providerName: provById.get(currentSource.provider)?.name || currentSource.provider,
+      techniqueId: techId,
+      techniqueName: tech ? tech.name : techId,
+      evidenceText: evidenceText,
+      githubUsername: username
     });
-  </script>
+    window.open(url, '_blank');
+    flash('Opening GitHub issue for tag deletion', 'info');
+  });
+
+  // 2. Evidence row click → set pending selection + scroll to highlight
+  sidebar.onEvidenceRowClick((techId, snippetIndex, evidenceText) => {
+    viewer.setPendingSelection({ text: evidenceText });
+    viewer.scrollToEvidence(techId, snippetIndex);
+    selHintEl.style.left = '50%';
+    selHintEl.style.top = '20px';
+    selHintEl.classList.add('visible');
+    flash('Evidence selected \u2014 click a technique to link it', 'info');
+  });
+
+  // 3. Technique name click → link or add depending on pending selection
+  sidebar.onTechniqueClick(async (techId, techName) => {
+    const pending = viewer.getPendingSelection();
+    if (!pending || !currentDocId) {
+      flash('Select text in the document first, or click an evidence row', 'error');
+      return;
+    }
+
+    const username = await ensureUsername();
+
+    // Determine if this is linking existing evidence or adding new
+    const tags = normalizedMap[currentDocId] || [];
+    const existingTag = tags.find(t =>
+      t.evidence && (Array.isArray(t.evidence) ? t.evidence : [t.evidence])
+        .some(e => {
+          const text = typeof e === 'object' ? e.text : e;
+          return text === pending.text;
+        })
+    );
+
+    const issueParams = {
+      sourceId: currentDocId,
+      sourceTitle: currentSource.title || currentDocId,
+      providerName: provById.get(currentSource.provider)?.name || currentSource.provider,
+      techniqueId: techId,
+      techniqueName: techName,
+      evidenceText: pending.text,
+      githubUsername: username
+    };
+
+    let url;
+    if (existingTag && existingTag.techniqueId !== techId) {
+      // Linking existing evidence to a different technique
+      url = buildLinkIssueUrl(issueParams);
+      flash('Opening GitHub issue to link evidence', 'info');
+    } else {
+      // New text selection → add new tag
+      url = buildNewTagIssueUrl(issueParams);
+      flash('Opening GitHub issue to add new tag', 'info');
+    }
+
+    window.open(url, '_blank');
+    viewer.clearPendingSelection();
+  });
+
+  // --- Init complete ---
+  updateUsernameDisplay();
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('header').style.display = 'flex';
+  document.getElementById('mainLayout').style.display = 'grid';
+
+</script>
 </body>
 </html>

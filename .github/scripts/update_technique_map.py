@@ -38,10 +38,10 @@ def validate_references(submission: dict, evidence: dict, techniques: list) -> N
         raise ValueError(f"Technique ID not found: {submission['technique_id']}")
 
 
-def make_evidence_entry(submission: dict, review_type: str = None, **extra) -> dict:
+def make_evidence_entry(submission: dict, review_type: str = None, created_by: str = None, **extra) -> dict:
     entry = {
         "text": submission["evidence_text"],
-        "created_by": "community",
+        "created_by": created_by or "community",
         "active": True,
         "deleted_by": None,
     }
@@ -52,6 +52,83 @@ def make_evidence_entry(submission: dict, review_type: str = None, **extra) -> d
 
 
 def apply_submission(technique_map: dict, submission: dict) -> dict:
+    version = submission.get("version", 1)
+    if version == 2:
+        return apply_v2(technique_map, submission)
+    return apply_v1(technique_map, submission)
+
+
+def apply_v2(technique_map: dict, submission: dict) -> dict:
+    """Handle version 2 payloads from the two-panel annotation tool."""
+    source_id = submission["source_id"]
+    technique_id = submission["technique_id"]
+    action = submission["action"]
+    username = submission.get("github_username", "community")
+
+    if source_id not in technique_map:
+        technique_map[source_id] = []
+
+    entries = technique_map[source_id]
+
+    # Find existing entry for this technique
+    existing = None
+    existing_idx = None
+    for idx, e in enumerate(entries):
+        if e["techniqueId"] == technique_id:
+            existing = e
+            existing_idx = idx
+            break
+
+    if action == "delete_tag":
+        if existing is None:
+            raise ValueError(f"Cannot delete non-existent mapping: {technique_id} in {source_id}")
+        existing["active"] = False
+        existing["deleted_by"] = username
+        return {"action": "deleted", "source_id": source_id, "technique_id": technique_id}
+
+    elif action == "link_evidence":
+        if existing is None:
+            # Create new entry when linking evidence to a new technique
+            new_entry = {
+                "techniqueId": technique_id,
+                "confidence": "Medium",
+                "active": True,
+                "deleted_by": None,
+                "evidence": [make_evidence_entry(submission, created_by=username)],
+            }
+            entries.append(new_entry)
+            return {"action": "linked_new", "source_id": source_id, "technique_id": technique_id}
+        else:
+            existing.setdefault("evidence", []).append(
+                make_evidence_entry(submission, created_by=username)
+            )
+            return {"action": "linked", "source_id": source_id, "technique_id": technique_id}
+
+    elif action == "add_new_tag":
+        if existing and existing.get("active", True):
+            return {"action": "skip", "reason": "Technique already mapped (active)"}
+
+        new_entry = {
+            "techniqueId": technique_id,
+            "confidence": "Medium",
+            "active": True,
+            "deleted_by": None,
+            "evidence": [make_evidence_entry(submission, created_by=username)],
+        }
+
+        if existing_idx is not None:
+            entries[existing_idx] = new_entry
+            return {"action": "reactivated", "source_id": source_id, "technique_id": technique_id}
+        else:
+            entries.append(new_entry)
+            return {"action": "added", "source_id": source_id, "technique_id": technique_id}
+
+    else:
+        raise ValueError(f"Unknown v2 action: {action}")
+
+
+def apply_v1(technique_map: dict, submission: dict) -> dict:
+    """Handle version 1 payloads (legacy form-based tool)."""
     source_id = submission["source_id"]
     technique_id = submission["technique_id"]
     submission_type = submission["submission_type"]
