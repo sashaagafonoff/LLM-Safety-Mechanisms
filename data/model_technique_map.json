@@ -9304,8 +9304,8 @@
     {
       "techniqueId": "tech-capability-monitoring",
       "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
+      "active": false,
+      "deleted_by": "sashaagafonoff",
       "evidence": [
         {
           "text": "This showcases Qwen2-VL’s superior capabilities in 11 Table 6.: Performance Comparison on Referring Expression Comprehension Task. Type Model RefCOCO RefCOCO+ RefCOCOg val test-A test-B val test-A test-B val OFA-L (Wang et al., 2022) Shikra (Chen et al., 2023a) Qwen-VL (Bai et al., 2023b) Ferretv2 (Zhang et al., 2024a) CogVLM (Wang et al., 2023b) InternVL22b (Chen et al., 2024c) InternVL28b (Chen et al., 2024c) InternVL276b (Chen et al., 2024c) Qwen2-VL2b Qwen2-VL7b Qwen2-VL72b G-DINO-L (Liu et al., 2023c) UNINEXT-H (Yan et al., 2023) ONE-PEACE (Wang et al., 2023a) 80.0 87.0 89.4 92.6 92.8 82.3 87.1 92.2 87.6 91.7 93.2 90.6 92.6 92.6 83.7 90.6 92.3 95.0 94.8 88.2 91.1 94.8 90.6 93.6 95.3 93.2 94.3 94.2 76.4 80.2 85.3 88.9 89.0 75.9 80.7 88.4 82.3 87.3 90.7 88.2 91.5 89.3 68.3 81.6 83.1 87.4 88.7 73.5 79.8 88.8 79.0 85.8 90.1 82.8 85.2 88.8 76.0 87.4 88.3 92.1 92.9 82.8 87.9 93.1 84.9 90.5 93.8 89.0 89.6 92.2 61.8 72.1 77.2 81.4 83.4 63.3 71.4 82.8 71.0 79.5 85.6 75.9 79.8 83.2 67.6 82.3 85.6 89.4 89.8 77.6 82.7 89.5 81.2 87.3 89.9 86.1 88.7 89.2 test 67.6 82.2 85.5 90.0 90.8 78.3 82.7 90.3 80.3 87.8 90.4 87.0 89.4 89.3 Generalist Specialist video understanding tasks, and scaling up Qwen2-VL yields significant improvements. For the challenging Video-MME benchmark (Fu et al., 2024), which includes videos up to one hour, it is noteworthy that we limited the maximum number of frames extracted per video to 768 during evaluation, potentially impacting performance on longer videos.",
