@@ -5,8 +5,7 @@ on:
     branches: [main]
     paths:
       - 'data/**.json'
-      - 'scripts/generate_dashboard.py'
-      - 'scripts/generate_report.py'
+      - 'observable/**'
   workflow_dispatch:
 
 permissions:
@@ -23,29 +22,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
       with:
-        python-version: '3.11'
-    
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: observable/package-lock.json
+
     - name: Install dependencies
-      run: |
-        pip install pandas plotly jsonschema python-dateutil
-    
-    - name: Generate reports
-      run: |
-        python scripts/generate_report.py
-        python scripts/generate_dashboard.py
-    
+      run: npm ci
+      working-directory: observable
+
+    - name: Build Observable Framework
+      run: npx @observablehq/framework build
+      working-directory: observable
+
     - name: Setup Pages
       uses: actions/configure-pages@v4
-    
+
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v2
       with:
-        path: './docs'
-    
+        path: './observable/dist'
+
   deploy:
     environment:
       name: github-pages
