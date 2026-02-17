@@ -1,0 +1,19 @@
+{
+  "name": "llm-safety-mechanisms-explorer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx @observablehq/framework preview",
+    "build": "npx @observablehq/framework build",
+    "clean": "rimraf dist .observablehq/cache"
+  },
+  "devDependencies": {
+    "@observablehq/framework": "^1.12.0",
+    "rimraf": "^5.0.0"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "htl": "^0.3.1"
+  }
+}
