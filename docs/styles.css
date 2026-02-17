@@ -95,18 +95,25 @@ hr {
 }
 .summary-table tbody tr:hover { background: #fafafa; }
 
-/* Buttons */
+/* Buttons — neutral base so chart toolbar buttons stay readable */
 button {
   padding: 8px 16px;
-  background: #1976D2;
-  color: white;
-  border: none;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 13px;
   cursor: pointer;
   font-weight: 500;
 }
-button:hover { background: #1565C0; }
+
+/* Accent buttons (export panel, standalone actions) */
+#export-panel button {
+  background: #1976D2;
+  color: white;
+  border: none;
+}
+#export-panel button:hover { background: #1565C0; }
 
 /* Details/summary */
 details { margin: 16px 0; }
