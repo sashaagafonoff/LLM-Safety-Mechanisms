@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tag & Review - LLM Safety Mechanisms</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="./">Explorer</a>
+    <a href="./tag.html" class="active">Tag &amp; Review</a>
+  </nav>
+
+  <main>
+    <h1>Tag &amp; Review Safety Techniques</h1>
+    <p>Help improve the LLM Safety Mechanisms dataset by reviewing existing technique tags or suggesting new ones. Submissions create a GitHub issue for maintainer review &mdash; approved submissions are automatically merged.</p>
+
+    <hr>
+
+    <h2>Source Documents</h2>
+    <p>Browse source documents by provider. Click a source to review its tags or add new ones.</p>
+    <div id="source-browser"><div class="loading">Loading&hellip;</div></div>
+
+    <hr>
+
+    <h2>Review / Add Tag</h2>
+    <div id="review-form"></div>
+
+    <hr>
+
+    <details>
+      <summary><strong>How this works</strong></summary>
+      <ol>
+        <li><strong>Browse sources</strong> &mdash; select a source document to see its existing technique tags</li>
+        <li><strong>Review existing tags</strong> &mdash; confirm accuracy, adjust confidence, or dispute incorrect mappings</li>
+        <li><strong>Add new tags</strong> &mdash; suggest a technique not yet mapped to this source</li>
+        <li><strong>Submit</strong> &mdash; generates a GitHub issue with structured data for maintainer review</li>
+        <li><strong>Automation</strong> &mdash; approved submissions are processed via GitHub Actions and merged as a PR</li>
+      </ol>
+      <p><strong>Requirements:</strong> GitHub account (for creating issues). Evidence must quote specific text from the source document.</p>
+      <p><strong>Confidence levels:</strong></p>
+      <ul>
+        <li><strong>High</strong> &mdash; technique is explicitly described with implementation details</li>
+        <li><strong>Medium</strong> &mdash; technique is implied or partially described</li>
+        <li><strong>Low</strong> &mdash; technique is briefly mentioned without detail</li>
+      </ul>
+    </details>
+
+    <hr>
+
+    <footer>
+      <strong>Repository:</strong> <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms</a> &middot;
+      <strong>License:</strong> MIT &middot;
+      <strong>Maintainer:</strong> Sasha Agafonoff
+    </footer>
+  </main>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "htl": "https://esm.sh/htl@0.3.1",
+      "d3": "https://esm.sh/d3@7.9.0"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as d3 from "d3";
+
+    import {buildTaggingDataset} from "./components/tag-data.js";
+    import {createSourceBrowser} from "./components/tag-browser.js";
+    import {createReviewForm} from "./components/tag-form.js";
+
+    // --- Data Loading ---
+    const ghBase = "https://raw.githubusercontent.com/sashaagafonoff/LLM-Safety-Mechanisms/main/data";
+    const fetchJson = (name) => fetch(`${ghBase}/${name}`).then((r) => r.json());
+
+    const [evidence, techniques, categories, techniqueMap, providers] = await Promise.all([
+      fetchJson("evidence.json"),
+      fetchJson("techniques.json"),
+      fetchJson("categories.json"),
+      fetchJson("model_technique_map.json"),
+      fetchJson("providers.json")
+    ]);
+
+    // --- Build Dataset ---
+    const tagData = buildTaggingDataset(evidence, techniques, categories, techniqueMap, providers);
+
+    // --- Source Browser ---
+    const browser = createSourceBrowser(tagData, d3);
+    const browserContainer = document.getElementById("source-browser");
+    browserContainer.innerHTML = "";
+    browserContainer.appendChild(browser);
+
+    // --- Review Form (reactive to selection) ---
+    const formContainer = document.getElementById("review-form");
+
+    function renderForm(selectedSource) {
+      formContainer.innerHTML = "";
+      formContainer.appendChild(createReviewForm(selectedSource, tagData, d3));
+    }
+
+    // Initial state: no selection
+    renderForm(null);
+
+    // Update form when a source is selected
+    browser.addEventListener("input", () => {
+      renderForm(browser.value);
+    });
+  </script>
+</body>
+</html>

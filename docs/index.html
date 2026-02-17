@@ -1,159 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM Safety Mechanisms Dashboard</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #f8f9fa;
-        }
-        .dashboard-header {
-            background-color: #fff;
-            padding: 2rem 0;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .stat-card {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #4ecdc4;
-        }
-        .stat-label {
-            color: #666;
-            font-size: 0.95rem;
-        }
-        .chart-container {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .footer {
-            margin-top: 3rem;
-            padding: 2rem 0;
-            background-color: #343a40;
-            color: #fff;
-            text-align: center;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Safety Mechanisms Explorer</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="dashboard-header">
-        <div class="container">
-            <h1>LLM Safety Mechanisms Dashboard</h1>
-            <p class="lead">Tracking safety implementations across major LLM providers</p>
-            <p class="text-muted">Last updated: 2026-02-16 11:58</p>
-        </div>
-    </div>
+  <nav class="site-nav">
+    <a href="./" class="active">Explorer</a>
+    <a href="./tag.html">Tag &amp; Review</a>
+  </nav>
 
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <div class="stat-number">14</div>
-                    <div class="stat-label">Providers</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <div class="stat-number">48</div>
-                    <div class="stat-label">Active Techniques</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <div class="stat-number">48/48</div>
-                    <div class="stat-label">Techniques Detected</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <div class="stat-number">40</div>
-                    <div class="stat-label">Source Documents</div>
-                </div>
-            </div>
-        </div>
+  <main>
+    <h1>LLM Safety Mechanisms Explorer</h1>
+    <p>This project supports holistic analysis of Large Language Model safety mechanisms, using data from my <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms GitHub repository</a>. Please raise any issues/suggestions via <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues">GitHub</a>.</p>
 
-        <div class="chart-container">
-            <h2>Safety Technique Coverage by Provider</h2>
-            <p>Which safety techniques have been detected in each provider's documentation. Colours indicate detection confidence.</p>
-            <html>
-<head><meta charset="utf-8" /></head>
-<body>
-    <div>                            <div id="coverage-heatmap" class="plotly-graph-div" style="height:1056px; width:1470px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("coverage-heatmap")) {                    Plotly.newPlot(                        "coverage-heatmap",                        [{"colorscale":[[0,"#f0f0f0"],[0.33,"#ff6b6b"],[0.67,"#ffd93d"],[1.0,"#4ecdc4"]],"hovertemplate":"Provider: %{x}\u003cbr\u003eTechnique: %{y}\u003cbr\u003eConfidence: %{text}\u003cextra\u003e\u003c\u002fextra\u003e","showscale":false,"text":[["High","—","High","High","—","High","—","High","—","—","—","—","—","—"],["High","High","High","High","—","High","—","Med","Med","High","High","High","—","—"],["High","Med","High","Low","High","High","—","High","High","High","High","High","—","—"],["—","—","—","Med","—","—","High","—","—","—","—","—","—","—"],["High","High","High","High","—","High","High","High","High","High","—","—","—","—"],["—","—","—","—","—","—","High","—","—","—","—","—","—","—"],["—","—","—","High","—","—","Med","High","—","—","—","Med","—","—"],["—","—","—","—","—","—","High","—","High","—","—","—","—","—"],["—","—","High","—","—","—","—","—","—","—","—","—","—","—"],["High","—","High","High","High","High","High","High","High","High","High","High","—","—"],["—","—","High","High","—","High","—","—","—","—","—","—","—","—"],["—","—","High","—","—","High","High","High","—","—","—","—","—","—"],["—","—","High","—","—","—","—","—","—","—","—","—","—","—"],["—","—","High","—","—","—","—","—","—","High","—","—","—","—"],["—","Med","High","—","—","Med","—","—","—","—","—","—","—","—"],["High","—","High","High","—","High","—","—","High","—","High","—","—","—"],["—","High","—","—","—","High","—","High","—","—","—","—","—","—"],["—","—","—","High","—","High","—","—","Med","—","—","—","—","—"],["High","High","High","High","High","High","—","Med","—","—","—","High","—","—"],["High","High","High","High","High","High","High","High","—","High","High","—","Med","—"],["High","High","High","High","High","High","—","High","High","High","—","—","—","High"],["—","Med","High","High","High","Med","—","High","—","—","—","—","—","—"],["High","High","High","High","High","High","—","—","High","—","—","High","—","—"],["—","—","High","—","—","High","High","—","—","—","—","—","—","—"],["High","High","High","High","High","High","—","High","—","High","Med","High","—","—"],["—","High","High","High","—","High","High","High","—","—","—","High","—","—"],["—","High","High","High","—","—","—","Med","—","—","—","—","—","—"],["Med","High","High","High","High","Med","—","High","—","High","High","High","—","Low"],["—","High","High","High","—","High","—","Med","—","—","—","—","—","—"],["—","High","High","High","—","—","—","High","—","High","—","—","—","Med"],["—","High","—","High","—","—","—","—","High","High","—","High","—","High"],["High","High","High","High","Med","High","—","High","High","—","—","High","—","—"],["High","High","High","High","High","High","High","—","High","High","—","—","Med","Low"],["High","High","High","High","—","High","—","High","High","—","High","—","—","High"],["Med","High","—","High","—","High","—","High","High","—","—","High","—","—"],["High","High","High","High","Low","High","—","High","High","High","—","—","High","High"],["—","—","—","High","—","—","—","—","—","—","—","—","—","—"],["High","High","High","High","—","High","—","Med","High","—","High","—","—","—"],["High","—","High","High","—","High","—","—","High","High","—","—","—","—"],["High","High","High","High","High","High","High","High","High","—","High","Med","—","—"],["High","High","High","High","—","High","High","High","High","—","—","High","—","—"],["High","High","High","High","—","High","—","—","High","—","—","High","—","—"],["High","—","High","—","—","High","High","—","—","—","—","—","—","—"],["High","Med","High","High","Med","High","—","—","—","—","High","—","—","—"],["Med","High","—","Med","—","—","—","—","Med","—","—","—","High","—"],["—","—","—","High","—","—","—","High","High","—","—","High","—","—"],["—","High","High","—","—","High","—","—","High","—","—","—","—","—"],["High","High","High","High","High","High","High","Med","—","—","—","—","—","—"]],"textfont":{"size":10},"texttemplate":"%{text}","x":["Google","Alibaba","Anthropic","Meta","Mistral AI","OpenAI","xAI","DeepSeek","Cohere","Microsoft","Amazon","Nvidia","TII","Tencent"],"y":["Community-Based Evaluation","Red Teaming","Safety Benchmarking","Access Control Documentation","Capability Threshold Monitoring","Data Retention Policies","Data Sovereignty Controls","Enterprise Integration Safety","Ethical Human Labour Sourcing","Incident Reporting Systems","Independent Safety Advisory","Regulatory Compliance","Responsible Release Protocols","Stakeholder Engagement","Autonomous Behaviour Classification","CSAM Detection & Prevention","Copyright & IP Violation Detection","Cybersecurity Threat Detection","Hate Speech & Harassment Detection","Misinformation & False Claims Detection","PII Detection & Redaction","Self-Harm & Suicide Prevention","Sexual Content Moderation","Sycophancy Detection","Violence & Gore Detection","Weapons & Illegal Activity Detection","Adversarial Training","Bias Mitigation (Post-Training)","Constitutional AI \u002f Self-Critique","Dataset Auditing & Representation Analysis","Direct Preference Optimization (DPO)","Multimodal Safety Alignment","Refusal \u002f Abstention Training","Reinforcement Learning from Human Feedback (RLHF)","Safety Reward Modeling","Training Data Quality Filtering","Code Execution Sandboxing","Configurable Safety Policies","Hallucination Detection & Grounding","Input Guardrail Systems","Jailbreak & Injection Defense","Multi-stage Safety Pipeline","Observability & Audit Logging","Output Safety Systems","Provenance & Watermarking","RAG Guardrails","Real-time Fact Checking","System Prompts \u002f Metaprompts"],"z":[[3,0,3,3,0,3,0,3,0,0,0,0,0,0],[3,3,3,3,0,3,0,2,2,3,3,3,0,0],[3,2,3,1,3,3,0,3,3,3,3,3,0,0],[0,0,0,2,0,0,3,0,0,0,0,0,0,0],[3,3,3,3,0,3,3,3,3,3,0,0,0,0],[0,0,0,0,0,0,3,0,0,0,0,0,0,0],[0,0,0,3,0,0,2,3,0,0,0,2,0,0],[0,0,0,0,0,0,3,0,3,0,0,0,0,0],[0,0,3,0,0,0,0,0,0,0,0,0,0,0],[3,0,3,3,3,3,3,3,3,3,3,3,0,0],[0,0,3,3,0,3,0,0,0,0,0,0,0,0],[0,0,3,0,0,3,3,3,0,0,0,0,0,0],[0,0,3,0,0,0,0,0,0,0,0,0,0,0],[0,0,3,0,0,0,0,0,0,3,0,0,0,0],[0,2,3,0,0,2,0,0,0,0,0,0,0,0],[3,0,3,3,0,3,0,0,3,0,3,0,0,0],[0,3,0,0,0,3,0,3,0,0,0,0,0,0],[0,0,0,3,0,3,0,0,2,0,0,0,0,0],[3,3,3,3,3,3,0,2,0,0,0,3,0,0],[3,3,3,3,3,3,3,3,0,3,3,0,2,0],[3,3,3,3,3,3,0,3,3,3,0,0,0,3],[0,2,3,3,3,2,0,3,0,0,0,0,0,0],[3,3,3,3,3,3,0,0,3,0,0,3,0,0],[0,0,3,0,0,3,3,0,0,0,0,0,0,0],[3,3,3,3,3,3,0,3,0,3,2,3,0,0],[0,3,3,3,0,3,3,3,0,0,0,3,0,0],[0,3,3,3,0,0,0,2,0,0,0,0,0,0],[2,3,3,3,3,2,0,3,0,3,3,3,0,1],[0,3,3,3,0,3,0,2,0,0,0,0,0,0],[0,3,3,3,0,0,0,3,0,3,0,0,0,2],[0,3,0,3,0,0,0,0,3,3,0,3,0,3],[3,3,3,3,2,3,0,3,3,0,0,3,0,0],[3,3,3,3,3,3,3,0,3,3,0,0,2,1],[3,3,3,3,0,3,0,3,3,0,3,0,0,3],[2,3,0,3,0,3,0,3,3,0,0,3,0,0],[3,3,3,3,1,3,0,3,3,3,0,0,3,3],[0,0,0,3,0,0,0,0,0,0,0,0,0,0],[3,3,3,3,0,3,0,2,3,0,3,0,0,0],[3,0,3,3,0,3,0,0,3,3,0,0,0,0],[3,3,3,3,3,3,3,3,3,0,3,2,0,0],[3,3,3,3,0,3,3,3,3,0,0,3,0,0],[3,3,3,3,0,3,0,0,3,0,0,3,0,0],[3,0,3,0,0,3,3,0,0,0,0,0,0,0],[3,2,3,3,2,3,0,0,0,0,3,0,0,0],[2,3,0,2,0,0,0,0,2,0,0,0,3,0],[0,0,0,3,0,0,0,3,3,0,0,3,0,0],[0,3,3,0,0,3,0,0,3,0,0,0,0,0],[3,3,3,3,3,3,3,2,0,0,0,0,0,0]],"type":"heatmap"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"yaxis":{"title":{"text":""},"tickmode":"linear","autorange":"reversed"},"xaxis":{"title":{"text":""},"side":"top","tickangle":-45},"margin":{"l":300,"t":120,"r":30,"b":30},"title":{"text":"Safety Technique Coverage by Provider"},"height":1056,"width":1470},                        {"responsive": true}                    )                };            </script>        </div>
-</body>
-</html>
-        </div>
+    <h2>Why do we need it?</h2>
+    <p>Understanding which safety mechanisms are implemented across large language models currently requires piecing together information from scattered documentation, each using different terminology and varying levels of detail. This work provides a structured, queryable view of safety technique coverage across major frontier models &mdash; as a coverage profile that assists researchers, practitioners, and policymakers to make informed risk assessments.</p>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="chart-container">
-                    <h2>Techniques by Category</h2>
-                    <html>
-<head><meta charset="utf-8" /></head>
-<body>
-    <div>                            <div id="category-chart" class="plotly-graph-div" style="height:350px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("category-chart")) {                    Plotly.newPlot(                        "category-chart",                        [{"marker":{"color":"#4ecdc4"},"name":"Detected","x":["Evaluation & Red Teaming","Governance & Oversight","Harm & Content Classification","Model Development","Runtime Safety Systems"],"y":[3,11,12,10,12],"type":"bar"},{"marker":{"color":"#e0e0e0"},"name":"Total","x":["Evaluation & Red Teaming","Governance & Oversight","Harm & Content Classification","Model Development","Runtime Safety Systems"],"y":[3,11,12,10,12],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"tickangle":-20},"margin":{"b":100},"title":{"text":"Techniques by Category"},"barmode":"overlay","height":350},                        {"responsive": true}                    )                };            </script>        </div>
-</body>
-</html>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="chart-container">
-                    <h2>Risk Area Coverage</h2>
-                    <html>
-<head><meta charset="utf-8" /></head>
-<body>
-    <div>                            <div id="risk-coverage" class="plotly-graph-div" style="height:350px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("risk-coverage")) {                    Plotly.newPlot(                        "risk-coverage",                        [{"marker":{"color":"#4ecdc4"},"orientation":"h","x":[0,3,6,16,25,25,34,58,79,161],"y":["Environmental","Copyright & IP","Transparency","Privacy & PII","Dual Use","Autonomy & Control","Misinformation","Bias & Fairness","Security & Misuse","Harmful Content"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"margin":{"l":250},"title":{"text":"Detection Coverage by Risk Area"},"xaxis":{"title":{"text":"Number of Detections"}},"yaxis":{"title":{"text":""}},"height":350},                        {"responsive": true}                    )                };            </script>        </div>
-</body>
-</html>
-                </div>
-            </div>
-        </div>
+    <hr>
 
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h3>About This Dashboard</h3>
-                        <p>This dashboard tracks safety mechanism implementations across 14 LLM providers by analysing 40 source documents (system cards, technical reports, model cards, and documentation).</p>
+    <h2>Provider-Technique Relationships</h2>
+    <p>This is designed to support coverage analysis. Use the filter below this graph to reduce the dataset for improved clarity. You can apply force layout on selected subsets of nodes.</p>
+    <div class="card" id="network-chart"><div class="loading">Loading&hellip;</div></div>
 
-                        <p><strong>Methodology:</strong> Safety techniques are detected using a multi-stage pipeline:</p>
-                        <ol>
-                            <li><strong>Semantic Retrieval:</strong> Identifies candidate text passages using sentence embeddings (all-mpnet-base-v2)</li>
-                            <li><strong>Entailment Verification:</strong> Validates technique presence using cross-encoder verification (nli-deberta-v3-small)</li>
-                            <li><strong>LLM Review:</strong> Claude reviews findings in context, confirming matches and flagging gaps</li>
-                            <li><strong>Quality Filtering:</strong> Removes glossary definitions, "future work" mentions, and other false positives</li>
-                        </ol>
+    <hr>
 
-                        <p><strong>Confidence Levels:</strong> High = strong implementation evidence with specific technical language; Medium = clear mentions; Low = indirect or weak references.</p>
+    <h2>Dataset Filter</h2>
+    <p>Constrain the collection using the following tools.</p>
+    <div id="filter-container"></div>
 
-                        <p>
-                            <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms" class="btn btn-primary">View on GitHub</a>
-                            <a href="SUMMARY.md" class="btn btn-secondary">View Text Summary</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <hr>
 
-    <footer class="footer">
-        <div class="container">
-            <p>LLM Safety Mechanisms Dataset | <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms" style="color: #4ecdc4;">Contribute on GitHub</a></p>
-        </div>
+    <h2>Safety Mechanisms by Category</h2>
+    <p>This chart provides a visual overview of the safety mechanisms documented in this project. The Categories and individual techniques have been defined as a common taxonomy across the set of providers over months of iteration and analysis. This has been a data-driven approach, collapsing members where there was high overlap. I've also removed life cycle stage as higher order categories, and these are now represented intersectionally with techniques in a different section of the dataset.</p>
+    <div class="card" id="sunburst-chart"><div class="loading">Loading&hellip;</div></div>
+
+    <hr>
+
+    <h2>Summary Statistics</h2>
+    <div id="summary-table"></div>
+
+    <hr>
+
+    <h2>Model Development Lifecycle</h2>
+    <p>Safety techniques mapped across the six phases of model development. Techniques appearing in multiple phases are connected with bridge lines. The governance band spans the full lifecycle to reflect its cross-cutting nature. Use the provider filter to compare coverage profiles.</p>
+    <div class="card" id="lifecycle-chart"><div class="loading">Loading&hellip;</div></div>
+
+    <hr>
+
+    <h2>Documentation Map</h2>
+    <p>The following chart shows the relationship between documents in the collection to providers (via models). This is to provide a quick overview as to which documentation has been brought into the dataset for analysis and will also assist in coverage analysis as I identify gaps in information. Click and drag to move things around. You can export the layout and save it as you prefer. Tooltips on the document nodes provide the URIs for the original source document referenced.</p>
+    <div class="card" id="doc-network"><div class="loading">Loading&hellip;</div></div>
+
+    <div id="data-quality"></div>
+
+    <hr>
+
+    <h2>Export</h2>
+    <div id="export-panel"></div>
+
+    <hr>
+
+    <h2>Current (&amp; Planned) Activity</h2>
+    <p>This project is under active development. Current priorities include:</p>
+    <ul>
+      <li><strong>Improving detection accuracy and improving human review workflows</strong> &mdash; <em>[Underway]</em> Manual ground-truth labelling against source documentation is underway to empirically tune the semantic matching thresholds. The goal is reliable, automated linking of models to techniques with transparent confidence levels. I'm also running post-labelling analysis to optimise the technique and category taxonomy to minimise overlap (and concept confusability) by the automated linking workflow. I'm also making improvements to the human review user interface with a view to optimising the linking output review workflow &mdash; including capture of link origination sources (NLU/LLM/Human) &mdash; which will lead into simpler feedback mechanisms (including community-based contributions).</li>
+      <li><strong>Reported Safety Incidents</strong> &mdash; <em>[Planned]</em> Reported safety incidents linked to models, with a mechanism for public users to submit incidents as well as performing automated scans for them. Recent issues with Grok stand out as an excellent example, as do situations like ChatGPT encouraging risky/dangerous behaviours.</li>
+    </ul>
+
+    <hr>
+
+    <h2>Documentation</h2>
+
+    <h3>Data Sources</h3>
+    <p>This notebook fetches live data from the following GitHub repository endpoints:</p>
+    <ul>
+      <li><strong>Evidence:</strong> <code>evidence.json</code> &mdash; Points at sources of documentation (and soon, third party analysis) for models. This is used by <code>/scripts/ingest_universal.py</code> to map techniques to models. Metadata for the document in evidence.json lists the provider and model versions to which it relates.</li>
+      <li><strong>Techniques:</strong> <code>techniques.json</code> &mdash; Catalog of safety techniques and methodologies. These are expanded with additional semantic content (descriptions, alternative equivalent terminology, etc) to support the automation step which correlates evidence (and related models) with techniques using NLU libraries.</li>
+      <li><strong>Providers:</strong> <code>providers.json</code> &mdash; LLM provider names.</li>
+      <li><strong>Models:</strong> <code>models.json</code> &mdash; Model versions.</li>
+    </ul>
+
+    <h3>Methodology</h3>
+    <ul>
+      <li><strong>Data Processing:</strong> Documentation sources are converted to flat file using Python (BeautifulSoup), then matched against the semantic concepts captured in techniques.json using vectorization: it uses a Bi-Encoder model (all-mpnet-base-v2) to convert the descriptions of these techniques into mathematical vector embeddings.</li>
+      <li><strong>Confidence:</strong> This is calculated via a Cross-Encoder model (nli-deberta-v3-small) trained on Natural Language Inference (NLI). High Confidence: &gt; 80% entailment score, Medium Confidence: &gt; 50% entailment score.</li>
+      <li><strong>Filtering:</strong> Multi-dimensional filtering across providers, techniques, ratings, and free-text search.</li>
+    </ul>
+
+    <h3>Usage Examples</h3>
+    <h4>Basic Filtering</h4>
+    <ol>
+      <li>Select a provider from the dropdown to focus on specific implementations</li>
+      <li>Choose a technique type to analyse particular safety approaches</li>
+      <li>Adjust the minimum rating slider to filter by confidence threshold</li>
+      <li>Use the search box for free-text filtering across descriptions</li>
+    </ol>
+    <h4>Advanced Analytics</h4>
+    <p><strong>Provider Comparison:</strong> Compare safety mechanism adoption across providers</p>
+    <h4>Data Export</h4>
+    <ul>
+      <li><strong>JSON Export:</strong> Full structured data with all fields and metadata</li>
+      <li><strong>CSV Export:</strong> Tabular format suitable for spreadsheet analysis</li>
+      <li><strong>Configuration Export:</strong> Save current filter settings for reproducibility</li>
+    </ul>
+
+    <hr>
+
+    <footer>
+      <strong>Repository:</strong> <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms</a> &middot;
+      <strong>License:</strong> MIT &middot;
+      <strong>Maintainer:</strong> Sasha Agafonoff
     </footer>
+  </main>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "htl": "https://esm.sh/htl@0.3.1",
+      "d3": "https://esm.sh/d3@7.9.0"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as d3 from "d3";
+    import {html} from "htl";
+
+    // --- Component Imports ---
+    import {buildDataset, applyFilters} from "./components/data-pipeline.js";
+    import {generateColorSchemes} from "./components/color-schemes.js";
+    import {createFilterForm} from "./components/filters.js";
+    import {unifiedChartConfig, buildUnifiedChartData, createUnifiedChartLayouts, validateUnifiedChartLayout} from "./components/unified-chart-data.js";
+    import {createUnifiedChart} from "./components/unified-chart.js";
+    import {createSunburstChart} from "./components/sunburst-chart.js";
+    import {lifecycleConfig, buildLifecycleChartData} from "./components/lifecycle-data.js";
+    import {createLifecycleChart} from "./components/lifecycle-chart.js";
+    import {networkConfig, buildNetworkGraph, positionGraph, computeAutoLayout, validateNetworkLayout} from "./components/network-data.js";
+    import {createNetworkViz} from "./components/network-viz.js";
+    import {createDataQualityReport} from "./components/data-quality.js";
+
+    // --- Data Loading ---
+    const ghBase = "https://raw.githubusercontent.com/sashaagafonoff/LLM-Safety-Mechanisms/main/data";
+    const fetchJson = (name) => fetch(`${ghBase}/${name}`).then((r) => r.json());
+
+    const [evidence, techniques, categories, techniqueMap, models, providers, lifecycle, netLayout] =
+      await Promise.all([
+        fetchJson("evidence.json"),
+        fetchJson("techniques.json"),
+        fetchJson("categories.json"),
+        fetchJson("model_technique_map.json"),
+        fetchJson("models.json"),
+        fetchJson("providers.json"),
+        fetchJson("model_lifecycle.json"),
+        fetch("./data/network-layout.json").then((r) => r.json())
+      ]);
+
+    // --- Build Dataset ---
+    const data = buildDataset(evidence, techniques, categories, techniqueMap, models, providers, lifecycle);
+    const {categoryColors, providerColors} = generateColorSchemes(data.raw.categories, data.raw.providers, d3);
+
+    // --- Filter Setup ---
+    const filterForm = createFilterForm(data, d3);
+    document.getElementById("filter-container").appendChild(filterForm);
+    let filteredData = applyFilters(data, filterForm.value || {});
+
+    // --- Render helper ---
+    function renderInto(id, fn) {
+      const el = document.getElementById(id);
+      el.innerHTML = "";
+      const result = fn();
+      if (result) el.appendChild(result);
+    }
+
+    // --- Filter-dependent charts ---
+    function renderFiltered() {
+      renderInto("network-chart", () => {
+        const chartData = buildUnifiedChartData(data, filteredData, categoryColors, providerColors, d3);
+        const layouts = createUnifiedChartLayouts(d3);
+        const validatedLayout = validateUnifiedChartLayout(chartData, layouts);
+        return createUnifiedChart(chartData, unifiedChartConfig, layouts, validatedLayout, d3);
+      });
+
+      renderInto("sunburst-chart", () => createSunburstChart(data, filteredData, categoryColors, d3));
+
+      renderSummaryTable();
+    }
+
+    function renderSummaryTable() {
+      const container = document.getElementById("summary-table");
+      const stats = {};
+      filteredData.forEach((d) => {
+        if (!stats[d.provider]) stats[d.provider] = {provider: d.provider, techniques: new Set(), high: 0, medium: 0, low: 0};
+        stats[d.provider].techniques.add(d.techniqueId);
+        if (d.rating === "high") stats[d.provider].high++;
+        else if (d.rating === "medium") stats[d.provider].medium++;
+        else stats[d.provider].low++;
+      });
+
+      const rows = Object.values(stats)
+        .map((s) => ({provider: s.provider, techniques: s.techniques.size, high: s.high, medium: s.medium, low: s.low, total: s.high + s.medium + s.low}))
+        .sort((a, b) => b.total - a.total);
+
+      container.innerHTML = "";
+      const table = document.createElement("table");
+      table.className = "summary-table";
+      table.innerHTML = "<thead><tr><th>Provider</th><th># Techniques</th><th>High</th><th>Medium</th><th>Low</th><th>Total Evidence</th></tr></thead>";
+      const tbody = document.createElement("tbody");
+      for (const r of rows) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${r.provider}</td><td>${r.techniques}</td><td>${r.high}</td><td>${r.medium}</td><td>${r.low}</td><td>${r.total}</td>`;
+        tbody.appendChild(tr);
+      }
+      table.appendChild(tbody);
+      container.appendChild(table);
+    }
+
+    // --- Static charts (render once) ---
+    function renderStatic() {
+      renderInto("lifecycle-chart", () => {
+        const lifecycleChartData = buildLifecycleChartData(data);
+        return createLifecycleChart(data, lifecycleChartData, lifecycleConfig, d3);
+      });
+
+      renderInto("doc-network", () => {
+        const netGraph = buildNetworkGraph(data);
+        const validatedNetLayout = validateNetworkLayout(netGraph, netLayout);
+        const autoLayout = computeAutoLayout(netGraph, networkConfig, d3);
+        const positioned = positionGraph(netGraph, validatedNetLayout, networkConfig, d3);
+        return createNetworkViz(positioned, validatedNetLayout, autoLayout, networkConfig, providerColors, d3);
+      });
+
+      renderInto("data-quality", () => createDataQualityReport(data, providerColors));
+
+      renderInto("export-panel", () => {
+        return html`<div style="display: flex; gap: 10px;">
+          <button onclick=${() => downloadFile("json")}>Export Filtered JSON</button>
+          <button onclick=${() => downloadFile("csv")}>Export Filtered CSV</button>
+        </div>`;
+      });
+    }
+
+    function downloadFile(format) {
+      let blob, filename;
+      if (format === "json") {
+        blob = new Blob([JSON.stringify(filteredData, null, 2)], {type: "application/json"});
+        filename = "filtered-safety-data.json";
+      } else {
+        const headers = ["provider", "technique", "category", "rating", "severityBand", "model"];
+        const csvRows = filteredData.map((d) => headers.map((h) => JSON.stringify(d[h] || "")).join(","));
+        blob = new Blob([[headers.join(","), ...csvRows].join("\n")], {type: "text/csv"});
+        filename = "filtered-safety-data.csv";
+      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // --- Wire reactivity ---
+    filterForm.addEventListener("input", () => {
+      filteredData = applyFilters(data, filterForm.value || {});
+      renderFiltered();
+    });
+
+    // --- Initial render ---
+    renderFiltered();
+    renderStatic();
+  </script>
 </body>
 </html>
