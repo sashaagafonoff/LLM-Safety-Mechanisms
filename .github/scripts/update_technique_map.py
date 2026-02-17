@@ -106,7 +106,11 @@ def apply_v2(technique_map: dict, submission: dict) -> dict:
 
     elif action == "add_new_tag":
         if existing and existing.get("active", True):
-            return {"action": "skip", "reason": "Technique already mapped (active)"}
+            # Technique already mapped — append evidence rather than skip
+            existing.setdefault("evidence", []).append(
+                make_evidence_entry(submission, created_by=username)
+            )
+            return {"action": "added_evidence", "source_id": source_id, "technique_id": technique_id}
 
         new_entry = {
             "techniqueId": technique_id,
@@ -234,9 +238,9 @@ def main() -> int:
         result = apply_submission(technique_map, submission)
 
         if result.get("action") == "skip":
-            summary = f"No changes: {result.get('reason', 'duplicate')}"
-            print(f"::warning::{summary}")
-            write_output("changes_summary", summary)
+            reason = result.get("reason", "duplicate")
+            print(f"::warning::No changes: {reason}")
+            # Don't write changes_summary so the workflow skips the commit step
             return 0
 
         save_json("data/model_technique_map.json", technique_map)
