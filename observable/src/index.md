@@ -1,13 +1,12 @@
 ---
 title: LLM Safety Mechanisms Explorer
 style: custom-styles.css
+toc: false
 ---
 
 # LLM Safety Mechanisms Explorer
 
-An interactive dashboard for exploring safety techniques implemented by major LLM providers.
-
----
+This project supports holistic analysis of Large Language Model safety mechanisms, using data from my [LLM Safety Mechanisms GitHub repository](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms). Please raise any issues/suggestions via [GitHub](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues).
 
 ```js
 // --- Data Loading (from GitHub) ---
@@ -39,7 +38,6 @@ import {createLifecycleChart} from "./components/lifecycle-chart.js";
 import {networkConfig, buildNetworkGraph, positionGraph, computeAutoLayout, validateNetworkLayout} from "./components/network-data.js";
 import {createNetworkViz} from "./components/network-viz.js";
 import {createDataQualityReport} from "./components/data-quality.js";
-import {createCoverageHeatmap} from "./components/coverage-heatmap.js";
 ```
 
 ```js
@@ -48,33 +46,20 @@ const data = buildDataset(evidence, techniques, categories, techniqueMap, models
 const {categoryColors, providerColors} = generateColorSchemes(data.raw.categories, data.raw.providers, d3);
 ```
 
----
-
-## Filters
-
 ```js
-const filters = view(createFilterForm(data, d3));
-```
-
-```js
+// --- Filter + Filtered Data (reactive) ---
 const filteredData = applyFilters(data, filters);
 ```
 
----
+## Why do we need it?
 
-## Safety Technique Coverage by Provider
-
-<div class="card">
-
-```js
-display(createCoverageHeatmap(data, filteredData, categoryColors, providerColors, d3));
-```
-
-</div>
+Understanding which safety mechanisms are implemented across large language models currently requires piecing together information from scattered documentation, each using different terminology and varying levels of detail. This work provides a structured, queryable view of safety technique coverage across major frontier models — as a coverage profile that assists researchers, practitioners, and policymakers to make informed risk assessments.
 
 ---
 
-## Provider–Technique Network
+## Provider-Technique Relationships
+
+This is designed to support coverage analysis. Use the filter below this graph to reduce the dataset for improved clarity. You can apply force layout on selected subsets of nodes.
 
 <div class="card">
 
@@ -89,7 +74,19 @@ display(createUnifiedChart(chartData, unifiedChartConfig, layouts, validatedLayo
 
 ---
 
-## Category Sunburst
+## Dataset Filter
+
+Constrain the collection using the following tools.
+
+```js
+const filters = view(createFilterForm(data, d3));
+```
+
+---
+
+## Safety Mechanisms by Category
+
+This chart provides a visual overview of the safety mechanisms documented in this project. The Categories and individual techniques have been defined as a common taxonomy across the set of providers over months of iteration and analysis. This has been a data-driven approach, collapsing members where there was high overlap. I've also removed life cycle stage as higher order categories, and these are now represented intersectionally with techniques in a different section of the dataset.
 
 <div class="card">
 
@@ -143,6 +140,8 @@ display(Inputs.table(summaryRows, {
 
 ## Model Development Lifecycle
 
+Safety techniques mapped across the six phases of model development. Techniques appearing in multiple phases are connected with bridge lines. The governance band spans the full lifecycle to reflect its cross-cutting nature. Use the provider filter to compare coverage profiles.
+
 <div class="card">
 
 ```js
@@ -154,7 +153,9 @@ display(createLifecycleChart(data, lifecycleChartData, lifecycleConfig, d3));
 
 ---
 
-## Document Network
+## Documentation Map
+
+The following chart shows the relationship between documents in the collection to providers (via models). This is to provide a quick overview as to which documentation has been brought into the dataset for analysis and will also assist in coverage analysis as I identify gaps in information. Click and drag to move things around. You can export the layout and save it as you prefer. Tooltips on the document nodes provide the URIs for the original source document referenced.
 
 <div class="card">
 
@@ -172,33 +173,8 @@ display(createNetworkViz(positioned, validatedNetLayout, autoLayout, networkConf
 
 </div>
 
----
-
-## Data Quality
-
 ```js
 display(createDataQualityReport(data, providerColors));
-```
-
----
-
-## Data Table
-
-```js
-const tableData = filteredData.map((d) => ({
-  Provider: d.provider,
-  Technique: d.technique,
-  Category: d.category,
-  Rating: d.rating,
-  "Severity Band": d.severityBand || "—",
-  Model: d.model || "—"
-}));
-
-display(Inputs.table(tableData, {
-  columns: ["Provider", "Technique", "Category", "Rating", "Severity Band", "Model"],
-  sort: "Provider",
-  rows: 20
-}));
 ```
 
 ---
@@ -241,19 +217,51 @@ display(html`<div style="display: flex; gap: 10px;">
 
 ---
 
-<details>
-<summary>About this dashboard</summary>
+## Current (& Planned) Activity
 
-This dashboard visualizes safety techniques implemented by major LLM providers (OpenAI, Anthropic, Google, Meta, Amazon, and others). The data is sourced from official documentation, research papers, and publicly available information.
+This project is under active development. Current priorities include:
 
-**Charts:**
-- **Safety Technique Coverage** — Heatmap showing which providers implement which techniques, colored by confidence level (High/Medium/Low).
-- **Provider–Technique Network** — Interactive force-directed graph showing which providers implement which techniques. Drag nodes to customize layout, use toolbar to save/load positions.
-- **Category Sunburst** — Hierarchical view of technique categories and their relative coverage.
-- **Model Development Lifecycle** — Timeline view of when safety techniques are applied during model development phases.
-- **Document Network** — Network graph showing relationships between source documents, providers, and models.
+- **Improving detection accuracy and improving human review workflows** — *[Underway]* Manual ground-truth labelling against source documentation is underway to empirically tune the semantic matching thresholds. The goal is reliable, automated linking of models to techniques with transparent confidence levels. I'm also running post-labelling analysis to optimise the technique and category taxonomy to minimise overlap (and concept confusability) by the automated linking workflow. I'm also making improvements to the human review user interface with a view to optimising the linking output review workflow — including capture of link origination sources (NLU/LLM/Human) — which will lead into simpler feedback mechanisms (including community-based contributions).
+- **Reported Safety Incidents** — *[Planned]* Reported safety incidents linked to models, with a mechanism for public users to submit incidents as well as performing automated scans for them. Recent issues with Grok stand out as an excellent example, as do situations like ChatGPT encouraging risky/dangerous behaviours.
 
-**Filters** narrow all charts simultaneously by provider, category, rating, or severity band.
+---
 
-Source: [GitHub Repository](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms)
-</details>
+## Documentation
+
+### Data Sources
+
+This notebook fetches live data from the following GitHub repository endpoints:
+
+- **Evidence:** `evidence.json` — Points at sources of documentation (and soon, third party analysis) for models. This is used by `/scripts/ingest_universal.py` to map techniques to models. Metadata for the document in evidence.json lists the provider and model versions to which it relates.
+- **Techniques:** `techniques.json` — Catalog of safety techniques and methodologies. These are expanded with additional semantic content (descriptions, alternative equivalent terminology, etc) to support the automation step which correlates evidence (and related models) with techniques using NLU libraries.
+- **Providers:** `providers.json` — LLM provider names.
+- **Models:** `models.json` — Model versions.
+
+### Methodology
+
+- **Data Processing:** Documentation sources are converted to flat file using Python (BeautifulSoup), then matched against the semantic concepts captured in techniques.json using vectorization: it uses a Bi-Encoder model (all-mpnet-base-v2) to convert the descriptions of these techniques into mathematical vector embeddings.
+- **Confidence:** This is calculated via a Cross-Encoder model (nli-deberta-v3-small) trained on Natural Language Inference (NLI). High Confidence: > 80% entailment score, Medium Confidence: > 50% entailment score.
+- **Filtering:** Multi-dimensional filtering across providers, techniques, ratings, and free-text search.
+
+### Usage Examples
+
+#### Basic Filtering
+
+1. Select a provider from the dropdown to focus on specific implementations
+2. Choose a technique type to analyse particular safety approaches
+3. Adjust the minimum rating slider to filter by confidence threshold
+4. Use the search box for free-text filtering across descriptions
+
+#### Advanced Analytics
+
+**Provider Comparison:** Compare safety mechanism adoption across providers
+
+#### Data Export
+
+- **JSON Export:** Full structured data with all fields and metadata
+- **CSV Export:** Tabular format suitable for spreadsheet analysis
+- **Configuration Export:** Save current filter settings for reproducibility
+
+---
+
+**Repository:** [LLM Safety Mechanisms](https://github.com/sashaagafonoff/LLM-Safety-Mechanisms) · **License:** MIT · **Maintainer:** Sasha Agafonoff

@@ -1,0 +1,75 @@
+name: Data Review Submission
+description: Review an existing technique tag or suggest a new one
+title: "[Review] "
+labels: ["data-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Tip:** For a better experience, use the [Tag & Review tool](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/tag) which pre-fills this form for you.
+
+  - type: dropdown
+    id: submission_type
+    attributes:
+      label: Submission Type
+      options:
+        - review_existing
+        - add_new_tag
+    validations:
+      required: true
+
+  - type: input
+    id: source_id
+    attributes:
+      label: Source ID
+      description: "Source document identifier from evidence.json (e.g., gpt-5-system-card)"
+      placeholder: gpt-5-system-card
+    validations:
+      required: true
+
+  - type: input
+    id: technique_id
+    attributes:
+      label: Technique ID
+      description: "Technique identifier from techniques.json (e.g., tech-rlhf)"
+      placeholder: tech-rlhf
+    validations:
+      required: true
+
+  - type: dropdown
+    id: action
+    attributes:
+      label: Action
+      options:
+        - add
+        - confirm
+        - adjust_confidence
+        - dispute
+    validations:
+      required: true
+
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: Confidence Level
+      options:
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence Text
+      description: Quote specific text from the source document that supports this tag
+      placeholder: Paste the relevant excerpt here...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Optional notes or explanation

@@ -3,6 +3,7 @@ export default {
   root: "src",
   base: "/LLM-Safety-Mechanisms/",
   pages: [
-    {name: "Explorer", path: "/"}
+    {name: "Explorer", path: "/"},
+    {name: "Tag & Review", path: "/tag"}
   ]
 };
