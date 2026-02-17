@@ -83,7 +83,8 @@ def main() -> int:
         data = extract_json_block(body)
         validate(data)
         write_output("submission_json", json.dumps(data))
-        print(f"Parsed {data['submission_type']} for {data['source_id']} / {data['technique_id']}")
+        action_desc = data.get("action") or data.get("submission_type", "unknown")
+        print(f"Parsed {action_desc} for {data['source_id']} / {data['technique_id']}")
         return 0
     except Exception as e:
         write_output("error", str(e))
