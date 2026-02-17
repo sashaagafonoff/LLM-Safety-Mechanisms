@@ -140,7 +140,8 @@ When manually editing JSON data files:
 
 GitHub Actions workflows in [.github/workflows/](.github/workflows/):
 
-- **dashboard-deploy.yml** - Auto-deploys dashboard to GitHub Pages when data or scripts change
+- **dashboard-deploy.yml** - Auto-deploys `docs/` to GitHub Pages when docs or data files change (no build step)
+- **process-review.yml** - Processes approved community tag submissions: parses structured JSON from GitHub issues, updates `model_technique_map.json`, and creates a PR
 - **validate.yml** - Validates JSON schema (currently empty, placeholder for future validation)
 - **weekly-verification.yml** - Weekly automated checks
 - **daily-automation.yml** - Daily automated tasks
@@ -165,11 +166,7 @@ The [scripts/analyze_nlu.py](scripts/analyze_nlu.py) includes specific heuristic
 
 ### Dashboard Visualization
 
-The dashboard uses Plotly for interactive charts with:
-- Custom color scales for rating levels (gray → yellow → orange → teal)
-- Responsive Bootstrap layout
-- Hover tooltips with detailed information
-- Static export capability via Kaleido
+The interactive dashboard at `docs/` is a plain static HTML site (no build step) deployed to GitHub Pages. It uses D3.js and htl loaded via ES module import maps from esm.sh CDN. All chart components are vanilla ES modules in `docs/components/`. The dashboard deploys automatically when `docs/**` or `data/**.json` files change on main.
 
 ## File Structure Reference
 
@@ -191,8 +188,12 @@ scripts/
 ├── generate_report.py    # Report generation
 └── semantic_retriever.py # Semantic search utility
 
-docs/                     # Generated dashboard (GitHub Pages)
+docs/                     # Interactive dashboard (GitHub Pages, plain static HTML)
+├── index.html           # Main explorer dashboard
+├── tag.html             # Community tag & review tool
+├── components/          # D3/htl ES module components
+└── data/                # Static layout data
+
 schema/                   # JSON schema definitions
 reports/                  # Generated reports
-observable/              # Observable notebook code
 ```

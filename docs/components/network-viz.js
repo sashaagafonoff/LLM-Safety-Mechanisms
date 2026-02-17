@@ -26,7 +26,7 @@ export function createNetworkViz(positionedGraph, validatedLayout, autoLayout, c
 
   const buttonStyle = `
     padding: 6px 12px; font-size: 12px; border: 1px solid #ccc;
-    border-radius: 4px; background: #fff; cursor: pointer;
+    border-radius: 4px; background: #fff; color: #333; cursor: pointer;
     transition: background 0.15s;
   `;
 

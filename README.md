@@ -8,7 +8,7 @@
 
 As AI systems become more powerful, understanding their safety mechanisms is critical for researchers, policymakers, and practitioners. This project maintains structured data about how providers implement safety techniques, extracted from official documentation, system cards, and technical reports.
 
-**[View Interactive Dashboard](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/)** | **[View on Observable](https://observablehq.com/d/88c345368b7d0fa1)**
+**[View Interactive Dashboard](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/)** | **[Tag & Review Tool](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/tag.html)**
 
 ## Dataset at a Glance
 
@@ -92,6 +92,23 @@ scripts/
 ├── generate_report.py               # Summary report generation
 └── semantic_retriever.py            # Semantic search utility
 
+docs/                                # Interactive dashboard (GitHub Pages)
+├── index.html                       # Main explorer dashboard
+├── tag.html                         # Community tag & review tool
+├── styles.css                       # Shared stylesheet
+├── components/                      # D3/htl ES module components
+│   ├── data-pipeline.js             # Data loading and filtering
+│   ├── unified-chart.js             # Provider-technique network graph
+│   ├── sunburst-chart.js            # Category sunburst visualization
+│   ├── lifecycle-chart.js           # Model lifecycle swim lanes
+│   ├── network-viz.js               # Document-provider network graph
+│   ├── filters.js                   # Multi-dimensional filter controls
+│   ├── tag-data.js                  # Tagging tool data transforms
+│   ├── tag-browser.js               # Source document browser
+│   └── tag-form.js                  # Review/add form + GitHub issue builder
+└── data/
+    └── network-layout.json          # Saved node positions for doc network
+
 tools/
 └── tagging_tool.html                # Browser-based review and annotation tool
 
@@ -99,7 +116,6 @@ reports/
 └── taxonomy_comparison.md           # Latest pipeline evaluation results
 
 cache/                               # Source checksums and pipeline logs
-docs/                                # Generated dashboard (GitHub Pages)
 ```
 
 ## Getting Started
@@ -154,7 +170,9 @@ python scripts/check_sources.py --update --analyse   # Re-ingest and analyse cha
 
 Contributions are welcome! See [CONTRIBUTORS.md](CONTRIBUTORS.md) for acknowledgments.
 
-The most impactful contributions are:
+The easiest way to contribute is via the **[Tag & Review tool](https://sashaagafonoff.github.io/LLM-Safety-Mechanisms/tag.html)** — browse source documents, review existing technique tags, or suggest new ones. Submissions create a GitHub issue for maintainer review; approved submissions are automatically merged via GitHub Actions.
+
+Other impactful contributions:
 - Adding new source documents and evidence records
 - Reviewing and correcting automated technique detections
 - Improving NLU semantic anchors for low-performing techniques
