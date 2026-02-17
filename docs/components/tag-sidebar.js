@@ -8,7 +8,7 @@
  * @param {Map} catById - Category lookup
  * @returns sidebar API object
  */
-export function createSidebar(sidebarListEl, techByCategory, catById) {
+export function createSidebar(sidebarListEl, techByCategory, catById, techById) {
   let onTechClickCb = null;
   let onDeleteClickCb = null;
   let onEvidenceRowClickCb = null;
@@ -17,6 +17,46 @@ export function createSidebar(sidebarListEl, techByCategory, catById) {
   const catColors = {};
   for (const [, cat] of catById) {
     catColors[cat.name] = cat.color || '#888';
+  }
+
+  // Tooltip element — appended to body
+  const tooltip = document.createElement('div');
+  tooltip.className = 'tech-tooltip';
+  document.body.appendChild(tooltip);
+
+  function showTooltip(event, tech) {
+    const nlu = tech.nlu_profile || {};
+    const cat = catById.get(tech.categoryId);
+
+    let html = `<div class="tt-title">${escapeHtml(tech.name)}</div>`;
+    if (cat) html += `<div class="tt-section"><div class="tt-label">Category</div><div class="tt-text">${escapeHtml(cat.name)}</div></div>`;
+    if (tech.description) html += `<div class="tt-section"><div class="tt-label">Description</div><div class="tt-text">${escapeHtml(tech.description)}</div></div>`;
+    if (nlu.primary_concept) html += `<div class="tt-section"><div class="tt-label">Concept</div><div class="tt-text">${escapeHtml(nlu.primary_concept)}</div></div>`;
+    if (nlu.semantic_anchors && nlu.semantic_anchors.length) {
+      html += `<div class="tt-section"><div class="tt-label">Semantic Anchors</div><div class="tt-anchors">`;
+      nlu.semantic_anchors.forEach(a => { html += `<span class="tt-anchor-tag">${escapeHtml(a)}</span>`; });
+      html += `</div></div>`;
+    }
+    if (nlu.entailment_hypothesis) html += `<div class="tt-section"><div class="tt-label">Hypothesis</div><div class="tt-text" style="font-style:italic;">"${escapeHtml(nlu.entailment_hypothesis)}"</div></div>`;
+
+    tooltip.innerHTML = html;
+    tooltip.style.visibility = 'hidden';
+    tooltip.classList.add('visible');
+
+    const rect = event.target.getBoundingClientRect();
+    const tipW = tooltip.offsetWidth;
+    const tipH = tooltip.offsetHeight;
+    let left = rect.left - tipW - 10;
+    let top = rect.top - 10;
+    if (left < 10) left = rect.right + 10;
+    top = Math.max(10, Math.min(top, window.innerHeight - tipH - 10));
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
+    tooltip.style.visibility = '';
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove('visible');
   }
 
   // Build static sidebar structure
@@ -43,6 +83,7 @@ export function createSidebar(sidebarListEl, techByCategory, catById) {
             <div class="tech-name">${escapeHtml(t.name)}</div>
             <div class="tech-evidence-list" data-tech-ev="${t.id}"></div>
           </div>
+          <div class="tech-info-btn" title="View technique details">\u24D8</div>
         `;
 
         // Technique name click — triggers link/add action
@@ -50,6 +91,11 @@ export function createSidebar(sidebarListEl, techByCategory, catById) {
           e.stopPropagation();
           if (onTechClickCb) onTechClickCb(t.id, t.name);
         });
+
+        // Info button — tooltip on hover
+        const infoBtn = item.querySelector('.tech-info-btn');
+        infoBtn.addEventListener('mouseenter', (e) => showTooltip(e, t));
+        infoBtn.addEventListener('mouseleave', hideTooltip);
 
         group.appendChild(item);
       });
