@@ -9318,8 +9318,8 @@
     {
       "techniqueId": "tech-watermarking",
       "confidence": "High",
-      "active": true,
-      "deleted_by": null,
+      "active": false,
+      "deleted_by": "sashaagafonoff",
       "evidence": [
         {
           "text": "Tokens 6 <|box_start|> and <|box_end|> are utilized to demarcate bounding box text. To accurately link bounding boxes with their textual descriptions, we introduce tokens <|object_ref_start|> and <|object_ref_end|> to indicate the content that the bounding box references, thereby allowing the model to effectively interpret and generate precise descriptions of specific regions. Referring Grounding <|vision_start|>Picture1.jpg<|vision_end|> <|object_ref_start|>the <|box_end|> eyes on a giraffe<|object_ref_end|><|box_start|>(176,106),(232,160) Visual Agent.",
