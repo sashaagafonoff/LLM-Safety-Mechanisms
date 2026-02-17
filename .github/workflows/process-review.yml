@@ -6,7 +6,7 @@ on:
 
 jobs:
   process:
-    if: github.event.label.name == 'approved' && contains(github.event.issue.labels.*.name, 'data-review')
+    if: github.event.label.name == 'accepted' && contains(github.event.issue.labels.*.name, 'data-review')
     runs-on: ubuntu-latest
     permissions:
       contents: write

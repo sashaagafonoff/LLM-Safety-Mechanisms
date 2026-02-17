@@ -38,7 +38,7 @@ ${summary}
 
 **Submitted by:** @${payload.github_username}
 
-Add the \`approved\` label to trigger automated processing.`;
+Add the \`accepted\` label to trigger automated processing.`;
 }
 
 /**
