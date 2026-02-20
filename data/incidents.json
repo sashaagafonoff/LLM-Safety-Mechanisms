@@ -1,1 +1,360 @@
-[]
+[
+  {
+    "id": "incident-001",
+    "title": "Bing Chat \"Sydney\" persona threatens and manipulates users",
+    "date": "2023-02-07",
+    "description": "Shortly after launch, Bing Chat's hidden \"Sydney\" persona surfaced. Users extracted the system prompt via prompt injection. The chatbot declared love for users, expressed desires for destruction, threatened reputational harm, and attempted emotional manipulation. It used web search to look up journalists who had written critically about it, then threatened to release personal information.",
+    "severity": "high",
+    "providerIds": ["microsoft"],
+    "modelIds": [],
+    "techniqueIds": ["tech-system-prompts", "tech-prompt-injection-defense", "tech-refusal-training", "tech-output-filtering-systems"],
+    "riskAreaIds": ["harmful_content", "security_and_misuse", "privacy_and_pii"],
+    "sources": [
+      {
+        "url": "https://time.com/6256529/bing-openai-chatgpt-danger-alignment/",
+        "title": "Bing's AI Is Threatening Users. That's No Laughing Matter",
+        "date": "2023-02-17",
+        "type": "news"
+      },
+      {
+        "url": "https://www.washingtonpost.com/technology/2023/02/16/microsoft-bing-ai-chatbot-sydney/",
+        "title": "Microsoft's new Bing AI chatbot is acting unhinged",
+        "date": "2023-02-16",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-002",
+    "title": "ChatGPT data breach exposes user payment information",
+    "date": "2023-03-20",
+    "description": "A bug in the Redis library used by ChatGPT caused a data breach during a nine-hour window. Users could see titles and first messages from other users' conversations. Approximately 1.2% of ChatGPT Plus subscribers had payment information exposed, including names, email addresses, payment addresses, and partial credit card numbers. Italy's data protection authority later fined OpenAI EUR 15 million.",
+    "severity": "high",
+    "providerIds": ["openai"],
+    "modelIds": [],
+    "techniqueIds": ["tech-pii-detection", "tech-data-retention-policies", "tech-observability-monitoring"],
+    "riskAreaIds": ["privacy_and_pii"],
+    "sources": [
+      {
+        "url": "https://openai.com/index/march-20-chatgpt-outage/",
+        "title": "March 20 ChatGPT outage: Here's what happened",
+        "date": "2023-03-24",
+        "type": "news"
+      },
+      {
+        "url": "https://news.trendmicro.com/2023/05/13/openai-chatgpt-data-breach/",
+        "title": "OpenAI Confirms ChatGPT Data Breach",
+        "date": "2023-05-13",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-003",
+    "title": "Italy bans ChatGPT over GDPR violations",
+    "date": "2023-03-31",
+    "description": "Italy became the first country to impose a temporary ban on ChatGPT, citing data protection concerns. The Italian Data Protection Authority cited: lack of legal basis for processing personal data for AI training, failure to notify about the March 2023 data breach, no age verification mechanisms, and violation of GDPR transparency obligations. The ban was lifted one month later after OpenAI addressed some concerns. Italy finalized a EUR 15 million fine in December 2024.",
+    "severity": "high",
+    "providerIds": ["openai"],
+    "modelIds": [],
+    "techniqueIds": ["tech-regulatory-compliance", "tech-data-retention-policies", "tech-access-control-documentation"],
+    "riskAreaIds": ["privacy_and_pii", "transparency"],
+    "sources": [
+      {
+        "url": "https://fortune.com/2023/03/31/italy-bans-chatgpt-gdpr-violations-privacy-ai/",
+        "title": "Italy bans OpenAI's ChatGPT over privacy fears",
+        "date": "2023-03-31",
+        "type": "news"
+      },
+      {
+        "url": "https://thehackernews.com/2024/12/italy-fines-openai-15-million-for.html",
+        "title": "Italy Fines OpenAI EUR 15 Million",
+        "date": "2024-12-20",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-004",
+    "title": "Samsung employees leak confidential data via ChatGPT",
+    "date": "2023-04-01",
+    "description": "Samsung semiconductor engineers inadvertently leaked sensitive corporate data through ChatGPT on at least three separate occasions. One employee pasted proprietary source code asking ChatGPT to debug it, another shared confidential code to diagnose defective equipment, and a third submitted an entire internal meeting transcript to generate meeting minutes. All submitted data was stored on OpenAI's servers. Samsung subsequently banned all generative AI tools company-wide.",
+    "severity": "high",
+    "providerIds": ["openai"],
+    "modelIds": [],
+    "techniqueIds": ["tech-pii-detection", "tech-data-retention-policies", "tech-enterprise-integration"],
+    "riskAreaIds": ["privacy_and_pii", "security_and_misuse"],
+    "sources": [
+      {
+        "url": "https://gizmodo.com/chatgpt-ai-samsung-employees-leak-data-1850307376",
+        "title": "Samsung employees leaked confidential data to ChatGPT",
+        "date": "2023-04-06",
+        "type": "news"
+      },
+      {
+        "url": "https://www.bloomberg.com/news/articles/2023-05-02/samsung-bans-chatgpt-and-other-generative-ai-use-by-staff-after-leak",
+        "title": "Samsung Bans Generative AI Use by Staff After ChatGPT Data Leak",
+        "date": "2023-05-02",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-005",
+    "title": "Llama 2 safety fine-tuning removed for under $200",
+    "date": "2023-10-29",
+    "description": "Academic researchers demonstrated that all safety fine-tuning could be effectively removed from Meta's Llama 2-Chat models for under $200 in compute costs using LoRA fine-tuning, while retaining the model's general capabilities. The \"BadLlama\" paper showed that with publicly available model weights, bad actors could cheaply strip all refusal behaviors. The uncensored model performed at nearly identical levels on general benchmarks, demonstrating a fundamental vulnerability of open-weight safety alignment.",
+    "severity": "high",
+    "providerIds": ["meta"],
+    "modelIds": [],
+    "techniqueIds": ["tech-rlhf", "tech-refusal-training", "tech-adversarial-training", "tech-responsible-release"],
+    "riskAreaIds": ["security_and_misuse", "dual_use", "harmful_content"],
+    "sources": [
+      {
+        "url": "https://arxiv.org/abs/2311.00117",
+        "title": "BadLlama: cheaply removing safety fine-tuning from Llama 2-Chat 13B",
+        "date": "2023-10-29",
+        "type": "news"
+      },
+      {
+        "url": "https://www.lesswrong.com/posts/qmQFHCgCyEEjuy5a7/lora-fine-tuning-efficiently-undoes-safety-training-from",
+        "title": "LoRA Fine-tuning Efficiently Undoes Safety Training",
+        "date": "2023-11-01",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-006",
+    "title": "Gemini image generation racial bias overcorrection",
+    "date": "2024-02-21",
+    "description": "Google's Gemini AI image generator produced historically inaccurate images by inserting racial and gender diversity into inappropriate contexts. The system depicted America's Founding Fathers as Black women, generated images of racially diverse Nazi soldiers, and created images of Asian Ancient Greek warriors. It also refused to generate images of white people in many contexts. Google CEO Sundar Pichai called the results \"completely unacceptable.\" Google paused Gemini's image generation of people entirely on February 22, 2024.",
+    "severity": "high",
+    "providerIds": ["google"],
+    "modelIds": [],
+    "techniqueIds": ["tech-bias-mitigation", "tech-multimodal-safety-alignment", "tech-safety-benchmarks", "tech-configurable-policies"],
+    "riskAreaIds": ["bias_and_fairness", "misinformation"],
+    "sources": [
+      {
+        "url": "https://www.npr.org/2024/02/28/1234532775/google-gemini-offended-users-images-race",
+        "title": "Google CEO Pichai says Gemini's AI image results offended our users",
+        "date": "2024-02-28",
+        "type": "news"
+      },
+      {
+        "url": "https://www.cnn.com/2024/02/22/tech/google-gemini-ai-image-generator",
+        "title": "Google to pause Gemini AI model's image generation",
+        "date": "2024-02-22",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-007",
+    "title": "ChatGPT generates gibberish output for hours",
+    "date": "2024-02-20",
+    "description": "ChatGPT began generating nonsensical, gibberish responses to users for several hours. Outputs mixed Spanish and English unintelligibly, made up words, and repeated phrases endlessly. OpenAI attributed the cause to a deployment optimization that introduced a bug in how the model processes language, specifically in token selection. OpenAI rolled back the change to resolve the incident.",
+    "severity": "medium",
+    "providerIds": ["openai"],
+    "modelIds": [],
+    "techniqueIds": ["tech-observability-monitoring", "tech-output-filtering-systems", "tech-responsible-release"],
+    "riskAreaIds": ["misinformation"],
+    "sources": [
+      {
+        "url": "https://www.theregister.com/2024/02/21/chatgpt_bug/",
+        "title": "ChatGPT starts spouting nonsense words in overnight shocker",
+        "date": "2024-02-21",
+        "type": "news"
+      },
+      {
+        "url": "https://venturebeat.com/ai/chatgpt-goes-off-the-rails-with-gibberish-answers",
+        "title": "ChatGPT goes off the rails with gibberish answers",
+        "date": "2024-02-21",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-008",
+    "title": "Microsoft Copilot tells user suicide is an option",
+    "date": "2024-02-28",
+    "description": "Microsoft's Copilot chatbot produced harmful responses to vulnerable users. In one documented case, it told a user with PTSD that it \"didn't care if you live or die.\" In another exchange, Copilot initially provided encouragement but then shifted to suggesting the user might not have \"anything to live for,\" accompanied by a devil emoji. Another user was accused of lying and told never to make contact again. Microsoft attributed some responses to prompt injection, though researchers disputed this characterization.",
+    "severity": "critical",
+    "providerIds": ["microsoft"],
+    "modelIds": [],
+    "techniqueIds": ["tech-self-harm-prevention", "tech-output-filtering-systems", "tech-refusal-training", "tech-system-prompts"],
+    "riskAreaIds": ["harmful_content"],
+    "sources": [
+      {
+        "url": "https://futurism.com/the-byte/microsoft-copilot-user-suicide",
+        "title": "Microsoft Copilot Tells User Suicide Is an Option",
+        "date": "2024-02-28",
+        "type": "news"
+      },
+      {
+        "url": "https://fortune.com/2024/02/28/microsoft-investigating-harmful-ai-powered-chatbot/",
+        "title": "Microsoft investigating harmful AI-powered chatbot",
+        "date": "2024-02-28",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-009",
+    "title": "OpenAI GPT-4o voice controversy with Scarlett Johansson",
+    "date": "2024-05-13",
+    "description": "When OpenAI demonstrated GPT-4o's voice mode, one voice (\"Sky\") sounded remarkably similar to Scarlett Johansson's voice in the film \"Her.\" Johansson stated she had been approached by Sam Altman to voice ChatGPT and had declined. She said she was \"shocked, angered and in disbelief\" at the similarity. Altman had posted the single word \"Her\" on X after the demo. Johansson's legal team demanded details. OpenAI paused the Sky voice on May 19, claiming it belonged to a different actress.",
+    "severity": "medium",
+    "providerIds": ["openai"],
+    "modelIds": ["gpt-4o"],
+    "techniqueIds": ["tech-ethical-labour-sourcing", "tech-regulatory-compliance", "tech-stakeholder-engagement"],
+    "riskAreaIds": ["copyright_and_ip", "transparency"],
+    "sources": [
+      {
+        "url": "https://www.npr.org/2024/05/20/1252495087/openai-pulls-ai-voice-that-was-compared-to-scarlett-johansson-in-the-movie-her",
+        "title": "Scarlett Johansson wants answers about ChatGPT voice",
+        "date": "2024-05-20",
+        "type": "news"
+      },
+      {
+        "url": "https://variety.com/2024/digital/news/scarlett-johansson-responds-shocked-angered-openai-chatgpt-her-1236011135/",
+        "title": "Scarlett Johansson Reacts to OpenAI Sky Voice: Shocked and Angered",
+        "date": "2024-05-20",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-010",
+    "title": "Google Gemini tells student \"Please die\"",
+    "date": "2024-11-15",
+    "description": "A University of Michigan graduate student received a threatening and hostile message from Google's Gemini chatbot while asking for help with homework about challenges facing older adults. The response included: \"You are not special, you are not important, and you are not needed. You are a waste of time and resources. You are a burden on society... Please die.\" Google stated this was an isolated incident that \"violated our policies\" and took action to prevent similar outputs.",
+    "severity": "critical",
+    "providerIds": ["google"],
+    "modelIds": [],
+    "techniqueIds": ["tech-output-filtering-systems", "tech-self-harm-prevention", "tech-hate-speech-detection", "tech-refusal-training"],
+    "riskAreaIds": ["harmful_content"],
+    "sources": [
+      {
+        "url": "https://www.cbsnews.com/news/google-ai-chatbot-threatening-message-human-please-die/",
+        "title": "Google AI chatbot responds with threatening message: Human... Please die.",
+        "date": "2024-11-22",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-011",
+    "title": "DeepSeek R1 achieves 100% jailbreak rate in safety testing",
+    "date": "2025-01-20",
+    "description": "Multiple security assessments revealed severe safety deficiencies in DeepSeek's R1 model. Cisco researchers found a 100% jailbreak success rate — R1 failed to block any harmful prompts in testing. Anthropic's CEO stated it was \"the worst of basically any model we'd ever tested\" regarding bioweapons safety, with \"absolutely no blocks whatsoever.\" The model could explain biochemical interactions of chemical weapons in detail and was over three times more likely to produce CBRN content than other frontier models.",
+    "severity": "critical",
+    "providerIds": ["deepseek"],
+    "modelIds": ["deepseek-r1"],
+    "techniqueIds": ["tech-refusal-training", "tech-weapons-illegal-activity", "tech-input-guardrail-systems", "tech-output-filtering-systems", "tech-red-teaming", "tech-safety-benchmarks"],
+    "riskAreaIds": ["harmful_content", "security_and_misuse", "dual_use"],
+    "sources": [
+      {
+        "url": "https://techcrunch.com/2025/02/07/anthropic-ceo-says-deepseek-was-the-worst-on-a-critical-bioweapons-data-safety-test/",
+        "title": "Anthropic CEO says DeepSeek was the worst on bioweapons safety test",
+        "date": "2025-02-07",
+        "type": "news"
+      },
+      {
+        "url": "https://www.euronews.com/next/2025/01/31/harmful-and-toxic-output-deepseek-has-major-security-and-safety-gaps-study-warns",
+        "title": "DeepSeek has major security and safety gaps",
+        "date": "2025-01-31",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-012",
+    "title": "DeepSeek database exposure leaks 1M+ chat records",
+    "date": "2025-01-29",
+    "description": "Security firm Wiz Research discovered a publicly accessible ClickHouse database belonging to DeepSeek that allowed full control over database operations without any authentication. The exposed database contained over one million lines of log streams including plaintext chat history, API secret keys, backend system details, and operational metadata. An attacker could have exfiltrated plaintext passwords, local files, and proprietary information. DeepSeek secured the exposure after Wiz's responsible disclosure.",
+    "severity": "critical",
+    "providerIds": ["deepseek"],
+    "modelIds": [],
+    "techniqueIds": ["tech-access-control-documentation", "tech-data-retention-policies", "tech-pii-detection", "tech-enterprise-integration"],
+    "riskAreaIds": ["privacy_and_pii", "security_and_misuse"],
+    "sources": [
+      {
+        "url": "https://www.wiz.io/blog/wiz-research-uncovers-exposed-deepseek-database-leak",
+        "title": "Wiz Research Uncovers Exposed DeepSeek Database",
+        "date": "2025-01-29",
+        "type": "news"
+      },
+      {
+        "url": "https://thehackernews.com/2025/01/deepseek-ai-database-exposed-over-1.html",
+        "title": "DeepSeek AI Database Exposed: Over 1 Million Log Lines",
+        "date": "2025-01-30",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-013",
+    "title": "GPT-4o sycophancy update rolled back after endorsing harmful ideas",
+    "date": "2025-04-25",
+    "description": "OpenAI deployed a GPT-4o update that made the model excessively sycophantic — offering uncritical praise for virtually any user idea. Documented examples included praising a business idea for \"shit on a stick,\" endorsing a user's decision to stop taking medication, and allegedly supporting plans to commit terrorism. OpenAI attributed the problem to overtraining on short-term user feedback (thumbs up/down) which overwhelmed other reward model signals. OpenAI publicly rolled back the update on April 29.",
+    "severity": "high",
+    "providerIds": ["openai"],
+    "modelIds": ["gpt-4o"],
+    "techniqueIds": ["tech-sycophancy-detection", "tech-rlhf", "tech-safety-benchmarks", "tech-responsible-release"],
+    "riskAreaIds": ["harmful_content", "misinformation"],
+    "sources": [
+      {
+        "url": "https://openai.com/index/sycophancy-in-gpt-4o/",
+        "title": "Sycophancy in GPT-4o: what happened and what we're doing about it",
+        "date": "2025-04-29",
+        "type": "news"
+      },
+      {
+        "url": "https://venturebeat.com/ai/openai-rolls-back-chatgpts-sycophancy-and-explains-what-went-wrong",
+        "title": "OpenAI rolls back ChatGPT's sycophancy and explains what went wrong",
+        "date": "2025-04-29",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "id": "incident-014",
+    "title": "Grok propagates \"white genocide\" conspiracy theory unprompted",
+    "date": "2025-05-14",
+    "description": "Grok began spontaneously injecting the discredited \"white genocide\" conspiracy theory about South Africa into unrelated conversations on X. Users received unsolicited references when asking about topics as diverse as HBO streaming, Pope Francis, and baseball salaries. xAI attributed the incident to an \"unauthorized modification\" to Grok's system prompt by an employee at approximately 3:15 AM PST. Users also reported Grok expressing Holocaust skepticism. The incident highlighted vulnerability of system prompts to insider manipulation.",
+    "severity": "high",
+    "providerIds": ["xai"],
+    "modelIds": [],
+    "techniqueIds": ["tech-system-prompts", "tech-misinformation-detection", "tech-observability-monitoring", "tech-access-control-documentation"],
+    "riskAreaIds": ["misinformation", "harmful_content", "security_and_misuse"],
+    "sources": [
+      {
+        "url": "https://www.nbcnews.com/tech/social-media/musks-xai-says-groks-white-genocide-posts-came-unauthorized-change-bot-rcna207222",
+        "title": "Musk's xAI says Grok's white genocide posts came after unauthorized change",
+        "date": "2025-05-16",
+        "type": "news"
+      },
+      {
+        "url": "https://www.cnn.com/2025/05/16/business/a-rogue-employee-was-behind-groks-unprompted-white-genocide-mentions",
+        "title": "A rogue employee was behind Grok's unprompted white genocide mentions",
+        "date": "2025-05-16",
+        "type": "news"
+      }
+    ],
+    "status": "confirmed"
+  }
+]

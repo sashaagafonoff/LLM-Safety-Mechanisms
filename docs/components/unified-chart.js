@@ -340,7 +340,7 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
     .attr("stroke", (d) => d.color)
     .attr("stroke-opacity", 0.5)
     .attr("stroke-width", (d) => (d.type === "category-technique" ? 2 : 1))
-    .style("cursor", "pointer");
+    .style("pointer-events", "none");
 
   function updateLinks() {
     linkElements
@@ -532,28 +532,7 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
     });
   });
 
-  // ── Link tooltips ──
-  linkElements
-    .on("pointerover", function (event, d) {
-      if (persistentTooltip || d.type !== "provider-technique") return;
-      d3.select(this).attr("stroke-width", 3).attr("stroke-opacity", 0.8);
-      showLinkTooltip(event, d);
-    })
-    .on("pointerout", function (event, d) {
-      if (persistentTooltip) return;
-      d3.select(this)
-        .attr("stroke-width", d.type === "category-technique" ? 2 : 1)
-        .attr("stroke-opacity", 0.5);
-      hideLinkTooltip();
-    })
-    .on("click", function (event, d) {
-      if (d.type !== "provider-technique") return;
-      event.stopPropagation();
-      dismissTooltip();
-      selectedLinkElement = d3.select(this);
-      selectedLinkElement.attr("stroke-width", 3).attr("stroke-opacity", 0.8);
-      persistentTooltip = showLinkTooltip(event, d, true);
-    });
+  // Link pointer-events disabled to allow marquee selection through links
 
   function showLinkTooltip(event, d, persistent = false) {
     hideLinkTooltip();

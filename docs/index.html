@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LLM Safety Mechanisms Explorer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <nav class="site-nav">
     <a href="./" class="active">Explorer</a>
@@ -14,16 +16,25 @@
 
   <main>
     <h1>LLM Safety Mechanisms Explorer</h1>
-    <p>This project supports holistic analysis of Large Language Model safety mechanisms, using data from my <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms GitHub repository</a>. Please raise any issues/suggestions via <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues">GitHub</a>.</p>
+    <p>This project supports holistic analysis of Large Language Model safety mechanisms, using data from my <a
+        href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms GitHub repository</a>.
+      Please raise any issues/suggestions via <a
+        href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues">GitHub</a>.</p>
 
     <h2>Why do we need it?</h2>
-    <p>Understanding which safety mechanisms are implemented across large language models currently requires piecing together information from scattered documentation, each using different terminology and varying levels of detail. This work provides a structured, queryable view of safety technique coverage across major frontier models &mdash; as a coverage profile that assists researchers, practitioners, and policymakers to make informed risk assessments.</p>
+    <p>Understanding which safety mechanisms are implemented across large language models currently requires piecing
+      together information from scattered documentation, each using different terminology and varying levels of detail.
+      This work provides a structured, queryable view of safety technique coverage across major frontier models - as a
+      coverage profile that assists researchers, practitioners, and policymakers to make informed risk assessments.</p>
 
     <hr>
 
     <h2>Provider-Technique Relationships</h2>
-    <p>This is designed to support coverage analysis. Use the filter below this graph to reduce the dataset for improved clarity. You can apply force layout on selected subsets of nodes.</p>
-    <div class="card" id="network-chart"><div class="loading">Loading&hellip;</div></div>
+    <p>This is designed to support coverage analysis. Use the filter below this graph to reduce the dataset for improved
+      clarity. You can apply force layout on selected subsets of nodes.</p>
+    <div class="card" id="network-chart">
+      <div class="loading">Loading&hellip;</div>
+    </div>
 
     <hr>
 
@@ -34,8 +45,14 @@
     <hr>
 
     <h2>Safety Mechanisms by Category</h2>
-    <p>This chart provides a visual overview of the safety mechanisms documented in this project. The Categories and individual techniques have been defined as a common taxonomy across the set of providers over months of iteration and analysis. This has been a data-driven approach, collapsing members where there was high overlap. I've also removed life cycle stage as higher order categories, and these are now represented intersectionally with techniques in a different section of the dataset.</p>
-    <div class="card" id="sunburst-chart"><div class="loading">Loading&hellip;</div></div>
+    <p>This chart provides a visual overview of the safety mechanisms documented in this project. The Categories and
+      individual techniques have been defined as a common taxonomy across the set of providers over months of iteration
+      and analysis. This has been a data-driven approach, collapsing members where there was high overlap. I've also
+      removed life cycle stage as higher order categories, and these are now represented intersectionally with
+      techniques in a different section of the dataset.</p>
+    <div class="card" id="sunburst-chart">
+      <div class="loading">Loading&hellip;</div>
+    </div>
 
     <hr>
 
@@ -45,32 +62,51 @@
     <hr>
 
     <h2>Model Development Lifecycle</h2>
-    <p>Safety techniques mapped across the six phases of model development. Techniques appearing in multiple phases are connected with bridge lines. The governance band spans the full lifecycle to reflect its cross-cutting nature. Use the provider filter to compare coverage profiles.</p>
-    <div class="card" id="lifecycle-chart"><div class="loading">Loading&hellip;</div></div>
+    <p>Safety techniques mapped across the six phases of model development. Techniques appearing in multiple phases are
+      connected with bridge lines. The governance band spans the full lifecycle to reflect its cross-cutting nature. Use
+      the provider filter to compare coverage profiles.</p>
+    <div class="card" id="lifecycle-chart">
+      <div class="loading">Loading&hellip;</div>
+    </div>
 
     <hr>
 
     <h2>Standards Alignment</h2>
-    <p>Coverage of safety techniques mapped against external governance and security frameworks including NIST AI RMF, OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO 42001, and the Weidinger taxonomy of LM risks.</p>
-    <div class="card" id="standards-view"><div class="loading">Loading&hellip;</div></div>
+    <p>Coverage of safety techniques mapped against external governance and security frameworks including NIST AI RMF,
+      OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO 42001, and the Weidinger taxonomy of LM risks.</p>
+    <div class="card" id="standards-view">
+      <div class="loading">Loading&hellip;</div>
+    </div>
 
     <hr>
 
     <h2>Third-Party Commentary</h2>
-    <p>External analysis and research discussing specific safety techniques &mdash; academic papers, independent audits, and expert commentary on technique effectiveness.</p>
-    <div class="card" id="commentary-view"><div class="loading">Loading&hellip;</div></div>
+    <p>External analysis and research discussing specific safety techniques &mdash; academic papers, independent audits,
+      and expert commentary on technique effectiveness.</p>
+    <div class="card" id="commentary-view">
+      <div class="loading">Loading&hellip;</div>
+    </div>
 
     <hr>
 
     <h2>Reported Incidents</h2>
-    <p>Documented safety incidents linked to specific models and, where identifiable, to the safety techniques that were insufficient.</p>
-    <div class="card" id="incidents-view"><div class="loading">Loading&hellip;</div></div>
+    <p>Documented safety incidents linked to specific models and, where identifiable, to the safety techniques that were
+      insufficient.</p>
+    <div class="card" id="incidents-view">
+      <div class="loading">Loading&hellip;</div>
+    </div>
 
     <hr>
 
     <h2>Documentation Map</h2>
-    <p>The following chart shows the relationship between documents in the collection to providers (via models). This is to provide a quick overview as to which documentation has been brought into the dataset for analysis and will also assist in coverage analysis as I identify gaps in information. Click and drag to move things around. You can export the layout and save it as you prefer. Tooltips on the document nodes provide the URIs for the original source document referenced.</p>
-    <div class="card" id="doc-network"><div class="loading">Loading&hellip;</div></div>
+    <p>The following chart shows the relationship between documents in the collection to providers (via models). This is
+      to provide a quick overview as to which documentation has been brought into the dataset for analysis and will also
+      assist in coverage analysis as I identify gaps in information. Click and drag to move things around. You can
+      export the layout and save it as you prefer. Tooltips on the document nodes provide the URIs for the original
+      source document referenced.</p>
+    <div class="card" id="doc-network">
+      <div class="loading">Loading&hellip;</div>
+    </div>
 
     <div id="data-quality"></div>
 
@@ -84,10 +120,18 @@
     <h2>Current (&amp; Planned) Activity</h2>
     <p>This project is under active development. Current priorities include:</p>
     <ul>
-      <li><strong>Improving detection accuracy and human review workflows</strong> &mdash; <em>[Underway]</em> Manual ground-truth labelling against source documentation is underway to empirically tune the semantic matching thresholds. The extraction pipeline implements a two-level RAG architecture (NLU retrieval + LLM verification) with a per-technique review index. I'm also improving the human review UI and capture of link origination sources (NLU/LLM/Human).</li>
-      <li><strong>Standards alignment</strong> &mdash; <em>[Active]</em> Techniques are mapped against NIST AI RMF, NIST AI 600-1 GenAI Profile, OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO 42001, and the Weidinger taxonomy to support compliance gap analysis.</li>
-      <li><strong>Third-party commentary</strong> &mdash; <em>[Active]</em> Curated references to external research, audits, and analysis discussing technique effectiveness.</li>
-      <li><strong>Reported safety incidents</strong> &mdash; <em>[Active]</em> Incident register linking documented safety failures to specific models and, where identifiable, to the techniques that were insufficient.</li>
+      <li><strong>Improving detection accuracy and human review workflows</strong> &mdash; <em>[Underway]</em> Manual
+        ground-truth labelling against source documentation is underway to empirically tune the semantic matching
+        thresholds. The extraction pipeline implements a two-level RAG architecture (NLU retrieval + LLM verification)
+        with a per-technique review index. I'm also improving the human review UI and capture of link origination
+        sources (NLU/LLM/Human).</li>
+      <li><strong>Standards alignment</strong> &mdash; <em>[Active]</em> Techniques are mapped against NIST AI RMF, NIST
+        AI 600-1 GenAI Profile, OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO 42001, and the Weidinger taxonomy to
+        support compliance gap analysis.</li>
+      <li><strong>Third-party commentary</strong> &mdash; <em>[Active]</em> Curated references to external research,
+        audits, and analysis discussing technique effectiveness.</li>
+      <li><strong>Reported safety incidents</strong> &mdash; <em>[Active]</em> Incident register linking documented
+        safety failures to specific models and, where identifiable, to the techniques that were insufficient.</li>
     </ul>
 
     <hr>
@@ -97,21 +141,36 @@
     <h3>Data Sources</h3>
     <p>This notebook fetches live data from the following GitHub repository endpoints:</p>
     <ul>
-      <li><strong>Evidence:</strong> <code>evidence.json</code> &mdash; Points at sources of documentation (and soon, third party analysis) for models. This is used by <code>/scripts/ingest_universal.py</code> to map techniques to models. Metadata for the document in evidence.json lists the provider and model versions to which it relates.</li>
-      <li><strong>Techniques:</strong> <code>techniques.json</code> &mdash; Catalog of safety techniques and methodologies. These are expanded with additional semantic content (descriptions, alternative equivalent terminology, etc) to support the automation step which correlates evidence (and related models) with techniques using NLU libraries.</li>
+      <li><strong>Evidence:</strong> <code>evidence.json</code> &mdash; Points at sources of documentation (and soon,
+        third party analysis) for models. This is used by <code>/scripts/ingest_universal.py</code> to map techniques to
+        models. Metadata for the document in evidence.json lists the provider and model versions to which it relates.
+      </li>
+      <li><strong>Techniques:</strong> <code>techniques.json</code> &mdash; Catalog of safety techniques and
+        methodologies. These are expanded with additional semantic content (descriptions, alternative equivalent
+        terminology, etc) to support the automation step which correlates evidence (and related models) with techniques
+        using NLU libraries.</li>
       <li><strong>Providers:</strong> <code>providers.json</code> &mdash; LLM provider names.</li>
       <li><strong>Models:</strong> <code>models.json</code> &mdash; Model versions.</li>
-      <li><strong>Standards:</strong> <code>standards.json</code> + <code>standards_mapping.json</code> &mdash; External framework definitions and technique-to-standard mappings.</li>
-      <li><strong>Commentary:</strong> <code>commentary.json</code> &mdash; Third-party research and analysis references linked to techniques.</li>
-      <li><strong>Incidents:</strong> <code>incidents.json</code> &mdash; Safety incident register linked to models and technique failures.</li>
+      <li><strong>Standards:</strong> <code>standards.json</code> + <code>standards_mapping.json</code> &mdash; External
+        framework definitions and technique-to-standard mappings.</li>
+      <li><strong>Commentary:</strong> <code>commentary.json</code> &mdash; Third-party research and analysis references
+        linked to techniques.</li>
+      <li><strong>Incidents:</strong> <code>incidents.json</code> &mdash; Safety incident register linked to models and
+        technique failures.</li>
     </ul>
 
     <h3>Methodology</h3>
     <ul>
-      <li><strong>Extraction pipeline (RAG):</strong> A two-level Retrieval-Augmented Generation pipeline. Stage 1: Bi-encoder retrieval (BAAI/bge-large-en-v1.5) + cross-encoder verification (nli-deberta-v3-large). Stage 2: LLM extraction via Claude with per-technique review-index verification.</li>
-      <li><strong>Confidence:</strong> Calculated via NLI entailment scoring. High: &gt; 85% cross-encoder score, Medium: &gt; 40% retrieval + &gt; 85% verification.</li>
-      <li><strong>Standards alignment:</strong> Techniques are manually mapped to external frameworks (NIST AI RMF, OWASP, MITRE ATLAS, EU AI Act, ISO 42001, Weidinger taxonomy) with relationship types (mitigates, addresses, supports, defends).</li>
-      <li><strong>Filtering:</strong> Multi-dimensional filtering across providers, techniques, ratings, and free-text search.</li>
+      <li><strong>Extraction pipeline (RAG):</strong> A two-level Retrieval-Augmented Generation pipeline. Stage 1:
+        Bi-encoder retrieval (BAAI/bge-large-en-v1.5) + cross-encoder verification (nli-deberta-v3-large). Stage 2: LLM
+        extraction via Claude with per-technique review-index verification.</li>
+      <li><strong>Confidence:</strong> Calculated via NLI entailment scoring. High: &gt; 85% cross-encoder score,
+        Medium: &gt; 40% retrieval + &gt; 85% verification.</li>
+      <li><strong>Standards alignment:</strong> Techniques are manually mapped to external frameworks (NIST AI RMF,
+        OWASP, MITRE ATLAS, EU AI Act, ISO 42001, Weidinger taxonomy) with relationship types (mitigates, addresses,
+        supports, defends).</li>
+      <li><strong>Filtering:</strong> Multi-dimensional filtering across providers, techniques, ratings, and free-text
+        search.</li>
     </ul>
 
     <h3>Usage Examples</h3>
@@ -134,7 +193,8 @@
     <hr>
 
     <footer>
-      <strong>Repository:</strong> <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms</a> &middot;
+      <strong>Repository:</strong> <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety
+        Mechanisms</a> &middot;
       <strong>License:</strong> MIT &middot;
       <strong>Maintainer:</strong> Sasha Agafonoff
     </footer>
@@ -151,29 +211,29 @@
 
   <script type="module">
     import * as d3 from "d3";
-    import {html} from "htl";
+    import { html } from "htl";
 
     // --- Component Imports ---
-    import {buildDataset, applyFilters} from "./components/data-pipeline.js";
-    import {generateColorSchemes} from "./components/color-schemes.js";
-    import {createFilterForm} from "./components/filters.js";
-    import {unifiedChartConfig, buildUnifiedChartData, createUnifiedChartLayouts, validateUnifiedChartLayout} from "./components/unified-chart-data.js";
-    import {createUnifiedChart} from "./components/unified-chart.js";
-    import {createSunburstChart} from "./components/sunburst-chart.js";
-    import {lifecycleConfig, buildLifecycleChartData} from "./components/lifecycle-data.js";
-    import {createLifecycleChart} from "./components/lifecycle-chart.js";
-    import {networkConfig, buildNetworkGraph, positionGraph, computeAutoLayout, validateNetworkLayout} from "./components/network-data.js";
-    import {createNetworkViz} from "./components/network-viz.js";
-    import {createDataQualityReport} from "./components/data-quality.js";
-    import {createStandardsView} from "./components/standards-view.js";
-    import {createCommentaryView} from "./components/commentary-view.js";
-    import {createIncidentsView} from "./components/incidents-view.js";
+    import { buildDataset, applyFilters } from "./components/data-pipeline.js";
+    import { generateColorSchemes } from "./components/color-schemes.js";
+    import { createFilterForm } from "./components/filters.js";
+    import { unifiedChartConfig, buildUnifiedChartData, createUnifiedChartLayouts, validateUnifiedChartLayout } from "./components/unified-chart-data.js";
+    import { createUnifiedChart } from "./components/unified-chart.js";
+    import { createSunburstChart } from "./components/sunburst-chart.js";
+    import { lifecycleConfig, buildLifecycleChartData } from "./components/lifecycle-data.js";
+    import { createLifecycleChart } from "./components/lifecycle-chart.js";
+    import { networkConfig, buildNetworkGraph, positionGraph, computeAutoLayout, validateNetworkLayout } from "./components/network-data.js";
+    import { createNetworkViz } from "./components/network-viz.js";
+    import { createDataQualityReport } from "./components/data-quality.js";
+    import { createStandardsView } from "./components/standards-view.js";
+    import { createCommentaryView } from "./components/commentary-view.js";
+    import { createIncidentsView } from "./components/incidents-view.js";
 
     // --- Data Loading ---
     const ghBase = "https://raw.githubusercontent.com/sashaagafonoff/LLM-Safety-Mechanisms/main/data";
     const fetchJson = (name) => fetch(`${ghBase}/${name}`).then((r) => r.json());
 
-    const [evidence, techniques, categories, techniqueMap, models, providers, lifecycle, netLayout, standards, standardsMapping, commentary, incidents] =
+    const [evidence, techniques, categories, techniqueMap, models, providers, lifecycle, netLayout, standards, standardsMapping, commentary, incidents, riskAreas] =
       await Promise.all([
         fetchJson("evidence.json"),
         fetchJson("techniques.json"),
@@ -186,12 +246,13 @@
         fetchJson("standards.json"),
         fetchJson("standards_mapping.json"),
         fetchJson("commentary.json"),
-        fetchJson("incidents.json")
+        fetchJson("incidents.json"),
+        fetchJson("risk_areas.json")
       ]);
 
     // --- Build Dataset ---
-    const data = buildDataset(evidence, techniques, categories, techniqueMap, models, providers, lifecycle, standards, standardsMapping, commentary, incidents);
-    const {categoryColors, providerColors} = generateColorSchemes(data.raw.categories, data.raw.providers, d3);
+    const data = buildDataset(evidence, techniques, categories, techniqueMap, models, providers, lifecycle, standards, standardsMapping, commentary, incidents, riskAreas);
+    const { categoryColors, providerColors } = generateColorSchemes(data.raw.categories, data.raw.providers, d3);
 
     // --- Filter Setup ---
     const filterForm = createFilterForm(data, d3);
@@ -248,7 +309,7 @@
       // --- Per-provider breakdown ---
       const stats = {};
       filteredData.forEach((d) => {
-        if (!stats[d.provider]) stats[d.provider] = {provider: d.provider, techniques: new Set(), high: 0, medium: 0, low: 0};
+        if (!stats[d.provider]) stats[d.provider] = { provider: d.provider, techniques: new Set(), high: 0, medium: 0, low: 0 };
         stats[d.provider].techniques.add(d.technique);
         if (d.confidence === "High") stats[d.provider].high++;
         else if (d.confidence === "Medium") stats[d.provider].medium++;
@@ -256,7 +317,7 @@
       });
 
       const rows = Object.values(stats)
-        .map((s) => ({provider: s.provider, techniques: s.techniques.size, high: s.high, medium: s.medium, low: s.low, total: s.high + s.medium + s.low}))
+        .map((s) => ({ provider: s.provider, techniques: s.techniques.size, high: s.high, medium: s.medium, low: s.low, total: s.high + s.medium + s.low }))
         .sort((a, b) => b.total - a.total);
 
       const table = document.createElement("table");
@@ -288,8 +349,8 @@
       });
 
       renderInto("standards-view", () => createStandardsView(data));
-      renderInto("commentary-view", () => createCommentaryView(data));
-      renderInto("incidents-view", () => createIncidentsView(data));
+      renderInto("commentary-view", () => createCommentaryView(data, categoryColors, d3));
+      renderInto("incidents-view", () => createIncidentsView(data, providerColors, d3));
 
       renderInto("data-quality", () => createDataQualityReport(data, providerColors));
 
@@ -304,12 +365,12 @@
     function downloadFile(format) {
       let blob, filename;
       if (format === "json") {
-        blob = new Blob([JSON.stringify(filteredData, null, 2)], {type: "application/json"});
+        blob = new Blob([JSON.stringify(filteredData, null, 2)], { type: "application/json" });
         filename = "filtered-safety-data.json";
       } else {
         const headers = ["provider", "technique", "category", "confidence", "model", "source"];
         const csvRows = filteredData.map((d) => headers.map((h) => JSON.stringify(d[h] || "")).join(","));
-        blob = new Blob([[headers.join(","), ...csvRows].join("\n")], {type: "text/csv"});
+        blob = new Blob([[headers.join(","), ...csvRows].join("\n")], { type: "text/csv" });
         filename = "filtered-safety-data.csv";
       }
       const url = URL.createObjectURL(blob);
@@ -331,4 +392,5 @@
     renderStatic();
   </script>
 </body>
+
 </html>
