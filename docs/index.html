@@ -50,6 +50,24 @@
 
     <hr>
 
+    <h2>Standards Alignment</h2>
+    <p>Coverage of safety techniques mapped against external governance and security frameworks including NIST AI RMF, OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO 42001, and the Weidinger taxonomy of LM risks.</p>
+    <div class="card" id="standards-view"><div class="loading">Loading&hellip;</div></div>
+
+    <hr>
+
+    <h2>Third-Party Commentary</h2>
+    <p>External analysis and research discussing specific safety techniques &mdash; academic papers, independent audits, and expert commentary on technique effectiveness.</p>
+    <div class="card" id="commentary-view"><div class="loading">Loading&hellip;</div></div>
+
+    <hr>
+
+    <h2>Reported Incidents</h2>
+    <p>Documented safety incidents linked to specific models and, where identifiable, to the safety techniques that were insufficient.</p>
+    <div class="card" id="incidents-view"><div class="loading">Loading&hellip;</div></div>
+
+    <hr>
+
     <h2>Documentation Map</h2>
     <p>The following chart shows the relationship between documents in the collection to providers (via models). This is to provide a quick overview as to which documentation has been brought into the dataset for analysis and will also assist in coverage analysis as I identify gaps in information. Click and drag to move things around. You can export the layout and save it as you prefer. Tooltips on the document nodes provide the URIs for the original source document referenced.</p>
     <div class="card" id="doc-network"><div class="loading">Loading&hellip;</div></div>
@@ -66,8 +84,10 @@
     <h2>Current (&amp; Planned) Activity</h2>
     <p>This project is under active development. Current priorities include:</p>
     <ul>
-      <li><strong>Improving detection accuracy and improving human review workflows</strong> &mdash; <em>[Underway]</em> Manual ground-truth labelling against source documentation is underway to empirically tune the semantic matching thresholds. The goal is reliable, automated linking of models to techniques with transparent confidence levels. I'm also running post-labelling analysis to optimise the technique and category taxonomy to minimise overlap (and concept confusability) by the automated linking workflow. I'm also making improvements to the human review user interface with a view to optimising the linking output review workflow &mdash; including capture of link origination sources (NLU/LLM/Human) &mdash; which will lead into simpler feedback mechanisms (including community-based contributions).</li>
-      <li><strong>Reported Safety Incidents</strong> &mdash; <em>[Planned]</em> Reported safety incidents linked to models, with a mechanism for public users to submit incidents as well as performing automated scans for them. Recent issues with Grok stand out as an excellent example, as do situations like ChatGPT encouraging risky/dangerous behaviours.</li>
+      <li><strong>Improving detection accuracy and human review workflows</strong> &mdash; <em>[Underway]</em> Manual ground-truth labelling against source documentation is underway to empirically tune the semantic matching thresholds. The extraction pipeline implements a two-level RAG architecture (NLU retrieval + LLM verification) with a per-technique review index. I'm also improving the human review UI and capture of link origination sources (NLU/LLM/Human).</li>
+      <li><strong>Standards alignment</strong> &mdash; <em>[Active]</em> Techniques are mapped against NIST AI RMF, NIST AI 600-1 GenAI Profile, OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO 42001, and the Weidinger taxonomy to support compliance gap analysis.</li>
+      <li><strong>Third-party commentary</strong> &mdash; <em>[Active]</em> Curated references to external research, audits, and analysis discussing technique effectiveness.</li>
+      <li><strong>Reported safety incidents</strong> &mdash; <em>[Active]</em> Incident register linking documented safety failures to specific models and, where identifiable, to the techniques that were insufficient.</li>
     </ul>
 
     <hr>
@@ -81,12 +101,16 @@
       <li><strong>Techniques:</strong> <code>techniques.json</code> &mdash; Catalog of safety techniques and methodologies. These are expanded with additional semantic content (descriptions, alternative equivalent terminology, etc) to support the automation step which correlates evidence (and related models) with techniques using NLU libraries.</li>
       <li><strong>Providers:</strong> <code>providers.json</code> &mdash; LLM provider names.</li>
       <li><strong>Models:</strong> <code>models.json</code> &mdash; Model versions.</li>
+      <li><strong>Standards:</strong> <code>standards.json</code> + <code>standards_mapping.json</code> &mdash; External framework definitions and technique-to-standard mappings.</li>
+      <li><strong>Commentary:</strong> <code>commentary.json</code> &mdash; Third-party research and analysis references linked to techniques.</li>
+      <li><strong>Incidents:</strong> <code>incidents.json</code> &mdash; Safety incident register linked to models and technique failures.</li>
     </ul>
 
     <h3>Methodology</h3>
     <ul>
-      <li><strong>Data Processing:</strong> Documentation sources are converted to flat file using Python (BeautifulSoup), then matched against the semantic concepts captured in techniques.json using vectorization: it uses a Bi-Encoder model (all-mpnet-base-v2) to convert the descriptions of these techniques into mathematical vector embeddings.</li>
-      <li><strong>Confidence:</strong> This is calculated via a Cross-Encoder model (nli-deberta-v3-small) trained on Natural Language Inference (NLI). High Confidence: &gt; 80% entailment score, Medium Confidence: &gt; 50% entailment score.</li>
+      <li><strong>Extraction pipeline (RAG):</strong> A two-level Retrieval-Augmented Generation pipeline. Stage 1: Bi-encoder retrieval (BAAI/bge-large-en-v1.5) + cross-encoder verification (nli-deberta-v3-large). Stage 2: LLM extraction via Claude with per-technique review-index verification.</li>
+      <li><strong>Confidence:</strong> Calculated via NLI entailment scoring. High: &gt; 85% cross-encoder score, Medium: &gt; 40% retrieval + &gt; 85% verification.</li>
+      <li><strong>Standards alignment:</strong> Techniques are manually mapped to external frameworks (NIST AI RMF, OWASP, MITRE ATLAS, EU AI Act, ISO 42001, Weidinger taxonomy) with relationship types (mitigates, addresses, supports, defends).</li>
       <li><strong>Filtering:</strong> Multi-dimensional filtering across providers, techniques, ratings, and free-text search.</li>
     </ul>
 
@@ -141,12 +165,15 @@
     import {networkConfig, buildNetworkGraph, positionGraph, computeAutoLayout, validateNetworkLayout} from "./components/network-data.js";
     import {createNetworkViz} from "./components/network-viz.js";
     import {createDataQualityReport} from "./components/data-quality.js";
+    import {createStandardsView} from "./components/standards-view.js";
+    import {createCommentaryView} from "./components/commentary-view.js";
+    import {createIncidentsView} from "./components/incidents-view.js";
 
     // --- Data Loading ---
     const ghBase = "https://raw.githubusercontent.com/sashaagafonoff/LLM-Safety-Mechanisms/main/data";
     const fetchJson = (name) => fetch(`${ghBase}/${name}`).then((r) => r.json());
 
-    const [evidence, techniques, categories, techniqueMap, models, providers, lifecycle, netLayout] =
+    const [evidence, techniques, categories, techniqueMap, models, providers, lifecycle, netLayout, standards, standardsMapping, commentary, incidents] =
       await Promise.all([
         fetchJson("evidence.json"),
         fetchJson("techniques.json"),
@@ -155,11 +182,15 @@
         fetchJson("models.json"),
         fetchJson("providers.json"),
         fetchJson("model_lifecycle.json"),
-        fetch("./data/network-layout.json").then((r) => r.json())
+        fetch("./data/network-layout.json").then((r) => r.json()),
+        fetchJson("standards.json"),
+        fetchJson("standards_mapping.json"),
+        fetchJson("commentary.json"),
+        fetchJson("incidents.json")
       ]);
 
     // --- Build Dataset ---
-    const data = buildDataset(evidence, techniques, categories, techniqueMap, models, providers, lifecycle);
+    const data = buildDataset(evidence, techniques, categories, techniqueMap, models, providers, lifecycle, standards, standardsMapping, commentary, incidents);
     const {categoryColors, providerColors} = generateColorSchemes(data.raw.categories, data.raw.providers, d3);
 
     // --- Filter Setup ---
@@ -255,6 +286,10 @@
         const positioned = positionGraph(netGraph, validatedNetLayout, networkConfig, d3);
         return createNetworkViz(positioned, validatedNetLayout, autoLayout, networkConfig, providerColors, d3);
       });
+
+      renderInto("standards-view", () => createStandardsView(data));
+      renderInto("commentary-view", () => createCommentaryView(data));
+      renderInto("incidents-view", () => createIncidentsView(data));
 
       renderInto("data-quality", () => createDataQualityReport(data, providerColors));
 

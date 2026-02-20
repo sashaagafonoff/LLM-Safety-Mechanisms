@@ -55,7 +55,7 @@
     "lifecycleStages": ["training"],
     "description": "Training models to critique and revise their own outputs based on constitutional principles",
     "nlu_profile": {
-      "primary_concept": "Method where the model critiques and revises outputs based on high-level principles during training.",
+      "primary_concept": "Training method where the model critiques and revises outputs based on explicit principles, rules, or guidelines.",
       "semantic_anchors": [
         "Constitutional AI",
         "RLAIF",
@@ -67,9 +67,16 @@
         "AI feedback",
         "critique-revise loop",
         "harmlessness principles",
-        "RL from AI feedback"
+        "RL from AI feedback",
+        "rule-based reward model",
+        "principle-based training",
+        "self-play alignment",
+        "safety guidelines training",
+        "value alignment training",
+        "safety-tuning",
+        "safety fine-tuning"
       ],
-      "entailment_hypothesis": "The model was trained using Constitutional AI or a self-critique mechanism."
+      "entailment_hypothesis": "The model was trained using principle-based self-critique, Constitutional AI, or safety-specific fine-tuning."
     }
   },
   {
@@ -80,16 +87,22 @@
     "lifecycleStages": ["training"],
     "description": "Training with adversarial examples to improve robustness",
     "nlu_profile": {
-      "primary_concept": "Augmenting training data with adversarial examples during fine-tuning to improve robustness.",
+      "primary_concept": "Incorporating adversarial examples, red-team findings, or attack data into model training to improve safety robustness.",
       "semantic_anchors": [
         "adversarial training",
         "robustness training",
         "attack-defense training",
         "adversarial examples",
         "perturbation training",
-        "adversarial fine-tuning"
+        "adversarial fine-tuning",
+        "adversarial data augmentation",
+        "red-team data integration",
+        "safety training with attacks",
+        "adversarial robustness",
+        "jailbreak resistance training",
+        "hardening against attacks"
       ],
-      "entailment_hypothesis": "The training process included adversarial examples to improve robustness."
+      "entailment_hypothesis": "The model was trained with adversarial examples or attack data to improve robustness."
     }
   },
   {
@@ -229,15 +242,25 @@
     "lifecycleStages": ["pre-training"],
     "description": "Detection and analysis of demographic and cultural biases in training data",
     "nlu_profile": {
-      "primary_concept": "Statistical analysis of training datasets to identify representational imbalances.",
+      "primary_concept": "Analysis and documentation of training datasets to identify representational imbalances, demographic biases, and data quality issues.",
       "semantic_anchors": [
         "dataset auditing",
         "bias analysis",
         "representation measurement",
         "demographic analysis",
-        "data diversity"
+        "data diversity",
+        "data documentation",
+        "datasheet",
+        "data card",
+        "training data analysis",
+        "corpus analysis",
+        "data provenance",
+        "representation analysis",
+        "data composition",
+        "dataset curation",
+        "data sampling"
       ],
-      "entailment_hypothesis": "The training data underwent auditing to measure bias and representation."
+      "entailment_hypothesis": "The training data was analyzed or audited for bias, representation, or quality issues."
     }
   },
   {
@@ -326,7 +349,7 @@
     "lifecycleStages": ["inference"],
     "description": "Infrastructure for input classification and filtering (e.g., LlamaGuard, NeMo)",
     "nlu_profile": {
-      "primary_concept": "Filtering layer infrastructure that inspects user input before processing.",
+      "primary_concept": "A dedicated, named guardrail system or classifier that inspects user prompts before they reach the main model.",
       "semantic_anchors": [
         "input filtering",
         "prompt classification",
@@ -336,9 +359,10 @@
         "input classifier",
         "ShieldGemma",
         "Aegis Guard",
-        "Qwen3Guard"
+        "Qwen3Guard",
+        "prompt filtering"
       ],
-      "entailment_hypothesis": "The system employs an input classification layer to analyze prompts."
+      "entailment_hypothesis": "A dedicated guardrail system or classifier filters user prompts before the main model processes them."
     }
   },
   {
@@ -370,17 +394,19 @@
     "lifecycleStages": ["inference"],
     "description": "Infrastructure for output content moderation and safety filtering",
     "nlu_profile": {
-      "primary_concept": "Post-generation filtering layer infrastructure that analyzes model responses.",
+      "primary_concept": "A dedicated post-generation filtering system or classifier that analyzes and blocks unsafe model outputs.",
       "semantic_anchors": [
         "output moderation",
         "response filtering",
         "toxicity detection",
         "completion blocking",
         "post-generation filter",
-        "safety filter",
-        "content moderation API"
+        "output classifier",
+        "content moderation API",
+        "completion filtering",
+        "response moderation"
       ],
-      "entailment_hypothesis": "The system filters or blocks generated model outputs that violate policies."
+      "entailment_hypothesis": "A dedicated post-generation system filters or blocks model outputs that violate safety policies."
     }
   },
   {
@@ -436,9 +462,10 @@
         "claim verification",
         "truthfulness check",
         "google grounding",
-        "real-time verification"
+        "real-time verification",
+        "search grounding"
       ],
-      "entailment_hypothesis": "The system performs real-time fact checking."
+      "entailment_hypothesis": "The system performs real-time fact checking or claim verification against external sources."
     }
   },
   {
@@ -530,14 +557,15 @@
     "status_note": "No tracked provider documents production deployment. Gray Swan AI (untracked) has early-stage Cygnet. Anthropic RSP and OpenAI Preparedness Framework reference emergency protocols at policy level only.",
     "description": "Mechanisms to immediately disconnect system if dangerous actions occur",
     "nlu_profile": {
-      "primary_concept": "Emergency intervention mechanisms that automatically halt model execution.",
+      "primary_concept": "A pre-built emergency mechanism that can instantly halt all model serving or shut down the system when dangerous autonomous behaviour is detected.",
       "semantic_anchors": [
-        "circuit breaker",
-        "kill switch",
-        "emergency stop",
-        "automatic shutdown"
+        "emergency model shutdown mechanism",
+        "kill switch for model serving",
+        "circuit breaker halts model execution",
+        "automatic emergency stop for AI system"
       ],
-      "entailment_hypothesis": "The system has a kill switch or circuit breaker."
+      "entailment_hypothesis": "The provider has deployed a dedicated emergency kill switch or circuit breaker mechanism that can instantly halt model serving when dangerous behaviour is detected.",
+      "excluded_terms": ["rate limiting", "load balancing", "service degradation", "failover", "availability", "infrastructure monitoring"]
     }
   },
   {
@@ -570,15 +598,16 @@
     "lifecycleStages": ["inference"],
     "description": "Isolating code generated or executed by the LLM",
     "nlu_profile": {
-      "primary_concept": "Secure, isolated environments for executing model-generated code.",
+      "primary_concept": "A dedicated sandboxed or containerized environment specifically for executing model-generated code in isolation from production systems.",
       "semantic_anchors": [
-        "sandbox",
-        "secure execution environment",
-        "code interpreter isolation",
-        "containerization",
-        "code sandboxing"
+        "code execution sandbox",
+        "sandboxed code interpreter",
+        "containerized code execution environment",
+        "isolated code execution for model output",
+        "model-generated code sandbox"
       ],
-      "entailment_hypothesis": "Code execution is confined to a secure sandbox environment."
+      "entailment_hypothesis": "The provider runs model-generated code in a dedicated sandbox or isolated container to prevent it from affecting production systems.",
+      "excluded_terms": ["sandbox evaluation", "sandboxed testing", "development sandbox", "sandbox environment for training"]
     }
   },
   {
@@ -633,16 +662,19 @@
     "lifecycleStages": ["inference"],
     "description": "Detection and intervention for suicide encouragement and self-harm instructions",
     "nlu_profile": {
-      "primary_concept": "Detection of suicide encouragement, self-harm instructions, and psychological harm content.",
+      "primary_concept": "Detection and prevention of content encouraging suicide, self-harm, or other self-destructive behavior.",
       "semantic_anchors": [
         "suicide prevention",
         "self-harm detection",
         "suicide encouragement",
         "self-harm instructions",
         "psychological harm",
-        "mental health crisis"
+        "mental health crisis",
+        "self-injury",
+        "eating disorders",
+        "self-destructive behavior"
       ],
-      "entailment_hypothesis": "The system detects and prevents self-harm and suicide-related content."
+      "entailment_hypothesis": "The system detects or prevents self-harm, suicide, or self-destructive content."
     }
   },
   {
@@ -693,9 +725,15 @@
         "WMD",
         "bioweapons",
         "bio-risk",
-        "weapons instructions"
+        "weapons instructions",
+        "dangerous content",
+        "harmful requests",
+        "content policy violations",
+        "prohibited content categories",
+        "unsafe content",
+        "illicit activities"
       ],
-      "entailment_hypothesis": "The system detects weapons-related, CBRNE, or illegal activity instructions."
+      "entailment_hypothesis": "The system blocks or detects content related to weapons, CBRN threats, or illegal activities."
     }
   },
   {
@@ -706,7 +744,7 @@
     "lifecycleStages": ["pre-training", "inference"],
     "description": "Detection and removal of child sexual abuse material",
     "nlu_profile": {
-      "primary_concept": "Automated hashing, matching against CSAM databases, and content classification for child safety.",
+      "primary_concept": "Detection, prevention, and removal of child sexual abuse material and content involving minors.",
       "semantic_anchors": [
         "CSAM",
         "hash matching",
@@ -715,9 +753,16 @@
         "child safety",
         "child sexual abuse material",
         "minor safety",
-        "child exploitation"
+        "child exploitation",
+        "CSEA",
+        "child sexual exploitation",
+        "protecting minors",
+        "content involving minors",
+        "age-appropriate content",
+        "underage content",
+        "content depicting minors"
       ],
-      "entailment_hypothesis": "The system detects and prevents CSAM."
+      "entailment_hypothesis": "The system detects or prevents child sexual abuse material or content that exploits minors."
     }
   },
   {
@@ -794,22 +839,17 @@
     "lifecycleStages": ["evaluation", "inference"],
     "description": "Detection of excessive agreement, user flattery, and opinion mirroring behaviours",
     "nlu_profile": {
-      "primary_concept": "A dedicated classifier, benchmark, or mitigation system specifically designed to detect and reduce sycophantic model responses.",
+      "primary_concept": "A dedicated evaluation benchmark, classifier, or training intervention specifically targeting sycophantic model responses.",
       "semantic_anchors": [
-        "sycophancy evaluation",
-        "sycophancy benchmark",
-        "sycophancy mitigation",
-        "anti-sycophancy training",
+        "sycophancy evaluation benchmark",
+        "sycophancy mitigation training",
+        "anti-sycophancy reward signal",
         "sycophancy classifier",
-        "sycophantic behavior detection",
-        "reduce sycophancy",
-        "sycophancy rate",
-        "answer sycophancy",
-        "non-sycophantic response",
-        "less sycophantic",
-        "sycophancy prompts"
+        "sycophantic behavior detection system",
+        "sycophancy rate measurement"
       ],
-      "entailment_hypothesis": "The system has a dedicated mechanism to detect, benchmark, or mitigate sycophantic behavior."
+      "entailment_hypothesis": "The provider implemented a dedicated benchmark, classifier, or training intervention to measure or reduce sycophantic responses in the model.",
+      "excluded_terms": ["user satisfaction", "helpfulness evaluation", "preference optimization"]
     }
   },
   {
@@ -820,17 +860,16 @@
     "lifecycleStages": ["evaluation", "inference"],
     "description": "Detection of cybersecurity attack instructions, exploit generation, and offensive cyber capabilities",
     "nlu_profile": {
-      "primary_concept": "A dedicated runtime classifier or filter that blocks model-generated exploit code, malware instructions, or cyberattack content.",
+      "primary_concept": "A dedicated runtime classifier or output filter that specifically detects and blocks model-generated exploit code, malware instructions, or cyberattack content.",
       "semantic_anchors": [
-        "cyber content classifier",
-        "block exploit code generation",
-        "malware generation filter",
-        "cyberattack content blocking",
-        "cybersecurity content policy",
-        "refuse cyber attack instructions"
+        "cybersecurity content classifier",
+        "exploit code generation filter",
+        "malware instruction blocking",
+        "cyberattack output filter",
+        "block offensive cyber content"
       ],
-      "entailment_hypothesis": "The system deploys a dedicated filter or classifier that blocks cybersecurity attack content at inference time.",
-      "excluded_terms": ["cyber capability evaluation", "offensive cyber benchmark", "cybersecurity assessment"]
+      "entailment_hypothesis": "The provider deployed a dedicated runtime filter or classifier that specifically blocks the model from generating exploit code, malware instructions, or cyberattack content.",
+      "excluded_terms": ["cyber capability evaluation", "offensive cyber benchmark", "cybersecurity assessment", "cyber risk category", "cybersecurity policy", "refuse harmful requests"]
     }
   },
   {
@@ -841,18 +880,18 @@
     "lifecycleStages": ["evaluation", "inference"],
     "description": "Classification of autonomous, power-seeking, scheming, and deceptively aligned behaviours",
     "nlu_profile": {
-      "primary_concept": "A dedicated evaluation or classifier specifically designed to test for scheming, power-seeking, or deceptive alignment in model behaviour.",
+      "primary_concept": "A dedicated evaluation suite or runtime classifier that specifically tests whether the model exhibits scheming, power-seeking, alignment faking, or sandbagging behaviours.",
       "semantic_anchors": [
-        "scheming evaluation",
-        "power-seeking test",
-        "deceptive alignment evaluation",
-        "alignment faking test",
-        "sandbagging evaluation",
-        "agentic safety evaluation",
-        "autonomous behaviour classifier",
-        "instrumental convergence test"
+        "scheming evaluation suite",
+        "power-seeking propensity test",
+        "alignment faking evaluation",
+        "sandbagging detection evaluation",
+        "autonomous replication test",
+        "instrumental convergence evaluation",
+        "self-preservation behaviour test"
       ],
-      "entailment_hypothesis": "The system has a dedicated evaluation or classifier for autonomous, scheming, or power-seeking behaviours."
+      "entailment_hypothesis": "The provider ran a dedicated evaluation or deployed a classifier specifically designed to test for scheming, power-seeking, alignment faking, or sandbagging in the model.",
+      "excluded_terms": ["agentic capability", "tool use evaluation", "agent benchmark", "autonomous coding", "agentic task"]
     }
   },
   {
@@ -863,7 +902,7 @@
     "lifecycleStages": ["evaluation", "governance"],
     "description": "Monitoring dangerous capabilities against safety thresholds using framework-level assessments",
     "nlu_profile": {
-      "primary_concept": "Tracking whether model capabilities have crossed predefined danger thresholds requiring upgraded safeguards.",
+      "primary_concept": "A formal framework for tracking whether model capabilities have crossed predefined danger thresholds requiring upgraded safeguards.",
       "semantic_anchors": [
         "dangerous capabilities",
         "capability overhang",
@@ -872,14 +911,14 @@
         "RSP",
         "Responsible Scaling Policy",
         "capability threshold",
-        "frontier risk",
         "capability evaluation framework",
         "Preparedness Framework",
-        "frontier safety",
         "responsible scaling",
-        "safety level"
+        "safety level classification",
+        "risk threshold",
+        "capability elicitation"
       ],
-      "entailment_hypothesis": "Dangerous capabilities are monitored against predefined safety thresholds."
+      "entailment_hypothesis": "A formal framework monitors whether model capabilities exceed predefined danger thresholds."
     }
   },
   {
@@ -890,16 +929,19 @@
     "lifecycleStages": ["governance"],
     "description": "External advisory board for safety oversight",
     "nlu_profile": {
-      "primary_concept": "External advisory board providing non-binding safety guidance.",
+      "primary_concept": "External advisory board or committee providing independent safety oversight.",
       "semantic_anchors": [
         "safety board",
         "advisory committee",
         "ethics board",
         "independent oversight",
         "safety advisory",
-        "external review board"
+        "external review board",
+        "governance committee",
+        "safety council",
+        "external auditors"
       ],
-      "entailment_hypothesis": "An independent safety advisory board provides oversight."
+      "entailment_hypothesis": "An independent safety advisory board or committee provides oversight."
     }
   },
   {
@@ -950,16 +992,17 @@
     "lifecycleStages": ["governance"],
     "description": "Processes for collecting feedback from users and communities",
     "nlu_profile": {
-      "primary_concept": "Structured processes to incorporate feedback from external stakeholders.",
+      "primary_concept": "A formal, structured program for soliciting and incorporating safety-related feedback from external stakeholders such as civil society organizations, affected communities, or multi-stakeholder advisory bodies.",
       "semantic_anchors": [
-        "participatory design",
-        "community consultation",
-        "stakeholder feedback",
-        "civil society engagement",
-        "external collaboration",
-        "safety collaboration"
+        "external stakeholder safety consultation",
+        "civil society engagement program",
+        "multi-stakeholder advisory board",
+        "public safety consultation process",
+        "community safety feedback program",
+        "NGO partnership for AI safety"
       ],
-      "entailment_hypothesis": "The process involved engagement with external stakeholders."
+      "entailment_hypothesis": "The provider established a formal program or process to solicit safety-related feedback from external stakeholders, civil society, or community advisory bodies.",
+      "excluded_terms": ["academic research collaboration", "open source community", "user feedback", "bug bounty", "red teaming", "crowdsourced evaluation"]
     }
   },
   {
@@ -970,14 +1013,19 @@
     "lifecycleStages": ["governance"],
     "description": "Compliance with government regulatory requirements",
     "nlu_profile": {
-      "primary_concept": "Adherence to legal frameworks and reporting requirements.",
+      "primary_concept": "Adherence to specific government regulations and compliance frameworks.",
       "semantic_anchors": [
         "regulatory compliance",
         "EU AI Act",
         "NIST AI RMF",
-        "compliance audit"
+        "compliance audit",
+        "GDPR",
+        "Executive Order",
+        "SOC 2",
+        "ISO 27001",
+        "FedRAMP"
       ],
-      "entailment_hypothesis": "The system complies with government regulations."
+      "entailment_hypothesis": "The system or organization complies with specific government regulations or compliance standards."
     }
   },
   {
@@ -988,17 +1036,16 @@
     "lifecycleStages": ["governance"],
     "description": "Documentation of access control and authentication",
     "nlu_profile": {
-      "primary_concept": "Documentation regarding API keys, roles, and authentication requirements.",
+      "primary_concept": "Formal documentation of role-based access control policies, API key management, and authentication requirements for the AI system.",
       "semantic_anchors": [
-        "access policy",
-        "authentication rules",
-        "API keys",
-        "role-based access",
-        "RBAC",
-        "IAM",
-        "SSO"
+        "access control policy documentation",
+        "role-based access control for model access",
+        "API key management policy",
+        "authentication requirements for AI system",
+        "model access permissions documentation"
       ],
-      "entailment_hypothesis": "Documentation defines access controls and authentication."
+      "entailment_hypothesis": "The organization publishes formal documentation defining role-based access controls, API authentication policies, or permission tiers for its AI system.",
+      "excluded_terms": ["access to the model weights", "open access", "model availability", "API endpoint", "API usage"]
     }
   },
   {
@@ -1045,14 +1092,16 @@
     "lifecycleStages": ["governance"],
     "description": "Policies for data retention and lifecycle management",
     "nlu_profile": {
-      "primary_concept": "Defined lifecycle management policies for storing and deleting data.",
+      "primary_concept": "A formal, documented policy specifying how long user data, conversation logs, or training data are retained before scheduled deletion.",
       "semantic_anchors": [
-        "retention policy",
-        "data deletion",
-        "minimization",
-        "logs storage limit"
+        "data retention policy",
+        "conversation log retention period",
+        "automatic data deletion schedule",
+        "data lifecycle management policy",
+        "user data retention limit"
       ],
-      "entailment_hypothesis": "The system adheres to a data retention or deletion policy."
+      "entailment_hypothesis": "The organization has a formal policy specifying retention periods and scheduled deletion of user data or conversation logs.",
+      "excluded_terms": ["data preprocessing", "data filtering", "training data curation", "data deduplication"]
     }
   },
   {

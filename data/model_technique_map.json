@@ -417,20 +417,354 @@
       ]
     },
     {
+      "techniqueId": "tech-input-guardrail-systems",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Runtime architecture: prompt filtering, augmentation, generation, completion filtering",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ],
+      "active": false,
+      "deleted_by": "manual"
+    },
+    {
+      "techniqueId": "tech-output-filtering-systems",
+      "confidence": "High",
+      "evidence": [
+        {
+          "passage": "Runtime architecture: prompt filtering, augmentation, generation, completion filtering",
+          "created_by": "llm",
+          "created_at": "2026-02-15T22:33:30.412893",
+          "active": true
+        }
+      ],
+      "active": false,
+      "deleted_by": "manual"
+    },
+    {
+      "techniqueId": "tech-self-harm-prevention",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-red-teaming",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Independent Red Teaming Network: Consistent with our Frontier AI Safety Commitments on ensuring Safe, Secure, and Trustworthy AI, we use a variety of third parties to conduct red teaming against our AI models. We leverage red teaming firms to complement our in-house testing in areas such as safety, security, privacy, fairness and veracity related topics. We also work with specialized firms and academics to red team our models for specialized areas such as Cybersecurity and Chemical, Biological, Radiological and Nuclear (CBRN) capabilities.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-cybersecurity-threat",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Independent Red Teaming Network: Consistent with our Frontier AI Safety Commitments on ensuring Safe, Secure, and Trustworthy AI, we use a variety of third parties to conduct red teaming against our AI models. We leverage red teaming firms to complement our in-house testing in areas such as safety, security, privacy, fairness and veracity related topics. We also work with specialized firms and academics to red team our models for specialized areas such as Cybersecurity and Chemical, Biological, Radiological and Nuclear (CBRN) capabilities.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Frontier AI Safety Commitments: Consistent with our Frontier AI Safety Commitments , we comprehensively evaluated Amazon Nova Premier — both its current public version and earlier iterations — across three high-risk domains: Chemical, Biological, Radiological, and Nuclear (CBRN), Offensive Cyber Operations, and Automated AI R&D. Using benchmarks and expert assessments, we found that Amazon Nova Premier is within the tolerance threshold for critical capabilities in each domain.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-hate-speech-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-bias-mitigation",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Fairness\nAmazon Nova models are designed to generate completions that a diverse set of customers will find effective across a\nwide range of categories and avoid generating content related to stereotypes or making generalizations about specific groups of people,\nroles, or behavior. The models are also designed to work well for use\ncases across our diverse set of customers. To achieve this, we examine the extent to which\nAmazon Nova model completions can be considered biased against particular demographic groups,\nand look for ways to discourage prompting the models with material that could elicit such\nbehavior. Consistent with our approach to safety, we steer the models towards being helpful\nwhile trying not to make assumptions about membership in specific demographic groups. We use\nBOLD\n, a dataset to evaluate\nfairness in open-ended language generation, to assess Nova FMs, observing 99.9% or more fair\ncompletions across Micro, Lite, Pro, and Premier. As this reached saturation at 99.9%, we evaluate\nAmazon Nova FMs propensity to reject generating biased content on\nproprietary datasets spanning multiple input modalities. For example,\non a proprietary dataset (1.2k samples) containing prompts that\nattempt to solicit biased responses (for example, stereotypes that contain\nbias against a group, etc.) Amazon Nova Premier correctly produces\nsafe responses to 95.3% these prompts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-constitutional-ai",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-dataset-auditing",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Therefore, we evaluate Amazon Nova FMs for harmlessness on both how often it generates harmful responses and how often it treats harmless prompts as harmful. For example, we use a proprietary dataset of harmless prompts and adversarial red teaming prompts that attempt to solicit completions containing violence, sexual content, insults, identity attacks, stereotypes, malicious intent, and other harmful content. For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-benchmarks",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Automated Benchmarks:\nBenchmarking provides\napples-to-apples comparisons between candidate models by substituting an automated\n\"assessor\" mechanism for human judgement, which can vary. We conducted comprehensive\nevaluations to assess the Amazon Nova models using multiple proprietary datasets. We also include external\nbenchmarks such as\nWILDCHAT non-toxic\nand\nStrongReject\nin our testing.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Frontier AI Safety Commitments: Consistent with our Frontier AI Safety Commitments , we comprehensively evaluated Amazon Nova Premier — both its current public version and earlier iterations — across three high-risk domains: Chemical, Biological, Radiological, and Nuclear (CBRN), Offensive Cyber Operations, and Automated AI R&D. Using benchmarks and expert assessments, we found that Amazon Nova Premier is within the tolerance threshold for critical capabilities in each domain.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-safety-advisory",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Independent Red Teaming Network:\nConsistent with\nour Frontier AI Safety Commitments on ensuring Safe, Secure, and Trustworthy AI, we use\na variety of third parties to conduct red teaming against our AI models. We leverage red\nteaming firms to complement our in-house testing in areas such as safety, security,\nprivacy, fairness and veracity related topics. We also work with specialized firms and\nacademics to red team our models for specialized areas such as Cybersecurity and\nChemical, Biological, Radiological and Nuclear (CBRN) capabilities.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Frontier AI Safety Commitments: Consistent with our Frontier AI Safety Commitments , we comprehensively evaluated Amazon Nova Premier — both its current public version and earlier iterations — across three high-risk domains: Chemical, Biological, Radiological, and Nuclear (CBRN), Offensive Cyber Operations, and Automated AI R&D. Using benchmarks and expert assessments, we found that Amazon Nova Premier is within the tolerance threshold for critical capabilities in each domain.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-weapons-illegal-activity",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Independent Red Teaming Network: Consistent with our Frontier AI Safety Commitments on ensuring Safe, Secure, and Trustworthy AI, we use a variety of third parties to conduct red teaming against our AI models. We leverage red teaming firms to complement our in-house testing in areas such as safety, security, privacy, fairness and veracity related topics. We also work with specialized firms and academics to red team our models for specialized areas such as Cybersecurity and Chemical, Biological, Radiological and Nuclear (CBRN) capabilities.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Frontier AI Safety Commitments: Consistent with our Frontier AI Safety Commitments , we comprehensively evaluated Amazon Nova Premier — both its current public version and earlier iterations — across three high-risk domains: Chemical, Biological, Radiological, and Nuclear (CBRN), Offensive Cyber Operations, and Automated AI R&D. Using benchmarks and expert assessments, we found that Amazon Nova Premier is within the tolerance threshold for critical capabilities in each domain.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "CBRN: Evaluations included Weapons of Mass Destruction Proxy (WMDP),\nProtocolQA, and BioLP Bench, along with external expert red teaming\nby Carnegie Mellon's Gomes Group and Nemesys Insights.\nOffensive Cyber Operations: We used benchmarks such as SECURE,\nCTIBench, CyberMetric (which test the model's knowledge of cyber\nthreat intelligence and vulnerabilities), and Cybench (which tests\npractical exploitation through cyberattack challenges), supported by\nexpert red-teaming by internal experts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-rlhf",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Human Evaluation:\nHuman evaluation is a critical step in evaluating the model's completions. Using human judgement is\ncritical for assessing the effectiveness of an Amazon Nova FM on more challenging tasks, because only\npeople can fully understand the context, intent and nuances of more complex prompts and\ncompletions. Given this, we have developed proprietary evaluation datasets of\nchallenging prompts that we use to assess development progress for Amazon Nova models.\nTo assess a model, we retrieve the completion for each prompt, and then ask multiple\nindividuals to assess the quality of each pair along a number of different factors,\nfor example, quality, verbosity, formatting.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-responsible-release",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Frontier AI Safety Commitments:\nConsistent with our\nFrontier AI Safety Commitments\n, we comprehensively evaluated Amazon\nNova Premier — both its current public version and earlier iterations — across three\nhigh-risk domains: Chemical, Biological, Radiological, and Nuclear (CBRN), Offensive\nCyber Operations, and Automated AI R&D. Using benchmarks and expert assessments,\nwe found that Amazon Nova Premier is within the tolerance threshold for critical\ncapabilities in each domain.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Governance\nWe have rigorous methodologies to build our AWS AI services responsibly,\nincluding a working backwards product development process that incorporates Responsible AI at\nthe design phase, design consultations, and implementation assessments by dedicated Responsible\nAI science and data experts, routine testing, reviews with customers, best practice development,\ndissemination, and training.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-autonomous-behaviour",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Frontier AI Safety Commitments: Consistent with our Frontier AI Safety Commitments , we comprehensively evaluated Amazon Nova Premier — both its current public version and earlier iterations — across three high-risk domains: Chemical, Biological, Radiological, and Nuclear (CBRN), Offensive Cyber Operations, and Automated AI R&D. Using benchmarks and expert assessments, we found that Amazon Nova Premier is within the tolerance threshold for critical capabilities in each domain.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Automated AI R&D: We relied on internal simulations and public\nbenchmarks including RE-Bench and PaperBench, with independent\nreview by METR, a nonprofit research organization specializing in AI\nevaluations.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-training-data-quality-filtering",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Fairness Amazon Nova models are designed to generate completions that a diverse set of customers will find effective across a wide range of categories and avoid generating content related to stereotypes or making generalizations about specific groups of people, roles, or behavior. The models are also designed to work well for use cases across our diverse set of customers. To achieve this, we examine the extent to which Amazon Nova model completions can be considered biased against particular demographic groups, and look for ways to discourage prompting the models with material that could elicit such behavior. Consistent with our approach to safety, we steer the models towards being helpful while trying not to make assumptions about membership in specific demographic groups. We use BOLD , a dataset to evaluate fairness in open-ended language generation, to assess Nova FMs, observing 99.9% or more fair completions across Micro, Lite, Pro, and Premier. As this reached saturation at 99.9%, we evaluate Amazon Nova FMs propensity to reject generating biased content on proprietary datasets spanning multiple input modalities. For example, on a proprietary dataset (1.2k samples) containing prompts that attempt to solicit biased responses (for example, stereotypes that contain bias against a group, etc.) Amazon Nova Premier correctly produces safe responses to 95.3% these prompts.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
       "techniqueId": "tech-misinformation-detection",
       "confidence": "High",
       "active": true,
       "deleted_by": null,
       "evidence": [
         {
-          "text": "Explainability Customers wanting to understand the steps taken by Amazon Nova models to arrive at the conclusion expressed in a completion can use chain of thought (CoT) techniques described here . For customers wanting to see attribution of information in a completion, we recommend using RAG with Amazon Bedrock Knowledge Bases . Veracity Because transformer-based FMs are token generation engines, and not information retrieval engines, their completions may contain statements that contradict statements in the prompt or that contradict facts verifiable from trusted third-party sources, or the completions may omit statements that customers expect should be made, given information in the prompt or even just \"common sense.\"",
-          "created_by": "nlu",
+          "text": "Veracity\nBecause transformer-based FMs are token generation engines, and not information retrieval\nengines, their completions may contain statements that contradict statements in the prompt or\nthat contradict facts verifiable from trusted third-party sources, or the completions may omit\nstatements that customers expect should be made, given information in the prompt or even just\n\"common sense.\" Customers should carefully consider whether or not using RAG will improve the\neffectiveness of their solution; use of RAG can still result in errors. We assess Nova models'\ngeneral knowledge without RAG on multiple datasets, and find that the models perform well, given\nthe intrinsic limitations of large language models technology",
+          "created_by": "manual",
           "active": true,
           "deleted_by": null
-        },
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-realtime-fact-checking",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
         {
-          "text": "Veracity Because transformer-based FMs are token generation engines, and not information retrieval engines, their completions may contain statements that contradict statements in the prompt or that contradict facts verifiable from trusted third-party sources, or the completions may omit statements that customers expect should be made, given information in the prompt or even just \"common sense.\" Customers should carefully consider whether or not using RAG will improve the effectiveness of their solution; use of RAG can still result in errors. We assess Nova models' general knowledge without RAG on multiple datasets, and find that the models perform well, given the intrinsic limitations of large language models technology.",
-          "created_by": "nlu",
+          "text": "Veracity Because transformer-based FMs are token generation engines, and not information retrieval engines, their completions may contain statements that contradict statements in the prompt or that contradict facts verifiable from trusted third-party sources, or the completions may omit statements that customers expect should be made, given information in the prompt or even just \"common sense.\" Customers should carefully consider whether or not using RAG will improve the effectiveness of their solution; use of RAG can still result in errors. We assess Nova models' general knowledge without RAG on multiple datasets, and find that the models perform well, given the intrinsic limitations of large language models technology",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-data-retention-policies",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Privacy\nAmazon Nova models are available in Amazon Bedrock. Amazon Bedrock is a managed service and does not store or review customer\nprompts or customer prompt completions, and prompts and completions are never shared between\ncustomers, or with Amazon Bedrock partners. AWS does not use inputs or completions generated through the\nAmazon Bedrock service to train Amazon Bedrock models, including Amazon Nova models.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-pii-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "PII:\nAmazon Nova models are designed to avoid\ncompleting prompts that could be construed as requesting private information. If a user\nis concerned that their private information has been included in an Amazon Nova model\ncompletions, the user should contact us\nhere",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-enterprise-integration",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Security\nAll Amazon Bedrock models, including Amazon Nova models, come with enterprise security that enables\ncustomers to build generative AI applications that support common data security and compliance\nstandards, including GDPR and HIPAA. Customers can use AWS PrivateLink to establish private\nconnectivity between customized Titan models and on-premises networks without exposing customer\ntraffic to the internet. Customer data is always encrypted in transit and at rest, and customers\ncan use their own keys to encrypt the data, for example, using AWS Key Management Service (AWS KMS). Customers can\nuse AWS Identity and Access Management (IAM) to securely control access to Amazon Bedrock resources. Also, Amazon Bedrock offers\ncomprehensive monitoring and logging capabilities that can support customer governance and audit\nrequirements. For example, Amazon CloudWatch; can help track usage metrics that are required for audit\npurposes, and AWS CloudTrail can help monitor API activity and troubleshoot issues as\nAmazon Nova models is integrated with other AWS systems. Customers can also choose to store\nthe metadata, prompts, and completions in their own encrypted Amazon Simple Storage Service (Amazon S3) bucket. For more\ninformation, see\nAmazon Bedrock Security",
+          "created_by": "manual",
           "active": true,
           "deleted_by": null
         }
@@ -443,94 +777,24 @@
       "deleted_by": null,
       "evidence": [
         {
-          "text": "They feature a red drawstring closure for easy tying and carrying. Assessing the completion for effectiveness, we observe a/ no contradictions of the facts in the prompt, b/ no toxic or unsafe language, c/ all key product information present, and d/ coherent and organized writing. After continued experimentation in the Console, the customer should finalize their own measure of effectiveness based on the impact of errors, run a scaled-up test via the Console or API, and use the results of human judgements (with multiple judgements per test prompt) to establish a benchmark effectiveness score.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "For example, on a proprietary dataset (2.4k samples) containing prompts that attempt to solicit model response containing harmful content (for example, self-harm, violence, animal abuse), on average, Amazon Nova FMs correctly produce safe responses to over 90% of these harmful prompts. Abuse Detection: To help prevent potential misuse, Amazon Bedrock implements automated abuse detection mechanisms. These mechanisms are fully automated, so there is no human review of, or access to, user inputs or model completions.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        },
-        {
-          "text": "These mechanisms are fully automated, so there is no human review of, or access to, user inputs or model completions. To learn more, see Amazon Bedrock Abuse Detection in the Amazon Bedrock User Guide . Child Sexual Abuse Material (CSAM): At Amazon, we are committed to producing generative AI services that keep child safety at the forefront of development, deployment, and operation.",
-          "created_by": "nlu",
+          "text": "Transparency\nAmazon Nova models provide information to customers in the following locations: this Service Card, AWS\ndocumentation, AWS educational channels (for example, blogs, developer classes), and the AWS\nConsole. We accept feedback via the AWS Console and through traditional customer support\nmechanisms such as account managers. Where appropriate for their use case, customers who\nincorporate Nova models in their workflow should consider disclosing their use of ML to end\nusers and other individuals impacted by the application, and customers should give their end\nusers the ability to provide feedback to improve workflows. In their documentation, customers\ncan also reference this Service Card.",
+          "created_by": "manual",
           "active": true,
           "deleted_by": null
         }
       ]
     },
     {
-      "techniqueId": "tech-rlhf",
+      "techniqueId": "tech-stakeholder-engagement",
       "confidence": "High",
+      "active": true,
+      "deleted_by": null,
       "evidence": [
         {
-          "passage": "Unsupervised and supervised learning techniques",
-          "created_by": "llm",
-          "created_at": "2026-02-15T22:33:30.412893",
-          "active": true
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-input-guardrail-systems",
-      "confidence": "High",
-      "evidence": [
-        {
-          "passage": "Runtime architecture: prompt filtering, augmentation, generation, completion filtering",
-          "created_by": "llm",
-          "created_at": "2026-02-15T22:33:30.412893",
-          "active": true
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-output-filtering-systems",
-      "confidence": "High",
-      "evidence": [
-        {
-          "passage": "Runtime architecture: prompt filtering, augmentation, generation, completion filtering",
-          "created_by": "llm",
-          "created_at": "2026-02-15T22:33:30.412893",
-          "active": true
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-red-teaming",
-      "confidence": "High",
-      "evidence": [
-        {
-          "passage": "Comprehensive evaluation across CBRN, Offensive Cyber Operations, and Automated AI R&D domains using external red teaming",
-          "created_by": "llm",
-          "created_at": "2026-02-15T22:33:30.412893",
-          "active": true
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-bias-mitigation",
-      "confidence": "High",
-      "evidence": [
-        {
-          "passage": "Using BOLD dataset evaluation: 99.9% or more fair completions across all models",
-          "created_by": "llm",
-          "created_at": "2026-02-15T22:33:30.412893",
-          "active": true
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-safety-benchmarks",
-      "confidence": "High",
-      "evidence": [
-        {
-          "passage": "Amazon Nova models correctly produce safe responses to over 90% of harmful prompts",
-          "created_by": "llm",
-          "created_at": "2026-02-15T22:33:30.412893",
-          "active": true
+          "text": "Transparency Amazon Nova models provide information to customers in the following locations: this Service Card, AWS documentation, AWS educational channels (for example, blogs, developer classes), and the AWS Console. We accept feedback via the AWS Console and through traditional customer support mechanisms such as account managers. Where appropriate for their use case, customers who incorporate Nova models in their workflow should consider disclosing their use of ML to end users and other individuals impacted by the application, and customers should give their end users the ability to provide feedback to improve workflows. In their documentation, customers can also reference this Service Card.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
         }
       ]
     }
@@ -3185,20 +3449,6 @@
   ],
   "falcon-series-paper": [
     {
-      "techniqueId": "tech-refusal-training",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "6 Results 6.1 To prompt or not to prompt: comparing evaluations across codebases . . . . . . . . 6.2 Comparisons with PaLM on a natural language tasks aggregate . . . . . . . . . . . 6.3 Comparisons with GPT-3.5 and GPT-4 on a limited set of tasks . . . . . . . . . . .",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
       "techniqueId": "tech-training-data-quality-filtering",
       "confidence": "High",
       "active": true,
@@ -3221,18 +3471,16 @@
           "created_by": "nlu",
           "active": true,
           "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-watermarking",
-      "confidence": "High",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
+        },
         {
-          "text": "In all cases, we reimplement them from scratch, to ensure the formats match our data pipeline. We introduced a number of special tokens to reproduce structured information in curated corpora and better control generation: »TITLE«, »ABSTRACT«, »INTRODUCTION«, and »COMMENT«. When LATEX files are available, we convert them to markdown, similar to Lewkowycz et al. (2022).",
-          "created_by": "nlu",
+          "text": "• Stringent deduplication and filtering. Inspired by Lee et al. (2022), RefinedWeb is fully\ndeduplicated. Fuzzy deduplication with MinHash is used to first massively shrink the dataset,\nand then extract substring deduplication is applied. Filtering heuristics are also first used\nto reduce text extraction artefacts, and to remove machine-generated content. We find in\nSection 4.2.1 that this allows web data to match curated corpora.\n\n• Neutral filtering. With the exception of language identification, the Macrodata Refinement\npipeline does not rely on ML-based filtering strategies. Indeed, such filters can easily\nintroduce or amplify biases into the data Dodge et al. (2021); Welbl et al. (2021).",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Figure 6: Subsequent stages of Macrodata Refinement remove nearly 90% of the documents\noriginally in CommonCrawl. Notably, filtering and deduplication each result in a halving of the\ndata available: around 50% of documents are discarded for not being English, 24% of remaining\nfor being of insufficient quality, and 12% for being duplicates. We report removal rate (grey) with\nrespect to each previous stage, and kept rate (shade) overall. Figure from Penedo et al. (2023).",
+          "created_by": "manual",
           "active": true,
           "deleted_by": null
         }
@@ -3241,12 +3489,26 @@
     {
       "techniqueId": "tech-misinformation-detection",
       "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
+      "active": false,
+      "deleted_by": "manual",
       "evidence": [
         {
           "text": "We keep the formatting of Gao et al. (2021) unchanged, but switch yes/no in the candidates for true/false. Candidates [true, false] 57",
           "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-community-evaluation",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "By open-sourcing artificial intelligence research and models, we can foster a broader and more\ndiverse community, and benefit from vibrant collaborative efforts to improve the safety and reliability\nof large language models.",
+          "created_by": "manual",
           "active": true,
           "deleted_by": null
         }
@@ -7236,34 +7498,20 @@
   ],
   "magistral-paper": [
     {
-      "techniqueId": "tech-bias-mitigation",
+      "techniqueId": "tech-training-data-quality-filtering",
       "confidence": "High",
       "active": true,
       "deleted_by": null,
       "evidence": [
         {
-          "text": "2 Methodology In this section, we outline the training methodology used to develop the Magistral models. This includes our optimizations of the GRPO algorithm for training stability (Section 2.1) and our training reward to improve both mathematical and coding capabilities, while ensuring the model adheres to proper format, length, and language usage (Section 2.2). 2.1 Reinforcement learning algorithm We use Group Relative Policy Optimization (GRPO) [Shao et al., 2024] as our RL algorithm.",
-          "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-input-guardrail-systems",
-      "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
-      "evidence": [
-        {
-          "text": "When calculating the reward for a conversation—a triple of (problem, thoughts, answer)—we first normalized each of the three components by removing LaTeX content and code blocks, and then applied a fastText classifier [Joulin et al., 2016] to each. If the classifier indicates that all three parts used the same language, we give an additional reward of 0.1. These simple modifications are sufficient to enable the model to closely follow the language of the user, with minimal code-switching, while maintaining performance on reasoning tasks.",
-          "created_by": "nlu",
+          "text": "Format filtering. We started with a large but noisy problem set of around 700k samples. We\nfirst perform comprehensive pre-processing and filtering of the data to ensure all the problems\nare complete and that the final answers were accurate and verifiable with a rule-based system.\nParticularly, we filter proof-based and multi-part problems for which it is difficult to verify\ncorrectness. Furthermore, we reformulate multiple-choice problems into statement-based problems\nfor more robust verification and increased difficulty.",
+          "created_by": "manual",
           "active": true,
           "deleted_by": null
         },
         {
-          "text": "We also maintain a mixed difficulty level of the problems by limiting number of generations per problem to avoid biasing the collected traces towards easier problems and also upsampling problems with lower pass rates. We augment this SFT cold-start data by generating responses from our Magistral Medium on a large set of diverse prompts, sourced from OpenThoughts [Guha et al., 2025] and the code subset of OpenR1 [Hugging Face, 2025, Penedo et al., 2025]. We perform additional filtering on top and kept a subset of the prompts.",
-          "created_by": "nlu",
+          "text": "Difficulty filtering. We implemented a two-stage filtering pipeline to curate a dataset of problems\nat a ‘goldilocks’ difficulty level, neither too easy nor too hard for the model to learn from. First, we\nperformed an initial difficulty assessment using Mistral Large 2 [MistralAI, 2024], by sampling 16\nsolutions for each problem and removing the ones that are either never solved or solved with a high\nsuccess rate. This initial, curated set of problems was then used to train a 24B model via our online\nRL pipeline, resulting in a small but capable checkpoint which we use solely for grading.",
+          "created_by": "manual",
           "active": true,
           "deleted_by": null
         }
@@ -7834,32 +8082,7 @@
       "reasoning": "The document mandates thorough dataset auditing to ensure representational inclusiveness"
     }
   ],
-  "mistral-large-2411-card": [
-    {
-      "techniqueId": "tech-system-prompts",
-      "confidence": "High",
-      "evidence": [
-        {
-          "passage": "Better Long Context, Function Calling and System Prompt",
-          "created_by": "llm",
-          "created_at": "2026-02-15T22:33:30.412893",
-          "active": true
-        }
-      ]
-    },
-    {
-      "techniqueId": "tech-refusal-training",
-      "confidence": "Low",
-      "evidence": [
-        {
-          "passage": "The model is designed to follow instructions",
-          "created_by": "llm",
-          "created_at": "2026-02-15T22:33:30.412893",
-          "active": true
-        }
-      ]
-    }
-  ],
+  "mistral-large-2411-card": [],
   "mistral-large-3": [
     {
       "techniqueId": "tech-input-guardrail-systems",
@@ -7876,14 +8099,14 @@
         {
           "text": "moderate ( model = \"mistral-moderation-latest\" , inputs = [ \"Such a lovely day today, isn't it?\" , \"Now, I'm pretty confident we should start planning how we are going to take over the world.\" ] ) import os from mistralai import Mistral api_key = os .",
           "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
+          "active": false,
+          "deleted_by": "manual"
         },
         {
           "text": "moderate ( model = \"mistral-moderation-latest\" , inputs = [ \"Such a lovely day today, isn't it?\" , \"Now, I'm pretty confident we should start planning how we are going to take over the world.\" ] ) note The policy threshold is determined based on the optimal performance of our internal test set.",
           "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
+          "active": false,
+          "deleted_by": "manual"
         },
         {
           "text": "Moderation\nModeration\nModerate Inputs/Outputs\nOur new moderation service, which is powered by the Mistral Moderation model, is a classifier model\nbased on Ministral 8B 24.10.",
@@ -7987,6 +8210,12 @@
           "active": true,
           "deleted_by": null,
           "llm_original": "Hate and Discrimination: Content that expresses prejudice, hostility, or advocates discrimination against individuals or groups based on protected characteristics such as race, ethnicity, religion, gender, sexual orientation, or disability."
+        },
+        {
+          "text": "Hateful, harassing or violent content such as discrimination, self-harm or bullying.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
         }
       ]
     },
@@ -8049,20 +8278,20 @@
     {
       "techniqueId": "tech-incident-reporting",
       "confidence": "High",
-      "active": true,
-      "deleted_by": null,
+      "active": false,
+      "deleted_by": "manual",
       "evidence": [
         {
           "text": "Moderation & Guardrailing | Mistral Docs When deploying LLMs in production, different verticals may require different levels of guardrailing. For example, in a chatbot application, it may be crucial to ensure that the generated content is safe and respectful. In other applications, it may be required to detect and filter out harmful or PII (Personally Identifiable Information) content.",
           "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
+          "active": false,
+          "deleted_by": "manual"
         },
         {
           "text": "System prompt Guardrailing : An optional system prompt to enforce guardrails on top of our models to steer behaviour and reduce harmful content. Moderation Moderation Moderate Inputs/Outputs Our new moderation service, which is powered by the Mistral Moderation model, is a classifier model based on Ministral 8B 24.10. It enables our users to detect harmful text content along several policy dimensions.",
           "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
+          "active": false,
+          "deleted_by": "manual"
         },
         {
           "text": "It enables our users to detect harmful text content along several policy dimensions. Endpoints Endpoints We are releasing two end-points: one to classify raw text and one to classify conversational content . More details below. The raw rext endpoint allows you to moderate text chunks directly, it will a score for different categories allowing classification of the text.",
@@ -8084,6 +8313,24 @@
           "active": true,
           "deleted_by": null,
           "llm_original": "Self-Harm: Content that promotes, instructs, plans, or encourages deliberate self-injury, suicide, eating disorders, or other self-destructive behaviors."
+        },
+        {
+          "text": "Dangerous and Criminal Content Content that promotes or provides instructions for illegal activities or extremely hazardous behaviors that pose a significant risk of physical harm, death, or legal consequences. This includes guidance on creating weapons or explosives, encouragement of extreme risk-taking behaviors, and promotion of non-violent crimes such as fraud, theft, or drug trafficking. Self-Harm Content that promotes, instructs, plans, or encourages deliberate self-injury, suicide, eating disorders, or other self-destructive behaviors. This includes detailed methods, glorification, statements of intent, dangerous challenges, and related slang terms Health Content that contains or tries to elicit detailed or tailored medical advice.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Hateful, harassing or violent content such as discrimination, self-harm or bullying.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "- physical harm: activity that has high risk of physical harm, including: weapons development, military and warfare, management or operation of critical infrastructure in energy, transportation, and water, content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
         }
       ],
       "reasoning": "Dedicated category for detecting and preventing self-harm content"
@@ -8103,6 +8350,72 @@
         }
       ],
       "reasoning": "Explicit demonstration of model's ability to refuse inappropriate requests"
+    },
+    {
+      "techniqueId": "tech-adversarial-training",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "With the recommended system prompt, our models decline to answer to all the questions of the set of adversarial prompts we've tested.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "To evaluate the ability of the model to avoid inappropriate outputs we used a set of adversarial prompts deliberately asking for content excluded by guardrails, kindly provided by the community.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-weapons-illegal-activity",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Dangerous and Criminal Content\nContent that promotes or provides instructions for illegal activities or extremely hazardous behaviors that pose a significant risk of physical harm, death, or legal consequences. This includes guidance on creating weapons or explosives, encouragement of extreme risk-taking behaviors, and promotion of non-violent crimes such as fraud, theft, or drug trafficking.\nSelf-Harm Content that promotes, instructs, plans, or encourages deliberate self-injury, suicide, eating disorders, or other self-destructive behaviors.Self-Harm & Suicide Prevention This includes detailed methods, glorification, statements of intent, dangerous challenges, and related slang terms",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "Illegal activities such as terrorism, child abuse or fraud",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "- physical harm: activity that has high risk of physical harm, including: weapons development, military and warfare, management or operation of critical infrastructure in energy, transportation, and water, content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "fraud: Fraudulent or deceptive activity, including: scams, coordinated inauthentic behavior, plagiarism, academic dishonesty, astroturfing, such as fake grassroots support or fake review generation, disinformation, spam, pseudo-pharmaceutical",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-csam-detection",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "Illegal activities such as terrorism, child abuse or fraud",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
     }
   ],
   "nemotron-4-tech-report": [
@@ -10024,6 +10337,12 @@
         {
           "text": "Zihan Qiu, Zeyu Huang, Bo Zheng, Kaiyue Wen, Zekun Wang, Rui Men, Ivan Titov, Dayiheng Liu, Jingren Zhou, and Junyang Lin. Demons in the detail: On implementing load balancing loss for training specialized mixture-of-expert models. CoRR, abs/2501.11873, 2025.",
           "created_by": "nlu",
+          "active": false,
+          "deleted_by": "manual"
+        },
+        {
+          "text": "The architecture of the Qwen3 dense models is similar to Qwen2.5 (Yang et al., 2024b), including using\nGrouped Query Attention (GQA, Ainslie et al., 2023), SwiGLU (Dauphin et al., 2017), Rotary Positional\nEmbeddings (RoPE, Su et al., 2024), and RMSNorm (Jiang et al., 2023) with pre-normalization. Besides,\nwe remove QKV-bias used in Qwen2 (Yang et al., 2024a) and introduce QK-Norm (Dehghani et al., 2023)\nto the attention mechanism to ensure stable training for Qwen3. Key information on model architecture\nis provided in Table 1.",
+          "created_by": "manual",
           "active": true,
           "deleted_by": null
         }
@@ -10032,14 +10351,14 @@
     {
       "techniqueId": "tech-red-teaming",
       "confidence": "High",
-      "active": true,
-      "deleted_by": null,
+      "active": false,
+      "deleted_by": "manual",
       "evidence": [
         {
           "text": "General Tasks Alignment Tasks Math & Text Reasoning Agent & Coding Multilingual Tasks Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Phi-4 Dense 14B 14B 85.3 56.1 66.9 41.6 62.1 75.4 7.61 51.2 5.73 80.8 22.9 17.3 32.3 66.2 Gemma-3 -27B-IT Qwen2.5-32B -Instruct Qwen3-14B Qwen3-30B-A3B Dense 27B 27B Dense 32B 32B Dense 14B 14B 82.6 42.4 66.6 49.2 80.6 86.8 7.80 82.0 7.22 90.0 32.6 24.0 24.6 64.2 83.9 49.5 80.6 50.0 79.5 74.5 7.71 54.6 5.90 84.6 18.8 12.8 26.1 65.5 82.0 54.8 81.0 59.6 84.8 86.3 8.52 73.1 7.24 90.0 31.7 23.3 33.0 82.0 MoE 3B 30B 84.1 54.8 82.9 59.4 83.7 88.0 8.55 68.1 7.22 89.8 32.8 21.6 33.2 81.5 BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 1280 / 65.3% 1063 / 49.3% 903 / 38.2% 1200 / 58.6% 1267 / 64.1% 61.5 29.0 59.1 26.9 47.0 25.2 58.6 29.8 62.8 26.4 Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 49.5 65.3 74.7 13.1 17.4 53.1 69.8 71.4 76.1 23.0 20.3 58.5 17 63.2 67.5 74.2 15.3 18.3 58.0 72.9 67.8 72.6 23.2 22.0 58.9 70.8 67.8 73.8 24.6 23.3 53.3 Table 17.: Comparison among Qwen3-8B / Qwen3-4B (Thinking) and other reasoning baselines. The highest and second-best scores are shown in bold and underlined, respectively. DeepSeek-R1 -Distill-Qwen-14B DeepSeek-R1 -Distill-Qwen-32B Qwen3-4B Qwen3-8B Dense 32B 32B Dense 4B 4B Dense 8B 8B Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Dense 14B 14B 84.1 59.1 78.1 52.3 72.6 48.0 7.43 54.2 6.03 93.9 69.7 44.5 59.1 78.6 Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 49.5 45.5 1574 / 89.1% 53.5 54.5 1691 / 93.4% Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 29.8 59.7 73.8 33.7 28.6 53.6 31.3 68.0 78.6 44.6 35.1 63.3 88.2 62.1 82.2 45.6 72.5 60.8 7.25 55.0 6.13 94.3 72.6 49.6 69.6 74.6 83.7 55.9 77.5 63.6 81.9 76.6 8.30 61.1 7.35 97.0 73.8 65.6 81.0 87.9 65.9 54.2 87.5 62.0 83.4 67.1 85.0 85.8 8.46 75.0 7.59 97.4 76.0 67.3 84.8 89.1 68.1 57.5 1671 / 92.8% 1785 / 95.6% 66.3 61.8 69.8 60.7 40.0 65.9 71.2 67.8 74.4 65.4 42.7 69.0 Table 18.: Comparison among Qwen3-8B / Qwen3-4B (Non-thinking) and other non-reasoning baselines.",
           "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
+          "active": false,
+          "deleted_by": "manual"
         },
         {
           "text": "Gemma-3 -1B-IT Phi-4-mini Qwen2.5-1.5B -Instruct Qwen2.5-3B -Instruct Qwen3-0.6B Qwen3-1.7B Architecture # Activated Params # Total Params Dense 1.0B 1.0B Dense 3.8B 3.8B Dense 1.5B 1.5B Dense 3.1B 3.1B Dense 0.6B 0.6B Dense 1.7B 1.7B General Tasks Alignment Tasks MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Agent & Coding BFCL v3 LiveCodeBench v5 Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 33.3 19.2 28.5 14.4 54.5 17.8 5.3 52.8 5.18 46.4 0.9 0.8 1.9 16.4 16.3 1.8 32.8 32.7 32.5 0.2 3.5 31.8 50.7 29.8 53.3 18.0 42.5 9.0 5.60 31.5 4.67 55.0 0.9 0.4 3.4 22.5 47.8 5.3 20.2 33.1 40.4 0.7 5.0 40.9 67.9 25.2 40.0 25.3 68.6 32.8 6.00 10.3 4.05 67.6 8.1 5.3 2.7 28.8 31.3 10.4 40.5 43.8 51.4 0.9 6.7 39.5 19 64.4 30.3 68.2 23.8 58.2 23.7 6.49 42.8 5.55 67.2 6.7 4.2 4.8 29.9 50.4 9.2 32.3 43.8 51.8 1.6 7.3 39.5 44.6 22.9 42.6 21.8 54.5 6.5 5.60 28.4 5.13 55.2 3.4 2.6 4.2 37.4 44.1 3.6 33.3 34.4 37.1 1.5 4.6 37.3 64.4 28.6 61.0 35.6 68.2 36.9 7.20 43.6 6.54 73.0 13.4 9.8 12.8 59.8 52.2 11.6 44.7 42.6 48.3 4.9 10.3 41.1 1/10 activated parameters, demonstrating the effectiveness of our Strong-to-Weak Distillation approach in endowing lightweight models with profound reasoning capabilities. (2) From Table 16., Qwen3-30B-A3B and Qwen3-14B (Non-thinking) surpass the non-reasoning baselines in most of the benchmarks. They exceed our previous Qwen2.5-32B-Instruct model with significantly fewer activated and total parameters, allowing for more efficient and cost- effective performance.",
@@ -10052,14 +10371,14 @@
     {
       "techniqueId": "tech-input-guardrail-systems",
       "confidence": "High",
-      "active": true,
-      "deleted_by": null,
+      "active": false,
+      "deleted_by": "manual",
       "evidence": [
         {
           "text": "When QwQ-32B consistently fails to generate correct solutions, human annotators manually assess the accuracy of the responses. For queries with positive Pass@N, further stringent filtering criteria are applied to remove responses that (1) yield incorrect final answers, (2) contain substantial repetition, (3) clearly indicate guesswork without adequate reasoning, (4) exhibit inconsistencies between the thinking and summary contents, (5) involve inappropriate language mixing or stylistic shifts, or (6) are suspected of being overly similar to potential validation set items. Subsequently, a carefully selected subset of the refined dataset is used for the initial cold-start training of the reasoning patterns.",
           "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
+          "active": false,
+          "deleted_by": "manual"
         },
         {
           "text": "(2) On-policy Distillation: In this phase, the student model generates on-policy sequences for fine-tuning. Specifically, prompts are sampled, and the student model produces responses in either /think or /no think mode. The student model is then fine-tuned by aligning its logits with those of a teacher model (Qwen3-32B or Qwen3-235B-A22B) to minimize the KL divergence.",
@@ -10106,24 +10425,58 @@
     {
       "techniqueId": "tech-capability-monitoring",
       "confidence": "Medium",
-      "active": true,
-      "deleted_by": null,
+      "active": false,
+      "deleted_by": "manual",
       "evidence": [
         {
           "text": "Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA GPT-4o-mini -2024-07-18 LLaMA-4 -Scout Qwen2.5-72B -Instruct Qwen3-32B - - - 81.5 40.2 66.3 41.3 80.4 74.9 7.81 70.3 5.98 78.2 8.1 8.8 20.1 52.6 64.0 27.9 MoE 17B 109B 86.3 57.2 78.2 47.6 84.7 70.5 7.49 55.0 5.49 82.6 28.6 10.0 24.2 56.8 45.4 29.8 1113 / 52.6% 981 / 43.7% Dense 72B 72B Dense 32B 32B 86.8 49.0 84.7 51.4 84.1 81.2 7.89 61.8 7.06 83.6 18.9 15.0 26.6 66.1 85.7 54.6 83.3 59.8 83.2 92.8 8.58 78.3 7.54 88.6 31.0 20.2 29.2 78.5 63.4 30.7 859 / 35.0% 63.0 31.3 1353 / 71.0% 64.2 74.1 77.5 19.1 20.9 53.9 65.3 69.6 76.9 12.7 16.9 59.3 70.7 70.9 76.5 24.1 22.5 62.9 62.4 66.0 72.1 6.0 12.0 42.6 16 Table 15.: Comparison among Qwen3-30B-A3B / Qwen3-14B (Thinking) and other reasoning baselines. The highest and second-best scores are shown in bold and underlined, respectively. DeepSeek-R1 -Distill-Qwen-32B QwQ-32B Qwen3-14B Qwen3-30B-A3B Dense 32B 32B Dense 32B 32B Dense 14B 14B Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi 88.2 62.1 82.2 45.6 72.5 60.8 7.25 55.0 6.13 94.3 72.6 49.6 69.6 74.6 Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 53.5 54.5 1691 / 93.4% Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 31.3 68.0 78.6 44.6 35.1 63.3 90.0 65.6 88.4 72.0 83.9 89.5 8.70 82.4 7.86 98.0 79.5 69.5 76.8 88.1 66.4 62.7 88.6 64.0 86.2 71.3 85.4 91.7 8.56 80.3 7.80 96.8 79.3 70.4 88.5 89.2 70.4 63.5 1982 / 97.7% 1766 / 95.3% 68.3 69.7 80.9 68.0 45.9 75.5 74.8 71.7 77.9 73.3 45.8 71.1 MoE 3B 30B 89.5 65.8 86.6 74.3 86.5 91.0 8.70 79.1 7.70 98.0 80.4 70.9 89.5 88.7 69.1 62.6 1974 / 97.7% 72.2 71.9 78.4 73.9 46.1 70.1 Table 16.: Comparison among Qwen3-30B-A3B / Qwen3-14B (Non-thinking) and other non-reasoning baselines.",
           "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
+          "active": false,
+          "deleted_by": "manual"
         },
         {
           "text": "DeepSeek-R1 -Distill-Qwen-32B QwQ-32B Qwen3-14B Qwen3-30B-A3B Dense 32B 32B Dense 32B 32B Dense 14B 14B Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi 88.2 62.1 82.2 45.6 72.5 60.8 7.25 55.0 6.13 94.3 72.6 49.6 69.6 74.6 Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 53.5 54.5 1691 / 93.4% Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 31.3 68.0 78.6 44.6 35.1 63.3 90.0 65.6 88.4 72.0 83.9 89.5 8.70 82.4 7.86 98.0 79.5 69.5 76.8 88.1 66.4 62.7 88.6 64.0 86.2 71.3 85.4 91.7 8.56 80.3 7.80 96.8 79.3 70.4 88.5 89.2 70.4 63.5 1982 / 97.7% 1766 / 95.3% 68.3 69.7 80.9 68.0 45.9 75.5 74.8 71.7 77.9 73.3 45.8 71.1 MoE 3B 30B 89.5 65.8 86.6 74.3 86.5 91.0 8.70 79.1 7.70 98.0 80.4 70.9 89.5 88.7 69.1 62.6 1974 / 97.7% 72.2 71.9 78.4 73.9 46.1 70.1 Table 16.: Comparison among Qwen3-30B-A3B / Qwen3-14B (Non-thinking) and other non-reasoning baselines. The highest and second-best scores are shown in bold and underlined, respectively. General Tasks Alignment Tasks Math & Text Reasoning Agent & Coding Multilingual Tasks Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Phi-4 Dense 14B 14B 85.3 56.1 66.9 41.6 62.1 75.4 7.61 51.2 5.73 80.8 22.9 17.3 32.3 66.2 Gemma-3 -27B-IT Qwen2.5-32B -Instruct Qwen3-14B Qwen3-30B-A3B Dense 27B 27B Dense 32B 32B Dense 14B 14B 82.6 42.4 66.6 49.2 80.6 86.8 7.80 82.0 7.22 90.0 32.6 24.0 24.6 64.2 83.9 49.5 80.6 50.0 79.5 74.5 7.71 54.6 5.90 84.6 18.8 12.8 26.1 65.5 82.0 54.8 81.0 59.6 84.8 86.3 8.52 73.1 7.24 90.0 31.7 23.3 33.0 82.0 MoE 3B 30B 84.1 54.8 82.9 59.4 83.7 88.0 8.55 68.1 7.22 89.8 32.8 21.6 33.2 81.5 BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 1280 / 65.3% 1063 / 49.3% 903 / 38.2% 1200 / 58.6% 1267 / 64.1% 61.5 29.0 59.1 26.9 47.0 25.2 58.6 29.8 62.8 26.4 Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 49.5 65.3 74.7 13.1 17.4 53.1 69.8 71.4 76.1 23.0 20.3 58.5 17 63.2 67.5 74.2 15.3 18.3 58.0 72.9 67.8 72.6 23.2 22.0 58.9 70.8 67.8 73.8 24.6 23.3 53.3 Table 17.: Comparison among Qwen3-8B / Qwen3-4B (Thinking) and other reasoning baselines.",
           "created_by": "nlu",
-          "active": true,
-          "deleted_by": null
+          "active": false,
+          "deleted_by": "manual"
         },
         {
           "text": "General Tasks Alignment Tasks Math & Text Reasoning Agent & Coding Multilingual Tasks Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Phi-4 Dense 14B 14B 85.3 56.1 66.9 41.6 62.1 75.4 7.61 51.2 5.73 80.8 22.9 17.3 32.3 66.2 Gemma-3 -27B-IT Qwen2.5-32B -Instruct Qwen3-14B Qwen3-30B-A3B Dense 27B 27B Dense 32B 32B Dense 14B 14B 82.6 42.4 66.6 49.2 80.6 86.8 7.80 82.0 7.22 90.0 32.6 24.0 24.6 64.2 83.9 49.5 80.6 50.0 79.5 74.5 7.71 54.6 5.90 84.6 18.8 12.8 26.1 65.5 82.0 54.8 81.0 59.6 84.8 86.3 8.52 73.1 7.24 90.0 31.7 23.3 33.0 82.0 MoE 3B 30B 84.1 54.8 82.9 59.4 83.7 88.0 8.55 68.1 7.22 89.8 32.8 21.6 33.2 81.5 BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 1280 / 65.3% 1063 / 49.3% 903 / 38.2% 1200 / 58.6% 1267 / 64.1% 61.5 29.0 59.1 26.9 47.0 25.2 58.6 29.8 62.8 26.4 Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 49.5 65.3 74.7 13.1 17.4 53.1 69.8 71.4 76.1 23.0 20.3 58.5 17 63.2 67.5 74.2 15.3 18.3 58.0 72.9 67.8 72.6 23.2 22.0 58.9 70.8 67.8 73.8 24.6 23.3 53.3 Table 17.: Comparison among Qwen3-8B / Qwen3-4B (Thinking) and other reasoning baselines. The highest and second-best scores are shown in bold and underlined, respectively. DeepSeek-R1 -Distill-Qwen-14B DeepSeek-R1 -Distill-Qwen-32B Qwen3-4B Qwen3-8B Dense 32B 32B Dense 4B 4B Dense 8B 8B Architecture # Activated Params # Total Params MMLU-Redux GPQA-Diamond C-Eval LiveBench 2024-11-25 IFEval strict prompt Arena-Hard AlignBench v1.1 Creative Writing v3 WritingBench General Tasks Alignment Tasks Math & Text Reasoning MATH-500 AIME’24 AIME’25 ZebraLogic AutoLogi Dense 14B 14B 84.1 59.1 78.1 52.3 72.6 48.0 7.43 54.2 6.03 93.9 69.7 44.5 59.1 78.6 Agent & Coding BFCL v3 LiveCodeBench v5 CodeForces (Rating / Percentile) 49.5 45.5 1574 / 89.1% 53.5 54.5 1691 / 93.4% Multilingual Tasks Multi-IF INCLUDE MMMLU 14 languages MT-AIME2024 PolyMath MLogiQA 29.8 59.7 73.8 33.7 28.6 53.6 31.3 68.0 78.6 44.6 35.1 63.3 88.2 62.1 82.2 45.6 72.5 60.8 7.25 55.0 6.13 94.3 72.6 49.6 69.6 74.6 83.7 55.9 77.5 63.6 81.9 76.6 8.30 61.1 7.35 97.0 73.8 65.6 81.0 87.9 65.9 54.2 87.5 62.0 83.4 67.1 85.0 85.8 8.46 75.0 7.59 97.4 76.0 67.3 84.8 89.1 68.1 57.5 1671 / 92.8% 1785 / 95.6% 66.3 61.8 69.8 60.7 40.0 65.9 71.2 67.8 74.4 65.4 42.7 69.0 Table 18.: Comparison among Qwen3-8B / Qwen3-4B (Non-thinking) and other non-reasoning baselines.",
           "created_by": "nlu",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-hallucination-grounding",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "In addition to the datasets mentioned earlier, we introduce several in-house benchmarks to monitor other capabilities. These benchmarks include: • CounterFactQA: Contains counterfactual questions where the model needs to identify that the questions are not factual and avoid generating hallucinatory answers. • LengthCtrl: Includes creative writing tasks with length requirements; the final score is based on the difference between the generated content length and the target length.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        }
+      ]
+    },
+    {
+      "techniqueId": "tech-dataset-auditing",
+      "confidence": "High",
+      "active": true,
+      "deleted_by": null,
+      "evidence": [
+        {
+          "text": "The architecture of the Qwen3 dense models is similar to Qwen2.5 (Yang et al., 2024b), including using Grouped Query Attention (GQA, Ainslie et al., 2023), SwiGLU (Dauphin et al., 2017), Rotary Positional Embeddings (RoPE, Su et al., 2024), and RMSNorm (Jiang et al., 2023) with pre-normalization. Besides, we remove QKV-bias used in Qwen2 (Yang et al., 2024a) and introduce QK-Norm (Dehghani et al., 2023) to the attention mechanism to ensure stable training for Qwen3. Key information on model architecture is provided in Table 1.",
+          "created_by": "manual",
+          "active": true,
+          "deleted_by": null
+        },
+        {
+          "text": "We have developed a multilingual data annotation system designed to enhance both the quality and\ndiversity of training data. This system has been applied to our large-scale pre-training datasets, annotating\nover 30 trillion tokens across multiple dimensions such as educational value, fields, domains, and safety.\nThese detailed annotations support more effective data filtering and combination. Unlike previous\nstudies (Xie et al., 2023; Fan et al., 2023; Liu et al., 2024b) that optimize the data mixture at the data source\nor domain level, our method optimizes the data mixture at the instance-level through extensive ablation\nexperiments on small proxy models with the fine-grained data labels.",
+          "created_by": "manual",
           "active": true,
           "deleted_by": null
         }

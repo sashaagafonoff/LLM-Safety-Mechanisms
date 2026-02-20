@@ -1,13 +1,27 @@
 #!/usr/bin/env python3
 """
-Extraction Pipeline - Runs NLU and LLM extraction in sequence.
+Extraction Pipeline — Full RAG Orchestrator
 
-This script orchestrates the two-stage extraction process:
-1. NLU pass: Semantic embedding + cross-encoder verification
-2. LLM pass: Claude API analysis with NLU context
+Orchestrates the complete Retrieval-Augmented Generation pipeline for
+safety technique extraction:
 
-The LLM pass builds on NLU findings (additive), can suggest deletions,
-and manual annotations are always preserved.
+  1. NLU PASS (Retrieval + Verification):
+     Bi-encoder retrieval (bge-large) finds candidate chunks per technique,
+     cross-encoder (nli-deberta-v3-large) verifies entailment.
+     → Cheap, high-recall, moderate precision.
+
+  2. LLM PASS (Augmented Generation):
+     Claude receives the full document + technique taxonomy + NLU context.
+     Pass 1 extracts candidates; Pass 2 verifies each against the
+     per-technique review index (confirmed/rejected examples from prior
+     human reviews). → Expensive, high-precision.
+
+  3. MERGE: NLU and LLM results are merged. LLM deletions remove NLU false
+     positives. Manual annotations are always preserved.
+
+This implements the RAG pattern at two levels:
+  - Macro: NLU retrieves, LLM generates (document-level)
+  - Micro: Review index retrieves, LLM verifies (technique-level)
 
 Two workflow modes:
   A) Full collection: Run after changing taxonomy or semantic anchors
@@ -421,8 +435,8 @@ def main():
         '--model',
         type=str,
         choices=['haiku', 'sonnet', 'sonnet-legacy', 'opus'],
-        default='haiku',
-        help='Claude model for LLM pass (default: haiku)'
+        default='sonnet',
+        help='Claude model for LLM pass (default: sonnet)'
     )
     parser.add_argument(
         '--preserve-manual',

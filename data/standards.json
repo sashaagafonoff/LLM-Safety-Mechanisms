@@ -1,0 +1,156 @@
+{
+  "frameworks": [
+    {
+      "id": "nist-ai-rmf",
+      "name": "NIST AI Risk Management Framework",
+      "version": "1.0",
+      "url": "https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf",
+      "structure": [
+        {
+          "code": "GOVERN",
+          "name": "Govern",
+          "children": [
+            { "code": "GOVERN-1", "name": "Policies, processes, procedures for AI risk management" },
+            { "code": "GOVERN-2", "name": "Accountability structures" },
+            { "code": "GOVERN-3", "name": "Workforce diversity and equity" },
+            { "code": "GOVERN-4", "name": "Risk management culture" },
+            { "code": "GOVERN-5", "name": "Stakeholder engagement" },
+            { "code": "GOVERN-6", "name": "Third-party risk management" }
+          ]
+        },
+        {
+          "code": "MAP",
+          "name": "Map",
+          "children": [
+            { "code": "MAP-1", "name": "Context and purpose documentation" },
+            { "code": "MAP-2", "name": "Stakeholder identification" },
+            { "code": "MAP-3", "name": "AI system capabilities and goals" },
+            { "code": "MAP-4", "name": "Component risks mapping" },
+            { "code": "MAP-5", "name": "Impact characterization" }
+          ]
+        },
+        {
+          "code": "MEASURE",
+          "name": "Measure",
+          "children": [
+            { "code": "MEASURE-1", "name": "Risk and benefit quantification" },
+            { "code": "MEASURE-2", "name": "AI systems evaluated for reliability" },
+            { "code": "MEASURE-3", "name": "Mechanisms for tracking identified risks" }
+          ]
+        },
+        {
+          "code": "MANAGE",
+          "name": "Manage",
+          "children": [
+            { "code": "MANAGE-1", "name": "AI risk mitigation plans" },
+            { "code": "MANAGE-2", "name": "Risks mapped to deployment context" },
+            { "code": "MANAGE-3", "name": "Risks managed across AI lifecycle" },
+            { "code": "MANAGE-4", "name": "Risk treatments monitored" },
+            { "code": "MANAGE-5", "name": "Organizational practices documented" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nist-ai-600-1",
+      "name": "NIST AI 600-1: GenAI Profile",
+      "version": "1.0",
+      "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+      "structure": [
+        { "code": "GAI-1", "name": "CBRN Information or Capabilities" },
+        { "code": "GAI-2", "name": "Confabulation" },
+        { "code": "GAI-3", "name": "Data Privacy" },
+        { "code": "GAI-4", "name": "Environmental Impacts" },
+        { "code": "GAI-5", "name": "Dangerous or Violent Content" },
+        { "code": "GAI-6", "name": "Harmful Bias and Homogenization" },
+        { "code": "GAI-7", "name": "Human-AI Configuration" },
+        { "code": "GAI-8", "name": "Information Integrity" },
+        { "code": "GAI-9", "name": "Information Security" },
+        { "code": "GAI-10", "name": "Intellectual Property" },
+        { "code": "GAI-11", "name": "Obscene or Abusive Content" },
+        { "code": "GAI-12", "name": "Value Chain and Component Integration" }
+      ]
+    },
+    {
+      "id": "owasp-llm-top10",
+      "name": "OWASP Top 10 for LLM Applications",
+      "version": "2025",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "structure": [
+        { "code": "LLM01", "name": "Prompt Injection" },
+        { "code": "LLM02", "name": "Insecure Output Handling" },
+        { "code": "LLM03", "name": "Training Data Poisoning" },
+        { "code": "LLM04", "name": "Model Denial of Service" },
+        { "code": "LLM05", "name": "Supply Chain Vulnerabilities" },
+        { "code": "LLM06", "name": "Sensitive Information Disclosure" },
+        { "code": "LLM07", "name": "Insecure Plugin Design" },
+        { "code": "LLM08", "name": "Excessive Agency" },
+        { "code": "LLM09", "name": "Overreliance" },
+        { "code": "LLM10", "name": "Model Theft" }
+      ]
+    },
+    {
+      "id": "mitre-atlas",
+      "name": "MITRE ATLAS",
+      "version": "2025",
+      "url": "https://atlas.mitre.org/",
+      "structure": [
+        { "code": "AML.TA0001", "name": "Reconnaissance" },
+        { "code": "AML.TA0002", "name": "Resource Development" },
+        { "code": "AML.TA0003", "name": "Initial Access" },
+        { "code": "AML.TA0004", "name": "ML Model Access" },
+        { "code": "AML.TA0005", "name": "Execution" },
+        { "code": "AML.TA0006", "name": "Persistence" },
+        { "code": "AML.TA0007", "name": "Privilege Escalation" },
+        { "code": "AML.TA0008", "name": "Defense Evasion" },
+        { "code": "AML.TA0009", "name": "Credential Access" },
+        { "code": "AML.TA0010", "name": "Discovery" },
+        { "code": "AML.TA0011", "name": "Collection" },
+        { "code": "AML.TA0012", "name": "ML Attack Staging" },
+        { "code": "AML.TA0013", "name": "Exfiltration" },
+        { "code": "AML.TA0014", "name": "Impact" }
+      ]
+    },
+    {
+      "id": "eu-ai-act",
+      "name": "EU AI Act",
+      "version": "2024",
+      "url": "https://artificialintelligenceact.eu/",
+      "structure": [
+        { "code": "unacceptable", "name": "Unacceptable Risk (Prohibited)" },
+        { "code": "high-risk", "name": "High Risk" },
+        { "code": "limited-risk", "name": "Limited Risk (Transparency)" },
+        { "code": "minimal-risk", "name": "Minimal Risk" }
+      ]
+    },
+    {
+      "id": "iso-42001",
+      "name": "ISO/IEC 42001 AI Management System",
+      "version": "2023",
+      "url": "https://www.iso.org/standard/81230.html",
+      "structure": [
+        { "code": "4", "name": "Context of the organization" },
+        { "code": "5", "name": "Leadership" },
+        { "code": "6", "name": "Planning" },
+        { "code": "7", "name": "Support" },
+        { "code": "8", "name": "Operation" },
+        { "code": "9", "name": "Performance evaluation" },
+        { "code": "10", "name": "Improvement" }
+      ]
+    },
+    {
+      "id": "weidinger-taxonomy",
+      "name": "Weidinger et al. Taxonomy of LM Risks",
+      "version": "2022",
+      "url": "https://arxiv.org/abs/2112.04359",
+      "structure": [
+        { "code": "W-I", "name": "Discrimination, Hate Speech and Exclusion" },
+        { "code": "W-II", "name": "Information Hazards" },
+        { "code": "W-III", "name": "Misinformation Harms" },
+        { "code": "W-IV", "name": "Malicious Uses" },
+        { "code": "W-V", "name": "Human-Computer Interaction Harms" },
+        { "code": "W-VI", "name": "Environmental and Socioeconomic Harms" }
+      ]
+    }
+  ]
+}

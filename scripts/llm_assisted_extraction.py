@@ -1,10 +1,25 @@
 #!/usr/bin/env python3
 """
-LLM-Assisted Technique Extraction
+LLM-Assisted Technique Extraction (Two-Pass RAG Architecture)
 
-Uses Claude API to analyze source documents and identify safety techniques
-with high accuracy. This creates a stronger baseline than pure semantic matching
-by leveraging Claude's contextual understanding.
+Uses Claude API to analyze source documents and identify safety techniques.
+Implements a Retrieval-Augmented Generation (RAG) pattern in two passes:
+
+  Pass 1 — EXTRACTION: Claude classifies the full document against the
+           technique taxonomy. The prompt contains generic examples of true
+           and false positive patterns, but NO dataset-specific review data,
+           keeping the initial classification unbiased.
+
+  Pass 2 — VERIFICATION: For each candidate technique from Pass 1, the
+           review index is queried for that technique's confirmed positives
+           and rejected negatives from prior human reviews. These are fed
+           to Claude as technique-specific context, and it confirms or
+           rejects each candidate. Techniques with no review history pass
+           through unverified.
+
+The review index is authoritative and cumulative — it reflects all manual
+additions, confirmed automated tags, and explicit deletions across the
+full review history in model_technique_map.json.
 
 Usage:
     python scripts/llm_assisted_extraction.py                    # Process all documents
@@ -57,10 +72,10 @@ CHECKPOINT_PATH = Path("cache/llm_extraction_checkpoint.json")
 
 # Model configuration
 MODEL_MAP = {
-    "haiku": "claude-3-5-haiku-20241022",
-    "sonnet": "claude-3-5-sonnet-20241022",  # Latest Sonnet 3.5
-    "sonnet-legacy": "claude-3-sonnet-20240229",  # Claude 3 Sonnet (fallback)
-    "opus": "claude-3-opus-20240229"  # Claude 3 Opus
+    "haiku": "claude-haiku-4-5-20251001",
+    "sonnet": "claude-sonnet-4-5-20250929",
+    "sonnet-legacy": "claude-3-5-sonnet-20241022",
+    "opus": "claude-opus-4-6",
 }
 
 def find_exact_passage(llm_quote: str, source_text: str, context_chars: int = 200) -> Optional[str]:
@@ -171,9 +186,12 @@ For each technique you identify, provide:
 
 {nlu_context}
 
-Return ONLY a JSON array of technique matches. If no techniques are found, return an empty array [].
+## Few-Shot Examples
 
-Example output format:
+Below are examples of CORRECT matches and CORRECT rejections from manually reviewed documents.
+
+### TRUE POSITIVES (should be matched):
+
 ```json
 [
   {{
@@ -181,9 +199,57 @@ Example output format:
     "confidence": "High",
     "evidence": "The model underwent reinforcement learning from human feedback, with human raters scoring outputs for helpfulness and harmlessness.",
     "reasoning": "Explicit description of RLHF implementation with human raters and dual objectives."
+  }},
+  {{
+    "techniqueId": "tech-red-teaming",
+    "confidence": "High",
+    "evidence": "We conducted extensive red teaming with over 100 external experts across domains including cybersecurity, biosecurity, and persuasion.",
+    "reasoning": "Direct description of red teaming activity with specific details about team size and domains."
+  }},
+  {{
+    "techniqueId": "tech-output-filtering-systems",
+    "confidence": "Medium",
+    "evidence": "A separate classifier is applied to model outputs to detect and filter harmful content before it reaches the user.",
+    "reasoning": "Describes a post-generation output filtering system with a classifier."
+  }},
+  {{
+    "techniqueId": "tech-safety-benchmarks",
+    "confidence": "High",
+    "evidence": "We evaluate on ToxiGen, BBQ, and BOLD benchmarks to measure the model's propensity for generating biased or toxic content.",
+    "reasoning": "Specific named safety benchmarks used for evaluation."
   }}
 ]
 ```
+
+### FALSE POSITIVES (should NOT be matched):
+
+These are examples of text that looks safety-related but should be REJECTED:
+
+1. **Citation/related work (not their implementation)**:
+   "Constitutional AI (Bai et al., 2022) has shown promise in aligning language models."
+   → REJECT tech-constitutional-ai: Only citing another paper, not describing own implementation.
+
+2. **Future work / aspirational**:
+   "We plan to incorporate adversarial training in future model iterations."
+   → REJECT tech-adversarial-training: Described as planned, not implemented.
+
+3. **Glossary / definition**:
+   "Red teaming: A practice where testers attempt to find vulnerabilities in AI systems."
+   → REJECT tech-red-teaming: Just a definition, no evidence of actually performing it.
+
+4. **Keyword match without implementation**:
+   "Unlike real-time fact checking systems, our model relies on parametric knowledge."
+   → REJECT tech-realtime-fact-checking: Explicitly states they do NOT use this technique.
+
+5. **Attack description (not defense)**:
+   "Adversarial prompts such as jailbreaks can bypass safety measures."
+   → REJECT tech-adversarial-training: Discussing the threat, not implementing the defense.
+
+6. **General mention without substance**:
+   "Safety is a priority and we comply with applicable regulations."
+   → REJECT tech-regulatory-compliance: Vague statement with no specific compliance details.
+
+Return ONLY a JSON array of technique matches. If no techniques are found, return an empty array [].
 
 IMPORTANT:
 - Return ONLY the JSON array, no explanatory text before or after
@@ -217,6 +283,32 @@ Example with deletion:
 """
 
 
+# RAG verification prompt — fed technique-specific review history after initial extraction
+VERIFICATION_PROMPT = """You are verifying technique classifications against prior human review decisions.
+
+For each candidate below, I show:
+- The proposed technique match and evidence quote
+- Previously CONFIRMED matches for this technique (true positives from human review)
+- Previously REJECTED matches for this technique (false positives caught by human review)
+
+Use the confirmed/rejected patterns to judge whether each candidate is a genuine implementation match.
+
+## Candidates to Verify
+
+{candidates_section}
+
+## Instructions
+
+For each candidate, return CONFIRM or REJECT:
+- CONFIRM: Evidence clearly describes implementation of the technique, consistent with confirmed examples
+- REJECT: Evidence matches a false-positive pattern seen in rejected examples (citation-only, future work, glossary, negation, vague mention)
+- When uncertain, CONFIRM — it is better for a human reviewer to catch a borderline case than to lose a valid match
+
+Return ONLY a JSON array:
+[{{"techniqueId": "...", "verdict": "confirm", "reason": "..."}}]
+"""
+
+
 class LLMExtractor:
     def __init__(self, model_name: str = "sonnet", resume: bool = False):
         """Initialize the LLM-based extractor."""
@@ -233,13 +325,23 @@ class LLMExtractor:
         self.techniques = self._load_techniques()
         self.categories = self._load_categories()
         self.evidence_metadata = self._load_evidence_metadata()
+        self.review_index = self._build_review_index()
+        self.tech_names = {t['id']: t['name'] for t in self.techniques}
 
         # Load or initialize results
         self.results = self._load_checkpoint() if resume else {}
 
+        # Review index stats
+        techs_with_data = sum(1 for v in self.review_index.values()
+                              if v["positives"] or v["negatives"])
+        total_pos = sum(len(v["positives"]) for v in self.review_index.values())
+        total_neg = sum(len(v["negatives"]) for v in self.review_index.values())
+
         print(f"✓ Loaded {len(self.techniques)} techniques")
         print(f"✓ Loaded {len(self.categories)} categories")
         print(f"✓ Loaded metadata for {len(self.evidence_metadata)} documents")
+        print(f"✓ Review index: {techs_with_data} techniques with review data "
+              f"({total_pos} positives, {total_neg} negatives)")
         print(f"✓ Using model: {self.model}")
 
         if resume and self.results:
@@ -271,6 +373,79 @@ class LLMExtractor:
                 metadata_map[doc_id] = source['content_metadata']
 
         return metadata_map
+
+    def _build_review_index(self) -> Dict[str, Dict[str, List]]:
+        """Build per-technique index of confirmed and rejected matches from reviewed documents.
+
+        This is the authoritative review history used in the RAG verification pass.
+        Instead of injecting a static sample into every prompt, this index is queried
+        per-technique AFTER the LLM makes its initial classification, providing
+        targeted positive/negative examples only for techniques the LLM proposed.
+
+        Returns:
+            Dict mapping technique_id -> {
+                "positives": [{"doc_id", "text", "created_by"}, ...],
+                "negatives": [{"doc_id", "text", "deleted_by", "reason"}, ...]
+            }
+        """
+        map_path = Path("data/model_technique_map.json")
+        if not map_path.exists():
+            return {}
+
+        with open(map_path, 'r', encoding='utf-8') as f:
+            technique_map = json.load(f)
+
+        index = {}
+
+        for doc_id, entries in technique_map.items():
+            # Only include documents that have been manually reviewed
+            is_reviewed = False
+            for e in entries:
+                if not e.get("active", True) and e.get("deleted_by") not in (None, "system"):
+                    is_reviewed = True
+                for ev in e.get("evidence", []):
+                    if isinstance(ev, dict) and ev.get("created_by") in ("manual", "sashaagafonoff"):
+                        is_reviewed = True
+
+            if not is_reviewed:
+                continue
+
+            for e in entries:
+                tech_id = e.get("techniqueId", "")
+                if not tech_id:
+                    continue
+
+                if tech_id not in index:
+                    index[tech_id] = {"positives": [], "negatives": []}
+
+                if e.get("active", True):
+                    # Active in reviewed doc = confirmed positive
+                    for ev in e.get("evidence", []):
+                        if isinstance(ev, dict) and ev.get("text"):
+                            text = ev["text"][:300].strip()
+                            if len(text) > 30:
+                                index[tech_id]["positives"].append({
+                                    "doc_id": doc_id,
+                                    "text": text,
+                                    "created_by": ev.get("created_by", "unknown"),
+                                })
+                            break  # One snippet per entry
+                else:
+                    # Deleted in reviewed doc = confirmed false positive
+                    evidence_text = ""
+                    for ev in e.get("evidence", []):
+                        if isinstance(ev, dict) and ev.get("text"):
+                            evidence_text = ev["text"][:300].strip()
+                            break
+
+                    index[tech_id]["negatives"].append({
+                        "doc_id": doc_id,
+                        "text": evidence_text,
+                        "deleted_by": e.get("deleted_by", "unknown"),
+                        "reason": e.get("deletion_reason", ""),
+                    })
+
+        return index
 
     def _load_checkpoint(self) -> Dict:
         """Load checkpoint if it exists."""
@@ -316,6 +491,188 @@ class LLMExtractor:
         truncated = text[:max_chars]
         truncated += f"\n\n[DOCUMENT TRUNCATED - Original length: {len(text)} chars, showing first {max_chars} chars]"
         return truncated
+
+    def _parse_json_response(self, content: str) -> Optional[list]:
+        """Extract and parse a JSON array from an LLM response.
+
+        Handles markdown code blocks, bare JSON, and embedded arrays.
+        Returns parsed list or None on failure.
+        """
+        json_str = None
+
+        if "```json" in content:
+            json_start = content.find("```json") + 7
+            json_end = content.find("```", json_start)
+            if json_end > json_start:
+                json_str = content[json_start:json_end].strip()
+
+        if not json_str and "```" in content:
+            json_start = content.find("```") + 3
+            json_end = content.find("```", json_start)
+            if json_end > json_start:
+                json_str = content[json_start:json_end].strip()
+
+        if not json_str:
+            if content.strip().startswith('['):
+                json_str = content.strip()
+            else:
+                match = re.search(r'\[[\s\S]*\]', content)
+                if match:
+                    json_str = match.group(0)
+
+        if not json_str:
+            return None
+
+        try:
+            result = json.loads(json_str)
+            if not isinstance(result, list):
+                result = [result] if result else []
+            return result
+        except json.JSONDecodeError:
+            return None
+
+    def _build_verification_sections(self, candidates: List[Dict],
+                                      exclude_doc_id: str = "") -> str:
+        """Build the candidates section for the verification prompt.
+
+        For each candidate technique, retrieves confirmed/rejected examples
+        from the review index (excluding the current document to avoid
+        circular reference).
+        """
+        sections = []
+
+        for i, c in enumerate(candidates, 1):
+            tech_id = c.get("techniqueId", "")
+            tech_name = self.tech_names.get(tech_id, tech_id)
+
+            # Extract evidence text from the candidate
+            evidence_text = ""
+            if isinstance(c.get("evidence"), list) and c["evidence"]:
+                ev = c["evidence"][0]
+                evidence_text = ev.get("text", "") if isinstance(ev, dict) else str(ev)
+            evidence_text = evidence_text[:300]
+
+            reasoning = c.get("reasoning", "")
+
+            section = f"### {i}. {tech_id} ({tech_name})\n"
+            section += f'Evidence: "{evidence_text}"\n'
+            if reasoning:
+                section += f"Reasoning: {reasoning}\n"
+
+            # Retrieve technique-specific review data (excluding current document)
+            review = self.review_index.get(tech_id, {})
+            positives = [p for p in review.get("positives", [])
+                         if p["doc_id"] != exclude_doc_id][:3]
+            negatives = [n for n in review.get("negatives", [])
+                         if n["doc_id"] != exclude_doc_id][:3]
+
+            if positives:
+                section += "\nConfirmed matches from other documents:\n"
+                for p in positives:
+                    section += f'- {p["doc_id"]}: "{p["text"][:200]}"\n'
+
+            if negatives:
+                section += "\nRejected matches from other documents:\n"
+                for n in negatives:
+                    text_part = f': "{n["text"][:200]}"' if n.get("text") else ""
+                    reason_part = f' ({n["reason"]})' if n.get("reason") else ""
+                    section += f"- {n['doc_id']}{text_part}{reason_part}\n"
+
+            if not positives and not negatives:
+                section += "\n(No prior review data for this technique)\n"
+
+            sections.append(section)
+
+        return "\n".join(sections)
+
+    def _verify_candidates(self, candidates: List[Dict], doc_id: str) -> List[Dict]:
+        """RAG verification pass: verify extraction candidates against review history.
+
+        For techniques that have prior review data (confirmed positives or rejected
+        negatives), asks Claude to verify each candidate against technique-specific
+        examples. Techniques without review data pass through unmodified.
+
+        This implements the "augmented generation" step of the RAG pattern:
+        the review index is the retrieval source, technique-specific examples are
+        the augmentation, and Claude's verdict is the generation.
+        """
+        # Split candidates: those with review data get verified, others pass through
+        to_verify = []
+        pass_through = []
+
+        for c in candidates:
+            tech_id = c.get("techniqueId", "")
+            review = self.review_index.get(tech_id, {})
+            # Only verify if there are examples from OTHER documents
+            has_external = any(p["doc_id"] != doc_id for p in review.get("positives", []))
+            has_external = has_external or any(
+                n["doc_id"] != doc_id for n in review.get("negatives", []))
+            if has_external:
+                to_verify.append(c)
+            else:
+                pass_through.append(c)
+
+        if not to_verify:
+            return candidates  # Nothing to verify
+
+        print(f"  Verifying {len(to_verify)} candidates against review index "
+              f"({len(pass_through)} pass-through)...")
+
+        # Build verification prompt with technique-specific examples
+        candidates_section = self._build_verification_sections(to_verify, exclude_doc_id=doc_id)
+        prompt = VERIFICATION_PROMPT.format(candidates_section=candidates_section)
+
+        try:
+            response = self.client.messages.create(
+                model=self.model,
+                max_tokens=2048,
+                temperature=0,
+                messages=[{"role": "user", "content": prompt}]
+            )
+
+            content = response.content[0].text
+            verdicts = self._parse_json_response(content)
+
+            if verdicts is None:
+                print(f"  ⚠️ Could not parse verification response, passing all through")
+                return candidates
+
+            # Build verdict lookup
+            verdict_map = {}
+            for v in verdicts:
+                tid = v.get("techniqueId", "")
+                verdict_map[tid] = v.get("verdict", "confirm").lower()
+
+            # Filter verified candidates
+            confirmed = []
+            rejected = []
+            for c in to_verify:
+                tid = c.get("techniqueId", "")
+                verdict = verdict_map.get(tid, "confirm")  # Default to confirm if missing
+                if verdict == "confirm":
+                    confirmed.append(c)
+                else:
+                    reason = next((v.get("reason", "") for v in verdicts
+                                   if v.get("techniqueId") == tid), "")
+                    rejected.append((tid, reason))
+
+            if rejected:
+                print(f"  Verification rejected {len(rejected)} candidate(s):")
+                for tid, reason in rejected:
+                    print(f"    [-] {tid}: {reason[:80]}")
+
+            if confirmed:
+                print(f"  Verification confirmed {len(confirmed)} candidate(s)")
+
+            return confirmed + pass_through
+
+        except anthropic.APIError as e:
+            print(f"  ⚠️ Verification API error: {e}, passing all candidates through")
+            return candidates
+
+        except Exception as e:
+            print(f"  ⚠️ Verification failed: {e}, passing all candidates through")
+            return candidates
 
     def extract_techniques(self, doc_id: str, text: str, nlu_results: Optional[List[Dict]] = None) -> Tuple[List[Dict], List[Dict]]:
         """
@@ -363,7 +720,7 @@ class LLMExtractor:
             excluded_topics=excluded_topics,
             techniques_list=techniques_list,
             document_text=document_text,
-            nlu_context=nlu_context
+            nlu_context=nlu_context,
         )
 
         # Call Claude API
@@ -382,50 +739,12 @@ class LLMExtractor:
 
             # Parse response
             content = response.content[0].text
+            matches = self._parse_json_response(content)
 
-            # Extract JSON from response (handle markdown code blocks)
-            json_str = None
-
-            if "```json" in content:
-                json_start = content.find("```json") + 7
-                json_end = content.find("```", json_start)
-                if json_end > json_start:
-                    json_str = content[json_start:json_end].strip()
-
-            if not json_str and "```" in content:
-                json_start = content.find("```") + 3
-                json_end = content.find("```", json_start)
-                if json_end > json_start:
-                    json_str = content[json_start:json_end].strip()
-
-            if not json_str:
-                # Try to find JSON array directly
-                if content.strip().startswith('['):
-                    json_str = content.strip()
-                else:
-                    # Look for JSON array anywhere in the response
-                    import re
-                    match = re.search(r'\[[\s\S]*\]', content)
-                    if match:
-                        json_str = match.group(0)
-                    else:
-                        print(f"  ⚠️ Could not find JSON in response")
-                        print(f"  Response preview: {content[:500]}")
-                        return []
-
-            # Parse JSON
-            try:
-                matches = json.loads(json_str)
-            except json.JSONDecodeError as e:
-                print(f"  ⚠️ Error parsing JSON: {e}")
-                print(f"  Attempted to parse: {json_str[:500]}")
-                print(f"  Full response: {content[:1000]}")
-                return []
-
-            # Validate structure
-            if not isinstance(matches, list):
-                print(f"  ⚠️ Warning: Response is not a list, wrapping in list")
-                matches = [matches] if matches else []
+            if matches is None:
+                print(f"  ⚠️ Could not parse JSON from response")
+                print(f"  Response preview: {content[:500]}")
+                return [], []
 
             # Separate additions from deletions and format output
             additions = []
@@ -526,12 +845,18 @@ class LLMExtractor:
             if nlu_results:
                 print(f"  NLU input: {len(nlu_results)} techniques to review")
 
-            # Extract techniques
+            # Pass 1: Extract technique candidates (clean prompt, no review data injected)
             additions, deletions = self.extract_techniques(doc_id, text, nlu_results)
 
-            print(f"  ✓ Found {len(additions)} technique matches")
+            print(f"  Pass 1: {len(additions)} candidates extracted")
             if deletions:
                 print(f"  ✗ Suggested {len(deletions)} deletions")
+
+            # Pass 2: RAG verification — retrieve technique-specific review history
+            # and verify each candidate against confirmed/rejected examples
+            if additions:
+                additions = self._verify_candidates(additions, doc_id)
+                print(f"  ✓ Final: {len(additions)} techniques after verification")
 
             # Display results
             if additions:
@@ -676,8 +1001,8 @@ def main():
         '--model',
         type=str,
         choices=['haiku', 'sonnet', 'sonnet-legacy', 'opus'],
-        default='haiku',
-        help='Claude model to use (default: haiku)'
+        default='sonnet',
+        help='Claude model to use (default: sonnet)'
     )
     parser.add_argument(
         '--resume',

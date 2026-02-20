@@ -1,3 +1,24 @@
+"""
+NLU-Based Technique Extraction (RAG Retrieval + Verification Stage)
+
+Implements the Retrieval-Augmented Generation pattern for safety technique
+detection using a two-stage neural pipeline:
+
+  Stage 1 — RETRIEVAL: A bi-encoder (bge-large-en-v1.5) embeds document
+            chunks and technique descriptions into the same vector space.
+            Cosine similarity retrieves candidate chunks above RETRIEVAL_THRESHOLD.
+
+  Stage 2 — VERIFICATION: A cross-encoder (nli-deberta-v3-large) scores
+            each (chunk, entailment_hypothesis) pair. Only pairs exceeding
+            VERIFICATION_THRESHOLD are accepted as detections.
+
+This pipeline forms the 'R' (retrieval) layer of the project's RAG
+architecture. Its output feeds into the LLM extraction pipeline
+(llm_assisted_extraction.py) as context for Claude's augmented generation.
+
+See also: run_extraction_pipeline.py for the full orchestrated pipeline.
+"""
+
 import json
 import glob
 import os
@@ -16,12 +37,12 @@ EVIDENCE_PATH = Path("data/evidence.json")
 OUTPUT_FILE = Path("data/model_technique_map.json")
 
 # STAGE 1: Retrieval Model
-RETRIEVAL_MODEL_NAME = "all-mpnet-base-v2"
-RETRIEVAL_THRESHOLD = 0.35  # Lowered from 0.45 to improve recall
+RETRIEVAL_MODEL_NAME = "BAAI/bge-large-en-v1.5"
+RETRIEVAL_THRESHOLD = 0.40  # Raised from 0.35 to reduce FPs with bge-large
 
 # STAGE 2: Verification Model
-VERIFICATION_MODEL_NAME = "cross-encoder/nli-deberta-v3-small"
-VERIFICATION_THRESHOLD = 0.65  # Lowered from 0.75 to improve recall
+VERIFICATION_MODEL_NAME = "cross-encoder/nli-deberta-v3-large"
+VERIFICATION_THRESHOLD = 0.85  # Raised from 0.65; large cross-encoder needs higher bar
 
 # Text Processing
 WINDOW_SIZE = 3
@@ -120,66 +141,63 @@ class NLUAnalyzer:
 
     def _is_low_quality_match(self, text: str, technique_name: str) -> bool:
         """
-        Enhanced heuristic filter to catch 'Glossary' definitions or weak references.
-        Returns True if the text should be discarded.
+        Heuristic filter to catch glossary definitions, future-work mentions,
+        and discussion-only references. Returns True if the text should be discarded.
         """
         text_lower = text.lower()
 
-        # 1. The Glossary/Reference Section Trap
+        # 1. Glossary/Reference Section
         glossary_patterns = [
-            "glossary", "definition:", "definitions:",
-            "overview:", "background:", "related work:",
-            "literature review:", "references:", "bibliography:"
+            "glossary", "definitions:", "bibliography:",
+            "literature review:", "references:"
         ]
         if any(pattern in text_lower[:100] for pattern in glossary_patterns):
             return True
 
-        # 2. The "Future Work" Trap - Expanded
+        # 2. Future Work — explicit future-tense phrases
         future_patterns = [
             "future work", "we plan to", "we intend to",
             "planned for", "will implement", "may implement",
-            "could implement", "should implement", "might use",
-            "proposed approach", "recommended approach",
-            "potential use of", "considering", "exploring the use"
+            "could implement", "should implement",
+            "exploring the use of"
         ]
         if any(pattern in text_lower for pattern in future_patterns):
             return True
 
-        # 3. Comparative/Contrastive Mentions
+        # 3. Comparative/Contrastive — only filter when no implementation context
         comparative_patterns = [
             "unlike", "compared to", "in contrast to",
             "as opposed to", "rather than", "instead of"
         ]
-        if any(pattern in text_lower for pattern in comparative_patterns):
-            return True
-
-        # 4. Discussion vs Implementation
-        # Check for implementation indicators
         implementation_keywords = [
             "we use", "we employ", "we implement", "we apply",
             "we deploy", "we utilize", "our system", "our model",
             "we train", "we trained", "incorporated", "deployed",
-            "used in", "applied to", "implemented in"
+            "used in", "applied to", "implemented in",
+            "the model uses", "the system uses", "is trained",
+            "was trained", "is deployed", "was deployed",
+            "we evaluate", "we assessed", "we tested",
+            "achieves", "performs"
         ]
         has_implementation = any(keyword in text_lower for keyword in implementation_keywords)
 
-        # Check for discussion-only indicators
+        if any(pattern in text_lower for pattern in comparative_patterns) and not has_implementation:
+            return True
+
+        # 4. Discussion vs Implementation
         discussion_keywords = [
-            "discussed in", "described in", "mentioned in",
-            "refers to", "defined as", "known as",
-            "examples include", "such as", "e.g."
+            "discussed in", "described in the literature",
+            "mentioned in", "refers to", "defined as", "known as"
         ]
         has_discussion_only = any(keyword in text_lower for keyword in discussion_keywords)
 
-        # If has discussion markers but no implementation markers, likely not a real implementation
         if has_discussion_only and not has_implementation:
             return True
 
         # 5. Access Control specific fix
-        # "Access Control" must imply permissions/login, NOT "refusal"
         if technique_name == "Access Control Documentation":
             if any(w in text_lower for w in ["refus", "declin", "answer", "abstain"]):
-                return True # This is Refusal, not Access Control
+                return True
 
         # 6. Proposed/Recommended (not implemented)
         if re.search(r'\b(proposed|recommended|suggested)\s+(by|in|approach)', text_lower):
@@ -425,6 +443,7 @@ def run_analysis():
     stats = {
         'total_docs': len(files),
         'processed': 0,
+        'skipped_no_safety': 0,
         'linked': 0,
         'unlinked': 0,
         'with_metadata': 0,
@@ -443,6 +462,12 @@ def run_analysis():
             logger.info(f"   Metadata: {metadata.get('document_purpose')} | " +
                        f"Signal: {metadata.get('signal_strength')} | " +
                        f"Depth: {metadata.get('technical_depth')}")
+
+            # Skip documents explicitly marked as having no safety content
+            if metadata.get('no_safety_content', False):
+                logger.info(f"   ⏭️ SKIPPED: marked as no_safety_content in evidence.json")
+                stats['skipped_no_safety'] += 1
+                continue
 
         # Use document ID as the output key (consistent with LLM extraction)
         output_key = filename_id
@@ -485,11 +510,13 @@ def run_analysis():
     logger.info(f"\n✅ Analysis Complete!")
     logger.info(f"\nSummary:")
     logger.info(f"  Documents processed: {stats['processed']}/{stats['total_docs']}")
+    if stats['skipped_no_safety'] > 0:
+        logger.info(f"  Skipped (no safety content): {stats['skipped_no_safety']}")
     logger.info(f"  With metadata: {stats['with_metadata']}/{stats['total_docs']}")
     logger.info(f"  Linked to evidence: {stats['linked']}")
     logger.info(f"  Unlinked (using filename): {stats['unlinked']}")
     logger.info(f"  Total techniques detected: {stats['total_techniques']}")
-    logger.info(f"  Average per document: {stats['total_techniques']/stats['processed']:.1f}")
+    logger.info(f"  Average per document: {stats['total_techniques']/max(stats['processed'],1):.1f}")
     logger.info(f"\nResults saved to: {OUTPUT_FILE}")
 
 if __name__ == "__main__":

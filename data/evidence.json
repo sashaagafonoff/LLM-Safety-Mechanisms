@@ -50,7 +50,7 @@
       "models": [
         {
           "modelId": "claude-opus-4.5",
-          "name": "Claude 3.5 Opus"
+          "name": "Claude 4.5 Opus"
         }
       ],
       "content_metadata": {
@@ -71,6 +71,39 @@
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Comprehensive official system card for Claude Opus 4.5 covering capabilities evaluation, safety testing, alignment assessment, and AI Safety Level 3 deployment decision."
+      }
+    },
+    {
+      "id": "claude-sonnet-4-6-system-card",
+      "title": "Claude Sonnet 4.6 System Card",
+      "provider": "anthropic",
+      "url": "https://www-cdn.anthropic.com/78073f739564e986ff3e28522761a7a0b4484f84.pdf",
+      "type": "System Card",
+      "date_added": "2026-02-17",
+      "models": [
+        {
+          "modelId": "claude-sonnet-4.6",
+          "name": "Claude 4.6 Sonnet"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Comprehensive official system card for Claude Sonnet 4.6 covering capabilities evaluation, safety testing, alignment assessment, and AI Safety Level 3 deployment decision."
       }
     },
     {
@@ -395,6 +428,7 @@
         ],
         "excluded_topics": [],
         "confidence_weight": 0.4,
+        "no_safety_content": true,
         "language": "en",
         "notes": "Technical report on Qwen2-VL vision-language model architecture and capabilities with no apparent safety content in provided excerpt"
       }
@@ -534,6 +568,7 @@
         ],
         "excluded_topics": [],
         "confidence_weight": 0.3,
+        "no_safety_content": true,
         "language": "en",
         "notes": "Document contains only JavaScript error message and footer content with no actual safety information about Grok image generation updates."
       }

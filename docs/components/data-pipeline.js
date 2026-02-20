@@ -1,7 +1,7 @@
 // Data pipeline: builds enriched dataset and applies filters
 // Ported from Observable notebook cells: `data`, `filteredData`
 
-export function buildDataset(evidenceRaw, techniques, categories, techniqueMap, models, providers, lifecycle) {
+export function buildDataset(evidenceRaw, techniques, categories, techniqueMap, models, providers, lifecycle, standards, standardsMapping, commentary, incidents) {
   // Unwrap: evidence.json is { "sources": [...] }
   const evidence = Array.isArray(evidenceRaw) ? evidenceRaw : evidenceRaw.sources || [];
 
@@ -70,7 +70,7 @@ export function buildDataset(evidenceRaw, techniques, categories, techniqueMap, 
   });
 
   return {
-    raw: { evidence, techniques, categories, techniqueMap, models, providers, lifecycle },
+    raw: { evidence, techniques, categories, techniqueMap, models, providers, lifecycle, standards, standardsMapping, commentary, incidents },
     enrichedModels,
     flatPairs,
     categories,
