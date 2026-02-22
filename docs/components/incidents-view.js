@@ -1,5 +1,7 @@
 // Incident register network graph: Provider → Incident
 
+const INCIDENTS_LAYOUT_KEY = "incidents-view-layout-v1";
+
 export function createIncidentsView(data, providerColors, d3) {
   const incidents = data.raw.incidents || [];
   const techLookup = new Map(data.raw.techniques.map((t) => [t.id, t]));
@@ -46,7 +48,6 @@ export function createIncidentsView(data, providerColors, d3) {
   const links = [];
   const nodeById = new Map();
 
-  // Provider nodes (only those with incidents)
   const incidentProviderIds = new Set();
   for (const inc of incidents) {
     for (const pid of inc.providerIds || []) incidentProviderIds.add(pid);
@@ -65,7 +66,6 @@ export function createIncidentsView(data, providerColors, d3) {
     nodeById.set(node.id, node);
   }
 
-  // Incident nodes
   for (const inc of incidents) {
     const techNames = (inc.techniqueIds || []).map((id) => {
       const t = techLookup.get(id);
@@ -99,7 +99,6 @@ export function createIncidentsView(data, providerColors, d3) {
     nodes.push(node);
     nodeById.set(node.id, node);
 
-    // Provider → Incident links
     for (const pid of inc.providerIds || []) {
       const provNodeId = `prov-${pid}`;
       if (nodeById.has(provNodeId)) {
@@ -113,8 +112,32 @@ export function createIncidentsView(data, providerColors, d3) {
     }
   }
 
+  // Load saved layout
+  let savedPositions = null;
+  let layoutSource = "default";
+  try {
+    const raw = localStorage.getItem(INCIDENTS_LAYOUT_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed.positions) {
+        savedPositions = parsed.positions;
+        layoutSource = "saved";
+      }
+    }
+  } catch (e) { /* ignore */ }
+
+  if (savedPositions) {
+    nodes.forEach((n) => {
+      const pos = savedPositions[n.id];
+      if (pos) { n.x = pos.x; n.y = pos.y; n.fx = pos.x; n.fy = pos.y; }
+    });
+  }
+
   const width = 900;
   const height = 550;
+
+  let forceSimulation = null;
+  let layoutModified = false;
 
   const container = d3.create("div").style("position", "relative");
 
@@ -154,16 +177,134 @@ export function createIncidentsView(data, providerColors, d3) {
     );
   });
 
+  // ── Toolbar ──
+  const toolbar = container.append("div")
+    .style("margin-bottom", "8px")
+    .style("display", "flex")
+    .style("gap", "8px")
+    .style("flex-wrap", "wrap")
+    .style("align-items", "center");
+
+  const buttonStyle = `
+    padding: 5px 10px; font-size: 12px; border: 1px solid #ccc;
+    border-radius: 4px; background: #fff; color: #333; cursor: pointer;
+    transition: background 0.15s;
+  `;
+
+  function addButton(parent, label, onClick) {
+    return parent.append("button")
+      .attr("style", buttonStyle)
+      .text(label)
+      .on("click", onClick)
+      .on("mouseover", function () { d3.select(this).style("background", "#f0f0f0"); })
+      .on("mouseout", function () { d3.select(this).style("background", "#fff"); });
+  }
+
+  const status = toolbar.append("span")
+    .style("font-size", "11px")
+    .style("color", layoutSource === "saved" ? "#2e7d32" : "#666")
+    .style("margin-left", "8px")
+    .style("min-width", "140px")
+    .text(layoutSource === "saved" ? "\u2713 Using saved layout" : "Using force layout");
+
+  function showStatus(message, color, duration = 2000) {
+    status.text(message).style("color", color);
+    if (duration > 0) {
+      setTimeout(() => {
+        if (layoutModified) {
+          status.text("\u26A0 Unsaved changes").style("color", "#c9190b");
+        } else {
+          status.text(layoutSource === "saved" ? "\u2713 Using saved layout" : "Using force layout")
+            .style("color", layoutSource === "saved" ? "#2e7d32" : "#666");
+        }
+      }, duration);
+    }
+  }
+
+  addButton(toolbar, "\uD83D\uDCBE Save Layout", function () {
+    try {
+      const positions = {};
+      nodes.forEach((n) => { positions[n.id] = { x: n.x, y: n.y }; });
+      localStorage.setItem(INCIDENTS_LAYOUT_KEY, JSON.stringify({ positions }));
+      layoutModified = false;
+      layoutSource = "saved";
+      showStatus("\u2713 Layout saved!", "#2e7d32", 2000);
+    } catch (e) {
+      showStatus("\u2717 Save failed: " + e.message, "#c9190b", 3000);
+    }
+  });
+
+  const forceBtn = addButton(toolbar, "\u26A1 Force", function () {
+    if (forceSimulation) {
+      stopForce();
+      showStatus("Force stopped", "#666", 2000);
+    } else {
+      startForce();
+      showStatus("\u26A1 Force active", "#7c5e10", 0);
+    }
+  });
+
+  addButton(toolbar, "\uD83D\uDCE4 Export", function () {
+    try {
+      const positions = {};
+      nodes.forEach((n) => { positions[n.id] = { x: n.x, y: n.y }; });
+      const blob = new Blob([JSON.stringify({ positions }, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "incidents-layout.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showStatus("\u2713 Layout exported!", "#2e7d32", 2000);
+    } catch (e) {
+      showStatus("\u2717 Export failed: " + e.message, "#c9190b", 3000);
+    }
+  });
+
+  const fileInput = toolbar.append("input")
+    .attr("type", "file").attr("accept", ".json").style("display", "none")
+    .on("change", function () {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (!imported.positions) throw new Error("Invalid layout: missing positions");
+          localStorage.setItem(INCIDENTS_LAYOUT_KEY, JSON.stringify(imported));
+          showStatus("\u2713 Imported! Reloading...", "#2e7d32", 1000);
+          setTimeout(() => location.reload(), 1000);
+        } catch (err) {
+          showStatus("\u2717 Import failed: " + err.message, "#c9190b", 3000);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+  addButton(toolbar, "\uD83D\uDCE5 Import", () => fileInput.node().click());
+
+  addButton(toolbar, "\u21BA Reset", function () {
+    try {
+      localStorage.removeItem(INCIDENTS_LAYOUT_KEY);
+      location.reload();
+    } catch (e) {
+      showStatus("\u2717 Reset failed: " + e.message, "#c9190b", 3000);
+    }
+  });
+
+  // ── SVG ──
   const svg = container.append("svg")
     .attr("viewBox", [0, 0, width, height])
     .attr("width", width)
     .attr("height", height)
     .style("background", "#fafafa")
-    .style("border-radius", "4px");
+    .style("border-radius", "4px")
+    .style("user-select", "none");
 
   const g = svg.append("g");
 
-  // Zoom
   const zoomBehavior = d3.zoom()
     .scaleExtent([0.3, 3])
     .on("zoom", (event) => { g.attr("transform", event.transform); });
@@ -176,7 +317,16 @@ export function createIncidentsView(data, providerColors, d3) {
     .join("line")
     .attr("stroke", (d) => d.color)
     .attr("stroke-opacity", 0.4)
-    .attr("stroke-width", 1.5);
+    .attr("stroke-width", 1.5)
+    .style("pointer-events", "none");
+
+  function updateLinks() {
+    linkElements
+      .attr("x1", (d) => { const s = typeof d.source === "string" ? nodeById.get(d.source) : d.source; return s ? s.x : 0; })
+      .attr("y1", (d) => { const s = typeof d.source === "string" ? nodeById.get(d.source) : d.source; return s ? s.y : 0; })
+      .attr("x2", (d) => { const t = typeof d.target === "string" ? nodeById.get(d.target) : d.target; return t ? t.x : 0; })
+      .attr("y2", (d) => { const t = typeof d.target === "string" ? nodeById.get(d.target) : d.target; return t ? t.y : 0; });
+  }
 
   // Node groups
   const nodeGroup = g.append("g").attr("class", "nodes");
@@ -224,7 +374,7 @@ export function createIncidentsView(data, providerColors, d3) {
     .style("pointer-events", "none")
     .text((d) => d.name);
 
-  // Tooltip
+  // ── Tooltip ──
   const tooltip = d3.select("body").append("div")
     .attr("class", "incidents-tooltip")
     .style("position", "absolute")
@@ -304,46 +454,98 @@ export function createIncidentsView(data, providerColors, d3) {
       .on("mouseleave", () => { isOverNode = false; scheduleHide(); });
   });
 
-  // Force simulation
-  const simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id((d) => d.id)
-      .distance(80)
-      .strength(0.4))
-    .force("charge", d3.forceManyBody().strength((d) => d.type === "provider" ? -400 : -80))
-    .force("center", d3.forceCenter(width / 2, height / 2))
-    .force("collision", d3.forceCollide().radius((d) => d.type === "provider" ? 35 : 18))
-    .force("x", d3.forceX(width / 2).strength(0.04))
-    .force("y", d3.forceY(height / 2).strength(0.04));
+  // ── Force simulation ──
+  function createSim() {
+    return d3.forceSimulation(nodes)
+      .force("link", d3.forceLink(links).id((d) => d.id)
+        .distance(80)
+        .strength(0.4))
+      .force("charge", d3.forceManyBody().strength((d) => d.type === "provider" ? -400 : -80))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("collision", d3.forceCollide().radius((d) => d.type === "provider" ? 35 : 18))
+      .force("x", d3.forceX(width / 2).strength(0.04))
+      .force("y", d3.forceY(height / 2).strength(0.04));
+  }
 
-  simulation.on("tick", () => {
-    linkElements
-      .attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y)
-      .attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
-    provNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
-    incNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
-  });
+  function startForce() {
+    stopForce();
+    nodes.forEach((n) => { n.fx = null; n.fy = null; });
+    forceSimulation = createSim();
+    forceSimulation.on("tick", () => {
+      provNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      incNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      updateLinks();
+    });
+    forceSimulation.alpha(1).restart();
+    forceBtn.style("background", "#e0e0e0");
+    layoutModified = true;
+  }
 
-  // Drag
+  function stopForce() {
+    if (forceSimulation) {
+      forceSimulation.stop();
+      nodes.forEach((n) => { n.fx = n.x; n.fy = n.y; });
+      forceSimulation = null;
+    }
+    forceBtn.style("background", "#fff");
+  }
+
+  // ── Drag ──
   function dragBehavior() {
     return d3.drag()
       .on("start", (event, d) => {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
+        if (forceSimulation) {
+          if (!event.active) forceSimulation.alphaTarget(0.3).restart();
+        }
         d.fx = d.x;
         d.fy = d.y;
       })
       .on("drag", (event, d) => {
         d.fx = event.x;
         d.fy = event.y;
+        d.x = event.x;
+        d.y = event.y;
+        if (!forceSimulation) {
+          d3.select(event.sourceEvent.target.closest("g")).attr("transform", `translate(${d.x},${d.y})`);
+          updateLinks();
+        }
+        if (!layoutModified) {
+          layoutModified = true;
+          status.text("\u26A0 Unsaved changes").style("color", "#c9190b");
+        }
       })
       .on("end", (event, d) => {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
+        if (forceSimulation) {
+          if (!event.active) forceSimulation.alphaTarget(0);
+        }
+        if (!forceSimulation) {
+          d.fx = d.x;
+          d.fy = d.y;
+        }
       });
   }
 
   provNodes.call(dragBehavior());
   incNodes.call(dragBehavior());
+
+  // ── Initial layout ──
+  if (savedPositions) {
+    provNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    incNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    updateLinks();
+  } else {
+    forceSimulation = createSim();
+    forceSimulation.on("tick", () => {
+      provNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      incNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      updateLinks();
+    });
+    forceSimulation.on("end", () => {
+      nodes.forEach((n) => { n.fx = n.x; n.fy = n.y; });
+      forceSimulation = null;
+      forceBtn.style("background", "#fff");
+    });
+  }
 
   return container.node();
 }

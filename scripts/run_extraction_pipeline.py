@@ -511,7 +511,6 @@ def main():
         print("=" * 70)
         import subprocess
         for script in ["scripts/generate_report.py",
-                       "scripts/generate_dashboard.py",
                        "scripts/compare_taxonomy_runs.py --detailed"]:
             parts = script.split()
             try:

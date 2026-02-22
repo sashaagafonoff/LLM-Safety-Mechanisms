@@ -73,7 +73,7 @@ CHECKPOINT_PATH = Path("cache/llm_extraction_checkpoint.json")
 # Model configuration
 MODEL_MAP = {
     "haiku": "claude-haiku-4-5-20251001",
-    "sonnet": "claude-sonnet-4-5-20250929",
+    "sonnet": "claude-sonnet-4-6",
     "sonnet-legacy": "claude-3-5-sonnet-20241022",
     "opus": "claude-opus-4-6",
 }

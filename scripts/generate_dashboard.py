@@ -1,3 +1,10 @@
+"""Legacy Plotly dashboard generator.
+
+NOTE: The primary dashboard (docs/index.html) is now a hand-maintained D3/htl
+application with modular components in docs/components/. Running this script will
+OVERWRITE docs/index.html with the old Plotly-based dashboard. Use with caution.
+This script has been removed from the --regenerate pipeline for this reason.
+"""
 import json
 import plotly.graph_objects as go
 from datetime import datetime

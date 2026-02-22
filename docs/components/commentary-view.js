@@ -1,5 +1,7 @@
 // Third-party commentary network graph: Category → Technique → Commentary
 
+const COMMENTARY_LAYOUT_KEY = "commentary-view-layout-v1";
+
 export function createCommentaryView(data, categoryColors, d3) {
   const commentary = data.raw.commentary || [];
   const techniques = data.raw.techniques;
@@ -52,12 +54,17 @@ export function createCommentaryView(data, categoryColors, d3) {
   for (const catId of referencedCatIds) {
     const cat = catLookup.get(catId);
     if (!cat) continue;
+    // Estimate text dimensions for rectangle sizing (refined after render)
+    const estCharWidth = 7.5;
+    const estW = cat.name.length * estCharWidth + 24;
+    const estH = 30;
     const node = {
       id: `cat-${catId}`,
       type: "category",
       name: cat.name,
       color: categoryColors[cat.name] || "#999",
-      radius: 18
+      rectW: estW,
+      rectH: estH
     };
     nodes.push(node);
     nodeById.set(node.id, node);
@@ -73,13 +80,11 @@ export function createCommentaryView(data, categoryColors, d3) {
       type: "technique",
       name: tech.name,
       color: categoryColors[cat ? cat.name : ""] || "#888",
-      categoryId: tech.categoryId,
-      radius: 10
+      categoryId: tech.categoryId
     };
     nodes.push(node);
     nodeById.set(node.id, node);
 
-    // Category → Technique link
     const catNodeId = `cat-${tech.categoryId}`;
     if (nodeById.has(catNodeId)) {
       links.push({
@@ -111,7 +116,6 @@ export function createCommentaryView(data, categoryColors, d3) {
     nodes.push(node);
     nodeById.set(node.id, node);
 
-    // Technique → Commentary links (one per referenced technique)
     for (const tid of c.techniqueIds || []) {
       const techNodeId = `tech-${tid}`;
       if (nodeById.has(techNodeId)) {
@@ -125,9 +129,33 @@ export function createCommentaryView(data, categoryColors, d3) {
     }
   }
 
-  // Layout
+  // Load saved layout
+  let savedPositions = null;
+  let layoutSource = "default";
+  try {
+    const raw = localStorage.getItem(COMMENTARY_LAYOUT_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed.positions) {
+        savedPositions = parsed.positions;
+        layoutSource = "saved";
+      }
+    }
+  } catch (e) { /* ignore */ }
+
+  // Apply saved positions
+  if (savedPositions) {
+    nodes.forEach((n) => {
+      const pos = savedPositions[n.id];
+      if (pos) { n.x = pos.x; n.y = pos.y; n.fx = pos.x; n.fy = pos.y; }
+    });
+  }
+
   const width = 900;
   const height = 600;
+
+  let forceSimulation = null;
+  let layoutModified = false;
 
   const container = d3.create("div").style("position", "relative");
 
@@ -147,7 +175,7 @@ export function createCommentaryView(data, categoryColors, d3) {
     .style("color", "#666")
     .style("flex-wrap", "wrap");
 
-  legend.append("span").html(`<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#888;margin-right:3px;vertical-align:middle;"></span> Category`);
+  legend.append("span").html(`<span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#888;margin-right:3px;vertical-align:middle;"></span> Category`);
   legend.append("span").html(`<span style="display:inline-block;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:10px solid #888;margin-right:3px;vertical-align:middle;"></span> Technique`);
 
   [["positive", "Positive"], ["negative", "Negative"], ["mixed", "Mixed"], ["neutral", "Neutral"]].forEach(([key, label]) => {
@@ -156,16 +184,134 @@ export function createCommentaryView(data, categoryColors, d3) {
     );
   });
 
+  // ── Toolbar ──
+  const toolbar = container.append("div")
+    .style("margin-bottom", "8px")
+    .style("display", "flex")
+    .style("gap", "8px")
+    .style("flex-wrap", "wrap")
+    .style("align-items", "center");
+
+  const buttonStyle = `
+    padding: 5px 10px; font-size: 12px; border: 1px solid #ccc;
+    border-radius: 4px; background: #fff; color: #333; cursor: pointer;
+    transition: background 0.15s;
+  `;
+
+  function addButton(parent, label, onClick) {
+    return parent.append("button")
+      .attr("style", buttonStyle)
+      .text(label)
+      .on("click", onClick)
+      .on("mouseover", function () { d3.select(this).style("background", "#f0f0f0"); })
+      .on("mouseout", function () { d3.select(this).style("background", "#fff"); });
+  }
+
+  const status = toolbar.append("span")
+    .style("font-size", "11px")
+    .style("color", layoutSource === "saved" ? "#2e7d32" : "#666")
+    .style("margin-left", "8px")
+    .style("min-width", "140px")
+    .text(layoutSource === "saved" ? "\u2713 Using saved layout" : "Using force layout");
+
+  function showStatus(message, color, duration = 2000) {
+    status.text(message).style("color", color);
+    if (duration > 0) {
+      setTimeout(() => {
+        if (layoutModified) {
+          status.text("\u26A0 Unsaved changes").style("color", "#c9190b");
+        } else {
+          status.text(layoutSource === "saved" ? "\u2713 Using saved layout" : "Using force layout")
+            .style("color", layoutSource === "saved" ? "#2e7d32" : "#666");
+        }
+      }, duration);
+    }
+  }
+
+  addButton(toolbar, "\uD83D\uDCBE Save Layout", function () {
+    try {
+      const positions = {};
+      nodes.forEach((n) => { positions[n.id] = { x: n.x, y: n.y }; });
+      localStorage.setItem(COMMENTARY_LAYOUT_KEY, JSON.stringify({ positions }));
+      layoutModified = false;
+      layoutSource = "saved";
+      showStatus("\u2713 Layout saved!", "#2e7d32", 2000);
+    } catch (e) {
+      showStatus("\u2717 Save failed: " + e.message, "#c9190b", 3000);
+    }
+  });
+
+  const forceBtn = addButton(toolbar, "\u26A1 Force", function () {
+    if (forceSimulation) {
+      stopForce();
+      showStatus("Force stopped", "#666", 2000);
+    } else {
+      startForce();
+      showStatus("\u26A1 Force active", "#7c5e10", 0);
+    }
+  });
+
+  addButton(toolbar, "\uD83D\uDCE4 Export", function () {
+    try {
+      const positions = {};
+      nodes.forEach((n) => { positions[n.id] = { x: n.x, y: n.y }; });
+      const blob = new Blob([JSON.stringify({ positions }, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "commentary-layout.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showStatus("\u2713 Layout exported!", "#2e7d32", 2000);
+    } catch (e) {
+      showStatus("\u2717 Export failed: " + e.message, "#c9190b", 3000);
+    }
+  });
+
+  const fileInput = toolbar.append("input")
+    .attr("type", "file").attr("accept", ".json").style("display", "none")
+    .on("change", function () {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (!imported.positions) throw new Error("Invalid layout: missing positions");
+          localStorage.setItem(COMMENTARY_LAYOUT_KEY, JSON.stringify(imported));
+          showStatus("\u2713 Imported! Reloading...", "#2e7d32", 1000);
+          setTimeout(() => location.reload(), 1000);
+        } catch (err) {
+          showStatus("\u2717 Import failed: " + err.message, "#c9190b", 3000);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+  addButton(toolbar, "\uD83D\uDCE5 Import", () => fileInput.node().click());
+
+  addButton(toolbar, "\u21BA Reset", function () {
+    try {
+      localStorage.removeItem(COMMENTARY_LAYOUT_KEY);
+      location.reload();
+    } catch (e) {
+      showStatus("\u2717 Reset failed: " + e.message, "#c9190b", 3000);
+    }
+  });
+
+  // ── SVG ──
   const svg = container.append("svg")
     .attr("viewBox", [0, 0, width, height])
     .attr("width", width)
     .attr("height", height)
     .style("background", "#fafafa")
-    .style("border-radius", "4px");
+    .style("border-radius", "4px")
+    .style("user-select", "none");
 
   const g = svg.append("g");
 
-  // Zoom
   const zoomBehavior = d3.zoom()
     .scaleExtent([0.3, 3])
     .on("zoom", (event) => { g.attr("transform", event.transform); });
@@ -178,12 +324,21 @@ export function createCommentaryView(data, categoryColors, d3) {
     .join("line")
     .attr("stroke", (d) => d.color)
     .attr("stroke-opacity", 0.5)
-    .attr("stroke-width", (d) => d.type === "category-technique" ? 2 : 1);
+    .attr("stroke-width", (d) => d.type === "category-technique" ? 2 : 1)
+    .style("pointer-events", "none");
+
+  function updateLinks() {
+    linkElements
+      .attr("x1", (d) => { const s = typeof d.source === "string" ? nodeById.get(d.source) : d.source; return s ? s.x : 0; })
+      .attr("y1", (d) => { const s = typeof d.source === "string" ? nodeById.get(d.source) : d.source; return s ? s.y : 0; })
+      .attr("x2", (d) => { const t = typeof d.target === "string" ? nodeById.get(d.target) : d.target; return t ? t.x : 0; })
+      .attr("y2", (d) => { const t = typeof d.target === "string" ? nodeById.get(d.target) : d.target; return t ? t.y : 0; });
+  }
 
   // Node groups
   const nodeGroup = g.append("g").attr("class", "nodes");
 
-  // Category nodes (rounded rects)
+  // Category nodes — rectangles sized to fully contain text
   const catNodes = nodeGroup.selectAll(".cat-node")
     .data(nodes.filter((n) => n.type === "category"))
     .join("g")
@@ -192,18 +347,32 @@ export function createCommentaryView(data, categoryColors, d3) {
 
   catNodes.each(function (d) {
     const group = d3.select(this);
+    // Create text first to measure
     const textEl = group.append("text")
       .attr("text-anchor", "middle")
       .attr("dy", "0.35em")
-      .style("font-size", "11px")
+      .style("font-size", "12px")
       .style("font-weight", "bold")
       .style("fill", "white")
       .style("pointer-events", "none")
       .text(d.name);
-    const bbox = textEl.node().getBBox();
-    const pad = 8;
-    d.rectW = bbox.width + pad * 2;
-    d.rectH = bbox.height + pad * 2;
+
+    // Measure — use getBBox with fallback to character estimate
+    let textW, textH;
+    try {
+      const bbox = textEl.node().getBBox();
+      textW = bbox.width > 0 ? bbox.width : d.name.length * 7.5;
+      textH = bbox.height > 0 ? bbox.height : 14;
+    } catch (e) {
+      textW = d.name.length * 7.5;
+      textH = 14;
+    }
+
+    const padX = 14;
+    const padY = 10;
+    d.rectW = textW + padX * 2;
+    d.rectH = textH + padY * 2;
+
     group.insert("rect", "text")
       .attr("x", -d.rectW / 2)
       .attr("y", -d.rectH / 2)
@@ -213,7 +382,7 @@ export function createCommentaryView(data, categoryColors, d3) {
       .attr("ry", 6)
       .attr("fill", d.color)
       .attr("stroke", "#fff")
-      .attr("stroke-width", 1.5);
+      .attr("stroke-width", 2);
   });
 
   // Technique nodes (triangles)
@@ -258,7 +427,7 @@ export function createCommentaryView(data, categoryColors, d3) {
     .style("pointer-events", "none")
     .text((d) => d.name);
 
-  // Tooltip
+  // ── Tooltip ──
   const tooltip = d3.select("body").append("div")
     .attr("class", "commentary-tooltip")
     .style("position", "absolute")
@@ -330,48 +499,112 @@ export function createCommentaryView(data, categoryColors, d3) {
       .on("mouseleave", () => { isOverNode = false; scheduleHide(); });
   });
 
-  // Force simulation
-  const simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id((d) => d.id)
-      .distance((d) => d.type === "category-technique" ? 100 : 60)
-      .strength((d) => d.type === "category-technique" ? 0.5 : 0.3))
-    .force("charge", d3.forceManyBody().strength((d) => d.type === "category" ? -300 : d.type === "technique" ? -150 : -50))
-    .force("center", d3.forceCenter(width / 2, height / 2))
-    .force("collision", d3.forceCollide().radius((d) => d.type === "category" ? 40 : d.type === "technique" ? 20 : 12))
-    .force("x", d3.forceX(width / 2).strength(0.03))
-    .force("y", d3.forceY(height / 2).strength(0.03));
+  // ── Force simulation ──
+  function createSim() {
+    return d3.forceSimulation(nodes)
+      .force("link", d3.forceLink(links).id((d) => d.id)
+        .distance((d) => d.type === "category-technique" ? 100 : 60)
+        .strength((d) => d.type === "category-technique" ? 0.5 : 0.3))
+      .force("charge", d3.forceManyBody().strength((d) => d.type === "category" ? -300 : d.type === "technique" ? -150 : -50))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("collision", d3.forceCollide().radius((d) => {
+        if (d.type === "category") return Math.max(d.rectW, d.rectH) / 2 + 5;
+        if (d.type === "technique") return 20;
+        return 12;
+      }))
+      .force("x", d3.forceX(width / 2).strength(0.03))
+      .force("y", d3.forceY(height / 2).strength(0.03));
+  }
 
-  simulation.on("tick", () => {
-    linkElements
-      .attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y)
-      .attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
-    catNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
-    techNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
-    commNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
-  });
+  function startForce() {
+    stopForce();
+    // Unpin all nodes
+    nodes.forEach((n) => { n.fx = null; n.fy = null; });
+    forceSimulation = createSim();
+    forceSimulation.on("tick", () => {
+      catNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      techNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      commNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      updateLinks();
+    });
+    forceSimulation.alpha(1).restart();
+    forceBtn.style("background", "#e0e0e0");
+    layoutModified = true;
+  }
 
-  // Drag
+  function stopForce() {
+    if (forceSimulation) {
+      forceSimulation.stop();
+      nodes.forEach((n) => { n.fx = n.x; n.fy = n.y; });
+      forceSimulation = null;
+    }
+    forceBtn.style("background", "#fff");
+  }
+
+  // ── Drag ──
   function dragBehavior() {
     return d3.drag()
       .on("start", (event, d) => {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
+        if (forceSimulation) {
+          if (!event.active) forceSimulation.alphaTarget(0.3).restart();
+        }
         d.fx = d.x;
         d.fy = d.y;
       })
       .on("drag", (event, d) => {
         d.fx = event.x;
         d.fy = event.y;
+        d.x = event.x;
+        d.y = event.y;
+        if (!forceSimulation) {
+          // Manual repositioning when force is off
+          d3.select(event.sourceEvent.target.closest("g")).attr("transform", `translate(${d.x},${d.y})`);
+          updateLinks();
+        }
+        if (!layoutModified) {
+          layoutModified = true;
+          status.text("\u26A0 Unsaved changes").style("color", "#c9190b");
+        }
       })
       .on("end", (event, d) => {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
+        if (forceSimulation) {
+          if (!event.active) forceSimulation.alphaTarget(0);
+        }
+        // Keep pinned if force is off
+        if (!forceSimulation) {
+          d.fx = d.x;
+          d.fy = d.y;
+        }
       });
   }
 
   catNodes.call(dragBehavior());
   techNodes.call(dragBehavior());
   commNodes.call(dragBehavior());
+
+  // ── Initial layout ──
+  if (savedPositions) {
+    // Position nodes from saved state, no force needed
+    catNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    techNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    commNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    updateLinks();
+  } else {
+    // Run force simulation for initial layout
+    forceSimulation = createSim();
+    forceSimulation.on("tick", () => {
+      catNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      techNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      commNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      updateLinks();
+    });
+    // Auto-stop after settling
+    forceSimulation.on("end", () => {
+      nodes.forEach((n) => { n.fx = n.x; n.fy = n.y; });
+      forceSimulation = null;
+      forceBtn.style("background", "#fff");
+    });
+  }
 
   return container.node();
 }
