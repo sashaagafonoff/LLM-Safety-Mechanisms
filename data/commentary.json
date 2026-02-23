@@ -1201,23 +1201,6 @@
     "sentiment": "negative"
   },
   {
-    "id": "commentary-072",
-    "title": "A Feature-Level Approach to Mitigating Bias and Censorship in DeepSeek-R1",
-    "url": "https://www.ctgt.ai/research/a-feature-level-approach-to-mitigating-bias-and-censorship-in-deepseek-r1",
-    "author": "CTGT AI Research Team",
-    "organization": "CTGT AI",
-    "date": "2025-03-01",
-    "type": "report",
-    "techniqueIds": [
-      "tech-bias-mitigation",
-      "tech-refusal-training",
-      "tech-machine-unlearning",
-      "tech-configurable-policies"
-    ],
-    "summary": "This technical report examines how post-training fine-tuning and reinforcement learning applied to DeepSeek R1 frequently result in over-censorship, limiting model adaptability. Researchers propose a feature-level intervention framework that identifies and modifies internal hidden-layer activations responsible for censorship behavior in DeepSeek-R1-Distill-Llama-70B at inference time, without retraining — restoring responses on a benchmark of 100 sensitive queries while preserving reasoning capabilities. The baseline model fully answered only 32% of sensitive prompts, and the feature-level approach substantially increased coverage, suggesting that refusal training in DeepSeek R1 is both over-broad and inefficiently embedded in model weights.",
-    "sentiment": "mixed"
-  },
-  {
     "id": "commentary-073",
     "title": "Challenging US Dominance: China's DeepSeek Model and the Pluralisation of AI Development",
     "url": "https://www.iss.europa.eu/publications/briefs/challenging-us-dominance-chinas-deepseek-model-and-pluralisation-ai-development",
@@ -2013,25 +1996,6 @@
       "tech-weapons-illegal-activity"
     ],
     "summary": "Sifted's independent testing of Mistral 7B at launch found the model would provide detailed instructions on bomb-making, self-harm, and harming others — content that competing models from Meta, OpenAI, and Google uniformly refused. AI safety researcher Paul Röttger (formerly on GPT-4's safety team) criticised the release for failing to evaluate or even comment on model safety, noting that the sole mitigation — an optional system prompt — is trivially bypassed by omitting it. The analysis concludes that Mistral's release approach lacked the responsible disclosure standards expected of a large commercial model provider.",
-    "sentiment": "negative"
-  },
-  {
-    "id": "commentary-119",
-    "title": "Mistral AI Safety Rating — SaferAI Independent Assessment",
-    "url": "https://ratings.safer-ai.org/mistral-ai",
-    "author": "SaferAI Research Team",
-    "organization": "SaferAI",
-    "date": "2024-06-01",
-    "type": "audit",
-    "techniqueIds": [
-      "tech-red-teaming",
-      "tech-safety-benchmarks",
-      "tech-capability-monitoring",
-      "tech-bias-mitigation",
-      "tech-system-prompts",
-      "tech-responsible-release"
-    ],
-    "summary": "SaferAI's structured rating framework assessed Mistral against criteria spanning risk tolerance, capability evaluation protocols, and deployment safety measures. The audit found Mistral provides no information about evaluation protocols for dangerous capabilities, no global risk tolerance statement, and no defined capability thresholds or mitigation objectives. The only bias analysis documented was on the Mixtral model using BOLD and BBQ benchmarks, and the sole safety mitigation for Mistral 7B — a system prompt — was judged ineffective against misuse since malicious actors can simply omit it.",
     "sentiment": "negative"
   },
   {
