@@ -233,6 +233,17 @@ export function createCommentaryView(data, categoryColors, d3) {
   // ── Layout algorithms ──
   function computeBalancedLayout() {
     const positions = {};
+
+    // Build technique → commentary mapping
+    const techToComm = new Map();
+    const placedComm = new Set();
+    for (const c of commentary) {
+      for (const tid of c.techniqueIds || []) {
+        if (!techToComm.has(tid)) techToComm.set(tid, []);
+        techToComm.get(tid).push(`comm-${c.id}`);
+      }
+    }
+
     const catGroups = [];
     for (const catId of referencedCatIds) {
       const cat = catLookup.get(catId);
@@ -244,57 +255,110 @@ export function createCommentaryView(data, categoryColors, d3) {
       catGroups.push({ catId, name: cat.name, techs });
     }
 
-    const techSpacing = 25, catGap = 40, catH = 35;
-    const sorted = [...catGroups].sort((a, b) => b.techs.length - a.techs.length);
+    const techBaseSpacing = 22;
+    const commSpacingV = 14;
+    const commSpacingH = 25;
+    const maxPerSubCol = 3;
+    const commOffset = 50;
+    const catH = 32;
+    const catGap = 30;
+
+    // Row height for a technique = max of base spacing or its commentary cluster height
+    function techRowHeight(tid) {
+      const n = (techToComm.get(tid) || []).filter((id) => !placedComm.has(id)).length;
+      if (n === 0) return techBaseSpacing;
+      return Math.max(techBaseSpacing, Math.min(n, maxPerSubCol) * commSpacingV + 6);
+    }
+
+    function groupHeight(g) {
+      return catH + g.techs.reduce((s, tid) => s + techRowHeight(tid), 0) + catGap;
+    }
+
+    // Balance columns by total height
+    const sorted = [...catGroups].sort((a, b) => groupHeight(b) - groupHeight(a));
     const leftGroups = [], rightGroups = [];
     let leftTotal = 0, rightTotal = 0;
 
     for (const group of sorted) {
-      const groupH = catH + group.techs.length * techSpacing + catGap;
-      if (leftTotal <= rightTotal) { leftGroups.push(group); leftTotal += groupH; }
-      else { rightGroups.push(group); rightTotal += groupH; }
+      const gh = groupHeight(group);
+      if (leftTotal <= rightTotal) { leftGroups.push(group); leftTotal += gh; }
+      else { rightGroups.push(group); rightTotal += gh; }
     }
 
     leftGroups.sort((a, b) => a.name.localeCompare(b.name));
     rightGroups.sort((a, b) => a.name.localeCompare(b.name));
 
-    function layoutCol(groups, xC) {
-      const totalH = groups.reduce((s, g) => s + catH + g.techs.length * techSpacing + catGap, 0);
-      let y = (height - totalH) / 2 + 30;
+    // Layout a column: category + techniques + commentary clustered near each technique
+    function layoutCol(groups, catX, isLeft) {
+      const totalH = groups.reduce((s, g) => s + groupHeight(g), 0);
+      let y = Math.max(20, (height - totalH) / 2);
+      const commDir = isLeft ? 1 : -1; // commentary extends toward center
+
       groups.forEach((group) => {
-        positions[`cat-${group.catId}`] = { x: xC, y };
-        group.techs.forEach((tid, i) => {
-          positions[`tech-${tid}`] = { x: xC, y: y + catH + i * techSpacing };
+        positions[`cat-${group.catId}`] = { x: catX, y };
+        let techY = y + catH;
+
+        group.techs.forEach((tid) => {
+          positions[`tech-${tid}`] = { x: catX, y: techY };
+
+          const commIds = (techToComm.get(tid) || []).filter((id) => !placedComm.has(id));
+          commIds.forEach((commId, i) => {
+            const subCol = Math.floor(i / maxPerSubCol);
+            const row = i % maxPerSubCol;
+            positions[commId] = {
+              x: catX + commDir * (commOffset + subCol * commSpacingH),
+              y: techY + row * commSpacingV
+            };
+            placedComm.add(commId);
+          });
+
+          techY += techRowHeight(tid);
         });
-        y += catH + group.techs.length * techSpacing + catGap;
+
+        y += groupHeight(group);
       });
     }
 
-    layoutCol(leftGroups, 150);
-    layoutCol(rightGroups, width - 150);
+    layoutCol(leftGroups, 130, true);
+    layoutCol(rightGroups, width - 130, false);
 
-    // Commentary in center — multiple columns if needed
-    const commEntries = nodes.filter((n) => n.type === "commentary");
-    const minSpacing = 14;
-    const maxPerCol = Math.floor((height - 60) / minSpacing);
-    const numCols = Math.max(1, Math.ceil(commEntries.length / maxPerCol));
-    const colWidth = 60;
-    const startX = width / 2 - ((numCols - 1) * colWidth) / 2;
-    const perCol = Math.ceil(commEntries.length / numCols);
-    const commSpacing = Math.min(minSpacing, (height - 60) / Math.max(perCol, 1));
-
-    commEntries.forEach((n, i) => {
-      const col = Math.floor(i / perCol);
-      const row = i % perCol;
-      positions[n.id] = { x: startX + col * colWidth, y: 30 + row * commSpacing };
+    // Place any commentary not linked to a technique
+    const unplaced = nodes.filter((n) => n.type === "commentary" && !placedComm.has(n.id));
+    unplaced.forEach((n, i) => {
+      positions[n.id] = { x: width / 2, y: 30 + i * commSpacingV };
     });
+
+    // Scale to fit viewport if layout overflows
+    const allPos = Object.values(positions);
+    const margin = 25;
+    const minY = Math.min(...allPos.map((p) => p.y));
+    const maxY = Math.max(...allPos.map((p) => p.y));
+    if (maxY - minY > height - margin * 2) {
+      const scale = (height - margin * 2) / (maxY - minY);
+      allPos.forEach((p) => { p.y = margin + (p.y - minY) * scale; });
+    }
+    const minX = Math.min(...allPos.map((p) => p.x));
+    const maxX = Math.max(...allPos.map((p) => p.x));
+    if (maxX - minX > width - margin * 2) {
+      const scale = (width - margin * 2) / (maxX - minX);
+      allPos.forEach((p) => { p.x = margin + (p.x - minX) * scale; });
+    }
 
     return positions;
   }
 
   function computeSequentialLayout() {
     const positions = {};
-    const colX = { category: width * 0.1, technique: width * 0.38, commentary: width * 0.72 };
+
+    // Build technique → commentary mapping
+    const techToComm = new Map();
+    const placedComm = new Set();
+    for (const c of commentary) {
+      for (const tid of c.techniqueIds || []) {
+        if (!techToComm.has(tid)) techToComm.set(tid, []);
+        techToComm.get(tid).push(`comm-${c.id}`);
+      }
+    }
 
     const catGroups = [];
     for (const catId of referencedCatIds) {
@@ -308,31 +372,59 @@ export function createCommentaryView(data, categoryColors, d3) {
     }
     catGroups.sort((a, b) => a.name.localeCompare(b.name));
 
-    const techSpacing = 22, catGap = 30, catH = 30;
-    let catY = 40;
+    const colX = { category: width * 0.08, technique: width * 0.28, commentary: width * 0.52 };
+    const techBaseSpacing = 20;
+    const commSpacingV = 13;
+    const commSpacingH = 25;
+    const maxPerSubCol = 3;
+    const catGap = 25;
+
+    function techRowHeight(tid) {
+      const n = (techToComm.get(tid) || []).filter((id) => !placedComm.has(id)).length;
+      if (n === 0) return techBaseSpacing;
+      return Math.max(techBaseSpacing, Math.min(n, maxPerSubCol) * commSpacingV + 6);
+    }
+
+    let y = 30;
 
     catGroups.forEach((group) => {
-      positions[`cat-${group.catId}`] = { x: colX.category, y: catY };
-      group.techs.forEach((tid, i) => {
-        positions[`tech-${tid}`] = { x: colX.technique, y: catY + i * techSpacing };
+      positions[`cat-${group.catId}`] = { x: colX.category, y };
+
+      group.techs.forEach((tid) => {
+        positions[`tech-${tid}`] = { x: colX.technique, y };
+
+        const commIds = (techToComm.get(tid) || []).filter((id) => !placedComm.has(id));
+        commIds.forEach((commId, i) => {
+          const subCol = Math.floor(i / maxPerSubCol);
+          const row = i % maxPerSubCol;
+          positions[commId] = {
+            x: colX.commentary + subCol * commSpacingH,
+            y: y + row * commSpacingV
+          };
+          placedComm.add(commId);
+        });
+
+        y += techRowHeight(tid);
       });
-      catY += catH + group.techs.length * techSpacing + catGap;
+
+      y += catGap;
     });
 
-    // Commentary in right area — multiple columns if needed
-    const commEntries = nodes.filter((n) => n.type === "commentary");
-    const minSpacing = 14;
-    const maxPerCol = Math.floor((height - 60) / minSpacing);
-    const numCols = Math.max(1, Math.ceil(commEntries.length / maxPerCol));
-    const colWidth = 60;
-    const perCol = Math.ceil(commEntries.length / numCols);
-    const commSpacing = Math.min(minSpacing, (height - 60) / Math.max(perCol, 1));
-
-    commEntries.forEach((n, i) => {
-      const col = Math.floor(i / perCol);
-      const row = i % perCol;
-      positions[n.id] = { x: colX.commentary + col * colWidth, y: 40 + row * commSpacing };
+    // Unplaced commentary (not linked to any technique)
+    const unplaced = nodes.filter((n) => n.type === "commentary" && !placedComm.has(n.id));
+    unplaced.forEach((n, i) => {
+      positions[n.id] = { x: colX.commentary, y: 30 + i * commSpacingV };
     });
+
+    // Scale to fit viewport if layout overflows
+    const allPos = Object.values(positions);
+    const margin = 25;
+    const minY = Math.min(...allPos.map((p) => p.y));
+    const maxY = Math.max(...allPos.map((p) => p.y));
+    if (maxY - minY > height - margin * 2) {
+      const scale = (height - margin * 2) / (maxY - minY);
+      allPos.forEach((p) => { p.y = margin + (p.y - minY) * scale; });
+    }
 
     return positions;
   }
@@ -556,7 +648,7 @@ export function createCommentaryView(data, categoryColors, d3) {
     .text((d) => d.name);
 
   // ── Shared interactions (zoom, marquee, multi-drag, selection) ──
-  setupNetworkInteractions({
+  const interactions = setupNetworkInteractions({
     d3, svg, g, nodes, nodeById,
     nodeGroups: [catNodes, techNodes, commNodes],
     linkElements, updateLinks, width, height,
@@ -659,8 +751,14 @@ export function createCommentaryView(data, categoryColors, d3) {
 
   function startForce() {
     stopForce();
-    // Unpin all nodes
-    nodes.forEach((n) => { n.fx = null; n.fy = null; });
+    const selected = interactions.selectedNodes;
+    if (selected.size > 0) {
+      nodes.forEach((n) => {
+        if (selected.has(n.id)) { n.fx = null; n.fy = null; }
+      });
+    } else {
+      nodes.forEach((n) => { n.fx = null; n.fy = null; });
+    }
     forceSimulation = createSim();
     forceSimulation.on("tick", () => {
       catNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);

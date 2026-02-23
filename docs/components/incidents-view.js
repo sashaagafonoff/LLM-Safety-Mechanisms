@@ -231,7 +231,7 @@ export function createIncidentsView(data, providerColors, d3) {
 
     // Providers in a circle
     const cx = width / 2, cy = height / 2;
-    const provR = Math.min(width, height) * 0.25;
+    const provR = Math.min(width, height) * 0.18;
 
     provEntries.forEach((n, i) => {
       const angle = (2 * Math.PI * i) / provEntries.length - Math.PI / 2;
@@ -255,20 +255,43 @@ export function createIncidentsView(data, providerColors, d3) {
       incByProv.get(primary).push(inc);
     }
 
-    // Fan incidents outward from each provider
-    const incR = 100;
+    // Fan incidents outward from each provider in multiple rings
+    const ringCapacity = 12;
+    const ringGap = 30;
+    const baseIncR = 80;
     for (const [provId, incs] of incByProv) {
       const provPos = positions[provId];
       if (!provPos) continue;
       const baseAngle = Math.atan2(provPos.y - cy, provPos.x - cx);
-      const fanSpread = Math.min(Math.PI * 0.6, incs.length * 0.18);
+
       incs.forEach((inc, i) => {
-        const a = baseAngle - fanSpread / 2 + (incs.length > 1 ? (fanSpread * i) / (incs.length - 1) : 0);
+        const ring = Math.floor(i / ringCapacity);
+        const idxInRing = i % ringCapacity;
+        const countInRing = Math.min(ringCapacity, incs.length - ring * ringCapacity);
+        const r = baseIncR + ring * ringGap;
+        const fanSpread = Math.min(Math.PI * 0.7, countInRing * 0.15);
+        const a = baseAngle - fanSpread / 2 + (countInRing > 1 ? (fanSpread * idxInRing) / (countInRing - 1) : 0);
         positions[inc.id] = {
-          x: provPos.x + incR * Math.cos(a),
-          y: provPos.y + incR * Math.sin(a)
+          x: provPos.x + r * Math.cos(a),
+          y: provPos.y + r * Math.sin(a)
         };
       });
+    }
+
+    // Scale to fit viewport if layout overflows
+    const allPos = Object.values(positions);
+    const margin = 30;
+    const minY = Math.min(...allPos.map((p) => p.y));
+    const maxY = Math.max(...allPos.map((p) => p.y));
+    if (maxY - minY > height - margin * 2) {
+      const scale = (height - margin * 2) / (maxY - minY);
+      allPos.forEach((p) => { p.y = margin + (p.y - minY) * scale; });
+    }
+    const minX = Math.min(...allPos.map((p) => p.x));
+    const maxX = Math.max(...allPos.map((p) => p.x));
+    if (maxX - minX > width - margin * 2) {
+      const scale = (width - margin * 2) / (maxX - minX);
+      allPos.forEach((p) => { p.x = margin + (p.x - minX) * scale; });
     }
 
     return positions;
@@ -277,49 +300,76 @@ export function createIncidentsView(data, providerColors, d3) {
   function computeSequentialLayout() {
     const positions = {};
     const provEntries = nodes.filter((n) => n.type === "provider");
-    const incEntries = nodes.filter((n) => n.type === "incident");
-
-    const leftX = width * 0.18;
-
-    // Providers stacked on left
-    const provSpacing = Math.min(40, (height - 80) / Math.max(provEntries.length, 1));
-    const provStartY = (height - provEntries.length * provSpacing) / 2;
-    provEntries.forEach((n, i) => {
-      positions[n.id] = { x: leftX, y: provStartY + i * provSpacing };
-    });
 
     // Group incidents by primary provider
     const incByProv = new Map();
-    for (const inc of incEntries) {
+    for (const inc of nodes.filter((n) => n.type === "incident")) {
       const linkedProvs = links
         .filter((l) => {
           const tid = typeof l.target === "string" ? l.target : l.target.id;
           return tid === inc.id;
         })
         .map((l) => typeof l.source === "string" ? l.source : l.source.id);
-      const primary = linkedProvs[0] || "unknown";
+      const primary = linkedProvs[0] || provEntries[0]?.id || "unknown";
       if (!incByProv.has(primary)) incByProv.set(primary, []);
       incByProv.get(primary).push(inc);
     }
 
-    // Incidents on right, grouped by provider — multiple columns if needed
-    const rightX = width * 0.65;
-    const minSpacing = 14;
-    const maxPerCol = Math.floor((height - 60) / minSpacing);
-    const numCols = Math.max(1, Math.ceil(incEntries.length / maxPerCol));
-    const colWidth = 60;
-    const perCol = Math.ceil(incEntries.length / numCols);
-    const incSpacing = Math.min(minSpacing, (height - 60) / Math.max(perCol, 1));
-
-    let idx = 0;
-    for (const prov of provEntries) {
+    // Build blocks: each provider + its incidents
+    const incSpacing = 16;
+    const provHeaderGap = 35;
+    const blockGap = 30;
+    const blocks = provEntries.map((prov) => {
       const incs = incByProv.get(prov.id) || [];
-      incs.forEach((inc) => {
-        const col = Math.floor(idx / perCol);
-        const row = idx % perCol;
-        positions[inc.id] = { x: rightX + col * colWidth, y: 30 + row * incSpacing };
-        idx++;
+      const blockH = provHeaderGap + incs.length * incSpacing;
+      return { prov, incs, blockH };
+    });
+
+    // Distribute blocks across columns (greedy bin-packing by height)
+    const totalH = blocks.reduce((s, b) => s + b.blockH + blockGap, 0);
+    const numCols = Math.max(1, Math.ceil(totalH / (height - 40)));
+    const cols = Array.from({ length: numCols }, () => ({ blocks: [], height: 0 }));
+
+    const sortedBlocks = [...blocks].sort((a, b) => b.blockH - a.blockH);
+    for (const block of sortedBlocks) {
+      const shortest = cols.reduce((min, col) => col.height < min.height ? col : min, cols[0]);
+      shortest.blocks.push(block);
+      shortest.height += block.blockH + blockGap;
+    }
+
+    // Sort within columns alphabetically for readability
+    cols.forEach((col) => col.blocks.sort((a, b) => a.prov.name.localeCompare(b.prov.name)));
+
+    // Position blocks in multi-column grid
+    const colWidth = (width - 60) / numCols;
+    const incOffsetX = 35;
+
+    cols.forEach((col, colIdx) => {
+      const colX = 30 + colIdx * colWidth + colWidth / 3;
+      let y = 25;
+
+      col.blocks.forEach((block) => {
+        positions[block.prov.id] = { x: colX, y };
+
+        block.incs.forEach((inc, i) => {
+          positions[inc.id] = {
+            x: colX + incOffsetX,
+            y: y + provHeaderGap + i * incSpacing
+          };
+        });
+
+        y += block.blockH + blockGap;
       });
+    });
+
+    // Scale to fit viewport if layout overflows
+    const allPos = Object.values(positions);
+    const margin = 25;
+    const minY = Math.min(...allPos.map((p) => p.y));
+    const maxY = Math.max(...allPos.map((p) => p.y));
+    if (maxY - minY > height - margin * 2) {
+      const scale = (height - margin * 2) / (maxY - minY);
+      allPos.forEach((p) => { p.y = margin + (p.y - minY) * scale; });
     }
 
     return positions;
@@ -497,7 +547,7 @@ export function createIncidentsView(data, providerColors, d3) {
     .text((d) => d.name);
 
   // ── Shared interactions (zoom, marquee, multi-drag, selection) ──
-  setupNetworkInteractions({
+  const interactions = setupNetworkInteractions({
     d3, svg, g, nodes, nodeById,
     nodeGroups: [provNodes, incNodes],
     linkElements, updateLinks, width, height,
@@ -598,15 +648,29 @@ export function createIncidentsView(data, providerColors, d3) {
       .force("charge", d3.forceManyBody().strength((d) => d.type === "provider" ? -400 : -80))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force("collision", d3.forceCollide().radius((d) => d.type === "provider" ? 35 : 18))
-      .force("x", d3.forceX(width / 2).strength(0.04))
-      .force("y", d3.forceY(height / 2).strength(0.04));
+      .force("x", d3.forceX(width / 2).strength(0.12))
+      .force("y", d3.forceY(height / 2).strength(0.12));
   }
 
   function startForce() {
     stopForce();
-    nodes.forEach((n) => { n.fx = null; n.fy = null; });
+    const selected = interactions.selectedNodes;
+    if (selected.size > 0) {
+      nodes.forEach((n) => {
+        if (selected.has(n.id)) { n.fx = null; n.fy = null; }
+      });
+    } else {
+      nodes.forEach((n) => { n.fx = null; n.fy = null; });
+    }
     forceSimulation = createSim();
     forceSimulation.on("tick", () => {
+      const pad = 30;
+      nodes.forEach((n) => {
+        if (n.fx == null) {
+          n.x = Math.max(pad, Math.min(width - pad, n.x));
+          n.y = Math.max(pad, Math.min(height - pad, n.y));
+        }
+      });
       provNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
       incNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
       updateLinks();
@@ -633,6 +697,11 @@ export function createIncidentsView(data, providerColors, d3) {
   } else {
     forceSimulation = createSim();
     forceSimulation.on("tick", () => {
+      const pad = 30;
+      nodes.forEach((n) => {
+        n.x = Math.max(pad, Math.min(width - pad, n.x));
+        n.y = Math.max(pad, Math.min(height - pad, n.y));
+      });
       provNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
       incNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
       updateLinks();
