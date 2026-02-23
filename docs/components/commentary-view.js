@@ -1,5 +1,7 @@
 // Third-party commentary network graph: Category → Technique → Commentary
 
+import { setupNetworkInteractions } from "./network-interactions.js";
+
 const COMMENTARY_LAYOUT_KEY = "commentary-view-layout-v1";
 
 export function createCommentaryView(data, categoryColors, d3) {
@@ -443,11 +445,6 @@ export function createCommentaryView(data, categoryColors, d3) {
 
   const g = svg.append("g");
 
-  const zoomBehavior = d3.zoom()
-    .scaleExtent([0.3, 3])
-    .on("zoom", (event) => { g.attr("transform", event.transform); });
-  svg.call(zoomBehavior);
-
   // Links
   const linkGroup = g.append("g").attr("class", "links");
   const linkElements = linkGroup.selectAll("line")
@@ -557,6 +554,19 @@ export function createCommentaryView(data, categoryColors, d3) {
     .style("fill", "#555")
     .style("pointer-events", "none")
     .text((d) => d.name);
+
+  // ── Shared interactions (zoom, marquee, multi-drag, selection) ──
+  setupNetworkInteractions({
+    d3, svg, g, nodes, nodeById,
+    nodeGroups: [catNodes, techNodes, commNodes],
+    linkElements, updateLinks, width, height,
+    toolbar, status, showStatus,
+    onLayoutModified: () => {
+      layoutModified = true;
+      status.text("\u26A0 Unsaved changes").style("color", "#c9190b");
+    },
+    uniqueId: "commentary"
+  });
 
   // ── Tooltip ──
   const tooltip = d3.select("body").append("div")
@@ -671,47 +681,6 @@ export function createCommentaryView(data, categoryColors, d3) {
     }
     forceBtn.style("background", "#fff");
   }
-
-  // ── Drag ──
-  function dragBehavior() {
-    return d3.drag()
-      .on("start", (event, d) => {
-        if (forceSimulation) {
-          if (!event.active) forceSimulation.alphaTarget(0.3).restart();
-        }
-        d.fx = d.x;
-        d.fy = d.y;
-      })
-      .on("drag", (event, d) => {
-        d.fx = event.x;
-        d.fy = event.y;
-        d.x = event.x;
-        d.y = event.y;
-        if (!forceSimulation) {
-          // Manual repositioning when force is off
-          d3.select(event.sourceEvent.target.closest("g")).attr("transform", `translate(${d.x},${d.y})`);
-          updateLinks();
-        }
-        if (!layoutModified) {
-          layoutModified = true;
-          status.text("\u26A0 Unsaved changes").style("color", "#c9190b");
-        }
-      })
-      .on("end", (event, d) => {
-        if (forceSimulation) {
-          if (!event.active) forceSimulation.alphaTarget(0);
-        }
-        // Keep pinned if force is off
-        if (!forceSimulation) {
-          d.fx = d.x;
-          d.fy = d.y;
-        }
-      });
-  }
-
-  catNodes.call(dragBehavior());
-  techNodes.call(dragBehavior());
-  commNodes.call(dragBehavior());
 
   // ── Initial layout ──
   if (savedPositions) {
