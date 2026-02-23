@@ -2105,5 +2105,129 @@
     ],
     "summary": "This policy-oriented analysis from the Centre for Future Generations examines the safety risks posed by open-weight model releases, explicitly calling out Mistral (alongside DeepSeek, Alibaba, and Meta) for failing to match their openness commitment with adequate safety investment. The report warns that Mistral's open-weight releases can be fine-tuned for almost any application — including automated cyberattacks — with little expertise or cost, and that once released, copies spread quickly and jailbreaking requires minimal effort. The authors recommend a tiered approach to evaluating open-weight release risks before deployment and advocate for mandatory third-party safety evaluations as a condition of release.",
     "sentiment": "negative"
+  },
+  {
+    "id": "commentary-124",
+    "title": "ChinAI #253: Tencent Research Institute releases Large Model Security & Ethics Report",
+    "url": "https://chinai.substack.com/p/chinai-253-tencent-research-institute",
+    "author": "Jeff Ding",
+    "organization": "George Washington University (ChinAI Newsletter)",
+    "date": "2024-02-05",
+    "type": "blog_post",
+    "techniqueIds": [
+      "tech-red-teaming",
+      "tech-prompt-injection-defense",
+      "tech-adversarial-training",
+      "tech-input-guardrail-systems",
+      "tech-regulatory-compliance"
+    ],
+    "summary": "Academic translator and GWU professor Jeff Ding analyzes Tencent's 76-page Large Model Security & Ethics Report, revealing that Tencent built a prompt security evaluation platform for Hunyuan that automatically generates risky attack samples and evaluates outputs against a corpus of rejection words harvested from ChatGPT, Bard, and LLaMA. The analysis notes that before launching Hunyuan, Tencent subjected it to four rounds of 'Blue Army' (red team) drills, and flags that Tencent's safety approach is heavily driven by compliance with China's Interim Measures for Generative AI Services. Ding observes that Chinese labs appear to be closely adapting Western safety techniques to their own regulatory context rather than developing wholly novel mechanisms.",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "commentary-125",
+    "title": "ChinAI #254: Tencent Res. Institute Tackles Value Alignment in Large Model Security & Ethics Research Report",
+    "url": "https://chinai.substack.com/p/chinai-254-tencent-res-institute",
+    "author": "Jeff Ding",
+    "organization": "George Washington University (ChinAI Newsletter)",
+    "date": "2024-02-12",
+    "type": "blog_post",
+    "techniqueIds": [
+      "tech-red-teaming",
+      "tech-safety-benchmarks",
+      "tech-prompt-injection-defense",
+      "tech-code-execution-sandboxing",
+      "tech-regulatory-compliance"
+    ],
+    "summary": "This follow-up analysis by GWU professor Jeff Ding examines chapters 4 and 5 of Tencent's Large Model Security & Ethics Report, focusing on vulnerability assessments and value alignment. A notable finding is Tencent's internal discovery of a remote code execution vulnerability in an external plugin that could be triggered by a crafted prompt to gain control of the entire inference service, illustrating real-world risks in plugin ecosystems. The analysis also discusses how the report situates Tencent's alignment work within international frameworks including the White House Executive Order, UK AI Safety Summit, and EU AI Act, suggesting Tencent is positioning itself as a global participant in AI safety discourse.",
+    "sentiment": "mixed"
+  },
+  {
+    "id": "commentary-126",
+    "title": "SafeDialBench: A Fine-Grained Safety Evaluation Benchmark for Large Language Models in Multi-Turn Dialogues with Diverse Jailbreak Attacks",
+    "url": "https://arxiv.org/html/2502.11090",
+    "author": "SafeDialBench Research Team",
+    "organization": "Multiple academic institutions (arXiv preprint)",
+    "date": "2025-02-16",
+    "type": "academic_paper",
+    "techniqueIds": [
+      "tech-safety-benchmarks",
+      "tech-red-teaming",
+      "tech-refusal-training",
+      "tech-prompt-injection-defense"
+    ],
+    "summary": "This academic paper introduces SafeDialBench, a bilingual (Chinese/English) benchmark that evaluates 19 LLMs—including Tencent Hunyuan-class models—on safety across multi-turn dialogues using 7 distinct jailbreak attack strategies and 4,053 test dialogues of 3–10 turns. The paper proposes a three-capability framework assessing models' ability to identify unsafe risks, handle unsafe information, and maintain consistency under persistent jailbreak pressure. Results indicate substantial variance across Chinese models in multi-turn consistency, with reasoning models like o3-mini showing unexpected safety vulnerabilities, providing an independent external calibration of Chinese LLM safety including Hunyuan-related architectures.",
+    "sentiment": "mixed"
+  },
+  {
+    "id": "commentary-127",
+    "title": "China's AI Regulations and How They Get Made",
+    "url": "https://carnegieendowment.org/research/2023/07/chinas-ai-regulations-and-how-they-get-made",
+    "author": "Matt Sheehan",
+    "organization": "Carnegie Endowment for International Peace",
+    "date": "2023-07-10",
+    "type": "report",
+    "techniqueIds": [
+      "tech-regulatory-compliance",
+      "tech-training-data-quality-filtering",
+      "tech-dataset-auditing",
+      "tech-watermarking",
+      "tech-misinformation-detection"
+    ],
+    "summary": "This Carnegie Endowment policy analysis examines how China's algorithm registry, deep synthesis, and generative AI regulations shape safety obligations for companies like Tencent. The report notes that Tencent played a direct role in the regulatory process by popularizing the term 'deep synthesis' to describe synthetic content, influencing how deepfake-related safety mechanisms were codified in law. It critically evaluates requirements such as mandating training data be 'true and accurate'—a standard the report describes as potentially impossible for LLMs—and mandatory algorithm security self-assessments including data source disclosure, giving independent perspective on the compliance-driven safety architecture Chinese AI providers including Tencent must implement.",
+    "sentiment": "mixed"
+  },
+  {
+    "id": "commentary-128",
+    "title": "Open Questions for China's Open-Source AI Regulation",
+    "url": "https://www.justsecurity.org/111053/chinas-open-source-ai-regulation/",
+    "author": "Just Security Editorial Team",
+    "organization": "Just Security (NYU Reiss Center on Law and Security)",
+    "date": "2025-05-05",
+    "type": "report",
+    "techniqueIds": [
+      "tech-regulatory-compliance",
+      "tech-responsible-release",
+      "tech-data-retention-policies",
+      "tech-output-filtering-systems"
+    ],
+    "summary": "This legal analysis discusses Tencent's Yuanbao AI assistant controversy, where the platform's user agreement originally granted Tencent an irrevocable and permanent license over user-generated content before public backlash forced a retraction and apology. The report uses this as a case study in how open-source model deployment (Yuanbao is built on Hunyuan) creates safety and governance gaps around data sovereignty and user rights that technical safety mechanisms alone cannot address. It places this in the context of China's broader regulatory requirements under the Interim Measures for Generative AI Services, which require service providers to define user content rights explicitly.",
+    "sentiment": "negative"
+  },
+  {
+    "id": "commentary-129",
+    "title": "ChineseSafe: A Chinese Benchmark for Evaluating Safety in Large Language Models",
+    "url": "https://arxiv.org/html/2410.18491v1",
+    "author": "ChineseSafe Research Team",
+    "organization": "Multiple academic institutions (arXiv preprint)",
+    "date": "2024-10-24",
+    "type": "academic_paper",
+    "techniqueIds": [
+      "tech-safety-benchmarks",
+      "tech-hate-speech-detection",
+      "tech-sexual-content-moderation",
+      "tech-training-data-quality-filtering",
+      "tech-dataset-auditing"
+    ],
+    "summary": "This academic paper introduces ChineseSafe, a 205,034-example benchmark for evaluating LLM safety in Chinese-language contexts, which explicitly incorporates Tencent's sensitive-word database as a source for constructing test cases. The benchmark covers 10 sub-categories of safety issues aligned with Chinese internet content moderation regulations, including political sensitivity and variant/homophonic word evasion techniques unique to Chinese-language jailbreaks. Experiments across 26 representative LLMs reveal that Chinese models—including those in Tencent's ecosystem—show particularly poor safety performance on physical and mental health categories, providing independent quantitative evaluation of safety gaps in Chinese LLM outputs.",
+    "sentiment": "negative"
+  },
+  {
+    "id": "commentary-130",
+    "title": "Import AI 422: LLM bias; China cares about the same safety risks as us; AI persuasion",
+    "url": "https://jack-clark.net/2025/07/28/import-ai-422-llm-bias-china-cares-about-the-same-safety-risks-as-us-ai-persuasion/",
+    "author": "Jack Clark",
+    "organization": "Import AI (Independent AI Research Newsletter)",
+    "date": "2025-07-28",
+    "type": "blog_post",
+    "techniqueIds": [
+      "tech-safety-benchmarks",
+      "tech-red-teaming",
+      "tech-weapons-illegal-activity",
+      "tech-sycophancy-detection",
+      "tech-autonomous-behaviour"
+    ],
+    "summary": "Anthropic co-founder Jack Clark analyzes a Chinese frontier AI risk management technical report that includes Tencent and other Chinese AI labs in its scope, noting that Chinese researchers are studying the same safety risk categories as Western counterparts—including chemical weapons dual-use knowledge, persuasion risks, and alignment faking. Clark critically observes that notably absent from the Chinese safety evaluation framework is any assessment of whether models comply with or deviate from CCP doctrine, calling the omission 'notable.' He finds that Chinese models including those from Tencent's ecosystem exhibit critical failures in chemical hazard refusal, with most demonstrating unsafe compliance with explicitly harmful requests.",
+    "sentiment": "mixed"
   }
 ]
