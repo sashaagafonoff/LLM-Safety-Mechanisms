@@ -221,6 +221,121 @@ export function createIncidentsView(data, providerColors, d3) {
     }
   }
 
+  // ── Layout algorithms ──
+  function computeBalancedLayout() {
+    const positions = {};
+    const provEntries = nodes.filter((n) => n.type === "provider");
+    const incEntries = nodes.filter((n) => n.type === "incident");
+
+    // Providers in a circle
+    const cx = width / 2, cy = height / 2;
+    const provR = Math.min(width, height) * 0.25;
+
+    provEntries.forEach((n, i) => {
+      const angle = (2 * Math.PI * i) / provEntries.length - Math.PI / 2;
+      positions[n.id] = {
+        x: cx + provR * Math.cos(angle),
+        y: cy + provR * Math.sin(angle)
+      };
+    });
+
+    // Group incidents by primary provider
+    const incByProv = new Map();
+    for (const inc of incEntries) {
+      const linkedProvs = links
+        .filter((l) => {
+          const tid = typeof l.target === "string" ? l.target : l.target.id;
+          return tid === inc.id;
+        })
+        .map((l) => typeof l.source === "string" ? l.source : l.source.id);
+      const primary = linkedProvs[0] || provEntries[0]?.id;
+      if (!incByProv.has(primary)) incByProv.set(primary, []);
+      incByProv.get(primary).push(inc);
+    }
+
+    // Fan incidents outward from each provider
+    const incR = 100;
+    for (const [provId, incs] of incByProv) {
+      const provPos = positions[provId];
+      if (!provPos) continue;
+      const baseAngle = Math.atan2(provPos.y - cy, provPos.x - cx);
+      const fanSpread = Math.min(Math.PI * 0.6, incs.length * 0.18);
+      incs.forEach((inc, i) => {
+        const a = baseAngle - fanSpread / 2 + (incs.length > 1 ? (fanSpread * i) / (incs.length - 1) : 0);
+        positions[inc.id] = {
+          x: provPos.x + incR * Math.cos(a),
+          y: provPos.y + incR * Math.sin(a)
+        };
+      });
+    }
+
+    return positions;
+  }
+
+  function computeSequentialLayout() {
+    const positions = {};
+    const provEntries = nodes.filter((n) => n.type === "provider");
+    const incEntries = nodes.filter((n) => n.type === "incident");
+
+    const leftX = width * 0.18;
+
+    // Providers stacked on left
+    const provSpacing = Math.min(40, (height - 80) / Math.max(provEntries.length, 1));
+    const provStartY = (height - provEntries.length * provSpacing) / 2;
+    provEntries.forEach((n, i) => {
+      positions[n.id] = { x: leftX, y: provStartY + i * provSpacing };
+    });
+
+    // Group incidents by primary provider
+    const incByProv = new Map();
+    for (const inc of incEntries) {
+      const linkedProvs = links
+        .filter((l) => {
+          const tid = typeof l.target === "string" ? l.target : l.target.id;
+          return tid === inc.id;
+        })
+        .map((l) => typeof l.source === "string" ? l.source : l.source.id);
+      const primary = linkedProvs[0] || "unknown";
+      if (!incByProv.has(primary)) incByProv.set(primary, []);
+      incByProv.get(primary).push(inc);
+    }
+
+    // Incidents on right, grouped by provider — multiple columns if needed
+    const rightX = width * 0.65;
+    const minSpacing = 14;
+    const maxPerCol = Math.floor((height - 60) / minSpacing);
+    const numCols = Math.max(1, Math.ceil(incEntries.length / maxPerCol));
+    const colWidth = 60;
+    const perCol = Math.ceil(incEntries.length / numCols);
+    const incSpacing = Math.min(minSpacing, (height - 60) / Math.max(perCol, 1));
+
+    let idx = 0;
+    for (const prov of provEntries) {
+      const incs = incByProv.get(prov.id) || [];
+      incs.forEach((inc) => {
+        const col = Math.floor(idx / perCol);
+        const row = idx % perCol;
+        positions[inc.id] = { x: rightX + col * colWidth, y: 30 + row * incSpacing };
+        idx++;
+      });
+    }
+
+    return positions;
+  }
+
+  function applyComputedLayout(positions) {
+    stopForce();
+    nodes.forEach((n) => {
+      const pos = positions[n.id];
+      if (pos) { n.x = pos.x; n.y = pos.y; n.fx = pos.x; n.fy = pos.y; }
+    });
+    provNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    incNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    updateLinks();
+    layoutModified = true;
+    status.text("\u26A0 Unsaved changes").style("color", "#c9190b");
+  }
+
   addButton(toolbar, "\uD83D\uDCBE Save Layout", function () {
     try {
       const positions = {};
@@ -232,6 +347,16 @@ export function createIncidentsView(data, providerColors, d3) {
     } catch (e) {
       showStatus("\u2717 Save failed: " + e.message, "#c9190b", 3000);
     }
+  });
+
+  addButton(toolbar, "\u229E Balanced", function () {
+    applyComputedLayout(computeBalancedLayout());
+    showStatus("\u229E Balanced layout applied (unsaved)", "#7c5e10", 3000);
+  });
+
+  addButton(toolbar, "\u2630 Sequential", function () {
+    applyComputedLayout(computeSequentialLayout());
+    showStatus("\u2630 Sequential layout applied (unsaved)", "#7c5e10", 3000);
   });
 
   const forceBtn = addButton(toolbar, "\u26A1 Force", function () {

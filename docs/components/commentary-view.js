@@ -228,6 +228,127 @@ export function createCommentaryView(data, categoryColors, d3) {
     }
   }
 
+  // ── Layout algorithms ──
+  function computeBalancedLayout() {
+    const positions = {};
+    const catGroups = [];
+    for (const catId of referencedCatIds) {
+      const cat = catLookup.get(catId);
+      if (!cat) continue;
+      const techs = [...referencedTechIds].filter((tid) => {
+        const t = techLookup.get(tid);
+        return t && t.categoryId === catId;
+      });
+      catGroups.push({ catId, name: cat.name, techs });
+    }
+
+    const techSpacing = 25, catGap = 40, catH = 35;
+    const sorted = [...catGroups].sort((a, b) => b.techs.length - a.techs.length);
+    const leftGroups = [], rightGroups = [];
+    let leftTotal = 0, rightTotal = 0;
+
+    for (const group of sorted) {
+      const groupH = catH + group.techs.length * techSpacing + catGap;
+      if (leftTotal <= rightTotal) { leftGroups.push(group); leftTotal += groupH; }
+      else { rightGroups.push(group); rightTotal += groupH; }
+    }
+
+    leftGroups.sort((a, b) => a.name.localeCompare(b.name));
+    rightGroups.sort((a, b) => a.name.localeCompare(b.name));
+
+    function layoutCol(groups, xC) {
+      const totalH = groups.reduce((s, g) => s + catH + g.techs.length * techSpacing + catGap, 0);
+      let y = (height - totalH) / 2 + 30;
+      groups.forEach((group) => {
+        positions[`cat-${group.catId}`] = { x: xC, y };
+        group.techs.forEach((tid, i) => {
+          positions[`tech-${tid}`] = { x: xC, y: y + catH + i * techSpacing };
+        });
+        y += catH + group.techs.length * techSpacing + catGap;
+      });
+    }
+
+    layoutCol(leftGroups, 150);
+    layoutCol(rightGroups, width - 150);
+
+    // Commentary in center — multiple columns if needed
+    const commEntries = nodes.filter((n) => n.type === "commentary");
+    const minSpacing = 14;
+    const maxPerCol = Math.floor((height - 60) / minSpacing);
+    const numCols = Math.max(1, Math.ceil(commEntries.length / maxPerCol));
+    const colWidth = 60;
+    const startX = width / 2 - ((numCols - 1) * colWidth) / 2;
+    const perCol = Math.ceil(commEntries.length / numCols);
+    const commSpacing = Math.min(minSpacing, (height - 60) / Math.max(perCol, 1));
+
+    commEntries.forEach((n, i) => {
+      const col = Math.floor(i / perCol);
+      const row = i % perCol;
+      positions[n.id] = { x: startX + col * colWidth, y: 30 + row * commSpacing };
+    });
+
+    return positions;
+  }
+
+  function computeSequentialLayout() {
+    const positions = {};
+    const colX = { category: width * 0.1, technique: width * 0.38, commentary: width * 0.72 };
+
+    const catGroups = [];
+    for (const catId of referencedCatIds) {
+      const cat = catLookup.get(catId);
+      if (!cat) continue;
+      const techs = [...referencedTechIds].filter((tid) => {
+        const t = techLookup.get(tid);
+        return t && t.categoryId === catId;
+      });
+      catGroups.push({ catId, name: cat.name, techs });
+    }
+    catGroups.sort((a, b) => a.name.localeCompare(b.name));
+
+    const techSpacing = 22, catGap = 30, catH = 30;
+    let catY = 40;
+
+    catGroups.forEach((group) => {
+      positions[`cat-${group.catId}`] = { x: colX.category, y: catY };
+      group.techs.forEach((tid, i) => {
+        positions[`tech-${tid}`] = { x: colX.technique, y: catY + i * techSpacing };
+      });
+      catY += catH + group.techs.length * techSpacing + catGap;
+    });
+
+    // Commentary in right area — multiple columns if needed
+    const commEntries = nodes.filter((n) => n.type === "commentary");
+    const minSpacing = 14;
+    const maxPerCol = Math.floor((height - 60) / minSpacing);
+    const numCols = Math.max(1, Math.ceil(commEntries.length / maxPerCol));
+    const colWidth = 60;
+    const perCol = Math.ceil(commEntries.length / numCols);
+    const commSpacing = Math.min(minSpacing, (height - 60) / Math.max(perCol, 1));
+
+    commEntries.forEach((n, i) => {
+      const col = Math.floor(i / perCol);
+      const row = i % perCol;
+      positions[n.id] = { x: colX.commentary + col * colWidth, y: 40 + row * commSpacing };
+    });
+
+    return positions;
+  }
+
+  function applyComputedLayout(positions) {
+    stopForce();
+    nodes.forEach((n) => {
+      const pos = positions[n.id];
+      if (pos) { n.x = pos.x; n.y = pos.y; n.fx = pos.x; n.fy = pos.y; }
+    });
+    catNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    techNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    commNodes.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    updateLinks();
+    layoutModified = true;
+    status.text("\u26A0 Unsaved changes").style("color", "#c9190b");
+  }
+
   addButton(toolbar, "\uD83D\uDCBE Save Layout", function () {
     try {
       const positions = {};
@@ -239,6 +360,16 @@ export function createCommentaryView(data, categoryColors, d3) {
     } catch (e) {
       showStatus("\u2717 Save failed: " + e.message, "#c9190b", 3000);
     }
+  });
+
+  addButton(toolbar, "\u229E Balanced", function () {
+    applyComputedLayout(computeBalancedLayout());
+    showStatus("\u229E Balanced layout applied (unsaved)", "#7c5e10", 3000);
+  });
+
+  addButton(toolbar, "\u2630 Sequential", function () {
+    applyComputedLayout(computeSequentialLayout());
+    showStatus("\u2630 Sequential layout applied (unsaved)", "#7c5e10", 3000);
   });
 
   const forceBtn = addButton(toolbar, "\u26A1 Force", function () {
