@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Third-Party Commentary — LLM Safety Mechanisms</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <nav class="site-nav">
+    <a href="./">Explorer</a>
+    <a href="./commentary.html" class="active">Commentary</a>
+    <a href="./incidents.html">Incidents</a>
+    <a href="./tag.html">Tag &amp; Review</a>
+  </nav>
+
+  <main class="wide-main">
+    <h1>Third-Party Commentary</h1>
+    <p>External analysis and research discussing specific safety techniques — academic papers, independent audits,
+      expert reports, and news analysis evaluating technique effectiveness. Provider associations are derived from the
+      <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms</a> evidence base.
+    </p>
+
+    <div id="commentary-app">
+      <div class="loading">Loading data...</div>
+    </div>
+
+    <hr>
+    <footer>
+      <strong>Repository:</strong>
+      <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms</a>
+      &middot; Please raise issues or suggestions via
+      <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues">GitHub</a>.
+    </footer>
+  </main>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "htl": "https://esm.sh/htl@0.3.1",
+      "d3": "https://esm.sh/d3@7.9.0"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import { createCommentaryTable } from "./components/commentary-table.js";
+
+    const ghBase = "https://raw.githubusercontent.com/sashaagafonoff/LLM-Safety-Mechanisms/main/data";
+    const fetchJson = (name) => fetch(`${ghBase}/${name}`).then(r => r.json());
+
+    const [commentary, techniques, categories, evidence, techniqueMap] = await Promise.all([
+      fetchJson("commentary.json"),
+      fetchJson("techniques.json"),
+      fetchJson("categories.json"),
+      fetchJson("evidence.json"),
+      fetchJson("model_technique_map.json")
+    ]);
+
+    const container = document.getElementById("commentary-app");
+    container.innerHTML = "";
+    container.appendChild(
+      createCommentaryTable(commentary, techniques, categories, evidence.sources, techniqueMap)
+    );
+  </script>
+</body>
+
+</html>

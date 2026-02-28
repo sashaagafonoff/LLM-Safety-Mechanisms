@@ -129,3 +129,186 @@ footer {
   color: #888;
   padding-top: 8px;
 }
+
+/* ===== Analytical Table Pages ===== */
+
+/* Stats cards row */
+.stats-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.stat-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px 20px;
+  min-width: 110px;
+  text-align: center;
+}
+.stat-card .stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111;
+}
+.stat-card .stat-label {
+  font-size: 11px;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* View toggle */
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+.view-toggle button {
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.view-toggle button.active {
+  background: #1976D2;
+  color: white;
+  border-color: #1976D2;
+}
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+.filter-bar select,
+.filter-bar input[type="text"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  background: white;
+}
+.filter-bar select { min-width: 140px; }
+.filter-bar input[type="text"] { min-width: 180px; flex: 1; }
+.filter-bar label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+}
+.filter-count {
+  font-size: 12px;
+  color: #666;
+  margin-left: auto;
+}
+
+/* Sortable table */
+.anal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.anal-table th {
+  background: #f5f5f5;
+  border-bottom: 2px solid #ddd;
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+}
+.anal-table th:hover { background: #eee; }
+.anal-table th .sort-arrow {
+  font-size: 10px;
+  color: #999;
+  margin-left: 4px;
+}
+.anal-table th.sort-active .sort-arrow { color: #1976D2; }
+.anal-table td {
+  border-bottom: 1px solid #eee;
+  padding: 6px 10px;
+  color: #444;
+  vertical-align: top;
+}
+.anal-table tbody tr { cursor: pointer; }
+.anal-table tbody tr:hover { background: #f5f8ff; }
+
+/* Expandable detail row */
+.detail-row td {
+  background: #f8f9fa;
+  padding: 12px 16px;
+  border-bottom: 2px solid #e0e0e0;
+  cursor: default;
+}
+.detail-row:hover { background: inherit; }
+
+/* Tag chips */
+.chip {
+  display: inline-block;
+  padding: 2px 7px;
+  margin: 1px 2px;
+  border-radius: 3px;
+  font-size: 11px;
+  white-space: nowrap;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+.chip-overflow {
+  display: inline-block;
+  padding: 2px 5px;
+  font-size: 10px;
+  color: #666;
+}
+
+/* Sentiment badges */
+.badge-positive { background: #dcfce7; color: #166534; }
+.badge-negative { background: #fef2f2; color: #991b1b; }
+.badge-mixed    { background: #fefce8; color: #854d0e; }
+.badge-neutral  { background: #f3f4f6; color: #374151; }
+
+/* Type badges */
+.badge-academic_paper  { background: #e0e7ff; color: #3730a3; }
+.badge-blog_post       { background: #fef3c7; color: #92400e; }
+.badge-report          { background: #d1fae5; color: #065f46; }
+.badge-news_analysis   { background: #f3e8ff; color: #6b21a8; }
+.badge-audit           { background: #fce7f3; color: #9d174d; }
+
+/* Severity badges */
+.badge-critical { background: #fef2f2; color: #dc2626; font-weight: 700; }
+.badge-high     { background: #fff7ed; color: #ea580c; font-weight: 700; }
+.badge-medium   { background: #fefce8; color: #ca8a04; font-weight: 700; }
+
+/* Export button */
+.export-btn {
+  background: #1976D2;
+  color: white;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.export-btn:hover { background: #1565C0; }
+
+/* Truncated text */
+.truncate {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Wider main for report pages */
+.wide-main {
+  max-width: 1400px;
+}

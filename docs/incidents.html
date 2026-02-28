@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Safety Incidents — LLM Safety Mechanisms</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <nav class="site-nav">
+    <a href="./">Explorer</a>
+    <a href="./commentary.html">Commentary</a>
+    <a href="./incidents.html" class="active">Incidents</a>
+    <a href="./tag.html">Tag &amp; Review</a>
+  </nav>
+
+  <main class="wide-main">
+    <h1>Safety Incidents</h1>
+    <p>Documented safety incidents across LLM providers — analyse by provider, severity, risk area, and which safety
+      techniques failed or were bypassed. Data from the
+      <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms</a> incident register.
+    </p>
+
+    <div id="incidents-app">
+      <div class="loading">Loading data...</div>
+    </div>
+
+    <hr>
+    <footer>
+      <strong>Repository:</strong>
+      <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms">LLM Safety Mechanisms</a>
+      &middot; Please raise issues or suggestions via
+      <a href="https://github.com/sashaagafonoff/LLM-Safety-Mechanisms/issues">GitHub</a>.
+    </footer>
+  </main>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "htl": "https://esm.sh/htl@0.3.1",
+      "d3": "https://esm.sh/d3@7.9.0"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import { createIncidentsTable } from "./components/incidents-table.js";
+
+    const ghBase = "https://raw.githubusercontent.com/sashaagafonoff/LLM-Safety-Mechanisms/main/data";
+    const fetchJson = (name) => fetch(`${ghBase}/${name}`).then(r => r.json());
+
+    const [incidents, providers, models, techniques, riskAreas, categories] = await Promise.all([
+      fetchJson("incidents.json"),
+      fetchJson("providers.json"),
+      fetchJson("models.json"),
+      fetchJson("techniques.json"),
+      fetchJson("risk_areas.json"),
+      fetchJson("categories.json")
+    ]);
+
+    const container = document.getElementById("incidents-app");
+    container.innerHTML = "";
+    container.appendChild(
+      createIncidentsTable(incidents, providers, models, techniques, riskAreas, categories)
+    );
+  </script>
+</body>
+
+</html>
