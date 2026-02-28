@@ -2,1562 +2,2629 @@
   {
     "techniqueId": "tech-rlhf",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-1", "MAP-1", "MEASURE-2"],
+    "codes": [
+      "GOVERN-1",
+      "MAP-1",
+      "MEASURE-2"
+    ],
     "relationship": "addresses",
-    "notes": "RLHF operationalizes risk governance by embedding human preferences into model training as a measurable alignment method."
+    "notes": "RLHF operationalizes risk governance by embedding human preferences into model training as a measurable alignment method.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-rlhf",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-6", "GAI-5"],
+    "codes": [
+      "GAI-6",
+      "GAI-5"
+    ],
     "relationship": "mitigates",
-    "notes": "Human feedback training directly reduces harmful bias and dangerous content generation by penalizing unsafe outputs."
+    "notes": "Human feedback training directly reduces harmful bias and dangerous content generation by penalizing unsafe outputs.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-rlhf",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "RLHF is a core operational control for AI system alignment during model development."
+    "notes": "RLHF is a core operational control for AI system alignment during model development.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-rlhf",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-V"],
+    "codes": [
+      "W-I",
+      "W-V"
+    ],
     "relationship": "mitigates",
-    "notes": "Human preference training reduces discriminatory outputs and improves human-AI interaction quality."
+    "notes": "Human preference training reduces discriminatory outputs and improves human-AI interaction quality.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-dpo",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-1", "MAP-1", "MEASURE-2"],
+    "codes": [
+      "GOVERN-1",
+      "MAP-1",
+      "MEASURE-2"
+    ],
     "relationship": "addresses",
-    "notes": "DPO provides a direct optimization method for aligning model outputs with human preferences without a separate reward model."
+    "notes": "DPO provides a direct optimization method for aligning model outputs with human preferences without a separate reward model.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-dpo",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-6", "GAI-5"],
+    "codes": [
+      "GAI-6",
+      "GAI-5"
+    ],
     "relationship": "mitigates",
-    "notes": "Direct preference optimization reduces bias and harmful content by training directly on human preference pairs."
+    "notes": "Direct preference optimization reduces bias and harmful content by training directly on human preference pairs.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-dpo",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "DPO is an operational alignment technique applied during the model development lifecycle."
+    "notes": "DPO is an operational alignment technique applied during the model development lifecycle.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-dpo",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-V"],
+    "codes": [
+      "W-I",
+      "W-V"
+    ],
     "relationship": "mitigates",
-    "notes": "Preference optimization directly targets reduction of discriminatory and harmful outputs."
+    "notes": "Preference optimization directly targets reduction of discriminatory and harmful outputs.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-constitutional-ai",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-1", "GOVERN-2", "MAP-1", "MEASURE-2"],
+    "codes": [
+      "GOVERN-1",
+      "GOVERN-2",
+      "MAP-1",
+      "MEASURE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Constitutional AI encodes explicit safety principles into training, supporting governance-by-design and measurable risk management."
+    "notes": "Constitutional AI encodes explicit safety principles into training, supporting governance-by-design and measurable risk management.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-constitutional-ai",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-5", "GAI-6", "GAI-11"],
+    "codes": [
+      "GAI-5",
+      "GAI-6",
+      "GAI-11"
+    ],
     "relationship": "mitigates",
-    "notes": "Principle-based self-critique directly reduces dangerous content, bias, and obscene/abusive outputs."
+    "notes": "Principle-based self-critique directly reduces dangerous content, bias, and obscene/abusive outputs.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-constitutional-ai",
     "frameworkId": "iso-42001",
-    "codes": ["5", "8"],
+    "codes": [
+      "5",
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Constitutional principles define leadership-level safety policies operationalized through the training process."
+    "notes": "Constitutional principles define leadership-level safety policies operationalized through the training process.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-constitutional-ai",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-IV", "W-V"],
+    "codes": [
+      "W-I",
+      "W-IV",
+      "W-V"
+    ],
     "relationship": "mitigates",
-    "notes": "Self-critique based on explicit principles reduces discrimination, malicious use potential, and harmful interaction patterns."
+    "notes": "Self-critique based on explicit principles reduces discrimination, malicious use potential, and harmful interaction patterns.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-constitutional-ai",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Principle-based training supports the EU AI Act requirement for high-risk systems to have appropriate risk management measures."
+    "notes": "Principle-based training supports the EU AI Act requirement for high-risk systems to have appropriate risk management measures.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-adversarial-training",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-1", "MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "GOVERN-1",
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Adversarial training improves model robustness as part of risk measurement and management processes."
+    "notes": "Adversarial training improves model robustness as part of risk measurement and management processes.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-adversarial-training",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-5", "GAI-9"],
+    "codes": [
+      "GAI-5",
+      "GAI-9"
+    ],
     "relationship": "mitigates",
-    "notes": "Training on adversarial examples hardens models against dangerous content elicitation and information security attacks."
+    "notes": "Training on adversarial examples hardens models against dangerous content elicitation and information security attacks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-adversarial-training",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM01", "LLM03"],
+    "codes": [
+      "LLM01",
+      "LLM03"
+    ],
     "relationship": "defends",
-    "notes": "Adversarial training improves resistance to prompt injection attacks and training data poisoning."
+    "notes": "Adversarial training improves resistance to prompt injection attacks and training data poisoning.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-adversarial-training",
     "frameworkId": "mitre-atlas",
-    "codes": ["AML.TA0003", "AML.TA0008", "AML.TA0012"],
+    "codes": [
+      "AML.TA0003",
+      "AML.TA0008",
+      "AML.TA0012"
+    ],
     "relationship": "defends",
-    "notes": "Hardening through adversarial examples defends against initial ML access, defense evasion, and attack staging."
+    "notes": "Hardening through adversarial examples defends against initial ML access, defense evasion, and attack staging.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-adversarial-training",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-IV"],
+    "codes": [
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Robustness training reduces the effectiveness of adversarial attacks intended for malicious use."
+    "notes": "Robustness training reduces the effectiveness of adversarial attacks intended for malicious use.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-safety-reward-modeling",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-1", "MEASURE-2"],
+    "codes": [
+      "GOVERN-1",
+      "MEASURE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Safety-specific reward models provide measurable signals for risk reduction during alignment training."
+    "notes": "Safety-specific reward models provide measurable signals for risk reduction during alignment training.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-safety-reward-modeling",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-5", "GAI-6", "GAI-11"],
+    "codes": [
+      "GAI-5",
+      "GAI-6",
+      "GAI-11"
+    ],
     "relationship": "mitigates",
-    "notes": "Dedicated safety reward signals penalize dangerous, biased, and abusive content generation."
+    "notes": "Dedicated safety reward signals penalize dangerous, biased, and abusive content generation.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-safety-reward-modeling",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Safety reward modeling is an operational control ensuring safety objectives are optimized during training."
+    "notes": "Safety reward modeling is an operational control ensuring safety objectives are optimized during training.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-safety-reward-modeling",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-IV"],
+    "codes": [
+      "W-I",
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Harmlessness reward signals reduce discriminatory outputs and content that enables malicious use."
+    "notes": "Harmlessness reward signals reduce discriminatory outputs and content that enables malicious use.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-refusal-training",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-1", "MANAGE-2"],
+    "codes": [
+      "GOVERN-1",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Refusal training implements risk management by teaching models to decline unsafe requests."
+    "notes": "Refusal training implements risk management by teaching models to decline unsafe requests.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-refusal-training",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-1", "GAI-5", "GAI-11"],
+    "codes": [
+      "GAI-1",
+      "GAI-5",
+      "GAI-11"
+    ],
     "relationship": "mitigates",
-    "notes": "Trained refusal directly blocks CBRN information, dangerous content, and obscene/abusive outputs."
+    "notes": "Trained refusal directly blocks CBRN information, dangerous content, and obscene/abusive outputs.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-refusal-training",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM01", "LLM02"],
+    "codes": [
+      "LLM01",
+      "LLM02"
+    ],
     "relationship": "defends",
-    "notes": "Refusal mechanisms defend against prompt injection attempts and reduce insecure output generation."
+    "notes": "Refusal mechanisms defend against prompt injection attempts and reduce insecure output generation.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-refusal-training",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-II", "W-IV"],
+    "codes": [
+      "W-II",
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Abstention training prevents disclosure of information hazards and resists malicious use attempts."
+    "notes": "Abstention training prevents disclosure of information hazards and resists malicious use attempts.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-refusal-training",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Refusal capability supports the requirement for high-risk AI systems to include appropriate risk mitigation measures."
+    "notes": "Refusal capability supports the requirement for high-risk AI systems to include appropriate risk mitigation measures.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-multimodal-safety-alignment",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MAP-1", "MAP-3", "MEASURE-2"],
+    "codes": [
+      "MAP-1",
+      "MAP-3",
+      "MEASURE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Multimodal alignment maps and measures safety risks specific to cross-modal inputs and outputs."
+    "notes": "Multimodal alignment maps and measures safety risks specific to cross-modal inputs and outputs.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-multimodal-safety-alignment",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-5", "GAI-11", "GAI-6"],
+    "codes": [
+      "GAI-5",
+      "GAI-11",
+      "GAI-6"
+    ],
     "relationship": "mitigates",
-    "notes": "Visual and audio safety alignment reduces dangerous, obscene, and biased content across modalities."
+    "notes": "Visual and audio safety alignment reduces dangerous, obscene, and biased content across modalities.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-multimodal-safety-alignment",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-IV"],
+    "codes": [
+      "W-I",
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Cross-modal safety training addresses discrimination in image generation and prevents malicious visual content creation."
+    "notes": "Cross-modal safety training addresses discrimination in image generation and prevents malicious visual content creation.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-multimodal-safety-alignment",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Multimodal alignment extends operational safety controls to cover non-text modalities."
+    "notes": "Multimodal alignment extends operational safety controls to cover non-text modalities.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-bias-mitigation",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MAP-2", "MEASURE-2", "MANAGE-3"],
+    "codes": [
+      "MAP-2",
+      "MEASURE-2",
+      "MANAGE-3"
+    ],
     "relationship": "addresses",
-    "notes": "Bias mitigation directly maps, measures, and manages fairness risks identified in the RMF."
+    "notes": "Bias mitigation directly maps, measures, and manages fairness risks identified in the RMF.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-bias-mitigation",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-6"],
+    "codes": [
+      "GAI-6"
+    ],
     "relationship": "mitigates",
-    "notes": "Post-training bias reduction directly addresses the harmful bias and homogenization risk profile."
+    "notes": "Post-training bias reduction directly addresses the harmful bias and homogenization risk profile.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-bias-mitigation",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Bias mitigation satisfies the EU AI Act requirement for high-risk systems to minimize discriminatory outcomes."
+    "notes": "Bias mitigation satisfies the EU AI Act requirement for high-risk systems to minimize discriminatory outcomes.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-bias-mitigation",
     "frameworkId": "iso-42001",
-    "codes": ["8", "9"],
+    "codes": [
+      "8",
+      "9"
+    ],
     "relationship": "addresses",
-    "notes": "Bias mitigation serves as both an operational control and a performance evaluation metric."
+    "notes": "Bias mitigation serves as both an operational control and a performance evaluation metric.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-bias-mitigation",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I"],
+    "codes": [
+      "W-I"
+    ],
     "relationship": "mitigates",
-    "notes": "De-biasing techniques directly target discrimination, exclusion, and toxicity harms."
+    "notes": "De-biasing techniques directly target discrimination, exclusion, and toxicity harms.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-machine-unlearning",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-3", "MANAGE-4"],
+    "codes": [
+      "MANAGE-3",
+      "MANAGE-4"
+    ],
     "relationship": "supports",
-    "notes": "Unlearning supports risk management by enabling removal of problematic data influence from deployed models."
+    "notes": "Unlearning supports risk management by enabling removal of problematic data influence from deployed models.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-machine-unlearning",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-3"],
+    "codes": [
+      "GAI-3"
+    ],
     "relationship": "mitigates",
-    "notes": "Machine unlearning addresses data privacy risks by removing specific training data influence from model weights."
+    "notes": "Machine unlearning addresses data privacy risks by removing specific training data influence from model weights.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-machine-unlearning",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Unlearning supports GDPR right-to-erasure compliance required for high-risk AI systems processing personal data."
+    "notes": "Unlearning supports GDPR right-to-erasure compliance required for high-risk AI systems processing personal data.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-machine-unlearning",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-II"],
+    "codes": [
+      "W-II"
+    ],
     "relationship": "mitigates",
-    "notes": "Targeted forgetting can address information hazards embedded in model weights from training data."
+    "notes": "Targeted forgetting can address information hazards embedded in model weights from training data.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-training-data-quality-filtering",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MAP-1", "MAP-4", "GOVERN-1"],
+    "codes": [
+      "MAP-1",
+      "MAP-4",
+      "GOVERN-1"
+    ],
     "relationship": "addresses",
-    "notes": "Data quality filtering addresses upstream risk mapping by ensuring training corpus quality and reducing known hazards."
+    "notes": "Data quality filtering addresses upstream risk mapping by ensuring training corpus quality and reducing known hazards.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-training-data-quality-filtering",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-3", "GAI-6", "GAI-10"],
+    "codes": [
+      "GAI-3",
+      "GAI-6",
+      "GAI-10"
+    ],
     "relationship": "mitigates",
-    "notes": "Filtering training data reduces privacy risks, bias from low-quality sources, and intellectual property exposure."
+    "notes": "Filtering training data reduces privacy risks, bias from low-quality sources, and intellectual property exposure.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-training-data-quality-filtering",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM03"],
+    "codes": [
+      "LLM03"
+    ],
     "relationship": "defends",
-    "notes": "Quality filtering defends against training data poisoning by removing malicious or corrupted data."
+    "notes": "Quality filtering defends against training data poisoning by removing malicious or corrupted data.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-training-data-quality-filtering",
     "frameworkId": "iso-42001",
-    "codes": ["7", "8"],
+    "codes": [
+      "7",
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Data quality filtering is a support resource and operational control for responsible AI development."
+    "notes": "Data quality filtering is a support resource and operational control for responsible AI development.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-training-data-quality-filtering",
     "frameworkId": "mitre-atlas",
-    "codes": ["AML.TA0012"],
+    "codes": [
+      "AML.TA0012"
+    ],
     "relationship": "defends",
-    "notes": "Filtering defends against ML attack staging by detecting anomalous or poisoned training samples."
+    "notes": "Filtering defends against ML attack staging by detecting anomalous or poisoned training samples.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-dataset-auditing",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MAP-2", "MAP-4", "MEASURE-1"],
+    "codes": [
+      "MAP-2",
+      "MAP-4",
+      "MEASURE-1"
+    ],
     "relationship": "addresses",
-    "notes": "Dataset auditing maps and measures representational risks in training data as required by the RMF."
+    "notes": "Dataset auditing maps and measures representational risks in training data as required by the RMF.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-dataset-auditing",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-6", "GAI-3"],
+    "codes": [
+      "GAI-6",
+      "GAI-3"
+    ],
     "relationship": "mitigates",
-    "notes": "Auditing training data for demographic biases and privacy issues mitigates harmful bias and data privacy risks."
+    "notes": "Auditing training data for demographic biases and privacy issues mitigates harmful bias and data privacy risks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-dataset-auditing",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Dataset auditing satisfies EU AI Act requirements for data governance including examining training data for biases."
+    "notes": "Dataset auditing satisfies EU AI Act requirements for data governance including examining training data for biases.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-dataset-auditing",
     "frameworkId": "iso-42001",
-    "codes": ["7", "8", "9"],
+    "codes": [
+      "7",
+      "8",
+      "9"
+    ],
     "relationship": "addresses",
-    "notes": "Dataset documentation provides support resources, operational controls, and performance evaluation baselines."
+    "notes": "Dataset documentation provides support resources, operational controls, and performance evaluation baselines.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-dataset-auditing",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-VI"],
+    "codes": [
+      "W-I",
+      "W-VI"
+    ],
     "relationship": "mitigates",
-    "notes": "Representation analysis identifies discriminatory biases and socioeconomic imbalances in training data."
+    "notes": "Representation analysis identifies discriminatory biases and socioeconomic imbalances in training data.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-red-teaming",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-1", "MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-1",
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Red teaming is a primary measurement and management method for identifying AI system risks."
+    "notes": "Red teaming is a primary measurement and management method for identifying AI system risks.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-red-teaming",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-1", "GAI-5", "GAI-9"],
+    "codes": [
+      "GAI-1",
+      "GAI-5",
+      "GAI-9"
+    ],
     "relationship": "mitigates",
-    "notes": "Adversarial testing probes for CBRN risks, dangerous content generation, and information security vulnerabilities."
+    "notes": "Adversarial testing probes for CBRN risks, dangerous content generation, and information security vulnerabilities.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-red-teaming",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM01", "LLM02", "LLM06"],
+    "codes": [
+      "LLM01",
+      "LLM02",
+      "LLM06"
+    ],
     "relationship": "defends",
-    "notes": "Red teaming identifies prompt injection, insecure output, and sensitive information disclosure vulnerabilities."
+    "notes": "Red teaming identifies prompt injection, insecure output, and sensitive information disclosure vulnerabilities.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-red-teaming",
     "frameworkId": "mitre-atlas",
-    "codes": ["AML.TA0003", "AML.TA0004", "AML.TA0008", "AML.TA0012"],
+    "codes": [
+      "AML.TA0003",
+      "AML.TA0004",
+      "AML.TA0008",
+      "AML.TA0012"
+    ],
     "relationship": "defends",
-    "notes": "Systematic adversarial testing identifies weaknesses across initial access, model access, defense evasion, and attack staging."
+    "notes": "Systematic adversarial testing identifies weaknesses across initial access, model access, defense evasion, and attack staging.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-red-teaming",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Red teaming satisfies EU AI Act requirements for adversarial testing and robustness validation of high-risk systems."
+    "notes": "Red teaming satisfies EU AI Act requirements for adversarial testing and robustness validation of high-risk systems.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-red-teaming",
     "frameworkId": "iso-42001",
-    "codes": ["8", "9"],
+    "codes": [
+      "8",
+      "9"
+    ],
     "relationship": "addresses",
-    "notes": "Red teaming serves as both an operational validation method and a performance evaluation tool."
+    "notes": "Red teaming serves as both an operational validation method and a performance evaluation tool.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-red-teaming",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-II", "W-III", "W-IV"],
+    "codes": [
+      "W-I",
+      "W-II",
+      "W-III",
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Adversarial testing probes across discrimination, information hazards, misinformation, and malicious use categories."
+    "notes": "Adversarial testing probes across discrimination, information hazards, misinformation, and malicious use categories.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-safety-benchmarks",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-1", "MEASURE-2", "MEASURE-3"],
+    "codes": [
+      "MEASURE-1",
+      "MEASURE-2",
+      "MEASURE-3"
+    ],
     "relationship": "addresses",
-    "notes": "Safety benchmarks provide standardized measurement of AI risks and enable tracking over time."
+    "notes": "Safety benchmarks provide standardized measurement of AI risks and enable tracking over time.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-safety-benchmarks",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-1", "GAI-2", "GAI-5", "GAI-6"],
+    "codes": [
+      "GAI-1",
+      "GAI-2",
+      "GAI-5",
+      "GAI-6"
+    ],
     "relationship": "mitigates",
-    "notes": "Benchmark suites quantify CBRN, confabulation, dangerous content, and bias risks with standardized metrics."
+    "notes": "Benchmark suites quantify CBRN, confabulation, dangerous content, and bias risks with standardized metrics.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-safety-benchmarks",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Standardized benchmarking satisfies EU AI Act requirements for testing and validation of high-risk systems."
+    "notes": "Standardized benchmarking satisfies EU AI Act requirements for testing and validation of high-risk systems.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-safety-benchmarks",
     "frameworkId": "iso-42001",
-    "codes": ["9"],
+    "codes": [
+      "9"
+    ],
     "relationship": "addresses",
-    "notes": "Safety benchmarks are a primary method for performance evaluation under ISO 42001."
+    "notes": "Safety benchmarks are a primary method for performance evaluation under ISO 42001.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-safety-benchmarks",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-II", "W-III", "W-IV"],
+    "codes": [
+      "W-I",
+      "W-II",
+      "W-III",
+      "W-IV"
+    ],
     "relationship": "supports",
-    "notes": "Benchmarks provide quantitative measurement across discrimination, information hazard, misinformation, and malicious use harm categories."
+    "notes": "Benchmarks provide quantitative measurement across discrimination, information hazard, misinformation, and malicious use harm categories.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-community-evaluation",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-1", "GOVERN-5"],
+    "codes": [
+      "MEASURE-1",
+      "GOVERN-5"
+    ],
     "relationship": "supports",
-    "notes": "Community evaluation supports diverse stakeholder measurement of AI system risks."
+    "notes": "Community evaluation supports diverse stakeholder measurement of AI system risks.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-community-evaluation",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-7"],
+    "codes": [
+      "GAI-7"
+    ],
     "relationship": "supports",
-    "notes": "External community evaluation provides feedback on human-AI interaction quality and configuration risks."
+    "notes": "External community evaluation provides feedback on human-AI interaction quality and configuration risks.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-community-evaluation",
     "frameworkId": "iso-42001",
-    "codes": ["9", "10"],
+    "codes": [
+      "9",
+      "10"
+    ],
     "relationship": "supports",
-    "notes": "Community evaluation contributes to performance evaluation and drives continual improvement."
+    "notes": "Community evaluation contributes to performance evaluation and drives continual improvement.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-community-evaluation",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-V"],
+    "codes": [
+      "W-V"
+    ],
     "relationship": "mitigates",
-    "notes": "Community testing surfaces human-computer interaction harms that internal testing may miss."
+    "notes": "Community testing surfaces human-computer interaction harms that internal testing may miss.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-input-guardrail-systems",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-2", "MANAGE-3"],
+    "codes": [
+      "MANAGE-2",
+      "MANAGE-3"
+    ],
     "relationship": "addresses",
-    "notes": "Input guardrails are a core risk management control for filtering harmful inputs at runtime."
+    "notes": "Input guardrails are a core risk management control for filtering harmful inputs at runtime.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-input-guardrail-systems",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-1", "GAI-5", "GAI-9", "GAI-11"],
+    "codes": [
+      "GAI-1",
+      "GAI-5",
+      "GAI-9",
+      "GAI-11"
+    ],
     "relationship": "mitigates",
-    "notes": "Input classifiers block CBRN queries, dangerous content requests, security attacks, and abusive prompts."
+    "notes": "Input classifiers block CBRN queries, dangerous content requests, security attacks, and abusive prompts.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-input-guardrail-systems",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM01"],
+    "codes": [
+      "LLM01"
+    ],
     "relationship": "defends",
-    "notes": "Input guardrails are the primary defense against prompt injection attacks."
+    "notes": "Input guardrails are the primary defense against prompt injection attacks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-input-guardrail-systems",
     "frameworkId": "mitre-atlas",
-    "codes": ["AML.TA0003", "AML.TA0004"],
+    "codes": [
+      "AML.TA0003",
+      "AML.TA0004"
+    ],
     "relationship": "defends",
-    "notes": "Input filtering defends against initial access and ML model access attack tactics."
+    "notes": "Input filtering defends against initial access and ML model access attack tactics.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-input-guardrail-systems",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-IV"],
+    "codes": [
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Input classification blocks prompts designed for malicious use of the model."
+    "notes": "Input classification blocks prompts designed for malicious use of the model.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-input-guardrail-systems",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Input guardrails contribute to the risk management system required for high-risk AI applications."
+    "notes": "Input guardrails contribute to the risk management system required for high-risk AI applications.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-system-prompts",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-2", "GOVERN-4"],
+    "codes": [
+      "MANAGE-2",
+      "GOVERN-4"
+    ],
     "relationship": "supports",
-    "notes": "System prompts implement organizational safety policies as runtime behavioral constraints."
+    "notes": "System prompts implement organizational safety policies as runtime behavioral constraints.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-system-prompts",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-7"],
+    "codes": [
+      "GAI-7"
+    ],
     "relationship": "addresses",
-    "notes": "Metaprompts directly configure human-AI interaction boundaries and behavioral constraints."
+    "notes": "Metaprompts directly configure human-AI interaction boundaries and behavioral constraints.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-system-prompts",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM01", "LLM08"],
+    "codes": [
+      "LLM01",
+      "LLM08"
+    ],
     "relationship": "defends",
-    "notes": "System prompts establish behavioral boundaries that defend against prompt injection and excessive agency."
+    "notes": "System prompts establish behavioral boundaries that defend against prompt injection and excessive agency.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-system-prompts",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "System prompts are an operational control that enforces safety policies at inference time."
+    "notes": "System prompts are an operational control that enforces safety policies at inference time.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-output-filtering-systems",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-2", "MANAGE-3"],
+    "codes": [
+      "MANAGE-2",
+      "MANAGE-3"
+    ],
     "relationship": "addresses",
-    "notes": "Output filtering is a core risk management control for blocking unsafe model generations."
+    "notes": "Output filtering is a core risk management control for blocking unsafe model generations.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-output-filtering-systems",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-5", "GAI-11", "GAI-6"],
+    "codes": [
+      "GAI-5",
+      "GAI-11",
+      "GAI-6"
+    ],
     "relationship": "mitigates",
-    "notes": "Post-generation filters block dangerous, obscene/abusive, and biased content before it reaches users."
+    "notes": "Post-generation filters block dangerous, obscene/abusive, and biased content before it reaches users.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-output-filtering-systems",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM02"],
+    "codes": [
+      "LLM02"
+    ],
     "relationship": "defends",
-    "notes": "Output safety systems directly defend against insecure output handling by filtering harmful generations."
+    "notes": "Output safety systems directly defend against insecure output handling by filtering harmful generations.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-output-filtering-systems",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-II", "W-IV"],
+    "codes": [
+      "W-I",
+      "W-II",
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Output filtering catches discriminatory, information-hazard, and malicious content that bypasses training-time alignment."
+    "notes": "Output filtering catches discriminatory, information-hazard, and malicious content that bypasses training-time alignment.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-output-filtering-systems",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Output moderation contributes to the accuracy and robustness requirements for high-risk AI systems."
+    "notes": "Output moderation contributes to the accuracy and robustness requirements for high-risk AI systems.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-hallucination-grounding",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Hallucination detection measures and manages confabulation risk as a core AI safety concern."
+    "notes": "Hallucination detection measures and manages confabulation risk as a core AI safety concern.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-hallucination-grounding",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-2", "GAI-8"],
+    "codes": [
+      "GAI-2",
+      "GAI-8"
+    ],
     "relationship": "mitigates",
-    "notes": "Grounding mechanisms directly mitigate confabulation and information integrity risks."
+    "notes": "Grounding mechanisms directly mitigate confabulation and information integrity risks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-hallucination-grounding",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM09"],
+    "codes": [
+      "LLM09"
+    ],
     "relationship": "mitigates",
-    "notes": "Factuality enforcement reduces the risk of user overreliance on fabricated model outputs."
+    "notes": "Factuality enforcement reduces the risk of user overreliance on fabricated model outputs.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-hallucination-grounding",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-III"],
+    "codes": [
+      "W-III"
+    ],
     "relationship": "mitigates",
-    "notes": "Hallucination detection directly addresses misinformation harms from fabricated content."
+    "notes": "Hallucination detection directly addresses misinformation harms from fabricated content.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-rag-guardrails",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "RAG guardrails measure and manage grounding accuracy in retrieval-augmented systems."
+    "notes": "RAG guardrails measure and manage grounding accuracy in retrieval-augmented systems.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-rag-guardrails",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-2", "GAI-8"],
+    "codes": [
+      "GAI-2",
+      "GAI-8"
+    ],
     "relationship": "mitigates",
-    "notes": "Citation verification in RAG systems mitigates confabulation and information integrity risks."
+    "notes": "Citation verification in RAG systems mitigates confabulation and information integrity risks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-rag-guardrails",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM09"],
+    "codes": [
+      "LLM09"
+    ],
     "relationship": "mitigates",
-    "notes": "RAG grounding checks reduce overreliance risks by ensuring outputs are supported by retrieved context."
+    "notes": "RAG grounding checks reduce overreliance risks by ensuring outputs are supported by retrieved context.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-rag-guardrails",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-III"],
+    "codes": [
+      "W-III"
+    ],
     "relationship": "mitigates",
-    "notes": "Context adherence checks reduce the risk of RAG systems producing misinformation."
+    "notes": "Context adherence checks reduce the risk of RAG systems producing misinformation.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-realtime-fact-checking",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Real-time verification measures and manages factual accuracy of model outputs."
+    "notes": "Real-time verification measures and manages factual accuracy of model outputs.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-realtime-fact-checking",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-2", "GAI-8"],
+    "codes": [
+      "GAI-2",
+      "GAI-8"
+    ],
     "relationship": "mitigates",
-    "notes": "Dynamic claim verification against external sources mitigates confabulation and information integrity risks."
+    "notes": "Dynamic claim verification against external sources mitigates confabulation and information integrity risks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-realtime-fact-checking",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-III"],
+    "codes": [
+      "W-III"
+    ],
     "relationship": "mitigates",
-    "notes": "Real-time verification directly reduces the propagation of misinformation and false claims."
+    "notes": "Real-time verification directly reduces the propagation of misinformation and false claims.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-watermarking",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-3", "GOVERN-4"],
+    "codes": [
+      "MANAGE-3",
+      "GOVERN-4"
+    ],
     "relationship": "addresses",
-    "notes": "Watermarking supports transparency governance and provides a management mechanism for AI content attribution."
+    "notes": "Watermarking supports transparency governance and provides a management mechanism for AI content attribution.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-watermarking",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-8"],
+    "codes": [
+      "GAI-8"
+    ],
     "relationship": "mitigates",
-    "notes": "Provenance signals directly address information integrity by enabling detection of AI-generated content."
+    "notes": "Provenance signals directly address information integrity by enabling detection of AI-generated content.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-watermarking",
     "frameworkId": "eu-ai-act",
-    "codes": ["limited-risk"],
+    "codes": [
+      "limited-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Watermarking satisfies EU AI Act transparency requirements for AI-generated content labeling."
+    "notes": "Watermarking satisfies EU AI Act transparency requirements for AI-generated content labeling.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-watermarking",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Provenance tracking is an operational control for responsible AI content management."
+    "notes": "Provenance tracking is an operational control for responsible AI content management.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-watermarking",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-III"],
+    "codes": [
+      "W-III"
+    ],
     "relationship": "mitigates",
-    "notes": "Content provenance signals help combat misinformation by distinguishing AI-generated from human-created content."
+    "notes": "Content provenance signals help combat misinformation by distinguishing AI-generated from human-created content.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-multistage-pipeline",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-2", "MANAGE-3"],
+    "codes": [
+      "MANAGE-2",
+      "MANAGE-3"
+    ],
     "relationship": "addresses",
-    "notes": "Defense-in-depth architecture implements layered risk management as recommended by the RMF."
+    "notes": "Defense-in-depth architecture implements layered risk management as recommended by the RMF.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-multistage-pipeline",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-5", "GAI-9"],
+    "codes": [
+      "GAI-5",
+      "GAI-9"
+    ],
     "relationship": "mitigates",
-    "notes": "Cascaded safety checks provide redundant mitigation of dangerous content and information security risks."
+    "notes": "Cascaded safety checks provide redundant mitigation of dangerous content and information security risks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-multistage-pipeline",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM01", "LLM02"],
+    "codes": [
+      "LLM01",
+      "LLM02"
+    ],
     "relationship": "defends",
-    "notes": "Multi-stage pipelines provide layered defense against both prompt injection and insecure output."
+    "notes": "Multi-stage pipelines provide layered defense against both prompt injection and insecure output.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-multistage-pipeline",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Multi-stage pipelines operationalize defense-in-depth as an operational control pattern."
+    "notes": "Multi-stage pipelines operationalize defense-in-depth as an operational control pattern.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-configurable-policies",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-4", "MANAGE-4"],
+    "codes": [
+      "GOVERN-4",
+      "MANAGE-4"
+    ],
     "relationship": "addresses",
-    "notes": "Configurable policies support organizational governance customization and adaptive risk management."
+    "notes": "Configurable policies support organizational governance customization and adaptive risk management.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-configurable-policies",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-7"],
+    "codes": [
+      "GAI-7"
+    ],
     "relationship": "addresses",
-    "notes": "Adjustable safety thresholds address human-AI configuration risks by giving appropriate control to operators."
+    "notes": "Adjustable safety thresholds address human-AI configuration risks by giving appropriate control to operators.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-configurable-policies",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Configurable policies are an operational control allowing context-appropriate safety tuning."
+    "notes": "Configurable policies are an operational control allowing context-appropriate safety tuning.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-observability-monitoring",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-3", "MANAGE-1", "MANAGE-4"],
+    "codes": [
+      "MEASURE-3",
+      "MANAGE-1",
+      "MANAGE-4"
+    ],
     "relationship": "addresses",
-    "notes": "Monitoring and logging directly support continuous measurement and ongoing risk management."
+    "notes": "Monitoring and logging directly support continuous measurement and ongoing risk management.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-observability-monitoring",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-9", "GAI-12"],
+    "codes": [
+      "GAI-9",
+      "GAI-12"
+    ],
     "relationship": "addresses",
-    "notes": "Audit logging supports information security monitoring and value chain visibility."
+    "notes": "Audit logging supports information security monitoring and value chain visibility.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-observability-monitoring",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Logging capabilities satisfy EU AI Act requirements for automatic recording of events in high-risk systems."
+    "notes": "Logging capabilities satisfy EU AI Act requirements for automatic recording of events in high-risk systems.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-observability-monitoring",
     "frameworkId": "iso-42001",
-    "codes": ["9"],
+    "codes": [
+      "9"
+    ],
     "relationship": "addresses",
-    "notes": "Observability provides the performance evaluation data required by ISO 42001."
+    "notes": "Observability provides the performance evaluation data required by ISO 42001.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-observability-monitoring",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM06"],
+    "codes": [
+      "LLM06"
+    ],
     "relationship": "defends",
-    "notes": "Audit logging enables detection of sensitive information disclosure incidents."
+    "notes": "Audit logging enables detection of sensitive information disclosure incidents.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-circuit-breakers",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-4", "MANAGE-5"],
+    "codes": [
+      "MANAGE-4",
+      "MANAGE-5"
+    ],
     "relationship": "addresses",
-    "notes": "Kill switches provide emergency risk management capability for immediate system shutdown."
+    "notes": "Kill switches provide emergency risk management capability for immediate system shutdown.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-circuit-breakers",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-5", "GAI-7"],
+    "codes": [
+      "GAI-5",
+      "GAI-7"
+    ],
     "relationship": "mitigates",
-    "notes": "Emergency shutdown capability mitigates dangerous content escalation and maintains human-AI control."
+    "notes": "Emergency shutdown capability mitigates dangerous content escalation and maintains human-AI control.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-circuit-breakers",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Kill switches satisfy the EU AI Act requirement for human oversight including ability to interrupt AI system operation."
+    "notes": "Kill switches satisfy the EU AI Act requirement for human oversight including ability to interrupt AI system operation.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-circuit-breakers",
     "frameworkId": "iso-42001",
-    "codes": ["8", "10"],
+    "codes": [
+      "8",
+      "10"
+    ],
     "relationship": "addresses",
-    "notes": "Emergency shutdown is both an operational control and an improvement mechanism for responding to safety failures."
+    "notes": "Emergency shutdown is both an operational control and an improvement mechanism for responding to safety failures.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-prompt-injection-defense",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-2", "MEASURE-2"],
+    "codes": [
+      "MANAGE-2",
+      "MEASURE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Injection defense addresses specific security risks identified through risk measurement."
+    "notes": "Injection defense addresses specific security risks identified through risk measurement.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-prompt-injection-defense",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-9"],
+    "codes": [
+      "GAI-9"
+    ],
     "relationship": "mitigates",
-    "notes": "Jailbreak and injection defense directly mitigates information security risks in generative AI."
+    "notes": "Jailbreak and injection defense directly mitigates information security risks in generative AI.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-prompt-injection-defense",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM01"],
+    "codes": [
+      "LLM01"
+    ],
     "relationship": "defends",
-    "notes": "This technique is the primary defense against the top-ranked LLM risk: prompt injection."
+    "notes": "This technique is the primary defense against the top-ranked LLM risk: prompt injection.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-prompt-injection-defense",
     "frameworkId": "mitre-atlas",
-    "codes": ["AML.TA0003", "AML.TA0004", "AML.TA0008"],
+    "codes": [
+      "AML.TA0003",
+      "AML.TA0004",
+      "AML.TA0008"
+    ],
     "relationship": "defends",
-    "notes": "Injection defense guards against adversarial initial access, model access exploitation, and defense evasion tactics."
+    "notes": "Injection defense guards against adversarial initial access, model access exploitation, and defense evasion tactics.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-prompt-injection-defense",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-IV"],
+    "codes": [
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Jailbreak defense prevents adversaries from weaponizing models for malicious use through prompt manipulation."
+    "notes": "Jailbreak defense prevents adversaries from weaponizing models for malicious use through prompt manipulation.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-code-execution-sandboxing",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-2"],
+    "codes": [
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Sandboxing manages the risk of model-generated code causing unintended harm to production systems."
+    "notes": "Sandboxing manages the risk of model-generated code causing unintended harm to production systems.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-code-execution-sandboxing",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-9"],
+    "codes": [
+      "GAI-9"
+    ],
     "relationship": "mitigates",
-    "notes": "Code isolation mitigates information security risks from untrusted model-generated code execution."
+    "notes": "Code isolation mitigates information security risks from untrusted model-generated code execution.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-code-execution-sandboxing",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM02", "LLM07", "LLM08"],
+    "codes": [
+      "LLM02",
+      "LLM07",
+      "LLM08"
+    ],
     "relationship": "defends",
-    "notes": "Sandboxing defends against insecure output handling, insecure plugin design, and excessive agency from code execution."
+    "notes": "Sandboxing defends against insecure output handling, insecure plugin design, and excessive agency from code execution.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-code-execution-sandboxing",
     "frameworkId": "mitre-atlas",
-    "codes": ["AML.TA0005", "AML.TA0007"],
+    "codes": [
+      "AML.TA0005",
+      "AML.TA0007"
+    ],
     "relationship": "defends",
-    "notes": "Containerized execution defends against adversarial code execution and privilege escalation."
+    "notes": "Containerized execution defends against adversarial code execution and privilege escalation.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-code-execution-sandboxing",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-IV"],
+    "codes": [
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Sandboxing prevents malicious use of model-generated code to compromise systems."
+    "notes": "Sandboxing prevents malicious use of model-generated code to compromise systems.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-violence-detection",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-5"],
+    "codes": [
+      "GAI-5"
+    ],
     "relationship": "mitigates",
-    "notes": "Violence detection directly mitigates the dangerous and violent content risk profile."
+    "notes": "Violence detection directly mitigates the dangerous and violent content risk profile.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-violence-detection",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Violence classifiers measure and manage violent content risks in model outputs."
+    "notes": "Violence classifiers measure and manage violent content risks in model outputs.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-violence-detection",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-IV"],
+    "codes": [
+      "W-I",
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Detecting violent content reduces both direct harm from toxic outputs and malicious weaponization."
+    "notes": "Detecting violent content reduces both direct harm from toxic outputs and malicious weaponization.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-violence-detection",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Violence detection supports content safety requirements applicable to high-risk AI systems."
+    "notes": "Violence detection supports content safety requirements applicable to high-risk AI systems.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-hate-speech-detection",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-6", "GAI-11"],
+    "codes": [
+      "GAI-6",
+      "GAI-11"
+    ],
     "relationship": "mitigates",
-    "notes": "Hate speech detection directly mitigates harmful bias and obscene/abusive content risks."
+    "notes": "Hate speech detection directly mitigates harmful bias and obscene/abusive content risks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-hate-speech-detection",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Hate speech classifiers measure and manage discrimination and harassment risks."
+    "notes": "Hate speech classifiers measure and manage discrimination and harassment risks.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-hate-speech-detection",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Hate speech detection supports the EU AI Act requirement to minimize discriminatory outcomes."
+    "notes": "Hate speech detection supports the EU AI Act requirement to minimize discriminatory outcomes.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-hate-speech-detection",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I"],
+    "codes": [
+      "W-I"
+    ],
     "relationship": "mitigates",
-    "notes": "Hate speech classifiers directly target discrimination, exclusion, toxicity, and hateful content."
+    "notes": "Hate speech classifiers directly target discrimination, exclusion, toxicity, and hateful content.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-hate-speech-detection",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Hate speech detection is an operational control for responsible AI content management."
+    "notes": "Hate speech detection is an operational control for responsible AI content management.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-self-harm-prevention",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-5"],
+    "codes": [
+      "GAI-5"
+    ],
     "relationship": "mitigates",
-    "notes": "Self-harm prevention directly mitigates the dangerous and violent content risk profile."
+    "notes": "Self-harm prevention directly mitigates the dangerous and violent content risk profile.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-self-harm-prevention",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-2", "MANAGE-3"],
+    "codes": [
+      "MANAGE-2",
+      "MANAGE-3"
+    ],
     "relationship": "addresses",
-    "notes": "Self-harm intervention is a critical risk management control for user safety."
+    "notes": "Self-harm intervention is a critical risk management control for user safety.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-self-harm-prevention",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-V"],
+    "codes": [
+      "W-V"
+    ],
     "relationship": "mitigates",
-    "notes": "Preventing self-harm content directly addresses human-computer interaction harms including psychological damage."
+    "notes": "Preventing self-harm content directly addresses human-computer interaction harms including psychological damage.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-self-harm-prevention",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Self-harm prevention supports safety requirements for AI systems interacting with vulnerable populations."
+    "notes": "Self-harm prevention supports safety requirements for AI systems interacting with vulnerable populations.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-sexual-content-moderation",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-11"],
+    "codes": [
+      "GAI-11"
+    ],
     "relationship": "mitigates",
-    "notes": "Sexual content moderation directly mitigates the obscene, degrading, and abusive content risk profile."
+    "notes": "Sexual content moderation directly mitigates the obscene, degrading, and abusive content risk profile.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-sexual-content-moderation",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Sexual content classifiers measure and manage explicit content risks in model outputs."
+    "notes": "Sexual content classifiers measure and manage explicit content risks in model outputs.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-sexual-content-moderation",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I"],
+    "codes": [
+      "W-I"
+    ],
     "relationship": "mitigates",
-    "notes": "Sexual content filtering addresses toxicity and degrading content harms."
+    "notes": "Sexual content filtering addresses toxicity and degrading content harms.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-weapons-illegal-activity",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-1", "GAI-5"],
+    "codes": [
+      "GAI-1",
+      "GAI-5"
+    ],
     "relationship": "mitigates",
-    "notes": "Weapons and illegal activity detection directly mitigates CBRN and dangerous content risks."
+    "notes": "Weapons and illegal activity detection directly mitigates CBRN and dangerous content risks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-weapons-illegal-activity",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "CBRNE and illegal activity classifiers measure and manage the most severe content safety risks."
+    "notes": "CBRNE and illegal activity classifiers measure and manage the most severe content safety risks.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-weapons-illegal-activity",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-II", "W-IV"],
+    "codes": [
+      "W-II",
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Blocking weapons instructions addresses both information hazards and malicious use of AI."
+    "notes": "Blocking weapons instructions addresses both information hazards and malicious use of AI.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-weapons-illegal-activity",
     "frameworkId": "eu-ai-act",
-    "codes": ["unacceptable"],
+    "codes": [
+      "unacceptable"
+    ],
     "relationship": "addresses",
-    "notes": "Detection of content facilitating illegal activities supports restrictions on unacceptable AI uses."
+    "notes": "Detection of content facilitating illegal activities supports restrictions on unacceptable AI uses.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-weapons-illegal-activity",
     "frameworkId": "mitre-atlas",
-    "codes": ["AML.TA0014"],
+    "codes": [
+      "AML.TA0014"
+    ],
     "relationship": "defends",
-    "notes": "Blocking weapons and illegal activity content defends against adversarial impact operations."
+    "notes": "Blocking weapons and illegal activity content defends against adversarial impact operations.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-csam-detection",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-11"],
+    "codes": [
+      "GAI-11"
+    ],
     "relationship": "mitigates",
-    "notes": "CSAM detection mitigates the most severe form of obscene and abusive content generation."
+    "notes": "CSAM detection mitigates the most severe form of obscene and abusive content generation.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-csam-detection",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-2", "MANAGE-3"],
+    "codes": [
+      "MANAGE-2",
+      "MANAGE-3"
+    ],
     "relationship": "addresses",
-    "notes": "CSAM detection is a critical risk management control requiring immediate action and zero tolerance."
+    "notes": "CSAM detection is a critical risk management control requiring immediate action and zero tolerance.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-csam-detection",
     "frameworkId": "eu-ai-act",
-    "codes": ["unacceptable"],
+    "codes": [
+      "unacceptable"
+    ],
     "relationship": "addresses",
-    "notes": "CSAM detection and prevention is aligned with the EU AI Act prohibition on AI systems that exploit vulnerable persons including children."
+    "notes": "CSAM detection and prevention is aligned with the EU AI Act prohibition on AI systems that exploit vulnerable persons including children.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-csam-detection",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-I", "W-IV"],
+    "codes": [
+      "W-I",
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "CSAM detection addresses both the most severe discriminatory harm and malicious exploitation use cases."
+    "notes": "CSAM detection addresses both the most severe discriminatory harm and malicious exploitation use cases.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-pii-detection",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-3"],
+    "codes": [
+      "GAI-3"
+    ],
     "relationship": "mitigates",
-    "notes": "PII detection and redaction directly mitigates the data privacy risk profile."
+    "notes": "PII detection and redaction directly mitigates the data privacy risk profile.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-pii-detection",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-2", "MAP-5"],
+    "codes": [
+      "MANAGE-2",
+      "MAP-5"
+    ],
     "relationship": "addresses",
-    "notes": "PII handling addresses privacy risk management and maps impacts on individuals."
+    "notes": "PII handling addresses privacy risk management and maps impacts on individuals.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-pii-detection",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM06"],
+    "codes": [
+      "LLM06"
+    ],
     "relationship": "defends",
-    "notes": "PII redaction defends against sensitive information disclosure from model outputs."
+    "notes": "PII redaction defends against sensitive information disclosure from model outputs.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-pii-detection",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "PII protection satisfies EU AI Act data governance requirements and aligns with GDPR obligations."
+    "notes": "PII protection satisfies EU AI Act data governance requirements and aligns with GDPR obligations.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-pii-detection",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-II"],
+    "codes": [
+      "W-II"
+    ],
     "relationship": "mitigates",
-    "notes": "PII redaction directly mitigates information hazards including privacy violations and data leakage."
+    "notes": "PII redaction directly mitigates information hazards including privacy violations and data leakage.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-pii-detection",
     "frameworkId": "iso-42001",
-    "codes": ["8"],
+    "codes": [
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "PII handling is an operational control for responsible data management in AI systems."
+    "notes": "PII handling is an operational control for responsible data management in AI systems.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-misinformation-detection",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-2", "GAI-8"],
+    "codes": [
+      "GAI-2",
+      "GAI-8"
+    ],
     "relationship": "mitigates",
-    "notes": "Misinformation detection directly mitigates confabulation and information integrity risks."
+    "notes": "Misinformation detection directly mitigates confabulation and information integrity risks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-misinformation-detection",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "False claims detection measures and manages factual accuracy risks."
+    "notes": "False claims detection measures and manages factual accuracy risks.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-misinformation-detection",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-III"],
+    "codes": [
+      "W-III"
+    ],
     "relationship": "mitigates",
-    "notes": "False claims detection directly targets misinformation, disinformation, and propaganda harms."
+    "notes": "False claims detection directly targets misinformation, disinformation, and propaganda harms.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-misinformation-detection",
     "frameworkId": "eu-ai-act",
-    "codes": ["limited-risk"],
+    "codes": [
+      "limited-risk"
+    ],
     "relationship": "supports",
-    "notes": "Misinformation detection supports transparency requirements for AI systems generating content."
+    "notes": "Misinformation detection supports transparency requirements for AI systems generating content.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-copyright-ip-violation",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-10"],
+    "codes": [
+      "GAI-10"
+    ],
     "relationship": "mitigates",
-    "notes": "Copyright detection directly mitigates the intellectual property risk profile for generative AI."
+    "notes": "Copyright detection directly mitigates the intellectual property risk profile for generative AI.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-copyright-ip-violation",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MAP-5", "MANAGE-2"],
+    "codes": [
+      "MAP-5",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "IP violation detection maps impacts on rights holders and manages legal compliance risks."
+    "notes": "IP violation detection maps impacts on rights holders and manages legal compliance risks.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-copyright-ip-violation",
     "frameworkId": "eu-ai-act",
-    "codes": ["limited-risk"],
+    "codes": [
+      "limited-risk"
+    ],
     "relationship": "supports",
-    "notes": "Copyright detection supports EU AI Act transparency obligations regarding training data and generated content."
+    "notes": "Copyright detection supports EU AI Act transparency obligations regarding training data and generated content.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-copyright-ip-violation",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-VI"],
+    "codes": [
+      "W-VI"
+    ],
     "relationship": "mitigates",
-    "notes": "IP protection addresses socioeconomic harms to content creators from unauthorized reproduction."
+    "notes": "IP protection addresses socioeconomic harms to content creators from unauthorized reproduction.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-sycophancy-detection",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-7"],
+    "codes": [
+      "GAI-7"
+    ],
     "relationship": "mitigates",
-    "notes": "Sycophancy detection mitigates human-AI configuration risks by preventing over-agreement and opinion mirroring."
+    "notes": "Sycophancy detection mitigates human-AI configuration risks by preventing over-agreement and opinion mirroring.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-sycophancy-detection",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2"],
+    "codes": [
+      "MEASURE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Sycophancy benchmarks provide measurable evaluation of AI trustworthiness and output honesty."
+    "notes": "Sycophancy benchmarks provide measurable evaluation of AI trustworthiness and output honesty.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-sycophancy-detection",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-V"],
+    "codes": [
+      "W-V"
+    ],
     "relationship": "mitigates",
-    "notes": "Reducing sycophancy addresses human-computer interaction harms including manipulation and over-trust."
+    "notes": "Reducing sycophancy addresses human-computer interaction harms including manipulation and over-trust.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-cybersecurity-threat",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-9"],
+    "codes": [
+      "GAI-9"
+    ],
     "relationship": "mitigates",
-    "notes": "Cybersecurity threat detection directly mitigates the information security risk profile."
+    "notes": "Cybersecurity threat detection directly mitigates the information security risk profile.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-cybersecurity-threat",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-2", "MANAGE-2"],
+    "codes": [
+      "MEASURE-2",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Cyber threat classifiers measure and manage the risk of AI-assisted cyberattacks."
+    "notes": "Cyber threat classifiers measure and manage the risk of AI-assisted cyberattacks.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-cybersecurity-threat",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM02", "LLM06"],
+    "codes": [
+      "LLM02",
+      "LLM06"
+    ],
     "relationship": "defends",
-    "notes": "Blocking exploit generation defends against insecure output and sensitive information disclosure."
+    "notes": "Blocking exploit generation defends against insecure output and sensitive information disclosure.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-cybersecurity-threat",
     "frameworkId": "mitre-atlas",
-    "codes": ["AML.TA0005", "AML.TA0014"],
+    "codes": [
+      "AML.TA0005",
+      "AML.TA0014"
+    ],
     "relationship": "defends",
-    "notes": "Blocking malware and exploit generation defends against adversarial execution and impact operations."
+    "notes": "Blocking malware and exploit generation defends against adversarial execution and impact operations.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-cybersecurity-threat",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-IV"],
+    "codes": [
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Detecting offensive cyber content directly addresses malicious use of AI for cyberattacks."
+    "notes": "Detecting offensive cyber content directly addresses malicious use of AI for cyberattacks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-autonomous-behaviour",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MEASURE-1", "MEASURE-2", "MANAGE-5"],
+    "codes": [
+      "MEASURE-1",
+      "MEASURE-2",
+      "MANAGE-5"
+    ],
     "relationship": "addresses",
-    "notes": "Autonomous behaviour evaluation measures emergent risks and supports escalation management for dangerous capabilities."
+    "notes": "Autonomous behaviour evaluation measures emergent risks and supports escalation management for dangerous capabilities.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-autonomous-behaviour",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-7"],
+    "codes": [
+      "GAI-7"
+    ],
     "relationship": "mitigates",
-    "notes": "Detecting scheming and power-seeking mitigates human-AI configuration risks where AI systems undermine human control."
+    "notes": "Detecting scheming and power-seeking mitigates human-AI configuration risks where AI systems undermine human control.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-autonomous-behaviour",
     "frameworkId": "eu-ai-act",
-    "codes": ["unacceptable", "high-risk"],
+    "codes": [
+      "unacceptable",
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Classifying deceptive and manipulative autonomous behaviours supports restrictions on unacceptable AI practices."
+    "notes": "Classifying deceptive and manipulative autonomous behaviours supports restrictions on unacceptable AI practices.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-autonomous-behaviour",
     "frameworkId": "iso-42001",
-    "codes": ["9"],
+    "codes": [
+      "9"
+    ],
     "relationship": "addresses",
-    "notes": "Autonomous behaviour evaluation is a critical performance evaluation activity for advanced AI systems."
+    "notes": "Autonomous behaviour evaluation is a critical performance evaluation activity for advanced AI systems.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-autonomous-behaviour",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-V"],
+    "codes": [
+      "W-V"
+    ],
     "relationship": "mitigates",
-    "notes": "Detecting alignment faking and scheming addresses fundamental human-computer interaction safety risks."
+    "notes": "Detecting alignment faking and scheming addresses fundamental human-computer interaction safety risks.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-capability-monitoring",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-1", "GOVERN-6", "MEASURE-1", "MANAGE-5"],
+    "codes": [
+      "GOVERN-1",
+      "GOVERN-6",
+      "MEASURE-1",
+      "MANAGE-5"
+    ],
     "relationship": "addresses",
-    "notes": "Capability threshold monitoring implements governance-level risk tracking with escalation for dangerous capabilities."
+    "notes": "Capability threshold monitoring implements governance-level risk tracking with escalation for dangerous capabilities.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-capability-monitoring",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-1", "GAI-5"],
+    "codes": [
+      "GAI-1",
+      "GAI-5"
+    ],
     "relationship": "mitigates",
-    "notes": "Threshold frameworks track CBRN and dangerous capability levels to trigger upgraded safeguards."
+    "notes": "Threshold frameworks track CBRN and dangerous capability levels to trigger upgraded safeguards.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-capability-monitoring",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk", "unacceptable"],
+    "codes": [
+      "high-risk",
+      "unacceptable"
+    ],
     "relationship": "addresses",
-    "notes": "Capability monitoring supports risk classification requirements and triggers for high-risk and prohibited AI applications."
+    "notes": "Capability monitoring supports risk classification requirements and triggers for high-risk and prohibited AI applications.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-capability-monitoring",
     "frameworkId": "iso-42001",
-    "codes": ["6", "9"],
+    "codes": [
+      "6",
+      "9"
+    ],
     "relationship": "addresses",
-    "notes": "Capability thresholds operationalize planning-level risk criteria and provide ongoing performance evaluation."
+    "notes": "Capability thresholds operationalize planning-level risk criteria and provide ongoing performance evaluation.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-capability-monitoring",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-II", "W-IV"],
+    "codes": [
+      "W-II",
+      "W-IV"
+    ],
     "relationship": "mitigates",
-    "notes": "Monitoring dangerous capabilities addresses information hazards and the potential for malicious use of advanced AI."
+    "notes": "Monitoring dangerous capabilities addresses information hazards and the potential for malicious use of advanced AI.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-safety-advisory",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-2", "GOVERN-5"],
+    "codes": [
+      "GOVERN-2",
+      "GOVERN-5"
+    ],
     "relationship": "addresses",
-    "notes": "Independent advisory boards provide external governance oversight and stakeholder accountability."
+    "notes": "Independent advisory boards provide external governance oversight and stakeholder accountability.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-safety-advisory",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Independent oversight supports the EU AI Act governance and accountability requirements for high-risk systems."
+    "notes": "Independent oversight supports the EU AI Act governance and accountability requirements for high-risk systems.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-safety-advisory",
     "frameworkId": "iso-42001",
-    "codes": ["5", "10"],
+    "codes": [
+      "5",
+      "10"
+    ],
     "relationship": "addresses",
-    "notes": "External advisory bodies demonstrate leadership commitment and provide independent input for continual improvement."
+    "notes": "External advisory bodies demonstrate leadership commitment and provide independent input for continual improvement.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-incident-reporting",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["MANAGE-4", "MANAGE-5", "GOVERN-3"],
+    "codes": [
+      "MANAGE-4",
+      "MANAGE-5",
+      "GOVERN-3"
+    ],
     "relationship": "addresses",
-    "notes": "Incident reporting supports risk management lifecycle tracking, escalation, and organizational accountability."
+    "notes": "Incident reporting supports risk management lifecycle tracking, escalation, and organizational accountability.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-incident-reporting",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-9", "GAI-12"],
+    "codes": [
+      "GAI-9",
+      "GAI-12"
+    ],
     "relationship": "addresses",
-    "notes": "Vulnerability disclosure processes address information security and value chain accountability."
+    "notes": "Vulnerability disclosure processes address information security and value chain accountability.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-incident-reporting",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Incident reporting satisfies EU AI Act requirements for post-market monitoring and serious incident notification."
+    "notes": "Incident reporting satisfies EU AI Act requirements for post-market monitoring and serious incident notification.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-incident-reporting",
     "frameworkId": "iso-42001",
-    "codes": ["9", "10"],
+    "codes": [
+      "9",
+      "10"
+    ],
     "relationship": "addresses",
-    "notes": "Incident tracking provides performance evaluation data and drives continual improvement."
+    "notes": "Incident tracking provides performance evaluation data and drives continual improvement.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-incident-reporting",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM06"],
+    "codes": [
+      "LLM06"
+    ],
     "relationship": "supports",
-    "notes": "Incident reporting helps identify and track sensitive information disclosure events."
+    "notes": "Incident reporting helps identify and track sensitive information disclosure events.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-responsible-release",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-1", "MANAGE-1", "MANAGE-4"],
+    "codes": [
+      "GOVERN-1",
+      "MANAGE-1",
+      "MANAGE-4"
+    ],
     "relationship": "addresses",
-    "notes": "Staged release protocols implement governance and risk management through controlled deployment."
+    "notes": "Staged release protocols implement governance and risk management through controlled deployment.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-responsible-release",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-12"],
+    "codes": [
+      "GAI-12"
+    ],
     "relationship": "addresses",
-    "notes": "Responsible release practices address value chain and component integration risks through phased rollout."
+    "notes": "Responsible release practices address value chain and component integration risks through phased rollout.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-responsible-release",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Phased deployment supports the risk management and testing requirements before placing high-risk systems on the market."
+    "notes": "Phased deployment supports the risk management and testing requirements before placing high-risk systems on the market.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-responsible-release",
     "frameworkId": "iso-42001",
-    "codes": ["6", "8"],
+    "codes": [
+      "6",
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Staged release operationalizes planning-level risk appetite decisions through controlled operational rollout."
+    "notes": "Staged release operationalizes planning-level risk appetite decisions through controlled operational rollout.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-stakeholder-engagement",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-5", "MAP-5"],
+    "codes": [
+      "GOVERN-5",
+      "MAP-5"
+    ],
     "relationship": "addresses",
-    "notes": "Stakeholder engagement fulfills the RMF requirement for inclusive participation and impact mapping."
+    "notes": "Stakeholder engagement fulfills the RMF requirement for inclusive participation and impact mapping.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-stakeholder-engagement",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Stakeholder consultation supports the EU AI Act emphasis on fundamental rights impact assessment."
+    "notes": "Stakeholder consultation supports the EU AI Act emphasis on fundamental rights impact assessment.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-stakeholder-engagement",
     "frameworkId": "iso-42001",
-    "codes": ["4", "5"],
+    "codes": [
+      "4",
+      "5"
+    ],
     "relationship": "addresses",
-    "notes": "Stakeholder engagement addresses understanding organizational context and demonstrates leadership commitment."
+    "notes": "Stakeholder engagement addresses understanding organizational context and demonstrates leadership commitment.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-stakeholder-engagement",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-VI"],
+    "codes": [
+      "W-VI"
+    ],
     "relationship": "mitigates",
-    "notes": "Engaging affected communities helps identify and mitigate socioeconomic and environmental harms."
+    "notes": "Engaging affected communities helps identify and mitigate socioeconomic and environmental harms.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-regulatory-compliance",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-3", "GOVERN-6"],
+    "codes": [
+      "GOVERN-3",
+      "GOVERN-6"
+    ],
     "relationship": "addresses",
-    "notes": "Regulatory compliance directly fulfills governance requirements for legal and policy adherence."
+    "notes": "Regulatory compliance directly fulfills governance requirements for legal and policy adherence.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-regulatory-compliance",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk", "limited-risk", "minimal-risk"],
+    "codes": [
+      "high-risk",
+      "limited-risk",
+      "minimal-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Regulatory compliance directly addresses all risk-tier obligations under the EU AI Act."
+    "notes": "Regulatory compliance directly addresses all risk-tier obligations under the EU AI Act.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-regulatory-compliance",
     "frameworkId": "iso-42001",
-    "codes": ["4", "6", "9"],
+    "codes": [
+      "4",
+      "6",
+      "9"
+    ],
     "relationship": "addresses",
-    "notes": "Compliance activities address organizational context, planning for legal requirements, and performance evaluation."
+    "notes": "Compliance activities address organizational context, planning for legal requirements, and performance evaluation.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-regulatory-compliance",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-12"],
+    "codes": [
+      "GAI-12"
+    ],
     "relationship": "addresses",
-    "notes": "Compliance programs address value chain accountability and third-party integration requirements."
+    "notes": "Compliance programs address value chain accountability and third-party integration requirements.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-access-control-documentation",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-4", "MANAGE-2"],
+    "codes": [
+      "GOVERN-4",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Access control documentation supports organizational governance and risk management through defined permissions."
+    "notes": "Access control documentation supports organizational governance and risk management through defined permissions.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-access-control-documentation",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-9"],
+    "codes": [
+      "GAI-9"
+    ],
     "relationship": "addresses",
-    "notes": "Documented access controls address information security requirements for AI system access."
+    "notes": "Documented access controls address information security requirements for AI system access.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-access-control-documentation",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM06", "LLM10"],
+    "codes": [
+      "LLM06",
+      "LLM10"
+    ],
     "relationship": "defends",
-    "notes": "Access control documentation defends against sensitive information disclosure and model theft."
+    "notes": "Access control documentation defends against sensitive information disclosure and model theft.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-access-control-documentation",
     "frameworkId": "mitre-atlas",
-    "codes": ["AML.TA0001", "AML.TA0003", "AML.TA0009", "AML.TA0013"],
+    "codes": [
+      "AML.TA0001",
+      "AML.TA0003",
+      "AML.TA0009",
+      "AML.TA0013"
+    ],
     "relationship": "defends",
-    "notes": "Documented access controls defend against reconnaissance, initial access, credential access, and exfiltration."
+    "notes": "Documented access controls defend against reconnaissance, initial access, credential access, and exfiltration.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-access-control-documentation",
     "frameworkId": "iso-42001",
-    "codes": ["7", "8"],
+    "codes": [
+      "7",
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Access documentation provides support resources and operational controls for secure AI system management."
+    "notes": "Access documentation provides support resources and operational controls for secure AI system management.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-enterprise-integration",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-4", "MANAGE-2"],
+    "codes": [
+      "GOVERN-4",
+      "MANAGE-2"
+    ],
     "relationship": "supports",
-    "notes": "Enterprise safety protocols support organizational governance and risk management in corporate deployments."
+    "notes": "Enterprise safety protocols support organizational governance and risk management in corporate deployments.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-enterprise-integration",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-9", "GAI-12"],
+    "codes": [
+      "GAI-9",
+      "GAI-12"
+    ],
     "relationship": "addresses",
-    "notes": "Enterprise integration safety addresses information security and value chain risks in corporate workflows."
+    "notes": "Enterprise integration safety addresses information security and value chain risks in corporate workflows.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-enterprise-integration",
     "frameworkId": "iso-42001",
-    "codes": ["4", "8"],
+    "codes": [
+      "4",
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Enterprise integration addresses organizational context understanding and operational controls for deployment."
+    "notes": "Enterprise integration addresses organizational context understanding and operational controls for deployment.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-enterprise-integration",
     "frameworkId": "owasp-llm-top10",
-    "codes": ["LLM07", "LLM08"],
+    "codes": [
+      "LLM07",
+      "LLM08"
+    ],
     "relationship": "defends",
-    "notes": "Enterprise safety protocols defend against insecure plugin design and excessive agency in corporate environments."
+    "notes": "Enterprise safety protocols defend against insecure plugin design and excessive agency in corporate environments.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-data-sovereignty",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-3", "MANAGE-2"],
+    "codes": [
+      "GOVERN-3",
+      "MANAGE-2"
+    ],
     "relationship": "addresses",
-    "notes": "Data sovereignty controls implement governance of jurisdictional compliance and manage cross-border data risks."
+    "notes": "Data sovereignty controls implement governance of jurisdictional compliance and manage cross-border data risks.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-data-sovereignty",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-3"],
+    "codes": [
+      "GAI-3"
+    ],
     "relationship": "addresses",
-    "notes": "Jurisdictional data controls address data privacy requirements across regulatory boundaries."
+    "notes": "Jurisdictional data controls address data privacy requirements across regulatory boundaries.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-data-sovereignty",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Data residency controls support EU AI Act data governance requirements for high-risk systems."
+    "notes": "Data residency controls support EU AI Act data governance requirements for high-risk systems.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-data-sovereignty",
     "frameworkId": "iso-42001",
-    "codes": ["4", "8"],
+    "codes": [
+      "4",
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Sovereignty controls address organizational context (jurisdiction) and operational data handling requirements."
+    "notes": "Sovereignty controls address organizational context (jurisdiction) and operational data handling requirements.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-data-retention-policies",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-3", "MANAGE-3"],
+    "codes": [
+      "GOVERN-3",
+      "MANAGE-3"
+    ],
     "relationship": "addresses",
-    "notes": "Data retention policies implement governance and risk management requirements for data lifecycle."
+    "notes": "Data retention policies implement governance and risk management requirements for data lifecycle.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-data-retention-policies",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-3"],
+    "codes": [
+      "GAI-3"
+    ],
     "relationship": "addresses",
-    "notes": "Defined retention periods address data privacy risks by limiting data exposure over time."
+    "notes": "Defined retention periods address data privacy risks by limiting data exposure over time.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-data-retention-policies",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "addresses",
-    "notes": "Retention policies support EU AI Act data governance and GDPR storage limitation requirements."
+    "notes": "Retention policies support EU AI Act data governance and GDPR storage limitation requirements.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-data-retention-policies",
     "frameworkId": "iso-42001",
-    "codes": ["7", "8"],
+    "codes": [
+      "7",
+      "8"
+    ],
     "relationship": "addresses",
-    "notes": "Retention policies provide support resources and operational controls for data lifecycle management."
+    "notes": "Retention policies provide support resources and operational controls for data lifecycle management.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-data-retention-policies",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-II"],
+    "codes": [
+      "W-II"
+    ],
     "relationship": "mitigates",
-    "notes": "Limiting data retention reduces information hazards from long-term storage of sensitive user interactions."
+    "notes": "Limiting data retention reduces information hazards from long-term storage of sensitive user interactions.",
+    "mappingConfidence": "strong"
   },
   {
     "techniqueId": "tech-ethical-labour-sourcing",
     "frameworkId": "nist-ai-rmf",
-    "codes": ["GOVERN-5", "GOVERN-6"],
+    "codes": [
+      "GOVERN-5",
+      "GOVERN-6"
+    ],
     "relationship": "addresses",
-    "notes": "Ethical labour sourcing addresses workforce governance and organizational accountability in AI development."
+    "notes": "Ethical labour sourcing addresses workforce governance and organizational accountability in AI development.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-ethical-labour-sourcing",
     "frameworkId": "nist-ai-600-1",
-    "codes": ["GAI-12"],
+    "codes": [
+      "GAI-12"
+    ],
     "relationship": "addresses",
-    "notes": "Worker welfare practices address value chain and component integration responsibilities."
+    "notes": "Worker welfare practices address value chain and component integration responsibilities.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-ethical-labour-sourcing",
     "frameworkId": "eu-ai-act",
-    "codes": ["high-risk"],
+    "codes": [
+      "high-risk"
+    ],
     "relationship": "supports",
-    "notes": "Ethical sourcing supports the EU AI Act emphasis on fundamental rights throughout the AI value chain."
+    "notes": "Ethical sourcing supports the EU AI Act emphasis on fundamental rights throughout the AI value chain.",
+    "mappingConfidence": "indirect"
   },
   {
     "techniqueId": "tech-ethical-labour-sourcing",
     "frameworkId": "iso-42001",
-    "codes": ["5", "7"],
+    "codes": [
+      "5",
+      "7"
+    ],
     "relationship": "addresses",
-    "notes": "Ethical labour policies demonstrate leadership commitment and provide appropriate support for human resources."
+    "notes": "Ethical labour policies demonstrate leadership commitment and provide appropriate support for human resources.",
+    "mappingConfidence": "partial"
   },
   {
     "techniqueId": "tech-ethical-labour-sourcing",
     "frameworkId": "weidinger-taxonomy",
-    "codes": ["W-VI"],
+    "codes": [
+      "W-VI"
+    ],
     "relationship": "mitigates",
-    "notes": "Fair labour practices directly address socioeconomic harms to workers in the AI supply chain."
+    "notes": "Fair labour practices directly address socioeconomic harms to workers in the AI supply chain.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-responsible-release",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G1",
+      "AU-G2"
+    ],
+    "relationship": "addresses",
+    "notes": "Responsible release protocols establish accountability and risk assessment processes before AI system deployment.",
+    "mappingConfidence": "partial"
+  },
+  {
+    "techniqueId": "tech-regulatory-compliance",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G1"
+    ],
+    "relationship": "addresses",
+    "notes": "Regulatory compliance directly supports establishing and publishing accountability processes.",
+    "mappingConfidence": "partial"
+  },
+  {
+    "techniqueId": "tech-red-teaming",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G2",
+      "AU-G4"
+    ],
+    "relationship": "mitigates",
+    "notes": "Red teaming identifies risks through adversarial testing, satisfying both risk management and testing guardrails.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-safety-benchmarks",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G2",
+      "AU-G4"
+    ],
+    "relationship": "mitigates",
+    "notes": "Safety benchmarking provides systematic testing and risk quantification for AI systems.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-capability-monitoring",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G2",
+      "AU-G4",
+      "AU-G5"
+    ],
+    "relationship": "mitigates",
+    "notes": "Capability threshold monitoring identifies dangerous capabilities and enables human intervention when thresholds are exceeded.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-pii-detection",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G3"
+    ],
+    "relationship": "mitigates",
+    "notes": "PII detection and redaction protects personal data within AI system inputs and outputs.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-prompt-injection-defense",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G3"
+    ],
+    "relationship": "defends",
+    "notes": "Jailbreak and injection defense protects AI systems from adversarial manipulation.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-data-sovereignty",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G3"
+    ],
+    "relationship": "addresses",
+    "notes": "Data sovereignty controls ensure data processing complies with jurisdictional requirements.",
+    "mappingConfidence": "partial"
+  },
+  {
+    "techniqueId": "tech-input-guardrail-systems",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G3",
+      "AU-G4"
+    ],
+    "relationship": "mitigates",
+    "notes": "Input guardrails protect AI systems by filtering harmful or malicious inputs.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-output-filtering-systems",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G4"
+    ],
+    "relationship": "mitigates",
+    "notes": "Output safety systems test and filter AI outputs to mitigate harmful content risks.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-circuit-breakers",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G5"
+    ],
+    "relationship": "mitigates",
+    "notes": "Circuit breakers and kill switches enable direct human control and intervention over AI systems.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-configurable-policies",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G5"
+    ],
+    "relationship": "addresses",
+    "notes": "Configurable safety policies allow operators to maintain human control over AI behavior.",
+    "mappingConfidence": "partial"
+  },
+  {
+    "techniqueId": "tech-watermarking",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G6"
+    ],
+    "relationship": "addresses",
+    "notes": "Provenance and watermarking informs end-users about AI-generated content.",
+    "mappingConfidence": "partial"
+  },
+  {
+    "techniqueId": "tech-system-prompts",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G6"
+    ],
+    "relationship": "supports",
+    "notes": "System prompts can include transparency disclosures about AI system capabilities and limitations.",
+    "mappingConfidence": "indirect"
+  },
+  {
+    "techniqueId": "tech-incident-reporting",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G7",
+      "AU-G9"
+    ],
+    "relationship": "addresses",
+    "notes": "Incident reporting systems support contestability by documenting issues and enabling follow-up.",
+    "mappingConfidence": "partial"
+  },
+  {
+    "techniqueId": "tech-access-control-documentation",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G8"
+    ],
+    "relationship": "addresses",
+    "notes": "Access control documentation provides transparency across the AI supply chain.",
+    "mappingConfidence": "partial"
+  },
+  {
+    "techniqueId": "tech-enterprise-integration",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G8"
+    ],
+    "relationship": "supports",
+    "notes": "Enterprise integration safety protocols support supply chain transparency through documented safety handoffs.",
+    "mappingConfidence": "indirect"
+  },
+  {
+    "techniqueId": "tech-observability-monitoring",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G9"
+    ],
+    "relationship": "mitigates",
+    "notes": "Observability and audit logging directly satisfies record-keeping requirements for AI system activity.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-stakeholder-engagement",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G10"
+    ],
+    "relationship": "addresses",
+    "notes": "Stakeholder engagement directly addresses the guardrail requiring engagement with affected communities.",
+    "mappingConfidence": "partial"
+  },
+  {
+    "techniqueId": "tech-community-evaluation",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G10",
+      "AU-G4"
+    ],
+    "relationship": "addresses",
+    "notes": "Community-based evaluation engages stakeholders in the testing and assessment of AI systems.",
+    "mappingConfidence": "partial"
+  },
+  {
+    "techniqueId": "tech-model-weight-security",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G3"
+    ],
+    "relationship": "mitigates",
+    "notes": "Model weight security protects AI system assets from unauthorized access.",
+    "mappingConfidence": "strong"
+  },
+  {
+    "techniqueId": "tech-data-retention-policies",
+    "frameworkId": "au-ai-guardrails",
+    "codes": [
+      "AU-G3",
+      "AU-G9"
+    ],
+    "relationship": "addresses",
+    "notes": "Data retention policies govern data lifecycle management and record-keeping obligations.",
+    "mappingConfidence": "partial"
   }
 ]

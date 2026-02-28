@@ -1,0 +1,262 @@
+# Data Dictionary
+
+Schema reference for all JSON data files in this directory. All files use UTF-8 encoding.
+
+---
+
+## evidence.json
+
+Core dataset containing evidence sources — documents that link providers to safety techniques.
+
+**Top-level structure:** `{ "sources": [ ... ] }`
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | yes | Unique source identifier (e.g., `gpt-5-system-card`) |
+| `title` | string | yes | Document title |
+| `provider` | string | yes | Provider ID (references `providers.json`) |
+| `url` | string | yes | Source document URL |
+| `type` | string | yes | Document format: `System Card`, `Technical Report`, `Policy`, `Model Card`, `Paper`, `Guide`, `Blog Post`, `Documentation`, `Framework`, `Website` |
+| `origin` | string | yes | Who produced the document: `provider`, `third-party` |
+| `evidenceQuality` | string | yes | Nature of evidence: `primary` (technical documentation), `secondary` (blog posts, commentary) |
+| `date_added` | string | yes | ISO 8601 date when source was added to dataset |
+| `models` | array | yes | Models referenced: `[{ "modelId": string, "name": string }]` |
+| `content_metadata` | object | yes | See below |
+
+**content_metadata fields:**
+
+| Field | Type | Values |
+|-------|------|--------|
+| `document_purpose` | string | `system_card`, `policy`, `primary_research`, `technical_report`, `documentation`, `blog_post`, `model_card` |
+| `signal_strength` | string | `high`, `medium`, `low` |
+| `temporal_focus` | string | `implemented`, `planned` |
+| `scope` | string | `model_family`, `specific_model`, `provider_wide` |
+| `technical_depth` | string | `deep`, `moderate`, `shallow` |
+| `primary_topics` | array | Topic strings relevant to the document |
+| `excluded_topics` | array | Topics explicitly out of scope |
+| `confidence_weight` | number | 0.0–1.0, weighting for pipeline |
+| `language` | string | ISO language code (e.g., `en`) |
+| `notes` | string | Human-readable description |
+
+---
+
+## techniques.json
+
+Safety technique definitions with NLU profiles for automated detection.
+
+**Top-level structure:** `[ ... ]` (array of technique objects)
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | yes | Unique technique ID (e.g., `tech-rlhf`) |
+| `name` | string | yes | Human-readable name |
+| `categoryId` | string | yes | References `categories.json` |
+| `riskAreaIds` | array | yes | Array of risk area IDs (references `risk_areas.json`) |
+| `lifecycleStages` | array | yes | `training`, `inference`, `governance` |
+| `description` | string | yes | Brief description |
+| `nlu_profile` | object | yes | See below |
+
+**nlu_profile fields:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `primary_concept` | string | Core semantic definition for NLU matching |
+| `semantic_anchors` | array | Keywords and phrases for bi-encoder retrieval |
+| `entailment_hypothesis` | string | Statement for cross-encoder verification |
+| `excluded_terms` | array | (Optional) Terms to filter out to avoid false positives |
+
+---
+
+## providers.json
+
+Provider metadata for the 15 tracked AI companies.
+
+**Top-level structure:** `[ ... ]` (array of provider objects)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique provider ID (e.g., `openai`) |
+| `name` | string | Display name (e.g., `OpenAI`) |
+| `type` | string | Organization type |
+| `headquarters` | string | Location |
+
+---
+
+## models.json
+
+Model definitions linked to providers.
+
+**Top-level structure:** `{ "models": [ ... ] }`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique model ID |
+| `name` | string | Model display name |
+| `providerId` | string | References `providers.json` |
+| `releaseDate` | string | ISO 8601 release date |
+
+---
+
+## categories.json
+
+Technique categories (5 categories).
+
+**Top-level structure:** `[ ... ]` (array of category objects)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Category ID (e.g., `cat-model-development`) |
+| `name` | string | Category name |
+| `description` | string | Category description |
+| `color` | string | Hex color for dashboard visualization |
+
+**Current categories:** Model Development, Evaluation & Red Teaming, Runtime Safety Systems, Harm & Content Classification, Governance & Oversight.
+
+---
+
+## risk_areas.json
+
+Risk area taxonomy (10 areas).
+
+**Top-level structure:** `[ ... ]` (array of risk area objects)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Risk area ID (e.g., `harmful_content`) |
+| `name` | string | Display name |
+| `description` | string | Brief description |
+| `category` | string | Grouping: `safety`, `fairness`, `privacy`, `security`, `reliability`, `transparency` |
+
+---
+
+## model_technique_map.json
+
+Generated by the NLU/LLM extraction pipeline. Maps evidence sources to detected techniques.
+
+**Top-level structure:** `{ "sourceId": [ ... ], ... }` (object keyed by evidence source ID)
+
+Each value is an array of detection objects:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `techniqueId` | string | References `techniques.json` |
+| `active` | boolean | Whether this detection is confirmed (true) or rejected (false) |
+| `confidence` | number | Detection confidence score |
+| `origin` | string | Detection source: `nlu`, `llm`, `manual` |
+| `evidence_text` | string | (Optional) Supporting text excerpt from the source document |
+| `review_status` | string | (Optional) `confirmed`, `rejected`, `pending` |
+
+**Update frequency:** After each pipeline run (`scripts/run_extraction_pipeline.py`).
+
+---
+
+## standards.json
+
+External framework definitions for regulatory crosswalk analysis.
+
+**Top-level structure:** `{ "frameworks": [ ... ] }`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Framework ID (e.g., `nist-ai-rmf`, `eu-ai-act`) |
+| `name` | string | Full framework name |
+| `version` | string | Version or year |
+| `url` | string | Reference URL |
+| `structure` | array | Hierarchical codes: `[{ "code": string, "name": string, "children": [...] }]` |
+
+**Current frameworks (8):** NIST AI RMF, NIST AI 600-1, OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO/IEC 42001, Weidinger Taxonomy, Australia Voluntary AI Safety Standard.
+
+---
+
+## standards_mapping.json
+
+Many-to-many mapping of techniques to standard controls.
+
+**Top-level structure:** `[ ... ]` (array of mapping objects)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `techniqueId` | string | References `techniques.json` |
+| `frameworkId` | string | References `standards.json` |
+| `codes` | array | Specific framework codes this technique addresses |
+| `relationship` | string | `mitigates`, `addresses`, `supports`, `defends` |
+| `mappingConfidence` | string | `strong` (directly addresses), `partial` (addresses some elements), `indirect` (contributes but doesn't directly satisfy) |
+| `notes` | string | Contextual explanation of the mapping |
+
+---
+
+## commentary.json
+
+Third-party references discussing safety technique effectiveness.
+
+**Top-level structure:** `[ ... ]` (array of commentary objects)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique commentary ID |
+| `title` | string | Publication title |
+| `url` | string | Source URL |
+| `author` | string | Author name(s) |
+| `organization` | string | Organization affiliation |
+| `date` | string | ISO 8601 publication date |
+| `type` | string | `academic_paper`, `audit`, `blog_post`, `report`, `news_analysis` |
+| `techniqueIds` | array | Technique IDs discussed (references `techniques.json`) |
+| `summary` | string | Brief summary |
+| `sentiment` | string | `positive`, `negative`, `mixed`, `neutral` |
+
+---
+
+## incidents.json
+
+Safety incident register documenting real-world failures.
+
+**Top-level structure:** `[ ... ]` (array of incident objects)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique incident ID |
+| `title` | string | Incident title |
+| `date` | string | ISO 8601 incident date |
+| `description` | string | Detailed description |
+| `severity` | string | `critical`, `high`, `medium` |
+| `providerIds` | array | Provider IDs involved (references `providers.json`) |
+| `modelIds` | array | Model IDs involved (references `models.json`; often empty) |
+| `techniqueIds` | array | Techniques that failed (references `techniques.json`) |
+| `riskAreaIds` | array | Risk areas involved (references `risk_areas.json`) |
+| `sources` | array | External references: `[{ "url": string, "title": string, "date": string, "type": string }]` |
+| `status` | string | `confirmed`, `mitigated`, `disputed` |
+
+---
+
+## Referential Integrity
+
+All ID references must point to existing entities:
+
+| Field | References |
+|-------|-----------|
+| `evidence.sources[].provider` | `providers[].id` |
+| `evidence.sources[].models[].modelId` | `models.models[].id` |
+| `techniques[].categoryId` | `categories[].id` |
+| `techniques[].riskAreaIds[]` | `risk_areas[].id` |
+| `model_technique_map[sourceId]` | `evidence.sources[].id` |
+| `model_technique_map[][].techniqueId` | `techniques[].id` |
+| `standards_mapping[].techniqueId` | `techniques[].id` |
+| `standards_mapping[].frameworkId` | `standards.frameworks[].id` |
+| `commentary[].techniqueIds[]` | `techniques[].id` |
+| `incidents[].providerIds[]` | `providers[].id` |
+| `incidents[].modelIds[]` | `models.models[].id` |
+| `incidents[].techniqueIds[]` | `techniques[].id` |
+| `incidents[].riskAreaIds[]` | `risk_areas[].id` |
+
+---
+
+## Snapshots
+
+Temporal versioning archives in `snapshots/` subdirectory.
+
+| File | Description |
+|------|-------------|
+| `snapshot_index.json` | Index of all snapshots with dates and summary stats |
+| `model_technique_map_YYYY-MM-DD.json` | Dated copy of model_technique_map.json |
+
+Created via `python scripts/snapshot.py`. See script docstring for usage.

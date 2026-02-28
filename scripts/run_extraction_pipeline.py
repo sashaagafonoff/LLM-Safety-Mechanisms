@@ -449,6 +449,11 @@ def main():
         action='store_true',
         help='Regenerate reports, dashboard, and comparison after pipeline'
     )
+    parser.add_argument(
+        '--snapshot',
+        action='store_true',
+        help='Create a dated snapshot of model_technique_map.json after pipeline'
+    )
 
     args = parser.parse_args()
 
@@ -525,6 +530,24 @@ def main():
                     print(f"  ✗ {name}: {result.stderr[:200]}")
             except Exception as e:
                 print(f"  ✗ {script}: {e}")
+
+    # Create snapshot if requested
+    if args.snapshot:
+        print("\n" + "=" * 70)
+        print("CREATING SNAPSHOT")
+        print("=" * 70)
+        import subprocess
+        try:
+            result = subprocess.run(
+                [sys.executable, "scripts/snapshot.py"],
+                capture_output=True, text=True, timeout=30
+            )
+            if result.returncode == 0:
+                print(result.stdout)
+            else:
+                print(f"  ✗ snapshot: {result.stderr[:200]}")
+        except Exception as e:
+            print(f"  ✗ snapshot: {e}")
 
     print("\n" + "=" * 70)
     print("PIPELINE COMPLETE")

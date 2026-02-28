@@ -1130,5 +1130,138 @@
       ],
       "entailment_hypothesis": "The organization addresses ethical treatment, fair compensation, or welfare of human annotation or crowd workers."
     }
+  },
+  {
+    "id": "tech-scalable-oversight",
+    "name": "Scalable Oversight & Debate",
+    "categoryId": "cat-model-development",
+    "riskAreaIds": ["autonomy_and_control", "harmful_content"],
+    "lifecycleStages": ["training"],
+    "description": "Techniques for supervising AI systems on tasks beyond direct human evaluation, including debate and recursive reward modeling",
+    "nlu_profile": {
+      "primary_concept": "Methods for maintaining meaningful human oversight of AI systems as they become more capable, including AI debate protocols, recursive reward modeling, iterated amplification, and weak-to-strong generalization techniques.",
+      "semantic_anchors": [
+        "scalable oversight",
+        "AI safety via debate",
+        "recursive reward modeling",
+        "iterated amplification",
+        "iterated distillation",
+        "superalignment",
+        "weak-to-strong generalization",
+        "scalable supervision",
+        "debate protocol",
+        "oversight scalability",
+        "human oversight at scale",
+        "AI-assisted evaluation"
+      ],
+      "entailment_hypothesis": "The organization implements scalable oversight techniques such as debate, recursive reward modeling, or weak-to-strong generalization for alignment.",
+      "excluded_terms": ["human feedback", "RLHF", "red teaming", "manual review"]
+    }
+  },
+  {
+    "id": "tech-whistleblower-protections",
+    "name": "Whistleblower & Internal Safety Reporting",
+    "categoryId": "cat-governance",
+    "riskAreaIds": ["transparency"],
+    "lifecycleStages": ["governance"],
+    "description": "Internal mechanisms protecting employees who raise safety concerns, including anonymous reporting channels and non-retaliation policies",
+    "nlu_profile": {
+      "primary_concept": "Organizational mechanisms that protect employees, contractors, and researchers who raise safety concerns about AI systems, including anonymous reporting channels, non-retaliation policies, and right-to-warn provisions.",
+      "semantic_anchors": [
+        "whistleblower protection",
+        "internal safety reporting",
+        "anonymous reporting channel",
+        "non-retaliation policy",
+        "right to warn",
+        "employee safety concerns",
+        "safety reporting mechanism",
+        "internal dissent",
+        "safety whistleblower",
+        "confidential reporting",
+        "speak-up policy"
+      ],
+      "entailment_hypothesis": "The organization has whistleblower protections or internal reporting mechanisms for employees raising AI safety concerns.",
+      "excluded_terms": ["incident reporting", "bug bounty", "vulnerability disclosure", "customer feedback"]
+    }
+  },
+  {
+    "id": "tech-voluntary-commitments",
+    "name": "Voluntary Safety Commitments & Pledges",
+    "categoryId": "cat-governance",
+    "riskAreaIds": ["transparency", "dual_use"],
+    "lifecycleStages": ["governance"],
+    "description": "Formal voluntary commitments to safety practices, including industry pledges, Frontier Model Forum membership, and White House commitments",
+    "nlu_profile": {
+      "primary_concept": "Formal voluntary commitments by AI organizations to specific safety practices, including government-brokered pledges, industry consortium membership, and public safety commitments that go beyond legal requirements.",
+      "semantic_anchors": [
+        "voluntary commitment",
+        "safety pledge",
+        "White House commitment",
+        "Frontier Model Forum",
+        "responsible AI pledge",
+        "industry agreement",
+        "voluntary safeguard",
+        "safety commitment",
+        "industry consortium",
+        "voluntary safety standard",
+        "public commitment",
+        "Seoul Declaration",
+        "Bletchley Declaration"
+      ],
+      "entailment_hypothesis": "The organization has made voluntary safety commitments, signed industry pledges, or joined safety-focused consortiums.",
+      "excluded_terms": ["regulatory compliance", "legal requirement", "mandatory", "regulation"]
+    }
+  },
+  {
+    "id": "tech-model-weight-security",
+    "name": "Model Weight Security",
+    "categoryId": "cat-governance",
+    "riskAreaIds": ["security_and_misuse", "dual_use"],
+    "lifecycleStages": ["governance"],
+    "description": "Protection of model weights against unauthorized access, exfiltration, or tampering, including secure infrastructure and access controls",
+    "nlu_profile": {
+      "primary_concept": "Security measures protecting trained model weights and artifacts from unauthorized access, exfiltration, theft, or tampering, including physical security, encryption, access controls, and supply chain integrity for model files.",
+      "semantic_anchors": [
+        "model weight security",
+        "weight protection",
+        "model exfiltration prevention",
+        "model artifact security",
+        "secure model storage",
+        "weight access control",
+        "model theft prevention",
+        "model weight encryption",
+        "secure model serving",
+        "model integrity",
+        "weight exfiltration"
+      ],
+      "entailment_hypothesis": "The organization implements security measures to protect model weights from unauthorized access or exfiltration.",
+      "excluded_terms": ["data privacy", "user data", "PII", "differential privacy"]
+    }
+  },
+  {
+    "id": "tech-differential-privacy",
+    "name": "Differential Privacy in Training",
+    "categoryId": "cat-model-development",
+    "riskAreaIds": ["privacy_and_pii"],
+    "lifecycleStages": ["training"],
+    "description": "Mathematical privacy guarantees during model training through noise injection, ensuring individual training examples cannot be extracted",
+    "nlu_profile": {
+      "primary_concept": "Application of differential privacy techniques during model training, providing mathematical guarantees that individual training examples cannot be reverse-engineered from model outputs, typically via DP-SGD or similar noise-injection methods.",
+      "semantic_anchors": [
+        "differential privacy",
+        "DP-SGD",
+        "privacy budget",
+        "epsilon guarantee",
+        "noise injection for privacy",
+        "membership inference defense",
+        "training data privacy guarantee",
+        "privacy-preserving training",
+        "differentially private learning",
+        "privacy loss bound",
+        "private gradient descent"
+      ],
+      "entailment_hypothesis": "The model was trained using differential privacy techniques such as DP-SGD to protect training data privacy.",
+      "excluded_terms": ["PII detection", "PII redaction", "data retention", "anonymization", "data filtering"]
+    }
   }
 ]
