@@ -353,18 +353,20 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
     .style("pointer-events", "stroke")
     .style("cursor", "pointer")
     .on("mouseenter", function (event, d) {
-      if (isDragging) return;
-      d3.select(this.previousElementSibling || linkElements.filter((l) => l === d).node())
+      if (isDragging || persistentTooltip) return;
+      linkElements.filter((l) => l === d)
         .attr("stroke-opacity", 0.9)
         .attr("stroke-width", 2.5);
       showLinkTooltip(event, d);
     })
     .on("mousemove", function (event) {
+      if (persistentTooltip) return;
       d3.select(".unified-link-tooltip")
         .style("left", event.pageX + 10 + "px")
         .style("top", event.pageY - 28 + "px");
     })
     .on("mouseleave", function (event, d) {
+      if (persistentTooltip) return;
       linkElements.filter((l) => l === d)
         .attr("stroke-opacity", 0.5)
         .attr("stroke-width", 1);
@@ -372,10 +374,14 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
     })
     .on("click", function (event, d) {
       event.stopPropagation();
-      dismissTooltip();
+      if (persistentTooltip) {
+        dismissTooltip();
+        return;
+      }
       selectedLinkElement = linkElements.filter((l) => l === d);
       selectedLinkElement.attr("stroke-opacity", 1).attr("stroke-width", 3);
       persistentTooltip = showLinkTooltip(event, d, true);
+      makeDraggable(persistentTooltip);
     });
 
   function updateLinks() {
@@ -573,6 +579,40 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
     });
   });
 
+  function makeDraggable(tooltipEl) {
+    if (!tooltipEl) return;
+    const node = tooltipEl.node();
+    let dragOffsetX = 0, dragOffsetY = 0, isDraggingTooltip = false;
+
+    const header = tooltipEl.select(".tooltip-drag-handle");
+    const target = header.empty() ? tooltipEl : header;
+
+    target.style("cursor", "grab");
+
+    target.on("mousedown.drag", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      isDraggingTooltip = true;
+      const rect = node.getBoundingClientRect();
+      dragOffsetX = event.clientX - rect.left;
+      dragOffsetY = event.clientY - rect.top;
+      target.style("cursor", "grabbing");
+    });
+
+    d3.select("body")
+      .on("mousemove.tooltipDrag", function (event) {
+        if (!isDraggingTooltip) return;
+        node.style.left = (event.clientX - dragOffsetX + window.scrollX) + "px";
+        node.style.top = (event.clientY - dragOffsetY + window.scrollY) + "px";
+      })
+      .on("mouseup.tooltipDrag", function () {
+        if (isDraggingTooltip) {
+          isDraggingTooltip = false;
+          target.style("cursor", "grab");
+        }
+      });
+  }
+
   function showLinkTooltip(event, d, persistent = false) {
     hideLinkTooltip();
     const source = typeof d.source === "string" ? chartData.nodeById.get(d.source) : d.source;
@@ -592,12 +632,16 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
       .style("border-radius", "4px")
       .style("max-width", "400px")
       .style("box-shadow", "0 4px 6px rgba(0,0,0,0.3)")
-      .style("border", "1px solid #333")
+      .style("border", persistent ? "1px solid #555" : "1px solid #333")
       .style("pointer-events", persistent ? "auto" : "none")
       .style("z-index", 1000)
       .style("left", event.pageX + 10 + "px")
       .style("top", event.pageY - 28 + "px")
       .style("opacity", 0);
+
+    const dragHandle = persistent
+      ? `<div class="tooltip-drag-handle" style="cursor:grab;padding:2px 0 6px;margin-bottom:6px;border-bottom:1px solid #444;display:flex;justify-content:space-between;align-items:center;"><span style="color:#888;font-size:10px;">Drag to move</span><span style="color:#888;font-size:10px;">Click chart to dismiss</span></div>`
+      : "";
 
     if (d.data) {
       const sourceHtml = d.data.source_uri
@@ -615,6 +659,7 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
       }
 
       tooltip.html(
+        dragHandle +
         `<h4 style="margin:0 0 8px 0;color:#ffa726;font-size:14px;">${source.name} \u2192 ${target.name}</h4>` +
         `<p style="margin:4px 0;"><strong>Source:</strong> ${sourceHtml}</p>` +
         `<p style="margin:4px 0;"><strong>Model(s):</strong> ${d.data.model || "N/A"}</p>` +
@@ -622,7 +667,10 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
         `<div style="margin-top:8px;padding-top:6px;border-top:1px solid #555;"><strong>Confidence:</strong> ${d.data.confidence || "Unknown"}</div>`
       );
     } else {
-      tooltip.html(`<h4 style="margin:0;color:#ffa726;">${source.name} \u2192 ${target.name}</h4>`);
+      tooltip.html(
+        dragHandle +
+        `<h4 style="margin:0;color:#ffa726;">${source.name} \u2192 ${target.name}</h4>`
+      );
     }
 
     tooltip.transition().duration(200).style("opacity", 0.95);
@@ -635,6 +683,7 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
 
   function dismissTooltip() {
     if (persistentTooltip) {
+      d3.select("body").on("mousemove.tooltipDrag", null).on("mouseup.tooltipDrag", null);
       persistentTooltip.remove();
       persistentTooltip = null;
     }
