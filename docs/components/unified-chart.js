@@ -342,8 +342,49 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
     .attr("stroke-width", (d) => (d.type === "category-technique" ? 2 : 1))
     .style("pointer-events", "none");
 
+  // Invisible wider hit-area lines for provider-technique links (tooltip interaction)
+  const linkHitAreas = linkGroup
+    .selectAll(".link-hit-area")
+    .data(chartData.links.filter((d) => d.type === "provider-technique"))
+    .join("line")
+    .attr("class", "link-hit-area")
+    .attr("stroke", "transparent")
+    .attr("stroke-width", 12)
+    .style("pointer-events", "stroke")
+    .style("cursor", "pointer")
+    .on("mouseenter", function (event, d) {
+      if (isDragging) return;
+      d3.select(this.previousElementSibling || linkElements.filter((l) => l === d).node())
+        .attr("stroke-opacity", 0.9)
+        .attr("stroke-width", 2.5);
+      showLinkTooltip(event, d);
+    })
+    .on("mousemove", function (event) {
+      d3.select(".unified-link-tooltip")
+        .style("left", event.pageX + 10 + "px")
+        .style("top", event.pageY - 28 + "px");
+    })
+    .on("mouseleave", function (event, d) {
+      linkElements.filter((l) => l === d)
+        .attr("stroke-opacity", 0.5)
+        .attr("stroke-width", 1);
+      hideLinkTooltip();
+    })
+    .on("click", function (event, d) {
+      event.stopPropagation();
+      dismissTooltip();
+      selectedLinkElement = linkElements.filter((l) => l === d);
+      selectedLinkElement.attr("stroke-opacity", 1).attr("stroke-width", 3);
+      persistentTooltip = showLinkTooltip(event, d, true);
+    });
+
   function updateLinks() {
     linkElements
+      .attr("x1", (d) => { const s = typeof d.source === "string" ? chartData.nodeById.get(d.source) : d.source; return s ? s.x : 0; })
+      .attr("y1", (d) => { const s = typeof d.source === "string" ? chartData.nodeById.get(d.source) : d.source; return s ? s.y : 0; })
+      .attr("x2", (d) => { const t = typeof d.target === "string" ? chartData.nodeById.get(d.target) : d.target; return t ? t.x : 0; })
+      .attr("y2", (d) => { const t = typeof d.target === "string" ? chartData.nodeById.get(d.target) : d.target; return t ? t.y : 0; });
+    linkHitAreas
       .attr("x1", (d) => { const s = typeof d.source === "string" ? chartData.nodeById.get(d.source) : d.source; return s ? s.x : 0; })
       .attr("y1", (d) => { const s = typeof d.source === "string" ? chartData.nodeById.get(d.source) : d.source; return s ? s.y : 0; })
       .attr("x2", (d) => { const t = typeof d.target === "string" ? chartData.nodeById.get(d.target) : d.target; return t ? t.x : 0; })
@@ -531,8 +572,6 @@ export function createUnifiedChart(chartData, config, layouts, validatedLayout, 
       updateSelectionStatus();
     });
   });
-
-  // Link pointer-events disabled to allow marquee selection through links
 
   function showLinkTooltip(event, d, persistent = false) {
     hideLinkTooltip();
