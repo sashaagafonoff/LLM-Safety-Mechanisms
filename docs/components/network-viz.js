@@ -2,6 +2,7 @@
 // Ported from Observable notebook cell: networkViz
 
 import {NETWORK_LAYOUT_STORAGE_KEY} from "./network-data.js";
+import { setupLinkTooltips } from "./link-tooltip.js";
 
 export function createNetworkViz(positionedGraph, validatedLayout, autoLayout, config, providerColors, d3) {
   const {
@@ -334,7 +335,26 @@ export function createNetworkViz(positionedGraph, validatedLayout, autoLayout, c
   function updateLinks() {
     linkElements.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y)
       .attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
+    if (linkTooltips) linkTooltips.updateHitAreas();
   }
+
+  // Link tooltips
+  const linkTooltips = setupLinkTooltips({
+    d3, svg, linkGroup, linkElements, links: resolvedLinks, nodeById,
+    uniqueId: "network",
+    buildTooltipHtml: (d) => {
+      const source = d.source;
+      const target = d.target;
+      if (!source || !target) return null;
+      if (d.type === "owns") {
+        return `<h4 style="margin:0 0 4px;color:#ffa726;font-size:13px;">${source.label} \u2192 ${target.label}</h4>` +
+          `<div style="font-size:11px;color:#aaa;">Provider owns this model</div>`;
+      }
+      return `<h4 style="margin:0 0 4px;color:#ffa726;font-size:13px;">${source.label} \u2192 ${target.label}</h4>` +
+        `<div style="font-size:11px;color:#aaa;">Model referenced in document</div>` +
+        (target.url ? `<div style="margin-top:4px;"><a href="${target.url}" target="_blank" rel="noopener" style="color:#64b5f6;font-size:11px;">View document \u2197</a></div>` : "");
+    }
+  });
 
   // ── Node styling helpers ──
   function getNodeStroke(d) {

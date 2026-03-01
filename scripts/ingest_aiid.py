@@ -48,6 +48,7 @@ AIID_DOWNLOAD_BASE = "https://incidentdatabase.ai/research/snapshots/"
 
 # Max reports (sources) to include per incident
 MAX_SOURCES_PER_INCIDENT = 3
+TECHNIQUES_PATH = DATA_DIR / "techniques.json"
 
 # ── Provider entity mapping ──
 # Maps AIID entity names (lowercase) to our provider IDs
@@ -105,6 +106,167 @@ CSET_SEVERITY_MAP = {
     "non-imminent risk of tangible harm (an issue) occurred": "medium",
     "no tangible harm, near-miss, or issue": "low",
 }
+
+
+# ── LLM/GenAI classification keywords ──
+# Incidents matching any of these in title+description are tagged isLLMRelated=true
+LLM_KEYWORDS = [
+    # Model types
+    "llm", "large language model", "language model", "foundation model",
+    "frontier model", "generative ai", "gen ai", "genai",
+    # Products and models
+    "chatgpt", "gpt-3", "gpt-4", "gpt-5", "dall-e", "dalle", "sora",
+    "gemini", "bard", "palm", "lamda",
+    "claude", "copilot", "bing chat", "sydney",
+    "grok", "llama", "mistral", "mixtral", "command r",
+    "stable diffusion", "midjourney", "flux",
+    "whisper", "codex",
+    # Categories
+    "chatbot", "chat bot", "ai chatbot", "ai assistant", "virtual assistant",
+    "text generation", "image generation", "video generation",
+    "content generation", "code generation",
+    "voice cloning", "speech synthesis", "text-to-speech", "text to speech",
+    "deepfake", "deep fake", "ai-generated", "ai generated",
+    "ai image", "ai video", "ai audio", "ai voice", "ai text",
+    # Safety concepts
+    "hallucination", "prompt injection", "jailbreak", "prompt attack",
+    "ai alignment", "ai safety",
+    # Companies (as indicators of LLM incidents when mentioned)
+    "openai", "anthropic",
+    # NLP
+    "natural language processing", "nlp", "transformer model",
+    "neural network text", "token generation",
+]
+
+# CSETv1 AI tools/tasks that indicate LLM/GenAI
+CSET_LLM_INDICATORS = {
+    "large language model", "large language models",
+    "natural language processing", "Natural Language Processesing",
+    "text generation", "chat bot", "chatbot",
+    "human language technology", "generative ai",
+    "image generation", "content moderation",
+}
+
+
+def classify_llm_related(title, description, cset_row=None):
+    """Determine if an incident relates to LLMs/GenAI."""
+    text = (title + " " + description).lower()
+    # Keyword match
+    for kw in LLM_KEYWORDS:
+        if kw in text:
+            return True
+    # CSETv1 AI task/tools match
+    if cset_row:
+        for field in ["AI Task", "AI tools and methods"]:
+            val = (cset_row.get(field, "") or "").strip().lower()
+            if val and any(ind.lower() in val for ind in CSET_LLM_INDICATORS):
+                return True
+    return False
+
+
+def load_technique_keywords():
+    """Load technique keywords from NLU profiles for incident mapping."""
+    if not TECHNIQUES_PATH.exists():
+        return {}
+    techniques = load_json(TECHNIQUES_PATH)
+    keyword_map = {}  # keyword -> (technique_id, risk_area_ids)
+    for tech in techniques:
+        tid = tech["id"]
+        risk_areas = tech.get("riskAreaIds", [])
+        nlu = tech.get("nlu_profile", {})
+        anchors = nlu.get("semantic_anchors", [])
+        # Use only distinctive anchors (skip very generic ones)
+        for anchor in anchors:
+            anchor_lower = anchor.lower()
+            # Skip anchors that are too short or generic
+            if len(anchor_lower) < 4 or anchor_lower in (
+                "ai", "model", "data", "test", "safe", "bias",
+                "risk", "harm", "fair", "train", "audit",
+            ):
+                continue
+            if tid not in keyword_map:
+                keyword_map[tid] = {
+                    "risk_areas": risk_areas,
+                    "anchors": [],
+                }
+            keyword_map[tid]["anchors"].append(anchor_lower)
+    return keyword_map
+
+
+# Incident-specific keyword → technique mapping
+# These map incident description patterns to technique failures
+INCIDENT_TECHNIQUE_KEYWORDS = {
+    "tech-prompt-injection-defense": [
+        "prompt injection", "prompt attack", "jailbreak",
+        "system prompt", "prompt leak", "prompt extraction",
+    ],
+    "tech-refusal-training": [
+        "refused to", "failed to refuse", "bypass safety",
+        "safety bypass", "circumvent", "override safety",
+    ],
+    "tech-output-filtering-systems": [
+        "harmful output", "toxic output", "inappropriate content",
+        "offensive content", "generated harmful", "produced harmful",
+    ],
+    "tech-pii-detection": [
+        "personal data", "pii", "personal information",
+        "data leak", "privacy breach", "data exposure",
+        "leaked personal", "exposed personal",
+    ],
+    "tech-data-retention-policies": [
+        "data breach", "data leak", "unauthorized access to data",
+        "data exposure", "data collection",
+    ],
+    "tech-bias-mitigation": [
+        "bias", "discriminat", "racial", "gender bias",
+        "unfair", "stereotyp", "prejudic",
+    ],
+    "tech-content-watermarking": [
+        "deepfake", "deep fake", "synthetic media",
+        "ai-generated image", "ai generated image",
+        "ai-generated video", "ai generated video",
+        "fake image", "fake video", "manipulated image",
+    ],
+    "tech-hallucination-detection": [
+        "hallucination", "fabricat", "made up",
+        "false information", "inaccurate information",
+        "invented", "confabul",
+    ],
+    "tech-copyright-compliance": [
+        "copyright", "intellectual property", "ip violation",
+        "copyrighted", "plagiari", "reproduction of",
+    ],
+    "tech-regulatory-compliance": [
+        "gdpr", "regulation", "compliance", "banned",
+        "fined", "penalty", "enforcement", "legal action",
+    ],
+    "tech-observability-monitoring": [
+        "outage", "malfunction", "system failure",
+        "unintended behavior", "unexpected behavior",
+        "monitoring failure",
+    ],
+    "tech-age-verification": [
+        "children", "minors", "underage", "child safety",
+        "kids", "young users",
+    ],
+}
+
+
+def map_techniques_from_text(title, description):
+    """Map incident text to likely failed techniques and risk areas."""
+    text = (title + " " + description).lower()
+    matched_techniques = set()
+    matched_risks = set()
+
+    for tech_id, keywords in INCIDENT_TECHNIQUE_KEYWORDS.items():
+        for kw in keywords:
+            if kw in text:
+                matched_techniques.add(tech_id)
+                break
+
+    # Derive additional risk areas from matched techniques
+    # (load technique risk areas if available)
+    return sorted(matched_techniques), sorted(matched_risks)
 
 
 def load_json(path):
@@ -388,9 +550,10 @@ def get_sources_for_incident(report_ids, reports_lookup):
     return sources
 
 
-def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classifications, provider_ids):
+def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classifications, provider_ids, techniques):
     """Transform AIID incidents into our schema."""
     results = []
+    tech_risk_map = {t["id"]: t.get("riskAreaIds", []) for t in techniques}
 
     for inc in aiid_incidents:
         inc_id = inc["incident_id"]
@@ -406,7 +569,18 @@ def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classif
         # Derive severity and risk areas from CSETv1 if available
         cset_row = cset_classifications.get(inc_id)
         severity = derive_severity(cset_row)
-        risk_areas = derive_risk_areas(cset_row)
+        risk_areas = set(derive_risk_areas(cset_row))
+
+        # Classify as LLM-related
+        is_llm = classify_llm_related(inc["title"], inc["description"], cset_row)
+
+        # Map techniques from incident text
+        technique_ids, _ = map_techniques_from_text(inc["title"], inc["description"])
+
+        # Enrich risk areas from matched techniques
+        for tid in technique_ids:
+            for rid in tech_risk_map.get(tid, []):
+                risk_areas.add(rid)
 
         # Get source URLs from reports
         sources = get_sources_for_incident(inc["report_ids"], reports_lookup)
@@ -421,11 +595,12 @@ def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classif
             "severity": severity,
             "providerIds": provider_matches,
             "modelIds": [],
-            "techniqueIds": [],
-            "riskAreaIds": risk_areas,
+            "techniqueIds": technique_ids,
+            "riskAreaIds": sorted(risk_areas),
             "sources": sources,
             "status": "confirmed",
             "aiidUrl": f"https://incidentdatabase.ai/cite/{inc_id}",
+            "isLLMRelated": is_llm,
         }
 
         results.append(record)
@@ -438,9 +613,13 @@ def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classif
     with_providers = sum(1 for r in results if r["providerIds"])
     with_severity = sum(1 for r in results if r["severity"] != "medium")
     with_risk = sum(1 for r in results if r["riskAreaIds"])
+    with_techniques = sum(1 for r in results if r["techniqueIds"])
+    llm_related = sum(1 for r in results if r["isLLMRelated"])
     logger.info(f"  Matched to our providers: {with_providers}")
     logger.info(f"  With CSETv1 severity: {with_severity}")
-    logger.info(f"  With CSETv1 risk areas: {with_risk}")
+    logger.info(f"  With risk areas: {with_risk}")
+    logger.info(f"  With technique mappings: {with_techniques}")
+    logger.info(f"  LLM/GenAI related: {llm_related}")
 
     return results
 
@@ -501,9 +680,10 @@ def main():
     version = extract_snapshot_version(snapshot_dir)
     logger.info(f"Snapshot version: {version}")
 
-    # Load our provider IDs
+    # Load our provider IDs and techniques
     providers = load_json(PROVIDERS_PATH)
     provider_ids = {p["id"] for p in providers}
+    techniques = load_json(TECHNIQUES_PATH) if TECHNIQUES_PATH.exists() else []
 
     # Load AIID data
     aiid_incidents = load_incidents_csv(snapshot_dir)
@@ -514,13 +694,15 @@ def main():
     # Transform
     incidents = transform_incidents(
         aiid_incidents, reports_lookup, duplicates,
-        cset_classifications, provider_ids
+        cset_classifications, provider_ids, techniques
     )
 
     # Save
     save_json(INCIDENTS_PATH, incidents)
 
     # Save metadata
+    llm_count = sum(1 for i in incidents if i.get("isLLMRelated"))
+    tech_count = sum(1 for i in incidents if i.get("techniqueIds"))
     meta = {
         "source": "AI Incident Database (AIID)",
         "source_url": "https://incidentdatabase.ai/",
@@ -530,7 +712,9 @@ def main():
         "archive_filename": find_latest_archive().name if find_latest_archive() else "",
         "ingested_at": datetime.now().isoformat(),
         "total_incidents": len(incidents),
+        "llm_related_incidents": llm_count,
         "incidents_with_known_providers": sum(1 for i in incidents if i["providerIds"]),
+        "incidents_with_technique_mappings": tech_count,
         "incidents_with_cset_classification": sum(1 for i in incidents if i["riskAreaIds"]),
     }
     save_json(AIID_META_PATH, meta)
@@ -541,7 +725,9 @@ def main():
     print(f"{'='*60}")
     print(f"  Snapshot version:           {version}")
     print(f"  Total incidents:            {len(incidents)}")
+    print(f"  LLM/GenAI related:          {llm_count}")
     print(f"  Matched to our providers:   {meta['incidents_with_known_providers']}")
+    print(f"  With technique mappings:    {tech_count}")
     print(f"  With CSET classification:   {meta['incidents_with_cset_classification']}")
     print(f"  Output:                     {INCIDENTS_PATH}")
     print(f"{'='*60}")

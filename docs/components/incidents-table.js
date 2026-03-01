@@ -94,7 +94,7 @@ export function createIncidentsTable(incidents, providers, models, techniques, r
 
   // --- State ---
   let viewMode = "by-incident";
-  let filterState = { provider: "", severity: "", riskArea: "", technique: "", search: "" };
+  let filterState = { provider: "", severity: "", riskArea: "", technique: "", search: "", llmOnly: true };
   let sortState = { column: "date", direction: "desc" };
   let expandedRow = null;
 
@@ -212,12 +212,27 @@ export function createIncidentsTable(incidents, providers, models, techniques, r
     });
     bar.appendChild(searchInput);
 
+    // LLM-only toggle
+    const llmLabel = document.createElement("label");
+    llmLabel.style.cssText = "display:flex;align-items:center;gap:4px;font-size:12px;white-space:nowrap;cursor:pointer";
+    const llmCheck = document.createElement("input");
+    llmCheck.type = "checkbox";
+    llmCheck.checked = filterState.llmOnly;
+    llmCheck.addEventListener("change", () => {
+      filterState.llmOnly = llmCheck.checked;
+      expandedRow = null;
+      render();
+    });
+    llmLabel.appendChild(llmCheck);
+    llmLabel.appendChild(document.createTextNode("LLM/GenAI only"));
+    bar.appendChild(llmLabel);
+
     if (hasActiveFilters()) {
       const clearBtn = document.createElement("button");
       clearBtn.textContent = "Clear filters";
       clearBtn.style.fontSize = "12px";
       clearBtn.addEventListener("click", () => {
-        filterState = { provider: "", severity: "", riskArea: "", technique: "", search: "" };
+        filterState = { provider: "", severity: "", riskArea: "", technique: "", search: "", llmOnly: true };
         expandedRow = null;
         render();
       });
@@ -228,7 +243,7 @@ export function createIncidentsTable(incidents, providers, models, techniques, r
   }
 
   function hasActiveFilters() {
-    return Object.values(filterState).some(v => v !== "");
+    return filterState.provider || filterState.severity || filterState.riskArea || filterState.technique || filterState.search || !filterState.llmOnly;
   }
 
   // --- Incident table ---
@@ -644,6 +659,7 @@ export function createIncidentsTable(incidents, providers, models, techniques, r
   // --- Filter logic ---
   function applyFilters(entries) {
     let result = entries;
+    if (filterState.llmOnly) result = result.filter(i => i.isLLMRelated !== false);
     if (filterState.provider) result = result.filter(i => i.resolvedProviders.some(p => p.id === filterState.provider));
     if (filterState.severity) result = result.filter(i => i.severity === filterState.severity);
     if (filterState.riskArea) result = result.filter(i => i.resolvedRiskAreas.some(r => r.id === filterState.riskArea));

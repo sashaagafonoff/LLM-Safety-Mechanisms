@@ -1,6 +1,7 @@
 // Third-party commentary network graph: Category → Technique → Commentary
 
 import { setupNetworkInteractions } from "./network-interactions.js";
+import { setupLinkTooltips } from "./link-tooltip.js";
 
 const COMMENTARY_LAYOUT_KEY = "commentary-view-layout-v1";
 
@@ -553,7 +554,27 @@ export function createCommentaryView(data, categoryColors, d3) {
       .attr("y1", (d) => { const s = typeof d.source === "string" ? nodeById.get(d.source) : d.source; return s ? s.y : 0; })
       .attr("x2", (d) => { const t = typeof d.target === "string" ? nodeById.get(d.target) : d.target; return t ? t.x : 0; })
       .attr("y2", (d) => { const t = typeof d.target === "string" ? nodeById.get(d.target) : d.target; return t ? t.y : 0; });
+    if (linkTooltips) linkTooltips.updateHitAreas();
   }
+
+  // Link tooltips
+  const linkTooltips = setupLinkTooltips({
+    d3, svg, linkGroup, linkElements, links, nodeById,
+    uniqueId: "commentary",
+    buildTooltipHtml: (d) => {
+      const source = typeof d.source === "string" ? nodeById.get(d.source) : d.source;
+      const target = typeof d.target === "string" ? nodeById.get(d.target) : d.target;
+      if (!source || !target) return null;
+      if (d.type === "technique-commentary") {
+        const commNode = target.type === "commentary" ? target : source;
+        const techNode = target.type === "technique" ? target : source;
+        return `<h4 style="margin:0 0 6px;color:#ffa726;font-size:13px;">${techNode.name} \u2192 ${commNode.name}</h4>` +
+          (commNode.fullTitle ? `<div style="font-size:11px;color:#ccc;margin-bottom:4px;">${commNode.fullTitle}</div>` : "") +
+          (commNode.author ? `<div style="font-size:11px;color:#aaa;">${commNode.author}${commNode.date ? " \u2014 " + commNode.date : ""}</div>` : "");
+      }
+      return `<h4 style="margin:0;color:#ffa726;font-size:13px;">${source.name} \u2192 ${target.name}</h4>`;
+    }
+  });
 
   // Node groups
   const nodeGroup = g.append("g").attr("class", "nodes");

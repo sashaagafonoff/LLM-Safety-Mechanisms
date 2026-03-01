@@ -1,6 +1,7 @@
 // Incident register network graph: Provider → Incident
 
 import { setupNetworkInteractions } from "./network-interactions.js";
+import { setupLinkTooltips } from "./link-tooltip.js";
 
 const INCIDENTS_LAYOUT_KEY = "incidents-view-layout-v1";
 
@@ -45,9 +46,10 @@ export function createIncidentsView(data, providerColors, d3) {
     bySeverity[inc.severity] = (bySeverity[inc.severity] || 0) + 1;
   }
 
-  // Filter to incidents linked to known providers (AIID contains many incidents
-  // involving entities outside our provider set)
-  const linkedIncidents = incidents.filter((inc) => (inc.providerIds || []).length > 0);
+  // Filter to LLM-related incidents linked to known providers
+  const linkedIncidents = incidents.filter(
+    (inc) => (inc.providerIds || []).length > 0 && inc.isLLMRelated !== false
+  );
 
   // Build graph
   const nodes = [];
@@ -503,7 +505,32 @@ export function createIncidentsView(data, providerColors, d3) {
       .attr("y1", (d) => { const s = typeof d.source === "string" ? nodeById.get(d.source) : d.source; return s ? s.y : 0; })
       .attr("x2", (d) => { const t = typeof d.target === "string" ? nodeById.get(d.target) : d.target; return t ? t.x : 0; })
       .attr("y2", (d) => { const t = typeof d.target === "string" ? nodeById.get(d.target) : d.target; return t ? t.y : 0; });
+    if (linkTooltips) linkTooltips.updateHitAreas();
   }
+
+  // Link tooltips
+  const linkTooltips = setupLinkTooltips({
+    d3, svg, linkGroup, linkElements, links, nodeById,
+    uniqueId: "incidents",
+    buildTooltipHtml: (d) => {
+      const source = typeof d.source === "string" ? nodeById.get(d.source) : d.source;
+      const target = typeof d.target === "string" ? nodeById.get(d.target) : d.target;
+      if (!source || !target) return null;
+      const provNode = source.type === "provider" ? source : target;
+      const incNode = source.type === "incident" ? source : target;
+      const sevColor = severityColors[incNode.severity] || "#666";
+      const statStyle = statusLabels[incNode.status] || statusLabels.alleged;
+      return `<h4 style="margin:0 0 6px;color:#ffa726;font-size:13px;">${provNode.name} \u2192 Incident</h4>` +
+        `<div style="font-size:12px;font-weight:bold;margin-bottom:4px;">${incNode.fullTitle || incNode.name}</div>` +
+        `<div style="margin-bottom:4px;">` +
+        `<span style="color:${sevColor};font-weight:bold;text-transform:capitalize;">${incNode.severity || "unknown"}</span>` +
+        `<span style="display:inline-block;background:${statStyle.bg};color:${statStyle.text};padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px;text-transform:capitalize;">${incNode.status}</span>` +
+        (incNode.date ? ` <span style="color:#999;font-size:11px;margin-left:6px;">${incNode.date}</span>` : "") +
+        `</div>` +
+        (incNode.techNames && incNode.techNames.length > 0 ? `<div style="font-size:11px;color:#aaa;margin-bottom:2px;"><strong style="color:#ccc;">Techniques:</strong> ${incNode.techNames.join(", ")}</div>` : "") +
+        (incNode.riskNames && incNode.riskNames.length > 0 ? `<div style="font-size:11px;color:#aaa;"><strong style="color:#ccc;">Risk areas:</strong> ${incNode.riskNames.join(", ")}</div>` : "");
+    }
+  });
 
   // Node groups
   const nodeGroup = g.append("g").attr("class", "nodes");
