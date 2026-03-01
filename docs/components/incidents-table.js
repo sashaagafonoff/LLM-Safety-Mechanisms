@@ -752,6 +752,9 @@ export function createIncidentsTable(incidents, providers, models, techniques, r
       html += `<div style="margin-bottom:8px"><strong>Models:</strong> ${inc.resolvedModels.map(m => escapeHtml(m.name)).join(", ")}</div>`;
     }
     html += `<div><strong>Status:</strong> ${capitalize(inc.status || "unknown")}</div>`;
+    if (inc.aiidUrl) {
+      html += `<div style="margin-top:4px"><a href="${escapeHtml(inc.aiidUrl)}" target="_blank" rel="noopener" style="color:#1976d2;font-size:12px;">View on AI Incident Database \u2197</a></div>`;
+    }
     html += `</div><div>`;
     html += `<div style="margin-bottom:8px"><strong>Techniques that failed:</strong></div>`;
     for (const t of inc.resolvedTechniques) {

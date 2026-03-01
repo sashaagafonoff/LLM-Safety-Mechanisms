@@ -212,6 +212,10 @@ data/*_old.json
 data/*_backup.json
 data/flat_text/clean_up_logs/
 
+# AIID third-party data (large archives and extracts; keep only aiid_meta.json)
+data/third_party/aiid/backup-*
+data/third_party/aiid/*.tar.bz2
+
 # Claude Code local settings (may contain secrets)
 .claude/settings.local.json
 

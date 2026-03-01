@@ -14,7 +14,7 @@ export function createIncidentsView(data, providerColors, d3) {
     const div = document.createElement("div");
     div.style.cssText = "padding: 20px; text-align: center; color: #999; background: #f8f9fa; border-radius: 8px;";
     div.innerHTML = `<p style="font-size: 16px; margin-bottom: 8px;">No incidents recorded yet.</p>
-      <p style="font-size: 13px;">Add entries to <code>data/incidents.json</code> to populate this view.</p>`;
+      <p style="font-size: 13px;">Run <code>python scripts/ingest_aiid.py</code> to populate from the <a href="https://incidentdatabase.ai/">AI Incident Database</a>.</p>`;
     return div;
   }
 
@@ -45,13 +45,17 @@ export function createIncidentsView(data, providerColors, d3) {
     bySeverity[inc.severity] = (bySeverity[inc.severity] || 0) + 1;
   }
 
+  // Filter to incidents linked to known providers (AIID contains many incidents
+  // involving entities outside our provider set)
+  const linkedIncidents = incidents.filter((inc) => (inc.providerIds || []).length > 0);
+
   // Build graph
   const nodes = [];
   const links = [];
   const nodeById = new Map();
 
   const incidentProviderIds = new Set();
-  for (const inc of incidents) {
+  for (const inc of linkedIncidents) {
     for (const pid of inc.providerIds || []) incidentProviderIds.add(pid);
   }
 
@@ -68,7 +72,7 @@ export function createIncidentsView(data, providerColors, d3) {
     nodeById.set(node.id, node);
   }
 
-  for (const inc of incidents) {
+  for (const inc of linkedIncidents) {
     const techNames = (inc.techniqueIds || []).map((id) => {
       const t = techLookup.get(id);
       return t ? t.name : id;
@@ -95,6 +99,7 @@ export function createIncidentsView(data, providerColors, d3) {
       techNames,
       riskNames,
       sources: inc.sources || [],
+      aiidUrl: inc.aiidUrl || "",
       color: severityColors[inc.severity] || severityColors.low,
       radius: inc.severity === "critical" ? 12 : inc.severity === "high" ? 10 : 8
     };
@@ -605,7 +610,8 @@ export function createIncidentsView(data, providerColors, d3) {
         (d.description ? `<div style="color:#ccc;font-size:11px;margin-bottom:6px;">${d.description.substring(0, 200)}${d.description.length > 200 ? "\u2026" : ""}</div>` : "") +
         (d.techNames.length > 0 ? `<div style="margin-bottom:4px;"><strong>Techniques:</strong> <span style="color:#aaa;font-size:11px;">${d.techNames.join(", ")}</span></div>` : "") +
         (d.riskNames.length > 0 ? `<div style="margin-bottom:4px;"><strong>Risk areas:</strong> <span style="color:#aaa;font-size:11px;">${d.riskNames.join(", ")}</span></div>` : "") +
-        sourcesHtml
+        sourcesHtml +
+        (d.aiidUrl ? `<div style="margin-top:6px;"><a href="${d.aiidUrl}" target="_blank" rel="noopener" style="color:#64b5f6;font-size:11px;">View on AIID \u2197</a></div>` : "")
       );
     } else if (d.type === "provider") {
       const incCount = links.filter((l) => {

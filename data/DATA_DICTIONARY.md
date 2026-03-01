@@ -208,23 +208,25 @@ Third-party references discussing safety technique effectiveness.
 
 ## incidents.json
 
-Safety incident register documenting real-world failures.
+Safety incident register sourced from the [AI Incident Database (AIID)](https://incidentdatabase.ai/), licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Severity and risk classifications enriched via CSET V1 taxonomy where available. Ingested by `scripts/ingest_aiid.py`.
 
 **Top-level structure:** `[ ... ]` (array of incident objects)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Unique incident ID |
+| `id` | string | Unique incident ID (format: `aiid-{number}`) |
+| `aiidIncidentId` | number | Original AIID incident number |
 | `title` | string | Incident title |
 | `date` | string | ISO 8601 incident date |
 | `description` | string | Detailed description |
-| `severity` | string | `critical`, `high`, `medium` |
-| `providerIds` | array | Provider IDs involved (references `providers.json`) |
-| `modelIds` | array | Model IDs involved (references `models.json`; often empty) |
-| `techniqueIds` | array | Techniques that failed (references `techniques.json`) |
-| `riskAreaIds` | array | Risk areas involved (references `risk_areas.json`) |
-| `sources` | array | External references: `[{ "url": string, "title": string, "date": string, "type": string }]` |
-| `status` | string | `confirmed`, `mitigated`, `disputed` |
+| `severity` | string | `high`, `medium`, `low` — derived from CSETv1 Tangible Harm classification where available, defaults to `medium` |
+| `providerIds` | array | Provider IDs involved (references `providers.json`; mapped from AIID developer/deployer entities) |
+| `modelIds` | array | Model IDs involved (references `models.json`; currently empty — AIID does not track specific models) |
+| `techniqueIds` | array | Techniques that failed (references `techniques.json`; currently empty — AIID does not track technique failures) |
+| `riskAreaIds` | array | Risk areas involved (references `risk_areas.json`; derived from CSETv1 classification fields) |
+| `sources` | array | External references from AIID report records: `[{ "url": string, "title": string, "date": string, "type": string }]` |
+| `status` | string | `confirmed` |
+| `aiidUrl` | string | Direct link to the incident on incidentdatabase.ai |
 
 ---
 

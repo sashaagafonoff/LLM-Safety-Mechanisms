@@ -38,7 +38,7 @@ The data model is centered around these key JSON files in [data/](data/):
 
 - [commentary.json](data/commentary.json) - Third-party references (academic papers, audits, blog posts) discussing technique effectiveness. Links to techniques via `techniqueIds[]`.
 
-- [incidents.json](data/incidents.json) - Safety incident register. Each incident links to `providerIds[]`, `modelIds[]`, optional `techniqueIds[]` (which techniques failed), `riskAreaIds[]`, and external `sources[]`.
+- [incidents.json](data/incidents.json) - Safety incident register sourced from the [AI Incident Database (AIID)](https://incidentdatabase.ai/) (CC BY-SA 4.0). Ingested by `scripts/ingest_aiid.py`. Each incident links to `providerIds[]`, `modelIds[]`, optional `techniqueIds[]` (which techniques failed), `riskAreaIds[]`, and external `sources[]`.
 
 ### RAG Architecture
 
@@ -241,10 +241,11 @@ data/
 ├── standards.json             # External framework definitions (7 frameworks)
 ├── standards_mapping.json     # Technique-to-standard mappings
 ├── commentary.json            # Third-party analysis references
-├── incidents.json             # Safety incident register
+├── incidents.json             # Safety incident register (sourced from AIID)
 └── flat_text/                 # Processed source documents
 
 scripts/
+├── ingest_aiid.py             # AIID incident ingestion
 ├── ingest_universal.py        # Document ingestion
 ├── analyze_nlu.py             # RAG retrieval + verification stage
 ├── llm_assisted_extraction.py # RAG augmented generation stage
