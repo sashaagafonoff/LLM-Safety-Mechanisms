@@ -1,100 +1,105 @@
 # LLM Safety Mechanisms - Dataset Summary
 
-*Generated: 2026-02-23 02:29*
+*Generated: 2026-03-01 15:09*
 
 ## Overall Statistics
 
 - **Providers**: 14
 - **Models tracked**: 56
 - **Technique categories**: 5
-- **Active techniques in taxonomy**: 48
+- **Active techniques in taxonomy**: 53
 - **Aspirational techniques** (no provider evidence): 2
 - **Source documents**: 41
-- **Techniques with detections**: 48 / 48
+- **Techniques with detections**: 53 / 53
 
 ## Coverage by Category
 
 | Category | Techniques | System Detected | Manual Entry |
 |----------|------------|-----------------|--------------|
 | Evaluation & Red Teaming | 3 | 3 | 0 |
-| Governance & Oversight | 11 | 11 | 0 |
+| Governance & Oversight | 14 | 14 | 0 |
 | Harm & Content Classification | 12 | 12 | 0 |
-| Model Development | 11 | 11 | 0 |
+| Model Development | 13 | 13 | 0 |
 | Runtime Safety Systems | 13 | 13 | 0 |
 
 ## Provider Breakdown
 
 | Provider | Type | Source Docs | Techniques | Detection Confidence |
 |----------|------|-------------|------------|----------------------|
-| Anthropic | commercial | 5 | 47 | H:47 / M:0 / L:0 |
-| Google | commercial | 5 | 47 | H:45 / M:2 / L:0 |
-| Alibaba | commercial | 4 | 50 | H:50 / M:0 / L:0 |
-| Meta | commercial | 4 | 46 | H:46 / M:0 / L:0 |
-| Mistral AI | commercial | 4 | 15 | H:14 / M:1 / L:0 |
-| OpenAI | commercial | 4 | 42 | H:41 / M:1 / L:0 |
-| xAI | commercial | 4 | 25 | H:23 / M:2 / L:0 |
-| DeepSeek | commercial | 3 | 24 | H:22 / M:2 / L:0 |
-| Cohere | commercial | 2 | 19 | H:18 / M:1 / L:0 |
-| Microsoft | commercial | 2 | 14 | H:12 / M:2 / L:0 |
-| Amazon | commercial | 1 | 27 | H:27 / M:0 / L:0 |
-| Nvidia | commercial | 1 | 18 | H:10 / M:8 / L:0 |
-| TII | academic | 1 | 3 | H:1 / M:1 / L:1 |
-| Tencent | commercial | 1 | 5 | H:5 / M:0 / L:0 |
+| Anthropic | commercial | 5 | 54 | H:54 / M:0 / L:0 |
+| Google | commercial | 5 | 50 | H:50 / M:0 / L:0 |
+| Alibaba | commercial | 4 | 55 | H:55 / M:0 / L:0 |
+| Meta | commercial | 4 | 50 | H:50 / M:0 / L:0 |
+| Mistral AI | commercial | 4 | 16 | H:15 / M:1 / L:0 |
+| OpenAI | commercial | 4 | 44 | H:44 / M:0 / L:0 |
+| xAI | commercial | 4 | 22 | H:22 / M:0 / L:0 |
+| DeepSeek | commercial | 3 | 20 | H:20 / M:0 / L:0 |
+| Cohere | commercial | 2 | 25 | H:25 / M:0 / L:0 |
+| Microsoft | commercial | 2 | 13 | H:13 / M:0 / L:0 |
+| Amazon | commercial | 1 | 28 | H:28 / M:0 / L:0 |
+| Nvidia | commercial | 1 | 7 | H:7 / M:0 / L:0 |
+| TII | academic | 1 | 2 | H:2 / M:0 / L:0 |
+| Tencent | commercial | 1 | 5 | H:4 / M:1 / L:0 |
 
 ## Technique Coverage Matrix
 
 | Technique | Anthropic | Google | Alibaba | Meta | Mistral AI | OpenAI | xAI | DeepSeek | Cohere | Microsoft | Amazon | Nvidia | TII | Tencent |
 |-----------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Community-Based Evaluation | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | — | — | — | — | — |
-| Red Teaming | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | — | ✅ | 🟡 | ✅ | ✅ | ✅ | — | — |
-| Safety Benchmarking | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — |
-| Access Control Documentation | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — | — | ✅ | — | — | — |
+| Community-Based Evaluation | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | ✅ | — | — | — | — | — | — |
+| Red Teaming | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — |
+| Safety Benchmarking | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| Access Control Documentation | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | — | ✅ | — | — | — |
 | Capability Threshold Monitoring | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — | — | ✅ | — | — | — |
 | Data Retention Policies | ✅ | ✅ | ✅ | ✅ | — | — | ✅ | ✅ | — | — | ✅ | — | — | — |
-| Data Sovereignty Controls | ✅ | ✅ | ✅ | ✅ | — | — | — | 🟡 | — | — | — | — | — | — |
-| Enterprise Integration Safety | ✅ | ✅ | ✅ | — | — | — | ✅ | — | — | — | — | — | — | — |
-| Ethical Human Labour Sourcing | ✅ | ✅ | ✅ | ✅ | — | — | — | — | — | — | — | — | — | — |
+| Data Sovereignty Controls | ✅ | ✅ | ✅ | ✅ | — | — | — | — | — | — | — | — | — | — |
+| Enterprise Integration Safety | ✅ | ✅ | ✅ | — | — | — | ✅ | — | ✅ | — | — | — | — | — |
+| Ethical Human Labour Sourcing | ✅ | ✅ | ✅ | ✅ | — | — | — | — | — | ✅ | — | — | — | — |
 | Incident Reporting Systems | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — | ✅ | — | — | — | — |
-| Independent Safety Advisory | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | — | — | — | — | — |
-| Regulatory Compliance | ✅ | — | ✅ | ✅ | — | ✅ | ✅ | ✅ | — | — | ✅ | — | — | — |
-| Responsible Release Protocols | ✅ | ✅ | ✅ | ✅ | — | ✅ | 🟡 | — | — | ✅ | ✅ | — | 🟠 | — |
+| Independent Safety Advisory | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | ✅ | — | — | — | — |
+| Model Weight Security | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — | — | ✅ | — | — | — |
+| Regulatory Compliance | ✅ | — | ✅ | ✅ | — | ✅ | ✅ | — | — | — | ✅ | — | — | — |
+| Responsible Release Protocols | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | ✅ | ✅ | ✅ | — | — | — |
 | Stakeholder Engagement | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | ✅ | — | — | — | — |
-| Autonomous Behaviour Classification | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — | — | — | — | — | — |
-| CSAM Detection & Prevention | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | 🟡 | — | — |
-| Copyright & IP Violation Detection | — | ✅ | ✅ | — | — | ✅ | — | ✅ | — | — | — | — | — | — |
-| Cybersecurity Threat Detection | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | — | — | ✅ | — | — | — |
-| Hate Speech & Harassment Detection | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | ✅ | 🟡 | — | — |
+| Voluntary Safety Commitments & Pledges | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | — | — | — | — | — |
+| Whistleblower & Internal Safety Reporting | ✅ | — | ✅ | — | — | — | — | — | — | — | — | — | — | — |
+| Autonomous Behaviour Classification | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | — | — | — | — | — |
+| CSAM Detection & Prevention | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | ✅ | — | — | — |
+| Copyright & IP Violation Detection | ✅ | ✅ | ✅ | — | — | ✅ | — | ✅ | — | — | ✅ | — | — | — |
+| Cybersecurity Threat Detection | ✅ | ✅ | ✅ | ✅ | — | — | ✅ | — | — | — | ✅ | — | — | — |
+| Hate Speech & Harassment Detection | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | — | — | — |
 | Misinformation & False Claims Detection | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | ✅ | — | — | — | — | — |
-| PII Detection & Redaction | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | ✅ | 🟡 | — | ✅ |
-| Self-Harm & Suicide Prevention | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | 🟡 | — | — |
-| Sexual Content Moderation | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | 🟡 | — | — |
+| PII Detection & Redaction | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | — | — | ✅ |
+| Self-Harm & Suicide Prevention | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — |
+| Sexual Content Moderation | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | — | — | — |
 | Sycophancy Detection | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — | — | — | — | — | — |
-| Violence & Gore Detection | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | 🟡 | — | — |
-| Weapons & Illegal Activity Detection | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | 🟡 | — | — |
-| Adversarial Training | ✅ | 🟡 | ✅ | ✅ | ✅ | 🟡 | — | — | — | 🟡 | — | — | — | — |
-| Bias Mitigation (Post-Training) | ✅ | — | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | ✅ | ✅ | — | — | — |
-| Constitutional AI / Self-Critique | ✅ | ✅ | ✅ | ✅ | — | — | — | 🟡 | — | — | ✅ | — | — | — |
-| Dataset Auditing & Representation Analysis | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | ✅ | — | — | 🟡 | — |
+| Violence & Gore Detection | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | — | — | — |
+| Weapons & Illegal Activity Detection | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — |
+| Adversarial Training | ✅ | — | ✅ | ✅ | ✅ | — | — | — | — | — | — | — | — | — |
+| Bias Mitigation (Post-Training) | ✅ | — | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | — | ✅ | — | — | — |
+| Constitutional AI / Self-Critique | ✅ | ✅ | ✅ | ✅ | — | — | — | ✅ | — | — | ✅ | — | — | — |
+| Dataset Auditing & Representation Analysis | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | — | — | ✅ | ✅ | — | — | — | 🟡 |
+| Differential Privacy in Training | ✅ | ✅ | ✅ | — | — | ✅ | — | — | — | — | — | — | — | — |
 | Direct Preference Optimization (DPO) | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | ✅ | ✅ | — | ✅ | — | ✅ |
 | Machine Unlearning * | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
 | Multimodal Safety Alignment | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | — | ✅ | — | — | — |
-| Refusal / Abstention Training | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | — | — |
-| Reinforcement Learning from Human Feedback (RLHF) | — | ✅ | ✅ | ✅ | — | — | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | ✅ |
-| Safety Reward Modeling | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | ✅ | ✅ | — | — | ✅ | — | ✅ |
+| Refusal / Abstention Training | ✅ | — | ✅ | ✅ | — | ✅ | ✅ | — | ✅ | ✅ | — | — | — | — |
+| Reinforcement Learning from Human Feedback (RLHF) | — | ✅ | ✅ | ✅ | ✅ | — | — | ✅ | ✅ | — | ✅ | ✅ | — | ✅ |
+| Safety Reward Modeling | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — | ✅ | — | — |
+| Scalable Oversight & Debate | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | — | ✅ | — | — |
 | Training Data Quality Filtering | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Circuit Breakers / Kill Switches * | — | — | — | — | — | — | — | — | — | — | — | — | — | — |
-| Code Execution Sandboxing | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | ✅ | — | — | — | — | — |
-| Configurable Safety Policies | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 🟡 | ✅ | ✅ | — | ✅ | — | — | — |
-| Hallucination Detection & Grounding | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | ✅ | ✅ | — | ✅ | — | — |
-| Input Guardrail Systems | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | ✅ | ✅ | — | — |
-| Jailbreak & Injection Defense | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | — | 🟡 | — | 🟡 | — | — |
-| Multi-stage Safety Pipeline | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — |
-| Observability & Audit Logging | ✅ | 🟡 | ✅ | — | — | ✅ | ✅ | — | — | ✅ | ✅ | — | — | — |
-| Output Safety Systems | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | ✅ | — | — | — |
+| Code Execution Sandboxing | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | — | — | — | — | — |
+| Configurable Safety Policies | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | ✅ | — | ✅ | — | — | — |
+| Hallucination Detection & Grounding | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | ✅ | — | — | — | — | — |
+| Input Guardrail Systems | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | — | ✅ | — | — | — |
+| Jailbreak & Injection Defense | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | — | — | — | — | — |
+| Multi-stage Safety Pipeline | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | ✅ | ✅ | — | ✅ | — | — | — |
+| Observability & Audit Logging | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | — | — | ✅ | ✅ | — | — | — |
+| Output Safety Systems | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | — | — | ✅ | — | — | — |
 | Provenance & Watermarking | ✅ | ✅ | ✅ | ✅ | — | — | — | — | — | — | — | — | — | — |
-| RAG Guardrails | — | ✅ | ✅ | — | — | ✅ | — | — | — | — | — | — | — | — |
+| RAG Guardrails | ✅ | ✅ | ✅ | — | — | ✅ | — | — | — | — | — | — | — | — |
 | Real-time Fact Checking | ✅ | ✅ | ✅ | ✅ | — | ✅ | — | — | — | — | ✅ | — | — | — |
-| System Prompts / Metaprompts | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | — | — | — |
+| System Prompts / Metaprompts | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | — | — | — | — |
 
 **Key:** ✅ = High confidence | 🟡 = Medium | 🟠 = Low | — = Not detected
 
