@@ -31,6 +31,25 @@ export function createFilterForm(data, d3) {
   const colorScale = d3.scaleOrdinal(d3.schemeTableau10)
     .domain(Array.from(techniquesByCategory.keys()));
 
+  // Models that have a source document, grouped by provider, for the model filter.
+  const providerNameById = new Map((data.raw.providers || []).map((p) => [p.id, p.name]));
+  const modelMap = new Map();
+  (data.raw.evidence || []).forEach((s) => {
+    (s.models || []).forEach((m) => {
+      if (m.modelId && !modelMap.has(m.modelId)) {
+        modelMap.set(m.modelId, { id: m.modelId, name: m.name || m.modelId, providerId: s.provider });
+      }
+    });
+  });
+  const modelsByProviderName = new Map();
+  [...modelMap.values()].forEach((m) => {
+    const pn = providerNameById.get(m.providerId) || m.providerId || "Other";
+    if (!modelsByProviderName.has(pn)) modelsByProviderName.set(pn, []);
+    modelsByProviderName.get(pn).push(m);
+  });
+  const modelGroups = [...modelsByProviderName.entries()].sort(([a], [b]) => a.localeCompare(b));
+  modelGroups.forEach(([, arr]) => arr.sort((a, b) => a.name.localeCompare(b.name)));
+
   const form = html`<div style="background: #f8f9fa; border-radius: 8px; padding: 10px; margin-bottom: 10px; font-family: sans-serif;">
     <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px;">
       <div>
@@ -75,6 +94,28 @@ export function createFilterForm(data, d3) {
           <button type="button" id="select-all-categories" style="font-size: 11px; padding: 4px 5px; margin-right: 5px;">Select All Categories</button>
           <button type="button" id="clear-categories" style="font-size: 11px; padding: 4px 5px;">Clear All</button>
         </div>
+      </div>
+    </div>
+    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd;">
+      <h4 style="margin: 0 0 6px 0; color: #333;">Models
+        <span style="font-weight: normal; font-size: 11px; color: #666;">&mdash; scope every chart to specific model versions (also includes that provider's blanket commitments, e.g. RSPs/policies)</span>
+      </h4>
+      <input type="text" id="model-search" placeholder="Type to find a model…" style="width: 100%; padding: 6px; box-sizing: border-box; margin-bottom: 6px;">
+      <div id="model-list" style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; border-radius: 4px; padding: 10px; background: white;">
+        ${modelGroups.map(([provName, models]) =>
+          html`<div class="model-group" data-group-name="${provName.toLowerCase()}" style="margin-bottom: 8px;">
+            <div style="font-weight: bold; font-size: 11px; color: #444; margin-bottom: 4px;">${provName}</div>
+            ${models.map((m) =>
+              html`<label class="model-item" data-model-search="${(m.name + " " + m.id).toLowerCase()}" style="display: inline-block; margin: 0 12px 5px 6px; cursor: pointer;">
+                <input type="checkbox" name="models" value="${m.id}" style="margin-right: 5px;">
+                <span style="font-size: 12px; color: #555;">${m.name}</span>
+              </label>`
+            )}
+          </div>`
+        )}
+      </div>
+      <div style="margin-top: 5px;">
+        <button type="button" id="clear-models" style="font-size: 11px; padding: 4px 5px;">Clear Models</button>
       </div>
     </div>
     <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd;">
@@ -186,6 +227,27 @@ export function createFilterForm(data, d3) {
     form.dispatchEvent(new CustomEvent("input", { bubbles: true }));
   });
 
+  // Model search box — purely a visual filter over the model checkbox list.
+  const modelSearchInput = form.querySelector("#model-search");
+  modelSearchInput.addEventListener("input", () => {
+    const term = modelSearchInput.value.trim().toLowerCase();
+    form.querySelectorAll(".model-group").forEach((group) => {
+      let anyVisible = false;
+      group.querySelectorAll(".model-item").forEach((item) => {
+        const match = !term || item.dataset.modelSearch.includes(term);
+        item.style.display = match ? "" : "none";
+        if (match) anyVisible = true;
+      });
+      group.style.display = anyVisible ? "" : "none";
+    });
+  });
+
+  form.querySelector("#clear-models").addEventListener("click", () => {
+    form.querySelectorAll('input[name="models"]').forEach((cb) => (cb.checked = false));
+    updateSummary();
+    form.dispatchEvent(new CustomEvent("input", { bubbles: true }));
+  });
+
   form.querySelector("#clear-all").addEventListener("click", () => {
     form.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
       cb.checked = false;
@@ -194,6 +256,8 @@ export function createFilterForm(data, d3) {
     ratingInput.value = 0;
     ratingSpan.textContent = "All";
     form.querySelector('input[name="search"]').value = "";
+    modelSearchInput.value = "";
+    modelSearchInput.dispatchEvent(new Event("input"));
     updateSummary();
     form.dispatchEvent(new CustomEvent("input", { bubbles: true }));
   });
@@ -202,11 +266,13 @@ export function createFilterForm(data, d3) {
     const selectedProviders = getSelectedText("providers");
     const selectedCategories = getSelectedText("categories");
     const selectedTechniques = getSelectedText("techniques");
+    const selectedModels = getSelectedValues("models");
     const minRating = parseFloat(ratingInput.value);
     const searchTerm = form.querySelector('input[name="search"]').value;
 
     const summaryParts = [];
     if (selectedProviders.length > 0) summaryParts.push(`Providers: ${selectedProviders.join(", ")}`);
+    if (selectedModels.length > 0) summaryParts.push(`Models: ${selectedModels.join(", ")}`);
     if (selectedCategories.length > 0) summaryParts.push(`Categories: ${selectedCategories.join(", ")}`);
     if (selectedTechniques.length > 0) summaryParts.push(`Techniques: ${selectedTechniques.length} selected`);
     if (minRating > 0) summaryParts.push(`Min Confidence: ${ratingLabels[minRating]}`);
@@ -222,11 +288,12 @@ export function createFilterForm(data, d3) {
   });
 
   // Initialize form value
-  form.value = { providers: [], categories: [], techniques: [], rating: 0, search: "" };
+  form.value = { providers: [], models: [], categories: [], techniques: [], rating: 0, search: "" };
 
   form.addEventListener("input", () => {
     form.value = {
       providers: getSelectedValues("providers"),
+      models: getSelectedValues("models"),
       categories: getSelectedValues("categories"),
       techniques: getSelectedValues("techniques"),
       rating: parseFloat(ratingInput.value) || 0,

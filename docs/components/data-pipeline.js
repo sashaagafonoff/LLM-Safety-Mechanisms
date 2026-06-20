@@ -33,6 +33,7 @@ export function buildDataset(evidenceRaw, techniques, categories, techniqueMap, 
         return {
           provider: source.provider || "Unknown",
           model: modelString,
+          modelIds: (source.models || []).map((m) => m.modelId).filter(Boolean),
           technique: def.name,
           category: catLookup.get(def.categoryId)?.name || "Uncategorized",
           confidence: d.confidence,
@@ -69,19 +70,38 @@ export function buildDataset(evidenceRaw, techniques, categories, techniqueMap, 
     };
   });
 
+  // 4. Model → provider, derived from EVIDENCE (models.json lacks providerId).
+  // Also collect a sorted index of the models that actually have a source
+  // document, for the model filter UI.
+  const modelProviderMap = new Map();
+  const modelNameMap = new Map();
+  evidence.forEach((source) => {
+    (source.models || []).forEach((m) => {
+      if (!m.modelId) return;
+      if (!modelProviderMap.has(m.modelId)) modelProviderMap.set(m.modelId, source.provider);
+      if (m.name && !modelNameMap.has(m.modelId)) modelNameMap.set(m.modelId, m.name);
+    });
+  });
+  const evidenceModels = [...modelProviderMap.keys()]
+    .map((id) => ({ id, name: modelNameMap.get(id) || id, providerId: modelProviderMap.get(id) }))
+    .sort((a, b) => (a.providerId || "").localeCompare(b.providerId || "") || a.id.localeCompare(b.id));
+
   return {
     raw: { evidence, techniques, categories, techniqueMap, models, providers, lifecycle, standards, standardsMapping, commentary, incidents, risk_areas: riskAreas || [] },
     enrichedModels,
     flatPairs,
     categories,
     techniques,
-    lifecycle
+    lifecycle,
+    modelProviderMap,
+    evidenceModels
   };
 }
 
 export function applyFilters(dataOrPairs, filters) {
   // Accept either the full dataset object or a flat array
-  const flatPairs = Array.isArray(dataOrPairs) ? dataOrPairs : dataOrPairs?.flatPairs || [];
+  const dataset = Array.isArray(dataOrPairs) ? null : dataOrPairs;
+  const flatPairs = dataset ? dataset.flatPairs || [] : dataOrPairs;
   if (!flatPairs || flatPairs.length === 0) return [];
 
   let filtered = [...flatPairs];
@@ -98,6 +118,26 @@ export function applyFilters(dataOrPairs, filters) {
 
     if (filters && filters.techniques && filters.techniques.length > 0) {
       filtered = filtered.filter((d) => filters.techniques.includes(d.technique));
+    }
+
+    // Model filter: a record matches if its document references a selected
+    // model, OR it is a provider-wide document (no model) belonging to the
+    // provider that owns a selected model — so the per-model view still
+    // includes that provider's blanket commitments (RSPs, policies, etc.).
+    if (filters && filters.models && filters.models.length > 0) {
+      const selected = new Set(filters.models);
+      const modelProvider = (dataset && dataset.modelProviderMap) || new Map();
+      const ownerProviders = new Set();
+      filters.models.forEach((m) => {
+        const p = modelProvider.get(m);
+        if (p) ownerProviders.add(p);
+      });
+      filtered = filtered.filter((d) => {
+        const ids = d.modelIds || [];
+        if (ids.some((id) => selected.has(id))) return true;
+        if (ids.length === 0 && ownerProviders.has(d.provider)) return true;
+        return false;
+      });
     }
 
     if (filters && filters.rating && filters.rating > 0) {
