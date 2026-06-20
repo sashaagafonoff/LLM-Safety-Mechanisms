@@ -1,7 +1,11 @@
 // Standards alignment view: shows technique coverage across external frameworks
 import {html} from "htl";
 
-export function createStandardsView(data) {
+// Preserve the selected framework tab across re-renders (a filter change
+// recreates the whole view).
+let lastSelectedFw = null;
+
+export function createStandardsView(data, implementedTechNames = null) {
   const standards = data.raw.standards;
   const mapping = data.raw.standardsMapping || [];
   const techniques = data.raw.techniques;
@@ -39,16 +43,45 @@ export function createStandardsView(data) {
     }
   }
 
-  // Summary stats
-  const totalMappings = mapping.length;
-  const techniquesWithMappings = new Set(mapping.map((m) => m.techniqueId)).size;
-  const frameworksUsed = new Set(mapping.map((m) => m.frameworkId)).size;
+  // When a filter is active, scope coverage to the techniques in the current
+  // selection (e.g. the techniques a selected model implements), so the view
+  // answers "which controls does THIS model's safety work satisfy".
+  if (implementedTechNames) {
+    for (const [, fwMap] of coverageMap) {
+      for (const [code, list] of fwMap) {
+        fwMap.set(code, list.filter((t) => {
+          const tech = techLookup.get(t.techniqueId);
+          return tech && implementedTechNames.has(tech.name);
+        }));
+      }
+    }
+  }
+
+  // Summary stats (reflect the scoped coverage when filtered).
+  let totalMappings = mapping.length;
+  let techniquesWithMappings = new Set(mapping.map((m) => m.techniqueId)).size;
+  let frameworksUsed = new Set(mapping.map((m) => m.frameworkId)).size;
+  if (implementedTechNames) {
+    const techSet = new Set();
+    const fwSet = new Set();
+    let cnt = 0;
+    for (const [fwId, fwMap] of coverageMap) {
+      for (const [, list] of fwMap) {
+        for (const t of list) { techSet.add(t.techniqueId); fwSet.add(fwId); cnt++; }
+      }
+    }
+    totalMappings = cnt;
+    techniquesWithMappings = techSet.size;
+    frameworksUsed = fwSet.size;
+  }
 
   // State for expanded details
   const container = html`<div></div>`;
 
-  // Framework selector
-  let selectedFw = standards.frameworks[0].id;
+  // Framework selector (restore the previously-selected tab if still valid)
+  let selectedFw = (lastSelectedFw && standards.frameworks.some((f) => f.id === lastSelectedFw))
+    ? lastSelectedFw
+    : standards.frameworks[0].id;
 
   function render() {
     container.innerHTML = "";
@@ -78,7 +111,7 @@ export function createStandardsView(data) {
           background: ${isActive ? "#2563eb" : "#fff"}; color: ${isActive ? "#fff" : "#333"};
           cursor: pointer; font-size: 13px; white-space: nowrap;
         ">${fw.name}</button>`;
-        btn.onclick = () => { selectedFw = fw.id; render(); };
+        btn.onclick = () => { selectedFw = fw.id; lastSelectedFw = fw.id; render(); };
         return btn;
       })}
     </div>`;
@@ -158,7 +191,16 @@ export function createStandardsView(data) {
         : html` &mdash; <span style="color: #16a34a;">full coverage</span>`}
     </div>`;
 
-    container.append(statsBar, tabs, fwLink, table, gapSummary);
+    const scopeNote = implementedTechNames
+      ? html`<div style="margin-bottom: 12px; padding: 8px 12px; background: #eef2ff; border-radius: 6px; font-size: 12px; color: #3730a3;">
+          Scoped to the current filter &mdash; showing only controls covered by the ${implementedTechNames.size} technique${implementedTechNames.size === 1 ? "" : "s"} in view.
+        </div>`
+      : null;
+
+    const nodes = [statsBar];
+    if (scopeNote) nodes.push(scopeNote);
+    nodes.push(tabs, fwLink, table, gapSummary);
+    container.append(...nodes);
   }
 
   render();

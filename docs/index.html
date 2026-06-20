@@ -288,6 +288,15 @@
 
       renderInto("sunburst-chart", () => createSunburstChart(data, filteredData, categoryColors, d3));
 
+      renderInto("standards-view", () => {
+        const v = filterForm.value || {};
+        const active = (v.providers && v.providers.length) || (v.models && v.models.length) ||
+          (v.categories && v.categories.length) || (v.techniques && v.techniques.length) ||
+          (v.rating || 0) > 0 || (v.search && v.search.length);
+        const implemented = active ? new Set(filteredData.map((d) => d.technique)) : null;
+        return createStandardsView(data, implemented);
+      });
+
       renderSummaryTable();
     }
 
@@ -358,7 +367,6 @@
         return createNetworkViz(positioned, validatedNetLayout, autoLayout, networkConfig, providerColors, d3);
       });
 
-      renderInto("standards-view", () => createStandardsView(data));
       renderInto("commentary-view", () => createCommentaryView(data, categoryColors, d3));
       renderInto("incidents-view", () => createIncidentsView(data, providerColors, d3));
 
