@@ -114,11 +114,16 @@ The typical workflow for updating the dataset:
    - The stages can also be invoked directly (`python scripts/analyze_nlu.py`, `python scripts/llm_assisted_extraction.py`), but doing so writes `map_nlu.json`/`map_llm.json` without the merge step.
    - Final merged output: [data/model_technique_map.json](data/model_technique_map.json)
 
-3. **Generate**: Create reports and dashboard
+3. **Generate**: Create reports
    ```bash
-   python scripts/generate_report.py    # Creates SUMMARY.md and data/stats.json
-   python scripts/generate_dashboard.py  # Creates docs/index.html
+   python scripts/generate_report.py    # Updates README "Dataset at a Glance", docs/SUMMARY.md, data/stats.json
    ```
+   > **Do NOT script-generate the dashboard.** The interactive dashboard
+   > (`docs/index.html` + `docs/components/*.js`) is a **hand-maintained** static
+   > site that fetches `data/*.json` from GitHub `main` at runtime — it has no
+   > build step and updates itself when data is pushed. There is no
+   > `generate_dashboard.py`; an old Plotly-based script by that name was removed
+   > because it overwrote the real Explorer dashboard with an inferior page.
 
 ### Key Scripts
 
@@ -132,12 +137,12 @@ The typical workflow for updating the dataset:
 
 - [scripts/evaluate_nlu.py](scripts/evaluate_nlu.py) - Evaluation harness. Runs NLU pipeline against ground truth from manually reviewed documents. Computes precision/recall/F1 per document and aggregate. Respects `no_safety_content` flags.
 
-- [scripts/generate_dashboard.py](scripts/generate_dashboard.py) - Creates interactive HTML dashboard with Plotly visualizations:
-  - Coverage heatmap (provider × technique matrix)
-  - Implementation timeline
-  - Rating distribution charts
-  - Evidence quality breakdown
-  - Risk area coverage
+- **Dashboard** — there is no dashboard-generation script. The interactive
+  dashboard lives in [docs/index.html](docs/index.html) + [docs/components/](docs/components/)
+  (vanilla D3/htl ES modules) and is edited by hand. It fetches `data/*.json`
+  from GitHub `main` at runtime, so updating data and pushing is all that's
+  needed for the live site to reflect changes. (A legacy `generate_dashboard.py`
+  was removed — it produced an inferior Plotly page that clobbered this one.)
 
 - [scripts/generate_report.py](scripts/generate_report.py) - Generates markdown summary reports with tables and statistics.
 
@@ -190,10 +195,12 @@ flake8 scripts/
 
 ### Common Tasks
 
-**Regenerate dashboard after data changes:**
+**Regenerate reports after data changes:**
 ```bash
-python scripts/generate_report.py && python scripts/generate_dashboard.py
+python scripts/generate_report.py
 ```
+The dashboard needs no regeneration — it reads `data/*.json` from GitHub `main`
+client-side, so pushing data changes updates the live site automatically.
 
 **Add a new source document:**
 1. Add source entry to `evidence.json` under the `sources` array

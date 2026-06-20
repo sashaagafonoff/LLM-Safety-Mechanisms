@@ -194,15 +194,18 @@ def run_analysis_for_document(doc_id):
 
 
 def regenerate_reports():
-    """Regenerate dashboard and reports."""
-    logger.info("Regenerating reports and dashboard...")
+    """Regenerate the markdown/stats reports.
+
+    Note: the interactive dashboard (docs/index.html + docs/components/) is a
+    hand-maintained static site that fetches data/*.json from GitHub `main` at
+    runtime, so it needs NO build step — pushing updated data is sufficient.
+    Do not regenerate docs/index.html from a script; that overwrites the real
+    Explorer dashboard.
+    """
+    logger.info("Regenerating reports...")
     try:
         subprocess.run(
             [sys.executable, "scripts/generate_report.py"],
-            capture_output=True, text=True, timeout=60
-        )
-        subprocess.run(
-            [sys.executable, "scripts/generate_dashboard.py"],
             capture_output=True, text=True, timeout=60
         )
         subprocess.run(

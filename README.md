@@ -92,8 +92,7 @@ scripts/
 ├── llm_assisted_extraction.py       # LLM-based technique extraction (Claude API)
 ├── compare_taxonomy_runs.py         # Evaluation against ground truth
 ├── check_sources.py                 # Source change detection for automation
-├── generate_dashboard.py            # Interactive dashboard generation
-├── generate_report.py               # Summary report generation
+├── generate_report.py               # Summary report generation (README/SUMMARY/stats)
 └── semantic_retriever.py            # Semantic search utility
 
 docs/                                # Interactive dashboard (GitHub Pages)

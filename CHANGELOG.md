@@ -24,4 +24,7 @@ Dates are ISO 8601 (UTC).
 ### Documentation
 - Corrected the README extraction methodology (actual NLU models `bge-large-en-v1.5` / `nli-deberta-v3-large` and thresholds) and replaced the outdated, non-blind performance table with held-out blind metrics.
 - Updated `data/DATA_DICTIONARY.md` to match the enforced `model_technique_map.json` schema (`created_by`/`deleted_by`/`evidence[]` provenance).
-- Regenerated `docs/index.html`, `docs/SUMMARY.md`, `data/stats.json`, and the README "Dataset at a Glance".
+- Regenerated `docs/SUMMARY.md`, `data/stats.json`, and the README "Dataset at a Glance".
+
+### Fixed
+- Restored the hand-maintained **Explorer dashboard** (`docs/index.html` + `docs/components/`) after a regeneration step had overwritten it with output from a legacy Plotly script. **Removed `scripts/generate_dashboard.py`** (the cause) and its call site in `scripts/check_sources.py`; documented that the dashboard is a no-build static site that fetches `data/*.json` from `main` at runtime.
