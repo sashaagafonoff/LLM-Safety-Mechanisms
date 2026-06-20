@@ -29,7 +29,7 @@ Techniques are organised into five categories that span the model lifecycle:
 | **Harm & Content Classification** | Cross-stage classifiers for specific harm types | CSAM Detection, Violence Detection, PII Redaction |
 | **Governance & Oversight** | Organisational structures, compliance, and release protocols | Responsible Release, Regulatory Compliance, Incident Reporting |
 
-Each technique also maps to **lifecycle stages** (pre-training, training, evaluation, inference, governance) and **risk areas** for cross-cutting analysis.
+Each technique also maps to **lifecycle stages** (pre-training, training, evaluation, inference, monitoring, governance) and **risk areas** for cross-cutting analysis.
 
 ## Extraction Methodology
 

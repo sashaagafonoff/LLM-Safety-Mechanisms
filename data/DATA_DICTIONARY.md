@@ -52,7 +52,7 @@ Safety technique definitions with NLU profiles for automated detection.
 | `name` | string | yes | Human-readable name |
 | `categoryId` | string | yes | References `categories.json` |
 | `riskAreaIds` | array | yes | Array of risk area IDs (references `risk_areas.json`) |
-| `lifecycleStages` | array | yes | `training`, `inference`, `governance` |
+| `lifecycleStages` | array | yes | One or more of `pre-training`, `training`, `evaluation`, `inference`, `monitoring`, `governance` (defined in `model_lifecycle.json`) |
 | `description` | string | yes | Brief description |
 | `nlu_profile` | object | yes | See below |
 
@@ -234,7 +234,7 @@ Safety incident register sourced from the [AI Incident Database (AIID)](https://
 | `severity` | string | `high`, `medium`, `low` — derived from CSETv1 Tangible Harm classification where available, defaults to `medium` |
 | `providerIds` | array | Provider IDs involved (references `providers.json`; mapped from AIID developer/deployer entities) |
 | `modelIds` | array | Model IDs involved (references `models.json`; currently empty — AIID does not track specific models) |
-| `techniqueIds` | array | Techniques that failed (references `techniques.json`; currently empty — AIID does not track technique failures) |
+| `techniqueIds` | array | Techniques that failed/were bypassed (references `techniques.json`; derived by heuristic text matching during ingest and routed through `taxonomy_aliases` — populated for ~715 of 1,515 incidents) |
 | `riskAreaIds` | array | Risk areas involved (references `risk_areas.json`; derived from CSETv1 classification fields) |
 | `sources` | array | External references from AIID report records: `[{ "url": string, "title": string, "date": string, "type": string }]` |
 | `status` | string | `confirmed` |

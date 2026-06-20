@@ -26,7 +26,7 @@
       licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
       Severity and risk classifications enriched via CSET V1 taxonomy where available.
       See <a href="https://incidentdatabase.ai/research/snapshots/" target="_blank" rel="noopener">AIID Research Snapshots</a>
-      for the upstream dataset.
+      for the upstream dataset. <span id="aiid-snapshot"></span>
     </p>
 
     <div id="incidents-app">
@@ -71,6 +71,19 @@
     container.appendChild(
       createIncidentsTable(incidents, providers, models, techniques, riskAreas, categories)
     );
+
+    // Surface the AIID snapshot version so its currency is explicit. Reads the
+    // ingest metadata, so it stays correct automatically after each re-ingest.
+    fetch(`${ghBase}/third_party/aiid/aiid_meta.json`)
+      .then(r => r.ok ? r.json() : null)
+      .then(meta => {
+        if (!meta) return;
+        const el = document.getElementById("aiid-snapshot");
+        if (el) el.innerHTML =
+          `Currently using <strong>AIID snapshot ${meta.snapshot_version}</strong> ` +
+          `&mdash; ${Number(meta.total_incidents).toLocaleString()} incidents, ingested ${String(meta.ingested_at).slice(0, 10)}.`;
+      })
+      .catch(() => {});
   </script>
 </body>
 

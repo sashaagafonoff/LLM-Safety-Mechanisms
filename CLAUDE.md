@@ -34,10 +34,10 @@ The data model is centered around these key JSON files in [data/](data/):
   - [map_nlu.json](data/map_nlu.json) / [map_llm.json](data/map_llm.json) - Per-stage outputs (NLU-only and LLM-only) that the orchestrator merges into the map above.
   - [model_technique_map_reviewed.json](data/model_technique_map_reviewed.json) - Frozen manually-reviewed ground truth used by the evaluation scripts.
 
-- [model_lifecycle.json](data/model_lifecycle.json) - Lifecycle stage definitions (pre-training, training, evaluation, inference, governance) that techniques map to.
+- [model_lifecycle.json](data/model_lifecycle.json) - Lifecycle stage definitions (pre-training, training, evaluation, inference, monitoring, governance) that techniques map to.
 - [stats.json](data/stats.json) - **Generated** by `generate_report.py`; aggregate counts consumed by the dashboard.
 
-- [standards.json](data/standards.json) - External framework definitions (NIST AI RMF, NIST AI 600-1, OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO 42001, Weidinger taxonomy). Each framework has an id, version, URL, and hierarchical structure of codes.
+- [standards.json](data/standards.json) - External framework definitions (NIST AI RMF, NIST AI 600-1, OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO 42001, Weidinger taxonomy, Australia Voluntary AI Safety Standard). Each framework has an id, version, URL, and hierarchical structure of codes.
 
 - [standards_mapping.json](data/standards_mapping.json) - Many-to-many mapping of techniques to standard controls. Each entry links a `techniqueId` to a `frameworkId` with specific `codes[]`, a `relationship` type (mitigates/addresses/supports/defends), and optional notes.
 
@@ -182,7 +182,7 @@ pip install -r requirements.txt
 ```
 
 ### Testing
-There is currently **no automated test suite** — no `tests/` directory exists, and CI does not run tests. `pytest`/`pytest-cov` are listed in `requirements.txt` but unused. The de facto correctness checks are the evaluation scripts (see Evaluation above) run against the reviewed ground truth, plus the data-integrity check below. If you add tests, place them under `tests/` and run with `pytest`.
+There is a `pytest` suite under `tests/` (run `pytest` from the repo root); the `validate.yml` CI gate runs it alongside `scripts/validate.py`. Beyond unit tests, the evaluation scripts (see Evaluation above) run against the reviewed ground truth and the data-integrity check below are the higher-level correctness checks.
 
 ### Code Quality
 ```bash
