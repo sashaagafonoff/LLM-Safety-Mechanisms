@@ -440,14 +440,28 @@
       const filteredProviders = !active ? data.raw.providers
         : data.raw.providers.filter((p) => relevantProviders.has(p.id));
 
-      // Techniques implemented within the provider/model scope (for commentary,
-      // which links to techniques rather than providers).
-      const scopedPairs = active ? applyFilters(data, { providers: selProviders, models: selModels }) : data.flatPairs;
-      const scopedTechIds = new Set();
-      scopedPairs.forEach((p) => { const id = techNameToId.get(p.technique); if (id) scopedTechIds.add(id); });
+      // Commentary links only to techniques, so it is scoped via the techniques
+      // in view. When specific models are selected, relate commentary to the
+      // techniques evidenced in THOSE models' own documents (excluding the
+      // provider's blanket/policy docs); otherwise use every technique across
+      // the selected provider's docs.
+      let commentaryTechIds;
+      if (relevantModels.size > 0) {
+        commentaryTechIds = new Set();
+        data.flatPairs.forEach((p) => {
+          if ((p.modelIds || []).some((id) => relevantModels.has(id))) {
+            const id = techNameToId.get(p.technique);
+            if (id) commentaryTechIds.add(id);
+          }
+        });
+      } else {
+        const scopedPairs = active ? applyFilters(data, { providers: selProviders, models: selModels }) : data.flatPairs;
+        commentaryTechIds = new Set();
+        scopedPairs.forEach((p) => { const id = techNameToId.get(p.technique); if (id) commentaryTechIds.add(id); });
+      }
 
       const filteredCommentary = !active ? data.raw.commentary
-        : data.raw.commentary.filter((c) => (c.techniqueIds || []).some((id) => scopedTechIds.has(id)));
+        : data.raw.commentary.filter((c) => (c.techniqueIds || []).some((id) => commentaryTechIds.has(id)));
       const filteredIncidents = !active ? data.raw.incidents
         : data.raw.incidents.filter((i) => (i.providerIds || []).some((p) => relevantProviders.has(p)));
 
