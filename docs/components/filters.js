@@ -103,7 +103,7 @@ export function createFilterForm(data, d3) {
       <input type="text" id="model-search" placeholder="Type to find a model…" style="width: 100%; padding: 6px; box-sizing: border-box; margin-bottom: 6px;">
       <div id="model-list" style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; border-radius: 4px; padding: 10px; background: white;">
         ${modelGroups.map(([provName, models]) =>
-          html`<div class="model-group" data-group-name="${provName.toLowerCase()}" style="margin-bottom: 8px;">
+          html`<div class="model-group" data-group-name="${provName.toLowerCase()}" data-provider-id="${models[0] ? models[0].providerId : ""}" style="margin-bottom: 8px;">
             <div style="font-weight: bold; font-size: 11px; color: #444; margin-bottom: 4px;">${provName}</div>
             ${models.map((m) =>
               html`<label class="model-item" data-model-search="${(m.name + " " + m.id).toLowerCase()}" style="display: inline-block; margin: 0 12px 5px 6px; cursor: pointer;">
@@ -199,15 +199,29 @@ export function createFilterForm(data, d3) {
     });
   });
 
+  // Provider checkboxes also narrow the model list — a researcher picks a
+  // provider, then drills into a specific model within it.
+  form.querySelectorAll('input[name="providers"]').forEach((providerCheckbox) => {
+    providerCheckbox.addEventListener("change", () => {
+      applyModelVisibility();
+      pruneHiddenModelSelections();
+      updateSummary();
+      form.dispatchEvent(new CustomEvent("input", { bubbles: true }));
+    });
+  });
+
   // Button event listeners
   form.querySelector("#select-all-providers").addEventListener("click", () => {
     form.querySelectorAll('input[name="providers"]').forEach((cb) => (cb.checked = true));
+    applyModelVisibility();
+    pruneHiddenModelSelections();
     updateSummary();
     form.dispatchEvent(new CustomEvent("input", { bubbles: true }));
   });
 
   form.querySelector("#clear-providers").addEventListener("click", () => {
     form.querySelectorAll('input[name="providers"]').forEach((cb) => (cb.checked = false));
+    applyModelVisibility();
     updateSummary();
     form.dispatchEvent(new CustomEvent("input", { bubbles: true }));
   });
@@ -227,20 +241,35 @@ export function createFilterForm(data, d3) {
     form.dispatchEvent(new CustomEvent("input", { bubbles: true }));
   });
 
-  // Model search box — purely a visual filter over the model checkbox list.
+  // Model list visibility is scoped by BOTH the provider filter (a provider
+  // selection narrows the visible models to that provider) and the search box.
   const modelSearchInput = form.querySelector("#model-search");
-  modelSearchInput.addEventListener("input", () => {
+  const applyModelVisibility = () => {
     const term = modelSearchInput.value.trim().toLowerCase();
+    const selProviders = new Set(getSelectedValues("providers"));
     form.querySelectorAll(".model-group").forEach((group) => {
+      const provMatch = selProviders.size === 0 || selProviders.has(group.dataset.providerId);
       let anyVisible = false;
       group.querySelectorAll(".model-item").forEach((item) => {
-        const match = !term || item.dataset.modelSearch.includes(term);
-        item.style.display = match ? "" : "none";
-        if (match) anyVisible = true;
+        const visible = provMatch && (!term || item.dataset.modelSearch.includes(term));
+        item.style.display = visible ? "" : "none";
+        if (visible) anyVisible = true;
       });
       group.style.display = anyVisible ? "" : "none";
     });
-  });
+  };
+  // When the provider filter hides a model, drop it from the selection so the
+  // now-invisible checkbox can't keep silently constraining the dataset.
+  const pruneHiddenModelSelections = () => {
+    form.querySelectorAll('input[name="models"]:checked').forEach((cb) => {
+      const item = cb.closest(".model-item");
+      const group = cb.closest(".model-group");
+      if ((item && item.style.display === "none") || (group && group.style.display === "none")) {
+        cb.checked = false;
+      }
+    });
+  };
+  modelSearchInput.addEventListener("input", applyModelVisibility);
 
   form.querySelector("#clear-models").addEventListener("click", () => {
     form.querySelectorAll('input[name="models"]').forEach((cb) => (cb.checked = false));

@@ -55,6 +55,7 @@
     <h2>Provider-Technique Relationships</h2>
     <p>This is designed to support coverage analysis. Use the filter below this graph to reduce the dataset for improved
       clarity. You can apply force layout on selected subsets of nodes.</p>
+    <div id="network-model-note" style="display:none; margin: 0 0 10px 0; padding: 8px 12px; background:#eef2ff; border-radius:6px; font-size:13px; color:#3730a3;"></div>
     <div class="card" id="network-chart">
       <div class="loading">Loading&hellip;</div>
     </div>
@@ -277,8 +278,32 @@
       if (result) el.appendChild(result);
     }
 
+    // Model id -> display name, for the "filtered to model(s)" banner.
+    const modelNameById = new Map((data.evidenceModels || []).map((m) => [m.id, m.name]));
+
+    // Banner above the Provider-Technique chart that names the model(s) the
+    // view is currently scoped to — shown only when one or more are selected.
+    function updateNetworkModelNote() {
+      const noteEl = document.getElementById("network-model-note");
+      const selModels = (filterForm.value && filterForm.value.models) || [];
+      noteEl.innerHTML = "";
+      if (selModels.length === 0) { noteEl.style.display = "none"; return; }
+      const label = document.createElement("strong");
+      label.textContent = `Showing model${selModels.length === 1 ? "" : "s"}: `;
+      noteEl.appendChild(label);
+      selModels.forEach((id) => {
+        const chip = document.createElement("span");
+        chip.textContent = modelNameById.get(id) || id;
+        chip.style.cssText = "display:inline-block; background:#fff; border:1px solid #c7d2fe; border-radius:3px; padding:2px 8px; margin:2px 3px; font-size:12px;";
+        noteEl.appendChild(chip);
+      });
+      noteEl.style.display = "";
+    }
+
     // --- Filter-dependent charts ---
     function renderFiltered() {
+      updateNetworkModelNote();
+
       renderInto("network-chart", () => {
         const chartData = buildUnifiedChartData(data, filteredData, categoryColors, providerColors, d3);
         const layouts = createUnifiedChartLayouts(d3);
