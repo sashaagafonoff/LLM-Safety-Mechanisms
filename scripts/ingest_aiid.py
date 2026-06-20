@@ -29,6 +29,13 @@ from datetime import datetime
 from pathlib import Path
 from collections import defaultdict
 
+# Canonical technique-id resolution. The keyword table below may carry legacy
+# technique ids; routing matches through taxonomy_aliases (the single source of
+# truth for renames/merges) keeps regenerated incidents on the current taxonomy
+# so a re-ingest can't reintroduce dangling references after a rename.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from taxonomy_aliases import canonical_techniques
+
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger("AIID-Ingest")
 
@@ -221,18 +228,18 @@ INCIDENT_TECHNIQUE_KEYWORDS = {
         "bias", "discriminat", "racial", "gender bias",
         "unfair", "stereotyp", "prejudic",
     ],
-    "tech-content-watermarking": [
+    "tech-watermarking": [
         "deepfake", "deep fake", "synthetic media",
         "ai-generated image", "ai generated image",
         "ai-generated video", "ai generated video",
         "fake image", "fake video", "manipulated image",
     ],
-    "tech-hallucination-detection": [
+    "tech-hallucination-grounding": [
         "hallucination", "fabricat", "made up",
         "false information", "inaccurate information",
         "invented", "confabul",
     ],
-    "tech-copyright-compliance": [
+    "tech-copyright-ip-violation": [
         "copyright", "intellectual property", "ip violation",
         "copyrighted", "plagiari", "reproduction of",
     ],
@@ -266,7 +273,8 @@ def map_techniques_from_text(title, description):
 
     # Derive additional risk areas from matched techniques
     # (load technique risk areas if available)
-    return sorted(matched_techniques), sorted(matched_risks)
+    # Canonicalize so legacy ids in the keyword table can't produce dangling refs.
+    return sorted(canonical_techniques(matched_techniques)), sorted(matched_risks)
 
 
 def load_json(path):
