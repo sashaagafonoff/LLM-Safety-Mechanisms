@@ -745,9 +745,10 @@
         <div class="empty-icon">📄</div>
         <p>Select a document from the dropdown to begin reviewing and tagging safety techniques.</p>
         <p style="margin-top:8px;font-size:12px;color:var(--text-faint)">
-          Serve this file from the repo root:<br>
-          <code style="font-family:'Overpass Mono',monospace;background:var(--surface-2);padding:2px 6px;border-radius:3px;">python -m http.server 8000</code><br>
-          Then open <code style="font-family:'Overpass Mono',monospace;background:var(--surface-2);padding:2px 6px;border-radius:3px;">http://localhost:8000/tools/tagging_tool.html</code>
+          Run the review server (so <b>Save</b> writes <code style="font-family:'Overpass Mono',monospace;background:var(--surface-2);padding:2px 6px;border-radius:3px;">data/model_technique_map.json</code> in place):<br>
+          <code style="font-family:'Overpass Mono',monospace;background:var(--surface-2);padding:2px 6px;border-radius:3px;">py scripts/review_server.py</code><br>
+          Then open <code style="font-family:'Overpass Mono',monospace;background:var(--surface-2);padding:2px 6px;border-radius:3px;">http://127.0.0.1:8000/tools/tagging_tool.html</code><br>
+          <span style="color:var(--text-faint)">(Plain <code style="font-family:'Overpass Mono',monospace">python -m http.server 8000</code> also works, but Save will download a copy instead of updating in place.)</span>
         </p>
       </div>
     </div>
@@ -794,8 +795,9 @@
   } catch(e) {
     document.getElementById('loading').innerHTML =
       `<p style="color:var(--danger);">Failed to load <strong>${e.message}</strong>.<br>
-       Make sure you're serving from the repo root:<br>
-       <code style="font-family:monospace">python -m http.server 8000</code></p>`;
+       Start the review server from the repo root (enables in-place Save):<br>
+       <code style="font-family:monospace">py scripts/review_server.py</code><br>
+       then open <code style="font-family:monospace">http://127.0.0.1:8000/tools/tagging_tool.html</code></p>`;
     return;
   }
 
@@ -1804,6 +1806,33 @@
   document.getElementById('btnSave').addEventListener('click', async () => {
     const output = buildOutput();
     const json = JSON.stringify(output, null, 2);
+
+    // Preferred: persist IN PLACE via the local review server
+    // (scripts/review_server.py). Writes data/model_technique_map.json directly
+    // and keeps a backup. If the tool isn't being served by that server this
+    // request fails and we fall back to the file-picker / download below.
+    try {
+      const resp = await fetch('/api/save-map', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: json
+      });
+      if (resp.ok) {
+        const info = await resp.json();
+        dirtyCount = 0;
+        flash(`Saved → data/model_technique_map.json (${info.active}/${info.links} active)`, 'save');
+        return;
+      }
+      // Endpoint reachable but rejected the payload — surface the reason.
+      if (resp.status === 400 || resp.status === 422) {
+        const info = await resp.json().catch(() => ({}));
+        flash(`Save rejected: ${info.error || 'invalid map'}`, 'error');
+        return;
+      }
+      // Any other status (e.g. 404 under plain http.server) → fall through.
+    } catch (e) {
+      // Review server not running → fall through to file-picker / download.
+    }
 
     // Try File System Access API (Chrome/Edge)
     if ('showSaveFilePicker' in window) {

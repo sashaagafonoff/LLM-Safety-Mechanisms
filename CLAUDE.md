@@ -271,3 +271,26 @@ The most important thing to know before editing: **which files are authored by h
 - **Ground truth (frozen):** `model_technique_map_reviewed.json` — don't regenerate; the evaluators compare against it.
 
 Other top-level dirs: `schema/` (JSON Schema definitions), `reports/` (generated evaluation reports, e.g. `taxonomy_comparison.md`), `cache/` (source checksums + pipeline logs), `tools/tagging_tool.html` (standalone browser review/annotation tool, distinct from the deployed `docs/tag.html`).
+
+### Reviewing / correcting automated tags (human-in-the-loop)
+
+The automated map is high-recall and carries false positives. To correct them
+locally with in-place persistence (no online tool, no manual file shuffling):
+
+```bash
+py scripts/review_server.py        # serves the repo on http://127.0.0.1:8000
+# open http://127.0.0.1:8000/tools/tagging_tool.html
+```
+
+`tools/tagging_tool.html` loads `data/*.json`, shows each document with its
+detections (provenance-marked N/L/M) against the source text, and lets you
+confirm/reject techniques and evidence. Its **Save** button POSTs to the
+server's `/api/save-map`, which writes `data/model_technique_map.json` **in
+place** after backing up the prior version to `cache/tagging_backups/`. Rejected
+items are soft-deleted (`active: false` with a `deleted_by` provenance), which
+also feeds the LLM review index so the same false positives are suppressed on
+future runs. After a review session, `python scripts/validate.py` then commit +
+push — the dashboard reads `data/*.json` from `main`, so it updates on push.
+
+(Served by a plain `python -m http.server` instead, the tool still works but
+Save falls back to downloading a copy you must move into `data/` by hand.)

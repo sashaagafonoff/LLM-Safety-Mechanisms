@@ -28,3 +28,6 @@ Dates are ISO 8601 (UTC).
 
 ### Fixed
 - Restored the hand-maintained **Explorer dashboard** (`docs/index.html` + `docs/components/`) after a regeneration step had overwritten it with output from a legacy Plotly script. **Removed `scripts/generate_dashboard.py`** (the cause) and its call site in `scripts/check_sources.py`; documented that the dashboard is a no-build static site that fetches `data/*.json` from `main` at runtime.
+
+### Review tooling
+- Added `scripts/review_server.py`: a localhost server that serves the repo for `tools/tagging_tool.html` and accepts the tool's **Save** as `POST /api/save-map`, writing `data/model_technique_map.json` **in place** (validated, with a timestamped backup under `cache/tagging_backups/`). The tagging tool's Save now persists corrections directly instead of downloading a copy to move by hand; rejections soft-delete (`active: false`) and feed the review index.
