@@ -103,11 +103,12 @@
     <hr>
 
     <h2>Documentation Map</h2>
-    <p>The following chart shows the relationship between documents in the collection to providers (via models). This is
-      to provide a quick overview as to which documentation has been brought into the dataset for analysis and will also
-      assist in coverage analysis as I identify gaps in information. Click and drag to move things around. You can
-      export the layout and save it as you prefer. Tooltips on the document nodes provide the URIs for the original
-      source document referenced.</p>
+    <p>The following chart shows how documents in the collection relate to providers &mdash; through the models a
+      document covers, or directly to the provider for provider-level documents (e.g. transparency-index assessments,
+      which score a provider rather than a specific model). This provides a quick overview of which documentation has
+      been brought into the dataset for analysis and assists in coverage analysis as I identify gaps in information.
+      Click and drag to move things around. You can export the layout and save it as you prefer. Tooltips on the
+      document nodes provide the URIs for the original source document referenced.</p>
     <div class="card" id="doc-network">
       <div class="loading">Loading&hellip;</div>
     </div>
@@ -124,11 +125,12 @@
     <h2>Current (&amp; Planned) Activity</h2>
     <p>This project is under active development. Current priorities include:</p>
     <ul>
-      <li><strong>Improving detection accuracy and human review workflows</strong> &mdash; <em>[Underway]</em> Manual
-        ground-truth labelling against source documentation is underway to empirically tune the semantic matching
-        thresholds. The extraction pipeline implements a two-level RAG architecture (NLU retrieval + LLM verification)
-        with a per-technique review index. I'm also improving the human review UI and capture of link origination
-        sources (NLU/LLM/Human).</li>
+      <li><strong>Improving detection accuracy and human review workflows</strong> &mdash; <em>[Underway]</em>
+        Detection is measured against a blind, held-out test split of manually-reviewed documents to avoid train/test
+        leakage, with thresholds tuned only on a separate development split. The extraction pipeline implements a
+        two-level RAG architecture (NLU retrieval + LLM verification) with a per-technique review index that learns
+        from prior human decisions. A local review tool now writes corrections straight back to the dataset, with every
+        link carrying its origination provenance (NLU/LLM/Human).</li>
       <li><strong>Standards alignment</strong> &mdash; <em>[Active]</em> Techniques are mapped against NIST AI RMF, NIST
         AI 600-1 GenAI Profile, OWASP LLM Top 10, MITRE ATLAS, EU AI Act, ISO 42001, and the Weidinger taxonomy to
         support compliance gap analysis.</li>
@@ -144,12 +146,13 @@
     <h2>Documentation</h2>
 
     <h3>Data Sources</h3>
-    <p>This notebook fetches live data from the following GitHub repository endpoints:</p>
+    <p>This dashboard fetches live data from the following data files, served from the repository's <code>main</code>
+      branch:</p>
     <ul>
-      <li><strong>Evidence:</strong> <code>evidence.json</code> &mdash; Points at sources of documentation (and soon,
-        third party analysis) for models. This is used by <code>/scripts/ingest_universal.py</code> to map techniques to
-        models. Metadata for the document in evidence.json lists the provider and model versions to which it relates.
-      </li>
+      <li><strong>Evidence:</strong> <code>evidence.json</code> &mdash; Catalogue of source documents (system cards,
+        technical reports, policies, and third-party assessments) together with the provider and model versions each
+        relates to. <code>scripts/ingest_universal.py</code> downloads these into flat text; the extraction pipeline
+        then maps them to techniques.</li>
       <li><strong>Techniques:</strong> <code>techniques.json</code> &mdash; Catalog of safety techniques and
         methodologies. These are expanded with additional semantic content (descriptions, alternative equivalent
         terminology, etc) to support the automation step which correlates evidence (and related models) with techniques

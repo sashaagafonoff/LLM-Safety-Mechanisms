@@ -25,7 +25,8 @@ export const networkConfig = {
   },
   linkColors: {
     owns: "#888",
-    documents: "#888"
+    documents: "#888",
+    assesses: "#888"
   }
 };
 
@@ -103,6 +104,8 @@ export function buildNetworkGraph(data) {
   data.raw.evidence.forEach((source) => {
     const evidenceId = `evidence:${source.id || source.title.replace(/[^a-zA-Z0-9]/g, "-")}`;
     const hasValidModels = source.models && source.models.length > 0;
+    const providerNodeId = `provider:${source.provider}`;
+    const hasProvider = nodeSet.has(providerNodeId);
 
     if (!nodeSet.has(evidenceId)) {
       nodeSet.add(evidenceId);
@@ -115,7 +118,11 @@ export function buildNetworkGraph(data) {
         providerName: providerIdToName.get(source.provider),
         url: source.url,
         modelCount: source.models ? source.models.length : 0,
-        isOrphan: !hasValidModels
+        // Orphan only if it connects to nothing. Provider-level documents
+        // (e.g. FMTI transparency assessments) carry no model reference but DO
+        // belong to a provider — they link to the provider node below instead
+        // of floating, so they are not orphans.
+        isOrphan: !hasValidModels && !hasProvider
       });
     }
 
@@ -126,6 +133,9 @@ export function buildNetworkGraph(data) {
           links.push({ source: evidenceId, target: modelNodeId, type: "documents" });
         }
       });
+    } else if (hasProvider) {
+      // Provider-scoped document with no specific model — attach to its provider.
+      links.push({ source: providerNodeId, target: evidenceId, type: "assesses" });
     }
   });
 
