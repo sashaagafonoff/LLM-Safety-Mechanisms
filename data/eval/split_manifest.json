@@ -1,0 +1,129 @@
+{
+  "protocol": "Deterministic stratified holdout over model_technique_map_reviewed.json. TEST documents are blind: never used for threshold calibration, few-shot seeding, or the review index. Selection is by sorted id within each provider family (no RNG); regenerating with the same gold set reproduces these files exactly. If gold_sha256 changes, the split is stale and must be re-frozen and re-reviewed.",
+  "fraction_test": 0.3,
+  "gold_sha256": "aa076a242175976b4af34c8ea082f618a4931bfe4443efd8f8b059131a2ad899",
+  "counts": {
+    "gold": 35,
+    "dev": 24,
+    "test": 11
+  },
+  "per_family": {
+    "alibaba": {
+      "n": 3,
+      "test": [
+        "qwen2-5-coder-tech-report"
+      ],
+      "dev": [
+        "qwen2-5-tech-report",
+        "qwen3-max"
+      ]
+    },
+    "anthropic": {
+      "n": 4,
+      "test": [
+        "anthropic-rsp"
+      ],
+      "dev": [
+        "claude-3-5-sonnet-card",
+        "claude-3-haiku-model-card",
+        "claude-opus-4-5-system-card"
+      ]
+    },
+    "cohere": {
+      "n": 2,
+      "test": [
+        "cohere-safety-framework"
+      ],
+      "dev": [
+        "command-a"
+      ]
+    },
+    "deepseek": {
+      "n": 3,
+      "test": [
+        "deepseek-privacy"
+      ],
+      "dev": [
+        "deepseek-r1-paper",
+        "deepseek-v3-paper"
+      ]
+    },
+    "google": {
+      "n": 5,
+      "test": [
+        "gemini-1-5-paper",
+        "gemini-25-flash-lite"
+      ],
+      "dev": [
+        "gemini-3-pro",
+        "gemini-3-technical-report",
+        "google-ai-principles-2024"
+      ]
+    },
+    "meta": {
+      "n": 4,
+      "test": [
+        "llama-3-paper"
+      ],
+      "dev": [
+        "llama-4-maverick",
+        "llama-4-responsible-use-guide",
+        "meta-llama-responsible-use"
+      ]
+    },
+    "microsoft": {
+      "n": 2,
+      "test": [
+        "microsoft-rai-standard"
+      ],
+      "dev": [
+        "phi-4-tech-report"
+      ]
+    },
+    "mistral": {
+      "n": 2,
+      "test": [
+        "mistral-large-3"
+      ],
+      "dev": [
+        "pixtral-12b-blog"
+      ]
+    },
+    "nvidia": {
+      "n": 1,
+      "test": [],
+      "dev": [
+        "nemotron-4-tech-report"
+      ]
+    },
+    "openai": {
+      "n": 4,
+      "test": [
+        "gpt-4o-system-card"
+      ],
+      "dev": [
+        "gpt-5-system-card",
+        "o3-pro",
+        "openai-preparedness"
+      ]
+    },
+    "tencent": {
+      "n": 1,
+      "test": [],
+      "dev": [
+        "hunyuan-technical-report"
+      ]
+    },
+    "xai": {
+      "n": 4,
+      "test": [
+        "grok-4"
+      ],
+      "dev": [
+        "grok-image-gen-update",
+        "grok-security",
+        "xai-security"
+      ]
+    }
+  }
+}

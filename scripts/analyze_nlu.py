@@ -28,6 +28,8 @@ from typing import List, Dict, Tuple
 from pathlib import Path
 from sentence_transformers import SentenceTransformer, CrossEncoder, util
 from robust_tokenizer import create_chunks_from_text
+from nli_utils import resolve_entailment_index
+from taxonomy_maps import CATEGORY_TO_TOPIC
 
 # --- CONFIGURATION ---
 INPUT_DIR = Path("data/flat_text")
@@ -44,6 +46,12 @@ RETRIEVAL_THRESHOLD = 0.40  # Raised from 0.35 to reduce FPs with bge-large
 VERIFICATION_MODEL_NAME = "cross-encoder/nli-deberta-v3-large"
 VERIFICATION_THRESHOLD = 0.85  # Raised from 0.65; large cross-encoder needs higher bar
 
+# Reproducibility: pin model revisions to a HF commit SHA to freeze scores.
+# None = latest (not reproducible). TODO: pin these (see docs/WORKPLAN.md B.0.4).
+RETRIEVAL_MODEL_REVISION = None
+VERIFICATION_MODEL_REVISION = None
+RANDOM_SEED = 42
+
 # Text Processing
 WINDOW_SIZE = 3
 STRIDE = 2
@@ -56,13 +64,43 @@ def normalize_string(s: str) -> str:
     if not s: return ""
     return re.sub(r'[^a-zA-Z0-9]', '', s).lower()
 
+def _set_determinism(seed: int = RANDOM_SEED) -> None:
+    """Seed RNGs for reproducible scores (best-effort; deps may be absent)."""
+    try:
+        import random
+        import numpy as np
+        import torch
+        random.seed(seed)
+        np.random.seed(seed)
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
+    except Exception as e:  # pragma: no cover - depends on optional heavy deps
+        logger.warning(f"Could not fully set determinism: {e}")
+
 class NLUAnalyzer:
     def __init__(self):
+        _set_determinism(RANDOM_SEED)
+
         logger.info("⏳ Loading Retrieval Model (Bi-Encoder)...")
-        self.retriever = SentenceTransformer(RETRIEVAL_MODEL_NAME)
+        st_kwargs = {} if RETRIEVAL_MODEL_REVISION is None else {"revision": RETRIEVAL_MODEL_REVISION}
+        self.retriever = SentenceTransformer(RETRIEVAL_MODEL_NAME, **st_kwargs)
 
         logger.info("⏳ Loading Verification Model (Cross-Encoder)...")
-        self.verifier = CrossEncoder(VERIFICATION_MODEL_NAME)
+        ce_kwargs = {} if VERIFICATION_MODEL_REVISION is None else {"revision": VERIFICATION_MODEL_REVISION}
+        self.verifier = CrossEncoder(VERIFICATION_MODEL_NAME, **ce_kwargs)
+
+        # Resolve the entailment class index from the checkpoint config (REFACTOR §1.3);
+        # do not hard-code index 1.
+        cfg_labels = getattr(getattr(self.verifier, "model", None), "config", None)
+        cfg_labels = getattr(cfg_labels, "id2label", None)
+        self.entailment_idx = resolve_entailment_index(cfg_labels)
+        if not cfg_labels:
+            logger.warning("Could not read id2label from verifier; defaulting entailment index to %s",
+                           self.entailment_idx)
+        else:
+            logger.info("Entailment class index resolved to %s (id2label=%s)",
+                        self.entailment_idx, cfg_labels)
 
         self.categories = self._load_categories()
         self.technique_index = self._load_and_index_techniques()
@@ -268,15 +306,9 @@ class NLUAnalyzer:
         candidates = []
         metadata_filtered = 0
 
-        # Category to topic mapping for metadata filtering
-        # Use unique names that don't collide with old 10-topic excluded_topics
-        category_to_topic_map = {
-            'cat-model-development': 'cat_model_development',
-            'cat-evaluation': 'cat_evaluation',
-            'cat-runtime-safety': 'cat_runtime_safety',
-            'cat-harm-classification': 'cat_harm_classification',
-            'cat-governance': 'cat_governance'
-        }
+        # Category to topic mapping for metadata filtering (single source of truth:
+        # taxonomy_maps.CATEGORY_TO_TOPIC — de-duplicated per REFACTOR §1.9).
+        category_to_topic_map = CATEGORY_TO_TOPIC
 
         for tech in self.technique_index:
             # Category-aware filtering using document metadata
@@ -310,7 +342,7 @@ class NLUAnalyzer:
         verified_matches = []
         pairs = [(c['chunk'], c['technique']['hypothesis']) for c in candidates]
         pred_scores = self.verifier.predict(pairs, apply_softmax=True)
-        entailment_idx = 1
+        entailment_idx = self.entailment_idx
 
         filtered_count = 0
         for i, score_dist in enumerate(pred_scores):
@@ -388,6 +420,57 @@ class NLUAnalyzer:
         logger.debug(f"   {len(verified_matches)} matches passed Stage 2 (verification)")
 
         return verified_matches
+
+    def score_candidates(self, text: str, doc_id: str = "",
+                         retrieval_floor: float = 0.30) -> List[Dict]:
+        """Return per-(technique, best-chunk) raw scores for threshold calibration.
+
+        Unlike analyze_document, this applies NO verification gate and NO quality
+        filter — it emits every technique whose best chunk clears `retrieval_floor`
+        (kept below the production RETRIEVAL_THRESHOLD so the calibrator can explore
+        operating points beneath the current one), with both raw scores. Metadata
+        category exclusion is still honoured, matching production retrieval.
+
+        Each record: {techniqueId, retrieval_score, verification_score, chunk}.
+        The caller attaches the gold label (B.1.3 calibrate_thresholds.py).
+        """
+        chunks = self._chunk_text(text)
+        if not chunks:
+            return []
+        doc_metadata = self.document_metadata.get(doc_id, {})
+        excluded_topics = set(doc_metadata.get('excluded_topics', []))
+
+        chunk_embeddings = self.retriever.encode(chunks, convert_to_tensor=True)
+        candidates = []
+        for tech in self.technique_index:
+            if excluded_topics:
+                tech_topic = CATEGORY_TO_TOPIC.get(tech['category_id'])
+                if tech_topic and tech_topic in excluded_topics:
+                    continue
+            scores = util.cos_sim(tech['embeddings'], chunk_embeddings)
+            max_scores_per_chunk, _ = scores.max(dim=0)
+            best_idx = int(max_scores_per_chunk.argmax().item())
+            best_score = float(max_scores_per_chunk[best_idx].item())
+            if best_score >= retrieval_floor:
+                candidates.append({
+                    "technique": tech,
+                    "chunk": chunks[best_idx],
+                    "retrieval_score": best_score,
+                })
+        if not candidates:
+            return []
+
+        pairs = [(c['chunk'], c['technique']['hypothesis']) for c in candidates]
+        pred_scores = self.verifier.predict(pairs, apply_softmax=True)
+        out = []
+        for i, dist in enumerate(pred_scores):
+            out.append({
+                "techniqueId": candidates[i]['technique']['id'],
+                "retrieval_score": candidates[i]['retrieval_score'],
+                "verification_score": float(dist[self.entailment_idx]),
+                "chunk": candidates[i]['chunk'][:200],
+            })
+        return out
 
     def _aggregate_results(self, matches: List[Dict]) -> List[Dict]:
         grouped = {}

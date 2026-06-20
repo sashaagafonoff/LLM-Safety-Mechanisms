@@ -14,24 +14,12 @@ from pathlib import Path
 # Add scripts dir for imports
 sys.path.insert(0, str(Path(__file__).parent))
 from analyze_nlu import NLUAnalyzer
+from eval_common import (  # single source of truth (WORKPLAN B.1.4)
+    is_reviewed_document, active_technique_set, load_no_safety_flags as _load_no_safety_flags,
+)
 
 INPUT_DIR = Path("data/flat_text")
 MAP_PATH = Path("data/model_technique_map.json")
-
-
-def _load_no_safety_flags() -> set:
-    """Load document IDs explicitly flagged as no_safety_content in evidence.json."""
-    evidence_path = Path("data/evidence.json")
-    if not evidence_path.exists():
-        return set()
-    with open(evidence_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    flagged = set()
-    for source in data.get("sources", []):
-        meta = source.get("content_metadata", {})
-        if meta.get("no_safety_content", False):
-            flagged.add(source.get("id", ""))
-    return flagged
 
 
 def load_ground_truth(map_path: Path) -> dict:
@@ -52,21 +40,9 @@ def load_ground_truth(map_path: Path) -> dict:
 
     ground_truth = {}
     for doc_id, entries in technique_map.items():
-        has_manual = False
-        has_deleted = False
-        for e in entries:
-            if not e.get("active", True) and e.get("deleted_by") not in (None, "system"):
-                has_deleted = True
-            for ev in e.get("evidence", []):
-                if ev.get("created_by") in ("manual", "sashaagafonoff"):
-                    has_manual = True
-
-        if has_manual or has_deleted:
-            # This document has been manually reviewed
-            active_techniques = set()
-            for e in entries:
-                if e.get("active", True):
-                    active_techniques.add(e["techniqueId"])
+        if is_reviewed_document(entries):
+            # Canonicalized active set via the single shared definition (B.1.4/B.1.5)
+            active_techniques = active_technique_set(entries)
 
             # Flag as no-safety if GT is empty OR explicitly marked in evidence.json
             is_no_safety = len(active_techniques) == 0 or doc_id in no_safety_flags

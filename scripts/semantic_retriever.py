@@ -6,6 +6,7 @@ from pathlib import Path
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict, Tuple, Optional
 from robust_tokenizer import create_chunks_from_text
+from taxonomy_maps import CATEGORY_TO_TOPIC
 
 # --- CONFIGURATION ---
 TECHNIQUES_PATH = Path("data/techniques.json")
@@ -149,17 +150,9 @@ class SemanticRetriever:
             # Category-aware filtering using metadata
             tech_cat_id = target['technique_category_id']
 
-            # Map technique category to topic taxonomy
-            # This helps filter false positives where document metadata excludes the category
-            category_to_topic_map = {
-                'cat-model-development': 'cat_model_development',
-                'cat-evaluation': 'cat_evaluation',
-                'cat-runtime-safety': 'cat_runtime_safety',
-                'cat-harm-classification': 'cat_harm_classification',
-                'cat-governance': 'cat_governance'
-            }
-
-            topic = category_to_topic_map.get(tech_cat_id)
+            # Map technique category to topic taxonomy (single source of truth:
+            # taxonomy_maps.CATEGORY_TO_TOPIC — de-duplicated per REFACTOR §1.9).
+            topic = CATEGORY_TO_TOPIC.get(tech_cat_id)
 
             # Skip if document metadata explicitly excludes this topic
             if topic and excluded_topics and topic in excluded_topics:

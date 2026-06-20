@@ -12,10 +12,10 @@ As AI systems become more powerful, understanding their safety mechanisms is cri
 
 ## Dataset at a Glance
 
-- **48 active safety techniques** across **5 categories** (+2 aspirational)
+- **55 active safety techniques** across **5 categories** (+2 aspirational)
 - **14 providers** (OpenAI, Anthropic, Google, Meta, Cohere, Mistral, xAI, and more)
-- **40 source documents** (system cards, technical reports, safety frameworks)
-- **461+ technique-document links** with provenance tracking
+- **70 source documents** (system cards, technical reports, safety frameworks)
+- **1253+ technique-document links** with provenance tracking
 
 ## Safety Taxonomy
 
@@ -40,8 +40,8 @@ Source documents (PDFs, HTML pages, system cards) are downloaded and converted t
 
 ### Stage 2: NLU Extraction
 A two-stage semantic analysis pipeline identifies technique mentions:
-1. **Retrieval**: `all-mpnet-base-v2` sentence embeddings find candidate text chunks matching each technique's semantic anchors
-2. **Verification**: `cross-encoder/nli-deberta-v3-small` performs natural language inference to confirm entailment against each technique's hypothesis
+1. **Retrieval**: `BAAI/bge-large-en-v1.5` bi-encoder embeddings find candidate text chunks (cosine similarity ≥ 0.40) matching each technique's semantic anchors
+2. **Verification**: `cross-encoder/nli-deberta-v3-large` performs natural language inference to confirm entailment (≥ 0.85) against each technique's hypothesis
 
 Quality filters exclude glossary definitions, "future work" mentions, and metadata-excluded topics.
 
@@ -49,26 +49,30 @@ Quality filters exclude glossary definitions, "future work" mentions, and metada
 Claude reviews each document with NLU findings as context, confirming matches, suggesting additions the NLU missed, and flagging false positives for removal. Each detection includes a supporting quote from the source text.
 
 ### Stage 4: Human Review
-All automated findings are reviewed and corrected using a tagging tool (`tools/tagging_tool.html`). Each evidence passage carries provenance metadata (`created_by`: manual, nlu, or llm) for auditability.
+All automated findings are reviewed and corrected using a tagging tool (`tools/tagging_tool.html`). Each evidence passage carries provenance metadata (`created_by`: manual, nlu, llm, sashaagafonoff, legacy) for auditability. Rejected detections are marked `active: false` (with a `deleted_by` provenance) rather than removed, preserving an audit trail.
 
 ### Pipeline Performance
 
-Measured against manually-reviewed ground truth (375 technique-document links):
+The pipeline is evaluated against a manually-reviewed ground truth using a **blind, stratified dev/test split** (35 reviewed documents → 24 dev / 11 test) to avoid train/test leakage. Thresholds and prompts are tuned only on the dev split; the held-out test split is scored once with the final configuration (`scripts/evaluate.py`).
 
-| Metric | NLU Only | NLU + LLM |
-|--------|----------|-----------|
-| Precision | 75.4% | 73.6% |
-| Recall | 76.0% | 89.3% |
-| F1 Score | 75.7% | 80.7% |
+**Held-out test split (11 documents, reported once):**
 
-The LLM stage recovers techniques that require contextual understanding beyond semantic similarity — particularly Red Teaming mentions (recall improved from 24% to 91%) and governance techniques.
+| Stage | Precision | Recall | F1 |
+|-------|-----------|--------|-----|
+| NLU (retrieval + verification) | 42% | 67% | 51% |
+| LLM extraction | 59% | 38% | 47% |
+| **Merged map** | **42%** | **79%** | **55%** |
+
+*(Dev split, 22 documents: merged P 54% / R 70% / F1 61%.)*
+
+The merged automated map is deliberately **high-recall**: it is a candidate-generation surface for human review, not the final published claim set, so its `active` links include unreviewed NLU candidates. The two stages are complementary — NLU favors recall, the LLM favors precision — and human review reconciles them: manually-reviewed evidence reaches ~97% recall against ground truth. Per-document and per-category breakdowns are in [`reports/evaluation_test.md`](reports/evaluation_test.md).
 
 ## Project Structure
 
 ```
 data/
 ├── evidence.json                    # Core evidence linking providers to techniques
-├── techniques.json                  # 50 safety technique definitions with NLU profiles
+├── techniques.json                  # 57 technique definitions (55 active + 2 aspirational) with NLU profiles
 ├── categories.json                  # 5 technique categories
 ├── providers.json                   # Provider metadata
 ├── models.json                      # Model metadata
@@ -159,8 +163,13 @@ python scripts/ingest_universal.py --force
 # Clean flat text files (remove TOCs, references, tables):
 python scripts/clean_flat_text.py
 
-# Evaluate against ground truth:
+# Evaluate against the blind held-out ground truth:
+python scripts/evaluate.py --split test       # held-out test split (report once)
+python scripts/evaluate.py --split dev         # dev split (use while iterating)
 python scripts/compare_taxonomy_runs.py --detailed
+
+# Validate data integrity (JSON Schema + referential integrity; same as CI):
+python scripts/validate.py
 
 # Check sources for updates:
 python scripts/check_sources.py                     # Report only

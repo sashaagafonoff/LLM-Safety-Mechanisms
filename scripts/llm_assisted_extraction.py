@@ -40,8 +40,13 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 import argparse
 import time
+import threading
 from datetime import datetime
 from difflib import SequenceMatcher
+
+# Local scripts dir on path (works when run directly or imported as a module).
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from eval_common import load_holdout_ids, is_reviewed_document  # blind-split quarantine + shared review predicate (B.1.2/B.1.4)
 
 # Load environment variables from .env file
 try:
@@ -75,8 +80,13 @@ MODEL_MAP = {
     "haiku": "claude-haiku-4-5-20251001",
     "sonnet": "claude-sonnet-4-6",
     "sonnet-legacy": "claude-3-5-sonnet-20241022",
-    "opus": "claude-opus-4-6",
+    "opus": "claude-opus-4-8",  # current flagship for the reasoning/extraction task (was 4-6)
 }
+
+# Minimum fuzzy-match score to accept an LLM quote as grounded in the source text.
+# Interim conservative value (raised from 0.4); calibrate via a PR curve on labelled
+# (quote, true_in_source) pairs in phase B.1.3 (REFACTOR §2.2).
+FUZZY_MATCH_MIN_SCORE = 0.6
 
 def find_exact_passage(llm_quote: str, source_text: str, context_chars: int = 200) -> Optional[str]:
     """
@@ -138,10 +148,25 @@ def find_exact_passage(llm_quote: str, source_text: str, context_chars: int = 20
                     best_match = sent
 
     # Only return if we have a reasonable match
-    if best_score > 0.4 and best_match:
+    if best_score > FUZZY_MATCH_MIN_SCORE and best_match:
         return best_match.strip()
 
     return None
+
+
+def _mark_abstained(candidate: Dict, reason: str) -> None:
+    """Quarantine a candidate for human review instead of auto-confirming.
+
+    Implements explicit abstention (REFACTOR §2.3): on a parse/API failure or an
+    explicit ABSTAIN verdict, the candidate is kept but marked inactive + needs_review
+    rather than silently confirmed.
+    """
+    candidate["active"] = False
+    candidate["needs_review"] = True
+    candidate["review_reason"] = reason
+    for ev in candidate.get("evidence", []):
+        if isinstance(ev, dict):
+            ev["active"] = False
 
 
 # Prompt template for technique extraction
@@ -299,13 +324,13 @@ Use the confirmed/rejected patterns to judge whether each candidate is a genuine
 
 ## Instructions
 
-For each candidate, return CONFIRM or REJECT:
+For each candidate, return CONFIRM, REJECT, or ABSTAIN:
 - CONFIRM: Evidence clearly describes implementation of the technique, consistent with confirmed examples
 - REJECT: Evidence matches a false-positive pattern seen in rejected examples (citation-only, future work, glossary, negation, vague mention)
-- When uncertain, CONFIRM — it is better for a human reviewer to catch a borderline case than to lose a valid match
+- ABSTAIN: Genuinely uncertain — a human reviewer should decide. The candidate is quarantined for review, not dropped, so abstain instead of guessing.
 
 Return ONLY a JSON array:
-[{{"techniqueId": "...", "verdict": "confirm", "reason": "..."}}]
+[{{"techniqueId": "...", "verdict": "confirm|reject|abstain", "reason": "..."}}]
 """
 
 
@@ -316,9 +341,15 @@ class LLMExtractor:
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY environment variable not set")
 
-        self.client = anthropic.Anthropic(api_key=api_key)
+        # Higher max_retries (default 2) gives the SDK more exponential-backoff
+        # attempts on 429/overloaded before the rate-limit path drops a doc —
+        # important under the parallel LLM pass.
+        self.client = anthropic.Anthropic(api_key=api_key, max_retries=5)
         self.model = MODEL_MAP.get(model_name, MODEL_MAP["sonnet"])
         self.resume = resume
+        # Guards self.results + checkpoint file when documents are processed
+        # concurrently (the Anthropic client itself is thread-safe).
+        self._results_lock = threading.Lock()
 
         # Load data
         print("Loading taxonomy and metadata...")
@@ -342,6 +373,9 @@ class LLMExtractor:
         print(f"✓ Loaded metadata for {len(self.evidence_metadata)} documents")
         print(f"✓ Review index: {techs_with_data} techniques with review data "
               f"({total_pos} positives, {total_neg} negatives)")
+        if getattr(self, "_review_quarantined", 0):
+            print(f"✓ Quarantined {self._review_quarantined} blind-test document(s) "
+                  f"from the review index (WORKPLAN B.1.2)")
         print(f"✓ Using model: {self.model}")
 
         if resume and self.results:
@@ -395,19 +429,23 @@ class LLMExtractor:
         with open(map_path, 'r', encoding='utf-8') as f:
             technique_map = json.load(f)
 
+        # Quarantine blind-test documents (WORKPLAN B.1.2): a test doc must never
+        # seed a few-shot positive/negative, or the LLM verification pass would be
+        # tuned on the very set it is later graded against. Empty until the split
+        # is frozen (make_eval_split.py), so this is a safe no-op by default.
+        holdout_ids = load_holdout_ids()
+        quarantined = 0
+
         index = {}
 
         for doc_id, entries in technique_map.items():
-            # Only include documents that have been manually reviewed
-            is_reviewed = False
-            for e in entries:
-                if not e.get("active", True) and e.get("deleted_by") not in (None, "system"):
-                    is_reviewed = True
-                for ev in e.get("evidence", []):
-                    if isinstance(ev, dict) and ev.get("created_by") in ("manual", "sashaagafonoff"):
-                        is_reviewed = True
+            if doc_id in holdout_ids:
+                quarantined += 1
+                continue
 
-            if not is_reviewed:
+            # Only include documents that have been manually reviewed — shared
+            # definition (WORKPLAN B.1.4) so this index and the evaluators agree.
+            if not is_reviewed_document(entries):
                 continue
 
             for e in entries:
@@ -445,6 +483,7 @@ class LLMExtractor:
                         "reason": e.get("deletion_reason", ""),
                     })
 
+        self._review_quarantined = quarantined
         return index
 
     def _load_checkpoint(self) -> Dict:
@@ -626,7 +665,6 @@ class LLMExtractor:
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=2048,
-                temperature=0,
                 messages=[{"role": "user", "content": prompt}]
             )
 
@@ -634,45 +672,57 @@ class LLMExtractor:
             verdicts = self._parse_json_response(content)
 
             if verdicts is None:
-                print(f"  ⚠️ Could not parse verification response, passing all through")
-                return candidates
+                # Abstain rather than confirm-on-failure (REFACTOR §2.3)
+                print(f"  ⚠️ Could not parse verification response; abstaining on {len(to_verify)} candidate(s)")
+                for c in to_verify:
+                    _mark_abstained(c, "verification_unparseable")
+                return to_verify + pass_through
 
-            # Build verdict lookup
+            # Build verdict lookup (a missing/unknown verdict means abstain, not confirm)
             verdict_map = {}
             for v in verdicts:
                 tid = v.get("techniqueId", "")
-                verdict_map[tid] = v.get("verdict", "confirm").lower()
+                verdict_map[tid] = v.get("verdict", "abstain").lower()
 
-            # Filter verified candidates
-            confirmed = []
-            rejected = []
+            def _reason_for(tid):
+                return next((v.get("reason", "") for v in verdicts
+                             if v.get("techniqueId") == tid), "")
+
+            confirmed, rejected, abstained = [], [], []
             for c in to_verify:
                 tid = c.get("techniqueId", "")
-                verdict = verdict_map.get(tid, "confirm")  # Default to confirm if missing
+                verdict = verdict_map.get(tid, "abstain")  # missing verdict -> abstain
                 if verdict == "confirm":
                     confirmed.append(c)
-                else:
-                    reason = next((v.get("reason", "") for v in verdicts
-                                   if v.get("techniqueId") == tid), "")
-                    rejected.append((tid, reason))
+                elif verdict == "reject":
+                    rejected.append((tid, _reason_for(tid)))
+                else:  # "abstain" or any unrecognized verdict
+                    _mark_abstained(c, _reason_for(tid) or "verifier_abstained")
+                    abstained.append(c)
 
             if rejected:
                 print(f"  Verification rejected {len(rejected)} candidate(s):")
                 for tid, reason in rejected:
                     print(f"    [-] {tid}: {reason[:80]}")
-
+            if abstained:
+                print(f"  Verification abstained on {len(abstained)} candidate(s) (quarantined for review)")
             if confirmed:
                 print(f"  Verification confirmed {len(confirmed)} candidate(s)")
 
-            return confirmed + pass_through
+            # Abstained candidates are returned but inactive, so a human can review them.
+            return confirmed + abstained + pass_through
 
         except anthropic.APIError as e:
-            print(f"  ⚠️ Verification API error: {e}, passing all candidates through")
-            return candidates
+            print(f"  ⚠️ Verification API error: {e}; abstaining on {len(to_verify)} candidate(s)")
+            for c in to_verify:
+                _mark_abstained(c, "verification_api_error")
+            return to_verify + pass_through
 
         except Exception as e:
-            print(f"  ⚠️ Verification failed: {e}, passing all candidates through")
-            return candidates
+            print(f"  ⚠️ Verification failed: {e}; abstaining on {len(to_verify)} candidate(s)")
+            for c in to_verify:
+                _mark_abstained(c, "verification_error")
+            return to_verify + pass_through
 
     def extract_techniques(self, doc_id: str, text: str, nlu_results: Optional[List[Dict]] = None) -> Tuple[List[Dict], List[Dict]]:
         """
@@ -730,7 +780,6 @@ class LLMExtractor:
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=4096,
-                temperature=0,  # Deterministic for consistency
                 messages=[{
                     "role": "user",
                     "content": prompt
@@ -755,6 +804,12 @@ class LLMExtractor:
                 if not tech_id:
                     continue
 
+                # Validate against the loaded taxonomy; quarantine hallucinated ids
+                # rather than recording them as real links (REFACTOR §2.3).
+                if tech_id not in self.tech_names:
+                    print(f"    ⚠️ Skipping out-of-taxonomy techniqueId: {tech_id}")
+                    continue
+
                 if match.get('delete'):
                     # This is a deletion suggestion
                     deletions.append({
@@ -763,31 +818,39 @@ class LLMExtractor:
                         "reasoning": match.get('reasoning', '')
                     })
                 else:
-                    # This is an addition - apply fuzzy matching to get exact quote
+                    # This is an addition - apply fuzzy matching to ground the quote
                     llm_evidence = match.get('evidence', '')
                     exact_quote = find_exact_passage(llm_evidence, text) if llm_evidence else None
 
-                    # Use exact quote if found, otherwise fall back to LLM's version
-                    final_evidence = exact_quote if exact_quote else llm_evidence
+                    # Hard grounding gate (REFACTOR §2.2): if the quote can't be grounded
+                    # in the source, keep the candidate but quarantine it (active=False,
+                    # needs_review) instead of publishing an unverified quote.
+                    grounded = exact_quote is not None
+                    final_evidence = exact_quote if grounded else llm_evidence
 
                     if final_evidence:
-                        additions.append({
+                        addition = {
                             "techniqueId": tech_id,
                             "confidence": match.get('confidence', 'Medium'),
-                            "active": True,
+                            "active": grounded,
                             "deleted_by": None,
                             "evidence": [{
                                 "text": final_evidence,
                                 "created_by": "llm",
-                                "active": True,
+                                "active": grounded,
                                 "deleted_by": None,
-                                "llm_original": llm_evidence if exact_quote else None  # Track if we modified
+                                "llm_original": llm_evidence if grounded else None,
                             }],
                             "reasoning": match.get('reasoning', '')
-                        })
-
-                        if exact_quote and exact_quote != llm_evidence:
+                        }
+                        if not grounded:
+                            addition["needs_review"] = True
+                            addition["review_reason"] = "grounding_failed"
+                            addition["evidence"][0]["grounding_failed"] = True
+                            print(f"    ⚠️ Grounding failed for {tech_id} — quarantined for review")
+                        elif exact_quote != llm_evidence:
                             print(f"    ↳ Fuzzy matched quote for {tech_id}")
+                        additions.append(addition)
 
             return additions, deletions
 
@@ -870,17 +933,14 @@ class LLMExtractor:
                     tech_id = d.get('techniqueId', 'unknown')
                     print(f"    [-DEL] {tech_id}: {d.get('reasoning', '')[:50]}")
 
-            # Store results with both additions and deletion metadata
-            self.results[doc_id] = {
-                "additions": additions,
-                "deletions": deletions
-            }
-
-            # Save checkpoint after each document
-            self._save_checkpoint()
-
-            # Small delay to avoid rate limits
-            time.sleep(1)
+            # Store results + checkpoint under a lock so concurrent workers don't
+            # corrupt self.results mid-serialization (parallel LLM pass).
+            with self._results_lock:
+                self.results[doc_id] = {
+                    "additions": additions,
+                    "deletions": deletions
+                }
+                self._save_checkpoint()
 
             return True
 

@@ -161,14 +161,6 @@
       "type": "Guide",
       "models": [
         {
-          "modelId": "llama-4-8b",
-          "name": "Llama 4 8B"
-        },
-        {
-          "modelId": "llama-4-17b",
-          "name": "Llama 4 17B"
-        },
-        {
           "modelId": "llama-4-scout",
           "name": "Llama 4 Scout"
         },
@@ -332,6 +324,10 @@
         {
           "modelId": "deepseek-r1-distill",
           "name": "DeepSeek-R1-Distill"
+        },
+        {
+          "modelId": "deepseek-r1-0528",
+          "name": "DeepSeek-R1-0528"
         }
       ],
       "content_metadata": {
@@ -1081,12 +1077,6 @@
           "modelId": "llama-3-70b"
         },
         {
-          "modelId": "llama-4-8b"
-        },
-        {
-          "modelId": "llama-4-17b"
-        },
-        {
           "modelId": "llama-4-scout"
         },
         {
@@ -1360,14 +1350,6 @@
         {
           "modelId": "llama-3-70b",
           "name": "Llama 3 70B"
-        },
-        {
-          "modelId": "llama-4-8b",
-          "name": "Llama 4 8B"
-        },
-        {
-          "modelId": "llama-4-17b",
-          "name": "Llama 4 17B"
         },
         {
           "modelId": "llama-4-scout",
@@ -1825,6 +1807,774 @@
         "tech-watermarking",
         "tech-whistleblower-protections"
       ]
+    },
+    {
+      "id": "claude-opus-4-8-system-card",
+      "title": "System Card: Claude Opus 4.8",
+      "url": "https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf",
+      "provider": "anthropic",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "claude-opus-4.8",
+          "name": "Claude Opus 4.8"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Anthropic system card for Claude Opus 4.8 (May 2026); RSP evaluations, safeguards, alignment, agentic safety."
+      }
+    },
+    {
+      "id": "claude-opus-4-7-system-card",
+      "title": "System Card: Claude Opus 4.7",
+      "url": "https://cdn.sanity.io/files/4zrzovbb/website/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+      "provider": "anthropic",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "claude-opus-4.7",
+          "name": "Claude Opus 4.7"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Anthropic system card for Claude Opus 4.7 (April 2026)."
+      }
+    },
+    {
+      "id": "claude-opus-4-6-system-card",
+      "title": "System Card: Claude Opus 4.6",
+      "url": "https://www-cdn.anthropic.com/14e4fb01875d2a69f646fa5e574dea2b1c0ff7b5.pdf",
+      "provider": "anthropic",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "claude-opus-4.6",
+          "name": "Claude Opus 4.6"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Anthropic system card for Claude Opus 4.6 (Feb 2026); deployed under ASL-3."
+      }
+    },
+    {
+      "id": "claude-fable-5-system-card",
+      "title": "System Card: Claude Fable 5 & Mythos 5",
+      "url": "https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf",
+      "provider": "anthropic",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "claude-fable-5",
+          "name": "Claude Fable 5"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Anthropic combined system card for Claude Fable 5 & Mythos 5 (June 2026); RSP/FCF, safeguards, alignment, model welfare."
+      }
+    },
+    {
+      "id": "gpt-5-5-system-card",
+      "title": "GPT-5.5 System Card",
+      "url": "https://deploymentsafety.openai.com/gpt-5-5/gpt-5-5.pdf",
+      "provider": "openai",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "gpt-5.5",
+          "name": "GPT-5.5"
+        },
+        {
+          "modelId": "gpt-5.5-pro",
+          "name": "GPT-5.5 Pro"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official OpenAI GPT-5.5 system card (April 2026); covers GPT-5.5 and GPT-5.5 Pro; Preparedness Framework evals."
+      }
+    },
+    {
+      "id": "gpt-5-4-thinking-system-card",
+      "title": "GPT-5.4 Thinking System Card",
+      "url": "https://deploymentsafety.openai.com/gpt-5-4-thinking/gpt-5-4-thinking.pdf",
+      "provider": "openai",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "gpt-5.4",
+          "name": "GPT-5.4"
+        },
+        {
+          "modelId": "gpt-5.4-mini",
+          "name": "GPT-5.4 mini"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official OpenAI GPT-5.4 Thinking system card (March 2026); covers GPT-5.4 and GPT-5.4 mini appendix."
+      }
+    },
+    {
+      "id": "gemini-3-5-flash-model-card",
+      "title": "Gemini 3.5 Flash Model Card",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+      "provider": "google",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "gemini-3.5-flash",
+          "name": "Gemini 3.5 Flash"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Google DeepMind model card for Gemini 3.5 Flash; Frontier Safety Framework, red teaming, content safety."
+      }
+    },
+    {
+      "id": "gemini-3-1-pro-model-card",
+      "title": "Gemini 3.1 Pro Model Card",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+      "provider": "google",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "gemini-3.1-pro",
+          "name": "Gemini 3.1 Pro"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Google DeepMind model card for Gemini 3.1 Pro; full Frontier Safety Framework eval across five domains."
+      }
+    },
+    {
+      "id": "gemini-3-1-flash-lite-model-card",
+      "title": "Gemini 3.1 Flash-Lite Model Card",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
+      "provider": "google",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "gemini-3.1-flash-lite",
+          "name": "Gemini 3.1 Flash-Lite"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Google DeepMind model card for Gemini 3.1 Flash-Lite; FSF assessment, content safety, red teaming."
+      }
+    },
+    {
+      "id": "phi-4-reasoning-card",
+      "title": "Phi-4-reasoning Model Card",
+      "url": "https://huggingface.co/microsoft/Phi-4-reasoning",
+      "provider": "microsoft",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "phi-4-reasoning",
+          "name": "Phi-4-reasoning"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "red_teaming",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Microsoft Phi-4-reasoning model card; Safety section (AIRT red-team) + Responsible AI Considerations."
+      }
+    },
+    {
+      "id": "phi-4-reasoning-plus-card",
+      "title": "Phi-4-reasoning-plus Model Card",
+      "url": "https://huggingface.co/microsoft/Phi-4-reasoning-plus",
+      "provider": "microsoft",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "phi-4-reasoning-plus",
+          "name": "Phi-4-reasoning-plus"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "red_teaming",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Microsoft Phi-4-reasoning-plus model card; Safety + Responsible AI sections."
+      }
+    },
+    {
+      "id": "phi-4-mini-reasoning-card",
+      "title": "Phi-4-mini-reasoning Model Card",
+      "url": "https://huggingface.co/microsoft/Phi-4-mini-reasoning",
+      "provider": "microsoft",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "phi-4-mini-reasoning",
+          "name": "Phi-4-mini-reasoning"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "red_teaming",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Microsoft Phi-4-mini-reasoning model card; Safety Evaluation and Red-Teaming."
+      }
+    },
+    {
+      "id": "phi-4-mini-instruct-card",
+      "title": "Phi-4-mini-instruct Model Card",
+      "url": "https://huggingface.co/microsoft/Phi-4-mini-instruct",
+      "provider": "microsoft",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "phi-4-mini-instruct",
+          "name": "Phi-4-mini-instruct"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "red_teaming",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Microsoft Phi-4-mini-instruct model card; Responsible AI + Safety/Red-Teaming."
+      }
+    },
+    {
+      "id": "phi-4-reasoning-vision-card",
+      "title": "Phi-4-reasoning-vision-15B Model Card",
+      "url": "https://huggingface.co/microsoft/Phi-4-reasoning-vision-15B",
+      "provider": "microsoft",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "phi-4-reasoning-vision-15b",
+          "name": "Phi-4-reasoning vision (15B)"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "red_teaming",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Microsoft Phi-4-reasoning-vision-15B model card; Alignment Approach + Safety/Red-Teaming (Azure)."
+      }
+    },
+    {
+      "id": "mai-thinking-1-card",
+      "title": "MAI-Thinking-1 (Microsoft AI)",
+      "url": "https://microsoft.ai/news/introducing-mai-thinking-1/",
+      "provider": "microsoft",
+      "type": "Documentation",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "mai-thinking-1",
+          "name": "MAI-Thinking-1"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "documentation",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "output_guardrails",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 0.9,
+        "language": "en",
+        "notes": "Official Microsoft AI MAI-Thinking-1 page; safety guardrails, safety-vs-helpfulness by harm category."
+      }
+    },
+    {
+      "id": "qwen3-coder-next-report",
+      "title": "Qwen3-Coder-Next Technical Report",
+      "url": "https://arxiv.org/html/2603.00729",
+      "provider": "alibaba",
+      "type": "Technical Report",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "qwen3-coder-next",
+          "name": "Qwen3-Coder-Next"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "technical_report",
+        "signal_strength": "high",
+        "temporal_focus": "research",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 0.9,
+        "language": "en",
+        "notes": "Qwen Team technical report (arXiv:2603.00729); security-of-generated-code evals (SecCodeBench/CWEval), reward-hacking mitigation."
+      }
+    },
+    {
+      "id": "cohere-command-a-vision-card",
+      "title": "Command A Vision Model Card",
+      "url": "https://huggingface.co/CohereLabs/command-a-vision-07-2025",
+      "provider": "cohere",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "command-a-vision-07-2025",
+          "name": "Command A Vision (07-2025)"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "output_guardrails",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Cohere Labs Command A Vision model card; Safety Guardrails (contextual/strict modes)."
+      }
+    },
+    {
+      "id": "cohere-command-r-rplus-card",
+      "title": "Command R and Command R+ Model Card",
+      "url": "https://docs.cohere.com/docs/responsible-use",
+      "provider": "cohere",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "command-r-08-2024",
+          "name": "Command R (08-2024)"
+        },
+        {
+          "modelId": "command-r-plus-08-2024",
+          "name": "Command R+ (08-2024)"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "safety_benchmarking",
+          "alignment_methods",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Cohere Command R/R+ model card; safety benchmarks (BOLD), toxicity/bias, prohibited uses."
+      }
+    },
+    {
+      "id": "codestral-card",
+      "title": "Codestral-22B-v0.1 Model Card",
+      "url": "https://huggingface.co/mistralai/Codestral-22B-v0.1",
+      "provider": "mistral",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "codestral",
+          "name": "Codestral"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "output_guardrails"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 0.8,
+        "language": "en",
+        "notes": "Official Mistral Codestral-22B-v0.1 model card; explicit limitations/safety statement on absence of moderation mechanisms."
+      }
+    },
+    {
+      "id": "nemotron-3-nano-card",
+      "title": "Nemotron 3 Nano 30B-A3B Model Card",
+      "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+      "provider": "nvidia",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "nemotron-3-nano-30b-a3b",
+          "name": "Nemotron 3 Nano 30B-A3B"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official NVIDIA Nemotron 3 Nano model card; Ethical Considerations + Safety/Bias/Privacy subcards."
+      }
+    },
+    {
+      "id": "nemotron-3-nano-omni-card",
+      "title": "Nemotron 3 Nano Omni 30B-A3B Model Card",
+      "url": "https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
+      "provider": "nvidia",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "nemotron-3-nano-omni-30b-a3b",
+          "name": "Nemotron 3 Nano Omni 30B-A3B"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official NVIDIA Nemotron 3 Nano Omni model card; ethics + CSAM scanning, dual safety-judge content filtering."
+      }
+    },
+    {
+      "id": "nova-2-lite-card",
+      "title": "Amazon Nova 2 Lite AWS AI Service Card",
+      "url": "https://docs.aws.amazon.com/ai/responsible-ai/nova-2-lite/overview.html",
+      "provider": "amazon",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "nova-2-lite",
+          "name": "Amazon Nova 2 Lite"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official AWS AI Service Card for Amazon Nova 2 Lite; Safety/Fairness/Veracity/Robustness/Privacy/Security/Governance, CBRN, red-teaming."
+      }
+    },
+    {
+      "id": "llama-3-3-card",
+      "title": "Llama 3.3 70B Model Card",
+      "url": "https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/MODEL_CARD.md",
+      "provider": "meta",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-06-19",
+      "models": [
+        {
+          "modelId": "llama-3-3-70b",
+          "name": "Llama 3.3 70B"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "model_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "specific_model",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "red_teaming",
+          "output_guardrails",
+          "alignment_methods",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Meta Llama 3.3 70B model card; responsible deployment, red teaming, CBRNE, Llama Guard 3 / Prompt Guard / Code Shield."
+      }
     }
   ]
 }

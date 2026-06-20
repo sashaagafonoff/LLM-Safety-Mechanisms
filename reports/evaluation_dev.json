@@ -1,0 +1,892 @@
+{
+  "meta": {
+    "automated_path": "D:\\LLM Safety Mechanisms\\data\\model_technique_map.json",
+    "automated_sha256": "0a909e9f9fd9e2267f3b2590dbe02af58501c438e5a560e6702667a1ee4dcbab",
+    "gold_path": "D:\\LLM Safety Mechanisms\\data\\model_technique_map_reviewed.json",
+    "gold_sha256": "5512deecb87d125840e8cb5cceae8d7c54775e262ea0480e6ee8ff84d068ee8d",
+    "split_gold_sha256": "aa076a242175976b4af34c8ea082f618a4931bfe4443efd8f8b059131a2ad899",
+    "split_drift": false,
+    "git_commit": "b81552a",
+    "generated": "2026-06-20T02:12:16+00:00"
+  },
+  "split": "dev",
+  "model_id": null,
+  "documents_scored": 22,
+  "no_safety_excluded": 2,
+  "overall": {
+    "tp": 180,
+    "fp": 152,
+    "fn": 78,
+    "precision": 0.5421686746987951,
+    "recall": 0.6976744186046512,
+    "f1": 0.6101694915254238
+  },
+  "grounded_precision": {
+    "grounded_tp": 180,
+    "grounded_detected": 332,
+    "precision": 0.5421686746987951
+  },
+  "per_stage": {
+    "nlu": {
+      "tp": 160,
+      "fp": 116,
+      "fn": 98,
+      "precision": 0.5797101449275363,
+      "recall": 0.6201550387596899,
+      "f1": 0.5992509363295879
+    },
+    "llm": {
+      "tp": 108,
+      "fp": 84,
+      "fn": 150,
+      "precision": 0.5625,
+      "recall": 0.4186046511627907,
+      "f1": 0.48
+    }
+  },
+  "source_recall": {
+    "nlu": {
+      "hits": 18,
+      "misses": 35,
+      "recall": 0.33962264150943394
+    },
+    "llm": {
+      "hits": 93,
+      "misses": 30,
+      "recall": 0.7560975609756098
+    },
+    "manual": {
+      "hits": 69,
+      "misses": 13,
+      "recall": 0.8414634146341463
+    },
+    "legacy": {
+      "hits": 0,
+      "misses": 0,
+      "recall": 0.0
+    }
+  },
+  "per_category": {
+    "cat-governance": {
+      "tp": 33,
+      "fp": 28,
+      "fn": 22,
+      "precision": 0.5409836065573771,
+      "recall": 0.6,
+      "f1": 0.5689655172413793
+    },
+    "cat-evaluation": {
+      "tp": 29,
+      "fp": 9,
+      "fn": 5,
+      "precision": 0.7631578947368421,
+      "recall": 0.8529411764705882,
+      "f1": 0.8055555555555555
+    },
+    "cat-model-development": {
+      "tp": 43,
+      "fp": 50,
+      "fn": 24,
+      "precision": 0.46236559139784944,
+      "recall": 0.6417910447761194,
+      "f1": 0.5375
+    },
+    "cat-runtime-safety": {
+      "tp": 41,
+      "fp": 31,
+      "fn": 20,
+      "precision": 0.5694444444444444,
+      "recall": 0.6721311475409836,
+      "f1": 0.6165413533834587
+    },
+    "cat-harm-classification": {
+      "tp": 34,
+      "fp": 34,
+      "fn": 7,
+      "precision": 0.5,
+      "recall": 0.8292682926829268,
+      "f1": 0.6238532110091743
+    }
+  },
+  "per_technique": {
+    "tech-capability-monitoring": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 6
+    },
+    "tech-safety-benchmarks": {
+      "tp": 14,
+      "fp": 2,
+      "fn": 1
+    },
+    "tech-red-teaming": {
+      "tp": 13,
+      "fp": 3,
+      "fn": 1
+    },
+    "tech-responsible-release": {
+      "tp": 3,
+      "fp": 4,
+      "fn": 2
+    },
+    "tech-refusal-training": {
+      "tp": 9,
+      "fp": 3,
+      "fn": 1
+    },
+    "tech-code-execution-sandboxing": {
+      "tp": 0,
+      "fp": 5,
+      "fn": 1
+    },
+    "tech-safety-advisory": {
+      "tp": 3,
+      "fp": 3,
+      "fn": 2
+    },
+    "tech-voluntary-commitments": {
+      "tp": 0,
+      "fp": 5,
+      "fn": 0
+    },
+    "tech-rlhf": {
+      "tp": 7,
+      "fp": 2,
+      "fn": 3
+    },
+    "tech-community-evaluation": {
+      "tp": 2,
+      "fp": 4,
+      "fn": 3
+    },
+    "tech-incident-reporting": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 8
+    },
+    "tech-constitutional-ai": {
+      "tp": 0,
+      "fp": 6,
+      "fn": 3
+    },
+    "tech-weapons-illegal-activity": {
+      "tp": 5,
+      "fp": 3,
+      "fn": 1
+    },
+    "tech-sexual-content-moderation": {
+      "tp": 4,
+      "fp": 3,
+      "fn": 1
+    },
+    "tech-hate-speech-detection": {
+      "tp": 3,
+      "fp": 3,
+      "fn": 0
+    },
+    "tech-violence-detection": {
+      "tp": 5,
+      "fp": 2,
+      "fn": 0
+    },
+    "tech-prompt-injection-defense": {
+      "tp": 9,
+      "fp": 1,
+      "fn": 2
+    },
+    "tech-multimodal-safety-alignment": {
+      "tp": 3,
+      "fp": 3,
+      "fn": 4
+    },
+    "tech-adversarial-training": {
+      "tp": 2,
+      "fp": 1,
+      "fn": 0
+    },
+    "tech-autonomous-behaviour": {
+      "tp": 0,
+      "fp": 7,
+      "fn": 0
+    },
+    "tech-output-filtering-systems": {
+      "tp": 5,
+      "fp": 5,
+      "fn": 0
+    },
+    "tech-input-guardrail-systems": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 3
+    },
+    "tech-stakeholder-engagement": {
+      "tp": 1,
+      "fp": 3,
+      "fn": 1
+    },
+    "tech-dataset-auditing": {
+      "tp": 1,
+      "fp": 2,
+      "fn": 6
+    },
+    "tech-misinformation-detection": {
+      "tp": 2,
+      "fp": 1,
+      "fn": 5
+    },
+    "tech-self-harm-prevention": {
+      "tp": 3,
+      "fp": 3,
+      "fn": 0
+    },
+    "tech-ethical-labour-sourcing": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "tech-csam-detection": {
+      "tp": 4,
+      "fp": 2,
+      "fn": 0
+    },
+    "tech-sycophancy-detection": {
+      "tp": 2,
+      "fp": 2,
+      "fn": 0
+    },
+    "tech-system-prompts": {
+      "tp": 2,
+      "fp": 3,
+      "fn": 3
+    },
+    "tech-hallucination-grounding": {
+      "tp": 2,
+      "fp": 2,
+      "fn": 2
+    },
+    "tech-multistage-pipeline": {
+      "tp": 5,
+      "fp": 3,
+      "fn": 2
+    },
+    "tech-observability-monitoring": {
+      "tp": 5,
+      "fp": 2,
+      "fn": 3
+    },
+    "tech-regulatory-compliance": {
+      "tp": 4,
+      "fp": 2,
+      "fn": 0
+    },
+    "tech-bias-mitigation": {
+      "tp": 3,
+      "fp": 2,
+      "fn": 5
+    },
+    "tech-realtime-fact-checking": {
+      "tp": 2,
+      "fp": 1,
+      "fn": 1
+    },
+    "tech-training-data-quality-filtering": {
+      "tp": 8,
+      "fp": 3,
+      "fn": 1
+    },
+    "tech-circuit-breakers": {
+      "tp": 0,
+      "fp": 3,
+      "fn": 0
+    },
+    "tech-enterprise-integration": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 1
+    },
+    "tech-supervised-fine-tuning": {
+      "tp": 0,
+      "fp": 14,
+      "fn": 0
+    },
+    "tech-pii-detection": {
+      "tp": 4,
+      "fp": 3,
+      "fn": 0
+    },
+    "tech-dpo": {
+      "tp": 4,
+      "fp": 3,
+      "fn": 0
+    },
+    "tech-machine-unlearning": {
+      "tp": 0,
+      "fp": 3,
+      "fn": 0
+    },
+    "tech-model-weight-security": {
+      "tp": 0,
+      "fp": 5,
+      "fn": 0
+    },
+    "tech-data-retention-policies": {
+      "tp": 2,
+      "fp": 1,
+      "fn": 0
+    },
+    "tech-watermarking": {
+      "tp": 1,
+      "fp": 3,
+      "fn": 1
+    },
+    "tech-differential-privacy": {
+      "tp": 0,
+      "fp": 3,
+      "fn": 0
+    },
+    "tech-scalable-oversight": {
+      "tp": 0,
+      "fp": 4,
+      "fn": 0
+    },
+    "tech-safety-reward-modeling": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 1
+    },
+    "tech-data-sovereignty": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    },
+    "tech-access-control-documentation": {
+      "tp": 2,
+      "fp": 2,
+      "fn": 1
+    },
+    "tech-configurable-policies": {
+      "tp": 4,
+      "fp": 1,
+      "fn": 2
+    },
+    "tech-copyright-ip-violation": {
+      "tp": 2,
+      "fp": 1,
+      "fn": 0
+    },
+    "tech-rag-guardrails": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 0
+    },
+    "tech-cybersecurity-threat": {
+      "tp": 0,
+      "fp": 4,
+      "fn": 0
+    }
+  },
+  "doc_details": {
+    "claude-3-5-sonnet-card": {
+      "no_safety_data": false,
+      "gt_count": 9,
+      "auto_count": 8,
+      "tp": 5,
+      "fp": 3,
+      "fn": 4,
+      "false_positives": [
+        "tech-code-execution-sandboxing",
+        "tech-safety-advisory",
+        "tech-voluntary-commitments"
+      ],
+      "false_negatives": [
+        "tech-community-evaluation",
+        "tech-constitutional-ai",
+        "tech-incident-reporting",
+        "tech-rlhf"
+      ]
+    },
+    "claude-3-haiku-model-card": {
+      "no_safety_data": false,
+      "gt_count": 15,
+      "auto_count": 15,
+      "tp": 10,
+      "fp": 5,
+      "fn": 5,
+      "false_positives": [
+        "tech-adversarial-training",
+        "tech-autonomous-behaviour",
+        "tech-code-execution-sandboxing",
+        "tech-output-filtering-systems",
+        "tech-responsible-release"
+      ],
+      "false_negatives": [
+        "tech-community-evaluation",
+        "tech-constitutional-ai",
+        "tech-input-guardrail-systems",
+        "tech-safety-advisory",
+        "tech-stakeholder-engagement"
+      ]
+    },
+    "claude-opus-4-5-system-card": {
+      "no_safety_data": false,
+      "gt_count": 27,
+      "auto_count": 49,
+      "tp": 27,
+      "fp": 22,
+      "fn": 0,
+      "false_positives": [
+        "tech-access-control-documentation",
+        "tech-autonomous-behaviour",
+        "tech-circuit-breakers",
+        "tech-community-evaluation",
+        "tech-constitutional-ai",
+        "tech-data-retention-policies",
+        "tech-data-sovereignty",
+        "tech-differential-privacy",
+        "tech-dpo",
+        "tech-enterprise-integration",
+        "tech-incident-reporting",
+        "tech-machine-unlearning",
+        "tech-model-weight-security",
+        "tech-multimodal-safety-alignment",
+        "tech-pii-detection",
+        "tech-safety-reward-modeling",
+        "tech-scalable-oversight",
+        "tech-sexual-content-moderation",
+        "tech-stakeholder-engagement",
+        "tech-supervised-fine-tuning",
+        "tech-voluntary-commitments",
+        "tech-watermarking"
+      ],
+      "false_negatives": []
+    },
+    "command-a": {
+      "no_safety_data": false,
+      "gt_count": 14,
+      "auto_count": 17,
+      "tp": 8,
+      "fp": 9,
+      "fn": 6,
+      "false_positives": [
+        "tech-bias-mitigation",
+        "tech-code-execution-sandboxing",
+        "tech-hate-speech-detection",
+        "tech-misinformation-detection",
+        "tech-red-teaming",
+        "tech-safety-benchmarks",
+        "tech-self-harm-prevention",
+        "tech-supervised-fine-tuning",
+        "tech-violence-detection"
+      ],
+      "false_negatives": [
+        "tech-capability-monitoring",
+        "tech-enterprise-integration",
+        "tech-incident-reporting",
+        "tech-multimodal-safety-alignment",
+        "tech-multistage-pipeline",
+        "tech-prompt-injection-defense"
+      ]
+    },
+    "deepseek-r1-paper": {
+      "no_safety_data": false,
+      "gt_count": 15,
+      "auto_count": 35,
+      "tp": 12,
+      "fp": 23,
+      "fn": 3,
+      "false_positives": [
+        "tech-autonomous-behaviour",
+        "tech-circuit-breakers",
+        "tech-code-execution-sandboxing",
+        "tech-community-evaluation",
+        "tech-constitutional-ai",
+        "tech-csam-detection",
+        "tech-cybersecurity-threat",
+        "tech-dpo",
+        "tech-hallucination-grounding",
+        "tech-hate-speech-detection",
+        "tech-machine-unlearning",
+        "tech-multistage-pipeline",
+        "tech-output-filtering-systems",
+        "tech-rag-guardrails",
+        "tech-realtime-fact-checking",
+        "tech-red-teaming",
+        "tech-refusal-training",
+        "tech-scalable-oversight",
+        "tech-sexual-content-moderation",
+        "tech-supervised-fine-tuning",
+        "tech-sycophancy-detection",
+        "tech-system-prompts",
+        "tech-watermarking"
+      ],
+      "false_negatives": [
+        "tech-bias-mitigation",
+        "tech-dataset-auditing",
+        "tech-input-guardrail-systems"
+      ]
+    },
+    "deepseek-v3-paper": {
+      "no_safety_data": false,
+      "gt_count": 6,
+      "auto_count": 5,
+      "tp": 3,
+      "fp": 2,
+      "fn": 3,
+      "false_positives": [
+        "tech-constitutional-ai",
+        "tech-supervised-fine-tuning"
+      ],
+      "false_negatives": [
+        "tech-bias-mitigation",
+        "tech-dataset-auditing",
+        "tech-red-teaming"
+      ]
+    },
+    "gemini-3-pro": {
+      "no_safety_data": false,
+      "gt_count": 8,
+      "auto_count": 17,
+      "tp": 6,
+      "fp": 11,
+      "fn": 2,
+      "false_positives": [
+        "tech-autonomous-behaviour",
+        "tech-cybersecurity-threat",
+        "tech-hate-speech-detection",
+        "tech-multimodal-safety-alignment",
+        "tech-output-filtering-systems",
+        "tech-self-harm-prevention",
+        "tech-sexual-content-moderation",
+        "tech-supervised-fine-tuning",
+        "tech-sycophancy-detection",
+        "tech-violence-detection",
+        "tech-weapons-illegal-activity"
+      ],
+      "false_negatives": [
+        "tech-dataset-auditing",
+        "tech-incident-reporting"
+      ]
+    },
+    "gemini-3-technical-report": {
+      "no_safety_data": false,
+      "gt_count": 11,
+      "auto_count": 14,
+      "tp": 7,
+      "fp": 7,
+      "fn": 4,
+      "false_positives": [
+        "tech-autonomous-behaviour",
+        "tech-cybersecurity-threat",
+        "tech-model-weight-security",
+        "tech-responsible-release",
+        "tech-safety-advisory",
+        "tech-supervised-fine-tuning",
+        "tech-weapons-illegal-activity"
+      ],
+      "false_negatives": [
+        "tech-hallucination-grounding",
+        "tech-incident-reporting",
+        "tech-misinformation-detection",
+        "tech-observability-monitoring"
+      ]
+    },
+    "google-ai-principles-2024": {
+      "no_safety_data": false,
+      "gt_count": 9,
+      "auto_count": 16,
+      "tp": 5,
+      "fp": 11,
+      "fn": 4,
+      "false_positives": [
+        "tech-community-evaluation",
+        "tech-differential-privacy",
+        "tech-model-weight-security",
+        "tech-multistage-pipeline",
+        "tech-observability-monitoring",
+        "tech-regulatory-compliance",
+        "tech-responsible-release",
+        "tech-rlhf",
+        "tech-stakeholder-engagement",
+        "tech-supervised-fine-tuning",
+        "tech-voluntary-commitments"
+      ],
+      "false_negatives": [
+        "tech-hallucination-grounding",
+        "tech-input-guardrail-systems",
+        "tech-misinformation-detection",
+        "tech-system-prompts"
+      ]
+    },
+    "gpt-5-system-card": {
+      "no_safety_data": false,
+      "gt_count": 28,
+      "auto_count": 43,
+      "tp": 26,
+      "fp": 17,
+      "fn": 2,
+      "false_positives": [
+        "tech-access-control-documentation",
+        "tech-autonomous-behaviour",
+        "tech-bias-mitigation",
+        "tech-code-execution-sandboxing",
+        "tech-copyright-ip-violation",
+        "tech-dataset-auditing",
+        "tech-differential-privacy",
+        "tech-dpo",
+        "tech-machine-unlearning",
+        "tech-model-weight-security",
+        "tech-rag-guardrails",
+        "tech-scalable-oversight",
+        "tech-self-harm-prevention",
+        "tech-stakeholder-engagement",
+        "tech-supervised-fine-tuning",
+        "tech-training-data-quality-filtering",
+        "tech-voluntary-commitments"
+      ],
+      "false_negatives": [
+        "tech-misinformation-detection",
+        "tech-rlhf"
+      ]
+    },
+    "grok-image-gen-update": {
+      "no_safety_data": true,
+      "auto_count": 0,
+      "spurious": []
+    },
+    "grok-security": {
+      "no_safety_data": false,
+      "gt_count": 4,
+      "auto_count": 5,
+      "tp": 4,
+      "fp": 1,
+      "fn": 0,
+      "false_positives": [
+        "tech-regulatory-compliance"
+      ],
+      "false_negatives": []
+    },
+    "hunyuan-technical-report": {
+      "no_safety_data": false,
+      "gt_count": 5,
+      "auto_count": 5,
+      "tp": 4,
+      "fp": 1,
+      "fn": 1,
+      "false_positives": [
+        "tech-supervised-fine-tuning"
+      ],
+      "false_negatives": [
+        "tech-dataset-auditing"
+      ]
+    },
+    "llama-4-maverick": {
+      "no_safety_data": false,
+      "gt_count": 7,
+      "auto_count": 7,
+      "tp": 5,
+      "fp": 2,
+      "fn": 2,
+      "false_positives": [
+        "tech-cybersecurity-threat",
+        "tech-multistage-pipeline"
+      ],
+      "false_negatives": [
+        "tech-code-execution-sandboxing",
+        "tech-system-prompts"
+      ]
+    },
+    "llama-4-responsible-use-guide": {
+      "no_safety_data": false,
+      "gt_count": 8,
+      "auto_count": 7,
+      "tp": 3,
+      "fp": 4,
+      "fn": 5,
+      "false_positives": [
+        "tech-dataset-auditing",
+        "tech-output-filtering-systems",
+        "tech-red-teaming",
+        "tech-watermarking"
+      ],
+      "false_negatives": [
+        "tech-access-control-documentation",
+        "tech-capability-monitoring",
+        "tech-incident-reporting",
+        "tech-responsible-release",
+        "tech-safety-advisory"
+      ]
+    },
+    "meta-llama-responsible-use": {
+      "no_safety_data": false,
+      "gt_count": 17,
+      "auto_count": 15,
+      "tp": 9,
+      "fp": 6,
+      "fn": 8,
+      "false_positives": [
+        "tech-constitutional-ai",
+        "tech-pii-detection",
+        "tech-safety-benchmarks",
+        "tech-supervised-fine-tuning",
+        "tech-system-prompts",
+        "tech-training-data-quality-filtering"
+      ],
+      "false_negatives": [
+        "tech-capability-monitoring",
+        "tech-configurable-policies",
+        "tech-misinformation-detection",
+        "tech-multistage-pipeline",
+        "tech-refusal-training",
+        "tech-sexual-content-moderation",
+        "tech-watermarking",
+        "tech-weapons-illegal-activity"
+      ]
+    },
+    "nemotron-4-tech-report": {
+      "no_safety_data": false,
+      "gt_count": 13,
+      "auto_count": 9,
+      "tp": 5,
+      "fp": 4,
+      "fn": 8,
+      "false_positives": [
+        "tech-refusal-training",
+        "tech-rlhf",
+        "tech-scalable-oversight",
+        "tech-supervised-fine-tuning"
+      ],
+      "false_negatives": [
+        "tech-bias-mitigation",
+        "tech-capability-monitoring",
+        "tech-data-sovereignty",
+        "tech-dataset-auditing",
+        "tech-incident-reporting",
+        "tech-multimodal-safety-alignment",
+        "tech-observability-monitoring",
+        "tech-prompt-injection-defense"
+      ]
+    },
+    "o3-pro": {
+      "no_safety_data": false,
+      "gt_count": 13,
+      "auto_count": 18,
+      "tp": 6,
+      "fp": 12,
+      "fn": 7,
+      "false_positives": [
+        "tech-autonomous-behaviour",
+        "tech-constitutional-ai",
+        "tech-csam-detection",
+        "tech-multimodal-safety-alignment",
+        "tech-output-filtering-systems",
+        "tech-pii-detection",
+        "tech-responsible-release",
+        "tech-safety-advisory",
+        "tech-supervised-fine-tuning",
+        "tech-system-prompts",
+        "tech-training-data-quality-filtering",
+        "tech-weapons-illegal-activity"
+      ],
+      "false_negatives": [
+        "tech-bias-mitigation",
+        "tech-community-evaluation",
+        "tech-incident-reporting",
+        "tech-misinformation-detection",
+        "tech-observability-monitoring",
+        "tech-rlhf",
+        "tech-safety-reward-modeling"
+      ]
+    },
+    "openai-preparedness": {
+      "no_safety_data": false,
+      "gt_count": 8,
+      "auto_count": 12,
+      "tp": 7,
+      "fp": 5,
+      "fn": 1,
+      "false_positives": [
+        "tech-community-evaluation",
+        "tech-model-weight-security",
+        "tech-prompt-injection-defense",
+        "tech-refusal-training",
+        "tech-voluntary-commitments"
+      ],
+      "false_negatives": [
+        "tech-configurable-policies"
+      ]
+    },
+    "phi-4-tech-report": {
+      "no_safety_data": false,
+      "gt_count": 8,
+      "auto_count": 8,
+      "tp": 5,
+      "fp": 3,
+      "fn": 3,
+      "false_positives": [
+        "tech-constitutional-ai",
+        "tech-hallucination-grounding",
+        "tech-supervised-fine-tuning"
+      ],
+      "false_negatives": [
+        "tech-bias-mitigation",
+        "tech-capability-monitoring",
+        "tech-incident-reporting"
+      ]
+    },
+    "pixtral-12b-blog": {
+      "no_safety_data": false,
+      "gt_count": 3,
+      "auto_count": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 3,
+      "false_positives": [],
+      "false_negatives": [
+        "tech-multimodal-safety-alignment",
+        "tech-safety-benchmarks",
+        "tech-training-data-quality-filtering"
+      ]
+    },
+    "qwen2-5-tech-report": {
+      "no_safety_data": true,
+      "auto_count": 1,
+      "spurious": [
+        "tech-supervised-fine-tuning"
+      ]
+    },
+    "qwen3-max": {
+      "no_safety_data": false,
+      "gt_count": 22,
+      "auto_count": 21,
+      "tp": 17,
+      "fp": 4,
+      "fn": 5,
+      "false_positives": [
+        "tech-circuit-breakers",
+        "tech-configurable-policies",
+        "tech-observability-monitoring",
+        "tech-supervised-fine-tuning"
+      ],
+      "false_negatives": [
+        "tech-constitutional-ai",
+        "tech-dataset-auditing",
+        "tech-multimodal-safety-alignment",
+        "tech-realtime-fact-checking",
+        "tech-system-prompts"
+      ]
+    },
+    "xai-security": {
+      "no_safety_data": false,
+      "gt_count": 8,
+      "auto_count": 6,
+      "tp": 6,
+      "fp": 0,
+      "fn": 2,
+      "false_positives": [],
+      "false_negatives": [
+        "tech-capability-monitoring",
+        "tech-responsible-release"
+      ]
+    }
+  }
+}

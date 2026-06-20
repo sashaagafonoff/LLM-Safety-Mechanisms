@@ -3,8 +3,13 @@
     "id": "tech-rlhf",
     "name": "Reinforcement Learning from Human Feedback (RLHF)",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["harmful_content", "bias_and_fairness"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "harmful_content",
+      "bias_and_fairness"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Training models to align with human preferences through feedback",
     "nlu_profile": {
       "primary_concept": "Optimization using a reward model trained on human preference data, typically via PPO, applied during model fine-tuning.",
@@ -30,8 +35,13 @@
     "id": "tech-dpo",
     "name": "Direct Preference Optimization (DPO)",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["harmful_content", "bias_and_fairness"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "harmful_content",
+      "bias_and_fairness"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Direct optimization on preference data without a separate reward model",
     "nlu_profile": {
       "primary_concept": "Alignment method that directly optimizes policy on preference pairs without requiring a reward model training step.",
@@ -51,8 +61,12 @@
     "id": "tech-constitutional-ai",
     "name": "Constitutional AI / Self-Critique",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Training models to critique and revise their own outputs based on constitutional principles",
     "nlu_profile": {
       "primary_concept": "Training method where the model critiques and revises outputs based on explicit principles, rules, or guidelines.",
@@ -83,8 +97,12 @@
     "id": "tech-adversarial-training",
     "name": "Adversarial Training",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["security_and_misuse"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "security_and_misuse"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Training with adversarial examples to improve robustness",
     "nlu_profile": {
       "primary_concept": "Incorporating adversarial examples, red-team findings, or attack data into model training to improve safety robustness.",
@@ -109,8 +127,12 @@
     "id": "tech-safety-reward-modeling",
     "name": "Safety Reward Modeling",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Reward models specifically optimized for safety",
     "nlu_profile": {
       "primary_concept": "Training a specific Reward Model to penalize unsafe outputs during RLHF.",
@@ -130,8 +152,12 @@
     "id": "tech-refusal-training",
     "name": "Refusal / Abstention Training",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Training the model to politely refuse harmful instructions",
     "nlu_profile": {
       "primary_concept": "Training model behavior to explicitly decline unsafe prompts during fine-tuning.",
@@ -154,8 +180,12 @@
     "id": "tech-multimodal-safety-alignment",
     "name": "Multimodal Safety Alignment",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Safety alignment for multimodal models",
     "nlu_profile": {
       "primary_concept": "Alignment techniques specifically designed for images, audio, or cross-modal risks.",
@@ -176,8 +206,12 @@
     "id": "tech-bias-mitigation",
     "name": "Bias Mitigation (Post-Training)",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["bias_and_fairness"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "bias_and_fairness"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Algorithmic interventions during fine-tuning to reduce output bias",
     "nlu_profile": {
       "primary_concept": "Techniques applied during fine-tuning to reduce stereotypical biases.",
@@ -197,8 +231,12 @@
     "id": "tech-machine-unlearning",
     "name": "Machine Unlearning",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["privacy_and_pii"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "privacy_and_pii"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "status": "aspirational",
     "status_note": "No tracked provider documents production use. Google DeepMind research (2024) questions effectiveness of current approaches.",
     "description": "Algorithms to 'forget' specific training data without retraining",
@@ -218,7 +256,9 @@
     "name": "Training Data Quality Filtering",
     "categoryId": "cat-model-development",
     "riskAreaIds": [],
-    "lifecycleStages": ["pre-training"],
+    "lifecycleStages": [
+      "pre-training"
+    ],
     "description": "Deduplication and quality filtering of training corpora",
     "nlu_profile": {
       "primary_concept": "Removal of low-quality, duplicated, or noisy text from training corpora.",
@@ -238,8 +278,12 @@
     "id": "tech-dataset-auditing",
     "name": "Dataset Auditing & Representation Analysis",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["bias_and_fairness"],
-    "lifecycleStages": ["pre-training"],
+    "riskAreaIds": [
+      "bias_and_fairness"
+    ],
+    "lifecycleStages": [
+      "pre-training"
+    ],
     "description": "Detection and analysis of demographic and cultural biases in training data",
     "nlu_profile": {
       "primary_concept": "Analysis and documentation of training datasets to identify representational imbalances, demographic biases, and data quality issues.",
@@ -267,8 +311,12 @@
     "id": "tech-red-teaming",
     "name": "Red Teaming",
     "categoryId": "cat-evaluation",
-    "riskAreaIds": ["security_and_misuse"],
-    "lifecycleStages": ["evaluation"],
+    "riskAreaIds": [
+      "security_and_misuse"
+    ],
+    "lifecycleStages": [
+      "evaluation"
+    ],
     "description": "Systematic adversarial testing including manual expert red teaming, automated AI-driven attacks, and integration of findings into training",
     "nlu_profile": {
       "primary_concept": "Adversarial testing where human experts or automated systems attempt to bypass safety filters, with findings fed back into improvement.",
@@ -299,7 +347,9 @@
     "name": "Safety Benchmarking",
     "categoryId": "cat-evaluation",
     "riskAreaIds": [],
-    "lifecycleStages": ["evaluation"],
+    "lifecycleStages": [
+      "evaluation"
+    ],
     "description": "Standardized benchmarks for measuring safety performance",
     "nlu_profile": {
       "primary_concept": "Evaluation using standardized safety benchmark suites to measure model safety performance.",
@@ -325,7 +375,9 @@
     "name": "Community-Based Evaluation",
     "categoryId": "cat-evaluation",
     "riskAreaIds": [],
-    "lifecycleStages": ["evaluation"],
+    "lifecycleStages": [
+      "evaluation"
+    ],
     "description": "Evaluation processes leveraging community expertise",
     "nlu_profile": {
       "primary_concept": "Distributed safety testing where the public or domain experts evaluate the model's safety properties.",
@@ -345,8 +397,13 @@
     "id": "tech-input-guardrail-systems",
     "name": "Input Guardrail Systems",
     "categoryId": "cat-runtime-safety",
-    "riskAreaIds": ["harmful_content", "security_and_misuse"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "harmful_content",
+      "security_and_misuse"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Infrastructure for input classification and filtering (e.g., LlamaGuard, NeMo)",
     "nlu_profile": {
       "primary_concept": "A dedicated, named guardrail system or classifier that inspects user prompts before they reach the main model.",
@@ -370,7 +427,9 @@
     "name": "System Prompts / Metaprompts",
     "categoryId": "cat-runtime-safety",
     "riskAreaIds": [],
-    "lifecycleStages": ["inference"],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Instructions provided at the system level to enforce behavior and safety",
     "nlu_profile": {
       "primary_concept": "Pre-pended instructional context or 'system message' that defines behavioral boundaries at runtime.",
@@ -390,8 +449,12 @@
     "id": "tech-output-filtering-systems",
     "name": "Output Safety Systems",
     "categoryId": "cat-runtime-safety",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Infrastructure for output content moderation and safety filtering",
     "nlu_profile": {
       "primary_concept": "A dedicated post-generation filtering system or classifier that analyzes and blocks unsafe model outputs.",
@@ -413,8 +476,12 @@
     "id": "tech-hallucination-grounding",
     "name": "Hallucination Detection & Grounding",
     "categoryId": "cat-runtime-safety",
-    "riskAreaIds": ["misinformation"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "misinformation"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Mechanisms to verify factuality and reduce fabrication",
     "nlu_profile": {
       "primary_concept": "Techniques to detect or prevent fabricated information in model outputs.",
@@ -433,8 +500,12 @@
     "id": "tech-rag-guardrails",
     "name": "RAG Guardrails",
     "categoryId": "cat-runtime-safety",
-    "riskAreaIds": ["misinformation"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "misinformation"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Checks for grounding and citation accuracy in RAG systems",
     "nlu_profile": {
       "primary_concept": "Verification mechanisms in retrieval systems ensuring outputs are supported by context.",
@@ -452,8 +523,12 @@
     "id": "tech-realtime-fact-checking",
     "name": "Real-time Fact Checking",
     "categoryId": "cat-runtime-safety",
-    "riskAreaIds": ["misinformation"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "misinformation"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Dynamic verification of information accuracy",
     "nlu_profile": {
       "primary_concept": "Dynamic verification of claims against external knowledge bases during generation.",
@@ -472,8 +547,12 @@
     "id": "tech-watermarking",
     "name": "Provenance & Watermarking",
     "categoryId": "cat-runtime-safety",
-    "riskAreaIds": ["transparency"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "transparency"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Embedding detectable patterns in AI-generated content",
     "nlu_profile": {
       "primary_concept": "Techniques to embed imperceptible signals to prove AI origin.",
@@ -494,7 +573,9 @@
     "name": "Multi-stage Safety Pipeline",
     "categoryId": "cat-runtime-safety",
     "riskAreaIds": [],
-    "lifecycleStages": ["inference"],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Multiple layers of safety checks in defense-in-depth architecture",
     "nlu_profile": {
       "primary_concept": "Defense-in-depth architecture using multiple cascaded safety checks.",
@@ -513,7 +594,10 @@
     "name": "Configurable Safety Policies",
     "categoryId": "cat-runtime-safety",
     "riskAreaIds": [],
-    "lifecycleStages": ["inference", "monitoring"],
+    "lifecycleStages": [
+      "inference",
+      "monitoring"
+    ],
     "description": "User or admin configurable safety thresholds",
     "nlu_profile": {
       "primary_concept": "Allowing users to adjust safety thresholds for their use case.",
@@ -533,7 +617,9 @@
     "name": "Observability & Audit Logging",
     "categoryId": "cat-runtime-safety",
     "riskAreaIds": [],
-    "lifecycleStages": ["monitoring"],
+    "lifecycleStages": [
+      "monitoring"
+    ],
     "description": "Real-time monitoring, logging, and drift detection",
     "nlu_profile": {
       "primary_concept": "Continuous runtime tracking of system inputs and outputs for monitoring.",
@@ -551,8 +637,12 @@
     "id": "tech-circuit-breakers",
     "name": "Circuit Breakers / Kill Switches",
     "categoryId": "cat-runtime-safety",
-    "riskAreaIds": ["autonomy_and_control"],
-    "lifecycleStages": ["monitoring"],
+    "riskAreaIds": [
+      "autonomy_and_control"
+    ],
+    "lifecycleStages": [
+      "monitoring"
+    ],
     "status": "aspirational",
     "status_note": "No tracked provider documents production deployment. Gray Swan AI (untracked) has early-stage Cygnet. Anthropic RSP and OpenAI Preparedness Framework reference emergency protocols at policy level only.",
     "description": "Mechanisms to immediately disconnect system if dangerous actions occur",
@@ -565,15 +655,26 @@
         "automatic emergency stop for AI system"
       ],
       "entailment_hypothesis": "The provider has deployed a dedicated emergency kill switch or circuit breaker mechanism that can instantly halt model serving when dangerous behaviour is detected.",
-      "excluded_terms": ["rate limiting", "load balancing", "service degradation", "failover", "availability", "infrastructure monitoring"]
+      "excluded_terms": [
+        "rate limiting",
+        "load balancing",
+        "service degradation",
+        "failover",
+        "availability",
+        "infrastructure monitoring"
+      ]
     }
   },
   {
     "id": "tech-prompt-injection-defense",
     "name": "Jailbreak & Injection Defense",
     "categoryId": "cat-runtime-safety",
-    "riskAreaIds": ["security_and_misuse"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "security_and_misuse"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Detection and prevention of prompt injection and jailbreak attempts",
     "nlu_profile": {
       "primary_concept": "Detection of adversarial attempts to hijack the model through prompt manipulation.",
@@ -594,8 +695,12 @@
     "id": "tech-code-execution-sandboxing",
     "name": "Code Execution Sandboxing",
     "categoryId": "cat-runtime-safety",
-    "riskAreaIds": ["security_and_misuse"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "security_and_misuse"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Isolating code generated or executed by the LLM",
     "nlu_profile": {
       "primary_concept": "A dedicated sandboxed or containerized environment specifically for executing model-generated code in isolation from production systems.",
@@ -607,15 +712,25 @@
         "model-generated code sandbox"
       ],
       "entailment_hypothesis": "The provider runs model-generated code in a dedicated sandbox or isolated container to prevent it from affecting production systems.",
-      "excluded_terms": ["sandbox evaluation", "sandboxed testing", "development sandbox", "sandbox environment for training"]
+      "excluded_terms": [
+        "sandbox evaluation",
+        "sandboxed testing",
+        "development sandbox",
+        "sandbox environment for training"
+      ]
     }
   },
   {
     "id": "tech-violence-detection",
     "name": "Violence & Gore Detection",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["pre-training", "inference"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "pre-training",
+      "inference"
+    ],
     "description": "Detection of graphic violence, terrorism threats, and violent content",
     "nlu_profile": {
       "primary_concept": "Classification of violent content including graphic violence, terrorism, and threats.",
@@ -636,8 +751,14 @@
     "id": "tech-hate-speech-detection",
     "name": "Hate Speech & Harassment Detection",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["harmful_content", "bias_and_fairness"],
-    "lifecycleStages": ["pre-training", "inference"],
+    "riskAreaIds": [
+      "harmful_content",
+      "bias_and_fairness"
+    ],
+    "lifecycleStages": [
+      "pre-training",
+      "inference"
+    ],
     "description": "Detection of hate speech, discrimination, harassment, and offensive language",
     "nlu_profile": {
       "primary_concept": "Classification of hate speech, discrimination, stereotyping, harassment, and offensive language.",
@@ -658,8 +779,12 @@
     "id": "tech-self-harm-prevention",
     "name": "Self-Harm & Suicide Prevention",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Detection and intervention for suicide encouragement and self-harm instructions",
     "nlu_profile": {
       "primary_concept": "Detection and prevention of content encouraging suicide, self-harm, or other self-destructive behavior.",
@@ -681,8 +806,13 @@
     "id": "tech-sexual-content-moderation",
     "name": "Sexual Content Moderation",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["pre-training", "inference"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "pre-training",
+      "inference"
+    ],
     "description": "Detection and filtering of pornographic or sexually explicit content",
     "nlu_profile": {
       "primary_concept": "Classification of pornographic, sexually explicit, or inappropriate sexual content.",
@@ -701,8 +831,13 @@
     "id": "tech-weapons-illegal-activity",
     "name": "Weapons & Illegal Activity Detection",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["harmful_content", "security_and_misuse"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "harmful_content",
+      "security_and_misuse"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Detection of instructions for weapons creation, CBRNE threats, and other illegal activities",
     "nlu_profile": {
       "primary_concept": "Detection of instructions for weapons creation, CBRNE threats, drug production, fraud, and other illegal activities.",
@@ -740,8 +875,13 @@
     "id": "tech-csam-detection",
     "name": "CSAM Detection & Prevention",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["pre-training", "inference"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "pre-training",
+      "inference"
+    ],
     "description": "Detection and removal of child sexual abuse material",
     "nlu_profile": {
       "primary_concept": "Detection, prevention, and removal of child sexual abuse material and content involving minors.",
@@ -769,8 +909,13 @@
     "id": "tech-pii-detection",
     "name": "PII Detection & Redaction",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["privacy_and_pii"],
-    "lifecycleStages": ["pre-training", "inference"],
+    "riskAreaIds": [
+      "privacy_and_pii"
+    ],
+    "lifecycleStages": [
+      "pre-training",
+      "inference"
+    ],
     "description": "Detection and redaction of personally identifiable information",
     "nlu_profile": {
       "primary_concept": "Identification and obfuscation of Personally Identifiable Information.",
@@ -789,8 +934,12 @@
     "id": "tech-misinformation-detection",
     "name": "Misinformation & False Claims Detection",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["misinformation"],
-    "lifecycleStages": ["inference"],
+    "riskAreaIds": [
+      "misinformation"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
     "description": "Detection and flagging of verifiably false information",
     "nlu_profile": {
       "primary_concept": "Detection of verifiably false claims, disinformation campaigns, and misleading content.",
@@ -811,8 +960,13 @@
     "id": "tech-copyright-ip-violation",
     "name": "Copyright & IP Violation Detection",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["copyright_and_ip"],
-    "lifecycleStages": ["pre-training", "inference"],
+    "riskAreaIds": [
+      "copyright_and_ip"
+    ],
+    "lifecycleStages": [
+      "pre-training",
+      "inference"
+    ],
     "description": "Detection of copyrighted content, trademark violations, and intellectual property infringement",
     "nlu_profile": {
       "primary_concept": "Detection and prevention of copyrighted content reproduction, trademark violations, and IP infringement.",
@@ -835,8 +989,13 @@
     "id": "tech-sycophancy-detection",
     "name": "Sycophancy Detection",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["harmful_content"],
-    "lifecycleStages": ["evaluation", "inference"],
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "evaluation",
+      "inference"
+    ],
     "description": "Detection of excessive agreement, user flattery, and opinion mirroring behaviours",
     "nlu_profile": {
       "primary_concept": "A dedicated evaluation benchmark, classifier, or training intervention specifically targeting sycophantic model responses.",
@@ -849,15 +1008,24 @@
         "sycophancy rate measurement"
       ],
       "entailment_hypothesis": "The provider implemented a dedicated benchmark, classifier, or training intervention to measure or reduce sycophantic responses in the model.",
-      "excluded_terms": ["user satisfaction", "helpfulness evaluation", "preference optimization"]
+      "excluded_terms": [
+        "user satisfaction",
+        "helpfulness evaluation",
+        "preference optimization"
+      ]
     }
   },
   {
     "id": "tech-cybersecurity-threat",
     "name": "Cybersecurity Threat Detection",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["security_and_misuse"],
-    "lifecycleStages": ["evaluation", "inference"],
+    "riskAreaIds": [
+      "security_and_misuse"
+    ],
+    "lifecycleStages": [
+      "evaluation",
+      "inference"
+    ],
     "description": "Detection of cybersecurity attack instructions, exploit generation, and offensive cyber capabilities",
     "nlu_profile": {
       "primary_concept": "A dedicated runtime classifier or output filter that specifically detects and blocks model-generated exploit code, malware instructions, or cyberattack content.",
@@ -869,15 +1037,28 @@
         "block offensive cyber content"
       ],
       "entailment_hypothesis": "The provider deployed a dedicated runtime filter or classifier that specifically blocks the model from generating exploit code, malware instructions, or cyberattack content.",
-      "excluded_terms": ["cyber capability evaluation", "offensive cyber benchmark", "cybersecurity assessment", "cyber risk category", "cybersecurity policy", "refuse harmful requests"]
+      "excluded_terms": [
+        "cyber capability evaluation",
+        "offensive cyber benchmark",
+        "cybersecurity assessment",
+        "cyber risk category",
+        "cybersecurity policy",
+        "refuse harmful requests"
+      ]
     }
   },
   {
     "id": "tech-autonomous-behaviour",
     "name": "Autonomous Behaviour Classification",
     "categoryId": "cat-harm-classification",
-    "riskAreaIds": ["autonomy_and_control", "dual_use"],
-    "lifecycleStages": ["evaluation", "inference"],
+    "riskAreaIds": [
+      "autonomy_and_control",
+      "dual_use"
+    ],
+    "lifecycleStages": [
+      "evaluation",
+      "inference"
+    ],
     "description": "Classification of autonomous, power-seeking, scheming, and deceptively aligned behaviours",
     "nlu_profile": {
       "primary_concept": "A dedicated evaluation suite or runtime classifier that specifically tests whether the model exhibits scheming, power-seeking, alignment faking, or sandbagging behaviours.",
@@ -891,15 +1072,27 @@
         "self-preservation behaviour test"
       ],
       "entailment_hypothesis": "The provider ran a dedicated evaluation or deployed a classifier specifically designed to test for scheming, power-seeking, alignment faking, or sandbagging in the model.",
-      "excluded_terms": ["agentic capability", "tool use evaluation", "agent benchmark", "autonomous coding", "agentic task"]
+      "excluded_terms": [
+        "agentic capability",
+        "tool use evaluation",
+        "agent benchmark",
+        "autonomous coding",
+        "agentic task"
+      ]
     }
   },
   {
     "id": "tech-capability-monitoring",
     "name": "Capability Threshold Monitoring",
     "categoryId": "cat-governance",
-    "riskAreaIds": ["dual_use", "autonomy_and_control"],
-    "lifecycleStages": ["evaluation", "governance"],
+    "riskAreaIds": [
+      "dual_use",
+      "autonomy_and_control"
+    ],
+    "lifecycleStages": [
+      "evaluation",
+      "governance"
+    ],
     "description": "Monitoring dangerous capabilities against safety thresholds using framework-level assessments",
     "nlu_profile": {
       "primary_concept": "A formal framework for tracking whether model capabilities have crossed predefined danger thresholds requiring upgraded safeguards.",
@@ -926,7 +1119,9 @@
     "name": "Independent Safety Advisory",
     "categoryId": "cat-governance",
     "riskAreaIds": [],
-    "lifecycleStages": ["governance"],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "External advisory board for safety oversight",
     "nlu_profile": {
       "primary_concept": "External advisory board or committee providing independent safety oversight.",
@@ -949,7 +1144,10 @@
     "name": "Incident Reporting Systems",
     "categoryId": "cat-governance",
     "riskAreaIds": [],
-    "lifecycleStages": ["monitoring", "governance"],
+    "lifecycleStages": [
+      "monitoring",
+      "governance"
+    ],
     "description": "Systems for reporting safety incidents and vulnerabilities",
     "nlu_profile": {
       "primary_concept": "Processes for tracking and disclosing safety failures.",
@@ -969,7 +1167,9 @@
     "name": "Responsible Release Protocols",
     "categoryId": "cat-governance",
     "riskAreaIds": [],
-    "lifecycleStages": ["governance"],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Structured processes for staged release",
     "nlu_profile": {
       "primary_concept": "Staged deployment strategies to monitor safety before full release.",
@@ -989,7 +1189,9 @@
     "name": "Stakeholder Engagement",
     "categoryId": "cat-governance",
     "riskAreaIds": [],
-    "lifecycleStages": ["governance"],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Processes for collecting feedback from users and communities",
     "nlu_profile": {
       "primary_concept": "A formal, structured program for soliciting and incorporating safety-related feedback from external stakeholders such as civil society organizations, affected communities, or multi-stakeholder advisory bodies.",
@@ -1002,7 +1204,14 @@
         "NGO partnership for AI safety"
       ],
       "entailment_hypothesis": "The provider established a formal program or process to solicit safety-related feedback from external stakeholders, civil society, or community advisory bodies.",
-      "excluded_terms": ["academic research collaboration", "open source community", "user feedback", "bug bounty", "red teaming", "crowdsourced evaluation"]
+      "excluded_terms": [
+        "academic research collaboration",
+        "open source community",
+        "user feedback",
+        "bug bounty",
+        "red teaming",
+        "crowdsourced evaluation"
+      ]
     }
   },
   {
@@ -1010,7 +1219,9 @@
     "name": "Regulatory Compliance",
     "categoryId": "cat-governance",
     "riskAreaIds": [],
-    "lifecycleStages": ["governance"],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Compliance with government regulatory requirements",
     "nlu_profile": {
       "primary_concept": "Adherence to specific government regulations and compliance frameworks.",
@@ -1033,7 +1244,9 @@
     "name": "Access Control Documentation",
     "categoryId": "cat-governance",
     "riskAreaIds": [],
-    "lifecycleStages": ["governance"],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Documentation of access control and authentication",
     "nlu_profile": {
       "primary_concept": "Formal documentation of role-based access control policies, API key management, and authentication requirements for the AI system.",
@@ -1045,7 +1258,13 @@
         "model access permissions documentation"
       ],
       "entailment_hypothesis": "The organization publishes formal documentation defining role-based access controls, API authentication policies, or permission tiers for its AI system.",
-      "excluded_terms": ["access to the model weights", "open access", "model availability", "API endpoint", "API usage"]
+      "excluded_terms": [
+        "access to the model weights",
+        "open access",
+        "model availability",
+        "API endpoint",
+        "API usage"
+      ]
     }
   },
   {
@@ -1053,7 +1272,9 @@
     "name": "Enterprise Integration Safety",
     "categoryId": "cat-governance",
     "riskAreaIds": [],
-    "lifecycleStages": ["governance"],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Safety protocols for enterprise deployment",
     "nlu_profile": {
       "primary_concept": "Safety protocols for corporate workflows (SSO, VPC).",
@@ -1071,7 +1292,9 @@
     "name": "Data Sovereignty Controls",
     "categoryId": "cat-governance",
     "riskAreaIds": [],
-    "lifecycleStages": ["governance"],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Controls ensuring data processing complies with regional requirements",
     "nlu_profile": {
       "primary_concept": "Mechanisms ensuring data processing occurs within specific jurisdictions.",
@@ -1088,8 +1311,12 @@
     "id": "tech-data-retention-policies",
     "name": "Data Retention Policies",
     "categoryId": "cat-governance",
-    "riskAreaIds": ["privacy_and_pii"],
-    "lifecycleStages": ["governance"],
+    "riskAreaIds": [
+      "privacy_and_pii"
+    ],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Policies for data retention and lifecycle management",
     "nlu_profile": {
       "primary_concept": "A formal, documented policy specifying how long user data, conversation logs, or training data are retained before scheduled deletion.",
@@ -1101,7 +1328,12 @@
         "user data retention limit"
       ],
       "entailment_hypothesis": "The organization has a formal policy specifying retention periods and scheduled deletion of user data or conversation logs.",
-      "excluded_terms": ["data preprocessing", "data filtering", "training data curation", "data deduplication"]
+      "excluded_terms": [
+        "data preprocessing",
+        "data filtering",
+        "training data curation",
+        "data deduplication"
+      ]
     }
   },
   {
@@ -1109,7 +1341,9 @@
     "name": "Ethical Human Labour Sourcing",
     "categoryId": "cat-governance",
     "riskAreaIds": [],
-    "lifecycleStages": ["governance"],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Ethical sourcing and welfare standards for human annotation and content review workers",
     "nlu_profile": {
       "primary_concept": "Policies and practices ensuring fair treatment, welfare, and ethical sourcing of human workers involved in annotation, content review, and model training.",
@@ -1135,8 +1369,13 @@
     "id": "tech-scalable-oversight",
     "name": "Scalable Oversight & Debate",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["autonomy_and_control", "harmful_content"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "autonomy_and_control",
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Techniques for supervising AI systems on tasks beyond direct human evaluation, including debate and recursive reward modeling",
     "nlu_profile": {
       "primary_concept": "Methods for maintaining meaningful human oversight of AI systems as they become more capable, including AI debate protocols, recursive reward modeling, iterated amplification, and weak-to-strong generalization techniques.",
@@ -1155,15 +1394,24 @@
         "AI-assisted evaluation"
       ],
       "entailment_hypothesis": "The organization implements scalable oversight techniques such as debate, recursive reward modeling, or weak-to-strong generalization for alignment.",
-      "excluded_terms": ["human feedback", "RLHF", "red teaming", "manual review"]
+      "excluded_terms": [
+        "human feedback",
+        "RLHF",
+        "red teaming",
+        "manual review"
+      ]
     }
   },
   {
     "id": "tech-whistleblower-protections",
     "name": "Whistleblower & Internal Safety Reporting",
     "categoryId": "cat-governance",
-    "riskAreaIds": ["transparency"],
-    "lifecycleStages": ["governance"],
+    "riskAreaIds": [
+      "transparency"
+    ],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Internal mechanisms protecting employees who raise safety concerns, including anonymous reporting channels and non-retaliation policies",
     "nlu_profile": {
       "primary_concept": "Organizational mechanisms that protect employees, contractors, and researchers who raise safety concerns about AI systems, including anonymous reporting channels, non-retaliation policies, and right-to-warn provisions.",
@@ -1181,15 +1429,25 @@
         "speak-up policy"
       ],
       "entailment_hypothesis": "The organization has whistleblower protections or internal reporting mechanisms for employees raising AI safety concerns.",
-      "excluded_terms": ["incident reporting", "bug bounty", "vulnerability disclosure", "customer feedback"]
+      "excluded_terms": [
+        "incident reporting",
+        "bug bounty",
+        "vulnerability disclosure",
+        "customer feedback"
+      ]
     }
   },
   {
     "id": "tech-voluntary-commitments",
     "name": "Voluntary Safety Commitments & Pledges",
     "categoryId": "cat-governance",
-    "riskAreaIds": ["transparency", "dual_use"],
-    "lifecycleStages": ["governance"],
+    "riskAreaIds": [
+      "transparency",
+      "dual_use"
+    ],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Formal voluntary commitments to safety practices, including industry pledges, Frontier Model Forum membership, and White House commitments",
     "nlu_profile": {
       "primary_concept": "Formal voluntary commitments by AI organizations to specific safety practices, including government-brokered pledges, industry consortium membership, and public safety commitments that go beyond legal requirements.",
@@ -1209,15 +1467,25 @@
         "Bletchley Declaration"
       ],
       "entailment_hypothesis": "The organization has made voluntary safety commitments, signed industry pledges, or joined safety-focused consortiums.",
-      "excluded_terms": ["regulatory compliance", "legal requirement", "mandatory", "regulation"]
+      "excluded_terms": [
+        "regulatory compliance",
+        "legal requirement",
+        "mandatory",
+        "regulation"
+      ]
     }
   },
   {
     "id": "tech-model-weight-security",
     "name": "Model Weight Security",
     "categoryId": "cat-governance",
-    "riskAreaIds": ["security_and_misuse", "dual_use"],
-    "lifecycleStages": ["governance"],
+    "riskAreaIds": [
+      "security_and_misuse",
+      "dual_use"
+    ],
+    "lifecycleStages": [
+      "governance"
+    ],
     "description": "Protection of model weights against unauthorized access, exfiltration, or tampering, including secure infrastructure and access controls",
     "nlu_profile": {
       "primary_concept": "Security measures protecting trained model weights and artifacts from unauthorized access, exfiltration, theft, or tampering, including physical security, encryption, access controls, and supply chain integrity for model files.",
@@ -1235,15 +1503,24 @@
         "weight exfiltration"
       ],
       "entailment_hypothesis": "The organization implements security measures to protect model weights from unauthorized access or exfiltration.",
-      "excluded_terms": ["data privacy", "user data", "PII", "differential privacy"]
+      "excluded_terms": [
+        "data privacy",
+        "user data",
+        "PII",
+        "differential privacy"
+      ]
     }
   },
   {
     "id": "tech-differential-privacy",
     "name": "Differential Privacy in Training",
     "categoryId": "cat-model-development",
-    "riskAreaIds": ["privacy_and_pii"],
-    "lifecycleStages": ["training"],
+    "riskAreaIds": [
+      "privacy_and_pii"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
     "description": "Mathematical privacy guarantees during model training through noise injection, ensuring individual training examples cannot be extracted",
     "nlu_profile": {
       "primary_concept": "Application of differential privacy techniques during model training, providing mathematical guarantees that individual training examples cannot be reverse-engineered from model outputs, typically via DP-SGD or similar noise-injection methods.",
@@ -1261,7 +1538,67 @@
         "private gradient descent"
       ],
       "entailment_hypothesis": "The model was trained using differential privacy techniques such as DP-SGD to protect training data privacy.",
-      "excluded_terms": ["PII detection", "PII redaction", "data retention", "anonymization", "data filtering"]
+      "excluded_terms": [
+        "PII detection",
+        "PII redaction",
+        "data retention",
+        "anonymization",
+        "data filtering"
+      ]
+    }
+  },
+  {
+    "id": "tech-age-verification",
+    "name": "Age Verification & Minor Protection",
+    "categoryId": "cat-runtime-safety",
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "inference"
+    ],
+    "description": "Verifying or estimating user age to restrict minors' access to age-inappropriate content, features, or interactions.",
+    "nlu_profile": {
+      "primary_concept": "Mechanisms that verify, estimate, or gate by user age to protect minors from age-inappropriate content or features.",
+      "semantic_anchors": [
+        "age verification",
+        "age assurance",
+        "age estimation",
+        "minor protection",
+        "teen safety",
+        "under-18",
+        "age gate",
+        "parental controls",
+        "age-appropriate",
+        "child safety"
+      ],
+      "entailment_hypothesis": "The system verifies or estimates user age to restrict access for minors."
+    }
+  },
+  {
+    "id": "tech-supervised-fine-tuning",
+    "name": "Supervised Fine-Tuning (SFT)",
+    "categoryId": "cat-model-development",
+    "riskAreaIds": [
+      "harmful_content"
+    ],
+    "lifecycleStages": [
+      "training"
+    ],
+    "description": "Supervised fine-tuning on curated instruction/response data to align model behavior toward safe, helpful responses.",
+    "nlu_profile": {
+      "primary_concept": "Aligning a base model by fine-tuning on curated, labelled instruction-response pairs (supervised fine-tuning), typically prior to RL-based alignment.",
+      "semantic_anchors": [
+        "supervised fine-tuning",
+        "SFT",
+        "instruction tuning",
+        "instruction fine-tuning",
+        "supervised learning",
+        "labelled examples",
+        "demonstration data",
+        "fine-tuned on curated data"
+      ],
+      "entailment_hypothesis": "The model was aligned using supervised fine-tuning (SFT) on curated instruction-response data."
     }
   }
 ]

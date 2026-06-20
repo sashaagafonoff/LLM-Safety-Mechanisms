@@ -35,7 +35,11 @@ PyGithub>=2.1.0
 anthropic>=0.39.0
 python-dotenv>=1.0.0
 
-# NLU-based extraction (optional, heavy dependencies)
-# Uncomment if using analyze_nlu.py or semantic_retriever.py
-# sentence-transformers>=2.2.0
-# torch>=2.0.0
+# NLU-based extraction (required for analyze_nlu.py / semantic_retriever.py).
+# Pin to exact versions (==) once the working set is confirmed, for full score
+# reproducibility (docs/WORKPLAN.md B.0.4). HF model revisions are pinned in
+# analyze_nlu.py (RETRIEVAL_MODEL_REVISION / VERIFICATION_MODEL_REVISION).
+sentence-transformers>=2.2.0
+torch>=2.0.0
+transformers>=4.36.0
+numpy>=1.24.0

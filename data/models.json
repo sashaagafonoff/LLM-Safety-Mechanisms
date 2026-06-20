@@ -6,7 +6,7 @@
       "provider": "amazon",
       "status": "active",
       "version": "Nova Pro",
-      "notes": "Highly-capable multimodal model with the best combination of accuracy, speed, and cost for a wide range of tasks"
+      "notes": "Highly-capable multimodal model with the best combination of accuracy, speed, and cost for a wide range of tasks (prior-gen; Amazon Nova 2 is current)."
     },
     {
       "id": "nova-lite",
@@ -14,7 +14,7 @@
       "provider": "amazon",
       "status": "active",
       "version": "Nova Lite",
-      "notes": "Low-cost multimodal model that is lightning fast for processing images, video, documents, and text"
+      "notes": "Low-cost multimodal model that is lightning fast for processing images, video, documents, and text (prior-gen; distinct from nova-2-lite)."
     },
     {
       "id": "nova-micro",
@@ -22,63 +22,90 @@
       "provider": "amazon",
       "status": "active",
       "version": "Nova Micro",
-      "notes": "Text-only model that delivers the lowest-latency responses at very low cost"
+      "notes": "Text-only model that delivers the lowest-latency responses at very low cost (prior-gen; no Nova 2 Micro yet)."
     },
     {
       "id": "gpt-4o",
       "family": "GPT",
       "provider": "openai",
-      "status": "active",
+      "status": "deprecated",
       "version": "GPT-4o",
-      "notes": "Multimodal model with text, audio, and vision capabilities"
+      "notes": "Multimodal model with text, audio, and vision capabilities API shutdown 2026-10-23; replaced by GPT-5.5.",
+      "statusDate": "2026-10-23",
+      "sources": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ]
     },
     {
       "id": "gpt-5.2",
       "family": "GPT",
       "provider": "openai",
-      "status": "active",
+      "status": "retired",
       "version": "GPT-5.2",
-      "notes": "<n/a>"
+      "notes": "Retired; replaced by GPT-5.5.",
+      "statusDate": "2026-06-12",
+      "sources": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ]
     },
     {
       "id": "o3-pro",
       "family": "o",
       "provider": "openai",
-      "status": "active",
+      "status": "deprecated",
       "version": "o3-pro",
-      "notes": "<n/a>"
+      "notes": "Shutdown 2026-12-11; replaced by GPT-5.5 Pro.",
+      "statusDate": "2026-06-11",
+      "sources": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ]
     },
     {
       "id": "o3",
       "family": "o",
       "provider": "openai",
-      "status": "active",
+      "status": "deprecated",
       "version": "o3",
-      "notes": "Reasoning model that excels at solving complex math, coding, and scientific challenges"
+      "notes": "Reasoning model that excels at solving complex math, coding, and scientific challenges API shutdown 2026-12-11; replaced by GPT-5.5.",
+      "statusDate": "2026-06-11",
+      "sources": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ]
     },
     {
       "id": "gpt-5-mini",
       "family": "GPT",
       "provider": "openai",
-      "status": "active",
+      "status": "deprecated",
       "version": "GPT-5 mini",
-      "notes": "<n/a>"
+      "notes": "Shutdown 2026-12-11; replaced by GPT-5.4 mini.",
+      "statusDate": "2026-06-11",
+      "sources": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ]
     },
     {
       "id": "gpt-5-thinking",
       "family": "GPT",
       "provider": "openai",
-      "status": "active",
+      "status": "deprecated",
       "version": "GPT-5 Thinking",
-      "notes": "Reasoning-focused variant of GPT-5"
+      "notes": "Reasoning-focused variant of GPT-5 ChatGPT product-mode label, not a canonical API id; reasoning is now an effort level on GPT-5.4/5.5. Candidate for removal/remap.",
+      "sources": [
+        "https://developers.openai.com/api/docs/models"
+      ]
     },
     {
       "id": "o4-mini",
       "family": "o",
       "provider": "openai",
-      "status": "active",
+      "status": "deprecated",
       "version": "o4-mini",
-      "notes": "Combines state-of-the-art reasoning with full tool capabilities, including web browsing and python analysis"
+      "notes": "Combines state-of-the-art reasoning with full tool capabilities, including web browsing and python analysis Shutdown; replaced by GPT-5.4 mini.",
+      "statusDate": "2026-10-23",
+      "sources": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ]
     },
     {
       "id": "gpt-oss-120b",
@@ -124,25 +151,31 @@
       "id": "claude-3-opus",
       "family": "Claude",
       "provider": "anthropic",
-      "status": "active",
+      "status": "retired",
       "version": "Claude 3 Opus",
-      "notes": "Previous generation flagship model with strong reasoning capabilities"
+      "notes": "Previous generation flagship model with strong reasoning capabilities RETIRED 2026-01-05 — no longer served by Anthropic (returns 404).",
+      "statusDate": "2026-01-05"
     },
     {
       "id": "claude-3-5-sonnet",
       "family": "Claude",
       "provider": "anthropic",
-      "status": "active",
+      "status": "retired",
       "version": "Claude 3.5 Sonnet",
-      "notes": "Previous generation balanced model"
+      "notes": "Previous generation balanced model RETIRED 2025-10-28 — no longer served by Anthropic (returns 404).",
+      "statusDate": "2025-10-28"
     },
     {
       "id": "gemini-3-pro",
       "family": "Gemini",
       "provider": "google",
-      "status": "active",
+      "status": "superseded",
       "version": "Gemini 3 Pro",
-      "notes": "Intelligent model with state-of-the-art reasoning, advanced multimodal understanding, and exceptional coding capabilities"
+      "notes": "Intelligent model with state-of-the-art reasoning, advanced multimodal understanding, and exceptional coding capabilities Preview shut down; superseded by Gemini 3.1 Pro.",
+      "statusDate": "2026-03-09",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/deprecations.md.txt"
+      ]
     },
     {
       "id": "gemini-3-deep-think",
@@ -156,25 +189,37 @@
       "id": "gemini-3-flash",
       "family": "Gemini",
       "provider": "google",
-      "status": "active",
+      "status": "superseded",
       "version": "Gemini 3 Flash",
-      "notes": "Minimizes latency for chat or high throughput applications while maintaining strong reasoning capabilities"
+      "notes": "Minimizes latency for chat or high throughput applications while maintaining strong reasoning capabilities No standalone GA; superseded by Gemini 3.5 Flash.",
+      "statusDate": "2026-05-19",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/deprecations.md.txt"
+      ]
     },
     {
       "id": "gemini-2.5-flash-lite",
       "family": "Gemini",
       "provider": "google",
-      "status": "active",
+      "status": "deprecated",
       "version": "Gemini 2.5 Flash-Lite",
-      "notes": "Cost-effective model optimized for speed and efficiency, suitable for high-volume tasks"
+      "notes": "Cost-effective model optimized for speed and efficiency, suitable for high-volume tasks Earliest shutdown 2026-10-16; migrate to Gemini 3.1 Flash-Lite.",
+      "statusDate": "2026-10-16",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/deprecations.md.txt"
+      ]
     },
     {
       "id": "gemini-1-5-pro",
       "family": "Gemini",
       "provider": "google",
-      "status": "active",
+      "status": "retired",
       "version": "Gemini 1.5 Pro",
-      "notes": "Previous generation multimodal model with strong reasoning and long context support"
+      "notes": "Previous generation multimodal model with strong reasoning and long context support Gemini 1.5 family fully retired; real id is gemini-1.5-pro.",
+      "statusDate": "2025-09-24",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/deprecations.md.txt"
+      ]
     },
     {
       "id": "llama-4-maverick",
@@ -193,22 +238,6 @@
       "notes": "General-purpose multimodal model with 16 experts, delivering superior performance for its size"
     },
     {
-      "id": "llama-4-8b",
-      "family": "Llama",
-      "provider": "meta",
-      "status": "active",
-      "version": "Llama 4 8B",
-      "notes": "<n/a>"
-    },
-    {
-      "id": "llama-4-17b",
-      "family": "Llama",
-      "provider": "meta",
-      "status": "active",
-      "version": "Llama 4 17B",
-      "notes": "<n/a>"
-    },
-    {
       "id": "llama-3-1-405b",
       "family": "Llama",
       "provider": "meta",
@@ -220,9 +249,13 @@
       "id": "llama-3-70b",
       "family": "Llama",
       "provider": "meta",
-      "status": "active",
+      "status": "superseded",
       "version": "Llama 3 70B",
-      "notes": "Previous generation model with 70 billion parameters"
+      "notes": "Previous generation model with 70 billion parameters Superseded by Llama 3.1 70B then Llama 3.3 70B.",
+      "statusDate": "2024-12-06",
+      "sources": [
+        "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct"
+      ]
     },
     {
       "id": "mistral-large-3",
@@ -236,9 +269,13 @@
       "id": "magistral-medium-1.2",
       "family": "Magistral",
       "provider": "mistral",
-      "status": "active",
+      "status": "deprecated",
       "version": "Magistral Medium 1.2",
-      "notes": "Specialized in transparent and multilingual reasoning with complex thinking capabilities"
+      "notes": "Specialized in transparent and multilingual reasoning with complex thinking capabilities Deprecated (retiring ~2026-06-30); folded into Mistral Medium 3.5.",
+      "statusDate": "2026-05-22",
+      "sources": [
+        "https://docs.mistral.ai/models/magistral-medium-1-2-25-09"
+      ]
     },
     {
       "id": "ministral-3",
@@ -252,25 +289,37 @@
       "id": "pixtral",
       "family": "Pixtral",
       "provider": "mistral",
-      "status": "active",
+      "status": "deprecated",
       "version": "Pixtral",
-      "notes": "Vision pioneer that combines text, image, and structured data understanding in a single model"
+      "notes": "Vision pioneer that combines text, image, and structured data understanding in a single model Pixtral 12B deprecated; superseded by Ministral 3 14B / Mistral Medium 3.5.",
+      "statusDate": "2025-12-02",
+      "sources": [
+        "https://docs.mistral.ai/models/pixtral-12b-24-09"
+      ]
     },
     {
       "id": "deepseek-v3.2",
       "family": "DeepSeek",
       "provider": "deepseek",
-      "status": "active",
+      "status": "superseded",
       "version": "DeepSeek-V3.2",
-      "notes": "Mixture-of-Experts model using sparse attention to improve long-context efficiency"
+      "notes": "Mixture-of-Experts model using sparse attention to improve long-context efficiency Last release before V4; superseded by DeepSeek-V4.",
+      "statusDate": "2026-04-24",
+      "sources": [
+        "https://api-docs.deepseek.com/news/news260424"
+      ]
     },
     {
       "id": "deepseek-r1",
       "family": "DeepSeek",
       "provider": "deepseek",
-      "status": "active",
+      "status": "superseded",
       "version": "DeepSeek-R1",
-      "notes": "Reasoning model that generates a step-by-step chain of thought for complex problem-solving"
+      "notes": "Reasoning model that generates a step-by-step chain of thought for complex problem-solving Superseded by R1-0528, then V3.1/V3.2 hybrid reasoning and V4.",
+      "statusDate": "2025-05-28",
+      "sources": [
+        "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528"
+      ]
     },
     {
       "id": "deepseek-r1-distill",
@@ -284,17 +333,24 @@
       "id": "deepseek-v3-lite",
       "family": "DeepSeek",
       "provider": "deepseek",
-      "status": "active",
+      "status": "unknown",
       "version": "DeepSeek-V3-Lite",
-      "notes": "<n/a>"
+      "notes": "Could not be matched to an official DeepSeek SKU; likely invalid. Candidate for removal pending confirmation.",
+      "sources": [
+        "https://api-docs.deepseek.com/updates"
+      ]
     },
     {
       "id": "deepseek-v3",
       "family": "DeepSeek",
       "provider": "deepseek",
-      "status": "active",
+      "status": "superseded",
       "version": "DeepSeek-V3",
-      "notes": "Mixture-of-Experts model with strong reasoning capabilities"
+      "notes": "Mixture-of-Experts model with strong reasoning capabilities Old generation; superseded by DeepSeek-V4.",
+      "statusDate": "2026-04-24",
+      "sources": [
+        "https://api-docs.deepseek.com/updates"
+      ]
     },
     {
       "id": "qwen3-max",
@@ -308,17 +364,23 @@
       "id": "qwen3-thinking",
       "family": "Qwen",
       "provider": "alibaba",
-      "status": "active",
+      "status": "deprecated",
       "version": "Qwen3-Thinking",
-      "notes": "<n/a>"
+      "notes": "Not a valid Alibaba id; the dedicated reasoning model is QwQ-Plus. Candidate for removal pending confirmation.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+      ]
     },
     {
       "id": "qwen3-turbo",
       "family": "Qwen",
       "provider": "alibaba",
-      "status": "active",
+      "status": "deprecated",
       "version": "Qwen3-Turbo",
-      "notes": "<n/a>"
+      "notes": "Not a valid id (real id qwen-turbo, no longer updated); migrate to Qwen-Flash. Candidate for removal pending confirmation.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/models"
+      ]
     },
     {
       "id": "qwen-2-5-72b",
@@ -332,49 +394,70 @@
       "id": "qwen-2-5-coder",
       "family": "Qwen",
       "provider": "alibaba",
-      "status": "active",
+      "status": "superseded",
       "version": "Qwen 2.5 Coder",
-      "notes": "Code-specialized model family (0.5B-32B parameters) for code generation and repair"
+      "notes": "Code-specialized model family (0.5B-32B parameters) for code generation and repair Superseded by Qwen3-Coder-Plus/-Next.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen-coder"
+      ]
     },
     {
       "id": "grok-1-5",
       "family": "Grok",
       "provider": "xai",
-      "status": "active",
+      "status": "retired",
       "version": "Grok 1.5",
-      "notes": "Previous generation model"
+      "notes": "Previous generation model Early-2024 model, long superseded.",
+      "sources": [
+        "https://docs.x.ai/developers/models"
+      ]
     },
     {
       "id": "grok-4",
       "family": "Grok",
       "provider": "xai",
-      "status": "active",
+      "status": "retired",
       "version": "Grok 4",
-      "notes": "Intelligent model featuring native tool use, real-time search integration, and refined reasoning"
+      "notes": "Intelligent model featuring native tool use, real-time search integration, and refined reasoning grok-4-0709 retired; requests redirect to Grok 4.3.",
+      "statusDate": "2026-05-15",
+      "sources": [
+        "https://docs.x.ai/developers/migration/may-15-retirement"
+      ]
     },
     {
       "id": "grok-4-thinking",
       "family": "Grok",
       "provider": "xai",
-      "status": "active",
+      "status": "deprecated",
       "version": "Grok 4 Thinking",
-      "notes": "<n/a>"
+      "notes": "Not an official xAI id (Grok 4 reasoning is intrinsic). Candidate for removal pending confirmation.",
+      "sources": [
+        "https://docs.x.ai/developers/models"
+      ]
     },
     {
       "id": "grok-4-fast",
       "family": "Grok",
       "provider": "xai",
-      "status": "active",
+      "status": "deprecated",
       "version": "Grok 4 Fast",
-      "notes": "<n/a>"
+      "notes": "Full retirement 2026-08-15; redirect to Grok 4.3.",
+      "statusDate": "2026-05-15",
+      "sources": [
+        "https://docs.x.ai/developers/migration/may-15-retirement"
+      ]
     },
     {
       "id": "phi-3-mini",
       "family": "Phi",
       "provider": "microsoft",
-      "status": "active",
+      "status": "retired",
       "version": "Phi-3 Mini",
-      "notes": "Previous generation compact model"
+      "notes": "Previous generation compact model Phi-3/3.5 families retired in Foundry; replaced by Phi-4-mini-instruct.",
+      "statusDate": "2025-08-30",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/retired-models"
+      ]
     },
     {
       "id": "phi-4",
@@ -404,25 +487,37 @@
       "id": "command-r-plus",
       "family": "Command",
       "provider": "cohere",
-      "status": "active",
+      "status": "retired",
       "version": "Command R+",
-      "notes": "Optimized for long-context tasks, RAG, and tool use to automate sophisticated enterprise workflows"
+      "notes": "Optimized for long-context tasks, RAG, and tool use to automate sophisticated enterprise workflows Bare alias (=command-r-plus-04-2024) shut down; use command-r-plus-08-2024 / Command A.",
+      "statusDate": "2025-09-15",
+      "sources": [
+        "https://docs.cohere.com/docs/deprecations"
+      ]
     },
     {
       "id": "nemotron-4",
       "family": "Nemotron",
       "provider": "nvidia",
-      "status": "active",
+      "status": "superseded",
       "version": "Nemotron-4",
-      "notes": "<n/a>"
+      "notes": "June-2024 Nemotron-4 340B gen; superseded by Nemotron 3.",
+      "statusDate": "2025-12-15",
+      "sources": [
+        "https://nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models"
+      ]
     },
     {
       "id": "llama-3.1-nemotron",
       "family": "Nemotron",
       "provider": "nvidia",
-      "status": "active",
+      "status": "superseded",
       "version": "Llama-3.1-Nemotron",
-      "notes": "Derivative reasoning model post-trained for math, code, and tool calling capabilities"
+      "notes": "Derivative reasoning model post-trained for math, code, and tool calling capabilities Llama-Nemotron superseded by Nemotron 3.",
+      "statusDate": "2025-12-15",
+      "sources": [
+        "https://nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models"
+      ]
     },
     {
       "id": "falcon-3",
@@ -436,17 +531,542 @@
       "id": "falcon-180b",
       "family": "Falcon",
       "provider": "tii",
-      "status": "active",
+      "status": "superseded",
       "version": "Falcon 180B",
-      "notes": "Large-scale open model with 180 billion parameters, optimized for reasoning and knowledge tasks"
+      "notes": "Large-scale open model with 180 billion parameters, optimized for reasoning and knowledge tasks Original 2023 dense 180B; superseded by Falcon 3 / Falcon-H1.",
+      "statusDate": "2023-09-06",
+      "sources": [
+        "https://huggingface.co/collections/tiiuae/falcon-h1"
+      ]
     },
     {
       "id": "hunyuan-large",
       "family": "Hunyuan",
       "provider": "tencent",
-      "status": "active",
+      "status": "superseded",
       "version": "Hunyuan-Large (MoE 389B)",
-      "notes": "Flagship MoE model, competes with Llama 3.1 405B"
+      "notes": "Flagship MoE model, competes with Llama 3.1 405B Legacy-platform model; legacy Hunyuan platform sunsetting; migrate to Hy3.",
+      "statusDate": "2026-06-22",
+      "sources": [
+        "https://www.tencent.com/en-us/articles/2202320.html"
+      ]
+    },
+    {
+      "id": "claude-fable-5",
+      "family": "Claude",
+      "provider": "anthropic",
+      "status": "active",
+      "version": "Claude Fable 5",
+      "notes": "Most capable widely released Anthropic model (1M context); built for the most demanding reasoning and long-horizon agentic work."
+    },
+    {
+      "id": "claude-opus-4.8",
+      "family": "Claude",
+      "provider": "anthropic",
+      "status": "active",
+      "version": "Claude Opus 4.8",
+      "notes": "Current Opus-tier flagship; state-of-the-art long-horizon agentic execution, knowledge work, and memory. 1M context."
+    },
+    {
+      "id": "claude-opus-4.7",
+      "family": "Claude",
+      "provider": "anthropic",
+      "status": "active",
+      "version": "Claude Opus 4.7",
+      "notes": "Highly autonomous Opus model; strong long-horizon agentic, knowledge, vision, and memory performance. 1M context."
+    },
+    {
+      "id": "claude-opus-4.6",
+      "family": "Claude",
+      "provider": "anthropic",
+      "status": "active",
+      "version": "Claude Opus 4.6",
+      "notes": "Opus model with adaptive thinking; 1M context, up to 128K output."
+    },
+    {
+      "id": "nova-2-lite",
+      "family": "Amazon Nova 2",
+      "provider": "amazon",
+      "status": "active",
+      "version": "Amazon Nova 2 Lite",
+      "notes": "Current-gen multimodal-in/text-out (GA 2025-12-02, 1M context). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://aws.amazon.com/about-aws/whats-new/2025/12/nova-2-foundation-models-amazon-bedrock/",
+        "https://aws.amazon.com/nova/models/"
+      ]
+    },
+    {
+      "id": "gpt-5.5",
+      "family": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5.5",
+      "notes": "Current flagship chat/reasoning model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://developers.openai.com/api/docs/models"
+      ]
+    },
+    {
+      "id": "gpt-5.5-pro",
+      "family": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5.5 Pro",
+      "notes": "Pro/high-reasoning tier. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://developers.openai.com/api/docs/models"
+      ]
+    },
+    {
+      "id": "gpt-5.4",
+      "family": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5.4",
+      "notes": "Affordable flagship-class for coding/professional work. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://developers.openai.com/api/docs/models"
+      ]
+    },
+    {
+      "id": "gpt-5.4-mini",
+      "family": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5.4 mini",
+      "notes": "Strongest current mini tier. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://developers.openai.com/api/docs/models"
+      ]
+    },
+    {
+      "id": "gpt-5.4-nano",
+      "family": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5.4 nano",
+      "notes": "Lowest-cost GPT-5.4 variant. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://developers.openai.com/api/docs/models"
+      ]
+    },
+    {
+      "id": "gemini-3.5-flash",
+      "family": "Gemini",
+      "provider": "google",
+      "status": "active",
+      "version": "Gemini 3.5 Flash",
+      "notes": "Current GA Flash (2026-05-19). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/deprecations.md.txt"
+      ]
+    },
+    {
+      "id": "gemini-3.1-flash-lite",
+      "family": "Gemini",
+      "provider": "google",
+      "status": "active",
+      "version": "Gemini 3.1 Flash-Lite",
+      "notes": "Current GA Flash-Lite (2026-05-07). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/deprecations.md.txt"
+      ]
+    },
+    {
+      "id": "gemini-3.1-pro",
+      "family": "Gemini",
+      "provider": "google",
+      "status": "active",
+      "version": "Gemini 3.1 Pro",
+      "notes": "Successor to Gemini 3 Pro; confirm GA model id before relying on it. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/"
+      ]
+    },
+    {
+      "id": "llama-3-3-70b",
+      "family": "Llama",
+      "provider": "meta",
+      "status": "active",
+      "version": "Llama 3.3 70B",
+      "notes": "Current production 70B (2024-12-06); supersedes Llama 3 70B. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct"
+      ]
+    },
+    {
+      "id": "mistral-small-4",
+      "family": "Mistral",
+      "provider": "mistral",
+      "status": "active",
+      "version": "Mistral Small 4",
+      "notes": "Unified small model (Apache 2.0, 2026-03-16). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://mistral.ai/news/mistral-small-4/"
+      ]
+    },
+    {
+      "id": "codestral",
+      "family": "Codestral",
+      "provider": "mistral",
+      "status": "active",
+      "version": "Codestral",
+      "notes": "Low-latency coding specialist. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://mistral.ai/models/"
+      ]
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "family": "DeepSeek",
+      "provider": "deepseek",
+      "status": "active",
+      "version": "DeepSeek-V4 Pro",
+      "notes": "Current flagship MoE, 1M context (2026-04-24, MIT). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://api-docs.deepseek.com/news/news260424"
+      ]
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "family": "DeepSeek",
+      "provider": "deepseek",
+      "status": "active",
+      "version": "DeepSeek-V4 Flash",
+      "notes": "Fast/cheaper V4; deepseek-chat/-reasoner aliases point here. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://api-docs.deepseek.com/news/news260424"
+      ]
+    },
+    {
+      "id": "deepseek-r1-0528",
+      "family": "DeepSeek",
+      "provider": "deepseek",
+      "status": "active",
+      "version": "DeepSeek-R1-0528",
+      "notes": "Updated R1 reasoning release (2025-05-28). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528"
+      ]
+    },
+    {
+      "id": "qwen3.5-plus",
+      "family": "Qwen",
+      "provider": "alibaba",
+      "status": "active",
+      "version": "Qwen3.5-Plus",
+      "notes": "Current flagship-tier commercial text model, hybrid thinking. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/models"
+      ]
+    },
+    {
+      "id": "qwen3.5-flash",
+      "family": "Qwen",
+      "provider": "alibaba",
+      "status": "active",
+      "version": "Qwen3.5-Flash",
+      "notes": "Current fast/low-cost production model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/models"
+      ]
+    },
+    {
+      "id": "qwen-plus",
+      "family": "Qwen",
+      "provider": "alibaba",
+      "status": "active",
+      "version": "Qwen-Plus",
+      "notes": "Core balanced production model, hybrid thinking. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/models"
+      ]
+    },
+    {
+      "id": "qwen-flash",
+      "family": "Qwen",
+      "provider": "alibaba",
+      "status": "active",
+      "version": "Qwen-Flash",
+      "notes": "Current speed tier (replaces qwen-turbo). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/models"
+      ]
+    },
+    {
+      "id": "qwen3-coder-plus",
+      "family": "Qwen",
+      "provider": "alibaba",
+      "status": "active",
+      "version": "Qwen3-Coder-Plus",
+      "notes": "Flagship code-gen model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen-coder"
+      ]
+    },
+    {
+      "id": "qwen3-coder-next",
+      "family": "Qwen",
+      "provider": "alibaba",
+      "status": "active",
+      "version": "Qwen3-Coder-Next",
+      "notes": "Recommended coder model (quality/speed/cost). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen-coder"
+      ]
+    },
+    {
+      "id": "qwq-plus",
+      "family": "Qwen",
+      "provider": "alibaba",
+      "status": "active",
+      "version": "QwQ-Plus",
+      "notes": "Dedicated reasoning/thinking model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+      ]
+    },
+    {
+      "id": "grok-4.3",
+      "family": "Grok",
+      "provider": "xai",
+      "status": "active",
+      "version": "Grok 4.3",
+      "notes": "Current flagship (1M ctx, native video in). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.x.ai/developers/models"
+      ]
+    },
+    {
+      "id": "grok-4.20",
+      "family": "Grok",
+      "provider": "xai",
+      "status": "active",
+      "version": "Grok 4.20",
+      "notes": "Active 4.20 reasoning/non-reasoning line (1M ctx). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.x.ai/developers/models"
+      ]
+    },
+    {
+      "id": "grok-4.20-multi-agent",
+      "family": "Grok",
+      "provider": "xai",
+      "status": "active",
+      "version": "Grok 4.20 (multi-agent)",
+      "notes": "Active multi-agent variant. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.x.ai/developers/models"
+      ]
+    },
+    {
+      "id": "phi-4-mini-instruct",
+      "family": "Phi",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "Phi-4-mini-instruct",
+      "notes": "Replacement for retired Phi-3-mini. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://azure.microsoft.com/en-us/blog/empowering-innovation-the-next-generation-of-the-phi-family/"
+      ]
+    },
+    {
+      "id": "phi-4-reasoning",
+      "family": "Phi",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "Phi-4-reasoning",
+      "notes": "14B open-weight reasoning model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://azure.microsoft.com/en-us/blog/empowering-innovation-the-next-generation-of-the-phi-family/"
+      ]
+    },
+    {
+      "id": "phi-4-reasoning-plus",
+      "family": "Phi",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "Phi-4-reasoning-plus",
+      "notes": "RL-enhanced reasoning variant. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://azure.microsoft.com/en-us/blog/empowering-innovation-the-next-generation-of-the-phi-family/"
+      ]
+    },
+    {
+      "id": "phi-4-mini-reasoning",
+      "family": "Phi",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "Phi-4-mini-reasoning",
+      "notes": "Small reasoning-focused Phi-4. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://azure.microsoft.com/en-us/blog/empowering-innovation-the-next-generation-of-the-phi-family/"
+      ]
+    },
+    {
+      "id": "phi-4-reasoning-vision-15b",
+      "family": "Phi",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "Phi-4-reasoning-vision-15B",
+      "notes": "Vision-reasoning Phi (2026-03-04). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://azure.microsoft.com/en-us/blog/empowering-innovation-the-next-generation-of-the-phi-family/"
+      ]
+    },
+    {
+      "id": "mai-1-preview",
+      "family": "MAI",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "MAI-1-preview",
+      "notes": "First in-house foundation text model (public preview). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://microsoft.ai/news/two-new-in-house-models/"
+      ]
+    },
+    {
+      "id": "mai-thinking-1",
+      "family": "MAI",
+      "provider": "microsoft",
+      "status": "active",
+      "version": "MAI-Thinking-1",
+      "notes": "First in-house reasoning model (private preview). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://microsoft.ai/news/two-new-in-house-models/"
+      ]
+    },
+    {
+      "id": "command-a-plus-05-2026",
+      "family": "Command",
+      "provider": "cohere",
+      "status": "active",
+      "version": "Command A+ (05-2026)",
+      "notes": "Latest flagship MoE (2026-05-20). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.cohere.com/v2/docs/models"
+      ]
+    },
+    {
+      "id": "command-a-reasoning-08-2025",
+      "family": "Command",
+      "provider": "cohere",
+      "status": "active",
+      "version": "Command A Reasoning (08-2025)",
+      "notes": "First Cohere reasoning model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.cohere.com/v2/docs/models"
+      ]
+    },
+    {
+      "id": "command-a-vision-07-2025",
+      "family": "Command",
+      "provider": "cohere",
+      "status": "active",
+      "version": "Command A Vision (07-2025)",
+      "notes": "Multimodal production model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.cohere.com/v2/docs/models"
+      ]
+    },
+    {
+      "id": "command-a-translate-08-2025",
+      "family": "Command",
+      "provider": "cohere",
+      "status": "active",
+      "version": "Command A Translate (08-2025)",
+      "notes": "Translation specialist (23 languages). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.cohere.com/v2/docs/models"
+      ]
+    },
+    {
+      "id": "command-r-plus-08-2024",
+      "family": "Command",
+      "provider": "cohere",
+      "status": "active",
+      "version": "Command R+ (08-2024)",
+      "notes": "Active successor to retired command-r-plus (04-2024). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.cohere.com/v2/docs/models"
+      ]
+    },
+    {
+      "id": "command-r-08-2024",
+      "family": "Command",
+      "provider": "cohere",
+      "status": "active",
+      "version": "Command R (08-2024)",
+      "notes": "Active conversational model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.cohere.com/v2/docs/models"
+      ]
+    },
+    {
+      "id": "command-r7b-12-2024",
+      "family": "Command",
+      "provider": "cohere",
+      "status": "active",
+      "version": "Command R7B (12-2024)",
+      "notes": "Small/fast RAG-agent model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://docs.cohere.com/v2/docs/models"
+      ]
+    },
+    {
+      "id": "nemotron-3-nano-30b-a3b",
+      "family": "Nemotron 3",
+      "provider": "nvidia",
+      "status": "active",
+      "version": "Nemotron 3 Nano 30B-A3B",
+      "notes": "Current Nemotron 3 Nano (hybrid MoE). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models"
+      ]
+    },
+    {
+      "id": "nemotron-3-nano-omni-30b-a3b",
+      "family": "Nemotron 3",
+      "provider": "nvidia",
+      "status": "active",
+      "version": "Nemotron 3 Nano Omni 30B-A3B",
+      "notes": "Multimodal Nemotron 3 (2026-04-28). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://blogs.nvidia.com/blog/nemotron-3-nano-omni-multimodal-ai-agents/"
+      ]
+    },
+    {
+      "id": "falcon-h1-34b-instruct",
+      "family": "Falcon-H1",
+      "provider": "tii",
+      "status": "active",
+      "version": "Falcon-H1 34B Instruct",
+      "notes": "Flagship hybrid Transformer-SSM (rivals 70B-class). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://huggingface.co/collections/tiiuae/falcon-h1"
+      ]
+    },
+    {
+      "id": "falcon-h1r-7b",
+      "family": "Falcon-H1R",
+      "provider": "tii",
+      "status": "active",
+      "version": "Falcon-H1R 7B",
+      "notes": "Reasoning variant (Jan 2026). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://huggingface.co/collections/tiiuae/falcon-h1r"
+      ]
+    },
+    {
+      "id": "hy3-preview",
+      "family": "Hunyuan Hy3",
+      "provider": "tencent",
+      "status": "active",
+      "version": "Hunyuan Hy3 (preview)",
+      "notes": "Current flagship after platform rebuild (295B MoE, 256K ctx). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://www.tencent.com/en-us/articles/2202320.html"
+      ]
     }
   ]
 }

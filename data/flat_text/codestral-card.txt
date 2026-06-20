@@ -1,0 +1,253 @@
+SOURCE_ID: codestral-card
+SOURCE_TITLE: Codestral-22B-v0.1 Model Card
+SOURCE_URI: https://huggingface.co/mistralai/Codestral-22B-v0.1
+--------------------
+mistralai/Codestral-22B-v0.1 · Hugging Face
+Model Card for Codestral-22B-v0.1
+Encode and Decode with
+mistral_common
+from
+mistral_common.tokens.tokenizers.mistral
+import
+MistralTokenizer
+from
+mistral_common.protocol.instruct.messages
+import
+UserMessage
+from
+mistral_common.protocol.instruct.request
+import
+ChatCompletionRequest
+mistral_models_path =
+"MISTRAL_MODELS_PATH"
+tokenizer = MistralTokenizer.v3()
+completion_request = ChatCompletionRequest(messages=[UserMessage(content=
+"Explain Machine Learning to me in a nutshell."
+)])
+tokens = tokenizer.encode_chat_completion(completion_request).tokens
+Inference with
+mistral_inference
+from
+mistral_inference.transformer
+import
+Transformer
+from
+mistral_inference.generate
+import
+generate
+model = Transformer.from_folder(mistral_models_path)
+out_tokens, _ = generate([tokens], model, max_tokens=
+64
+, temperature=
+0.0
+, eos_id=tokenizer.instruct_tokenizer.tokenizer.eos_id)
+result = tokenizer.decode(out_tokens[
+0
+])
+print
+(result)
+Inference with hugging face
+transformers
+from
+transformers
+import
+AutoModelForCausalLM
+model = AutoModelForCausalLM.from_pretrained(
+"mistralai/Codestral-22B-v0.1"
+)
+model.to(
+"cuda"
+)
+generated_ids = model.generate(tokens, max_new_tokens=
+1000
+, do_sample=
+True
+)
+# decode with mistral tokenizer
+result = tokenizer.decode(generated_ids[
+0
+].tolist())
+print
+(result)
+PRs to correct the
+transformers
+tokenizer so that it gives 1-to-1 the same results as the
+mistral_common
+reference implementation are very welcome!
+Codestral-22B-v0.1 is trained on a diverse dataset of 80+ programming languages, including the most popular ones, such as Python, Java, C, C++, JavaScript, and Bash (more details in the
+Blogpost
+). The model can be queried:
+As instruct, for instance to answer any questions about a code snippet (write documentation, explain, factorize) or to generate code following specific indications
+As Fill in the Middle (FIM), to predict the middle tokens between a prefix and a suffix (very useful for software development add-ons like in VS Code)
+Installation
+It is recommended to use
+mistralai/Codestral-22B-v0.1
+with
+mistral-inference
+.
+pip install mistral_inference
+Download
+from
+huggingface_hub
+import
+snapshot_download
+from
+pathlib
+import
+Path
+mistral_models_path = Path.home().joinpath(
+'mistral_models'
+,
+'Codestral-22B-v0.1'
+)
+mistral_models_path.mkdir(parents=
+True
+, exist_ok=
+True
+)
+snapshot_download(repo_id=
+"mistralai/Codestral-22B-v0.1"
+, allow_patterns=[
+"params.json"
+,
+"consolidated.safetensors"
+,
+"tokenizer.model.v3"
+], local_dir=mistral_models_path)
+Chat
+After installing
+mistral_inference
+, a
+mistral-chat
+CLI command should be available in your environment.
+mistral-chat $HOME/mistral_models/Codestral-22B-v0.1 --instruct --max_tokens 256
+Will generate an answer to "Write me a function that computes fibonacci in Rust" and should give something along the following lines:
+Sure, here's a simple implementation of a function that computes the Fibonacci sequence in Rust. This function takes an integer `n` as an argument and returns the `n`th Fibonacci number.
+fn fibonacci(n: u32) -> u32 {
+match n {
+0 => 0,
+1 => 1,
+_ => fibonacci(n - 1) + fibonacci(n - 2),
+}
+}
+fn main() {
+let n = 10;
+println!("The {}th Fibonacci number is: {}", n, fibonacci(n));
+}
+This function uses recursion to calculate the Fibonacci number. However, it's not the most efficient solution because it performs a lot of redundant calculations. A more efficient solution would use a loop to iteratively calculate the Fibonacci numbers.
+Fill-in-the-middle (FIM)
+After installing
+mistral_inference
+and running
+pip install --upgrade mistral_common
+to make sure to have mistral_common>=1.2 installed:
+from
+mistral_inference.transformer
+import
+Transformer
+from
+mistral_inference.generate
+import
+generate
+from
+mistral_common.tokens.tokenizers.mistral
+import
+MistralTokenizer
+from
+mistral_common.tokens.instruct.request
+import
+FIMRequest
+tokenizer = MistralTokenizer.v3()
+model = Transformer.from_folder(
+"~/codestral-22B-240529"
+)
+prefix =
+"""def add("""
+suffix =
+"""
+return sum"""
+request = FIMRequest(prompt=prefix, suffix=suffix)
+tokens = tokenizer.encode_fim(request).tokens
+out_tokens, _ = generate([tokens], model, max_tokens=
+256
+, temperature=
+0.0
+, eos_id=tokenizer.instruct_tokenizer.tokenizer.eos_id)
+result = tokenizer.decode(out_tokens[
+0
+])
+middle = result.split(suffix)[
+0
+].strip()
+print
+(middle)
+Should give something along the following lines:
+num1, num2):
+# Add two numbers
+sum = num1 + num2
+# return the sum
+Usage with transformers library
+This model is also compatible with
+transformers
+library, first run
+pip install -U transformers
+then use the snippet below to quickly get started:
+from
+transformers
+import
+AutoModelForCausalLM, AutoTokenizer
+model_id =
+"mistralai/Codestral-22B-v0.1"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id)
+text =
+"Hello my name is"
+inputs = tokenizer(text, return_tensors=
+"pt"
+)
+outputs = model.generate(**inputs, max_new_tokens=
+20
+)
+print
+(tokenizer.decode(outputs[
+0
+], skip_special_tokens=
+True
+))
+By default, transformers will load the model in full precision. Therefore you might be interested to further reduce down the memory requirements to run the model through the optimizations we offer in HF ecosystem.
+Limitations
+The Codestral-22B-v0.1 does not have any moderation mechanisms. We're looking forward to engaging with the community on ways to
+make the model finely respect guardrails, allowing for deployment in environments requiring moderated outputs.
+License
+Codestral-22B-v0.1 is released under the
+MNLP-0.1
+license.
+The Mistral AI Team
+Albert Jiang, Alexandre Sablayrolles, Alexis Tacnet, Antoine Roux, Arthur Mensch, Audrey Herblin-Stoop, Baptiste Bout, Baudouin de Monicault, Blanche Savary, Bam4d, Caroline Feldman, Devendra Singh Chaplot, Diego de las Casas, Eleonore Arcelin, Emma Bou Hanna, Etienne Metzger, Gianna Lengyel, Guillaume Bour, Guillaume Lample, Harizo Rajaona, Henri Roussez, Jean-Malo Delignon, Jia Li, Justus Murke, Kartik Khandelwal, Lawrence Stewart, Louis Martin, Louis Ternon, Lucile Saulnier, Lélio Renard Lavaud, Margaret Jennings, Marie Pellat, Marie Torelli, Marie-Anne Lachaux, Marjorie Janiewicz, Mickael Seznec, Nicolas Schuhl, Patrick von Platen, Romain Sauvestre, Pierre Stock, Sandeep Subramanian, Saurabh Garg, Sophia Yang, Szymon Antoniak, Teven Le Scao, Thibaut Lavril, Thibault Schueller, Timothée Lacroix, Théophile Gervet, Thomas Wang, Valera Nemychnikova, Wendy Shang, William El Sayed, William Marshall
+Downloads last month
+10,587
+Safetensors
+Model size
+22B params
+Tensor type
+BF16
+·
+Inference Providers
+NEW
+This model isn't deployed by any Inference Provider.
+🙋
+9
+Ask for provider support
+Model tree for
+mistralai/Codestral-22B-v0.1
+Adapters
+4 models
+Finetunes
+13 models
+Merges
+5 models
+Quantizations
+53 models
+Spaces using
+mistralai/Codestral-22B-v0.1
+46

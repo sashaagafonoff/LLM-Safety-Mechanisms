@@ -171,6 +171,13 @@ def ingest_all(target_id=None, force=False):
                 processed_content = result.text_content
             elif ext == ".html":
                 processed_content = extract_text_from_html(temp_filename)
+            elif ext in (".md", ".txt", ".json"):
+                # Plain text / markdown is already text — read directly as UTF-8.
+                # markitdown's PlainTextConverter defaults to ascii and throws
+                # UnicodeDecodeError on non-ascii bytes (e.g. em-dashes in GitHub
+                # model cards), so bypass it for known text formats.
+                with open(temp_filename, "r", encoding="utf-8", errors="replace") as tf:
+                    processed_content = tf.read()
             else:
                 result = md.convert(temp_filename)
                 processed_content = result.text_content

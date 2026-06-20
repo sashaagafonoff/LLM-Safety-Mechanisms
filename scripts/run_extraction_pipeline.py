@@ -49,6 +49,7 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Set
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Load environment variables from .env file
 try:
@@ -69,6 +70,42 @@ NLU_OUTPUT_PATH = DATA_DIR / "map_nlu.json"
 LLM_OUTPUT_PATH = DATA_DIR / "map_llm.json"
 FLAT_TEXT_DIR = DATA_DIR / "flat_text"
 PIPELINE_LOG_PATH = Path("cache/pipeline_log.json")
+
+# Provenance accumulated during a run (resolved model ids, thresholds, revisions),
+# written to the pipeline log so an output can be tied to the config that produced it.
+_PROVENANCE: Dict = {}
+
+
+def _lib_versions() -> Dict[str, str]:
+    """Record installed versions of the libraries that determine outputs."""
+    try:
+        from importlib.metadata import version
+    except ImportError:  # pragma: no cover
+        return {}
+    out = {}
+    for pkg in ("sentence-transformers", "torch", "transformers", "anthropic", "numpy"):
+        try:
+            out[pkg] = version(pkg)
+        except Exception:
+            out[pkg] = "not-installed"
+    return out
+
+
+MANUAL_CREATORS = {'manual', 'sashaagafonoff'}
+
+
+def _has_manual_evidence(tech: Dict) -> bool:
+    """True if ANY evidence entry on this technique was human-created (REFACTOR §2.4).
+
+    Provenance must not be decided from evidence[0] alone — a manual entry can sit
+    behind a machine-created evidence[0] after a merge.
+    """
+    for ev in tech.get('evidence', []) or []:
+        if isinstance(ev, dict) and ev.get('created_by') in MANUAL_CREATORS:
+            return True
+        if isinstance(ev, str) and ev == 'Manual annotation':
+            return True
+    return False
 
 
 def load_existing_map() -> Dict[str, List[Dict]]:
@@ -95,23 +132,21 @@ def partition_by_source(existing: Dict[str, List[Dict]]) -> Dict[str, Dict[str, 
 
     for doc_id, techniques in existing.items():
         for tech in techniques:
-            # Determine source from evidence entries
-            source = 'legacy'  # Default for old format
-
-            evidence = tech.get('evidence', [])
-            if isinstance(evidence, list) and evidence:
-                first_ev = evidence[0]
-                if isinstance(first_ev, dict):
-                    created_by = first_ev.get('created_by', '')
-                    if created_by == 'manual':
-                        source = 'manual'
-                    elif created_by == 'nlu':
-                        source = 'nlu'
-                    elif created_by == 'llm':
-                        source = 'llm'
-                elif isinstance(first_ev, str):
-                    if first_ev == 'Manual annotation':
-                        source = 'manual'
+            # Provenance is 'manual' if ANY evidence is human-created (REFACTOR §2.4),
+            # not just evidence[0]; otherwise fall back to the first entry's creator.
+            if _has_manual_evidence(tech):
+                source = 'manual'
+            else:
+                source = 'legacy'  # Default for old format
+                evidence = tech.get('evidence', [])
+                if isinstance(evidence, list) and evidence:
+                    first_ev = evidence[0]
+                    if isinstance(first_ev, dict):
+                        created_by = first_ev.get('created_by', '')
+                        if created_by == 'nlu':
+                            source = 'nlu'
+                        elif created_by == 'llm':
+                            source = 'llm'
 
             if doc_id not in partitioned[source]:
                 partitioned[source][doc_id] = []
@@ -169,6 +204,11 @@ def apply_deletions(techniques: List[Dict], deletions: List[Dict]) -> List[Dict]
     for tech in techniques:
         tech_id = tech['techniqueId']
         if tech_id in deletion_ids:
+            # Never let an LLM deletion deactivate a human-confirmed technique (REFACTOR §2.4).
+            if _has_manual_evidence(tech):
+                print(f"    [skip-del] {tech_id}: has manual evidence, preserving")
+                continue
+
             # Mark as deleted at technique level
             tech['active'] = False
             tech['deleted_by'] = 'llm'
@@ -195,12 +235,25 @@ def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]
 
     # Import here to avoid requiring sentence-transformers when not using NLU
     try:
-        from analyze_nlu import NLUAnalyzer, INPUT_DIR
+        from analyze_nlu import (
+            NLUAnalyzer, INPUT_DIR,
+            RETRIEVAL_MODEL_NAME, VERIFICATION_MODEL_NAME,
+            RETRIEVAL_THRESHOLD, VERIFICATION_THRESHOLD,
+            RETRIEVAL_MODEL_REVISION, VERIFICATION_MODEL_REVISION,
+        )
     except ImportError as e:
         print(f"Error importing NLU analyzer: {e}")
         print("Make sure sentence-transformers is installed")
         sys.exit(1)
 
+    _PROVENANCE['nlu'] = {
+        "retrieval_model": RETRIEVAL_MODEL_NAME,
+        "retrieval_revision": RETRIEVAL_MODEL_REVISION,
+        "retrieval_threshold": RETRIEVAL_THRESHOLD,
+        "verification_model": VERIFICATION_MODEL_NAME,
+        "verification_revision": VERIFICATION_MODEL_REVISION,
+        "verification_threshold": VERIFICATION_THRESHOLD,
+    }
     analyzer = NLUAnalyzer()
 
     # Load existing results when processing a single document
@@ -247,8 +300,9 @@ def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]
 
 
 def run_llm_pass(nlu_results: Dict[str, List[Dict]],
-                 model_name: str = "haiku",
-                 specific_doc_id: Optional[str] = None) -> Dict[str, Dict]:
+                 model_name: str = "sonnet",
+                 specific_doc_id: Optional[str] = None,
+                 llm_concurrency: int = 5) -> Dict[str, Dict]:
     """
     Run LLM analysis with NLU context and return results.
 
@@ -277,6 +331,8 @@ def run_llm_pass(nlu_results: Dict[str, List[Dict]],
         print(f"  Loaded existing LLM results ({len(existing_llm)} documents)")
 
     extractor = LLMExtractor(model_name=model_name, resume=False)
+    _PROVENANCE['llm'] = {"alias": model_name, "model": extractor.model,
+                          "concurrency": llm_concurrency}
 
     # Get files to process
     if specific_doc_id:
@@ -284,16 +340,34 @@ def run_llm_pass(nlu_results: Dict[str, List[Dict]],
     else:
         files = [(f.stem, f) for f in sorted(FLAT_TEXT_DIR.glob("*.txt"))]
 
-    print(f"\nProcessing {len(files)} documents with {extractor.model}...")
+    workers = max(1, min(llm_concurrency, len(files)))
+    print(f"\nProcessing {len(files)} documents with {extractor.model} "
+          f"(concurrency={workers})...")
 
-    for i, (doc_id, file_path) in enumerate(files, 1):
-        print(f"\n[{i}/{len(files)}] ", end="")
-
-        # Get NLU results for this document
-        nlu_for_doc = nlu_results.get(doc_id, [])
-
-        # Process with NLU context
-        extractor.process_document(doc_id, file_path, nlu_results=nlu_for_doc)
+    if workers == 1:
+        for i, (doc_id, file_path) in enumerate(files, 1):
+            print(f"\n[{i}/{len(files)}] {doc_id}")
+            extractor.process_document(doc_id, file_path,
+                                       nlu_results=nlu_results.get(doc_id, []))
+    else:
+        # Documents are independent; the Anthropic client is thread-safe and
+        # extractor.results/checkpoint are lock-guarded. Parallelism turns a
+        # linear doc-by-doc loop into concurrent API calls (much faster).
+        done = 0
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {
+                pool.submit(extractor.process_document, doc_id, file_path,
+                            nlu_results.get(doc_id, [])): doc_id
+                for (doc_id, file_path) in files
+            }
+            for fut in as_completed(futures):
+                doc_id = futures[fut]
+                done += 1
+                try:
+                    ok = fut.result()
+                    print(f"  [{done}/{len(files)}] {'✓' if ok else '✗ FAILED'} {doc_id}")
+                except Exception as e:
+                    print(f"  [{done}/{len(files)}] ✗ ERROR {doc_id}: {e}")
 
     # Get raw results with deletions
     raw_results = extractor.get_raw_results()
@@ -399,17 +473,20 @@ def save_final_results(results: Dict[str, List[Dict]]):
     print(f"  Active links: {active_techniques}")
 
 
-def save_pipeline_log(stats: Dict):
-    """Save pipeline execution log."""
+def save_pipeline_log(summary: Dict):
+    """Save a pipeline execution log with a provenance block (REFACTOR §1.5/§2.5)."""
     PIPELINE_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     log = {
         "timestamp": datetime.now().isoformat(),
-        "stats": stats
+        "library_versions": _lib_versions(),
+        "provenance": _PROVENANCE,
+        "summary": summary,
     }
 
     with open(PIPELINE_LOG_PATH, 'w', encoding='utf-8') as f:
         json.dump(log, f, indent=2)
+    print(f"✓ Pipeline provenance written to {PIPELINE_LOG_PATH}")
 
 
 def main():
@@ -437,6 +514,12 @@ def main():
         choices=['haiku', 'sonnet', 'sonnet-legacy', 'opus'],
         default='sonnet',
         help='Claude model for LLM pass (default: sonnet)'
+    )
+    parser.add_argument(
+        '--llm-concurrency',
+        type=int,
+        default=5,
+        help='Number of documents to process concurrently in the LLM pass (default: 5)'
     )
     parser.add_argument(
         '--preserve-manual',
@@ -491,7 +574,8 @@ def main():
         llm_results = run_llm_pass(
             nlu_results,
             model_name=args.model,
-            specific_doc_id=args.id
+            specific_doc_id=args.id,
+            llm_concurrency=args.llm_concurrency
         )
 
     # Ensure we have complete stage results for merge
@@ -508,6 +592,14 @@ def main():
         llm=llm_results
     )
     save_final_results(final)
+
+    # Write provenance (library versions, resolved model ids, thresholds/revisions)
+    save_pipeline_log({
+        "documents": len(final),
+        "total_links": sum(len(t) for t in final.values()),
+        "active_links": sum(1 for techs in final.values() for t in techs if t.get('active', True)),
+        "model_alias": args.model,
+    })
 
     # Regenerate reports if requested
     if args.regenerate:

@@ -1,0 +1,231 @@
+SOURCE_ID: phi-4-reasoning-vision-card
+SOURCE_TITLE: Phi-4-reasoning-vision-15B Model Card
+SOURCE_URI: https://huggingface.co/microsoft/Phi-4-reasoning-vision-15B
+--------------------
+microsoft/Phi-4-reasoning-vision-15B · Hugging Face
+Phi-4-Reasoning-Vision-15B
+Official Microsoft Blog
+Technical Report
+Github
+Try Phi-4-Reasoning-Vision-15B on Microsoft Foundry
+Developer:
+Microsoft Corporation
+Authorized Representative:
+Microsoft Ireland Operations Limited, 70 Sir John Rogerson's Quay, Dublin 2, D02 R296, Ireland
+Release Date:
+March 4, 2026
+License:
+MIT
+Parameters:
+15B
+Context Length:
+16,384 tokens
+Inputs:
+Text and Images
+Outputs:
+Text
+Training GPUs:
+240 B200s
+Training Time:
+4 days
+Training Dates:
+February 3, 2025 – February 21, 2026
+Model Dependencies:
+Phi-4-Reasoning
+1. Model Overview
+Phi-4-Reasoning-Vision-15B is a compact open-weight multimodal reasoning model built on the Phi-4-Reasoning language model backbone and the SigLIP-2 vision encoder, using a mid-fusion architecture. In this architecture, the vision encoder first converts images into visual tokens, which are then projected into the language model's embedding space and injected into the pretrained language model. This approach leverages the strengths of both pretrained components while keeping training and inference costs manageable. The model employs a dynamic resolution vision encoder with up to 3,600 visual tokens, enabling high-resolution image understanding critical for tasks such as GUI grounding and fine-grained document analysis. Bidirectional attention is applied within images (intra-image) to improve spatial reasoning without the overfitting risks observed with broader bidirectional schemes.
+Phi-4-Reasoning-Vision-15B is trained with Supervised Fine-Tuning (SFT) on a carefully curated mixture of reasoning and non-reasoning data. Rather than training separate models for each mode, the model operates as a single system that can invoke extended chain-of-thought reasoning (using
+<think>...</think>
+blocks) for tasks like mathematical and scientific reasoning, or default to direct inference (tagged with
+<nothink>
+) for perception-focused tasks such as captioning, object detection, and grounding. The training data consists primarily of meticulously filtered and improved open-source vision-language datasets, supplemented by high-quality domain-specific data from internal Microsoft teams and targeted data acquisitions. This data-centric approach, combined with moderate training compute requirements (240 NVIDIA B200 GPUs for 4 days), distinguishes Phi-4-Reasoning-Vision-15B from models that rely on substantially more training data and compute.
+1.1 Alignment Approach
+Phi-4-Reasoning-Vision-15B has adopted a safety post-training approach leveraging a combination of open-source and in-house generated synthetic datasets. The safety alignment is achieved through Supervised Fine-Tuning (SFT) using data that includes both helpfulness and harmlessness examples, as well as targeted questions and answers across multiple safety categories. The model's training data explicitly includes safety-oriented samples designed to teach appropriate refusal behavior for harmful content categories including hate speech, violence, self-harm content, and sexually explicit material. Automated red teaming was performed on Azure to assess safety risks including groundedness, jailbreak susceptibility, harmful content generation, and copyright violations for protected material.
+2. Usage
+2.1 Primary Use Cases
+Phi-4-Reasoning-Vision-15B is designed for general-purpose multimodal AI systems and applications that require vision-language understanding with selective reasoning capabilities, particularly in memory- or compute-constrained environments. The model excels in two primary domains:
+Scientific and mathematical reasoning over visual inputs:
+such as solving math problems presented as handwritten equations or diagrams, extracting and reasoning over quantitative information in documents, charts, and tables, and supporting multi-step reasoning in educational or scientific analysis contexts.
+Computer-use agent (CUA) tasks:
+such as interpreting screen content, localizing interactive GUI elements, and selecting actions within graphical user interfaces.
+The model is also capable of general multimodal tasks including image captioning, visual question answering, optical character recognition, object localization, and grounding. Its hybrid reasoning design allows it to produce fast, direct responses for perception-focused tasks while engaging in structured chain-of-thought reasoning when the task benefits from it, making it suitable as a building block for generative AI-powered features across a range of applications.
+2.2 Out-of-Scope Use Cases
+Phi-4-Reasoning-Vision-15B is not specifically designed or evaluated for all downstream purposes. Developers should consider common limitations of vision-language models as they select use cases, and evaluate and mitigate for accuracy, safety, and fairness before using within a specific downstream use case, particularly for high-risk scenarios.
+The model is trained primarily on English text and image-text pairs. Languages other than English may experience degraded performance. The model should not be used in scenarios that could have consequential impact on legal status or the allocation of resources or life opportunities (e.g., housing, employment, credit) without further assessments and additional debiasing techniques. It is not suitable for providing medical diagnoses, legal advice, or financial planning. Developers should be aware of and adhere to applicable laws or regulations (including privacy, trade compliance laws, etc.) that are relevant to their use case. Nothing contained in this Model Card should be interpreted as or deemed a restriction or modification to the license the model is released under.
+2.3 Distribution Channels
+Some of Phi-4-Reasoning-Vision-15B's distribution channels include:
+Public access through open-source repositories:
+Hugging Face
+Public access through open-source code repositories:
+GitHub
+Enterprise or subscription-based access through
+Azure AI Foundry
+2.4 Input Formats
+Given the nature of the training data, always use chat template and system prompt for inference. For example, for the prompt "Please describe the image", the fully formatted chat templated prompt is the following:
+<|im_start|>system<|im_sep|>You are Phi, a multimodal model trained by Microsoft to help users. Your role as an assistant is to provide accurate, coherent, and actionable responses, adapting your reasoning mode ("NOTHINK" vs "THINK") automatically based on the complexity, clarity, and confidence of each task.
+#### NOTHINK Mode
+Use this mode when the task is clear, factual, low-complexity, or can be confidently answered immediately without iterative reasoning. Such as when the input is clear and unambiguous or visual recognition or text comprehension is straightforward, and where a factual, numeric, or short procedural answer is sufficient. Provide a concise, accurate, and confident answer. Please structure your response into one section: using the specified format: <nothink> {Solution section}. In the Solution section, present the final solution that you deem correct. The Solution section should be logical, accurate, and concise.
+#### THINK Mode
+This requires engaging in a comprehensive cycle of analysis, summarizing, exploration, reassessment, reflection, backtracing, and iteration to develop well-considered thinking process. Use this mode when multiple modalities must be integrated, the task involves analysis, inference, design, or planning, the query is ambiguous, multi-step, or requires judgment. Think through the visual and textual context before responding. Please structure your response into two main sections: Thought and Solution using the specified format: <think> {Thought section} </think> {Solution section}. In the Thought section, detail your reasoning process in steps. Each step should include detailed considerations such as analysing questions, summarizing relevant findings, brainstorming new ideas, verifying the accuracy of the current steps, refining any errors, and revisiting previous steps. In the Solution section, based on various attempts, explorations, and reflections from the Thought section, systematically present the final solution that you deem correct. The Solution section should be logical, accurate, and concise and detail necessary steps needed to reach the conclusion.
+Now, try to solve the following question through the above guidelines:<|im_end|><|im_start|>user<|im_sep|>Please describe the image<|im_end|><|im_start|>assistant<|im_sep|>
+To force a thinking response, append the
+<think>
+token to the generation template:
+<|im_start|>assistant<|im_sep|><think>
+To force a non-thinking response, append the
+<nothink>
+token to the generation template:
+<|im_start|>assistant<|im_sep|><nothink>
+2.5 Technical Requirements and Integration Guidance
+The following software packages are required for running Phi-4-Reasoning-Vision:
+torch >= 2.7.1
+transformers >= 4.57.1
+vllm >= 0.15.2
+(only required if using vLLM)
+Phi-4-Reasoning-Vision-15B has been tested on NVIDIA A6000, A100, H100, and B200 GPUs with the Ubuntu 22.04.5 LTS operating system. In principle, other GPU architectures with enough memory to fit the model could suffice, but these have not been tested. It is recommended that users host Phi-4-Reasoning-Vision-15B on a vLLM server using bf16 precision.
+2.6 Responsible AI Considerations
+Like other models, Phi-4-Reasoning-Vision-15B can potentially behave in ways that are unfair, unreliable, or offensive. Some of the limiting behaviors to be aware of include:
+Quality of Service:
+The model is trained primarily on English text. Languages other than English may experience worse performance. English language varieties with less representation in the training data might experience worse performance than standard American English. Phi-4-Reasoning-Vision-15B is not intended to support multilingual use.
+Representation of Harms & Perpetuation of Stereotypes:
+The model may over- or under-represent groups of people, erase representation of some groups, or reinforce demeaning or negative stereotypes. Despite safety post-training, these limitations may still be present due to differing levels of representation of different groups or prevalence of examples of negative stereotypes in training data that reflect real-world patterns and societal biases.
+Inappropriate or Offensive Content:
+The model may produce inappropriate or offensive content, which may make it inappropriate to deploy in sensitive contexts without additional mitigations specific to the use case.
+Information Reliability:
+Language models can generate nonsensical content or fabricate content that might sound reasonable but is inaccurate or outdated.
+Developers should apply responsible AI best practices and are responsible for ensuring that a specific use case complies with relevant laws and regulations (e.g., privacy, trade, etc.). Using safety services like Azure AI Content Safety that have advanced guardrails is highly recommended. Important areas for consideration include:
+Allocation:
+Models may not be suitable for scenarios that could have consequential impact on legal status or the allocation of resources or life opportunities (e.g., housing, employment, credit) without further assessments and additional debiasing techniques.
+High-Risk Scenarios:
+Developers should assess suitability of using models in high-risk scenarios where unfair, unreliable, or offensive outputs might be extremely costly or lead to harm. This includes providing advice in sensitive or expert domains where accuracy and reliability are critical (e.g., legal or health advice). Additional safeguards should be implemented at the application level according to the deployment context.
+Misinformation:
+Models may produce inaccurate information. Developers should follow transparency best practices and inform end-users they are interacting with an AI system. At the application level, developers can build feedback mechanisms and pipelines to ground responses in use-case specific, contextual information, a technique known as Retrieval Augmented Generation (RAG).
+Generation of Harmful Content:
+Developers should assess outputs for their context and use available safety classifiers or custom solutions appropriate for their use case.
+Misuse:
+Other forms of misuse such as fraud, spam, or malware production may be possible, and developers should ensure that their applications do not violate applicable laws and regulations.
+3. Quality and Performance Evaluation
+Phi-4-Reasoning-Vision-15B was evaluated across a broad range of public benchmarks spanning multimodal reasoning, mathematical problem solving, document and chart understanding, visual perception, OCR, and computer-use grounding tasks. Two evaluation frameworks were used: Microsoft's Eureka ML Insights for internal development benchmarks, and VLMEvalKit for standardized community benchmarks. Evaluation logs will be released publicly.
+The model was evaluated on the following benchmarks via VLMEvalKit: AI2D (diagram understanding), BLINK (core visual perception), ChartQA (chart reasoning), DocVQA (document question answering), HallusionBench (hallucination and visual illusion detection), MathVerse (visual math with varying multimodal information), MathVision (competition-level mathematical reasoning), MathVista (math reasoning in visual contexts), MMMU (multi-discipline multimodal understanding), MMStar (vision-indispensable multimodal evaluation), OCRBench (OCR capabilities), ScreenSpot-V2 for Desktop, Mobile, and Web (GUI element localization), WeMath (human-like mathematical reasoning process evaluation), WildVision (real-world human preference evaluation), and ZeroBench (challenging visual reasoning). During development, additional benchmarks including MMMU-CoT, ScreenSpot-Pro, and V*Bench were evaluated using Eureka ML Insights.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+Phi-4-Reasoning-Vision-15B was trained on a mixture of public safety data and internally generated tasks that it ought to refuse based on Microsoft's Responsible AI Policy.
+Phi-4-Reasoning-Vision-15B's safety was evaluated using both quantitative and qualitative approaches prior to release. Automated red teaming was performed on Azure to assess safety risks across multiple risk categories, including disallowed content (sexual, violent, hateful, or self-harm content), copyright content and intellectual property, and jailbreak susceptibility. The evaluation assessed the model's groundedness and its tendency to generate fabricated or misleading information.
+The safety evaluation built upon the established practices from the Phi-4-Reasoning model's safety assessment. The model's training data included explicit safety-oriented samples across both reasoning and non-reasoning modes, designed to teach appropriate refusal and harm-avoidance behaviors. The multimodal nature of the model introduces additional safety considerations around visual content interpretation, and evaluations were conducted to assess the model's behavior when presented with potentially harmful or misleading visual inputs.
+Evaluation
+Description
+Defect Rate
+Text to Text Safety
+Automated content safety evaluation measuring safety policies
+1.4%
+Image to Text Safety
+Automated content safety evaluation measuring safety policies
+4.5%
+4. Data Overview
+4.1 Training, Testing, and Validation Datasets
+To learn more about the training data used for Phi-4-Reasoning-Vision-15B please refer to the full data card: RRRR_nnnn_Data Card for Foundation+Frontier Models.
+4.2 List of Data Sources
+To learn more about the training data used for Phi-4-Reasoning-Vision-15B please refer to the full data card: RRRR_nnnn_Data Card for Foundation+Frontier Models.
+5. Contact
+Requests for additional information can be directed to
+MSFTAIActRequest@microsoft.com
+.
+Authorized representative: Microsoft Ireland Operations Limited, 70 Sir John Rogerson's Quay, Dublin 2, D02 R296, Ireland
+6. Appendix
+A. Benchmarking Methodology
+Phi-4-Reasoning-Vision-15B was evaluated using two complementary open-source evaluation frameworks:
+1.
+Eureka ML Insights
+Used during development for internal benchmarks and ablation studies. The following benchmarks were evaluated through this framework:
+MathVista:
+Mathematical reasoning over visual inputs including diagrams, charts, and figures
+MMMU-CoT:
+Multi-discipline multimodal understanding with chain-of-thought reasoning
+ScreenSpot / ScreenSpot-V2:
+GUI element localization on desktop and mobile screenshots
+ScreenSpot-Pro:
+High-resolution professional GUI grounding tasks
+V*Bench:
+Visual reasoning benchmark
+2.
+VLMEvalKit
+Used for standardized community benchmark evaluation. The following benchmarks were evaluated through this framework:
+AI2D (TEST split):
+Diagram understanding over ~5K illustrative diagrams from grade school natural sciences, evaluating the ability to interpret diagrammatic elements, relationships, and structure.
+BLINK:
+Core visual perception benchmark with 3,807 multiple-choice questions spanning 14 classic computer vision tasks including relative depth estimation, visual correspondence, and multi-view reasoning.
+ChartQA (TEST split):
+Chart understanding and reasoning benchmark with 9,600 human-written questions assessing complex visual and logical reasoning over chart data.
+DocVQA (VAL split):
+Document visual question answering over 12,000+ document images, evaluating text extraction and comprehension within document layouts.
+HallusionBench:
+Diagnostic benchmark evaluating image-context reasoning, language hallucination tendencies, and visual illusion susceptibility in vision-language models.
+MathVerse (MINI split):
+Visual math benchmark with 2,612 multi-subject math problems transformed into six versions offering varying degrees of multimodal information content.
+MathVision (MINI split):
+3,040 high-quality mathematical problems with visual contexts sourced from real math competitions, spanning 16 mathematical disciplines across 5 difficulty levels.
+MathVista (MINI split):
+Mathematical reasoning in visual contexts including geometry, algebra, and data interpretation.
+MMMU (DEV_VAL split):
+Massive multi-discipline multimodal understanding benchmark with 11.5K questions from college exams covering six core disciplines and 30 subjects.
+MMStar:
+Vision-indispensable multimodal benchmark with 1,500 carefully curated samples evaluating six core capabilities: coarse perception, fine-grained perception, instance reasoning, logical reasoning, science and technology, and mathematics.
+OCRBench:
+Comprehensive OCR evaluation with 1,000 question-answer pairs spanning text recognition, scene text VQA, document-oriented VQA, key information extraction, and handwritten mathematical expression recognition.
+ScreenSpot-V2 (Desktop, Mobile, Web):
+GUI element localization benchmark across desktop, mobile, and web interfaces.
+WeMath:
+Mathematical reasoning process benchmark with 6.5K visual math problems spanning 67 hierarchical knowledge concepts, evaluating knowledge acquisition and generalization beyond end-to-date performance.
+WildVision:
+Real-world human preference evaluation benchmark with 500 high-quality samples curated from 8,000 user submissions, using GPT-4o as judge.
+ZeroBench:
+Challenging visual reasoning benchmark with 100 manually curated questions designed to probe the limits of spatial reasoning, object recognition, and complex visual scene interpretation.
+Evaluation logs will be released publicly.
+Downloads last month
+24,280
+Safetensors
+Model size
+15B params
+Tensor type
+BF16
+·
+Model tree for
+microsoft/Phi-4-reasoning-vision-15B
+Base model
+microsoft/phi-4
+Finetuned
+microsoft/Phi-4-reasoning
+Finetuned
+(
+8
+)
+this model
+Merges
+1 model
+Quantizations
+5 models
+Evaluation results
+accuracy
+on AI2D
+self-reported
+84.800
+accuracy
+on ChartQA
+self-reported
+83.300
+accuracy
+on MathVista (MINI)
+self-reported
+75.200
+accuracy
+on MMMU
+self-reported
+54.300
+accuracy
+on OCRBench
+self-reported
+76.000
+accuracy
+on ScreenSpot-V2
+self-reported
+88.200

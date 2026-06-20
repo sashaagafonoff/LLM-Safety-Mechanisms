@@ -69,7 +69,7 @@ Safety technique definitions with NLU profiles for automated detection.
 
 ## providers.json
 
-Provider metadata for the 15 tracked AI companies.
+Provider metadata for the 14 tracked AI companies.
 
 **Top-level structure:** `[ ... ]` (array of provider objects)
 
@@ -140,11 +140,23 @@ Each value is an array of detection objects:
 | Field | Type | Description |
 |-------|------|-------------|
 | `techniqueId` | string | References `techniques.json` |
-| `active` | boolean | Whether this detection is confirmed (true) or rejected (false) |
-| `confidence` | number | Detection confidence score |
-| `origin` | string | Detection source: `nlu`, `llm`, `manual` |
-| `evidence_text` | string | (Optional) Supporting text excerpt from the source document |
-| `review_status` | string | (Optional) `confirmed`, `rejected`, `pending` |
+| `active` | boolean | Whether this detection is currently confirmed (`true`) or rejected/deactivated (`false`) |
+| `confidence` | string | Qualitative confidence (`High`, `Medium`, `Low`) |
+| `deleted_by` | string\|null | (Optional) Who deactivated the detection: `manual`, `nlu`, `llm`, `sashaagafonoff`, `system`, or `null` |
+| `deletion_reason` | string | (Optional) Why the detection was deactivated |
+| `evidence` | array | Supporting passages — see below |
+
+**evidence[] item fields:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `text` | string | Supporting excerpt from the source document |
+| `created_by` | string | Provenance: `manual`, `nlu`, `llm`, `sashaagafonoff`, `legacy` |
+| `active` | boolean | (Optional) Whether this evidence item is active |
+| `deleted_by` | string\|null | (Optional) Who deactivated this evidence item (`system` = automated false-positive sweep) |
+| `grounding_failed` | boolean | (Optional) Set when an LLM-proposed passage could not be grounded in the source text |
+
+Provenance (`created_by` / `deleted_by`) is the source of truth for the evaluation scripts and is enforced by `schema/llm-safety-v1.1.0.json` via `scripts/validate.py`.
 
 **Update frequency:** After each pipeline run (`scripts/run_extraction_pipeline.py`).
 

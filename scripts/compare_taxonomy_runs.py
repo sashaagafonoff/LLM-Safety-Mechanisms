@@ -15,8 +15,15 @@ Usage:
 
 import json
 import argparse
+import sys
 from pathlib import Path
 from collections import defaultdict
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from eval_common import (  # noqa: E402  single source of truth (WORKPLAN B.1.4)
+    active_technique_set as _active_technique_set,
+    techniques_by_source as _techniques_by_source,
+)
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 REPORTS_DIR = Path(__file__).resolve().parent.parent / "reports"
@@ -42,52 +49,14 @@ def load_category_lookup():
 
 
 def extract_active_techniques(doc_techniques):
-    """
-    Extract the set of active technique IDs from a document's technique list.
-    Only includes technique-level active entries (not deleted).
-    """
-    active = set()
-    for tech in doc_techniques:
-        # Check technique-level active flag
-        if not tech.get("active", True):
-            continue
-        # Check if any evidence is active
-        evidence = tech.get("evidence", [])
-        has_active_evidence = False
-        for ev in evidence:
-            if isinstance(ev, dict):
-                if ev.get("active", True):
-                    has_active_evidence = True
-                    break
-            else:
-                # Legacy string format - assume active
-                has_active_evidence = True
-                break
-        if has_active_evidence or not evidence:
-            active.add(tech["techniqueId"])
-    return active
+    """Active technique IDs for a document — delegates to eval_common so the
+    definition is single-sourced (WORKPLAN B.1.4) and alias-canonicalized (B.1.5)."""
+    return _active_technique_set(doc_techniques)
 
 
 def extract_techniques_by_source(doc_techniques):
-    """
-    Extract technique IDs grouped by source (nlu, llm, manual).
-    Only active entries.
-    """
-    by_source = {"nlu": set(), "llm": set(), "manual": set(), "legacy": set()}
-    for tech in doc_techniques:
-        if not tech.get("active", True):
-            continue
-        evidence = tech.get("evidence", [])
-        sources = set()
-        for ev in evidence:
-            if isinstance(ev, dict):
-                if ev.get("active", True):
-                    sources.add(ev.get("created_by", "legacy"))
-            else:
-                sources.add("legacy")
-        for source in sources:
-            by_source.get(source, by_source["legacy"]).add(tech["techniqueId"])
-    return by_source
+    """Active technique IDs grouped by source — delegates to eval_common."""
+    return _techniques_by_source(doc_techniques)
 
 
 def compare(ground_truth, automated, tech_lookup, cat_lookup, detailed=False):
@@ -354,6 +323,10 @@ def main():
     )
 
     args = parser.parse_args()
+
+    print("NOTE: scripts/evaluate.py is now the authoritative blind-gold evaluator "
+          "(reports on the held-out test split, grounded precision, per-stage). This "
+          "script scores ALL gold docs (incl. dev) and remains for taxonomy-drift diffs.\n")
 
     # Load data
     with open(args.ground_truth, "r", encoding="utf-8") as f:

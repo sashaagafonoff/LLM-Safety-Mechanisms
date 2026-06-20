@@ -11,8 +11,11 @@ Usage:
     python scripts/expand_collections.py --provider openai        # Single provider
     python scripts/expand_collections.py --type commentary        # Commentary only
     python scripts/expand_collections.py --type incidents         # Incidents only
-    python scripts/expand_collections.py --dry-run                # Print without writing
+    python scripts/expand_collections.py --write                  # Persist (default is a safe dry run)
     python scripts/expand_collections.py --model haiku            # Use cheaper model
+
+Note: writes are OFF by default (safe dry run). LLM-sourced records use a distinct
+`webllm-` id namespace and must be reviewed before persisting with --write.
 
 Requirements:
     - ANTHROPIC_API_KEY environment variable set
@@ -114,16 +117,24 @@ class CollectionExpander:
                 self.existing_incident_urls.add(src["url"])
 
         # Next IDs
-        self._next_commentary_id = self._max_id(self.commentary, "commentary") + 1
-        self._next_incident_id = self._max_id(self.incidents, "incident") + 1
+        self._next_commentary_id = self._max_id(self.commentary, "webllm-commentary") + 1
+        self._next_incident_id = self._max_id(self.incidents, "webllm-incident") + 1
 
         # Counters
         self.stats = {"commentary_added": 0, "incidents_added": 0, "commentary_skipped": 0, "incidents_skipped": 0}
 
     def _max_id(self, entries, prefix):
+        """Max trailing number among ids in the given namespace prefix only.
+
+        LLM-sourced records use a distinct `webllm-` namespace so their counter
+        never collides with manual/AIID (`aiid-*`) ids (REFACTOR §5.6).
+        """
         max_num = 0
         for e in entries:
-            match = re.search(r"(\d+)$", e["id"])
+            eid = e.get("id", "")
+            if not eid.startswith(prefix):
+                continue
+            match = re.search(r"(\d+)$", eid)
             if match:
                 max_num = max(max_num, int(match.group(1)))
         return max_num
@@ -131,12 +142,12 @@ class CollectionExpander:
     def _next_commentary_num(self):
         num = self._next_commentary_id
         self._next_commentary_id += 1
-        return f"commentary-{num:03d}"
+        return f"webllm-commentary-{num:03d}"
 
     def _next_incident_num(self):
         num = self._next_incident_id
         self._next_incident_id += 1
-        return f"incident-{num:03d}"
+        return f"webllm-incident-{num:03d}"
 
     def _technique_list_str(self):
         lines = []
@@ -457,7 +468,7 @@ Rules:
 
         return new_entries
 
-    def run(self, providers=None, collection_type="both", dry_run=False):
+    def run(self, providers=None, collection_type="both", write=False):
         """Run expansion across providers."""
         target_providers = providers or list(self.provider_ids)
         do_commentary = collection_type in ("both", "commentary")
@@ -506,8 +517,9 @@ Rules:
         print(f"Commentary skipped (duplicate): {self.stats['commentary_skipped']}")
         print(f"Incidents skipped (duplicate):  {self.stats['incidents_skipped']}")
 
-        if dry_run:
-            print(f"\n[DRY RUN] Would write {len(all_new_commentary)} commentary + {len(all_new_incidents)} incidents")
+        if not write:
+            print(f"\n[DRY RUN — default] Would write {len(all_new_commentary)} commentary + "
+                  f"{len(all_new_incidents)} incidents. Re-run with --write to persist after review.")
             if all_new_commentary:
                 print(f"\nNew commentary entries:")
                 print(json.dumps(all_new_commentary, indent=2, ensure_ascii=False))
@@ -540,8 +552,9 @@ def main():
     parser.add_argument("--type", type=str, default="both",
                         choices=["both", "commentary", "incidents"],
                         help="Collection type to expand (default: both)")
-    parser.add_argument("--dry-run", action="store_true",
-                        help="Print results without writing to files")
+    parser.add_argument("--write", action="store_true",
+                        help="Persist results to data files. Default is a safe dry run "
+                             "(print only) — review the LLM-sourced output before writing (REFACTOR §5.6).")
     parser.add_argument("--model", type=str, default="sonnet",
                         choices=list(MODEL_MAP.keys()),
                         help="Model to use (default: sonnet)")
@@ -557,7 +570,7 @@ def main():
             sys.exit(1)
         providers = [args.provider]
 
-    expander.run(providers=providers, collection_type=args.type, dry_run=args.dry_run)
+    expander.run(providers=providers, collection_type=args.type, write=args.write)
 
 
 if __name__ == "__main__":

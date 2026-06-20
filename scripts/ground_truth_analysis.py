@@ -7,8 +7,12 @@ for documents that have been manually reviewed.
 """
 
 import json
+import sys
 from collections import defaultdict, Counter
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from eval_common import is_reviewed_document as _is_reviewed_document  # noqa: E402
 
 
 def load_data():
@@ -24,26 +28,13 @@ def load_techniques():
 
 
 def is_reviewed_document(doc_id, techniques_list):
-    """
-    A document is considered 'reviewed' if:
-    1. It has any evidence with created_by in ("manual", "sashaagafonoff"), OR
-    2. It has any technique-level deletion by a human reviewer
-       (deleted_by is not null and not "system")
-    """
-    for tech in techniques_list:
-        # Check evidence level for manual additions
-        for ev in tech.get("evidence", []):
-            cb = ev.get("created_by", "")
-            if cb in ("manual", "sashaagafonoff"):
-                return True
+    """Whether a document has been human-reviewed.
 
-        # Check technique-level deletions by human reviewers
-        db = tech.get("deleted_by")
-        if db and db not in ("system",):
-            # Human-reviewed deletion (could be "manual", "sashaagafonoff", "llm" used during review)
-            return True
-
-    return False
+    Delegates to the single shared definition in eval_common (WORKPLAN B.1.4) so
+    this provenance audit and the evaluators agree on which docs count as ground
+    truth. (doc_id is accepted for signature stability; only entries are needed.)
+    """
+    return _is_reviewed_document(techniques_list)
 
 
 def classify_techniques(doc_id, techniques_list):

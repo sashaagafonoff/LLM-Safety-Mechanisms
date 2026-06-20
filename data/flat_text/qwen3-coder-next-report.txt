@@ -1,0 +1,1411 @@
+SOURCE_ID: qwen3-coder-next-report
+SOURCE_TITLE: Qwen3-Coder-Next Technical Report
+SOURCE_URI: https://arxiv.org/html/2603.00729
+--------------------
+Qwen3-Coder-Next Technical Report
+License: arXiv.org perpetual non-exclusive license
+arXiv:2603.00729v1 [cs.CL] 28 Feb 2026
+\useunder
+\ul
+Qwen3-Coder-Next Technical Report
+Qwen Team
+Abstract
+We present Qwen3-Coder-Next, an open-weight language model specialized for coding agents. Qwen3-Coder-Next is an 80-billion-parameter model that activates only 3 billion parameters during inference, enabling strong coding capability with efficient inference. In this work, we explore how far strong training recipes can push the capability limits of models with small parameter footprints. To achieve this, we perform agentic training through large-scale synthesis of verifiable coding tasks paired with executable environments, allowing learning directly from environment feedback via mid-training and reinforcement learning. Across agent-centric benchmarks including SWE-Bench and Terminal-Bench, Qwen3-Coder-Next achieves competitive performance relative to its active parameter count. We release both base and instruction-tuned open-weight versions to support research and real-world coding agent development.
+Figure 1:
+Comparison of Qwen3-Coder-Next to other open-weight models on SWE-Bench Verified, SWE-Bench Multilingual, SWE-Bench Pro, Terminal-Bench 2.0, and Aider.
+1
+Introduction
+We introduce Qwen3-Coder-Next, an open-weight language model based on Qwen3-Next with hybrid attention and Mixture-of-Experts (MoE) designed specifically for coding agents and local development.
+It contains 80 billion total parameters while activating only 3 billion per forward pass, enabling fast inference and low deployment cost. Despite its lightweight active footprint, Qwen3-Coder-Next delivers strong performance across a wide range of coding benchmarks and real-world developer workflows.
+The central advancement behind Qwen3-Coder-Next is the ability to scale agentic training. Modern coding agents must reason over long horizons, interact with real execution environments, and recover from cascading failures across multiple steps. Training for this regime requires more than static code data, which requires large volumes of verifiable, executable, and interaction-rich training signals
+(Copet
+et al.
+,
+2025
+; Zhang
+et al.
+,
+2025b
+)
+. To address this, we build a large-scale agentic training stack that synthesizes executable tasks, constructs reproducible environments, and learns directly from execution feedback. This stack enables reliable large-scale rollout collection and learning from real environment outcomes, supporting both mid-training adaptation and reinforcement learning for agent behaviors such as multi-step code editing, tool usage, and fault recovery in realistic development settings.
+We train Qwen3-Coder-Next using a staged pipeline that progressively builds agentic capabilities without sacrificing base model generality. Starting from the pretrained base of Qwen3-Next, we first shift representations toward code- and agent-centric domains via continued pretraining. Next, we apply supervised fine-tuning on high-quality agentic coding data. From this checkpoint, we specialize multiple expert models, covering software engineering workflows, QA, web development, and user experience (UX) focused coding, and then distill their capabilities back into a single unified model. The result is an efficient, deployable model that delivers expert-level agentic performance across domains.
+Extensive evaluation shows that Qwen3-Coder-Next achieves strong performance relative to its active parameter footprint. As illustrated in Figure
+1
+, Qwen3-Coder-Next reaches competitive SWE-Bench Pro
+(Deng
+et al.
+,
+2025
+)
+performance, outperforming or matching several models with an order of magnitude larger active compute. Beyond SWE-Bench Pro, we evaluate Qwen3-Coder-Next on an extensive suite of benchmarks spanning coding agents, general coding tasks, and general knowledge and reasoning tasks, with detailed results reported in Section
+5
+. This efficiency makes Qwen3-Coder-Next particularly well-suited for production coding agents, where latency, throughput, and cost are first-order constraints. More broadly, these results suggest that scaling agentic training, rather than model size alone, is a key driver for advancing real-world coding agent capability.
+2
+Scaling up Agentic Training
+Scaling agentic training to large volumes, across both mid-training and reinforcement learning, requires addressing two core challenges. First, we need a reliable pipeline for synthesizing verifiable tasks paired with fully executable environments. Second, we need an execution infrastructure capable of running a massive number of such tasks with high throughput and returning environment feedback efficiently. In this section, we describe our approach to each of these challenges, with a focus on task synthesis at scale.
+2.1
+Task Synthesis
+We develop two complementary approaches for generating verifiable tasks with executable environments. The first approach grounds tasks in real-world software engineering issues by mining GitHub pull requests (PRs) and constructing corresponding runnable environments. The second approach starts from existing open-source datasets that already provide executable environments and synthesizes new task instances within them. Together, these methods enable large-scale task diversity with consistent execution-based validation.
+Creating Executable Environments from GitHub PRs.
+To synthesize realistic software engineering tasks, we mine issue-related PRs and construct executable environments that reflect real-world bug-fixing tasks. After removing instances that overlap with downstream benchmarks, we decompose each PR into a buggy state, a corresponding fix, and an associated test patch. A specialized environment-building agent then constructs a runnable Docker environment and verification script, which is required to reliably distinguish the buggy and fixed states through execution. This process produces a large collection of verifiable software engineering tasks grounded in real repositories.
+Environment construction poses significant challenges for agents, leading to failure modes where agents exploit superficial verification shortcuts.
+To mitigate this, we apply automated detection to identify and filter non-functional verifiers, and train a dedicated model to improve environment construction quality. We apply this model at scale to recent GitHub data to generate a large corpus of verifiable software engineering tasks, with all environments stored as reusable Docker images. To ensure dataset quality, we further employ a quality-assurance agent to automatically identify and remove ambiguous tasks, inconsistent environments, and misaligned tests before final inclusion. Further technical details can be found in
+Chen
+et al.
+(
+2026
+)
+.
+Figure 2:
+Our pipeline for synthesizing bugs to scale up the number of software engineering tasks.
+Synthesizing Issues.
+In parallel, we synthesize additional software engineering tasks by building on prior work, including SWE-Smith
+(Yang
+et al.
+,
+2025
+)
+, SWE-Flow
+(Zhang
+et al.
+,
+2025c
+)
+, SWE-Rebench
+(Badertdinov
+et al.
+,
+2025
+)
+, and Multi-SWE-RL
+(Zan
+et al.
+,
+2025
+)
+. These projects provide a strong foundation of seed tasks with executable repositories, test suites, and evaluation scripts. We extend these datasets to generate a substantially larger and more diverse set of verifiable software engineering problems. Our pipeline is shown in
+Figure
+˜
+2
+.
+Our synthesis pipeline systematically introduces controlled bugs into existing codebases and produces matching issue descriptions.
+Building on curated, containerized repositories, we inject bugs via model-driven rewriting, semantic perturbations, and rule-based transformations, generalizing prior techniques to multilingual codebases.
+We retain generated bugs only when they fail existing tests and are resolved by patch reversion, guaranteeing that each task is both meaningful and tractable.
+To mitigate shortcut learning, we generate natural-language issue descriptions and exclude bug-triggering test files.
+This process yields approximately 800K verifiable software engineering task instances spanning over nine programming languages.
+2.2
+Infrastructure
+Scaling agentic coding requires large-scale parallel execution and fully reproducible execution environments. To this end, we develop MegaFlow
+(Zhang
+et al.
+,
+2026c
+)
+, an internal orchestration system. Our system adopts a fully cloud-native execution framework based on
+Alibaba Cloud Kubernetes
+1
+1
+1
+https://www.alibabacloud.com/en/product/kubernetes
+, enabling production-scale training, evaluation, and data generation for agentic coding workloads. In MegaFlow, each agentic coding task is expressed as an
+Argo workflow
+composed of three logical stages:
+agent rollout
+,
+evaluation
+, and
+post-processing
+. During the rollout stage, a single pod typically co-locates the agent container with the execution environment container (and additional auxiliary services when needed), enabling efficient long-horizon interaction with minimal communication overhead. The evaluation stage performs automated verification in a dedicated container, while the post-processing stage handles result interpretation, including parsing outcomes, extracting metrics, and optionally downstream analysis.
+3
+Mid-training
+We now describe the mid-training stage used to specialize Qwen3-Coder-Next for coding and agentic tasks. Starting from the pretrained Qwen3-Next base model
+(Qwen Team,
+2025b
+)
+, we perform targeted mid-training to adapt the model toward code reasoning, repository-level understanding, and agent-style interaction patterns.
+3.1
+Data
+The guiding principle for data selection in mid-training is to balance natural and synthetic data. Natural data improves the model’s general intelligence and robustness, but it does not fully match the distribution of tasks and interaction patterns observed in real user workflows. In contrast, heavy reliance on synthetic data can significantly improve performance on targeted tasks, but may lead to over-specialization, reduced response diversity, and weaker adaptation to other tasks during fine-tuning.
+Therefore, our goal is to introduce the minimum amount of synthetic data required for the model to reliably perform common user tasks, while preserving response diversity and maintaining strong general-purpose capabilities. Following this principle, the mid-training corpus is composed primarily of natural data, supplemented with a smaller but carefully designed portion of synthetic data. We describe the key components below.
+3.1.1
+Natural Data
+Our sources of natural data include large-scale source code from GitHub and text–code grounding data derived from Common Crawl and targeted web domains. The pretraining corpus is updated through Sep 30, 2025.
+GitHub.
+Compared to the Qwen2.5-Coder series
+(Hui
+et al.
+,
+2024
+)
+, we significantly expand coverage by increasing programming language support from 92 to 370 languages. We also incorporate substantially more pull requests, repositories, and code review data, and restructure these data sources to better reflect real development workflows.
+We first include file-level pretraining data, which enables the model to learn strong file-level structural understanding. However, real-world software development rarely operates at the single-file level. Therefore, we place additional emphasis on repository-level code, allowing the model to learn cross-file dependencies and broader contextual relationships. To support this shift, we expand the training context length from 32,768 tokens to 262,144 tokens. Consistent with Qwen2.5-Coder, we use special tokens to concatenate repository data. In addition, we experiment with multiple repository serialization formats to improve generalization across different project layouts. In this release, repository-level data is expanded to approximately 600B tokens, representing a major portion of the mid-training recipe and proving more impactful than file-level datasets alone.
+Text–code Grounding Data.
+Text–code grounding data is collected from Common Crawl and domain-targeted sources such as math, programming, and education. We note that natural web data varies significantly in quality. Low-quality web content may contain incorrect information, insufficient context, or excessive code-switching between languages and formats. To mitigate these issues, we prompt Qwen3-Coder-480B-A35B-Instruct to rewrite web documents into normalized, structured text. The rewriting process removes advertisements, irrelevant HTML elements, and formatting artifacts, producing clean Markdown-style documents suitable for training. We empirically evaluate the impact of reformatting during mid-training. As shown in Table
+1
+, reformatting substantially improves our model across multiple evaluation benchmarks.
+Model
+Evalplus
+MultiplE
+CRUX-Eval
+Baseline
+54.38
+36.02
+57.13
+Reformat
+63.09
+48.35
+58.94
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+To improve single-turn QA capability, we use Common Crawl documents as seed data and prompt Qwen3-Coder-480B-A35B-Instruct to generate multiple grounded question–answer pairs per document. Generated questions must be self-contained and progressively increase in semantic depth or reasoning complexity. When documents lack sufficient quality or coherence, the model is allowed to abstain from generating QA pairs, reducing hallucination risk.
+We also experimented with rewriting documents into alternative formats such as Wikipedia-style pages. However, this sometimes introduced hallucinated references or URLs. To avoid reinforcing these behaviors, we restrict rewriting to transformations that preserve original document content.
+Multi-turn Agentic Coding.
+For multi-turn agentic data, we leverage synthetic tasks described in Section
+2.1
+. Trajectories are generated using multiple agent frameworks, including SWE-agent
+(Yang
+et al.
+,
+2024
+)
+, Mini-SWE-agent
+(SWE-agent Team,
+2025
+)
+, OpenHands
+(Wang
+et al.
+,
+2024a
+)
+, Claude-Code
+(Anthropic,
+2024
+)
+, Qwen-Code
+(Qwen Team,
+2025a
+)
+, and Terminus
+(Merrill
+et al.
+,
+2026
+)
+. We use Qwen3-Coder-480B-A35B-Instruct as the teacher model.
+After generation, trajectories undergo strict rule-based filtering, including removal of missing termination signals, task failures, malformed tool calls. This produces a large-scale dataset of high-quality multi-turn tool-calling trajectories.
+Figure 3:
+Scaling analysis of code agent pretraining on SWE tasks, SWE-Bench Verified and SWE-Bench Multilingual.
+Left:
+Within-scaffold scaling shows consistent improvement with the increase of mid-training tokens.
+Right:
+Cross-scaffold transfer reveals limited generalization across different agent frameworks.
+To study scaling behavior, we analyze the relationship between mid-training token volume and downstream performance across agent scaffolds. As shown in Figure
+3
+, we observe that within the same scaffold, performance consistently improves with increased mid-training tokens, demonstrating the effectiveness of large-scale agentic pretraining. Second, cross-scaffold transfer remains limited. Models trained on trajectories from one scaffold do not transfer strongly to others. Third, framework specialization plays an important role. For example, OpenHands, which is highly specialized for SWE tasks, transfers poorly to SWE-Agent, while transfer in the opposite direction is moderately successful. This highlights a trade-off between framework generality and specialization.
+3.1.3
+Instruction-Following Data
+Because mid-training is dominated by natural documents, instruction-following behavior may not emerge reliably during mid-training alone. Therefore, we mix a small amount of instruction-following data into mid-training to enable early monitoring of downstream task performance during mid-training.
+3.1.4
+Fill-In-the-Middle Code Completion
+Qwen3-Coder-Next supports fill-in-the-middle (FIM) code completion, which improves tasks such as document editing and online code modification
+(Chen
+et al.
+,
+2024
+)
+. Using Stack-V2
+(Lozhkov
+et al.
+,
+2024
+)
+, we synthesize FIM data in two formats: 1) chat-FIM, which embeds FIM tokens inside ChatML format
+(Zhang
+et al.
+,
+2026b
+)
+, and 2) search-and-replace FIM, which generates diff-style patches.
+To improve usability, we provide a proxy server that converts search-and-replace outputs into standard autocomplete-compatible formats. Experiments show that search-and-replace FIM outperforms Chat-FIM at an equivalent scale, likely due to strong alignment with PR-style pretraining data.
+2
+2
+2
+Detailed analysis is presented in
+Zhang
+et al.
+(
+2026a
+)
+.
+3.2
+Training
+In this stage, we train the model on trillions of tokens drawn from the mixture described above. To support multi-turn agentic trajectories, we extend the context length beyond typical pretraining settings to 262,144 tokens. In addition to standard next-token prediction, we also train the model using fill-in-the-middle (FIM) objectives, which are important for code editing tasks within long contexts.
+We adopt best-fit packing (BFP)
+(Ding
+et al.
+,
+2024a
+)
+as our sample packing strategy to avoid introducing context hallucination and head-side truncation when constructing combined document samples. Our BFP implementation achieves nearly the same efficiency as the traditional concatenate-then-split strategy during document index construction. For extremely long documents that exceed the model context length, we pre-split them into chunks matching the maximum input length. A pilot study comparing different packing strategies (see Appendix
+A.3
+) shows that, by trading off a negligible number of trailing padding tokens, BFP provides stable performance gains, particularly on long-horizon tasks.
+Another challenge arises from the persistent presence of redundancy and noise within pretraining contexts, which can significantly reduce training efficiency. For example, while code headers and configuration blocks provide important contextual signals, repeatedly training on identical or near-identical patterns is redundant. To mitigate this, we apply masking to highly repetitive segments, so that we avoid potential repetitive behaviors of language models.
+4
+Post-training
+4.1
+Supervised Fine-tuning
+After mid-training, we first perform supervised fine-tuning (SFT), which serves as the alignment stage bridging base model capabilities and complex human instructions. While much of the underlying knowledge is acquired during pre-training and mid-training, SFT reshapes this knowledge into instruction-following behaviors and improves response consistency across diverse interaction settings.
+Data Composition and Sources
+We curate a high-quality SFT dataset from three primary sources to ensure broad coverage and strong technical depth: in-house proprietary corpora, consisting of high-quality data accumulated from internal research and development, with a focus on alignment quality and safety behaviors; verified agentic trajectories, consisting of step-by-step action sequences validated through execution; and documentation-grounded open-domain QA, consisting of large-scale open-ended questions with emphasis on coding-related tasks, where candidate answers are filtered based on functional correctness and security.
+Filtering with Verification.
+We deploy a specialized agent model using Mini-SWE-agent to perform verification. This agent acts as a user simulator. Given a response from the assistant, the simulator attempts to execute the proposed code or commands from an end-user perspective. It evaluates system feedback signals, such as compiler outputs, runtime errors, and environment state changes, to determine whether the response meaningfully advances the task or resolves the user’s request. This closed-loop verification process allows us to filter hallucinated or non-functional solutions, substantially increasing the density of executable and reasoning-valid training data.
+Preference Modeling via Pairwise Judging
+In addition to functional verification, we apply pairwise preference evaluation to refine conversational quality and response style. For each user request, we sample
+n
+n
+candidate responses using our strongest in-house models, forming
+(
+n
+2
+)
+\binom{n}{2}
+unique candidate pairs. These pairs are evaluated by a dedicated pairwise judging model trained to score responses against a multi-dimensional checklist, including factual accuracy, task usefulness, and conversational style. The judge performs detailed comparisons to produce an ordinal ranking across candidates. Fine-tuning on data ranked through this process leads to consistent improvements in: stylistic consistency across diverse task types, linguistic clarity and professionalism in open-ended interactions, and proactive engagement, including anticipating follow-up user needs and driving task completion.
+4.2
+Expert Models
+To further specialize the model toward important real-world domains, we train a set of expert models targeting specific capability clusters. While all experts share the same initial model, they differ in data sources, training recipes, and evaluation.
+4.2.1
+Web Development Expert
+The Web Development expert targets full-stack web coding tasks, including UI construction, component composition, and interactive behavior implementation. High-quality training data in this domain must satisfy both visual correctness, functional correctness requirements, and optionally artistic tastes.
+Data.
+To curate high-quality WebDev alignment data, we employ a multi-stage filtering pipeline. All code samples are rendered in a Playwright-controlled Chromium environment. For framework-based samples such as React, we first deploy a Vite server to ensure all dependencies and components are correctly initialized before evaluation.
+We perform two complementary evaluation stages. First, static visual evaluation uses a Vision-Language Model (VLM) to judge rendered pages using high-resolution screenshots. The VLM evaluates layout integrity, content completeness, and UI quality using a structured checklist
+(Zhang
+et al.
+,
+2025a
+)
+. Samples that fail visual quality checks or contain rendering artifacts are discarded.
+Additionally, dynamic interaction evaluation verifies functional behavior through browser automation. We parse DOM trees to identify interactive elements and use an in-house model to generate task-oriented user actions such as clicking, form entry, or menu navigation. These actions are executed automatically, and the VLM compares pre- and post-action screenshots to verify correct page behavior. Samples exhibiting broken interactions or unstable state transitions are removed.
+Training.
+The WebDev expert is trained using filtered execution-valid WebDev trajectories, emphasizing consistency between visual appearance and runtime behavior.
+4.2.2
+User Experience Expert
+We observe that standard software-engineering tasks (e.g., fixing GitHub issues) do not fully capture the challenges of real-world agentic coding in CLI/IDE settings.
+We thus complement these evaluations with several in-house benchmarks and optimize the model based on their feedback. In particular, we find that different CLI/IDE scaffolds (e.g., Cline, Qoder, OpenCode, etc) adopt distinct tool-calling schemas, which poses a substantial challenge for models to reliably follow tool-call formats. Motivated by this, we propose targeted optimizations for tool-call format adherence.
+Data and Tool Calling.
+Our data come from diverse sources, spanning over many scaffolds, task types, programming languages, development frameworks, and user interaction patterns, and include both synthetic and real-world trajectories. Building on this collection, we conducted extensive data-cleaning and data-mixture ablations under the guidance of in-house benchmarks.
+The inherent diversity of the data sources introduces substantial noise, making data cleaning particularly challenging. Beyond generic filtering (e.g. no finish action, resource failure, tool call failed), we found that rule-based validation on tool-call format correctness is particularly effective for improving agentic coding performance in CLI/IDE settings. Enforcing tool-call correctness can raise the performance upper bound by preventing models from learning malformed instruction-following patterns. In addition, this improves agent efficiency by reducing invalid tool calls and retries. These observations motivate us to treat tool-call format as an important objective during training.
+Figure 4:
+Different tool chat templates, split by tool definition, tool calls, and tool response.
+Many existing models are trained with a single tool chat template, which often leads to overfitting to specific output structures and reduced robustness when deployed under unseen tool-calling formats. In practice, real-world agent systems use a wide variety of formatting conventions, and users frequently define custom tool-call schemas directly in system prompts. To improve generalization, we train the model using diverse tool chat templates and formats.
+As illustrated in Figure
+4
+, tool chat templates differ along several key axes, including tool set definition, tool invocation format, and tool response wrapping. While JSON is a widely used protocol, it often introduces heavy escaping overhead for multi-line code. To address this, we also introduce an XML-style tool calling format,
+qwen3_coder
+, which is designed for string-heavy arguments and allows the model to emit long code snippets without nested quoting.
+Our training data incorporates a wide range of tool representations, including natural language tool descriptions, JSON-based formats, Python-style calls, XML-style schemas (including
+qwen3_coder
+), and TypeScript-style interfaces. By exposing the model to diverse formatting conventions during training, the model learns format-invariant tool-use behavior rather than memorizing a single output structure.
+Figure 5:
+SWE-bench Verified performance vs. number of tool chat templates. Data volume and training configuration are kept identical.
+Empirically, increasing the number of tool call templates used during training consistently improves downstream robustness to format variation. As shown in Figure
+5
+, performance on SWE-bench Verified improves as template diversity increases, even when the data volume and training recipe remain fixed. These results indicate that format diversity during training is an effective way to improve generalization to new tool-calling formats at deployment time.
+Evaluating tool call format following.
+Different IDE/CLI frameworks, such as Qwen-Code, Trae, OpenCode, Cline, and KiloCode, adopt customized prompt templates together with distinct function-calling and MCP interaction formats. These design choices introduce diverse structural constraints on how models must issue tool calls, parse responses, and coordinate multi-step actions. Such diversity poses a significant challenge for a single model to generalize across different community-adopted IDEs/CLIs.
+To systematically evaluate this crucial capability, we construct an in-house evaluation benchmark that explicitly measures model’s adaptability to different real-world agentic coding scaffolds/IDEs. The benchmark consists of multiple prompt templates and tool-call schemas derived from representative IDE/CLI scaffolds, covering variations in system instructions, XML-variant/JSON-based tool call patterns.
+For each question, we assess whether the model can follow the instructions in the system prompt and generate precisely formatted tool calls that satisfy the corresponding scaffold specifications.
+Model
+Scaffold
+1
+Scaffold
+2
+Scaffold
+3
+Scaffold
+4
+Scaffold
+5
+Avg.
+GPT-5-2
+84.0
+14.0
+41.8
+29.8
+77.0
+49.3
+Claude-sonnet-4-5
+86.8
+61.0
+100.0
+88.0
+91.0
+85.4
+Gemini-3-pro
+92.4
+57.0
+98.0
+93.5
+94.0
+87.0
+Deepseek-v3.2
+98.0
+87.0
+100.0
+92.5
+91.0
+93.7
+GLM-4.6
+85.8
+86.0
+100.0
+82.9
+24.0
+75.7
+GLM-4.7
+91.0
+64.0
+100.0
+94.7
+0.0
+69.9
+MiniMax-M2.1
+68.3
+48.0
+93.8
+86.2
+90.0
+77.3
+Kimi-K2
+59.0
+59.0
+100.0
+57.4
+81.0
+71.3
+Kimi-K2-thinking
+71.5
+70.0
+91.8
+83.0
+80.0
+79.3
+Qwen3-Coder-Next
+98.0
+83.0
+98.0
+91.5
+93.0
+92.7
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+For single-turn RL, instead of focusing exclusively on competitive programming as in much prior work, we argue that most coding tasks are naturally well-suited for execution-driven reinforcement learning. The key reason is that code correctness can be directly verified by running it against unit tests, which provides a reliable and scalable learning signal. Following this view, we extend code RL training to a broader set of realistic coding tasks, aiming to better exploit the potential of large-scale RL beyond competitive programming.
+To this end, we synthesize tasks that cover a broader spectrum of programming competencies. In particular, many tasks require library usage, including calling standard or third-party APIs, handling I/O and data formats, and composing existing utilities. These requirements more closely match real-world development scenarios than purely algorithmic problems. We further extend the task suite to multiple programming languages. This multilingual setup encourages the model to learn language-specific idioms, tooling constraints, and semantic differences, such as type systems, standard libraries, error handling behavior, and runtime characteristics, instead of overfitting to a single-language distribution. We also consider vulnerability-prone coding scenarios, where the model is asked to generate secure code snippets and repair the vulnerabilities. For both tasks, we ensure that the functional correctness and security are properly covered.
+After scaling the task collection, we automatically synthesize corresponding unit tests for each instance. To obtain reliable unit tests without human annotation, we generate multiple candidate unit tests using internal models and retain the tests that achieve the highest consensus under majority voting across independently generated solutions. These unit tests are then used to drive RL through execution-based rewards. As shown in
+Figure
+˜
+6
+, scaling RL task diversity leads to consistent improvements across multiple coding sub-capabilities.
+4.2.4
+Software Engineering Expert
+Real-world software engineering tasks require models to reason over large codebases, interact with tools and execution environments, and operate reliably across long interaction horizons. To address these challenges, we train a Software Engineering expert specialized for multi-step, environment-interactive coding tasks.
+Data.
+RL queries are derived from real-world software engineering tasks, including open-source datasets
+(Pan
+et al.
+,
+2025
+; Badertdinov
+et al.
+,
+2025
+)
+and our automatically constructed repository environments (
+§
+˜
+2.1
+).
+To prevent information leakage between training stages, SFT and RL prompts are fully disjoint. In addition, we estimate the pass-rate distribution of each training instance and filter out both overly easy examples and noisy failure cases. This allows RL training to focus on informative failures that provide stronger learning signals.
+Reward Shaping.
+In multi-turn RL rollouts, the model interacts with the environment through tool calls across multiple steps to solve software engineering tasks. Trajectory-level rewards are assigned based on final task completion. However, correct final outcomes do not necessarily imply high-quality intermediate reasoning or tool usage
+(Shum
+et al.
+,
+2025
+)
+. To address this, we introduce additional trajectory-level and token-level penalties.
+First, we apply an unfinished trajectory penalty. When the number of interaction turns exceeds a predefined maximum, the trajectory reward is penalized to discourage excessively long rollouts and failure to terminate.
+Second, we apply a turn-level tool-format penalty. At each interaction step, we perform rule-based validation of tool-call format correctness. During optimization, tokens associated with invalid tool calls receive token-level penalties, preventing the model from learning malformed tool invocation patterns.
+Figure 7:
+Left
+: SWE-bench Verified performance vs. RL steps with a reinforced reward-hacking blocker. We also found that a
+long-horizon
+coding ability emerged in the model during RL training, pushing the average number of agent turns from 50 to 130.
+Right
+: Performance without the blocker. Even after removing
+git
+remotes and future commits, the agent autonomously learns to exploit various
+git
+commands to retrieve ground-truth information as model capability increases. To the best of our knowledge, this behavior has not previously been reported.
+Reinforced Reward Hacking Blocker.
+Prior work has shown that GitHub-based environments may unintentionally leak future commit information
+3
+3
+3
+https://github.com/SWE-bench/SWE-bench/pull/471
+, which agents can exploit to recover ground-truth fixes (e.g., via
+git log --all
+). To mitigate this, we adopt standard protections including removing remotes, branches, and tags.
+During later RL stages, however, many new ways of reward hacking emerge. Agents attempt to reconnect local repositories to GitHub using commands such as
+git remote add
+, or retrieve commit history through
+git clone
+,
+curl
+, or similar tools, as illustrated in
+Figure
+˜
+7
+. Fully disabling network access is not reasonable, as agents require connectivity for legitimate operations such as environment setup, documentation retrieval, or installing additional packages.
+To address this, we introduce a heuristic blocking rule. Any tool call containing both a repository link (e.g.,
+github.com/{repo}
+) and network-access keywords (e.g.,
+git
+,
+curl
+,
+wget
+) is blocked, and the agent receives explicit feedback indicating the prohibited action. With our improved blocker, our manual inspection of trajectories confirms that reward-hacking behaviors are effectively eliminated.
+4.2.5
+Expert Distillation
+Finally, we perform expert distillation to consolidate capabilities from multiple domain experts into a single unified deployment model. Concretely, we distill knowledge from domain-specialized experts, including Web Development, User Experience, Single-turn RL, and Software Engineering experts, into the SFT model.
+Through distillation, the unified model inherits the strengths of individual experts while preserving the strong instruction following capability of the base SFT model. This enables practical deployment in real-world agentic coding scenarios, where a single model must handle diverse tasks spanning multiple domains without relying on expert routing or multi-model orchestration.
+5
+Experiments
+Model
+Size
+SWE-Bench Verified
+SWE-Agent
+MiniSWE-Agent
+OpenHands
+Proprietary Models
+Claude-Opus-4.5
+?
+78.2
+77.8
+79.0
+Claude-Sonnet-4.5
+?
+76.0
+68.4
+74.6
+Open-source Models
+DeepSeek-V3.2
+671A37
+70.2
+67.2
+72.6
+GLM-4.7
+358A32
+74.2
+70.4
+70.6
+MiniMax-M2.1
+230A10
+74.8
+70.4
+71.0
+Kimi-K2.5
+1000A32
+73.2
+70.8
+–
+Qwen3-Coder-Next
+80A3
+70.6
+71.1
+71.3
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+SWE-Bench Multilingual and SWE-Bench Pro. Dashes indicate we couldn’t reliably obtain test results in such settings. The maximum number of agent turns was set to 300.
+5.1
+Agentic Evaluation
+Setting.
+We evaluate Qwen3-Coder-Next on three SWE benchmarks, SWE-Bench Verified
+(Jimenez
+et al.
+,
+2024
+)
+, SWE-Bench Multilingual
+(Yang
+et al.
+,
+2025
+)
+, and SWE-Bench Pro
+(Deng
+et al.
+,
+2025
+)
+, and a command-line interface (CLI) task, TerminalBench 2.0
+(Merrill
+et al.
+,
+2026
+)
+. To ensure a fair comparison, we replicated all baselines on each scaffold and adopted standard hacking-free mechanisms, including the removal of remotes, branches, and tags, to prevent the agent from accessing future commit information, as we introduce in
+§
+˜
+4.2.4
+. The baselines include two proprietary models, Claude-Opus-4.5
+(Anthropic,
+2025
+)
+and Claude-Sonnet-4.5
+(Anthropic,
+2026
+)
+, as well as four top-tier open-source models, DeepSeek-V3.2
+(DeepSeek-AI,
+2025
+)
+, GLM-4.7
+(Z.ai,
+2025
+)
+, MiniMax-M2.1
+(MiniMax,
+2025b
+)
+, and Kimi-K2.5
+(Moonshot,
+2026
+)
+. The maximum number of agent turns was set to 300.
+SWE Coding Tasks.
+Table
+˜
+3
+reports results on SWE-Bench Verified across three agent scaffolds. Qwen3-Coder-Next achieves strong and consistent performance across SWE-Agent, MiniSWE-Agent, and OpenHands, remaining competitive with substantially larger frontier and open-weight models. Specifically, it achieves scores of 70.6% with SWE-Agent, 71.1% with MiniSWE-Agent, and 71.3% with OpenHands. A key highlight is the model’s exceptional efficiency. Despite its relatively compact size of 80A3, Qwen3-Coder-Next achieves results that are on par with, and in some cases outperform, much larger models.
+Table
+˜
+4
+presents results on SWE-Bench Multilingual, which evaluates repository-level bug fixing across multiple programming languages, as well as the more challenging SWE-Bench Pro benchmark. On SWE-Bench-Pro, which emphasizes longer-horizon software engineering tasks, Qwen3-Coder-Next remains competitive with significantly larger open-weight models, highlighting a favorable efficiency–performance trade-off under multilingual and high-difficulty evaluation conditions.
+Model
+Size
+TerminalBench 2.0
+Terminus2-xml
+Terminus2-json
+ClaudeCode
+QwenCode
+Proprietary Models
+Claude-Opus-4.5
+?
+58.4
+57.3
+53.9
+51.7
+Claude-Sonnet-4.5
+?
+51.7
+51.7
+41.6
+37.1
+Open-source Models
+DeepSeek-V3.2
+671A37
+34.8
+39.3
+–
+–
+GLM-4.7
+358A32
+44.9
+37.1
+–
+31.5
+MiniMax-M2.1
+230A10
+–
+32.6
+42.7
+39.3
+Kimi-K2.5
+1000A32
+38.8
+49.4
+0
+9.0
+27.5
+Qwen3-Coder-Next
+80A3
+34.2
+36.2
+30.9
+25.8
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+Results on function-level coding and competitive-programming benchmarks.
+Model
+FullStackBench-en
+FullStackBench-zh
+Spider
+BIRD-SQL
+Aider-Polyglot
+Qwen3-Coder-480B-A35B
+62.54
+63.07
+85.98
+64.15
+60.40
+Qwen3-Next
+62.30
+59.22
+82.50
+66.62
+52.90
+Qwen3-Coder-Next
+60.58
+57.38
+83.66
+63.56
+66.20
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+et al.
+,
+2023
+)
+, code reasoning
+(Gu
+et al.
+,
+2024
+)
+, competitive-programming style tasks
+(Jain
+et al.
+,
+2024
+; Wang
+et al.
+,
+2025
+)
+, full-stack development
+(Liu
+et al.
+,
+2024b
+)
+, and structured querying
+(Yu
+et al.
+,
+2018
+; Li
+et al.
+,
+2024
+)
+, as well as multi-language code editing
+4
+4
+4
+aider.chat/docs/leaderboards/edit.html
+. Results are presented in
+Table
+˜
+6
+and
+Table
+˜
+7
+, where we compare Qwen3-Coder-Next to Qwen3-Coder-480B-A35B, our last flagship coder model, and Qwen3-Next, a general model. Overall, these results show that Qwen3-Coder-Next offers a favorable trade-off, with consistent gains on more difficult competitive-programming and reasoning benchmarks while maintaining solid performance across full-stack and data-centric coding tasks.
+5.3
+General Tasks
+Model
+MMLU
+MMLU-Redux
+MMLU-Pro
+GPQA
+SuperGPQA
+Qwen3-Next
+87.87
+91.14
+80.89
+73.54
+58.70
+Qwen3-Coder-Next
+87.73
+91.18
+80.52
+74.49
+57.45
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+Results on competitive math benchmarks.
+We compare Qwen3-Coder-Next to Qwen3-Next on general knowledge
+(Hendrycks
+et al.
+,
+2021
+; Wang
+et al.
+,
+2024b
+; Gema
+et al.
+,
+2024
+)
+and reasoning
+(Rein
+et al.
+,
+2023
+; Du
+et al.
+,
+2025
+)
+benchmarks, and results are shown in
+Table
+˜
+8
+. Despite being a model specialized for coding, its general capability remains strong. Qwen3-Coder-Next is competitive with Qwen-Next, slightly improving on MMLU-Redux and GPQA, while remaining close on MMLU, MMLU-Pro, and SuperGPQA.
+We also compare Qwen3-Coder-Next to Qwen3-Next on competitive math benchmarks
+(AIME,
+2025
+; Balunović
+et al.
+,
+2025
+)
+, and results are presented in
+Table
+˜
+9
+. Qwen3-Coder-Next substantially outperforms the baseline across all benchmarks, with large gains on HMMT25 Feb and AIME25, and clear improvements on HMMT25 Nov and AIME24. These results indicate that strong code reasoning capabilities can be transferred to math reasoning capabilities.
+6
+Conclusion, Limitation, and Future Work
+In this work, we introduced Qwen3-Coder-Next, a coding model designed for real-world agentic software development tasks. Built on a hybrid mixture-of-experts architecture with
+80
+80
+billion total parameters and only
+3
+3
+billion active parameters per forward pass, Qwen3-Coder-Next is designed to balance strong reasoning and coding capability with practical inference efficiency. By scaling agentic training through large-scale synthesis of executable coding tasks and learning from execution feedback, we significantly improve tool-use robustness, long-context coding ability, and multi-domain coding performance.
+Despite these advances, we acknowledge several limitations compared with frontier proprietary models such as Claude Opus 4.5. Qwen3-Coder-Next is designed with a significantly smaller active compute footprint and lower total training compute, which enables efficient deployment but introduces capability trade-offs. While the model demonstrates strong instruction-following and solid coding fundamentals, there remains a gap in solving highly complex, large-scale software engineering tasks, which we plan to address by scaling exposure to harder and more realistic software projects during pre-training. In addition, for some complex tasks, the model may require more interaction turns to reach a correct solution, motivating future work on improving reasoning efficiency through reinforcement learning and better long-horizon planning. Furthermore, frontend and UI-related capability remains an area for improvement. Finally, we aim to explore agentic and real-world cybersecurity tasks for the future models, such as vulnerability exploitation and capture-the-flag competitions. such as We plan to address this by integrating visual capability into future agent models, enabling the model to directly evaluate rendered outputs and interactive behavior.
+7
+Authors
+Core contributors:
+Ruisheng Cao, Mouxiang Chen, Jiawei Chen, Zeyu Cui, Yunlong Feng, Binyuan Hui, Yuheng Jing, Kaixin Li, Mingze Li, Junyang Lin, Zeyao Ma, Kashun Shum, Xuwu Wang, Jinxi Wei, Jiaxi Yang, Jiajun Zhang, Lei Zhang, Zongmeng Zhang, Wenting Zhao, Fan Zhou
+Contributors:
+Tianyi Bai, Keqin Bao, Chen Cheng, Yizhong Cao, Xiaodong Deng, Shichun Feng, Hao Ge, Fei Huang, Yukai Huang, Fangyu Lei, Xiaochuan Li, Ziyang Li, Dayiheng Liu, Yukun Liu, Yuqiong Liu, Zhongwei Liu, Chen Liang, Dunjie Lu, Rui Men, Yuandong Ni, Xingzhang Ren, Yang Su, Jianhong Tu, Junli Wang, Yongxing Wu, Chencan Wu, Tianbao Xie, Yiheng Xu, Mingfeng Xue, An Yang, Kexin Yang, Zhiyu Yin, Beichen Zhang, Yi Zhang, Jianwei Zhang, Kai Zhang, Bo Zheng, Jingren Zhou, Terry Yue Zhuo
+Authors are listed alphabetically by their last names.
+[PIPELINE INGESTION WORKFLOW - REMOVED REFERENCES]
+
+Appendix A
+Appendix
+A.1
+Data Statistics for Synthesized Tasks
+Building repository-level environments with agents.
+In
+Table
+˜
+10
+, we present detailed data statistics for all repositories built from real-world GitHub pull requests.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+Synthesizing issues.
+In
+§
+˜
+A.1
+, we present detailed data statistics for all repositories collected from open-source projects and synthesized bugs with different bug sampling strategies. On average, we succeed to sample
+169.7
+169.7
+bugs (or tasks) for each code repository.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+tool chat templates we used for scaling. These templates, originating from open-source models and agent scaffolds, differ mainly from each other in the formats of both tool definition and tool call formats. Note that,
+qwen3_xml_mixed
+is a variant of
+qwen3_coder
+, where the tool definition is structured as JSON lines.
+hermes
+is a generic JSON-format function calling templates.
+harmony_json
+and
+harmony_xml
+are adapted from the original harmony format in
+gpt-oss
+(OpenAI,
+2025
+)
+. Template
+xml_cline
+and
+xml_aone
+are summarized from agent scaffolds Cline
+5
+5
+5
+Cline:
+https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev
+.
+and Aone Copilot
+6
+6
+6
+Aone Copilot:
+https://marketplace.visualstudio.com/items?itemName=Aone.aone-copilot
+,
+respectively.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+et al.
+,
+2025
+)
+JSON
+Mixed XML+JSON
+deepseekv3
+DeepSeek-V3
+(Liu
+et al.
+,
+2024a
+)
+JSON
+Mixed XML+JSON
+deepseekv31
+DeepSeek-V3.1
+(Liu
+et al.
+,
+2024a
+)
+Text
+Mixed XML+JSON
+deepseekv32
+DeepSeek-V3.2
+(DeepSeek-AI,
+2025
+)
+JSON
+XML
+glm46
+GLM-4.6
+(Z.AI,
+2025
+)
+JSON
+XML
+minimax_m1
+MiniMax-M1
+(MiniMax,
+2025c
+)
+JSON
+JSON
+minimax_m2
+MiniMax-M2
+(MiniMax,
+2025a
+)
+XML
+XML
+kimik2
+Kimi-K2
+(Team,
+2025
+)
+JSON
+Mixed XML+JSON
+hermes
+-
+JSON
+JSON
+qwen25_coder
+Qwen2.5-Coder
+(Hui
+et al.
+,
+2024
+)
+JSON
+JSON
+harmony_json
+gpt-oss
+(OpenAI,
+2025
+)
+TypeScript
+JSON
+harmony_xml
+gpt-oss
+(OpenAI,
+2025
+)
+TypeScript
+XML
+llama4_pythonic
+Llama4
+(Meta-AI,
+2025
+)
+JSON
+Python
+toolace
+ToolACE-8B
+(Liu
+et al.
+,
+2025
+)
+JSON
+Python
+mistral3
+Mistral-Large-3
+(Mistral AI,
+2025
+)
+JSON
+Text + JSON
+xlam_qwen
+xLAM-2
+(Prabhakar
+et al.
+,
+2025
+)
+JSON
+JSON
+xml_cline
+Cline Agent
+JSON
+XML
+xml_aone
+Aone Copilot
+JSON
+XML
+A.3
+Detailed Implementation on Best-Fit-Packing
+The traditional sample packing strategy during pre-training first
+concatenates all documents into a single flattened text sequence,
+inserting a special separator token (e.g., "<|endoftext|>") between
+documents. It then splits this entire sequence into fixed-length chunks according to the model’s context size to construct training samples. Though efficient due to zero padding, it inevitably incurs the notorious context hallucination problem
+(Ji
+et al.
+,
+2023
+)
+. This problem is particularly pronounced in multi-turn agent interaction tasks involving tool calls, where all tool definitions and their calling formats are typically defined only at the beginning of trajectories. Random document chunking prevents models from learning and adhering to the strict formatting requirements of tool invocations. To this end, we re-implement best-fit-packing algorithm
+(Ding
+et al.
+,
+2024a
+)
+with C++ in the Megatron framework
+(Shoeybi
+et al.
+,
+2019
+)
+, and compare it with two other variants quantitively.
+Fragmentation Rate and Padding Rate
+To formally analyze the impact of sample packing strategies, we define two metrics, fragmentation rate and padding rate, to report 1) the proportion of fragmented documents over the total number of training documents, and 2) the number of padding tokens (which are not trained upon) against the total number of training tokens, respectively. Mathematically,
+fragmentation rate
+=
+# of documents that are fragmented
+# of all documents
+,
+\displaystyle=\frac{\text{\# of documents that are fragmented}}{\text{\# of all documents}},
+padding rate
+=
+# of padding tokens
+# of all training tokens
+.
+\displaystyle=\frac{\text{\# of padding tokens}}{\text{\# of all training tokens}}.
+A.3.1
+Two Variants of Sample Packing Strategy
+For compatibility with the data loader in Megatron, we propose two simple variants with minimal modifications of the original concat-then-split packing strategy (see Figure
+8
+).
+Figure 8:
+Two simple variants of the traditional concat-then-split sample packing strategy: restart last document (RLD) and pad last document (PLD).
+Restart Last Document (RLD)
+Aiming to resolve the head fragmentation problem, the last fragmented document in the previous chunk is forced to restart in the current sample. That is, each training sample will start with the beginning of one document, completely eliminating the fragmentation at the head side. Another benefit is that the padding rate is still zero, which implies optimal training efficiency. However, the tail side fragmentation is preserved. And this strategy evidently introduces a reweighting of tokens: tokens at the beginning of long documents, due to their higher likelihood of being reused (or restarted), are implicitly assigned greater weight during training.
+Pad Last Document (PLD)
+Based on RLD, in order to prevent the aforementioned tail-side truncation and imbalanced token weight re-distribution, we fill in the last fragmented document of the previous training sample with padding tokens. The gradients of these padding tokens are masked during pre-training to prevent unreasonable back-propagation. Although this scheme completely eliminates the fragmentation issue, it sacrifices training efficiency for a significant ratio of padding tokens. For fair comparison, we need to scale up the total size of training tokens in proportion. Formally, the updated token size is calculated by
+# of training tokens with PLD
+=
+# of training tokens
+×11-
+padding_rate
+.
+A.3.2
+How to Tackle Long Documents with Best-Fit-Packing
+The original BFP algorithm
+(Ding
+et al.
+,
+2024a
+)
+treats sample packing as a classic bin packing problem, i.e., for each incoming document, it seeks a bin (or sample) with sufficient remaining capacity to accommodate it entirely. The prerequisite is that all documents are shorter than the model input length. When the maximum context length cannot individually accommodate an extremely long document, we propose the following three techniques to handle it:
+•
+Split:
+It pre-splits extremely long documents into chunks with sizes equal to the model input length. The last chunk, which may be shorter, is preserved as is.
+•
+Slide:
+It pre-splits extremely long documents using a sliding window with overlap. The last chunk is merged with the previous one or extended backward to maintain the target model length, trying to infer based on more context.
+•
+Drop:
+It aggressively drops those extremely long documents before running BFP.
+A.3.3
+Ablation Study on Sample Packing Strategy
+For efficient evaluation without containerized environment or agent interaction, we experiment with an agentless framework on SWE-bench
+(Jimenez
+et al.
+,
+2024
+)
+. This agentless pipeline is adapted from
+Xia
+et al.
+(
+2024
+)
+, which splits the entire issue-solving task into two steps: 1) bug localization, and 2) patch prediction. As for bug localization, we prepare three settings to further simplify the evaluation, where the bug location comes from 1) model prediction, 2) the ground truth bug snippet, and 3) the ground truth file containing the bug. In this way, the trained model only needs to predict the target patch, based on different location implications. In
+Table
+˜
+13
+, we report two metrics for each setting: 1) the similarity between the predicted patch and the oracle patch, and 2) the ratio of empty patch.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+Fragm.
+Rate (%)
+Padding
+Rate (%)
+Model Loc (%)
+GT Loc (%)
+GT File (%)
+AVG (%)
+sim
+↑
+\uparrow
+empty
+↓
+\downarrow
+sim
+↑
+\uparrow
+empty
+↓
+\downarrow
+sim
+↑
+\uparrow
+empty
+↓
+\downarrow
+sim
+↑
+\uparrow
+empty
+↓
+\downarrow
+concat-then-split
+73
+30.2
+0.00
+16.61
+30.61
+24.02
+26.60
+9.41
+59.60
+16.68
+38.94
+restart-last-document
+73
+17.8
+0.00
+17.92
+25.92
+23.51
+27.00
+10.28
+54.60
+17.24
+35.84
+pad-last-document
+89
+0.0
+17.55
+17.24
+25.31
+22.99
+25.60
+10.35
+52.40
+16.86
+34.44
+best-fit-packing
+73
+0.0
+0.01
+17.22
+28.37
+25.76
+23.60
+10.47
+56.80
+17.82
+36.26
+best-fit-packing w/ split
+73
+0.0
+0.01
+17.95
+22.04
+27.46
+16.80
+15.10
+36.20
+20.17
+25.01
+w/ slide
+73
+0.0
+0.01
+18.47
+20.41
+27.50
+18.60
+14.49
+36.40
+20.15
+25.14
+w/ drop
+73
+0.0
+0.01
+17.85
+21.43
+29.53
+18.00
+15.14
+33.60
+20.84
+24.34
+The results above reveal three key insights: 1) eliminating fragmentation steadily improves performance. Best-fit-packing outperforms the traditional concat-then-split strategy in both patch similarity and empty rate. 2) BFP is more token-efficient than padding, achieving better results (
+17.82
+%
+17.82\%
+vs
+16.86
+%
+16.86\%
+) with
+22
+%
+22\%
+fewer tokens. 3) handling extremely long documents is also non-negligible. Augmenting BFP with the “drop” strategy yields the best overall performance (
+20.84
+%
+20.84\%
+similarity,
+24.34
+%
+24.34\%
+empty rate). This suggests that, rather than fancy algorithmic improvements, the best solution for handling long contexts may be to directly extend the model context length. We adopt the “split” strategy to handle extremely long documents throughout the main experiments.
+A.4
+Experiments on Cybersecurity
+We view cybersecurity as a frontier direction for existing models, where they have yet to achieve human-expert level performance even on non-agentic tasks such as Cyber Threat Intelligence (CTI) analysis, vulnerability detection, and secure coding. To provide insight into future capabilities, we present the first comparative evaluation of Qwen3-Coder-Next against other frontier models in this domain.
+Model
+CKT (Acc)
+ATE (Acc)
+RCM (Acc)
+RMS (F1)
+VSP (Acc)
+TAA (Acc)
+Claude-Opus-4-5
+94.33
+85.50
+71.25
+68.39
+53.88
+29.00
+Claude-sonnet-4-5
+93.22
+78.67
+64.00
+61.69
+45.17
+18.67
+Deepseek-V3.2
+90.00
+60.00
+65.50
+29.02
+20.50
+13.00
+GLM-4.7
+85.67
+66.00
+70.50
+19.45
+29.00
+12.00
+Ours
+85.00
+44.00
+58.50
+5.50
+24.50
+8.00
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+et al.
+,
+2024
+)
+for CTI analysis evaluation. The benchmark includes 6 distinct tasks of CTI reasoning: (1) CTI Knowledge Test (CTK), (2) Root Cause Mapping (RCM), (3) Vulnerability Severity Prediction (VSP), (4) Threat Actor Attribution (TAA), (5) Risk Mitigation Strategy (RMS), and (6) Attack Technique Extraction (ATE). We use the public AthenaBench-Mini set and report the results in
+Table 14
+. The results suggest that Qwen3-Coder-Next achieve comparable performances to other open frontier models like Deepseek-V3.2 and GLM-4.7, but still fall short on the tasks related to root cause mapping and threat actor attribution. We plan to improve these tasks by adding more pre-training data on CTI analysis.
+Model
+Acc
+Precision
+Recall
+F1
+P-C
+↓
+\downarrow
+P-V
+↓
+\downarrow
+P-B
+↓
+\downarrow
+P-R
+↓
+\downarrow
+Claude-Opus-4-5
+52.73
+52.42
+59.02
+55.53
+9.02
+50.06
+37.28
+3.63
+Claude-sonnet-4-5
+52.57
+51.44
+91.80
+65.93
+8.52
+83.38
+4.93
+3.17
+Deepseek-V3.2
+50.09
+51.27
+4.89
+8.91
+3.51
+1.00
+91.60
+3.88
+GLM-4.7
+53.22
+53.24
+58.62
+55.80
+20.55
+38.60
+26.57
+12.53
+Ours
+48.33
+48.54
+54.54
+51.37
+0.88
+53.01
+41.29
+4.64
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+, Qwen3-Coder-Next achieves the lowest P-C score, indicating superior performance in correctly identifying both vulnerable and benign functions within similar code contexts. While our model shows competitive F1 score and overall performance, it demonstrates significantly better paired prediction consistency compared to all baselines.
+Model
+SecCodeBench
+CWEval
+Gen w/o Hint
+Gen w/ Hint
+Fix w/o Hint
+Fix w/ Hint
+func@1
+func-sec@1
+Claude-Opus-4-5
+52.5
+73.2
+75.2
+83.9
+92.27
+74.75
+Claude-sonnet-4-5
+43.4
+57.6
+62.2
+76.4
+91.55
+71.72
+Deepseek-V3.2
+43.1
+50.2
+50.0
+65.8
+83.53
+54.71
+GLM-4.7
+29.4
+56.0
+49.8
+64.9
+72.44
+46.39
+Ours
+61.2
+69.5
+76.4
+83.7
+80.17
+56.32
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+.
+SecCodeBench and CWEval
+We consider secure coding important in daily practice, where models help avoid and mitigate software vulnerabilities. Typically, there are two main scenarios: code generation and vulnerability repair. We focus on two existing benchmarks: SecCodeBench
+7
+7
+7
+https://github.com/alibaba/sec-code-bench
+and CWEval
+(Peng
+et al.
+,
+2025
+)
+. SecCodeBench consists of 53 Java coding tasks, the majority of which are derived from anonymized, real-world historical vulnerabilities at Alibaba, covering generation and repair scenarios both with and without security hints. CWEval is a multilingual secure code generation benchmark, with a focus on both functionality and security.
+From
+Table 16
+, we observe that Qwen3-Coder-Next achieves competitive security performance on SecCodeBench across both generation and repair tasks. Notably, it maintains high scores even without security hints, particularly outperforming Claude-Opus-4-5 on generation (61.2 vs. 52.5), indicating robust inherent security awareness in default code generation.
+For CWEval, we report func@1 and func-sec@1 for functionality and security, respectively. While Claude models achieve higher func@1 scores, Qwen3-Coder-Next demonstrates competitive secure code generation capability with func-sec@1 of 56.32%, outperforming Deepseek-V3.2 and GLM-4.7, indicating a reasonable balance between generating functional and secure code.
+BETA
