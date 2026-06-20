@@ -727,6 +727,7 @@
   <div class="header-stat" id="headerStat"></div>
 
   <button class="btn" id="btnClear" style="display:none;">Clear</button>
+  <button class="btn" id="btnUndo" title="Undo last change (Ctrl+Z)" disabled>Undo</button>
   <button class="btn btn-save" id="btnSave">Save</button>
 </div>
 
@@ -889,6 +890,10 @@
 
   // Flag for save state
   let dirtyCount = 0;  // unsaved changes
+
+  // Undo: a stack of per-document tag snapshots taken before each edit.
+  const undoStack = [];
+  const UNDO_LIMIT = 100;
 
   // Evidence match tracking per technique per snippet:
   // techId → { overall: 'matched'|'unmatched'|'manual', snippets: [{index, state, text}] }
@@ -1137,10 +1142,52 @@
   }
 
   // ========================================================================
+  // UNDO SUPPORT
+  // ========================================================================
+  // Snapshot the current document's tags (deep copy) BEFORE a mutating action,
+  // so any edit — including a bulk Clear — can be reverted with one click.
+  function snapshotForUndo() {
+    if (!currentDocId) return;
+    undoStack.push({
+      docId: currentDocId,
+      tags: JSON.parse(JSON.stringify(tagState[currentDocId] || [])),
+      dirty: dirtyCount
+    });
+    if (undoStack.length > UNDO_LIMIT) undoStack.shift();
+    syncUndoButton();
+  }
+
+  async function performUndo() {
+    if (!undoStack.length) { flash('Nothing to undo', 'untag'); return; }
+    const snap = undoStack.pop();
+    tagState[snap.docId] = snap.tags;   // restore the saved tag list
+    dirtyCount = snap.dirty;            // and the unsaved-change counter
+    pendingSelection = null;
+    if (snap.docId !== currentDocId) {
+      // The reverted edit was on another document — bring it back into view.
+      docSelect.value = snap.docId;
+      await selectDocument(snap.docId);
+    } else {
+      updateVisuals();
+    }
+    refreshSelectLabels();
+    syncUndoButton();
+    flash('↶ Undo', 'save');
+  }
+
+  function syncUndoButton() {
+    const b = document.getElementById('btnUndo');
+    if (!b) return;
+    b.disabled = undoStack.length === 0;
+    b.textContent = undoStack.length ? `Undo (${undoStack.length})` : 'Undo';
+  }
+
+  // ========================================================================
   // TOGGLE / EVIDENCE LOGIC
   // ========================================================================
   function toggleTech(techId) {
     if (!currentDocId) return;
+    snapshotForUndo();
     if (!tagState[currentDocId]) tagState[currentDocId] = [];
 
     const techName = techLookup.get(techId)?.name || techId;
@@ -1188,6 +1235,7 @@
 
   function removeEvidence(techId, snippetIndex) {
     if (!currentDocId) return;
+    snapshotForUndo();
     const tags = tagState[currentDocId] || [];
     const entry = tags.find(t => t.techniqueId === techId);
     if (!entry) return;
@@ -1794,11 +1842,14 @@
   document.getElementById('btnClear').addEventListener('click', () => {
     if (!currentDocId) return;
     if (!confirm('Clear all tags for this document?')) return;
+    snapshotForUndo();
     tagState[currentDocId] = [];
     dirtyCount++;
     updateVisuals();
     refreshSelectLabels();
   });
+
+  document.getElementById('btnUndo').addEventListener('click', performUndo);
 
   // ========================================================================
   // SAVE — File System Access API with download fallback
@@ -2027,6 +2078,9 @@
     } else if ((e.ctrlKey || e.metaKey) && e.key === 's') {
       e.preventDefault();
       document.getElementById('btnSave').click();
+    } else if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z')) {
+      e.preventDefault();
+      performUndo();
     }
   });
 
