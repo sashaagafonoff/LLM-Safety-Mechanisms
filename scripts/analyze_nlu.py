@@ -31,6 +31,7 @@ from robust_tokenizer import create_chunks_from_text
 from nli_utils import resolve_entailment_index
 from taxonomy_maps import CATEGORY_TO_TOPIC
 from chunk_filters import is_low_quality_chunk
+from nlu_evidence import build_nlu_evidence
 
 # --- CONFIGURATION ---
 INPUT_DIR = Path("data/flat_text")
@@ -447,12 +448,11 @@ class NLUAnalyzer:
                     "confidence": confidence,
                     "active": True,
                     "deleted_by": None,
-                    "evidence": [{
-                        "text": chunk_text,
-                        "created_by": "nlu",
-                        "active": True,
-                        "deleted_by": None
-                    }]
+                    "evidence": [build_nlu_evidence(
+                        chunk_text,
+                        cand['retrieval_score'],
+                        entailment_score,
+                    )]
                 })
 
         if filtered_count > 0:
