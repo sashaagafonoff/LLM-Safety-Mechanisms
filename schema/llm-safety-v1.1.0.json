@@ -291,6 +291,7 @@
         "active": {"type": "boolean"},
         "deleted_by": {"type": ["string", "null"],
           "enum": ["manual", "nlu", "llm", "sashaagafonoff", "system", null]},
+        "deletion_reason": {"type": "string"},
         "grounding_failed": {"type": "boolean"},
         "llm_original": {"type": ["string", "null"]},
         "created_at": {"type": "string"},

@@ -666,6 +666,60 @@
   .flash.flash-save { background: var(--accent); color: #fff; }
   .flash.flash-error { background: var(--danger); color: #fff; }
 
+  /* ==================== REASON MODAL ==================== */
+  .reason-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 9, 12, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 400;
+  }
+
+  .reason-modal-overlay.visible { display: flex; }
+
+  .reason-modal {
+    background: var(--surface-2);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 16px 18px;
+    width: 320px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+  }
+
+  .reason-modal-title {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .reason-modal-select,
+  .reason-modal-input {
+    width: 100%;
+    padding: 6px 8px;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+  }
+
+  .reason-modal-select:focus,
+  .reason-modal-input:focus { outline: none; border-color: var(--accent); }
+
+  .reason-modal-input { margin-top: 8px; }
+
+  .reason-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
   /* ==================== LOADING ==================== */
   .loading-overlay {
     position: fixed;
@@ -703,6 +757,28 @@
 <div class="tech-tooltip" id="techTooltip"></div>
 <div class="selection-hint" id="selectionHint">Click a technique to attach this text as evidence →</div>
 <div class="flash" id="flash"></div>
+
+<div class="reason-modal-overlay" id="reasonModalOverlay">
+  <div class="reason-modal">
+    <div class="reason-modal-title" id="reasonModalTitle">Why was this rejected?</div>
+    <select class="reason-modal-select" id="reasonModalSelect">
+      <option value="">(no reason given)</option>
+      <option value="citation-only">Citation-only</option>
+      <option value="future work / aspirational">Future work / aspirational</option>
+      <option value="glossary / definition">Glossary / definition</option>
+      <option value="negation / not implemented">Negation / not implemented</option>
+      <option value="table-formatting artifact">Table-formatting artifact</option>
+      <option value="wrong technique (see notes)">Wrong technique (see notes)</option>
+      <option value="too vague">Too vague</option>
+      <option value="__other">Other…</option>
+    </select>
+    <input type="text" class="reason-modal-input" id="reasonModalInput" placeholder="Add a short note…" style="display:none;">
+    <div class="reason-modal-actions">
+      <button class="btn" id="reasonModalSkip">Skip</button>
+      <button class="btn btn-save" id="reasonModalConfirm">Confirm</button>
+    </div>
+  </div>
+</div>
 
 <div class="header" id="header" style="display:none;">
   <div class="logo"><em>▪</em> TAG</div>
@@ -953,6 +1029,57 @@
     el.className = `flash visible flash-${type}`;
     clearTimeout(el._t);
     el._t = setTimeout(() => el.classList.remove('visible'), 1500);
+  }
+
+  // ========================================================================
+  // DELETION REASON PROMPT
+  // ========================================================================
+  // Small inline modal offered after a technique/evidence rejection so the
+  // reviewer can optionally record *why* — feeds the LLM review index's
+  // negatives (deletion_reason, read by _build_review_index). The rejection
+  // itself already happened by the time this shows; this only enriches it,
+  // so a reviewer who just wants to reject-and-move-on can hit Skip/Escape.
+  const reasonOverlay = document.getElementById('reasonModalOverlay');
+  const reasonTitle = document.getElementById('reasonModalTitle');
+  const reasonSelect = document.getElementById('reasonModalSelect');
+  const reasonInput = document.getElementById('reasonModalInput');
+  let reasonResolver = null;
+
+  reasonSelect.addEventListener('change', () => {
+    reasonInput.style.display = reasonSelect.value === '__other' ? '' : 'none';
+    if (reasonSelect.value === '__other') reasonInput.focus();
+  });
+
+  function closeReasonModal(result) {
+    reasonOverlay.classList.remove('visible');
+    if (reasonResolver) { reasonResolver(result); reasonResolver = null; }
+  }
+
+  document.getElementById('reasonModalSkip').addEventListener('click', () => closeReasonModal(''));
+  document.getElementById('reasonModalConfirm').addEventListener('click', () => {
+    const val = reasonSelect.value === '__other' ? reasonInput.value.trim() : reasonSelect.value;
+    closeReasonModal(val);
+  });
+  reasonOverlay.addEventListener('mousedown', (e) => {
+    if (e.target === reasonOverlay) closeReasonModal('');
+  });
+  reasonOverlay.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { e.preventDefault(); closeReasonModal(''); }
+    else if (e.key === 'Enter' && e.target === reasonInput) { e.preventDefault(); closeReasonModal(reasonInput.value.trim()); }
+  });
+
+  // Resolves to a (possibly empty) reason string; never rejects. An empty
+  // result (Skip/Escape/blank confirm) means "no deletion_reason field".
+  function askDeletionReason(title) {
+    return new Promise(resolve => {
+      reasonTitle.textContent = title;
+      reasonSelect.value = '';
+      reasonInput.value = '';
+      reasonInput.style.display = 'none';
+      reasonResolver = resolve;
+      reasonOverlay.classList.add('visible');
+      reasonSelect.focus();
+    });
   }
 
   // Normalize text for fuzzy matching: collapse whitespace, lowercase, fix ligatures
@@ -1233,7 +1360,7 @@
     updateVisuals();
   }
 
-  function removeEvidence(techId, snippetIndex) {
+  async function removeEvidence(techId, snippetIndex) {
     if (!currentDocId) return;
     snapshotForUndo();
     const tags = tagState[currentDocId] || [];
@@ -1248,10 +1375,14 @@
       return true;
     });
 
+    let deletedTarget;  // the entry or evidence object that just got soft-deleted
+
     if (activeEvidence.length <= 1) {
       // Last active snippet — mark entire technique as deleted (soft delete)
       entry.active = false;
       entry.deleted_by = 'manual';
+      delete entry.deletion_reason;
+      deletedTarget = entry;
       flash(`− ${techName}`, 'untag');
     } else {
       // Soft delete just this snippet
@@ -1259,20 +1390,32 @@
       if (typeof evItem === 'object' && evItem !== null) {
         evItem.active = false;
         evItem.deleted_by = 'manual';
+        delete evItem.deletion_reason;
+        deletedTarget = evItem;
       } else {
         // Old string format - convert to object and mark deleted
-        entry.evidence[snippetIndex] = {
+        const converted = {
           text: evItem,
           created_by: 'legacy',
           active: false,
           deleted_by: 'manual'
         };
+        entry.evidence[snippetIndex] = converted;
+        deletedTarget = converted;
       }
       flash(`− Removed passage from ${techName}`, 'untag');
     }
 
     dirtyCount++;
     updateVisuals();
+
+    // Optional reason, asked for after the rejection already took effect —
+    // Skip/Escape/blank leaves no deletion_reason field (keeps JSON clean).
+    const reason = await askDeletionReason(`Why was "${techName}" rejected?`);
+    if (reason) {
+      deletedTarget.deletion_reason = reason;
+      updateVisuals();
+    }
   }
 
   // ========================================================================
