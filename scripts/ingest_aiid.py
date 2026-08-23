@@ -25,16 +25,17 @@ import re
 import subprocess
 import sys
 import tarfile
+from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
-from collections import defaultdict
 
 # Canonical technique-id resolution. The keyword table below may carry legacy
 # technique ids; routing matches through taxonomy_aliases (the single source of
 # truth for renames/merges) keeps regenerated incidents on the current taxonomy
 # so a re-ingest can't reintroduce dangling references after a rename.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from taxonomy_aliases import canonical_techniques
+from taxonomy_aliases import canonical_model, canonical_techniques
+from aiid_model_matcher import build_alias_table, find_notable_unmatched, match_models
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger("AIID-Ingest")
@@ -46,6 +47,7 @@ DATA_DIR = PROJECT_ROOT / "data"
 AIID_DIR = DATA_DIR / "third_party" / "aiid"
 INCIDENTS_PATH = DATA_DIR / "incidents.json"
 PROVIDERS_PATH = DATA_DIR / "providers.json"
+MODELS_PATH = DATA_DIR / "models.json"
 RISK_AREAS_PATH = DATA_DIR / "risk_areas.json"
 AIID_META_PATH = AIID_DIR / "aiid_meta.json"
 
@@ -558,10 +560,17 @@ def get_sources_for_incident(report_ids, reports_lookup):
     return sources
 
 
-def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classifications, provider_ids, techniques):
+def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classifications,
+                         provider_ids, techniques, alias_table, valid_model_ids):
     """Transform AIID incidents into our schema."""
     results = []
     tech_risk_map = {t["id"]: t.get("riskAreaIds", []) for t in techniques}
+
+    # Model-matcher bookkeeping (T5.3): tracked across the whole run so main()
+    # can print a summary of what matched and what looked model-shaped but
+    # didn't resolve to a models.json entry.
+    notable_unmatched = defaultdict(lambda: {"count": 0, "example": None})
+    unknown_model_ids = set()
 
     for inc in aiid_incidents:
         inc_id = inc["incident_id"]
@@ -590,6 +599,25 @@ def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classif
             for rid in tech_risk_map.get(tid, []):
                 risk_areas.add(rid)
 
+        # Model matching (T5.3): gated to providers already matched above, so
+        # a model mention can never introduce a provider the text-based
+        # provider matcher didn't already establish. Case preserved (not
+        # lowercased) -- the notable-unmatched heuristic relies on
+        # capitalization to spot proper-noun model names.
+        raw_text = f"{inc['title']} {inc['description'] or ''}"
+        model_ids = match_models(raw_text, alias_table, provider_matches)
+        model_ids = sorted({canonical_model(mid) for mid in model_ids})
+        bad = [mid for mid in model_ids if mid not in valid_model_ids]
+        if bad:
+            unknown_model_ids.update(bad)
+            model_ids = [mid for mid in model_ids if mid in valid_model_ids]
+
+        for mention in find_notable_unmatched(raw_text, provider_matches, alias_table):
+            entry = notable_unmatched[mention]
+            entry["count"] += 1
+            if entry["example"] is None:
+                entry["example"] = f"aiid-{inc_id}"
+
         # Get source URLs from reports
         sources = get_sources_for_incident(inc["report_ids"], reports_lookup)
 
@@ -602,7 +630,7 @@ def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classif
             "description": inc["description"] or "",
             "severity": severity,
             "providerIds": provider_matches,
-            "modelIds": [],
+            "modelIds": model_ids,
             "techniqueIds": technique_ids,
             "riskAreaIds": sorted(risk_areas),
             "sources": sources,
@@ -612,6 +640,13 @@ def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classif
         }
 
         results.append(record)
+
+    if unknown_model_ids:
+        # Should be unreachable by construction (aliases are only built from
+        # live models.json ids), but this is the in-script validation the
+        # design calls for -- fail loudly rather than silently drop.
+        logger.error(f"Model matcher emitted unknown model ids: {sorted(unknown_model_ids)}")
+        sys.exit(1)
 
     # Sort by date descending
     results.sort(key=lambda r: r["date"] or "0000-00-00", reverse=True)
@@ -623,13 +658,15 @@ def transform_incidents(aiid_incidents, reports_lookup, duplicates, cset_classif
     with_risk = sum(1 for r in results if r["riskAreaIds"])
     with_techniques = sum(1 for r in results if r["techniqueIds"])
     llm_related = sum(1 for r in results if r["isLLMRelated"])
+    with_models = sum(1 for r in results if r["modelIds"])
     logger.info(f"  Matched to our providers: {with_providers}")
     logger.info(f"  With CSETv1 severity: {with_severity}")
     logger.info(f"  With risk areas: {with_risk}")
     logger.info(f"  With technique mappings: {with_techniques}")
     logger.info(f"  LLM/GenAI related: {llm_related}")
+    logger.info(f"  With model mappings: {with_models}")
 
-    return results
+    return results, notable_unmatched
 
 
 def check_for_updates():
@@ -688,10 +725,16 @@ def main():
     version = extract_snapshot_version(snapshot_dir)
     logger.info(f"Snapshot version: {version}")
 
-    # Load our provider IDs and techniques
+    # Load our provider IDs, techniques, and models (T5.3 model matcher)
     providers = load_json(PROVIDERS_PATH)
     provider_ids = {p["id"] for p in providers}
     techniques = load_json(TECHNIQUES_PATH) if TECHNIQUES_PATH.exists() else []
+    models_raw = load_json(MODELS_PATH) if MODELS_PATH.exists() else {"models": []}
+    model_list = models_raw["models"] if isinstance(models_raw, dict) else models_raw
+    valid_model_ids = {m["id"] for m in model_list if isinstance(m, dict) and "id" in m}
+    alias_table = build_alias_table(model_list)
+    model_lookup = {m["id"]: m for m in model_list if isinstance(m, dict) and "id" in m}
+    logger.info(f"Built model alias table: {len(alias_table)} aliases across {len(model_list)} models")
 
     # Load AIID data
     aiid_incidents = load_incidents_csv(snapshot_dir)
@@ -700,9 +743,10 @@ def main():
     cset_classifications = load_csetv1_classifications(snapshot_dir)
 
     # Transform
-    incidents = transform_incidents(
+    incidents, notable_unmatched = transform_incidents(
         aiid_incidents, reports_lookup, duplicates,
-        cset_classifications, provider_ids, techniques
+        cset_classifications, provider_ids, techniques,
+        alias_table, valid_model_ids,
     )
 
     # Save
@@ -711,6 +755,23 @@ def main():
     # Save metadata
     llm_count = sum(1 for i in incidents if i.get("isLLMRelated"))
     tech_count = sum(1 for i in incidents if i.get("techniqueIds"))
+    model_count = sum(1 for i in incidents if i.get("modelIds"))
+    provider_matched_llm = sum(1 for i in incidents if i.get("providerIds") and i.get("isLLMRelated"))
+    model_match_rate = (model_count / provider_matched_llm * 100) if provider_matched_llm else 0.0
+
+    model_id_counter = Counter(mid for i in incidents for mid in i.get("modelIds", []))
+    top_matched_models = [
+        {"modelId": mid, "count": n, "version": model_lookup.get(mid, {}).get("version", mid)}
+        for mid, n in model_id_counter.most_common(10)
+    ]
+    notable_sorted = sorted(
+        notable_unmatched.items(), key=lambda kv: (-kv[1]["count"], kv[0])
+    )
+    notable_list = [
+        {"mention": mention, "count": info["count"], "example": info["example"]}
+        for mention, info in notable_sorted
+    ]
+
     meta = {
         "source": "AI Incident Database (AIID)",
         "source_url": "https://incidentdatabase.ai/",
@@ -724,6 +785,11 @@ def main():
         "incidents_with_known_providers": sum(1 for i in incidents if i["providerIds"]),
         "incidents_with_technique_mappings": tech_count,
         "incidents_with_cset_classification": sum(1 for i in incidents if i["riskAreaIds"]),
+        "incidents_with_model_mappings": model_count,
+        "provider_matched_llm_incidents": provider_matched_llm,
+        "model_match_rate_pct": round(model_match_rate, 1),
+        "top_matched_models": top_matched_models,
+        "notable_unmatched_model_mentions": notable_list[:50],
     }
     save_json(AIID_META_PATH, meta)
 
@@ -737,8 +803,21 @@ def main():
     print(f"  Matched to our providers:   {meta['incidents_with_known_providers']}")
     print(f"  With technique mappings:    {tech_count}")
     print(f"  With CSET classification:   {meta['incidents_with_cset_classification']}")
+    print(f"  With model mappings:        {model_count} "
+          f"({model_match_rate:.1f}% of {provider_matched_llm} provider-matched LLM incidents)")
     print(f"  Output:                     {INCIDENTS_PATH}")
     print(f"{'='*60}")
+
+    if top_matched_models:
+        print(f"\nTop matched models:")
+        for row in top_matched_models:
+            print(f"  {row['count']:4d}  {row['modelId']:<28} ({row['version']})")
+
+    if notable_list:
+        print(f"\nNotable unmatched model mentions ({len(notable_list)} distinct; "
+              f"model-shaped text with no models.json entry):")
+        for row in notable_list[:25]:
+            print(f"  {row['count']:4d}x  {row['mention']!r}  (e.g. {row['example']})")
 
 
 if __name__ == "__main__":

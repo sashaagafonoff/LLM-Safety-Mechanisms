@@ -5,10 +5,67 @@
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "snapshot_version": "2026-08-17",
   "archive_filename": "backup-20260817101120.tar.bz2",
-  "ingested_at": "2026-08-23T09:33:55.797391",
+  "ingested_at": "2026-08-23T10:35:39.326281",
   "total_incidents": 1630,
   "llm_related_incidents": 960,
   "incidents_with_known_providers": 451,
   "incidents_with_technique_mappings": 757,
-  "incidents_with_cset_classification": 816
+  "incidents_with_cset_classification": 816,
+  "incidents_with_model_mappings": 10,
+  "provider_matched_llm_incidents": 311,
+  "model_match_rate_pct": 3.2,
+  "top_matched_models": [
+    {
+      "modelId": "gpt-4o",
+      "count": 5,
+      "version": "GPT-4o"
+    },
+    {
+      "modelId": "claude-opus-4.6",
+      "count": 2,
+      "version": "Claude Opus 4.6"
+    },
+    {
+      "modelId": "claude-opus-4.7",
+      "count": 1,
+      "version": "Claude Opus 4.7"
+    },
+    {
+      "modelId": "gpt-5-mini",
+      "count": 1,
+      "version": "GPT-5 mini"
+    },
+    {
+      "modelId": "o4-mini",
+      "count": 1,
+      "version": "o4-mini"
+    },
+    {
+      "modelId": "deepseek-r1",
+      "count": 1,
+      "version": "DeepSeek-R1"
+    }
+  ],
+  "notable_unmatched_model_mentions": [
+    {
+      "mention": "ChatGPT 3.5",
+      "count": 1,
+      "example": "aiid-677"
+    },
+    {
+      "mention": "Claude 3.5",
+      "count": 1,
+      "example": "aiid-1044"
+    },
+    {
+      "mention": "Claude Mythos 5",
+      "count": 1,
+      "example": "aiid-1628"
+    },
+    {
+      "mention": "Grok 3",
+      "count": 1,
+      "example": "aiid-1198"
+    }
+  ]
 }
