@@ -1205,6 +1205,10 @@
         {
           "modelId": "command-a",
           "name": "Command A"
+        },
+        {
+          "modelId": "command-r7b-12-2024",
+          "name": "Command R7B (12-2024)"
         }
       ],
       "content_metadata": {
@@ -1400,6 +1404,14 @@
         {
           "modelId": "ministral-3",
           "name": "Ministral 3"
+        },
+        {
+          "modelId": "mistral-medium-3.5",
+          "name": "Mistral Medium 3.5"
+        },
+        {
+          "modelId": "mistral-small-4",
+          "name": "Mistral Small 4"
         }
       ],
       "content_metadata": {
@@ -2574,6 +2586,343 @@
         "confidence_weight": 1.0,
         "language": "en",
         "notes": "Official Meta Llama 3.3 70B model card; responsible deployment, red teaming, CBRNE, Llama Guard 3 / Prompt Guard / Code Shield."
+      }
+    },
+    {
+      "id": "claude-sonnet-5-system-card",
+      "title": "System Card: Claude Sonnet 5",
+      "url": "https://www-cdn.anthropic.com/480e0bb54327b9622282e9c39a83a4f490ed377e/Claude%20Sonnet%205%20System%20Card.pdf",
+      "provider": "anthropic",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [
+        {
+          "modelId": "claude-sonnet-5",
+          "name": "Claude Sonnet 5"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Anthropic system card for Claude Sonnet 5 (2026-06-30); alignment, safety testing, RSP compliance."
+      }
+    },
+    {
+      "id": "claude-opus-5-system-card",
+      "title": "System Card: Claude Opus 5",
+      "url": "https://www-cdn.anthropic.com/c5fbac3f0b1280a933ebd26d3cb8bb9f5bdeaf48/Claude%20Opus%205%20System%20Card.pdf",
+      "provider": "anthropic",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [
+        {
+          "modelId": "claude-opus-5",
+          "name": "Claude Opus 5"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "alignment_methods",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Official Anthropic system card for Claude Opus 5 (2026-07-24); alignment assessment, covert-capability tracking vs AI R&D threshold."
+      }
+    },
+    {
+      "id": "gpt-5-6-system-card",
+      "title": "GPT-5.6 System Card",
+      "url": "https://deploymentsafety.openai.com/gpt-5-6/gpt-5-6.pdf",
+      "provider": "openai",
+      "type": "System Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [
+        {
+          "modelId": "gpt-5.6-sol",
+          "name": "GPT-5.6 Sol"
+        },
+        {
+          "modelId": "gpt-5.6-terra",
+          "name": "GPT-5.6 Terra"
+        },
+        {
+          "modelId": "gpt-5.6-luna",
+          "name": "GPT-5.6 Luna"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "inference_safeguards",
+          "output_guardrails",
+          "governance",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "OpenAI Deployment Safety Hub system card for GPT-5.6 Sol/Terra/Luna (2026-07-09); layered safeguards, High capability ratings in cyber/bio/chem domains."
+      }
+    },
+    {
+      "id": "grok-4-20-model-card",
+      "title": "Grok 4.20 Model Card",
+      "url": "https://data.x.ai/2026-04-07-grok-4-20-model-card.pdf",
+      "provider": "xai",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [
+        {
+          "modelId": "grok-4.20",
+          "name": "Grok 4.20"
+        },
+        {
+          "modelId": "grok-4.20-multi-agent",
+          "name": "Grok 4.20 (multi-agent)"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "output_guardrails",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "xAI model card for Grok 4.20 (2026-04-07); refusal behavior, adversarial robustness, dual-use (CBRN/cyber), deception and sycophancy assessments."
+      }
+    },
+    {
+      "id": "grok-4-6-model-card",
+      "title": "Grok 4.6 Model Card",
+      "url": "https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf",
+      "provider": "xai",
+      "type": "Model Card",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [
+        {
+          "modelId": "grok-4.6",
+          "name": "Grok 4.6"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "system_card",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "safety_benchmarking",
+          "red_teaming",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "xAI model card for the Grok 4.6 flagship (2026-08-12, rev 2026-08-17); safety evaluation and pre-deployment testing results."
+      }
+    },
+    {
+      "id": "xai-frontier-ai-framework",
+      "title": "xAI Frontier Artificial Intelligence Framework (June 2026)",
+      "url": "https://media.x.ai/v1/website/xai-frontier-artificial-intelligence-framework-30-june-2026-99c40684.pdf",
+      "provider": "xai",
+      "type": "Framework",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [],
+      "content_metadata": {
+        "document_purpose": "policy",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "governance",
+          "risk_assessment",
+          "capability_thresholds",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "xAI frontier-model risk framework (2026-06-30); malicious-use and loss-of-control risk categories, mitigation policies. Successor to the 2025-08-20 risk management framework."
+      }
+    },
+    {
+      "id": "deepseek-model-algorithm-disclosure",
+      "title": "DeepSeek Model & Algorithm Disclosure",
+      "url": "https://cdn.deepseek.com/policies/en-US/model-algorithm-disclosure.html",
+      "provider": "deepseek",
+      "type": "Policy",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [
+        {
+          "modelId": "deepseek-v4-pro",
+          "name": "DeepSeek-V4 Pro"
+        },
+        {
+          "modelId": "deepseek-v4-flash",
+          "name": "DeepSeek-V4 Flash"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "transparency_assessment",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "moderate",
+        "primary_topics": [
+          "alignment_methods",
+          "data_governance",
+          "red_teaming",
+          "transparency"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "DeepSeek platform disclosure covering safety data construction, SFT/RL alignment, data filtering, bias mitigation, red-team testing. Platform-wide; linked to the served V4 generation. NOTE: the V4 HF model cards and tech report contain no safety content (documented gap)."
+      }
+    },
+    {
+      "id": "falcon-h1-tech-report",
+      "title": "Falcon-H1: A Family of Hybrid-Head Language Models",
+      "url": "https://arxiv.org/pdf/2507.22448",
+      "provider": "tii",
+      "type": "Technical Report",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [
+        {
+          "modelId": "falcon-h1-34b-instruct",
+          "name": "Falcon-H1 34B Instruct"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "technical_report",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "alignment_methods",
+          "safety_benchmarking",
+          "pre_training_safety"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "TII Falcon-H1 technical report (July 2025) incl. safety evaluation section."
+      }
+    },
+    {
+      "id": "falcon-h1r-tech-report",
+      "title": "Falcon-H1R: Pushing the Reasoning Frontiers",
+      "url": "https://arxiv.org/pdf/2601.02346",
+      "provider": "tii",
+      "type": "Technical Report",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [
+        {
+          "modelId": "falcon-h1r-7b",
+          "name": "Falcon-H1R 7B"
+        }
+      ],
+      "content_metadata": {
+        "document_purpose": "technical_report",
+        "signal_strength": "high",
+        "temporal_focus": "implemented",
+        "scope": "model_family",
+        "technical_depth": "deep",
+        "primary_topics": [
+          "alignment_methods",
+          "safety_benchmarking"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "TII Falcon-H1R technical report (Jan 2026); SFT + GRPO training with safety curriculum, safety evaluation section."
+      }
+    },
+    {
+      "id": "mistral-shieldstral-card",
+      "title": "Shieldstral 1.0 Model Card (Moderation Model)",
+      "url": "https://docs.mistral.ai/models/model-cards/shieldstral-1-0",
+      "provider": "mistral",
+      "type": "Documentation",
+      "origin": "provider",
+      "evidenceQuality": "primary",
+      "date_added": "2026-08-23",
+      "models": [],
+      "content_metadata": {
+        "document_purpose": "documentation",
+        "signal_strength": "medium",
+        "temporal_focus": "implemented",
+        "scope": "provider_wide",
+        "technical_depth": "shallow",
+        "primary_topics": [
+          "input_filtering",
+          "output_guardrails",
+          "harm_taxonomies"
+        ],
+        "excluded_topics": [],
+        "confidence_weight": 1.0,
+        "language": "en",
+        "notes": "Shieldstral 1.0 (3.8B multimodal moderation model, Apache 2.0, public preview 2026-08-04): prompt/response moderation, refusal detection, safety filtering via natural-language policy questions. Thin page — single-paragraph description; evidence of Mistral moderation infrastructure."
       }
     }
   ]

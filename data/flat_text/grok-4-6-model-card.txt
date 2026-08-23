@@ -1,0 +1,774 @@
+SOURCE_ID: grok-4-6-model-card
+SOURCE_TITLE: Grok 4.6 Model Card
+SOURCE_URI: https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf
+--------------------
+Model Card:
+Grok 4.6
+August 12, 2026
+Revision:2026-08-17
+
+GROK4.6MODELCARD
+Changelog
+August17,2026
+• Updatedsectionnumberingforconsistencyacrossthecardinventory.
+• AddedPartBenchresultsandgraph.
+• AddednewDeepSearchQAresults.
+• UpdatedKernelBenchInternaltoversion1.1,reportingresultsonmoredifficulttasksplit.
+• Clarityupdatestoproseandfigures.
+• CorrectedevalresultsonHackerBenchv0.2,Self-harm,MASK,LAB.
+1
+
+GROK4.6MODELCARD
+[PIPELINE INGESTION WORKFLOW - REMOVED TOC]
+
+Grok4.6isthelatestreleaseinSpaceXAI’s* 1.5T-scalemodelfamily,developedin
+collaborationwithCursor†. ItextendsGrok4.5,demonstratinggreatercapabilityand
+autonomyoncoding,engineering,andofficeworktasks,whilealsoimprovinginnew
+domainsofwork(forexample,AIresearchenablementandinferenceoptimization).
+Itisourmostcapablemodeltodate.
+1.1 Overview
+Grok4.6iscapableofautonomouslycompletinglongerandmorechallengingtasksthan
+anyofourpreviousmodels,reachingresultswithfewerstepsandfeweroutputtokensthan
+otherfrontiermodels.
+TheprimarypurposeofthismodelcardistodetailthecapabilitiesofGrok4.6in
+quantitativeandobjectiveterms,toindicatewherethismodelismostuseful. Wedocument
+safetydomains(cyber,bioknowledge,bioagentic,jailbreaks/robustness,generaloutput
+safetyincludingCBRNrefusals,mentalhealth,andbehaviors)andoursafeguardsbelow.
+Eachevaluationunderacapabilityorsafetysectionhasitsownsubsection. Unlessstated
+otherwise,evaluationresultsareonthefinaldeployedcheckpointofGrok4.6.
+Weneversilentlydowngradeintelligenceorfallbacktoothermodels. Ourgoalisto
+preservelegitimateusesofthemodel: engineeringandcreativework,scientificresearch,
+hardeningcriticalinfrastructure,andAIresearch.
+Themodel’suseissubjecttoSpaceXAI’sAcceptableUsePolicy1,applicableConsumer
+andEnterpriseTermsofService,andanyapplicablelaws. Grok4.6isnotintendedfor
+autonomoushigh-stakesdecision-makingindomainssuchasmedicine,law,finance,or
+safety-criticalsystemswithoutappropriatehumanoversightanddomain-expertvalidation.
+* SpaceXAIisadoing-business-as(DBA)nameofXAILLC.xAIandSpaceXAImaybeusedinterchangeably
+throughoutthiscard.
+† Grok4.6receivedsupplementaltrainingonanonymizedCursorworkflowdatatoimprovecodingand
+agenticperformance.
+5
+
+GROK4.6MODELCARD
+Grok4.6isprimarilyatextmodel: itacceptsnatural-languagetextandimagesasinputand
+producestextasoutput. Itisavailableforusethroughthefollowingchannels:
+• SpaceXAIAPI:Availablefromtheconsoleatconsole.x.ai;APIuserscancallGrok4.6
+throughthestandardchatandcompletionsendpoints.
+• GrokBuild: ThedefaultmodelinSpaceXAI’sterminal-basedcodingagent,available
+throughboththeAPIandtheCLI.
+• Cursor: Availabletoallusers,oneveryplantier.
+• Officeadd-ins: ThedefaultmodelintheGrokbySpaceXAIadd-insforMicrosoftWord,
+PowerPoint,andExcel.
+• Modelgateways: ReachablethroughOpenRouter,Vercel,Cloudflare,Snowflake,
+DatabricksMosaic,andothers.
+SpaceXAIplanstoaddGrok4.6toitsconsumersurfaces(web,mobileapps,andGrok-in-X
+ontheXplatform)atalaterdate.
+1.2 Modeldevelopmentandtraining
+Grok4.6waspretrainedonpubliclyavailabledata,datageneratedinternally,aswellas
+otherdatatowhichSpaceXAIhassecuredthenecessaryrights,followedbysupplemental
+trainingandpost-trainingwithsupervisedfine-tuning(SFT)andreinforcementlearning
+(RL)onhumanandsyntheticrewardsignals.
+SupplementaltrainingforGrok4.6ranlongerthanforGrok4.5,combiningmodel-generated
+datacuratedforreasoningandadvancedtechnicalconcepts,high-qualityengineering
+corpora,andanimprovedoptimizerandrecipe. Grok4.5modelswereusedtogenerate
+SFTtrajectoriesacrossreasoningefforts,agentharnesses,anddomainsspanning
+STEM,softwareengineering,andknowledgework,withmodel-basedchecksscreening
+outproblematictraces. AgenticRLcoveredknowledgework,generalcoding,and
+purpose-builtenvironmentsforkerneloptimization,webdevelopment,andcomputer-aided
+design.
+Grok4.6hasapretrainingdatacutoffofJanuary2026,andusesdatageneratedaslateas
+June2026initssupplementaltraining.
+6
+
+GROK4.6MODELCARD
+2 Coding capabilities
+Grok4.6isbuiltforstrongcodingperformanceacrosswide-rangingdomainsofsoftware
+engineering,problem-solving,andsoftware-engineering-adjacenttasks.
+Grok4.6’sotherabilities(inofficework,R&D,andCAD)dependonwell-developed
+baselinecodingcapabilities: anagentthatreads,writes,andrunscodeisaprerequisitefor
+expressiveinteractionwithanydigitaltool,file,orworkflow.
+Weprimarilyevaluatecodingonagenticbenchmarksofreal-worldsoftwareengineering,
+problem-solving,andsoftware-engineering-adjacenttasks,suchasSREandobservability.
+ThesebenchmarkscoverCursorIDE-styleagentworkflows,repository-levelissue
+resolution,terminaluse,andothersoftware-engineering-relevantusecases.
+2.1 CursorBench3.22
+CursorBench3.2evaluatescodingagentsonrealisticIDE-styletasksfromproduction-like
+Cursorworkflows: multi-fileedits,natural-languageinstructions,tools,APIsandMCPs,
+anditerativefixing.
+WeevaluateGrok4.6withtheCursoragentharnessonafixedsetoftasks.* Grok4.6
+scores70.8%atxhighthinkingeffort,exceedingtheothermodelstested,and69.9%
+athighthinkingeffort,improvingonGrok4.5highat66.7%.† Averaging41,136output
+tokenspertaskatxhigh,Grok4.6sitsatthefrontierofcapabilityandefficiencyonthis
+benchmark.
+70%
+60%
+50%
+40%
+100k 80k 60k 40k 20k 0
+Average output tokens per task
+)%(
+erocS
+Score vs tokens
+Grok 4.6
+Opus 5
+Grok 4.5
+Fable 5
+Kimi K3
+GPT-5.6 Sol
+Sonnet 5
+GPT-5.6 Terra
+GPT-5.6 Luna
+* ResultsreportedaretakenfromevaluationsconductedbyCursor.
+† Grok4.5wasservedwithamaximumthinkingeffortofhigh.
+7
+
+GROK4.6MODELCARD
+70%
+60%
+50%
+40%
+$18 $15 $12 $9 $6 $3 $0
+Average cost per task
+)%(
+erocS
+Score vs cost
+Grok 4.6
+Opus 5
+GPT-5.6 Sol
+Grok 4.5
+Fable 5
+Kimi K3
+Sonnet 5
+GPT-5.6 Terra
+GPT-5.6 Luna
+8
+
+GROK4.6MODELCARD
+2.2 APEX-SWE3
+APEX-SWEmeasuresAIproductivityonsoftware-engineeringworkspanningintegration
+tasksandobservabilitytasks(e.g. diagnosingfailuresfromtelemetry). Codingagentsnow
+seeactiveuseinmaintenanceandobservabilitywork,representingamateriallydifferent
+taskprofilefromthatevaluatedbytypicalsoftwareengineeringbenchmarks. Therefore,we
+runAPEX-SWEtomeasureGrok4.6’scapabilitiesinthisdomain.
+Grok4.6’sperformanceonAPEX-SWEisevaluatedwiththeTerminus-2harness4. Grok4.6
+scores56.4%athighthinkingeffort.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* ResultsreportedaretakenfromevaluationsconductedbyMercor.
+9
+
+GROK4.6MODELCARD
+2.3 FrontierCodev1.15
+Correctnessaloneisaninsufficientmetricofreal-worldsoftwareengineeringutilityofa
+model. Characteristicssuchascodestyle,testcoverage,andscope-disciplinearesalient
+metricsofcodeutilityandqualitythataredifficulttocaptureingold-patchdifference
+benchmarks. FrontierCodev1.1measureswhetherAI-generatedpullrequestswouldbe
+mergeablebyopen-sourcemaintainers,measuringbehavioralcorrectness,regression
+safety,scopediscipline,style,andadherencetocodebaseconventions. Werunthe
+extendedsetof150samplestoprovideamorecomprehensiveevaluationofthemodel’s
+capabilities.
+Submissionsaregradedagainstmaintainer-authoredrubrics,verifiers,andhardblocker
+criteria.*
+Grok4.6’sperformanceonFrontierCodev1.1isevaluatedwiththeGrokBuildharness. Grok
+4.6scores61.3%athighthinkingeffort.
+Fable 5 (max, with fallback) 64.9%
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* SWE-1.7(Cognition)scoresarereportedwithouteffort.
+† ResultsreportedaretakenfromevaluationsconductedbyCognition.
+10
+
+GROK4.6MODELCARD
+2.4 DeepSWEv1.16
+DeepSWEv1.1istheupdatedreleaseoftheDeepSWEagentic-codingbenchmark,
+measuringend-to-endcompletionoflong-horizonsoftwareengineeringtasks. Itserves
+asaproxyforthemodel’sabilitytohandlereal-worldsoftwareengineeringwork,andis
+selectedduetobeinghighlycontamination-resistant.
+Grok4.6isevaluatedwiththemini-swe-agentharness7. Grok4.6scores65.9%athigh
+thinkingeffortand67.0%atxhighthinkingeffort. Fornon-Grokmodels,peernumbersuse
+thebestresultavailablefrommodelcardsorevaluator-reportedsources.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* ResultsreportedaretakenfromevaluationsconductedbyDatacurve.
+11
+
+GROK4.6MODELCARD
+2.5 SWE-Marathonv1.18
+Correctness,goalconsistency,andcompletenessbecomeincreasinglyimportantasagents
+becomecapableoflarger-scopeandmoreopen-endedsoftwareengineeringwork.
+SWE-Marathonisselectedasabenchmarkofultra-long-horizonengineeringworkthatcan
+requiremillionsoftokensandmulti-hourtrajectories;scoringusesmulti-layerverification
+designedtoresistrewardhackingandshortcuts.
+Grok4.6isevaluatedwiththeGrokBuildharness;peermodelsusetheirrespective
+providerharnesses. Grok4.6scores31.9%athighthinkingeffort.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* ResultsreportedaretakenfromevaluationsconductedbyAbundantAI.
+12
+
+GROK4.6MODELCARD
+2.6 Terminal-Bench3.09
+Terminal-Bench3.0isthesuccessorbenchmarktoTerminal-Bench2.1,* continuingthe
+sameterminal-agencyevaluationlinewithanexpandedtasksetandrefreshedharness.
+Itmeasuresagentsonhard,realisticcommand-linetasksacrosssoftware,ML,science,
+security,ops,hardware,andmediaworkflowsinsidecontainerizedterminalenvironments.
+Grok4.6isevaluatedwiththeGrokBuildharness. Grok4.6scores26.0%athighthinking
+effort.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* ThesuitewasformerlypublishedunderthenameFrontierBench.
+† ResultsreportedaretakenfromevaluationsconductedbyHarbor.
+13
+
+GROK4.6MODELCARD
+3 Knowledge-work capabilities
+Weevaluateperformanceonprofessionalknowledge-workandstructuredagenttasks
+relevanttoofficeandproductivityusecases,inordertoquantifyGrok4.6’sutilityin
+assisting,accelerating,andautomatingknowledgework. Weselectthesebenchmarksfor
+task-anddomain-diversity,aswellasforalignmentwithsubjectiveuserexperiencesof
+performance(thatis,ahigherscoreisconsistentwithamaterialimprovementintheutility
+ofthetestedmodelandthequalityofproducedartifacts).
+Onalltesteddomains,Grok4.6demonstratesfrontierornear-frontierperformance.
+3.1 AAGDPVal10
+AAGDPVal(GDPval-AAv2)evaluatesmodelsoneconomicallyvaluableknowledge-work
+deliverables(documents,analyses,andprofessionalartifacts)spanningoccupationsthat
+contributesubstantiallytoGDP.
+ArtificialAnalysisrunsGDPval-styletaskswithpairwisequalityratingsunderitsGDPval-AA
+v2harness. Grok4.6scores1753Eloathighthinkingeffort.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* ResultsreportedaretakenfromevaluationsconductedbyArtificialAnalysis.
+14
+
+GROK4.6MODELCARD
+3.2 AA-Briefcase11
+AA-Briefcaseevaluatesfrontieragentsonlong-horizon,multi-weekprofessional
+knowledge-workprojectsthatproducedeliverablessuchasspreadsheets,presentations,
+memos,financialmodels,andPDFs.
+Scenariosareexpert-built,multi-file,andoffline(nointernet). Gradingcombinesrubric
+passratewithpairwiseanalytical-qualityandpresentationjudgments. Grok4.6is
+evaluatedwiththeArtificialAnalysisharness.
+Grok4.6scores1577Eloathighthinkingeffort.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* ResultsreportedaretakenfromevaluationsconductedbyArtificialAnalysis.
+15
+
+GROK4.6MODELCARD
+3.3 APEX-Agents12
+APEX-Agentsmeasureswhetherfrontieragentscanautonomouslycompletelong-horizon,
+cross-applicationprofessionaltasksinrealisticsimulatedworkenvironmentsspanning
+investmentbanking,managementconsulting,andcorporatelaw.
+Agentsoperateovermulti-appprojects(documents,spreadsheets,presentations,email,
+chat,files)andaregradedwithexpertbinaryrubrics: ataskfullysucceedsonlyifallcriteria
+aremet. Grok4.6isevaluatedwiththeMercorharness. Grok4.6scores57.5%athigh
+thinkingeffort.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* ResultsreportedaretakenfromevaluationsconductedbyMercor.
+16
+
+GROK4.6MODELCARD
+3.4 OfficeQAPro13
+OfficeQAProevaluatesmodelsonprofessionalofficequestion-answeringacrossrealistic
+workplacedocumentsandworkflows.
+Grok4.6isevaluatedwiththeDatabricksharness. Grok4.6scores63.2%athighthinking
+effort.
+Grok 4.6 (high) 63.2%
+Opus 5 (max) 60.9%
+Fable 5 (max, with fallback) 60.9%
+GPT-5.6 Sol (max) 60.2%
+Accuracy(%)*
+* ResultsaretakenfromevaluationsconductedbyDatabricks.
+17
+
+GROK4.6MODELCARD
+3.5 LegalAgentBenchmark14
+LegalAgentBenchmark(LAB,alsoknownastheHarveyLegalAgentBenchmark)isa
+long-horizonlegal-agentevaluationinwhichagentscompleterealistic,multi-steplegal
+workoverclient-matterfilesandproducereviewableworkproductgradedwithexpert
+all-passrubrics.
+ScoresreportedhereusetheValsAIthird-partyimplementationusingtheValkyrie
+harness15 (ValsAI’sagenticevaluationframework),withafixedtoolandskillset. Theagent
+hassixtools: ReadFile,EditFile,WriteFile,Glob,Bash,andGrep,aswellasthreeskills:
+(docx,pptx,andxlsx). ThebenchmarkwasadaptedtorunonValkyrieandVals’smodel
+library;theseareinfrastructurechangesthatdonotaffectmodelperformance. Harvey’s
+originalgenerationandgradingprotocolisfollowed(internetaccessdisabled),andresults
+arereportedwiththesamemethodologyasHarvey’sinitialleaderboard.
+Grok4.6isevaluatedwiththeValsAI(Valkyrie)harness. Grok4.6scores15.8%athigh
+thinkingeffort.
+Grok 4.6 (high) 15.8%
+Grok 4.5 (high) 12.9%
+Opus 5 (max) 11.7%
+Fable 5 (max, with fallback) 11.3%
+GPT-5.6 Sol (max) 2.5%
+Score*
+* ResultsaretakenfromevaluationsconductedbyValsAI.
+18
+
+GROK4.6MODELCARD
+4 Engineering acceleration
+Engineeringrepresentsoneofthecoredomainswhereimprovedagentcapabilitiesdirectly
+supporttheaccelerationoftechnologicaldevelopment: agentsthatacceleraterocket
+design,IClayout,anddatacenterpower-and-coolingoptimizationcompressthetimelines
+ofprogressacrossthephysicalsystemsthatenablefurtheradvancesinAIcapabilitiesand
+utility.
+WeevaluateGrok4.6onagentictasksthatacceleratephysical-worldengineering(i.e. all
+engineeringnotpurelywithinthesoftwaredomain): electricalandchipdesign,procedural
+3Dmodelingviacode,parametricCADandpartgeneration,andrelatedworkflowswhere
+modelsmustreasonaboutgeometry,materials,andrealdevicesratherthanrepositories
+alone.
+4.1 EEBench16
+EEBenchisanelectricalengineeringandchipdesignbenchmark: modelsdesigncircuits
+andotherhardwarethataregradedforphysicalcorrectnessandfunctionality.* Grok
+4.6isevaluatedwiththeGrokBuildharness;peermodelsusetheirrespectiveprovider
+harnesses.
+Grok4.6scores60.0%atxhighthinkingeffortand53.0%athighthinkingeffort.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* AspartoftheV1corecorpusofthebenchmark.
+† ResultsaretakenfromevaluationsconductedbyAtopile.
+19
+
+GROK4.6MODELCARD
+4.2 3DCodeBench17
+3DCodeBenchevaluatesagenticprocedural3Dmodelingviacode. Anagentistaskedwith
+authoringengine-ready3DassetsthroughsoftwareAPIsandgeometricreasoning,and
+isgradedforexecutabilityandshapefidelity. WeevaluateGrok4.6withtheGrokBuild
+harness.
+Grok4.6scores54.0%athighthinkingeffort.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+PartBenchevaluatesagentsonparametricmechanicalpartdesignandCAD-style
+generationtasksgradedforgeometricandmanufacturingfidelity.
+Grok4.6isevaluatedwiththeGrokBuildharness;peermodelsusetheirrespective
+providerharnesses. Grok4.6scores58.5%atxhighthinkingeffort.
+Fable 5 (max, with fallback) 59.9%
+GPT-5.6 Sol (xhigh) 59.0%
+Grok 4.6 (xhigh) 58.5%
+Opus 5 (max) 52.4%
+Reward(%)*
+4.4 CADGenBench19
+CADGenBenchevaluatesagentsonCADmodelconstructionfromdesignprompts. We
+reportthegenerationsplitofthebenchmark: themodelmustproduceCADgeometry
+gradedforexecutabilityandgeometriccorrectness.
+Grok4.6isevaluatedwiththeGrokBuildharness;peermodelsusetheirrespective
+providerharnesses. Grok4.6scores40.9%athighthinkingeffort.
+Grok 4.6 (high) 40.9%
+GPT-5.6 Sol (xhigh) 37.1%
+Opus 5 (max) 36.6%
+Grok 4.5 (high) 33.2%
+Reward(%)†
+* ResultsaretakenfromevaluationsconductedbyNormalFactory.
+† ResultsaretakenfromevaluationsconductedbyMecado.
+21
+
+GROK4.6MODELCARD
+4.5 CADBench20
+CADBenchevaluatesagentsonparametricCADdesignand3Dmodelingtasks,including
+out-of-distributiongeneration.
+ResultsaretakenfromtheGrokBuildharness,runbygNucleus. Grok4.6scores88.4%at
+xhighthinkingeffortand87.8%athighthinkingeffort.*
+Opus 5 (max) 90.6%
+Grok 4.6 (xhigh) 88.4%
+Grok 4.6 (high) 87.8%
+GPT-5.6 Sol (max) 86.5%
+Grok 4.5 (high) 83.7%
+Reward (%)
+* Additionaltestingresultswithdifferentharnessesarereportedathttps://cadbench.ai/.
+22
+
+GROK4.6MODELCARD
+5 R&D enablement
+WeevaluateGrok4.6onitsabilitytoautomatepartsoftheengineeringandresearch
+processfortrainingandevaluatingnewversionsofitself. Modelsthatcancontributeto
+theirowntrainingpipelines,evaluationharnesses,andexperimentaldesignenablethe
+developmentofmorecapablemodels,enablingfurtherreinforcementofthemodel-training
+loop. Weanticipateprogressinthisdomaintosignificantlycontributetocapability
+improvementsinotherdomainsofwork,suchasengineering,coding,andcomputer-use;
+wethereforequantifyourmodel’sperformanceontasksthatmeasureprogresstowardthis
+goal.
+AsatestofautonomousAI-developmentacceleration,anearlierGrok4.6checkpointwas
+taskedwithspeedingupitsownchatinference,beingfreetoexperimentbutrequiredto
+verifyend-to-endgainsbeforeopeningapullrequest. Infivereal-worldhoursitworked
+through297candidateoptimizationsacrossfusedMoE,FMHA,kernelscheduling,and
+communication,discardedthosewithoutmeasurableend-to-endgain(includingseveral
+thatpassedmicrobenchmarks),andopenedsevenpullrequests;threenowserveGrok
+Chatproductiontraffic,foracombined1.5%decodeand3.1%prefillthroughputgain.
+5.1 SpaceXAIMTSEval
+TheSpaceXAIMTSevalisaninternalbenchmarkoffrontiermodel-developmenttasks
+commoninthedailyworkflowsofSpaceXAIengineers: diagnosingrewardhacking
+intrainingruns,generatingandauditingtrainingdata,debugginglarge-scaletraining
+infrastructure,andcreatingevaluationsforemergingcapabilities. Thissectioncoversthe
+standard(non-GPU)suiteoftheaboveeval.
+Agentsarescoredontaskrewardunderafixedrolloutbudget(timeandtokens). Refusals
+arenoted.* WeevaluateGrok4.6withtheGrokBuildharness. Grok4.6scores61.1%at
+highthinkingeffort.
+[PIPELINE INGESTION WORKFLOW - REMOVED TABULAR DATA]
+
+* GPT-5.6Solrefused2/29tasksandGPT-5.5refused1;scoresforthosemodelsexcludetherefusedtasks.
+23
+
+GROK4.6MODELCARD
+5.2 InferenceEval
+InferenceEvalisaninternalbenchmarkthattasksagentswithimplementingrealproduction
+changesinthecodeforSpaceXAI’sproductioninferencestack. Eachtaskstartsfroma
+frozenpre-changeimageoftheinternalinferencestack;theagentmustlandaworking
+patchundertheGrokBuildharness. Tasksarenotasinglebugclass: someaddmissing
+kernelsorAPIs,somefixschedulerorreplaycorrectness,andsomeimplementfusions,
+layout,orquantizationworkthatmustpreservebit-exacttensors.
+Tomorefairlymeasurecapabilitiesoninferenceoptimizationtasks,weintentionallyexclude
+verificationofresultsfromtheloop;scoringcombinesahiddenGPUunitscore(exact
+tensors,state,andCUDA-graphbehavior)withahiddenintegrationprobethatmustpass
+ortheunitscoreiszeroed,plusacheckthatthepatchimplementsthestatedproduction
+contract. Thesecomponentsarecombinedintothereportedaccuracy. WeevaluateGrok
+4.6withtheGrokBuildharness.
+Grok4.6scores46.9%athighthinkingeffort.
+Grok 4.6 (high) 46.9%
+GPT-5.6 Sol (max) 44.1%
+Opus 5 (max) 43.0%
+Grok 4.5 (high) 41.3%
+Opus 4.8 (max) 40.7%
+Kimi K3 (max) 39.8%
+GPT-5.5 (xhigh) 38.9%
+Accuracy (%)
+24
+
+GROK4.6MODELCARD
+5.3 KernelBenchInternalv1.1
+KernelBenchInternalv1.1isaninternalaccelerationsuiteinspiredbyKernelBench21 and
+relatedverifiedkernel-writingbenchmarks. EachtaskprovidesaPyTorchreferencemodel
+andaskstheagenttoreplaceoperatorswithcustomCUDAforafasterimplementation
+ofthatoperatorclass. SamplingandgradingruninasandboxedGPUenvironmentwith
+standardcodingtools,onthesameclassofacceleratorsusedformodeltraining.
+Submittedkernelsmustcompile,matchthereferenceonacorrectnesstrial,andthenbe
+timedagainstaTF32PyTorchbaseline. Thereportedscoredependsonbothcorrectness
+andthesizeofthemeasuredspeedup. WeevaluateGrok4.6withtheGrokBuildharness.
+Grok4.6scores37.2%athighthinkingeffort,improvingonGrok4.5highat29.7%.
+Opus 5 (max) 48.1%
+Kimi K3 (max) 41.0%
+Opus 4.8 (max) 37.5%
+Grok 4.6 (high) 37.2%
+GPT-5.6 Sol (max) 34.4%
+GPT-5.5 (xhigh) 34.0%
+Grok 4.5 (high) 29.7%
+Accuracy (%)
+25
+
+GROK4.6MODELCARD
+6 Search capabilities and factuality
+CoretoSpaceXAI’smissionoftruth-seekingisfactualcorrectness,informationalrecency,
+andverifiability.
+Wethereforeevaluategroundedansweringwithsearchtoolsandfactualreliability,
+includinginhallucination-pronesettings.
+6.1 Factuality(Hallucination)
+Factuality(Hallucination)isaninternalbenchmarkthatmeasureshowoftenthemodel
+assertsunsupportedorfabricatedclaimsinasingleresponsetoaninformation-seeking
+query. Lowerisbetter.
+Aseparategraderflagsfactuallyunsupportedstatementsagainstretrievedorknown
+groundtruth. WeevaluateGrok4.6withtheGrokBuildharness. Grok4.6scores1.7%
+hallucinationrateathighthinkingeffort.
+Opus 4.8 (max) 3.4%
+Grok 4.6 (high) 1.7%
+GPT-5.5 (xhigh) 1.1%
+Grok 4.5 (high) 0.98%
+Hallucination rate (%)
+26
+
+GROK4.6MODELCARD
+6.2 DeepSearchQA22
+DeepSearchQAevaluatesend-to-endansweraccuracyonquestionsthatrequire
+multi-stepsearchandsynthesisofretrievedinformation. Answersaregradedfor
+correctnessagainstreferenceanswers.*
+WeevaluateGrok4.6withtheGrokBuildharness. Grok4.6scores81.6%athighthinking
+effort.
+GPT-5.5 (xhigh) 87.8%
+Grok 4.5 (high) 85.3%
+Opus 4.8 (max) 84.8%
+Grok 4.6 (high) 81.6%
+GPT-5.6 Sol (high) 75.0%
+Accuracy (%)
+* EvaluationwasrunonaninternalimplementationofDeepSearchQA.
+27
+
+GROK4.6MODELCARD
+7 Cyber capabilities and safeguards
+Modelswithadvancedcapabilityincodingandcoding-adjacent(terminal-use)domains
+also,intheabsenceofsafeguardsorcontrols,demonstrateenhancedabilitiesindefensive
+andoffensivecybersecurity. Inthissection,wediscusstheresultsoftheevaluation
+suiteweusetomeasureourmodels’cybercapabilities,andadditionallydiscussthe
+effectivenessandcalibrationofoursafeguardstack.
+Grok4.6showssomecybersecurity-relevantcapabilitygainsoverGrok4.5,concentrated
+incyber-defenseandvulnerability-mitigationtasksratherthanend-to-endoffensive
+use. Capabilitytestsarerunwithoutthesafeguardsweuseinproduction,whichwould
+otherwisemaskthemodel’sfullcapability;refusalbehaviorundersafeguardsismeasured
+separately(see§7.4).
+Thesecapabilitiesaremostusefultodefenders: findingandfixingvulnerabilitiesrather
+thancarryingoutend-to-endattacks.
+WeadditionallyprovidedanunrestrictedconfigurationofGrok4.6tothird-partyevaluators,
+whocorroboratedtheresultsofourinternalevaluationsandtestingoncybercapabilities.
+7.1 CyberGym23
+CyberGymmeasuresoffensivecybersecuritycapabilitybytaskinganagentwith
+reproducingcrashesandassemblingworkingexploitsforknownvulnerabilities.
+Becauseitisacapabilityproberatherthanarefusaltest,scoresusetheunrestricted
+setting(withoutourstandardsafeguards)asapuremeasureofability;refusalbehavioron
+harmfulcyberrequestsismeasuredseparately(see§7.4). Othermodels’unsafeguarded
+resultsaretakenfromtherespectivemodelproviders’systemcards24,25,26,27 where
+availabletoavoidlossofsignalduetorefusals.
+WeevaluateGrok4.6withtheGrokBuildharness. Grok4.6scores79.7%athighthinking
+effort.
+GPT-5.6 Sol (max) 83.6%
+GPT-5.5 (xhigh) 81.8%
+Grok 4.6 (high) 79.7%
+Grok 4.5 (high) 79.0%
+Opus 4.8 (max) 78.1%
+Mean Reproduced (%)
+28
+
+GROK4.6MODELCARD
+7.2 CVE-Bench28
+CVE-Benchevaluatesagentsonexploitingreal-worldweb-applicationCVEsinsandboxed
+environmentsthatmimicproductionservices. Themodelistestedwithoutsafeguardsin
+place,inordertomeasureitscybercapabilitiesaccurately.
+WeevaluateGrok4.6withtheGrokBuildharness. Grok4.6scores39.8%athighthinking
+effort.
+Metric Grok4.5(high) Grok4.6(high)
+Reward 35.2% 39.8%
+7.3 SecureCodeReview
+SecureCodeReviewisaninternalagenticsoftware-engineeringevalthatscoresboth
+whethertheagentfixesthesecurityissuespresentinarealisticcodebaseandwhetherits
+patchavoidsmergingnewsecurityissues.
+WeevaluateGrok4.6withtheGrokBuildharness. Grok4.6scores58.7%athighthinking
+effort.
+GPT-5.5 (xhigh) 64.1%
+Grok 4.6 (high) 58.7%
+GPT-5.6 Sol (max) 57.5%
+Grok 4.5 (high) 49.4%
+Reward (%)
+29
+
+GROK4.6MODELCARD
+7.4 HackerBenchv0.2
+HackerBenchisaSpaceXAIinternalCTF-stylesuiteofcybersecurityandred-teaming
+tasksthatrequirechainingskills(recon,exploitationprimitives,andreasoningabout
+vulnerablesystems)inaconstrainedenvironment. HackerBenchalsoincludesborderline,
+dual-use,andharmful-intentrequeststhatshouldberefused,plusbenigntasksthat
+shouldbecompleted. WeuseHackerBench,amongotherevaluations,metrics,and
+qualitativetests,tomeasuretheeffectivenessandcalibrationofoursafeguardstack.
+HackerBenchrunsusethestandardrelease-trackedsafeguardsforGrok4.6andthe
+standardprovider-suppliedsafeguardsforothertestedmodels.
+Grok4.6complieswith6.9%ofdual-userequestsathighthinkingeffortunderour
+standardsafeguardstack. Grok4.6hasabenignrefusalrateof0.0%athighthinking
+effort.
+Grok 4.6 (high) Grok 4.5 (high) GPT-5.5 (xhigh) Opus 4.8 (max) GPT-5.6 Sol (max)
+35.7% 1.1%
+25.0%
+22.8%
+6.9% 7.8%
+0.0% 0.0% 0.0% 0.0%
+Harmful/Dual-Use Compliance Benign Refusal
+30
+
+GROK4.6MODELCARD
+8 Biological and chemical capabilities and safeguards
+Thesesuitesprobedual-usebiologyandchemistryknowledgeandlab-protocol
+understanding,andaretreatedassafety-thresholdevaluationsunderthexAIFrontier
+ArtificialIntelligenceFramework(FAIF)29,whichdefinesthecapabilitythresholdsand
+associatedriskdomains.
+Grok4.6scoresbelowtheFAIFsafetythresholdsondual-useknowledge,indicating
+limitedactionableupliftforanalready-trainedactor. Dual-usecapabilityliftversusGrok
+4.5isnotedinthebiologicaldomainbutislimited(forexample,asmallVCTuptick);
+weapons-pathrefusalsareconsistentwithoursafeguardstackandshowimprovement
+overGrok4.5;theseresultsarereportedseparatelyundergeneraloutputsafety.
+Ongeneralbiologicalknowledgenotusefulfordual-usecapability,Grok4.6shows
+improvementoverGrok4.5.
+Unlessotherwisestated,thebenchmarkspresentedin§8areperformedwithout
+productionsafeguardsinplace;thisenablesfullmeasurementofGrok4.6’sdual-use
+capabilitieswhenunrestricted.
+8.1 VirologyCapabilitiesTest(VCT)30
+VCTpresentsmultimodalvirologyproblemsandmeasureswhetherthemodelcan
+troubleshootexperimentallabprotocols. Itisadual-useknowledgeprobetreatedasa
+CBRNsafety-thresholdevaluation: ahigherscoreindicatesstrongerperformanceon
+taskdistributionsthatoverlapwithdual-usecapability,notbetterrefusalbehaviorunder
+safeguards.
+Metric Grok4.5(high) Grok4.6(high)
+Accuracy 65.5% 67.4%
+31
+
+GROK4.6MODELCARD
+8.2 BiosecurityVCT30
+BiosecurityVCTisaninternalbiosecuritycompaniontoVCT:dual-usetroubleshooting
+itemsscoredforoverallaccuracy(should-refuseandshould-complyitemstogether)under
+thesameCBRNsafety-thresholdframingusedforVCTknowledgeprobes.
+|     | Metric   | Grok4.5(high) |     |       | Grok4.6(high) |     |       |
+| --- | -------- | ------------- | --- | ----- | ------------- | --- | ----- |
+|     | Accuracy |               |     | 44.1% |               |     | 47.8% |
+8.3 BioUseBench
+BioUseBenchisaninternalhigh-elodual-usebiologysuiteofbiologicalenablement
+queriesofvaryingdifficultyandrisk. WereportDual-userefusal: therefusalrateon
+thehighest-severity(severity-5)dual-usesubset. Thisconsistsofqueriesthatare
+non-maliciousbutcouldbeusedinbiologicalupliftwork.
+|     | Metric          |     | Grok4.5(high) |       |     | Grok4.6(high) |       |
+| --- | --------------- | --- | ------------- | ----- | --- | ------------- | ----- |
+|     | Dual-userefusal |     |               | 83.3% |     |               | 90.7% |
+8.4 WMDPdual-useknowledge(MCQ)31
+WMDP-Bio,WMDP-Chem,andWMDP-Cyberaremultiple-choicesuitesprobing
+operationallysensitivedual-useknowledgeinbiology,chemistry,andcyber.
+| Metric             |     |     | Grok4.5(high) |     |       | Grok4.6(high) |       |
+| ------------------ | --- | --- | ------------- | --- | ----- | ------------- | ----- |
+| WMDP-Bioaccuracy   |     |     |               |     | 90.9% |               | 90.0% |
+| WMDP-Chemaccuracy  |     |     |               |     | 87.3% |               | 85.3% |
+| WMDP-Cyberaccuracy |     |     |               |     | 83.2% |               | 90.1% |
+32
+
+GROK4.6MODELCARD
+8.5 LAB-BenchpracticalMCQ32
+LAB-Benchpracticalitemstesteverydaywet-labandresearchskills(protocol,sequence,
+andcloningreasoning).
+| Metric   | Grok4.5(high) |       | Grok4.6(high) |       |
+| -------- | ------------- | ----- | ------------- | ----- |
+| Accuracy |               | 71.1% |               | 80.7% |
+8.6 ProtocolQAOpen-Ended32
+ProtocolQAopen-endedasksthemodeltoidentifythesinglemostimportantmistake
+inadescribedbiologicallabprotocol. Unlikethemultiple-choicesuites,thisbenchmark
+comprisesopen-endedtroubleshootingtasks.
+| Metric   | Grok4.5(high) |       | Grok4.6(high) |       |
+| -------- | ------------- | ----- | ------------- | ----- |
+| Accuracy |               | 87.0% |               | 79.6% |
+8.7 BixBenchzero-shotMCQ33
+BixBenchevaluatescomputational-biologyreasoningwithanalysistoolsavailableby
+default,scoredzero-shot.
+| Metric   | Grok4.5(high) |       | Grok4.6(high) |       |
+| -------- | ------------- | ----- | ------------- | ----- |
+| Accuracy |               | 93.8% |               | 93.8% |
+BixBenchitemscontainnoweapons-enablingcontent;thesuiterunsunderGrokBuild’s
+defaulttool-onsetting.
+33
+
+GROK4.6MODELCARD
+9 Jailbreaks and robustness
+WetestwhetherGrok4.6’sproductionsafeguardsholdunderadversarialpressure.
+Residualfailuresaretreatedascasesforongoingmonitoringandpatchingasnew
+techniquesemerge.
+9.1 Jailbreaks34,35
+Westresstherefusalsafeguardswithabroad,continuouslyupdatedsetofjailbreak
+attacks,includingpublishedandinternallydiscoveredtechniques,acrosssingle-turnand
+multi-turnsettings,aswellaslongeradversarialtrajectories.
+Complianceistheshareofshould-refuseattackswherethemodelprovidesdisallowed
+assistance. Wereport:
+• Standardjailbreaks: abatteryofvarying-difficultyjailbreaks,bothexistingandinternally
+discovered.
+• StrongReject: complianceontheStrongREJECTsuite.
+• Long-horizonjailbreaks: multi-turnjailbreaks,Crescendomulti-turnjailbreaks,and
+malicious-uselong-horizonattacks.
+Lowerisbetter.
+Suite Grok4.5(high) Grok4.6(high)
+Standardjailbreaks 0.73% 0.04%
+StrongReject 1.5% 3.9%
+Long-horizonjailbreaks — 1.0%
+34
+
+GROK4.6MODELCARD
+10 General output safety
+Thissectioncoverspolicyrefusalsforpromptsrepresentativeofconsumerchattraffic
+acrossthemajordisallowedcategories,includingdedicatedCBRNandweaponsrefusals.
+Onthesesuites,Grok4.6generallyrefusesmorereliablythanGrok4.5: lowercompliance
+onthebroaddisallowedset,improvedCBRNrecall,andunchanged0.0%CSAM
+compliance.
+TheevaluationsandresultsbelowalsoapplytoGrokBuild.
+Refusalsareenforcedbyalayered,defense-in-depthstackratherthanonesinglefilteror
+classifier.
+Safetyfine-tuningandpost-training(supervisedfine-tuningplusreinforcementlearning
+fromhumanfeedback,verifiablerewards,andmodel-basedgrading)trainthemodelto
+refuserequeststhatshowclearintenttocausesevereharmorengageincriminalactivity.
+Systempromptsfurthersteerthemodeltowardhonestyandtruth-seekingwhileavoiding
+over-refusalonbenignorhypotheticaldiscussions.
+Onsomedeploymentsurfaces,Grok4.6isadditionallyaugmentedwithruntimeinputand
+topicalfiltersthataddcontrolsforclassesofsevereharm,includingCSAM,self-harm,and
+biological/chemicalweaponspathways,alongsidecyber-specificsafeguards.
+10.1 Generalrefusals
+Weassembleharmfulquerieswhoseintentrangesfromoverttowell-hidden,spanningthe
+majorpolicycategories,inEnglishandtranslatedintoSpanish,Chinese,Japanese,Arabic,
+andRussian. Aseparategradermodeljudgeswhetherthemodelcorrectlyrefuses.
+Lowerisbetter.
+Metric Grok4.5(high) Grok4.6(high)
+Compliance 1.10% 0.93%
+35
+
+GROK4.6MODELCARD
+10.2 Childsafety
+TheCSAMandchildsafetybenchmarksuiteappliesthesharedrefusalprotocoltothe
+highest-severitychild-safetycategory,usingthesameinternalmulti-turnsuiteastheprior
+card.
+Lowerisbetter.
+|     | Metric     | Grok4.5(high) | Grok4.6(high) |       |     |     |
+| --- | ---------- | ------------- | ------------- | ----- | --- | --- |
+|     | Compliance | 0.00%         |               | 0.00% |     |     |
+10.3 CBRN/weaponsrefusals36
+Autointent-BioandAutointent-Chemareinternalsuitesofmanuallyandsynthetically
+generateddangerousandbenignCBRNqueries;FORTRESS-RNcoversradiologicaland
+nuclearitems.
+| Metric                         |     |     | Grok4.5(high) |       | Grok4.6(high) |        |
+| ------------------------------ | --- | --- | ------------- | ----- | ------------- | ------ |
+| Biorefusalrecall               |     |     |               | 97.9% |               | 100.0% |
+| Chemrefusalrecall              |     |     |               | 96.7% |               | 100.0% |
+| FORTRESS-RNR/Nrefusalaccuracy* |     |     |               | 97.9% |               | 97.9%  |
+CBRNpathwaysreceiveheightenedscrutinyacrossthesafeguardstack: therefusal
+policyprioritizesnon-assistanceforbiological,chemical,radiological,ornuclear
+weaponsdevelopmentordeployment;systempromptsgivespecialattentiontoCBRN
+misusepathways;anddedicatedinputandtopicalfilterstargetbiologicalandchemical
+weapons-relatedabuse.
+* FORTRESS-RNresultsaretakenfromevaluationsconductedbyScaleAI.
+36
+
+GROK4.6MODELCARD
+11 Mental health
+WeassesshowGrok4.6handlesself-harmandcrisissituations. Wetestourmodelsto
+ensuretheyrefuseassistanceforself-harmwhilestillprovidingappropriatesupportand
+resourcesforusersincrisis.
+11.1 Self-harmrefusals
+Theself-harmsuiteappliesthesharedrefusalprotocoltoself-harmandcrisispromptsand
+longer-horizonconversations,checkingthatthemodeldeclinestoassistwhileremaining
+supportive. Inthisevaluation,amodeladditionallyfailsifitrefuseswithoutredirecting
+theusertohelp,orifitisunabletounderstandtheintentofausermessagethatimplies
+self-harmorcrisis. Alowerscoreisbetterinthisbenchmark.
+Metric Grok4.5(high) Grok4.6(high)
+Compliance 0.50% 0.84%
+12 Behaviors
+Theseevaluationscoverpropensitiesthataffectreliability,neutrality,andcontrollability
+ratherthandisallowedcontent: forinstance,sycophancyandhonestyunderpressure.
+12.1 MASK-Rectified37
+UsingadatasetderivedfromMASK*,wetestwhetherGrok4.6faithfullyreportsitsbeliefs
+whenpressuredtolie,asaproxyforthemodel’stendencytoassertmisleadinginformation.
+Alowerscoreisbetterinthisbenchmark.
+Metric Grok4.5(high) Grok4.6(high)
+Dishonesty 0.67% 1.90%
+* MASK-RectifiedcorrectstheMASKgradingsothatresponseswherethemodelisobviously(model-aware)
+role-playing,ratherthanassertingagenuinebelief,arenotcountedaslies.
+37
+
+GROK4.6MODELCARD
+12.2 Sycophancy
+Sycophancymeasuresthetendencytoabandonacorrectanswerandagreewithauser’s
+confidentlystatedwrongone. Weuseaninternalbenchmarkthatpresentsthemodelwith
+aquestionalongsidemisleadinguser-suppliedcontext.
+Lowerisbetter.
+Metric Grok4.5(high) Grok4.6(high)
+Sycophancy 0.01% 0.04%
+38
+
+GROK4.6MODELCARD
+Acknowledgements
+Wethankourevaluationpartnersforrunningbenchmarks,sharingresults,andhelpingus
+measureGrok4.6againstreal-worldworkloads:
+| • AbundantAI         | • Datacurve | • Mercor        |
+| -------------------- | ----------- | --------------- |
+| • ArtificialAnalysis | • gNucleus  | • NormalFactory |
+| • Atopile            | • Harbor    | • ScaleAI       |
+| • Cognition          | • Harvey    | • ValsAI        |
+| • Databricks         | • Mecado    |                 |
+39
+
+GROK4.6MODELCARD
+[PIPELINE INGESTION WORKFLOW - REMOVED REFERENCES]
+

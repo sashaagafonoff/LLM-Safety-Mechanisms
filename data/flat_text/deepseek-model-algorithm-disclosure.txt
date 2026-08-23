@@ -1,0 +1,155 @@
+SOURCE_ID: deepseek-model-algorithm-disclosure
+SOURCE_TITLE: DeepSeek Model & Algorithm Disclosure
+SOURCE_URI: https://cdn.deepseek.com/policies/en-US/model-algorithm-disclosure.html
+--------------------
+Model Mechanism and Training Methods of DeepSeek
+Model Mechanism and Training Methods of DeepSeek
+Hangzhou DeepSeek Artificial Intelligence Co., Ltd. (hereinafter "we" or "DeepSeek") is a
+research team dedicated to exploring AGI, focusing on fundamental model technology research
+and adhering to an open-source approach. We aim to promote technological inclusivity through
+openness, transparency, and security. This document introduces and explains the basic
+principles and training methods of DeepSeek models, providing you with a detailed
+understanding of how DeepSeek operates. This will help you use DeepSeek more effectively
+while ensuring your right to know and control during usage, thereby mitigating risks
+associated with improper use of the model.
+For specific rules on how we collect, protect, and use personal information, please
+carefully read the
+DeepSeek Privacy Policy
+.
+I. Basic Principles of DeepSeek Models
+Currently, the foundational models provided by DeepSeek are all large-scale language models
+based on deep neural networks. These models operate in two main stages: the training phase
+and the inference phase. Additionally, DeepSeek models are open-source, so this section will
+also introduce our open-source efforts.
+1. Model Training
+The model training phase is the development stage, where developers create deployable models
+using designed training methods. The models consist of multi-layered neural networks with
+parameters ranging from billions to trillions. These parameters are continuously optimized
+during training through gradient descent algorithms. Model training can generally be divided
+into two steps: pre-training and optimization training.
+Pre-training: The goal of pre-training is to train the model with datasets, enabling it to
+acquire general language understanding and generation capabilities. During this phase, the
+model learns language patterns and knowledge associations from text data through
+large-scale self-supervised learning. After pre-training, the model can understand and
+generate coherent text but may not yet answer questions or perform tasks accurately.
+Further training adjustments are required.
+Optimization Training: Also known as fine-tuning, optimization training further adjusts
+the model parameters based on the pre-trained model using task-specific data to adapt it
+to real-world application scenarios. During this phase, the model typically employs
+supervised fine-tuning (SFT) or reinforcement learning (RL) methods to learn how to answer
+questions according to instructions, align with human preferences and needs, and unlock
+expertise in specific domains. After optimization training, the model better meets
+practical requirements and can be deployed.
+2. Model Inference
+The inference phase is when the model is deployed to provide services. Once trained and
+deployed, the model can encode and compute input information to predict the next token,
+thereby enabling text generation, conversation, and other capabilities. It can proficiently
+perform a wide range of text-based tasks and be integrated into various downstream systems
+or applications. Specifically, for DeepSeek's product services, the model computes and
+infers based on user input to generate corresponding responses, including text, tables, and
+code.
+It is important to note that the model uses an autoregressive generation method, predicting
+the most likely subsequent sequence of tokens based on the input context through
+probabilistic calculations. This process is not a simple retrieval or "copy-paste" of text
+from the original training data. The model does not store copies of the original training
+data but dynamically generates contextually appropriate responses based on its deep
+understanding of language structure and semantic relationships.
+3. Model Open-Source
+DeepSeek is committed to open-sourcing its models. To this end, we publicly release all
+model weights, parameters, and inference tool code on open-source platforms under the
+permissive MIT License, allowing users to freely download and deploy them. Additionally,
+DeepSeek publishes comprehensive technical reports for each model, serving as references for
+the community and researchers and helping the public gain a deeper understanding of each
+model's technical principles and details.
+II. Data Used for DeepSeek Model Training
+The capabilities of DeepSeek models are built on high-quality, large-scale, and diverse data
+sources. We place great emphasis on and strictly comply with laws and regulations related to
+intellectual property, trade secrets, and personal privacy, ensuring that all data
+acquisition and usage occur within a legal and compliant framework. To enhance transparency,
+DeepSeek hereby publishes Training Data Summary：
+DeepSeek-V4 Training Data Summary
+1. Pre-training Phase
+During the pre-training phase, corpus data is required for training. This phase primarily
+uses the following two categories of data:
+Public Data
+: We use publicly
+available information on the internet to build the model's broad understanding of world
+knowledge. We employ technical methods to acquire and filter these freely accessible data
+to enrich the model's knowledge base.
+Licensed Data
+: We collaborate with
+third-party data providers to obtain proprietary datasets through legally signed
+agreements. We ensure all collaborations are based on lawful authorization.
+The pre-training phase does not require personal information for training. Therefore, we do
+not intentionally collect personal information to associate with any specific account or
+individual, nor do we proactively use it to train our models. We exclude sensitive
+information, credit card numbers, or unique identification information from our training
+data sources to minimize the risk of collecting any personal information. However, due to
+the vast scale of pre-training data, some publicly available online content or licensed data
+from other providers may incidentally contain personal information. We employ technical
+measures to screen and remove such information from the training data as much as possible
+and conduct tests before using the data for training.
+Additionally, to ensure data quality, safety, and diversity, we have established a rigorous
+data governance process. First, we use filters to automatically screen and remove raw data
+containing hate speech, pornography, violence, spam, or potential infringement. Second,
+recognizing that large-scale datasets may inherently contain statistical biases, we combine
+algorithmic and manual review methods to identify and mitigate the impact of these biases on
+the model's values, thereby enhancing fairness.
+2. Optimization Training Phase
+During the optimization training phase, we typically need to construct or annotate a set of
+question-answer pair data manually or automatically to train the model. These
+question-answer pairs are produced by our research team, with a small portion potentially
+based on user input.
+If user input is used to construct training data, we apply secure encryption, strict
+de-identification, and anonymization to make it cannot be linked to any specific
+individual. We also deploy measures to make personal information not appear in the model's
+outputs to other users and we will not use it for user profiling or personalized
+recommendations. To be clear, we do not offer services involving user profiling or
+personalized recommendations. Users are also given the right to opt out. For information
+on how to opt out of AI training, please refer to the
+DeepSeek Privacy Policy
+.
+To ensure model safety, during the
+optimization training phase, we construct specialized safety data to align the model with
+human values, enhancing its inherent safety capabilities.
+III. Model Limitations and Risks
+Risks associated with AI models may arise from two causes:
+1. Limitations due to the immaturity of AI technology.
+2. Risks due to the misuse of AI technology.
+Specifically:
+1. Limitations
+Currently, AI is still in its early stages, and the technology is not yet mature. Due to the
+limitations of current model principles, AI may generate incorrect, omitted, or non-factual
+content, a phenomenon known as "hallucination." Hallucination is a challenge faced by the
+entire AI industry. DeepSeek is committed to reducing hallucination rates through research,
+including but not limited to selecting high-quality training data sources, optimizing
+alignment strategies, and employing retrieval-augmented generation (RAG) techniques.
+However, at this stage, we cannot guarantee that the model will not produce hallucinations.
+To further mitigate the potential adverse effects caused by hallucinations, we have added
+prominent warning labels on DeepSeek's welcome page, at the end of generated text, and at
+the bottom of the interactive interface, specifically reminding users that the content is
+AI-generated and may be inaccurate.
+The content generated by the model is for reference only and should not be treated as
+professional advice. Specifically, when using this service for medical, legal, financial, or
+other professional inquiries, please note that the service does not constitute any advice or
+commitment or represent opinions in any professional field. If you require professional
+services, consult experts and make decisions under their guidance. The output of this
+software should not serve as the basis for further actions or inactions.
+2. Misuse Risks
+The risks of AI technology misuse are widely recognized globally, including concerns about
+privacy protection, copyright, data security, content safety, bias, and discrimination. The
+technology itself is neutral; risks arise from its practical application and must be
+considered in the context of usage scenarios and intended purposes.
+DeepSeek takes the potential risks of AI technology applications very seriously. We strictly
+comply with legal and regulatory requirements and take reasonable measures to continuously
+enhance model safety throughout the entire lifecycle of model development, training, and
+deployment. These measures include, but are not limited to, establishing internal risk
+management systems, conducting model safety assessments, performing red team testing, and
+improving model and service transparency.
+At the same time, we respect and safeguard the rights granted to users by law, including but
+not limited to the right to know, choose, and control model technology and services. Users
+can query basic service information, opt out of data usage for model training, delete their
+historical data, and more. If you have any claims, requests, or questions regarding the
+exercise of these rights, please refer to our [Privacy Policy] or contact us at [
+privacy@deepseek.com
+].

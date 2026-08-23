@@ -898,9 +898,32 @@
       "provider": "xai",
       "status": "active",
       "version": "Grok 4.3",
-      "notes": "Current flagship (1M ctx, native video in). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "notes": "Still served but superseded as flagship by Grok 4.5 then Grok 4.6 (2026-08). Added per model-currency audit 2026-06-19; status note updated per 2026-08 execution plan T1.4 (verified on docs.x.ai).",
       "sources": [
         "https://docs.x.ai/developers/models"
+      ]
+    },
+    {
+      "id": "grok-4.5",
+      "family": "Grok",
+      "provider": "xai",
+      "status": "active",
+      "version": "Grok 4.5",
+      "notes": "Active; sits between Grok 4.3 and the 4.6 flagship on the official models page. Release date not yet confirmed on an official page. Added per 2026-08 execution plan T1.4 (verified on docs.x.ai).",
+      "sources": [
+        "https://docs.x.ai/developers/models"
+      ]
+    },
+    {
+      "id": "grok-4.6",
+      "family": "Grok",
+      "provider": "xai",
+      "status": "active",
+      "version": "Grok 4.6",
+      "notes": "Current xAI flagship for code and chat (\"most intelligent and fastest model we've built\"). Model card published 2026-08-12 (rev 2026-08-17) with safety evaluations. Added per 2026-08 execution plan T1.4 (verified on docs.x.ai).",
+      "sources": [
+        "https://docs.x.ai/developers/models",
+        "https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf"
       ]
     },
     {
