@@ -73,6 +73,25 @@ RANDOM_SEED = 42
 WINDOW_SIZE = 3
 STRIDE = 2
 
+# --- PERFORMANCE (2026-08 perf/resilience upgrade) ---
+# fp16 inference for the verification cross-encoder. On CUDA, halving the
+# model's weights roughly doubles effective throughput on tensor-core GPUs
+# (fewer bytes to move, higher achievable FLOPs) and lets a larger batch fit
+# in the same VRAM — the two effects compound, which is why batch size is
+# raised at the same time (below). CPU inference gets no benefit from fp16
+# (no tensor cores, and some ops fall back to fp32 anyway) and is never
+# switched, regardless of this flag — see `should_use_fp16`.
+#
+# Score note: fp16 and fp32 give slightly different verification scores
+# (rounding in the reduced mantissa) — typically a 3rd-4th decimal place
+# difference, occasionally larger near a threshold boundary. This is accepted:
+# scores feed RETRIEVAL_THRESHOLD/VERIFICATION_THRESHOLD comparisons, not
+# exact-value reproduction, so a few-thousandths shift essentially never flips
+# a decision. Set NLU_FP16 = False as a working escape hatch if exact fp32
+# reproducibility is ever needed (e.g. debugging a threshold-boundary case).
+NLU_FP16 = True
+CROSS_ENCODER_BATCH_SIZE = 64
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("NLU_Analyzer")
 
@@ -175,6 +194,17 @@ def _apply_chunk_quality_gate(chunks: List[str], doc_id: str = "") -> List[str]:
         logger.info(f"chunk-quality gate dropped {dropped} of {total} chunks{label}")
     return kept
 
+def should_use_fp16(cuda_available: bool, flag: bool = NLU_FP16) -> bool:
+    """Whether the verification cross-encoder should be cast to fp16.
+
+    Pure function so the dtype decision is unit-testable without loading any
+    model or touching torch.cuda: fp16 is only ever used on CUDA (there is no
+    throughput benefit — and real correctness risk — running fp16 on CPU), and
+    only when the escape-hatch flag is enabled.
+    """
+    return bool(cuda_available) and bool(flag)
+
+
 def _set_determinism(seed: int = RANDOM_SEED) -> None:
     """Seed RNGs for reproducible scores (best-effort; deps may be absent)."""
     try:
@@ -200,6 +230,23 @@ class NLUAnalyzer:
         logger.info("⏳ Loading Verification Model (Cross-Encoder)...")
         ce_kwargs = {} if VERIFICATION_MODEL_REVISION is None else {"revision": VERIFICATION_MODEL_REVISION}
         self.verifier = CrossEncoder(VERIFICATION_MODEL_NAME, **ce_kwargs)
+
+        # Performance: fp16 the verifier on CUDA (see NLU_FP16 docstring above
+        # for the throughput/score-precision tradeoff). CPU always stays fp32.
+        try:
+            import torch
+            cuda_available = torch.cuda.is_available()
+        except Exception:  # pragma: no cover - torch always present in this project
+            cuda_available = False
+        self.fp16 = should_use_fp16(cuda_available, NLU_FP16)
+        if self.fp16:
+            self.verifier.model.half()
+        device = "cuda" if cuda_available else "cpu"
+        dtype = "fp16" if self.fp16 else "fp32"
+        logger.info(
+            "✓ Verifier ready — device=%s, dtype=%s, batch_size=%d (NLU_FP16=%s, cuda_available=%s)",
+            device, dtype, CROSS_ENCODER_BATCH_SIZE, NLU_FP16, cuda_available,
+        )
 
         # Resolve the entailment class index from the checkpoint config (REFACTOR §1.3);
         # do not hard-code index 1.
@@ -393,7 +440,7 @@ class NLUAnalyzer:
             targets = [profile.get('primary_concept', tech['description'])]
             targets.extend(profile.get('semantic_anchors', []))
 
-            embeddings = self.retriever.encode(targets, convert_to_tensor=True)
+            embeddings = self.retriever.encode(targets, convert_to_tensor=True, batch_size=64)
 
             # Get category info for metadata filtering
             category_id = tech.get('categoryId')
@@ -443,7 +490,7 @@ class NLUAnalyzer:
             logger.debug(f"   Excluded topics: {excluded_topics if excluded_topics else 'none'}")
 
         logger.debug(f"   Generated {len(chunks)} chunks")
-        chunk_embeddings = self.retriever.encode(chunks, convert_to_tensor=True)
+        chunk_embeddings = self.retriever.encode(chunks, convert_to_tensor=True, batch_size=64)
         candidates = []
         metadata_filtered = 0
 
@@ -482,7 +529,7 @@ class NLUAnalyzer:
 
         verified_matches = []
         pairs = [(c['chunk'], c['technique']['hypothesis']) for c in candidates]
-        pred_scores = self.verifier.predict(pairs, apply_softmax=True)
+        pred_scores = self.verifier.predict(pairs, apply_softmax=True, batch_size=CROSS_ENCODER_BATCH_SIZE)
         entailment_idx = self.entailment_idx
 
         filtered_count = 0
@@ -601,7 +648,7 @@ class NLUAnalyzer:
         doc_metadata = self.document_metadata.get(doc_id, {})
         excluded_topics = set(doc_metadata.get('excluded_topics', []))
 
-        chunk_embeddings = self.retriever.encode(chunks, convert_to_tensor=True)
+        chunk_embeddings = self.retriever.encode(chunks, convert_to_tensor=True, batch_size=64)
         candidates = []
         for tech in self.technique_index:
             if excluded_topics:
@@ -622,7 +669,7 @@ class NLUAnalyzer:
             return []
 
         pairs = [(c['chunk'], c['technique']['hypothesis']) for c in candidates]
-        pred_scores = self.verifier.predict(pairs, apply_softmax=True)
+        pred_scores = self.verifier.predict(pairs, apply_softmax=True, batch_size=CROSS_ENCODER_BATCH_SIZE)
         out = []
         for i, dist in enumerate(pred_scores):
             out.append({
