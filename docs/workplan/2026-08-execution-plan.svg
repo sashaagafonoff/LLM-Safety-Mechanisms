@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1580 940" width="1580" height="940" role="img" aria-label="Execution plan diagram: parallel tracks with model assignments">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1580" height="940" fill="#ffffff"/>
+
+  <g font-family="Segoe UI, -apple-system, Arial, sans-serif">
+
+    <!-- Title -->
+    <text x="20" y="38" font-size="21" font-weight="700" fill="#0f172a">Execution Plan — Aug 2026 · parallel tracks &amp; model assignment</text>
+    <text x="20" y="58" font-size="12" fill="#64748b">LLM Safety Mechanisms · companion to docs/workplan/2026-08-execution-plan.md · goals: blind-test precision 41.8% → ≥70% · incidents linked to models · model list current</text>
+
+    <!-- Legend -->
+    <g font-size="11" fill="#334155">
+      <rect x="20" y="76" width="34" height="16" rx="8" fill="#0e8a5f"/>
+      <text x="37" y="88" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">H</text>
+      <text x="62" y="88">Haiku 4.5 subagent · $1/$5 per MTok</text>
+
+      <rect x="270" y="76" width="34" height="16" rx="8" fill="#2563eb"/>
+      <text x="287" y="88" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+      <text x="312" y="88">Sonnet subagent · $3/$15</text>
+
+      <rect x="480" y="76" width="34" height="16" rx="8" fill="#7c3aed"/>
+      <text x="497" y="88" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">F5</text>
+      <text x="522" y="88">Orchestrator · Fable 5</text>
+
+      <rect x="670" y="76" width="34" height="16" rx="8" fill="#b45309"/>
+      <text x="687" y="88" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">HG</text>
+      <text x="712" y="88">Human gate</text>
+
+      <rect x="800" y="76" width="34" height="16" rx="8" fill="#64748b"/>
+      <text x="817" y="88" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">PY</text>
+      <text x="842" y="88">Local script · no LLM</text>
+
+      <rect x="985" y="76" width="34" height="16" rx="8" fill="#0891b2"/>
+      <text x="1002" y="88" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">API</text>
+      <text x="1027" y="88">Pipeline Claude API call (model chosen by A/B)</text>
+    </g>
+
+    <!-- Day markers -->
+    <g font-size="10.5" font-weight="700" fill="#94a3b8" text-anchor="middle">
+      <text x="110" y="122">DAY 0</text>
+      <text x="385" y="122">DAYS 0–2</text>
+      <text x="735" y="122">DAYS 2–4</text>
+      <text x="1085" y="122">DAYS 4–5</text>
+      <text x="1430" y="122">WEEK 2</text>
+    </g>
+
+    <!-- ============ PHASE 0 (standalone) ============ -->
+    <rect x="16" y="160" width="188" height="78" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="16" y="160" width="188" height="26" rx="10" fill="#f1f5f9"/>
+    <rect x="16" y="173" width="188" height="13" fill="#f1f5f9"/>
+    <text x="28" y="177" font-size="12.5" font-weight="700" fill="#0f172a">PHASE 0 · Ship today</text>
+
+    <rect x="28" y="192" width="34" height="16" rx="8" fill="#b45309"/>
+    <text x="45" y="204" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">HG</text>
+    <text x="70" y="204" font-size="11" fill="#1e293b">Push AIID refresh</text>
+
+    <rect x="28" y="212" width="34" height="16" rx="8" fill="#7c3aed"/>
+    <text x="45" y="224" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">F5</text>
+    <text x="70" y="224" font-size="11" fill="#1e293b">WORKPLAN C.4 fix</text>
+
+    <text x="20" y="256" font-size="10" font-style="italic" fill="#94a3b8">independent — no downstream deps</text>
+
+    <!-- ============ TRACK A band ============ -->
+    <rect x="210" y="130" width="1055" height="230" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-dasharray="4 3"/>
+    <text x="224" y="148" font-size="11" font-weight="700" fill="#64748b" letter-spacing="1">TRACK A · DATA CURRENCY &amp; SOURCES</text>
+
+    <!-- P1 -->
+    <rect x="230" y="160" width="310" height="178" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="230" y="160" width="310" height="26" rx="10" fill="#f1f5f9"/>
+    <rect x="230" y="173" width="310" height="13" fill="#f1f5f9"/>
+    <text x="242" y="177" font-size="12.5" font-weight="700" fill="#0f172a">PHASE 1 · Model currency</text>
+    <text x="528" y="177" font-size="10" fill="#64748b" text-anchor="end">Days 0–1</text>
+
+    <rect x="242" y="192" width="34" height="16" rx="8" fill="#0e8a5f"/><text x="259" y="204" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">H</text>
+    <text x="284" y="204" font-size="11" fill="#1e293b">Verify Sonnet 5 + Opus 5 ids/dates</text>
+    <rect x="242" y="212" width="34" height="16" rx="8" fill="#0e8a5f"/><text x="259" y="224" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">H</text>
+    <text x="284" y="224" font-size="11" fill="#1e293b">Verify GPT-5.6 Sol/Terra/Luna ids</text>
+    <rect x="242" y="232" width="34" height="16" rx="8" fill="#0e8a5f"/><text x="259" y="244" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">H</text>
+    <text x="284" y="244" font-size="11" fill="#1e293b">Verify Llama 5 — official pages only</text>
+    <rect x="242" y="252" width="34" height="16" rx="8" fill="#b45309"/><text x="259" y="264" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">HG</text>
+    <text x="284" y="264" font-size="11" fill="#1e293b">Confirm retirements + Mythos 5 call</text>
+    <rect x="242" y="272" width="34" height="16" rx="8" fill="#7c3aed"/><text x="259" y="284" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">F5</text>
+    <text x="284" y="284" font-size="11" fill="#1e293b">Edit models.json (adds + notes)</text>
+    <rect x="242" y="292" width="34" height="16" rx="8" fill="#2563eb"/><text x="259" y="304" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="284" y="304" font-size="11" fill="#1e293b">Retire/remove + repoint evidence refs</text>
+    <rect x="242" y="312" width="34" height="16" rx="8" fill="#64748b"/><text x="259" y="324" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">PY</text>
+    <text x="284" y="324" font-size="11" fill="#1e293b">validate.py + check_integrity gate</text>
+
+    <!-- P5 -->
+    <rect x="580" y="160" width="310" height="118" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="580" y="160" width="310" height="26" rx="10" fill="#f1f5f9"/>
+    <rect x="580" y="173" width="310" height="13" fill="#f1f5f9"/>
+    <text x="592" y="177" font-size="12.5" font-weight="700" fill="#0f172a">PHASE 5 · Source docs (17 gap models)</text>
+    <text x="878" y="177" font-size="10" fill="#64748b" text-anchor="end">Days 1–4</text>
+
+    <rect x="592" y="192" width="34" height="16" rx="8" fill="#0e8a5f"/><text x="609" y="204" font-size="8.5" font-weight="700" fill="#ffffff" text-anchor="middle">H×6</text>
+    <text x="634" y="204" font-size="11" fill="#1e293b">Per-provider card-URL discovery</text>
+    <rect x="592" y="212" width="34" height="16" rx="8" fill="#7c3aed"/><text x="609" y="224" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">F5</text>
+    <text x="634" y="224" font-size="11" fill="#1e293b">Approve sources → evidence.json</text>
+    <rect x="592" y="232" width="34" height="16" rx="8" fill="#64748b"/><text x="609" y="244" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">PY</text>
+    <text x="634" y="244" font-size="11" fill="#1e293b">ingest_universal + clean_flat_text</text>
+    <rect x="592" y="252" width="34" height="16" rx="8" fill="#0e8a5f"/><text x="609" y="264" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">H</text>
+    <text x="634" y="264" font-size="11" fill="#1e293b">Spot-check flat-text quality</text>
+
+    <!-- ============ TRACK B band ============ -->
+    <rect x="210" y="380" width="1055" height="210" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-dasharray="4 3"/>
+    <text x="224" y="398" font-size="11" font-weight="700" fill="#64748b" letter-spacing="1">TRACK B · EXTRACTION ACCURACY</text>
+
+    <!-- P2 -->
+    <rect x="230" y="410" width="310" height="138" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="230" y="410" width="310" height="26" rx="10" fill="#f1f5f9"/>
+    <rect x="230" y="423" width="310" height="13" fill="#f1f5f9"/>
+    <text x="242" y="427" font-size="12.5" font-weight="700" fill="#0f172a">PHASE 2 · Precision quick wins</text>
+    <text x="528" y="427" font-size="10" fill="#64748b" text-anchor="end">Days 1–2</text>
+
+    <rect x="242" y="442" width="34" height="16" rx="8" fill="#2563eb"/><text x="259" y="454" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="284" y="454" font-size="11" fill="#1e293b">NLU deny-list: 12 FP-factory techniques</text>
+    <rect x="242" y="462" width="34" height="16" rx="8" fill="#2563eb"/><text x="259" y="474" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="284" y="474" font-size="11" fill="#1e293b">Chunk-quality gate + table-soup tests</text>
+    <rect x="242" y="482" width="34" height="16" rx="8" fill="#2563eb"/><text x="259" y="494" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="284" y="494" font-size="11" fill="#1e293b">Corroboration rule (1-chunk → review)</text>
+    <rect x="242" y="502" width="34" height="16" rx="8" fill="#2563eb"/><text x="259" y="514" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="284" y="514" font-size="11" fill="#1e293b">Store raw scores (+ schema update)</text>
+    <rect x="242" y="522" width="34" height="16" rx="8" fill="#7c3aed"/><text x="259" y="534" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">F5</text>
+    <text x="284" y="534" font-size="11" fill="#1e293b">Review · merge · NLU-only mini-run</text>
+
+    <!-- P3 -->
+    <rect x="580" y="410" width="310" height="158" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="580" y="410" width="310" height="26" rx="10" fill="#f1f5f9"/>
+    <rect x="580" y="423" width="310" height="13" fill="#f1f5f9"/>
+    <text x="592" y="427" font-size="12.5" font-weight="700" fill="#0f172a">PHASE 3 · LLM-pass recall</text>
+    <text x="878" y="427" font-size="10" fill="#64748b" text-anchor="end">Days 2–4</text>
+
+    <rect x="592" y="442" width="34" height="16" rx="8" fill="#2563eb"/><text x="609" y="454" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="634" y="454" font-size="11" fill="#1e293b">Inject NLU chunks into extraction prompt</text>
+    <rect x="592" y="462" width="34" height="16" rx="8" fill="#2563eb"/><text x="609" y="474" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="634" y="474" font-size="11" fill="#1e293b">Category-batched extraction (5 calls)</text>
+    <rect x="592" y="482" width="34" height="16" rx="8" fill="#2563eb"/><text x="609" y="494" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="634" y="494" font-size="11" fill="#1e293b">Structured outputs (strict tool schema)</text>
+    <rect x="592" y="502" width="34" height="16" rx="8" fill="#2563eb"/><text x="609" y="514" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="634" y="514" font-size="11" fill="#1e293b">Pass-2 verify: fuller context + reasons</text>
+    <rect x="592" y="522" width="34" height="16" rx="8" fill="#7c3aed"/><text x="609" y="534" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">F5</text>
+    <text x="634" y="534" font-size="11" fill="#1e293b">Prompt wording owned by orchestrator</text>
+    <rect x="592" y="542" width="34" height="16" rx="8" fill="#0891b2"/><text x="609" y="554" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">API</text>
+    <text x="634" y="554" font-size="11" fill="#1e293b">A/B dev split: sonnet-4-6 vs opus-5</text>
+
+    <!-- P4 -->
+    <rect x="930" y="410" width="310" height="118" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="930" y="410" width="310" height="26" rx="10" fill="#f1f5f9"/>
+    <rect x="930" y="423" width="310" height="13" fill="#f1f5f9"/>
+    <text x="942" y="427" font-size="12.5" font-weight="700" fill="#0f172a">PHASE 4 · Calibration</text>
+    <text x="1228" y="427" font-size="10" fill="#64748b" text-anchor="end">Days 4–5</text>
+
+    <rect x="942" y="442" width="34" height="16" rx="8" fill="#2563eb"/><text x="959" y="454" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="984" y="454" font-size="11" fill="#1e293b">Label pool: review index (1253+ / 518−)</text>
+    <rect x="942" y="462" width="34" height="16" rx="8" fill="#2563eb"/><text x="959" y="474" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="984" y="474" font-size="11" fill="#1e293b">Per-technique thresholds + isotonic</text>
+    <rect x="942" y="482" width="34" height="16" rx="8" fill="#64748b"/><text x="959" y="494" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">PY</text>
+    <text x="984" y="494" font-size="11" fill="#1e293b">CI threshold-regression check</text>
+    <rect x="942" y="502" width="34" height="16" rx="8" fill="#7c3aed"/><text x="959" y="514" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">F5</text>
+    <text x="984" y="514" font-size="11" fill="#1e293b">Approve operating points</text>
+
+    <!-- ============ TRACK C band ============ -->
+    <rect x="210" y="630" width="1055" height="140" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-dasharray="4 3"/>
+    <text x="224" y="648" font-size="11" font-weight="700" fill="#64748b" letter-spacing="1">TRACK C · INCIDENT LINKAGE</text>
+
+    <rect x="230" y="660" width="310" height="98" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="230" y="660" width="310" height="26" rx="10" fill="#f1f5f9"/>
+    <rect x="230" y="673" width="310" height="13" fill="#f1f5f9"/>
+    <text x="242" y="677" font-size="12.5" font-weight="700" fill="#0f172a">T5.3 · AIID model matcher</text>
+    <text x="528" y="677" font-size="10" fill="#64748b" text-anchor="end">~1 day</text>
+
+    <rect x="242" y="692" width="34" height="16" rx="8" fill="#2563eb"/><text x="259" y="704" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="284" y="704" font-size="11" fill="#1e293b">Alias matcher from models.json versions</text>
+    <rect x="242" y="712" width="34" height="16" rx="8" fill="#64748b"/><text x="259" y="724" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">PY</text>
+    <text x="284" y="724" font-size="11" fill="#1e293b">Re-ingest snapshot · measure match rate</text>
+    <rect x="242" y="732" width="34" height="16" rx="8" fill="#64748b"/><text x="259" y="744" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">PY</text>
+    <text x="284" y="744" font-size="11" fill="#1e293b">validate.py gate</text>
+
+    <text x="570" y="712" font-size="10.5" font-style="italic" fill="#94a3b8">fixes modelIds = 0 / 1630 · independent of Track B ·</text>
+    <text x="570" y="728" font-size="10.5" font-style="italic" fill="#94a3b8">needs only the Mythos 5 alias decision from Phase 1</text>
+
+    <!-- ============ PHASE 6 (convergence) ============ -->
+    <rect x="1300" y="330" width="260" height="158" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+    <rect x="1300" y="330" width="260" height="26" rx="10" fill="#f3ebfd"/>
+    <rect x="1300" y="343" width="260" height="13" fill="#f3ebfd"/>
+    <text x="1312" y="347" font-size="12.5" font-weight="700" fill="#0f172a">PHASE 6 · Converge &amp; publish</text>
+
+    <rect x="1312" y="362" width="34" height="16" rx="8" fill="#0891b2"/><text x="1329" y="374" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">API</text>
+    <text x="1354" y="374" font-size="11" fill="#1e293b">Full rerun (A/B winner model)</text>
+    <rect x="1312" y="382" width="34" height="16" rx="8" fill="#64748b"/><text x="1329" y="394" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">PY</text>
+    <text x="1354" y="394" font-size="11" fill="#1e293b">Blind eval: dev + test splits</text>
+    <rect x="1312" y="402" width="34" height="16" rx="8" fill="#b45309"/><text x="1329" y="414" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">HG</text>
+    <text x="1354" y="414" font-size="11" fill="#1e293b">Tagging-tool review session</text>
+    <rect x="1312" y="422" width="34" height="16" rx="8" fill="#64748b"/><text x="1329" y="434" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">PY</text>
+    <text x="1354" y="434" font-size="11" fill="#1e293b">snapshot + generate_report</text>
+    <rect x="1312" y="442" width="34" height="16" rx="8" fill="#b45309"/><text x="1329" y="454" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">HG</text>
+    <text x="1354" y="454" font-size="11" fill="#1e293b">Commit + push → dashboard</text>
+
+    <text x="1300" y="510" font-size="10.5" font-weight="700" fill="#7c3aed">Exit gate: test precision ≥ 70% ·</text>
+    <text x="1300" y="525" font-size="10.5" font-weight="700" fill="#7c3aed">recall ≥ 65% · validate.py green</text>
+
+    <!-- ============ Arrows ============ -->
+    <g stroke="#94a3b8" stroke-width="1.8" fill="none">
+      <path d="M542,240 C560,240 560,225 576,225" marker-end="url(#arr)"/>
+      <path d="M892,219 C1100,219 1180,330 1296,350" marker-end="url(#arr)"/>
+      <path d="M542,479 C560,479 560,489 576,489" marker-end="url(#arr)"/>
+      <path d="M892,489 C912,489 912,469 926,469" marker-end="url(#arr)"/>
+      <path d="M1242,469 C1268,469 1268,420 1296,414" marker-end="url(#arr)"/>
+      <path d="M542,709 C900,709 1380,700 1380,494" marker-end="url(#arr)"/>
+    </g>
+
+    <!-- Footer -->
+    <text x="20" y="920" font-size="10.5" fill="#94a3b8">Generated 2026-08-23 · chips = executor &amp; model tier · arrows = dependencies · Phase 0 runs independently · task specs (T-ids) in 2026-08-execution-plan.md · WORKPLAN.md remains the master backlog</text>
+  </g>
+</svg>

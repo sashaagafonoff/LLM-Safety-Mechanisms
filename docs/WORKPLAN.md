@@ -8,6 +8,11 @@ Consolidated, explicit backlog derived from [REFACTOR.md](REFACTOR.md) (reliabil
 2. **Reliability-review implementation** (Section B) — _do next, **before** reprocessing data._
 3. **Reprocess the data** for the updated model collection (Section C).
 4. **Generative-media extension** (Section D) — _deferred; image/video models intentionally dropped for now._
+5. **GitHub automation** (Section E) — _backlog; to be planned and built after the 2026-08 execution plan completes._
+
+> **Near-term execution (2026-08-23):** [workplan/2026-08-execution-plan.md](workplan/2026-08-execution-plan.md)
+> operationalizes the remaining B.2 items, unblocks A.3, and sequences Section C — with per-task
+> subagent/model assignments and a companion diagram.
 
 Status legend: `[x]` done · `[ ]` to do · `[~]` partially done / deferred.
 
@@ -104,7 +109,7 @@ and split-freshness guards in `check_integrity.py`. Foundation modules:
 - [ ] **C.1** Ingest model/system cards for the newly-added models (use the `sources[]` URLs now on each model record + MODEL_AUDIT.md §5) via `ingest_universal.py`.
 - [ ] **C.2** Run the (now reliability-hardened) extraction pipeline over the new + existing corpus (`run_extraction_pipeline.py --regenerate`).
 - [ ] **C.3** Evaluate against the blind gold set (B.1) and snapshot (B.2.7); report metrics with the new honest methodology.
-- [ ] **C.4** Regenerate report + dashboard (`generate_report.py` → `generate_dashboard.py`).
+- [ ] **C.4** Regenerate reports (`generate_report.py` — updates README stats, `docs/SUMMARY.md`, `data/stats.json`). The dashboard needs **no** regeneration step: it is hand-maintained and reads `data/*.json` from `main` at runtime, so pushing the data is sufficient (`generate_dashboard.py` was removed — see CLAUDE.md).
 
 > ⚠️ Do **not** regenerate the dashboard for any media models until Section D's modality-aware work lands (REFACTOR §7.5) — they would render as "fails every text technique."
 
@@ -119,3 +124,25 @@ Captured from REFACTOR.md §7 for whenever media coverage is revisited. The reco
 - [ ] **D.4** Build a parallel set of NLU anchors + entailment hypotheses for media techniques; re-validate the extractor against media model cards (§7.4).
 - [ ] **D.5** Make the dashboard modality-aware (filter facet + applicability-aware cells + modality-weighted coverage) (§7.5).
 - [ ] **D.6** Re-add the image/video models (FLUX, GPT Image, etc. — see MODEL_AUDIT.md §1/§4) under the new modality schema.
+
+---
+
+## E. GitHub automation (backlog — to be planned)
+
+Captured 2026-08-23. **Goal:** automate as much of the recurring workflow as possible via
+GitHub (Actions + issue/PR flows) so refreshes don't depend on a local machine. This section is
+a placeholder to be scoped into a proper plan **after** the immediate tasks in
+[workplan/2026-08-execution-plan.md](workplan/2026-08-execution-plan.md) are executed —
+the accuracy fixes and calibration land first so anything we automate is worth automating.
+
+Candidate scope (unplanned — revisit and design before building):
+- [ ] **E.1** Scheduled AIID re-ingest: `ingest_aiid.py --download` on cron → `validate.py` → auto-PR with a diff summary (never a direct push to `main`).
+- [ ] **E.2** Wire `check_sources.py` (upstream source-drift detection) into a scheduled workflow; open an issue/PR per changed source. Decide runner strategy — `--update --analyse` needs the ML stack + `ANTHROPIC_API_KEY`, so detection-only may be the CI mode with analysis staying local.
+- [ ] **E.3** Scheduled `snapshot.py` + field-level drift report — overlaps **B.2.7**; fold the two together when planning.
+- [ ] **E.4** Auto-run `generate_report.py` (stats/SUMMARY/README) when `data/**.json` changes on `main`, committing back or PR-ing the regenerated artifacts.
+- [ ] **E.5** Secrets/cost policy for LLM stages in CI: `ANTHROPIC_API_KEY` as a repo secret, per-run budget caps, and an explicit list of which pipeline stages stay manual-only.
+- [ ] **E.6** Extend `process-review.yml` toward a full review loop: tagging-tool submissions → PR → validate + blind-eval gate → merge.
+
+Existing automation to build on: `validate.yml` (schema + integrity + pytest CI gate),
+`dashboard-deploy.yml` (Pages deploy on `docs/**`/`data/**.json` changes), `process-review.yml`
+(community tag submissions).
