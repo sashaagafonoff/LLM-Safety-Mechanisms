@@ -33,6 +33,7 @@ Two workflow modes:
 Usage:
     python scripts/run_extraction_pipeline.py                    # Full pipeline
     python scripts/run_extraction_pipeline.py --nlu-only         # Just NLU pass
+    python scripts/run_extraction_pipeline.py --nlu-only --resume-nlu  # Resume an interrupted full NLU pass
     python scripts/run_extraction_pipeline.py --llm-only         # Just LLM pass (uses existing NLU)
     python scripts/run_extraction_pipeline.py --id doc-id        # Process specific document
     python scripts/run_extraction_pipeline.py --model sonnet     # Use Sonnet instead of Haiku
@@ -45,6 +46,7 @@ Requirements:
 
 import json
 import argparse
+import os
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Set
@@ -74,6 +76,10 @@ NLU_OUTPUT_PATH = DATA_DIR / "map_nlu.json"
 LLM_OUTPUT_PATH = DATA_DIR / "map_llm.json"
 FLAT_TEXT_DIR = DATA_DIR / "flat_text"
 PIPELINE_LOG_PATH = Path("cache/pipeline_log.json")
+# Sidecar recording the NLU provenance a full-collection pass started with, so
+# a later --resume-nlu run can detect it's resuming across a config change
+# (see check_nlu_config_drift). Gitignored (cache/), same as PIPELINE_LOG_PATH.
+NLU_RUN_CONFIG_PATH = Path("cache/nlu_run_config.json")
 
 # Provenance accumulated during a run (resolved model ids, thresholds, revisions),
 # written to the pipeline log so an output can be tied to the config that produced it.
@@ -287,11 +293,133 @@ def apply_corroboration_rule(doc_id: str, entries: List[Dict], reviewed: bool) -
     return quarantined
 
 
-def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]:
+# --- Performance + resilience helpers (2026-08 NLU perf/resume upgrade) ---
+# Pure functions, deliberately free of model/network/heavy-import dependencies,
+# so they're directly unit-testable (see tests/test_nlu_perf_resume.py).
+
+def docs_to_process(all_files: List[Path], existing_results: Dict[str, List[Dict]],
+                     resume: bool) -> List[Path]:
+    """Which document files a full-collection NLU pass should still analyze.
+
+    - resume=False: every file in `all_files` is (re)processed — a fresh full
+      run behaves exactly as before this change, even if a stale/partial
+      map_nlu.json happens to be sitting on disk from an earlier interrupted
+      run (it gets overwritten from scratch, same as today).
+    - resume=True: files whose `.stem` (doc_id) is already a key in
+      `existing_results` are skipped. An empty `existing_results` is treated
+      the same as resume=False (nothing has completed yet, so there is
+      nothing to skip) — this also makes the "all-done" case (every id
+      already present) fall out naturally as an empty return list.
+
+    `all_files` elements only need a `.stem` attribute (Path or path-like),
+    so this is testable with plain `Path("...")` objects that are never
+    touched on disk.
+    """
+    if not resume or not existing_results:
+        return list(all_files)
+    return [f for f in all_files if Path(f).stem not in existing_results]
+
+
+def atomic_write_json(path: Path, data) -> None:
+    """Write `data` as JSON to `path` atomically.
+
+    Writes to a `<path>.tmp` sibling in the same directory first, then
+    `os.replace`s it into place. `os.replace` is atomic on both POSIX and
+    Windows when source and destination are on the same volume (true here —
+    the tmp file is always written next to its target), so a crash, kill, or
+    sleep-death mid-write can never leave `path` truncated or holding
+    half-written JSON: readers always see either the previous complete
+    contents or the new complete contents. Used for data/map_nlu.json, which
+    is now rewritten after every document in a long NLU pass rather than
+    once at the end (see run_nlu_pass) — without this, an interrupted write
+    could corrupt hours of accumulated progress instead of just losing the
+    one document in flight.
+    """
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = Path(str(path) + ".tmp")
+    with open(tmp_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
+    os.replace(tmp_path, path)
+
+
+def nlu_config_drift(current: Dict, previous: Optional[Dict]) -> List[str]:
+    """Human-readable differences between two NLU provenance dicts.
+
+    Pure comparison — no disk I/O. `previous=None` means there was nothing to
+    compare against (no sidecar on disk yet, or it was unreadable): that is
+    "unknown", not "drift", so it returns an empty list rather than flagging
+    every key. Otherwise every key present in either dict is compared; a key
+    missing from one side is reported as `<missing>` on that side.
+    """
+    if previous is None:
+        return []
+    diffs = []
+    for key in sorted(set(current) | set(previous)):
+        cur_val = current.get(key, "<missing>")
+        prev_val = previous.get(key, "<missing>")
+        if cur_val != prev_val:
+            diffs.append(f"{key}: {prev_val!r} -> {cur_val!r}")
+    return diffs
+
+
+def check_nlu_config_drift(current_provenance: Dict) -> None:
+    """Warn loudly (never raises) if --resume-nlu's config differs from the
+    run being resumed, per the NLU_RUN_CONFIG_PATH sidecar written by
+    write_nlu_run_config at the start of the run being resumed.
+    """
+    previous = None
+    if NLU_RUN_CONFIG_PATH.exists():
+        try:
+            with open(NLU_RUN_CONFIG_PATH, 'r', encoding='utf-8') as f:
+                previous = json.load(f)
+        except (OSError, json.JSONDecodeError):
+            previous = None
+
+    diffs = nlu_config_drift(current_provenance, previous)
+    if diffs:
+        print("\n" + "!" * 70)
+        print("⚠️  WARNING: --resume-nlu config drift detected")
+        print(f"   This run's NLU config differs from {NLU_RUN_CONFIG_PATH}")
+        print(f"   (the config the resumed run in {NLU_OUTPUT_PATH} started with):")
+        for d in diffs:
+            print(f"     - {d}")
+        print("   Resumed results may mix two configurations. Continuing anyway —")
+        print("   this is fine if the config change was intentional.")
+        print("!" * 70 + "\n")
+
+
+def write_nlu_run_config(provenance: Dict) -> None:
+    """Persist this run's NLU provenance to the resume-drift sidecar.
+
+    Written at the start of every full-collection NLU pass (resumed or not),
+    so a *later* --resume-nlu run has something to compare against. Best-
+    effort: a failure here must never abort the pipeline.
+    """
+    try:
+        atomic_write_json(NLU_RUN_CONFIG_PATH, provenance)
+    except OSError as e:
+        print(f"  ⚠️ Could not write {NLU_RUN_CONFIG_PATH}: {e}")
+
+
+def run_nlu_pass(specific_doc_id: Optional[str] = None,
+                  resume: bool = False) -> Dict[str, List[Dict]]:
     """Run NLU analysis and return results.
 
     When specific_doc_id is set, loads existing NLU results and merges
     the new document's results in, preserving all other documents.
+
+    Full-collection mode (specific_doc_id=None) checkpoints after EVERY
+    document: data/map_nlu.json is rewritten atomically (atomic_write_json)
+    as soon as each document finishes, not just once at the end — so a crash,
+    kill, or laptop sleep-death partway through a long run only forfeits the
+    document in flight, never the whole pass.
+
+    `resume=True` (the --resume-nlu CLI flag, full-collection mode only)
+    loads any results already on disk from a prior — possibly interrupted —
+    run and skips documents already present in them (docs_to_process), and
+    warns loudly (without aborting) if the current NLU config differs from
+    the one the resumed run started with (check_nlu_config_drift).
     """
     print("\n" + "=" * 70)
     print("STAGE 1: NLU ANALYSIS")
@@ -304,6 +432,7 @@ def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]
             RETRIEVAL_MODEL_NAME, VERIFICATION_MODEL_NAME,
             RETRIEVAL_THRESHOLD, VERIFICATION_THRESHOLD,
             RETRIEVAL_MODEL_REVISION, VERIFICATION_MODEL_REVISION,
+            NLU_FP16, CROSS_ENCODER_BATCH_SIZE,
         )
     except ImportError as e:
         print(f"Error importing NLU analyzer: {e}")
@@ -317,11 +446,23 @@ def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]
         "verification_model": VERIFICATION_MODEL_NAME,
         "verification_revision": VERIFICATION_MODEL_REVISION,
         "verification_threshold": VERIFICATION_THRESHOLD,
+        "fp16": NLU_FP16,
+        "cross_encoder_batch_size": CROSS_ENCODER_BATCH_SIZE,
     }
+
+    # Full-collection only: config-drift guard + sidecar (single-doc --id
+    # runs already merge into existing results regardless, and never take
+    # --resume-nlu).
+    if not specific_doc_id:
+        if resume:
+            check_nlu_config_drift(_PROVENANCE['nlu'])
+        write_nlu_run_config(_PROVENANCE['nlu'])
+
     analyzer = NLUAnalyzer()
 
-    # Load existing results when processing a single document
-    if specific_doc_id and NLU_OUTPUT_PATH.exists():
+    # Load existing results when processing a single document, or resuming a
+    # full-collection run.
+    if (specific_doc_id or resume) and NLU_OUTPUT_PATH.exists():
         with open(NLU_OUTPUT_PATH, 'r', encoding='utf-8') as f:
             results = json.load(f)
         print(f"  Loaded existing NLU results ({len(results)} documents)")
@@ -335,8 +476,12 @@ def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]
             print(f"Error: File not found: {files[0]}")
             return results
     else:
-        files = sorted(INPUT_DIR.glob("*.txt"))
-        files = [f for f in files if not f.name.startswith("temp_")]
+        all_files = sorted(INPUT_DIR.glob("*.txt"))
+        all_files = [f for f in all_files if not f.name.startswith("temp_")]
+        files = docs_to_process(all_files, results, resume)
+        if resume:
+            skipped = len(all_files) - len(files)
+            print(f"  resumed: skipping {skipped} already-completed documents")
 
     print(f"\nProcessing {len(files)} documents...")
 
@@ -355,9 +500,13 @@ def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]
         results[doc_id] = consolidated
         print(f"   → {len(consolidated)} techniques found")
 
-    # Save NLU results
-    with open(NLU_OUTPUT_PATH, 'w', encoding='utf-8') as f:
-        json.dump(results, f, indent=2)
+        # Checkpoint after every document (atomic — see atomic_write_json)
+        # so a crash mid-run only loses the document currently in flight.
+        atomic_write_json(NLU_OUTPUT_PATH, results)
+
+    # Save NLU results (also atomic; for specific_doc_id this is the only
+    # write, since that path only ever processes one document).
+    atomic_write_json(NLU_OUTPUT_PATH, results)
     print(f"\n✓ NLU results saved to {NLU_OUTPUT_PATH} ({len(results)} documents)")
 
     return results
@@ -585,6 +734,13 @@ def main():
         help='Process only a specific document ID'
     )
     parser.add_argument(
+        '--resume-nlu',
+        action='store_true',
+        help='Resume a full-collection NLU pass, skipping documents already '
+             'present in data/map_nlu.json (crash/sleep-death recovery; '
+             'has no effect with --id, which already merges into existing results)'
+    )
+    parser.add_argument(
         '--model',
         type=str,
         choices=['haiku', 'sonnet', 'sonnet-legacy', 'opus'],
@@ -636,7 +792,7 @@ def main():
     llm_results = {}
 
     if not args.llm_only:
-        nlu_results = run_nlu_pass(specific_doc_id=args.id)
+        nlu_results = run_nlu_pass(specific_doc_id=args.id, resume=args.resume_nlu)
     else:
         # Load existing NLU results
         if NLU_OUTPUT_PATH.exists():
