@@ -51,6 +51,10 @@ from typing import Dict, List, Optional, Set
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+# Pure-stdlib shared definitions (no anthropic/sentence-transformers import, so this
+# is safe at module load time — see apply_corroboration_rule below).
+from eval_common import is_reviewed_document
+
 # Load environment variables from .env file
 try:
     from dotenv import load_dotenv
@@ -221,6 +225,66 @@ def apply_deletions(techniques: List[Dict], deletions: List[Dict]) -> List[Dict]
                     ev['deleted_by'] = 'llm'
 
     return techniques
+
+
+def apply_corroboration_rule(doc_id: str, entries: List[Dict], reviewed: bool) -> int:
+    """
+    Quarantine NLU-only, single-chunk technique entries for human review (T2.3).
+
+    An NLU-only detection backed by exactly one evidence chunk is too weak to
+    auto-publish as active — it hasn't been corroborated by the LLM pass or a
+    human. Any entry in `entries` that:
+
+      - is currently `active: true`,
+      - has exactly one evidence item, and that item's `created_by == "nlu"`
+        (so the entry has no LLM or manual evidence at all — any additional
+        or differently-sourced evidence means it's corroborated and is left
+        alone), and
+      - does not already carry a `needs_review` flag
+
+    is demoted in place: `active` -> False, `needs_review` -> True,
+    `review_reason` -> "single_chunk_uncorroborated", and its sole evidence
+    item is also marked `active: False` (mirrors `_mark_abstained` in
+    llm_assisted_extraction.py). `deleted_by` is deliberately left unset —
+    nothing rejected this entry, it's merely awaiting review.
+
+    Reviewed documents (`reviewed=True`; see `eval_common.is_reviewed_document`)
+    are skipped entirely — a human already reviewed this document's entries, so
+    an automated re-quarantine must never fight that decision (this is what
+    keeps the frozen `model_technique_map_reviewed.json` ground truth, and any
+    other human-reviewed doc, untouched).
+
+    `doc_id` is accepted for parity with the per-document call site and future
+    logging; the rule itself is per-entry. Mutates `entries` in place (mirrors
+    `apply_deletions`'s convention) and returns the number of entries
+    quarantined. Side-effect-free apart from that mutation, so it's directly
+    unit-testable — no disk or network access.
+    """
+    if reviewed:
+        return 0
+
+    quarantined = 0
+    for tech in entries:
+        if not tech.get('active', True):
+            continue
+        if tech.get('needs_review'):
+            continue
+
+        evidence = tech.get('evidence', []) or []
+        if len(evidence) != 1:
+            continue
+
+        ev = evidence[0]
+        if not isinstance(ev, dict) or ev.get('created_by') != 'nlu':
+            continue  # legacy string evidence, or corroborated by llm/manual
+
+        tech['active'] = False
+        tech['needs_review'] = True
+        tech['review_reason'] = 'single_chunk_uncorroborated'
+        ev['active'] = False
+        quarantined += 1
+
+    return quarantined
 
 
 def run_nlu_pass(specific_doc_id: Optional[str] = None) -> Dict[str, List[Dict]]:
@@ -402,7 +466,8 @@ def merge_all_results(manual: Dict[str, List[Dict]],
         'manual_preserved': 0,
         'nlu_added': 0,
         'llm_added': 0,
-        'llm_deleted': 0
+        'llm_deleted': 0,
+        'corroboration_quarantined': 0
     }
 
     for doc_id in sorted(all_doc_ids):
@@ -441,6 +506,16 @@ def merge_all_results(manual: Dict[str, List[Dict]],
                 doc_techniques = apply_deletions(doc_techniques, deletions)
                 stats['llm_deleted'] += len(deletions)
 
+        # 4. Corroboration rule (T2.3): quarantine NLU-only, single-chunk
+        # entries for human review instead of auto-publishing them active.
+        # Runs after NLU+LLM merging (so corroborating LLM/manual evidence
+        # has already landed) and before the document is written to `final`.
+        # Reviewed documents (incl. the frozen ground truth) are never touched.
+        reviewed = is_reviewed_document(doc_techniques)
+        stats['corroboration_quarantined'] += apply_corroboration_rule(
+            doc_id, doc_techniques, reviewed
+        )
+
         final[doc_id] = doc_techniques
 
     print(f"\nMerge statistics:")
@@ -448,6 +523,7 @@ def merge_all_results(manual: Dict[str, List[Dict]],
     print(f"  NLU added: {stats['nlu_added']}")
     print(f"  LLM added: {stats['llm_added']}")
     print(f"  LLM deletions: {stats['llm_deleted']}")
+    print(f"  Corroboration quarantined: {stats['corroboration_quarantined']}")
 
     return final
 
