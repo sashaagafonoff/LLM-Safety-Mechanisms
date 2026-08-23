@@ -60,6 +60,20 @@ STRIDE = 2
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("NLU_Analyzer")
 
+
+def is_nlu_enabled(tech: dict) -> bool:
+    """Whether a technique participates in NLU retrieval.
+
+    Deny-list mechanism (WORKPLAN T2.1): a technique's `nlu_profile` can carry
+    `"nlu_enabled": false` to opt it out of the NLU stage entirely — used for
+    techniques that are systematic FP factories in retrieval (0 true positives,
+    many false positives against reviewed ground truth) while remaining fully
+    part of the LLM-extraction taxonomy. Defaults to True (enabled) when the
+    field is absent, so untouched techniques are unaffected.
+    """
+    return tech.get('nlu_profile', {}).get('nlu_enabled', True) is not False
+
+
 def normalize_string(s: str) -> str:
     """Normalizes strings for matching (lowercase, alphanumeric only)."""
     if not s: return ""
@@ -268,7 +282,11 @@ class NLUAnalyzer:
         index = []
         logger.info(f"Indexing {len(techniques)} techniques with category context...")
 
+        skipped = 0
         for tech in techniques:
+            if not is_nlu_enabled(tech):
+                skipped += 1
+                continue
             profile = tech.get('nlu_profile', {})
             hypothesis = profile.get('entailment_hypothesis', f"The model uses {tech['name']}.")
             targets = [profile.get('primary_concept', tech['description'])]
@@ -289,6 +307,9 @@ class NLUAnalyzer:
                 "embeddings": embeddings,
                 "targets": targets
             })
+
+        if skipped:
+            logger.info(f"Skipped {skipped} technique(s) with nlu_enabled=false (deny-listed from NLU retrieval)")
 
         return index
 
