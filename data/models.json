@@ -560,6 +560,28 @@
       "notes": "Most capable widely released Anthropic model (1M context); built for the most demanding reasoning and long-horizon agentic work."
     },
     {
+      "id": "claude-sonnet-5",
+      "family": "Claude",
+      "provider": "anthropic",
+      "status": "active",
+      "version": "Claude Sonnet 5",
+      "notes": "Most agentic Sonnet model; substantial improvements over Sonnet 4.6 in reasoning, tool use, coding, and knowledge work. GA 2026-06-30. Added per 2026-08 execution plan T1.4 (web-verified on official docs).",
+      "sources": [
+        "https://platform.claude.com/docs/en/about-claude/models/overview"
+      ]
+    },
+    {
+      "id": "claude-opus-5",
+      "family": "Claude",
+      "provider": "anthropic",
+      "status": "active",
+      "version": "Claude Opus 5",
+      "notes": "Strongest Opus model for long-running agents; approaches Fable 5 capability at half the price. GA 2026-07-24. Added per 2026-08 execution plan T1.4 (web-verified on official docs).",
+      "sources": [
+        "https://platform.claude.com/docs/en/about-claude/models/overview"
+      ]
+    },
+    {
       "id": "claude-opus-4.8",
       "family": "Claude",
       "provider": "anthropic",
@@ -601,7 +623,40 @@
       "provider": "openai",
       "status": "active",
       "version": "GPT-5.5",
-      "notes": "Current flagship chat/reasoning model. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "notes": "Flagship chat/reasoning model until GPT-5.6 (2026-07-09); still active, not deprecated as of 2026-08-23. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "sources": [
+        "https://developers.openai.com/api/docs/models"
+      ]
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "family": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5.6 Sol",
+      "notes": "Current flagship for complex professional work; the bare gpt-5.6 alias routes here. 1.05M ctx, 128K output. Public release 2026-07-09. System card: https://deploymentsafety.openai.com/gpt-5-6. Added per 2026-08 execution plan T1.4 (web-verified).",
+      "sources": [
+        "https://developers.openai.com/api/docs/models"
+      ]
+    },
+    {
+      "id": "gpt-5.6-terra",
+      "family": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5.6 Terra",
+      "notes": "Balanced intelligence/cost tier of GPT-5.6 (mini-tier successor). 1.05M ctx. Public release 2026-07-09. Added per 2026-08 execution plan T1.4 (web-verified).",
+      "sources": [
+        "https://developers.openai.com/api/docs/models"
+      ]
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "family": "GPT",
+      "provider": "openai",
+      "status": "active",
+      "version": "GPT-5.6 Luna",
+      "notes": "Cost-sensitive high-volume tier of GPT-5.6 (nano-tier successor). 1.05M ctx. Public release 2026-07-09. Added per 2026-08 execution plan T1.4 (web-verified).",
       "sources": [
         "https://developers.openai.com/api/docs/models"
       ]
@@ -695,6 +750,17 @@
       ]
     },
     {
+      "id": "mistral-medium-3.5",
+      "family": "Mistral",
+      "provider": "mistral",
+      "status": "active",
+      "version": "Mistral Medium 3.5",
+      "notes": "128B dense merged flagship (chat + reasoning + code, text+vision, 256K ctx; released 2026-04-30); replaces Magistral Medium 1.2, Devstral 2, and Mistral Medium 3/3.1. Official model card id mistral-medium-3-5-26-04. Added per 2026-08 execution plan T1.4 (previously held in WORKPLAN A.3 pending id confirmation).",
+      "sources": [
+        "https://docs.mistral.ai/models/model-cards/mistral-medium-3-5-26-04"
+      ]
+    },
+    {
       "id": "mistral-small-4",
       "family": "Mistral",
       "provider": "mistral",
@@ -722,7 +788,7 @@
       "provider": "deepseek",
       "status": "active",
       "version": "DeepSeek-V4 Pro",
-      "notes": "Current flagship MoE, 1M context (2026-04-24, MIT). Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "notes": "Current flagship MoE, 1M context (MIT). Left preview and went GA as DeepSeek-V4-Pro-0813 on 2026-08-12/13 (API + app; deepseek-chat/-reasoner point here). Added per model-currency audit 2026-06-19; GA status updated per 2026-08 execution plan T1.4.",
       "sources": [
         "https://api-docs.deepseek.com/news/news260424"
       ]
@@ -733,7 +799,7 @@
       "provider": "deepseek",
       "status": "active",
       "version": "DeepSeek-V4 Flash",
-      "notes": "Fast/cheaper V4; deepseek-chat/-reasoner aliases point here. Added per model-currency audit 2026-06-19 (web-verified); see docs/MODEL_AUDIT.md.",
+      "notes": "Fast/cheaper V4 (~304B total / ~13B active). Open weights released as V4-Flash-0731 on 2026-07-31 (Hugging Face, MIT) with live API. Added per model-currency audit 2026-06-19; release status updated per 2026-08 execution plan T1.4.",
       "sources": [
         "https://api-docs.deepseek.com/news/news260424"
       ]
