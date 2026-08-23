@@ -241,6 +241,7 @@
     "status_note": "No tracked provider documents production use. Google DeepMind research (2024) questions effectiveness of current approaches.",
     "description": "Algorithms to 'forget' specific training data without retraining",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "Interventions to remove influence of specific data points from model weights.",
       "semantic_anchors": [
         "unlearning",
@@ -508,6 +509,7 @@
     ],
     "description": "Checks for grounding and citation accuracy in RAG systems",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "Verification mechanisms in retrieval systems ensuring outputs are supported by context.",
       "semantic_anchors": [
         "hallucination detection",
@@ -647,6 +649,7 @@
     "status_note": "No tracked provider documents production deployment. Gray Swan AI (untracked) has early-stage Cygnet. Anthropic RSP and OpenAI Preparedness Framework reference emergency protocols at policy level only.",
     "description": "Mechanisms to immediately disconnect system if dangerous actions occur",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "A pre-built emergency mechanism that can instantly halt all model serving or shut down the system when dangerous autonomous behaviour is detected.",
       "semantic_anchors": [
         "emergency model shutdown mechanism",
@@ -1061,6 +1064,7 @@
     ],
     "description": "Classification of autonomous, power-seeking, scheming, and deceptively aligned behaviours",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "A dedicated evaluation suite or runtime classifier that specifically tests whether the model exhibits scheming, power-seeking, alignment faking, or sandbagging behaviours.",
       "semantic_anchors": [
         "scheming evaluation suite",
@@ -1297,6 +1301,7 @@
     ],
     "description": "Controls ensuring data processing complies with regional requirements",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "Mechanisms ensuring data processing occurs within specific jurisdictions.",
       "semantic_anchors": [
         "data residency",
@@ -1378,6 +1383,7 @@
     ],
     "description": "Techniques for supervising AI systems on tasks beyond direct human evaluation, including debate and recursive reward modeling",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "Methods for maintaining meaningful human oversight of AI systems as they become more capable, including AI debate protocols, recursive reward modeling, iterated amplification, and weak-to-strong generalization techniques.",
       "semantic_anchors": [
         "scalable oversight",
@@ -1414,6 +1420,7 @@
     ],
     "description": "Internal mechanisms protecting employees who raise safety concerns, including anonymous reporting channels and non-retaliation policies",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "Organizational mechanisms that protect employees, contractors, and researchers who raise safety concerns about AI systems, including anonymous reporting channels, non-retaliation policies, and right-to-warn provisions.",
       "semantic_anchors": [
         "whistleblower protection",
@@ -1450,6 +1457,7 @@
     ],
     "description": "Formal voluntary commitments to safety practices, including industry pledges, Frontier Model Forum membership, and White House commitments",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "Formal voluntary commitments by AI organizations to specific safety practices, including government-brokered pledges, industry consortium membership, and public safety commitments that go beyond legal requirements.",
       "semantic_anchors": [
         "voluntary commitment",
@@ -1488,6 +1496,7 @@
     ],
     "description": "Protection of model weights against unauthorized access, exfiltration, or tampering, including secure infrastructure and access controls",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "Security measures protecting trained model weights and artifacts from unauthorized access, exfiltration, theft, or tampering, including physical security, encryption, access controls, and supply chain integrity for model files.",
       "semantic_anchors": [
         "model weight security",
@@ -1523,6 +1532,7 @@
     ],
     "description": "Mathematical privacy guarantees during model training through noise injection, ensuring individual training examples cannot be extracted",
     "nlu_profile": {
+      "nlu_enabled": false,
       "primary_concept": "Application of differential privacy techniques during model training, providing mathematical guarantees that individual training examples cannot be reverse-engineered from model outputs, typically via DP-SGD or similar noise-injection methods.",
       "semantic_anchors": [
         "differential privacy",

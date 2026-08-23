@@ -90,7 +90,8 @@
         "primary_concept": {"type": "string", "minLength": 1},
         "semantic_anchors": {"type": "array", "items": {"type": "string"}, "minItems": 1},
         "entailment_hypothesis": {"type": "string", "minLength": 1},
-        "excluded_terms": {"type": "array", "items": {"type": "string"}}
+        "excluded_terms": {"type": "array", "items": {"type": "string"}},
+        "nlu_enabled": {"type": "boolean"}
       }
     },
     "technique": {
