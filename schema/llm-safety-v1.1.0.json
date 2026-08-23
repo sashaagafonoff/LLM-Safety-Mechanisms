@@ -293,7 +293,9 @@
         "grounding_failed": {"type": "boolean"},
         "llm_original": {"type": ["string", "null"]},
         "created_at": {"type": "string"},
-        "passage": {"type": "string"}
+        "passage": {"type": "string"},
+        "retrieval_score": {"type": "number", "minimum": 0, "maximum": 1},
+        "verification_score": {"type": "number", "minimum": 0, "maximum": 1}
       }
     },
     "map_entry": {
