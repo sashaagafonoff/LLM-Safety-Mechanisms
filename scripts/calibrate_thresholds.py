@@ -1,33 +1,57 @@
 #!/usr/bin/env python3
-"""Threshold + confidence calibration on the DEV split (WORKPLAN B.1.3).
+"""Threshold + confidence calibration on the DEV split (WORKPLAN B.1.3; T4.2).
 
-Two calibrations, both DEV-only (the blind test split is hard-refused):
+Two calibration modes, both quarantining the blind test split (hard-refused):
 
-  1. Operating point — sweep a 2D grid of (retrieval_threshold,
-     verification_threshold), trace the precision/recall trade-off, and recommend
-     the point that maximises F-beta subject to a precision floor. This replaces
-     the hand-set RETRIEVAL_THRESHOLD=0.40 / VERIFICATION_THRESHOLD=0.85 in
-     analyze_nlu.py with a number derived from labelled data (REFACTOR §1.2/§1.6).
+  1. Default mode — operating-point sweep. A 2D grid of (retrieval_threshold,
+     verification_threshold), tracing the precision/recall trade-off and
+     recommending the point that maximises F-beta subject to a precision
+     floor. This replaces the hand-set RETRIEVAL_THRESHOLD=0.40 /
+     VERIFICATION_THRESHOLD=0.85 in analyze_nlu.py with a number derived from
+     labelled data (REFACTOR §1.2/§1.6). Gold labels come from
+     model_technique_map_reviewed.json (frozen, dev-only). Writes
+     reports/threshold_calibration.json.
 
-  2. Confidence calibration — isotonic regression (pool-adjacent-violators) maps a
-     candidate's verification score to its empirical probability of being correct,
-     so "confidence" means something measurable rather than a raw softmax value
-     (REFACTOR §3.5).
+  2. `--per-technique` mode (T4.2, 2026-08 execution plan Phase 4) — the
+     expanded-pool calibration. Builds a labelled pool from EVERY reviewed
+     document in `data/model_technique_map.json` (T4.1's
+     `threshold_pool.build_labelled_pool`, ~1,253 active + ~518 rejected
+     entries as of 2026-08, vs. the original 39-point pool) rather than only
+     the frozen 35-doc gold set, fits a global verification threshold, fits
+     per-technique thresholds with shrinkage toward that global threshold for
+     low-data techniques (`threshold_pool.compute_per_technique_thresholds`),
+     and builds an isotonic (PAV) calibration curve mapping verification score
+     -> P(correct) across the whole pool. Writes the **GENERATED** file
+     `data/eval/nlu_thresholds.json` — a fresh instance is produced by running
+     this script; the repo never commits an actual instance of it (see
+     `.gitignore` / commit guidance). Consumed by `analyze_nlu.NLUAnalyzer` at
+     init (`load_thresholds`) if present.
 
-Detection model: a (doc, technique) is detected at (rt, vt) iff ANY of its
-candidate chunks clears both gates. Gold labels come from
-model_technique_map_reviewed.json (active set, alias-canonicalized) restricted to
-dev — a gold technique with no candidate at all is an unconditional miss (retrieval
-floor too high), which the recall figure reflects.
+Both modes never read the blind test split: default mode restricts gold to
+`load_split("dev")`; `--per-technique` mode excludes `load_holdout_ids()` doc
+ids from the pool and hard-refuses a scores file that contains any of them.
+`--per-technique` mode also never reads model_technique_map_reviewed.json —
+its labels come entirely from model_technique_map.json (see
+threshold_pool.py's docstring).
 
-Pure stdlib; `--self-test` runs the full math on synthetic separable scores so the
-calibrator is verifiable without the ML stack.
+Detection model (mode 1): a (doc, technique) is detected at (rt, vt) iff ANY of
+its candidate chunks clears both gates. A gold technique with no candidate at
+all is an unconditional miss (retrieval floor too high), which the recall
+figure reflects.
+
+Pure stdlib; `--self-test` runs the full math on synthetic separable scores so
+the calibrator is verifiable without the ML stack.
 
 Usage:
-    python scripts/dump_nlu_scores.py            # produce dev scores (needs ML stack)
-    python scripts/calibrate_thresholds.py       # calibrate from those scores
+    python scripts/dump_nlu_scores.py                    # produce dev scores (needs ML stack)
+    python scripts/calibrate_thresholds.py               # PR-curve sweep from those scores
     python scripts/calibrate_thresholds.py --precision-floor 0.7 --beta 0.5
     python scripts/calibrate_thresholds.py --self-test
+
+    # T4.2 expanded-pool calibration:
+    python scripts/dump_nlu_scores.py --docs reviewed     # score every reviewed doc (needs ML stack)
+    python scripts/calibrate_thresholds.py --per-technique \\
+        --scores data/eval/nlu_scores_reviewed.json
 """
 import argparse
 import json
@@ -37,12 +61,18 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from eval_common import (  # noqa: E402
-    DATA, load_split, load_holdout_ids, active_technique_set,
+    DATA, load_split, load_holdout_ids, active_technique_set, fbeta,
 )
 from taxonomy_aliases import canonical_technique  # noqa: E402
+from threshold_pool import (  # noqa: E402
+    MIN_POINTS, SHRINKAGE_K, build_labelled_pool, fit_verification_threshold,
+    compute_per_technique_thresholds, sha256_file,
+)
 
 SCORES_PATH = DATA / "eval" / "nlu_scores_dev.json"
 GOLD_PATH = DATA / "model_technique_map_reviewed.json"
+MODEL_MAP_PATH = DATA / "model_technique_map.json"
+THRESHOLDS_OUT_PATH = DATA / "eval" / "nlu_thresholds.json"  # GENERATED — never commit an instance
 REPORTS = Path(__file__).resolve().parent.parent / "reports"
 
 
@@ -52,12 +82,6 @@ def _frange(lo, hi, step):
         out.append(round(x, 4))
         x += step
     return out
-
-
-def fbeta(p, r, beta):
-    b2 = beta * beta
-    denom = b2 * p + r
-    return (1 + b2) * p * r / denom if denom else 0.0
 
 
 def load_gold_dev():
@@ -171,6 +195,77 @@ def confidence_table(grp, gold_by_doc):
     return isotonic_pav(pts), len(pts)
 
 
+def per_technique_calibration(scores_path, map_path, beta, precision_floor,
+                               vt_grid, min_points=MIN_POINTS, k=SHRINKAGE_K,
+                               holdout_ids=None):
+    """T4.2 end-to-end: pool -> global fit -> per-technique fit+shrinkage ->
+    isotonic calibration curve. Returns the dict written to
+    data/eval/nlu_thresholds.json (schema below); callers own file I/O so this
+    stays testable on synthetic in-memory data (see tests/test_calibration.py).
+
+    scores_path / map_path: paths to a dump_nlu_scores.py-format scores file
+    and to data/model_technique_map.json (or synthetic equivalents in tests).
+    holdout_ids: blind-test doc ids to quarantine; defaults to
+    `load_holdout_ids()`. Raises ValueError if the scores file contains any
+    holdout doc (same hard refusal as the default PR-curve mode) or if the
+    resulting pool is empty.
+
+    Output schema:
+        {"global": {verification_threshold, precision, recall, fbeta, beta,
+                     precision_floor, n_points},
+         "per_technique": {techId: {verification_threshold, n_points,
+                     local_threshold, shrinkage_weight, used_global_fallback,
+                     local_precision, local_recall}},
+         "calibration": [{x_min, x_max, p, n}, ...],   # isotonic_pav steps
+         "generated": {scores_sha256, map_sha256, min_points, shrinkage_k}}
+    """
+    holdout = load_holdout_ids() if holdout_ids is None else set(holdout_ids)
+
+    with open(scores_path, encoding="utf-8") as f:
+        payload = json.load(f)
+    candidates = payload.get("candidates", [])
+    leaked = sorted({c["doc_id"] for c in candidates} & holdout)
+    if leaked:
+        raise ValueError(f"scores file contains blind-test docs {leaked}; "
+                          f"re-dump with dump_nlu_scores.py (reviewed/dev only)")
+
+    with open(map_path, encoding="utf-8") as f:
+        map_data = json.load(f)
+
+    pool = build_labelled_pool(candidates, map_data, holdout)
+    if not pool:
+        raise ValueError("labelled pool is empty — the scores file must cover "
+                          "reviewed, non-holdout documents (see threshold_pool.py)")
+
+    global_fit = fit_verification_threshold(pool, vt_grid, beta, precision_floor)
+    global_threshold = global_fit["verification_threshold"]
+
+    per_technique = compute_per_technique_thresholds(
+        pool, global_threshold, vt_grid, beta, precision_floor, min_points, k)
+
+    calibration = isotonic_pav([(p["verification_score"], p["label"]) for p in pool])
+
+    return {
+        "global": {
+            "verification_threshold": global_threshold,
+            "precision": global_fit["precision"],
+            "recall": global_fit["recall"],
+            "fbeta": global_fit["fbeta"],
+            "beta": beta,
+            "precision_floor": precision_floor,
+            "n_points": len(pool),
+        },
+        "per_technique": per_technique,
+        "calibration": calibration,
+        "generated": {
+            "scores_sha256": sha256_file(scores_path),
+            "map_sha256": sha256_file(map_path),
+            "min_points": min_points,
+            "shrinkage_k": k,
+        },
+    }
+
+
 def _synthetic():
     """Separable synthetic scores for --self-test (no ML stack needed)."""
     cands, gold = [], defaultdict(set)
@@ -200,10 +295,59 @@ def main():
     ap.add_argument("--vt-grid", default="0.50:0.95:0.05")
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--json", dest="json_out", default=str(REPORTS / "threshold_calibration.json"))
+    ap.add_argument("--per-technique", action="store_true",
+                     help="T4.2 mode: build the expanded labelled pool from every "
+                          "reviewed doc in --map (threshold_pool.py), fit a global "
+                          "+ per-technique (shrunk) verification threshold, and an "
+                          "isotonic calibration curve. Writes --thresholds-out "
+                          "instead of --json. Mutually exclusive with --self-test.")
+    ap.add_argument("--map", default=str(MODEL_MAP_PATH),
+                     help="--per-technique only: path to model_technique_map.json.")
+    ap.add_argument("--min-points", type=int, default=MIN_POINTS,
+                     help="--per-technique only: minimum labelled points before a "
+                          "technique gets a local (shrunk) fit instead of the "
+                          "global threshold outright.")
+    ap.add_argument("--shrinkage-k", type=float, default=SHRINKAGE_K,
+                     help="--per-technique only: shrinkage strength K in w=n/(n+K).")
+    ap.add_argument("--thresholds-out", default=str(THRESHOLDS_OUT_PATH),
+                     help="--per-technique only: output path for the GENERATED "
+                          "thresholds file (never commit an instance of it).")
     args = ap.parse_args()
 
     rt_grid = _frange(*[float(x) for x in args.rt_grid.split(":")])
     vt_grid = _frange(*[float(x) for x in args.vt_grid.split(":")])
+
+    if args.per_technique:
+        try:
+            result = per_technique_calibration(
+                args.scores, args.map, args.beta, args.precision_floor, vt_grid,
+                min_points=args.min_points, k=args.shrinkage_k)
+        except (FileNotFoundError, ValueError) as e:
+            print(f"ABORT: {e}")
+            return 2
+
+        out_path = Path(args.thresholds_out)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(result, f, indent=2, ensure_ascii=False)
+
+        g = result["global"]
+        n_tech = len(result["per_technique"])
+        n_local = sum(1 for v in result["per_technique"].values()
+                      if not v["used_global_fallback"])
+        print("=" * 60)
+        print("PER-TECHNIQUE THRESHOLD CALIBRATION (T4.2)")
+        print("=" * 60)
+        print(f"pool points: {g['n_points']}  techniques observed: {n_tech}  "
+              f"locally fit (>= {args.min_points} pts): {n_local}")
+        print(f"global verification_threshold={g['verification_threshold']:.3f}  "
+              f"precision={g['precision']:.3f} recall={g['recall']:.3f} "
+              f"fbeta={g['fbeta']:.3f}")
+        print(f"calibration curve: {len(result['calibration'])} monotone step(s)")
+        print(f"\nWrote {out_path}")
+        print("NOTE: this file is GENERATED and must not be committed. "
+              "analyze_nlu.NLUAnalyzer picks it up automatically at init if present.")
+        return 0
 
     if args.self_test:
         candidates, gold_by_doc = _synthetic()

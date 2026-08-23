@@ -209,3 +209,17 @@ def prf(tp: int, fp: int, fn: int):
     recall = tp / (tp + fn) if (tp + fn) else 0.0
     f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
     return precision, recall, f1
+
+
+def fbeta(p: float, r: float, beta: float) -> float:
+    """F-beta score from precision/recall. Zero denominator -> 0.0 (not NaN).
+
+    Single source of truth (moved here from calibrate_thresholds.py in T4.2 so
+    threshold_pool.py's per-technique fitting can share it without a circular
+    import back onto calibrate_thresholds.py); calibrate_thresholds.py
+    re-exports this name via `from eval_common import fbeta` so existing
+    callers (incl. `calibrate_thresholds.fbeta(...)`) are unaffected.
+    """
+    b2 = beta * beta
+    denom = b2 * p + r
+    return (1 + b2) * p * r / denom if denom else 0.0

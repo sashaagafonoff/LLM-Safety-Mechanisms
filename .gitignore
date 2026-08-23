@@ -216,6 +216,13 @@ data/flat_text/clean_up_logs/
 data/third_party/aiid/backup-*
 data/third_party/aiid/*.tar.bz2
 
+# GENERATED NLU calibration inputs/outputs (T4.1/T4.2, docs/workplan/2026-08-execution-plan.md
+# Phase 4) — produced by dump_nlu_scores.py / calibrate_thresholds.py --per-technique; never
+# commit an actual instance (see those scripts' docstrings).
+data/eval/nlu_scores_dev.json
+data/eval/nlu_scores_reviewed.json
+data/eval/nlu_thresholds.json
+
 # Claude Code local settings (may contain secrets)
 .claude/settings.local.json
 
