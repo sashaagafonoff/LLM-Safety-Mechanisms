@@ -30,6 +30,7 @@ from sentence_transformers import SentenceTransformer, CrossEncoder, util
 from robust_tokenizer import create_chunks_from_text
 from nli_utils import resolve_entailment_index
 from taxonomy_maps import CATEGORY_TO_TOPIC
+from chunk_filters import is_low_quality_chunk
 
 # --- CONFIGURATION ---
 INPUT_DIR = Path("data/flat_text")
@@ -63,6 +64,23 @@ def normalize_string(s: str) -> str:
     """Normalizes strings for matching (lowercase, alphanumeric only)."""
     if not s: return ""
     return re.sub(r'[^a-zA-Z0-9]', '', s).lower()
+
+def _apply_chunk_quality_gate(chunks: List[str], doc_id: str = "") -> List[str]:
+    """Retrieval-side backstop against PDF table-soup and structural noise.
+
+    `clean_flat_text.py` already strips most known noise at ingest time, but
+    fragments (mashed words, table syntax, repeated benchmark tokens) still
+    slip through into individual chunks. Drop those here, before they reach
+    the bi-encoder, so they can never be embedded/verified/tagged as evidence.
+    See chunk_filters.is_low_quality_chunk and docs/workplan/2026-08-execution-plan.md T2.2.
+    """
+    total = len(chunks)
+    kept = [c for c in chunks if not is_low_quality_chunk(c)]
+    dropped = total - len(kept)
+    if dropped > 0:
+        label = f" ({doc_id})" if doc_id else ""
+        logger.info(f"chunk-quality gate dropped {dropped} of {total} chunks{label}")
+    return kept
 
 def _set_determinism(seed: int = RANDOM_SEED) -> None:
     """Seed RNGs for reproducible scores (best-effort; deps may be absent)."""
@@ -285,6 +303,7 @@ class NLUAnalyzer:
 
     def analyze_document(self, text: str, doc_id: str = "") -> List[Dict]:
         chunks = self._chunk_text(text)
+        chunks = _apply_chunk_quality_gate(chunks, doc_id)
         if not chunks:
             logger.debug(f"   No chunks generated for {doc_id}")
             return []
@@ -435,6 +454,7 @@ class NLUAnalyzer:
         The caller attaches the gold label (B.1.3 calibrate_thresholds.py).
         """
         chunks = self._chunk_text(text)
+        chunks = _apply_chunk_quality_gate(chunks, doc_id)
         if not chunks:
             return []
         doc_metadata = self.document_metadata.get(doc_id, {})
