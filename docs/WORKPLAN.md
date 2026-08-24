@@ -37,7 +37,8 @@ Renaming a model `id` changes a primary key referenced by `evidence.json` and `m
 - [ ] Cohere: track dated ids (`command-a-03-2025`) for the bare `command-a` alias.
 
 ### A.3 Deferred — needs human confirmation (MODEL_AUDIT.md §6)
-- [ ] **Candidate removals** (flagged invalid/fabricated, currently kept with a note): `gpt-5-thinking`, `qwen3-thinking`, `qwen3-turbo`, `grok-4-thinking`, `deepseek-v3-lite` (`status:"unknown"`). Confirm, then remove + repoint any refs.
+- [x] **Decision 2026-08-24 (owner): age-based retirements are OFF the table.** Older/superseded models stay in the dataset permanently — their value is longitudinal (technique-adoption timelines; see Section F). Status fields (`retired`/`superseded` + `statusDate`) capture lifecycle; entries are never deleted for age. Supersedes the 2026-08 execution plan's T1.5 batch B.
+- [ ] **Candidate removals** (flagged invalid/fabricated, currently kept with a note): `gpt-5-thinking`, `qwen3-thinking`, `qwen3-turbo`, `grok-4-thinking`, `deepseek-v3-lite` (`status:"unknown"`). These are a **data-quality** question (ids that never existed), not age-based retirement — still awaiting confirmation. Confirm, then remove + repoint any refs.
 - [ ] **Models with unconfirmed ids** (not added): Amazon Nova 2 Pro / Nova Multimodal Embedding, Google `gemini-3.1-pro` GA id, Mistral Medium 3.5 id, NVIDIA Nemotron 3 Super/Ultra/Content-Safety, Meta Muse Spark. Add once the exact id is confirmed on an official page.
 - [ ] **Deliberately excluded, unverified** (re-check before adding): DeepSeek R2, Qwen 3.6/3.7-Max.
 - [ ] Re-verify GPT-5.x / Gemini 3.x / DeepSeek V4 / Qwen 3.5 / Grok 4.x / Falcon-H1 / Hunyuan Hy3 ids against the official pages in MODEL_AUDIT.md §5 (these came from web research past the assistant's training cutoff).
@@ -146,3 +147,20 @@ Candidate scope (unplanned — revisit and design before building):
 Existing automation to build on: `validate.yml` (schema + integrity + pytest CI gate),
 `dashboard-deploy.yml` (Pages deploy on `docs/**`/`data/**.json` changes), `process-review.yml`
 (community tag submissions).
+
+---
+
+## F. Technique-adoption timeline (backlog — captured 2026-08-24)
+
+Owner idea, and the reason age-based model retirement was rejected (A.3): the dataset already
+carries dates — `implementationDate` on evidence records, source publication dates, `date_added`,
+model `statusDate` — so we can chart **when safety techniques were introduced and which providers
+adopted them when**. Older models/documents are the substrate for this.
+
+- [ ] **F.1** Date-coverage audit: how many evidence records carry `implementationDate`; add
+  publication dates to `content_metadata` for sources missing them (most system cards have one).
+- [ ] **F.2** Derivation script: per (provider, technique) first-documented date from sources +
+  `model_technique_map.json`; per technique, an adoption curve across providers.
+- [ ] **F.3** Dashboard timeline component (hand-maintained `docs/components/`, no build step):
+  technique-introduction timeline with provider-adoption lanes; model-generation markers from
+  `statusDate`.
