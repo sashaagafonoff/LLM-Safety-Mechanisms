@@ -85,17 +85,6 @@
       ]
     },
     {
-      "id": "gpt-5-thinking",
-      "family": "GPT",
-      "provider": "openai",
-      "status": "deprecated",
-      "version": "GPT-5 Thinking",
-      "notes": "Reasoning-focused variant of GPT-5 ChatGPT product-mode label, not a canonical API id; reasoning is now an effort level on GPT-5.4/5.5. Candidate for removal/remap.",
-      "sources": [
-        "https://developers.openai.com/api/docs/models"
-      ]
-    },
-    {
       "id": "o4-mini",
       "family": "o",
       "provider": "openai",
@@ -330,17 +319,6 @@
       "notes": "<n/a>"
     },
     {
-      "id": "deepseek-v3-lite",
-      "family": "DeepSeek",
-      "provider": "deepseek",
-      "status": "unknown",
-      "version": "DeepSeek-V3-Lite",
-      "notes": "Could not be matched to an official DeepSeek SKU; likely invalid. Candidate for removal pending confirmation.",
-      "sources": [
-        "https://api-docs.deepseek.com/updates"
-      ]
-    },
-    {
       "id": "deepseek-v3",
       "family": "DeepSeek",
       "provider": "deepseek",
@@ -359,28 +337,6 @@
       "status": "active",
       "version": "Qwen3-Max",
       "notes": "Delivers major improvements in reasoning, instruction following, and multilingual support across 100+ languages"
-    },
-    {
-      "id": "qwen3-thinking",
-      "family": "Qwen",
-      "provider": "alibaba",
-      "status": "deprecated",
-      "version": "Qwen3-Thinking",
-      "notes": "Not a valid Alibaba id; the dedicated reasoning model is QwQ-Plus. Candidate for removal pending confirmation.",
-      "sources": [
-        "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
-      ]
-    },
-    {
-      "id": "qwen3-turbo",
-      "family": "Qwen",
-      "provider": "alibaba",
-      "status": "deprecated",
-      "version": "Qwen3-Turbo",
-      "notes": "Not a valid id (real id qwen-turbo, no longer updated); migrate to Qwen-Flash. Candidate for removal pending confirmation.",
-      "sources": [
-        "https://www.alibabacloud.com/help/en/model-studio/models"
-      ]
     },
     {
       "id": "qwen-2-5-72b",
@@ -422,17 +378,6 @@
       "statusDate": "2026-05-15",
       "sources": [
         "https://docs.x.ai/developers/migration/may-15-retirement"
-      ]
-    },
-    {
-      "id": "grok-4-thinking",
-      "family": "Grok",
-      "provider": "xai",
-      "status": "deprecated",
-      "version": "Grok 4 Thinking",
-      "notes": "Not an official xAI id (Grok 4 reasoning is intrinsic). Candidate for removal pending confirmation.",
-      "sources": [
-        "https://docs.x.ai/developers/models"
       ]
     },
     {
