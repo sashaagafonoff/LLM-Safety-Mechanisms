@@ -314,6 +314,7 @@
         "reasoning": {"type": "string"},
         "needs_review": {"type": "boolean"},
         "review_reason": {"type": "string"},
+        "confirmed_by": {"type": "string"},
         "evidence": {"type": "array", "items": {"$ref": "#/$defs/map_evidence"}}
       }
     },
