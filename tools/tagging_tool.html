@@ -745,6 +745,117 @@
   @keyframes spin { to { transform: rotate(360deg); } }
 
   .loading-overlay p { color: var(--text-dim); font-size: 12px; }
+
+  /* ==================== REVIEW QUEUE ==================== */
+  .btn-review-filter.active {
+    border-color: rgba(240, 196, 90, 0.5);
+    color: var(--warning);
+    background: rgba(240, 196, 90, 0.12);
+  }
+
+  .header-counts {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-dim);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .header-counts em { font-style: normal; color: var(--text); }
+  .header-counts .hc-warn { color: var(--warning); }
+  .hc-sep { color: var(--border-light); }
+
+  .tech-item.needs-review {
+    background: rgba(240, 196, 90, 0.08);
+    box-shadow: inset 2px 0 0 var(--warning);
+  }
+
+  .tech-item.needs-review:hover { background: rgba(240, 196, 90, 0.14); }
+  .tech-item.needs-review .tech-check { border-color: var(--warning); }
+
+  .tech-review-card {
+    margin: 4px 0 6px;
+    padding: 6px 8px;
+    background: rgba(240, 196, 90, 0.08);
+    border: 1px solid rgba(240, 196, 90, 0.35);
+    border-radius: 5px;
+  }
+
+  .review-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+
+  .review-badge {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--bg);
+    background: var(--warning);
+    padding: 1px 5px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .review-reason-text {
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .review-reason-code {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 10px;
+    color: var(--warning);
+    margin-bottom: 6px;
+    word-break: break-word;
+  }
+
+  .review-actions { display: flex; gap: 6px; }
+
+  .btn-accept {
+    height: 24px;
+    padding: 0 9px;
+    font-size: 11px;
+    border-color: var(--tagged-border);
+    color: var(--tagged);
+  }
+  .btn-accept:hover { background: var(--tagged-dim); }
+
+  .btn-reject {
+    height: 24px;
+    padding: 0 9px;
+    font-size: 11px;
+    border-color: rgba(224, 99, 86, 0.4);
+    color: var(--danger);
+  }
+  .btn-reject:hover { background: rgba(224, 99, 86, 0.15); }
+
+  .ev-row.ev-pending { background: rgba(240, 196, 90, 0.06); }
+  .ev-link.ev-pending-link { color: var(--warning); opacity: 0.9; }
+  .ev-link.ev-pending-link.clickable:hover { opacity: 1; text-decoration: underline; }
+
+  .ev-score {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 9px;
+    color: var(--text-faint);
+  }
+  .ev-score-low { color: var(--warning); }
+
+  .ev-conf {
+    font-size: 9px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
 </style>
 </head>
 <body>
@@ -798,7 +909,15 @@
     <input type="checkbox" id="reviewCheck"> Reviewed
   </label>
 
+  <button class="btn btn-review-filter" id="btnReviewFilter" title="Show only documents with items awaiting review">Needs review (<span id="reviewFilterCount">0</span>)</button>
+
   <div class="header-spacer"></div>
+
+  <div class="header-counts" id="headerCounts">
+    <span id="hcDocLabel">Doc —</span>
+    <span class="hc-sep">|</span>
+    <span id="hcGlobalLabel"></span>
+  </div>
 
   <div class="header-stat" id="headerStat"></div>
 
@@ -967,6 +1086,11 @@
   // Flag for save state
   let dirtyCount = 0;  // unsaved changes
 
+  // Review queue (needs_review / Accept / Reject) state
+  let reviewerName = null;        // resolved once per session, see getReviewerName()
+  let reviewedThisSession = 0;    // quarantined entries Accepted or Rejected this session
+  let reviewFilterActive = false; // "Needs review" header toggle — restricts doc list
+
   // Undo: a stack of per-document tag snapshots taken before each edit.
   const undoStack = [];
   const UNDO_LIMIT = 100;
@@ -1079,6 +1203,150 @@
       reasonResolver = resolve;
       reasonOverlay.classList.add('visible');
       reasonSelect.focus();
+    });
+  }
+
+  // ========================================================================
+  // REVIEW QUEUE — reviewer identity, Accept / Reject, counts, doc filter
+  // ========================================================================
+  // Quarantined entries (`needs_review: true` + `review_reason`) are written
+  // by the pipeline's abstention/corroboration rules (see llm_assisted_
+  // extraction._mark_abstained and run_extraction_pipeline.apply_corroboration_
+  // rule) — they are NOT human rejections, so `deleted_by` is left unset on
+  // them. This block is the human-review UI for that queue.
+
+  // `deleted_by` (and, by convention, `confirmed_by`) are constrained by
+  // schema/llm-safety-v1.1.0.json's map_evidence/map_entry enum to a small
+  // fixed set of identities — NOT free text — so a free-typed reviewer name
+  // would fail `py scripts/validate.py`. eval_common.MANUAL_CREATORS names the
+  // two identities the pipeline already recognizes as "a human reviewed this".
+  const REVIEWER_IDENTITIES = ['manual', 'sashaagafonoff'];
+
+  // Small once-per-session prompt for reviewer identity, defaulting to
+  // 'manual'. Memoized in `reviewerName` so it's asked at most once.
+  function getReviewerName() {
+    if (reviewerName) return reviewerName;
+    let entered = null;
+    try {
+      entered = window.prompt(
+        'Reviewer identity for this session (used for confirmed_by / deleted_by).\n' +
+        'Must be one of: ' + REVIEWER_IDENTITIES.join(', '),
+        'manual'
+      );
+    } catch (e) { /* prompt() unavailable in this context — fall back silently */ }
+    const trimmed = (entered || '').trim().toLowerCase();
+    reviewerName = REVIEWER_IDENTITIES.includes(trimmed) ? trimmed : 'manual';
+    return reviewerName;
+  }
+
+  // Count of quarantined (needs_review) entries for one document / the whole map.
+  function docQuarantineCount(docId) {
+    return (tagState[docId] || []).filter(t => t.needs_review).length;
+  }
+
+  function globalStats() {
+    let total = 0, active = 0, quarantined = 0;
+    for (const arr of Object.values(tagState)) {
+      if (!arr) continue;
+      total += arr.length;
+      for (const t of arr) {
+        if (t.active !== false) active++;
+        if (t.needs_review) quarantined++;
+      }
+    }
+    return { total, active, quarantined };
+  }
+
+  // Accept a quarantined entry: publish it active, stamp who confirmed it,
+  // and activate its evidence (preserving each item's original created_by —
+  // this was an NLU/LLM detection a human is now vouching for, not manual
+  // annotation). Clearing needs_review/review_reason here — not just setting
+  // active:true — is what stops run_extraction_pipeline's corroboration rule
+  // from re-quarantining it on the next --regenerate.
+  function acceptEntry(techId) {
+    if (!currentDocId) return;
+    const entry = (tagState[currentDocId] || []).find(t => t.techniqueId === techId);
+    if (!entry) return;
+    const techName = techLookup.get(techId)?.name || techId;
+
+    snapshotForUndo();
+    pendingSelection = null;
+    entry.active = true;
+    delete entry.needs_review;
+    delete entry.review_reason;
+    entry.confirmed_by = getReviewerName();
+    (entry.evidence || []).forEach(ev => {
+      if (ev && typeof ev === 'object') ev.active = true;
+    });
+    dirtyCount++;
+    reviewedThisSession++;
+    updateVisuals();
+    flash(`✓ Confirmed ${techName}`, 'tag');
+  }
+
+  // Reject an entry via the existing soft-delete + deletion-reason modal path.
+  // Shared by the review queue's Reject button AND toggleTech's "uncheck an
+  // already-persisted entry" path (T-item 2) — both must produce the same
+  // active:false + deleted_by shape so eval_common.is_reviewed_document /
+  // _build_review_index see the rejection. Clears needs_review/review_reason
+  // (it has now been reviewed, whichever direction the decision went).
+  async function rejectEntry(techId) {
+    if (!currentDocId) return;
+    const entry = (tagState[currentDocId] || []).find(t => t.techniqueId === techId);
+    if (!entry) return;
+    const techName = techLookup.get(techId)?.name || techId;
+    const wasQuarantined = !!entry.needs_review;
+
+    snapshotForUndo();
+    pendingSelection = null;
+    entry.active = false;
+    entry.deleted_by = getReviewerName();
+    delete entry.deletion_reason;
+    delete entry.needs_review;
+    delete entry.review_reason;
+    dirtyCount++;
+    if (wasQuarantined) reviewedThisSession++;
+    updateVisuals();
+
+    const reason = await askDeletionReason(`Why was "${techName}" rejected?`);
+    if (reason) { entry.deletion_reason = reason; updateVisuals(); }
+    flash(`− ${techName}`, 'untag');
+  }
+
+  // Live doc/global entry counts in the header, plus the "Needs review (N)" badge.
+  function updateCounts() {
+    const docTags = getDocTags();
+    const docTotal = docTags.length;
+    const docActive = docTags.filter(t => t.active !== false).length;
+    const docQuarantined = docTags.filter(t => t.needs_review).length;
+
+    const hcDoc = document.getElementById('hcDocLabel');
+    if (hcDoc) {
+      hcDoc.innerHTML = currentDocId
+        ? `Doc <em>${docTotal}</em>/<em>${docActive}</em>/<em class="${docQuarantined ? 'hc-warn' : ''}">${docQuarantined}</em>`
+        : 'Doc —';
+      hcDoc.title = 'Current document: total / active / needs review entries';
+    }
+
+    const g = globalStats();
+    const hcGlobal = document.getElementById('hcGlobalLabel');
+    if (hcGlobal) {
+      hcGlobal.innerHTML =
+        `All <em>${g.total}</em>/<em>${g.active}</em>/<em class="${g.quarantined ? 'hc-warn' : ''}">${g.quarantined}</em> · <em>${reviewedThisSession}</em> this session`;
+      hcGlobal.title = 'Dataset-wide: total / active / needs review entries · queue items resolved this session';
+    }
+
+    const filterCountEl = document.getElementById('reviewFilterCount');
+    if (filterCountEl) filterCountEl.textContent = g.quarantined;
+  }
+
+  // Applies the "Needs review" header toggle to the document dropdown —
+  // hides (doesn't remove) options for docs with zero quarantined entries so
+  // prevDoc/nextDoc and the dropdown itself only surface the review queue.
+  function applyDocFilter() {
+    docSelect.querySelectorAll('option').forEach(opt => {
+      if (!opt.value) { opt.hidden = false; return; }
+      opt.hidden = reviewFilterActive && docQuarantineCount(opt.value) === 0;
     });
   }
 
@@ -1314,14 +1582,26 @@
   // ========================================================================
   function toggleTech(techId) {
     if (!currentDocId) return;
-    snapshotForUndo();
     if (!tagState[currentDocId]) tagState[currentDocId] = [];
 
     const techName = techLookup.get(techId)?.name || techId;
     const existing = tagState[currentDocId].findIndex(t => t.techniqueId === techId);
+    const existingEntry = existing >= 0 ? tagState[currentDocId][existing] : null;
+
+    if (existingEntry && existingEntry.needs_review) {
+      // Quarantined entry: its checkbox reads "unchecked" (active is false
+      // until reviewed), so a click here reads as "yes, confirm this" — the
+      // same effect as the Accept button on its review card. Deliberate
+      // rejection is a separate, explicit action (that card's Reject button),
+      // not an accidental checkbox click.
+      pendingSelection = null;
+      acceptEntry(techId);
+      return;
+    }
 
     if (existing >= 0 && pendingSelection) {
       // Already tagged + text selected → append evidence snippet
+      snapshotForUndo();
       const entry = tagState[currentDocId][existing];
       // Remove "Manual annotation" placeholder if present
       entry.evidence = entry.evidence.filter(e => {
@@ -1336,12 +1616,30 @@
         deleted_by: null
       });
       flash(`+ Added evidence for ${techName}`, 'tag');
+      pendingSelection = null;
+      dirtyCount++;
+      updateVisuals();
     } else if (existing >= 0) {
-      // Already tagged + no selection → untag entirely
+      // Already tagged + no selection → reject. A persisted entry (present
+      // in the map as loaded) must be soft-deleted through the same modal
+      // path as the review queue's Reject button — never hard-spliced, or
+      // the rejection silently vanishes from the review index instead of
+      // suppressing the false positive on future runs (T-item 2).
+      const persisted = (normalizedMap[currentDocId] || []).some(t => t.techniqueId === techId);
+      pendingSelection = null;
+      if (persisted) {
+        rejectEntry(techId);   // async: soft-deletes now, optional reason modal after
+        return;
+      }
+      // Session-only addition, never saved — safe to hard-remove.
+      snapshotForUndo();
       tagState[currentDocId].splice(existing, 1);
+      dirtyCount++;
       flash(`− ${techName}`, 'untag');
+      updateVisuals();
     } else {
       // Not tagged → tag, with evidence if text is selected
+      snapshotForUndo();
       const evidenceEntry = pendingSelection
         ? { text: pendingSelection.text, created_by: 'manual', active: true, deleted_by: null }
         : { text: 'Manual annotation', created_by: 'manual', active: true, deleted_by: null };
@@ -1353,11 +1651,10 @@
         evidence: [evidenceEntry]
       });
       flash(`✓ ${techName}`, 'tag');
+      pendingSelection = null;
+      dirtyCount++;
+      updateVisuals();
     }
-
-    pendingSelection = null;
-    dirtyCount++;
-    updateVisuals();
   }
 
   async function removeEvidence(techId, snippetIndex) {
@@ -1380,8 +1677,14 @@
     if (activeEvidence.length <= 1) {
       // Last active snippet — mark entire technique as deleted (soft delete)
       entry.active = false;
-      entry.deleted_by = 'manual';
+      entry.deleted_by = getReviewerName();
       delete entry.deletion_reason;
+      // If this entry was still awaiting review, removing its last snippet
+      // is itself a review decision — clear the quarantine flags and count it.
+      const wasQuarantined = !!entry.needs_review;
+      delete entry.needs_review;
+      delete entry.review_reason;
+      if (wasQuarantined) reviewedThisSession++;
       deletedTarget = entry;
       flash(`− ${techName}`, 'untag');
     } else {
@@ -1389,7 +1692,7 @@
       const evItem = entry.evidence[snippetIndex];
       if (typeof evItem === 'object' && evItem !== null) {
         evItem.active = false;
-        evItem.deleted_by = 'manual';
+        evItem.deleted_by = getReviewerName();
         delete evItem.deletion_reason;
         deletedTarget = evItem;
       } else {
@@ -1398,7 +1701,7 @@
           text: evItem,
           created_by: 'legacy',
           active: false,
-          deleted_by: 'manual'
+          deleted_by: getReviewerName()
         };
         entry.evidence[snippetIndex] = converted;
         deletedTarget = converted;
@@ -1445,6 +1748,7 @@
           <div class="tech-check">✓</div>
           <div class="tech-body">
             <div class="tech-name">${t.name}</div>
+            <div class="tech-review-card" data-review-card="${t.id}" style="display:none;"></div>
             <div class="tech-evidence-list" data-tech-ev="${t.id}"></div>
           </div>
           <div class="tech-info-btn" data-info="${t.id}" title="View technique details">ⓘ</div>
@@ -1462,8 +1766,8 @@
           if (isTagged(t.id) && !pendingSelection) {
             const matchInfo = evidenceMatchState.get(t.id);
             if (matchInfo?.overall === 'matched') {
-              // Scroll to first matched snippet
-              const firstMatched = matchInfo.snippets.find(s => s.state === 'matched');
+              // Scroll to first matched (or pending-but-located) snippet
+              const firstMatched = matchInfo.snippets.find(s => s.state === 'matched' || s.state === 'pending');
               if (firstMatched) scrollToEvidence(t.id, firstMatched.index);
             } else if (matchInfo?.overall === 'unmatched') {
               flash(`⚠ Evidence text not found in document`, 'error');
@@ -1561,7 +1865,15 @@
     .forEach(([provName, docs]) => {
       const og = document.createElement('optgroup');
       og.label = provName;
-      docs.sort((a,b) => a.title.localeCompare(b.title)).forEach(doc => {
+      // Quarantined docs first (most-quarantined first), then alphabetical —
+      // "sorts... docs having them" per the review-queue spec. Live counts
+      // only apply as badges after this (refreshSelectLabels); the order
+      // reflects state at load time.
+      docs.sort((a,b) => {
+        const qa = docQuarantineCount(a.id), qb = docQuarantineCount(b.id);
+        if (qa !== qb) return qb - qa;
+        return a.title.localeCompare(b.title);
+      }).forEach(doc => {
         const opt = document.createElement('option');
         opt.value = doc.id;
         opt.textContent = formatOptionLabel(doc);
@@ -1572,8 +1884,10 @@
 
   function formatOptionLabel(doc) {
     const tagCount = (tagState[doc.id] || []).length;
+    const qCount = docQuarantineCount(doc.id);
+    const badge = qCount > 0 ? `  ⚠${qCount}` : '';
     const rev = reviewedDocs[doc.id] ? ' ✓' : '';
-    return `${doc.title}  [${tagCount}]${rev}`;
+    return `${doc.title}  [${tagCount}]${badge}${rev}`;
   }
 
   function refreshSelectLabels() {
@@ -1582,6 +1896,7 @@
       const doc = evidence.find(d => d.id === opt.value);
       if (doc) opt.textContent = formatOptionLabel(doc);
     });
+    applyDocFilter();
   }
 
   // ========================================================================
@@ -1680,6 +1995,7 @@
     if (!currentDocText) {
       content.innerHTML = '';
       tags.forEach(tag => {
+        const tagQuarantined = tag.needs_review === true;
         // Normalize evidence to array and handle new structured format
         let rawEvidence = tag.evidence || [];
         const snippets = Array.isArray(rawEvidence) ? rawEvidence : [rawEvidence];
@@ -1691,14 +2007,21 @@
           const createdBy = isObject ? (s.created_by || 'legacy') : (text === 'Manual annotation' ? 'manual' : 'legacy');
           const isActive = isObject ? (s.active !== false) : true;
           const deletedBy = isObject ? s.deleted_by : null;
+          const retrievalScore = isObject ? s.retrieval_score : undefined;
+          const verificationScore = isObject ? s.verification_score : undefined;
+          // A quarantined entry's inactive evidence is machine abstention, not
+          // a human rejection — display it as 'pending', not 'deleted'.
+          const pending = tagQuarantined && !isActive;
 
           snippetDetails.push({
             index: i,
-            state: text === 'Manual annotation' ? 'manual' : 'unmatched',
+            state: text === 'Manual annotation' ? 'manual' : (pending ? 'pending' : 'unmatched'),
             text: text,
             createdBy: createdBy,
-            active: isActive,
-            deletedBy: deletedBy
+            active: pending ? true : isActive,
+            deletedBy: pending ? null : deletedBy,
+            retrievalScore: retrievalScore,
+            verificationScore: verificationScore
           });
         });
         const hasReal = snippetDetails.some(s => s.state !== 'manual' && s.active);
@@ -1723,6 +2046,8 @@
         return;
       }
 
+      const tagQuarantined = tag.needs_review === true;
+
       // Normalize evidence to array and handle new structured format
       let rawEvidence = tag.evidence || [];
       const snippets = Array.isArray(rawEvidence) ? rawEvidence : [rawEvidence];
@@ -1735,23 +2060,31 @@
         const createdBy = isObject ? (snippet.created_by || 'legacy') : (text === 'Manual annotation' ? 'manual' : 'legacy');
         const isActive = isObject ? (snippet.active !== false) : true;
         const deletedBy = isObject ? snippet.deleted_by : null;
+        const retrievalScore = isObject ? snippet.retrieval_score : undefined;
+        const verificationScore = isObject ? snippet.verification_score : undefined;
 
         if (text === 'Manual annotation') {
-          snippetDetails.push({ index: sIdx, state: 'manual', text: text, createdBy: 'manual', active: true, deletedBy: null });
+          snippetDetails.push({ index: sIdx, state: 'manual', text: text, createdBy: 'manual', active: true, deletedBy: null, retrievalScore, verificationScore });
           console.log(`  ○ ${tech.name}[${sIdx}]: manual`);
           return;
         }
 
-        // Skip deleted evidence for matching purposes but still track it
-        if (!isActive) {
-          snippetDetails.push({ index: sIdx, state: 'deleted', text: text, createdBy: createdBy, active: false, deletedBy: deletedBy });
+        // A quarantined entry's inactive evidence is machine abstention, not a
+        // human rejection — still worth matching/highlighting in the document
+        // so the reviewer can see it in context. Tracked as 'pending', which
+        // stays out of the 'deleted' (strikethrough) styling below.
+        const pending = tagQuarantined && !isActive;
+
+        // Skip truly-deleted evidence for matching purposes but still track it
+        if (!isActive && !pending) {
+          snippetDetails.push({ index: sIdx, state: 'deleted', text: text, createdBy: createdBy, active: false, deletedBy: deletedBy, retrievalScore, verificationScore });
           console.log(`  ✗ ${tech.name}[${sIdx}]: DELETED by ${deletedBy}`);
           return;
         }
 
         const match = findEvidence(currentDocText, text);
         if (match) {
-          snippetDetails.push({ index: sIdx, state: 'matched', text: text, createdBy: createdBy, active: true, deletedBy: null });
+          snippetDetails.push({ index: sIdx, state: pending ? 'pending' : 'matched', text: text, createdBy: createdBy, active: true, deletedBy: null, retrievalScore, verificationScore });
           ranges.push({
             start: match.start,
             end: match.end,
@@ -1760,14 +2093,14 @@
             snippetIndex: sIdx,
             catName: catLookup.get(tech.categoryId)?.name || ''
           });
-          console.log(`  ● ${tech.name}[${sIdx}]: MATCHED at ${match.start}-${match.end} (${createdBy})`);
+          console.log(`  ${pending ? '◐' : '●'} ${tech.name}[${sIdx}]: MATCHED at ${match.start}-${match.end} (${createdBy}${pending ? ', pending review' : ''})`);
         } else {
-          snippetDetails.push({ index: sIdx, state: 'unmatched', text: text, createdBy: createdBy, active: true, deletedBy: null });
-          console.log(`  ⚠ ${tech.name}[${sIdx}]: NOT FOUND — "${text.substring(0, 60)}…" (${createdBy})`);
+          snippetDetails.push({ index: sIdx, state: pending ? 'pending-unmatched' : 'unmatched', text: text, createdBy: createdBy, active: true, deletedBy: null, retrievalScore, verificationScore });
+          console.log(`  ⚠ ${tech.name}[${sIdx}]: NOT FOUND — "${text.substring(0, 60)}…" (${createdBy}${pending ? ', pending review' : ''})`);
         }
       });
 
-      const anyMatched = snippetDetails.some(s => s.state === 'matched' && s.active);
+      const anyMatched = snippetDetails.some(s => (s.state === 'matched' || s.state === 'pending') && s.active);
       const anyReal = snippetDetails.some(s => s.state !== 'manual' && s.active);
       evidenceMatchState.set(tag.techniqueId, {
         overall: anyMatched ? 'matched' : (anyReal ? 'unmatched' : 'manual'),
@@ -1946,7 +2279,8 @@
   // ========================================================================
   function getDocIds() {
     return Array.from(docSelect.querySelectorAll('option'))
-      .filter(o => o.value).map(o => o.value);
+      .filter(o => o.value && (!reviewFilterActive || !o.hidden))
+      .map(o => o.value);
   }
 
   document.getElementById('prevDoc').addEventListener('click', () => {
@@ -2098,24 +2432,61 @@
       const tagged = taggedIds.has(techId);
       item.classList.toggle('tagged', tagged);
 
+      const entry = getTagEntry(techId);
+      const quarantined = !!(entry && entry.needs_review);
+      const entryConfidence = entry?.confidence || '';
+      item.classList.toggle('needs-review', quarantined);
+
       const matchInfo = evidenceMatchState.get(techId);
       const overall = matchInfo?.overall || null;
       item.classList.toggle('ev-missing-item', tagged && overall === 'unmatched');
 
-      // Evidence list
+      // Review queue card — badge, full review_reason text, Accept/Reject
+      const reviewCard = item.querySelector('.tech-review-card');
+      if (quarantined) {
+        const reasonRaw = entry.review_reason || '';
+        // Machine flags are short snake_case codes (e.g. single_chunk_
+        // uncorroborated); LLM-written borderline explanations are full
+        // sentences. Both are shown in full — never truncated.
+        const reasonIsCode = /^[a-z][a-z0-9_]*$/.test(reasonRaw.trim());
+        reviewCard.style.display = '';
+        reviewCard.innerHTML = `
+          <div class="review-badge-row"><span class="review-badge">NEEDS REVIEW</span></div>
+          ${reasonRaw ? `<div class="${reasonIsCode ? 'review-reason-code' : 'review-reason-text'}">${escapeHtml(reasonRaw)}</div>` : ''}
+          <div class="review-actions">
+            <button type="button" class="btn btn-accept" data-review-accept="${techId}">Accept</button>
+            <button type="button" class="btn btn-reject" data-review-reject="${techId}">Reject</button>
+          </div>
+        `;
+        reviewCard.querySelector('[data-review-accept]').addEventListener('click', (e) => {
+          e.stopPropagation();
+          acceptEntry(techId);
+        });
+        reviewCard.querySelector('[data-review-reject]').addEventListener('click', (e) => {
+          e.stopPropagation();
+          rejectEntry(techId);
+        });
+      } else {
+        reviewCard.style.display = 'none';
+        reviewCard.innerHTML = '';
+      }
+
+      // Evidence list — shown for confirmed-active AND quarantined entries
+      // (a reviewer needs to see a quarantined entry's evidence to judge it).
       const listEl = item.querySelector('.tech-evidence-list');
       listEl.innerHTML = '';
 
-      if (tagged && currentDocId && matchInfo && matchInfo.snippets.length > 0) {
+      if ((tagged || quarantined) && currentDocId && matchInfo && matchInfo.snippets.length > 0) {
         listEl.style.display = '';
 
         matchInfo.snippets.forEach((snip) => {
           const row = document.createElement('div');
           row.className = 'ev-row';
 
-          // Handle deleted evidence
-          if (snip.state === 'deleted' || !snip.active) {
+          if (snip.state === 'deleted') {
             row.classList.add('ev-deleted');
+          } else if (snip.state === 'pending' || snip.state === 'pending-unmatched') {
+            row.classList.add('ev-pending');
           }
 
           const link = document.createElement('span');
@@ -2129,23 +2500,48 @@
             ? snip.text
             : snip.text.substring(0, 45) + (snip.text.length > 45 ? '…' : '');
 
-          if (snip.state === 'deleted' || !snip.active) {
+          // Retrieval/verification scores (2dp, when present) + entry
+          // confidence label, shown on every evidence chip. A low
+          // verification score is a triage cue.
+          const scoreParts = [];
+          if (typeof snip.retrievalScore === 'number') scoreParts.push(`r:${snip.retrievalScore.toFixed(2)}`);
+          if (typeof snip.verificationScore === 'number') scoreParts.push(`v:${snip.verificationScore.toFixed(2)}`);
+          const lowScore = typeof snip.verificationScore === 'number' && snip.verificationScore < 0.9;
+          const scoreHtml = scoreParts.length
+            ? ` <span class="ev-score${lowScore ? ' ev-score-low' : ''}">${scoreParts.join(' ')}</span>`
+            : '';
+          const confHtml = entryConfidence ? ` <span class="ev-conf">${escapeHtml(entryConfidence)}</span>` : '';
+          const prefix = `<span class="prov-marker prov-${snip.createdBy}">(${provenance})</span>${confHtml}${scoreHtml}`;
+
+          if (snip.state === 'deleted') {
             // Show deleted with strikethrough style
-            link.innerHTML = `<span class="prov-marker prov-${snip.createdBy}">(${provenance})</span> <s>${preview}</s>`;
+            link.innerHTML = `${prefix} <s>${preview}</s>`;
             link.classList.add('ev-deleted-link');
             link.title = `Deleted by: ${snip.deletedBy || 'unknown'}`;
           } else if (snip.state === 'matched') {
-            link.innerHTML = `<span class="prov-marker prov-${snip.createdBy}">(${provenance})</span> ● ${preview}`;
+            link.innerHTML = `${prefix} ● ${preview}`;
             link.classList.add('has-evidence', 'clickable');
             link.addEventListener('click', (e) => {
               e.stopPropagation();
               scrollToEvidence(techId, snip.index);
             });
+          } else if (snip.state === 'pending') {
+            link.innerHTML = `${prefix} ◐ ${preview}`;
+            link.classList.add('ev-pending-link', 'clickable');
+            link.title = 'Awaiting review';
+            link.addEventListener('click', (e) => {
+              e.stopPropagation();
+              scrollToEvidence(techId, snip.index);
+            });
+          } else if (snip.state === 'pending-unmatched') {
+            link.innerHTML = `${prefix} ◐ ${preview}`;
+            link.classList.add('ev-pending-link');
+            link.title = 'Awaiting review — passage not located in document';
           } else if (snip.state === 'unmatched') {
-            link.innerHTML = `<span class="prov-marker prov-${snip.createdBy}">(${provenance})</span> ⚠ ${preview}`;
+            link.innerHTML = `${prefix} ⚠ ${preview}`;
             link.classList.add('ev-missing');
           } else {
-            link.innerHTML = `<span class="prov-marker prov-manual">(M)</span> ○ ${preview}`;
+            link.innerHTML = `<span class="prov-marker prov-manual">(M)</span>${confHtml} ○ ${preview}`;
             link.classList.add('ev-manual');
           }
 
@@ -2191,6 +2587,7 @@
 
     updateProgress();
     refreshSelectLabels();
+    updateCounts();
     selHint.classList.remove('visible');
   }
 
@@ -2238,10 +2635,22 @@
   });
 
   // ========================================================================
+  // REVIEW FILTER TOGGLE
+  // ========================================================================
+  const btnReviewFilter = document.getElementById('btnReviewFilter');
+  btnReviewFilter.addEventListener('click', () => {
+    reviewFilterActive = !reviewFilterActive;
+    btnReviewFilter.classList.toggle('active', reviewFilterActive);
+    applyDocFilter();
+  });
+
+  // ========================================================================
   // INIT
   // ========================================================================
   buildSidebar();
   updateProgress();
+  applyDocFilter();
+  updateCounts();
 
   document.getElementById('loading').style.display = 'none';
   document.getElementById('header').style.display = 'flex';

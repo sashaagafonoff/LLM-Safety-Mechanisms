@@ -43,12 +43,22 @@ def technique_ids():
 
 def is_reviewed_document(entries) -> bool:
     """A document is 'reviewed' iff a human touched it: either it carries manual
-    evidence, or a reviewer deactivated a technique (deleted_by is a real person,
-    not the 'system' auto-merge). This is the union definition REFACTOR §3.2 calls
-    for — matches evaluate_nlu/ground_truth_analysis/_build_review_index exactly.
+    evidence, a reviewer deactivated a technique (deleted_by is a real person,
+    not the 'system' auto-merge), or a reviewer confirmed a quarantined technique
+    (confirmed_by set by tools/tagging_tool.html's Accept action on a needs_review
+    entry). This is the union definition REFACTOR §3.2 calls for — matches
+    evaluate_nlu/ground_truth_analysis/_build_review_index exactly.
+
+    The confirmed_by arm matters beyond bookkeeping: without it, an all-Accept
+    review session (no rejections, no new manual evidence) would leave the
+    document looking un-reviewed, and run_extraction_pipeline.apply_corroboration_
+    rule would happily re-quarantine the very entries the reviewer just confirmed
+    on the next --regenerate.
     """
     for e in entries:
         if not e.get("active", True) and e.get("deleted_by") not in (None, "system"):
+            return True
+        if e.get("confirmed_by"):
             return True
         for ev in e.get("evidence", []) or []:
             if isinstance(ev, dict) and ev.get("created_by") in MANUAL_CREATORS:
