@@ -104,6 +104,20 @@ def _deny_listed_ids(techniques):
 
 
 def test_deny_listed_techniques_are_evidence_justified():
+    """Live invariant: no deny-listed technique has a human-confirmed positive.
+
+    The original decision evidence (0 confirmed positives AND >=2 review
+    negatives per technique, computed against the 2026-08-23 map) is a
+    point-in-time record kept in the T2.1 report — it is deliberately NOT
+    re-asserted against the live map, because once the deny-list is active the
+    NLU stage stops generating those techniques and their historical rejection
+    entries age out of the regenerated map. The self-erasing negatives bar
+    would then fail precisely because the deny-list works.
+
+    What must stay continuously true is the re-enable signal: if a human ever
+    confirms a positive for a deny-listed technique, this test fires and the
+    deny-listing should be reconsidered.
+    """
     techniques = _load_techniques()
     technique_map = _load_map()
     deny_listed = _deny_listed_ids(techniques)
@@ -112,13 +126,13 @@ def test_deny_listed_techniques_are_evidence_justified():
 
     failures = []
     for tid in sorted(deny_listed):
-        pos, neg = _review_stats_for_technique(technique_map, tid)
+        pos, _neg = _review_stats_for_technique(technique_map, tid)
         if pos != 0:
-            failures.append(f"{tid}: has {pos} human-confirmed positive(s), should not be deny-listed")
-        if neg < 2:
-            failures.append(f"{tid}: has only {neg} negative(s), below the >=2 evidence bar")
+            failures.append(
+                f"{tid}: has {pos} human-confirmed positive(s) — reconsider its deny-listing"
+            )
 
-    assert not failures, "deny-list evidence rule violated:\n" + "\n".join(failures)
+    assert not failures, "deny-list re-enable signal fired:\n" + "\n".join(failures)
 
 
 def test_expected_deny_list_members_present():

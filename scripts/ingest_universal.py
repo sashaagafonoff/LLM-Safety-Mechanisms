@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 import logging
 import json
@@ -23,6 +24,35 @@ md = MarkItDown()
 # Configuration
 EVIDENCE_PATH = Path("data/evidence.json")
 OUTPUT_DIR = Path("data/flat_text")
+
+# A PDF whose extracted text has this fraction (or more) of implausibly long
+# alphabetic tokens (>25 chars) almost certainly lost its inter-word spaces
+# during extraction; real prose sits at ~0.000.
+MASHED_RATIO_THRESHOLD = 0.02
+
+
+def _mashed_word_ratio(text):
+    """Fraction of alphabetic tokens longer than 25 chars (mashed-word signal)."""
+    tokens = re.findall(r"[A-Za-z]+", text or "")
+    if not tokens:
+        return 0.0
+    return sum(1 for t in tokens if len(t) > 25) / len(tokens)
+
+
+def _extract_pdf_with_pymupdf(path):
+    """Extract PDF text via PyMuPDF (position-aware spacing); None if unavailable."""
+    try:
+        import fitz
+    except ImportError:
+        logger.warning("   -> PyMuPDF (fitz) not installed; cannot repair mashed extraction")
+        return None
+    try:
+        with fitz.open(path) as doc:
+            return "\n".join(page.get_text() for page in doc)
+    except Exception as e:
+        logger.warning(f"   -> PyMuPDF fallback failed: {e}")
+        return None
+
 
 def load_sources(json_path):
     try:
@@ -169,6 +199,20 @@ def ingest_all(target_id=None, force=False):
             if ext == ".pdf":
                 result = md.convert(temp_filename)
                 processed_content = result.text_content
+                # Some PDFs (e.g. the GPT-5.6 and Grok 4.6 cards) extract with
+                # inter-word spaces stripped under markitdown/pdfminer, which the
+                # NLU chunk-quality gate then (correctly) rejects wholesale. When
+                # the extraction looks mashed, fall back to PyMuPDF, which infers
+                # spacing from glyph positions.
+                if _mashed_word_ratio(processed_content) > MASHED_RATIO_THRESHOLD:
+                    fallback = _extract_pdf_with_pymupdf(temp_filename)
+                    if fallback and _mashed_word_ratio(fallback) < _mashed_word_ratio(processed_content):
+                        logger.warning(
+                            "   -> markitdown extraction looks mashed "
+                            f"(ratio {_mashed_word_ratio(processed_content):.3f}); "
+                            "using PyMuPDF fallback"
+                        )
+                        processed_content = fallback
             elif ext == ".html":
                 processed_content = extract_text_from_html(temp_filename)
             elif ext in (".md", ".txt", ".json"):
