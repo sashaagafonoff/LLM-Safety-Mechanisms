@@ -743,7 +743,7 @@ def main():
     parser.add_argument(
         '--model',
         type=str,
-        choices=['haiku', 'sonnet', 'sonnet-legacy', 'opus'],
+        choices=['haiku', 'sonnet', 'sonnet-legacy', 'opus', 'opus-5', 'sonnet-5'],
         default='sonnet',
         help='Claude model for LLM pass (default: sonnet)'
     )
