@@ -55,7 +55,10 @@ def snapshot(path: Path):
     mtime = datetime.fromtimestamp(path.stat().st_mtime)
 
     out = {
-        "complete": bool(COMPLETE_RE.search(text)),
+        # Only trust a completion marker near the END of the log: a file that
+        # contains an older finished run followed by a new one must not report
+        # the new run as complete (learned the hard way).
+        "complete": bool(COMPLETE_RE.search(text[-4096:])),
         "mtime": mtime,
         "stale_s": (datetime.now() - mtime).total_seconds(),
         "dropped_chunks": sum(int(d) for d, _ in gates),
@@ -109,12 +112,27 @@ def render(snap: dict, recent: list) -> str:
 
 def main():
     ap = argparse.ArgumentParser(description="Live monitor for extraction-pipeline logs")
-    ap.add_argument("logfile", help="Path to the pipeline console log to watch")
+    ap.add_argument("logfile", nargs="?", help="Path to the pipeline console log to watch, "
+                    "or a directory (watches its most recently modified *.output/*.log file)")
+    ap.add_argument("--latest", metavar="DIR",
+                    help="Watch the most recently modified *.output/*.log file under DIR")
     ap.add_argument("--interval", type=float, default=5.0, help="Refresh seconds (default 5)")
     ap.add_argument("--once", action="store_true", help="Print one snapshot and exit")
     args = ap.parse_args()
 
-    path = Path(args.logfile)
+    target = args.latest or args.logfile
+    if not target:
+        ap.error("give a log file, a directory, or --latest DIR")
+    path = Path(target)
+    if path.is_dir():
+        candidates = sorted(
+            [p for pat in ("*.output", "*.log") for p in path.glob(pat)],
+            key=lambda p: p.stat().st_mtime,
+        )
+        if not candidates:
+            sys.exit(f"No *.output or *.log files found in: {path}")
+        path = candidates[-1]
+        print(f"watching newest log: {path}")
     if not path.exists():
         sys.exit(f"Log file not found: {path}")
 
