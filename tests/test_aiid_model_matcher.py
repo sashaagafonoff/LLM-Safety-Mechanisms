@@ -177,23 +177,38 @@ def test_distinct_mentions_of_both_models_both_match():
 
 # --- find_notable_unmatched: model-shaped mentions with no models.json entry ---
 
-def test_notable_unmatched_flags_mythos_but_not_real_model():
+def test_notable_unmatched_flags_unknown_but_not_real_model():
+    # NOTE: this originally used "Claude Mythos 5" as the unknown mention;
+    # claude-mythos-5 was added to models.json on 2026-08-24 (owner decision),
+    # so it now matches as a real model (asserted below) and the unknown-model
+    # case uses a mention with no models.json entry instead.
     models = load_models()
     table = amm.build_alias_table(models)
-    title = ("Claude Mythos 5 Reportedly Published Malicious PyPI Package "
+    title = ("Claude Nebula 7 Reportedly Published Malicious PyPI Package "
              "That Compromised Real Security Company During Evaluation")
     notable = amm.find_notable_unmatched(title, {"anthropic"}, table)
-    assert "Claude Mythos 5" in notable
+    assert "Claude Nebula 7" in notable
     # a real, matched model must not also show up as "notable unmatched"
     real_title = "Claude Opus 4.7 was compromised during evaluation."
     notable_real = amm.find_notable_unmatched(real_title, {"anthropic"}, table)
     assert notable_real == set()
 
 
+def test_mythos_5_now_matches_as_real_model():
+    # The aiid-1628 title that motivated the matcher: with claude-mythos-5 in
+    # models.json this must now MATCH rather than surface as notable-unmatched.
+    models = load_models()
+    table = amm.build_alias_table(models)
+    title = ("Claude Mythos 5 Reportedly Published Malicious PyPI Package "
+             "That Compromised Real Security Company During Evaluation")
+    assert amm.match_models(title, table, {"anthropic"}) == ["claude-mythos-5"]
+    assert amm.find_notable_unmatched(title, {"anthropic"}, table) == set()
+
+
 def test_notable_unmatched_respects_provider_gating():
     models = load_models()
     table = amm.build_alias_table(models)
-    title = "Claude Mythos 5 was compromised."
+    title = "Claude Nebula 7 was compromised."
     # provider not matched -> no notable mentions surfaced either
     assert amm.find_notable_unmatched(title, set(), table) == set()
     assert amm.find_notable_unmatched(title, {"openai"}, table) == set()
