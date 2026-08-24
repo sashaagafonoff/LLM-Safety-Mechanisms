@@ -126,7 +126,9 @@ def main():
     path = Path(target)
     if path.is_dir():
         candidates = sorted(
-            [p for pat in ("*.output", "*.log") for p in path.glob(pat)],
+            # Skip empty files: the shell harness creates a 0-byte capture file
+            # per command, which would otherwise always be "newest".
+            [p for pat in ("*.output", "*.log") for p in path.glob(pat) if p.stat().st_size > 0],
             key=lambda p: p.stat().st_mtime,
         )
         if not candidates:
