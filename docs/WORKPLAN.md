@@ -102,6 +102,15 @@ and split-freshness guards in `check_integrity.py`. Foundation modules:
 - [ ] **B.2.5** Verification-gated, abstaining LLM ETL for `expand_collections.py` (URL fetch+confirm, two-pass agreement, pending-review queue) (§5.6).
 - [ ] **B.2.6** Calibrated, measured AIID/FMTI mappings (alias resolver, sampled κ-backed precision/recall, immutable FMTI ref + checksums, header-by-name validation) (§5.4, §5.5).
 - [ ] **B.2.7** Snapshot all generated datasets, CI-triggered, sha256-keyed, with field-level drift reports + alert thresholds (§5.7).
+- [ ] **B.2.8** Calibration-pool redesign (lesson from 2026-08-24): per-technique NLU threshold
+  calibration built its label pool from the **live** `model_technique_map.json`, which the pipeline
+  itself rewrites — the pool is circular and drifts across regenerations (1,061 → 798 points in one
+  day), and the floor-0.6 fit (vt≈0.50) cost ~9 points of end-to-end dev precision vs the flat 0.85
+  gate (51.6% vs 60.5%, same extraction model). Redesign: labels from the **frozen dev-split gold**
+  only (`model_technique_map_reviewed.json` restricted to dev ids; test stays quarantined),
+  precision floor ≥0.8, and an end-to-end dev eval as the acceptance gate before any thresholds
+  file ships. Until then the pipeline runs the hand-set 0.85 gate (thresholds file deliberately
+  absent; rejected fits kept as `data/eval/nlu_thresholds_*.bak`).
 
 ---
 
